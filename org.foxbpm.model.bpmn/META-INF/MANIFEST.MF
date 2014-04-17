@@ -1,6 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.foxbpm.model.bpmn
-Bundle-SymbolicName: org.foxbpm.model.bpmn; singleton:=true
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.foxbpm.model.bpmn;singleton:=true
 Bundle-Version: 0.1.0.qualifier
-Require-Bundle: org.eclipse.emf.ecore
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.foxbpm.model.bpmn.foxbpm,
+ org.foxbpm.model.bpmn.foxbpm.impl,
+ org.foxbpm.model.bpmn.foxbpm.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport
+Bundle-ActivationPolicy: lazy

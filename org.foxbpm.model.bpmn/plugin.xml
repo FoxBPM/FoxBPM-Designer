@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated foxbpm-bpmn-model -->
+      <package
+            uri="http://www.foxbpm.org/foxbpm"
+            class="org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage"
+            genModel="model/foxbpm-bpmn-model.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated foxbpm-bpmn-model -->
+      <parser
+            type="foxbpm"
+            class="org.foxbpm.model.bpmn.foxbpm.util.FoxBPMResourceFactoryImpl"/>
+   </extension>
+</plugin>
