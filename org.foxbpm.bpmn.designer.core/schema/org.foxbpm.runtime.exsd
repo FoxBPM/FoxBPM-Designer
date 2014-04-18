@@ -218,7 +218,7 @@
 This may also be set to the string &quot;default&quot; to indicate that the DefaultDetailSection will be used. The list of BPMN2 element attributes that will be rendered is then specified with the &quot;feature&quot; attribute (see below).
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn="org.foxbpm.bpmn.designer.core.runtime.AbstractFixFlowPropertySection:"/>
+                  <meta.attribute kind="java" basedOn="org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMPropertySection:"/>
                </appinfo>
             </annotation>
          </attribute>

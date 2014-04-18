@@ -9,9 +9,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.foxbpm.bpmn.designer.core.runtime.AbstractFixFlowComposite;
+import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 
-public class TestComposite extends AbstractFixFlowComposite{
+public class TestComposite extends AbstractFoxBPMComposite{
 	private Text text;
 
 	public TestComposite(Composite parent, int style) {

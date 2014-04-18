@@ -37,7 +37,7 @@ import org.eclipse.ui.part.IContributedContentsView;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-public abstract class AbstractFixFlowPropertySection extends GFPropertySection implements IBpmn2PropertySection {
+public abstract class AbstractFoxBPMPropertySection extends GFPropertySection implements IBpmn2PropertySection {
 	
 	protected TabbedPropertySheetPage tabbedPropertySheetPage;
 	protected Composite parent;
@@ -66,7 +66,7 @@ public abstract class AbstractFixFlowPropertySection extends GFPropertySection i
 		}
 	};
 	
-	public AbstractFixFlowPropertySection() {
+	public AbstractFoxBPMPropertySection() {
 		cachedWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (cachedWorkbenchWindow != null) {
 			cachedWorkbenchWindow.getPartService().addPartListener(
@@ -157,14 +157,14 @@ public abstract class AbstractFixFlowPropertySection extends GFPropertySection i
 	 * 
 	 * @return the composite
 	 */
-	public AbstractFixFlowComposite getSectionRoot() {
-		AbstractFixFlowComposite sectionRoot = null;
+	public AbstractFoxBPMComposite getSectionRoot() {
+		AbstractFoxBPMComposite sectionRoot = null;
 		if (parent!=null && !parent.isDisposed()) {
 			if (parent.getChildren().length==0) {
 				sectionRoot = createSectionRoot();
 				sectionRoot.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,false,1,1));
 			}
-			sectionRoot = (AbstractFixFlowComposite)parent.getChildren()[0];
+			sectionRoot = (AbstractFoxBPMComposite)parent.getChildren()[0];
 		}
 		return sectionRoot;
 	}
@@ -176,8 +176,8 @@ public abstract class AbstractFixFlowPropertySection extends GFPropertySection i
 	 * 
 	 * @return
 	 */
-	protected abstract AbstractFixFlowComposite createSectionRoot();
-//	public abstract AbstractFixFlowComposite createSectionRoot(Composite parent, int style);
+	protected abstract AbstractFoxBPMComposite createSectionRoot();
+//	public abstract AbstractFoxBPMComposite createSectionRoot(Composite parent, int style);
 	protected abstract EObject getBusinessObjectForSelection(ISelection selection);
 	
 	/* (non-Javadoc)
@@ -204,7 +204,7 @@ public abstract class AbstractFixFlowPropertySection extends GFPropertySection i
 		EObject be = getBusinessObjectForSelection(getSelection());
 		
 		if (be!=null) {
-			AbstractFixFlowComposite sectionRoot = getSectionRoot();
+			AbstractFoxBPMComposite sectionRoot = getSectionRoot();
 			if (sectionRoot!=null) {
 				if (sectionRoot.getBusinessObject() != be) {
 					sectionRoot.setDiagramEditor((DiagramEditor) getDiagramEditor());
