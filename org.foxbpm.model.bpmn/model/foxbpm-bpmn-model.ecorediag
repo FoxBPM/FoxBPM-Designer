@@ -111,6 +111,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVanAcXMEeOb9caI1cUYMA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_udp9gMm-EeO0sOxvRirFBQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/isCreateRecord"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_udp9gcm-EeO0sOxvRirFBQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVCMgcXMEeOb9caI1cUYMA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_mVCMgsXMEeOb9caI1cUYMA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVCMg8XMEeOb9caI1cUYMA"/>
