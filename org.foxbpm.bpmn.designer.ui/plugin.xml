@@ -1021,7 +1021,7 @@
  <extension
        point="org.foxbpm.runtime">
     <propertyTab
-          class="org.foxbpm.bpmn.designer.ui.propertytab.TestFixFlowPropertySection"
+          class="org.foxbpm.bpmn.designer.ui.propertytab.TestFoxBPMPropertySection"
           id="org.foxbpm.bpmn.designer.ui.propertyTab"
           label="测试标签页"
           order="1">

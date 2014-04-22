@@ -8,14 +8,18 @@ Bundle-Vendor: %pluginProvider
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.eclipse.ui.views.properties.tabbed;bundle-version="3.6.0",
+ org.eclipse.ui.views.properties.tabbed,
  org.eclipse.graphiti;bundle-version="0.10.1",
  org.eclipse.graphiti.ui;bundle-version="0.10.1",
  org.eclipse.bpmn2;bundle-version="0.7.0",
  org.eclipse.bpmn2.edit;bundle-version="0.7.0",
  org.eclipse.bpmn2.editor;bundle-version="0.7.0",
  org.eclipse.gef;bundle-version="3.9.0",
- org.eclipse.bpmn2.modeler.core;bundle-version="1.0.2"
+ org.eclipse.bpmn2.modeler.core;bundle-version="1.0.2",
+ org.eclipse.emf.transaction,
+ org.eclipse.jface.databinding,
+ org.eclipse.bpmn2.modeler.ui;bundle-version="1.0.2",
+ org.eclipse.core.databinding
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.swt,
