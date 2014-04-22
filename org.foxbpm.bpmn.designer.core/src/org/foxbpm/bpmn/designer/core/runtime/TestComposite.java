@@ -10,7 +10,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class TestComposite extends AbstractFixFlowComposite{
+public class TestComposite extends AbstractFoxBPMComposite{
 	private Text text;
 
 	public TestComposite(Composite parent, int style) {

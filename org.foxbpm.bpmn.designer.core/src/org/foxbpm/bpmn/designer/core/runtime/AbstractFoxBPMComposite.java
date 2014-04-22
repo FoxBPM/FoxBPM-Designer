@@ -11,11 +11,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
-public abstract class AbstractFixFlowComposite extends Composite {
+public abstract class AbstractFoxBPMComposite extends Composite {
 	private EObject businessObject;
 	private DiagramEditor diagramEditor;
 
-	public AbstractFixFlowComposite(Composite parent, int style) {
+	public AbstractFoxBPMComposite(Composite parent, int style) {
 		super(parent, style);
 	}
 	
@@ -26,9 +26,9 @@ public abstract class AbstractFixFlowComposite extends Composite {
 		Display.getDefault().asyncExec( new Runnable() {
 			public void run() {
 				List<Control>kids = new ArrayList<Control>();
-				Composite parent = AbstractFixFlowComposite.this;
+				Composite parent = AbstractFoxBPMComposite.this;
 				try {
-					AbstractFixFlowPropertySection section = AbstractFixFlowComposite.this.getPropertySection();
+					AbstractFoxBPMPropertySection section = AbstractFoxBPMComposite.this.getPropertySection();
 					if (section!=null && section.getTabbedPropertySheetPage()!=null) {
 						parent = (Composite)section.getTabbedPropertySheetPage().getControl();
 					}

@@ -6,10 +6,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.ui.IWorkbenchPart;
-import org.foxbpm.bpmn.designer.core.runtime.AbstractFixFlowComposite;
-import org.foxbpm.bpmn.designer.core.runtime.AbstractFixFlowPropertySection;
+import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
+import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMPropertySection;
 
-public class TestFixFlowPropertySection extends AbstractFixFlowPropertySection {
+public class TestFoxBPMPropertySection extends AbstractFoxBPMPropertySection {
 
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
@@ -18,12 +18,12 @@ public class TestFixFlowPropertySection extends AbstractFixFlowPropertySection {
 		return enabled;
 	}
 
-	public TestFixFlowPropertySection() {
+	public TestFoxBPMPropertySection() {
 		
 	}
 
 	@Override
-	protected AbstractFixFlowComposite createSectionRoot() {
+	protected AbstractFoxBPMComposite createSectionRoot() {
 		return new TestComposite(parent, SWT.NONE);
 	}
 
