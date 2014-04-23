@@ -1,14 +1,9 @@
 package org.foxbpm.bpmn.designer.ui.propertytab;
 
-import org.eclipse.bpmn2.Bpmn2Package.Literals;
+import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.StartEvent;
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.SWTResourceManager;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -17,9 +12,10 @@ import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 
 public class TestComposite extends AbstractFoxBPMComposite{
-	private DataBindingContext m_bindingContext;
-	private Text text;
 	private StartEvent startEvent;
+	private Text text;
+	private Text idText;
+	private Text nameText;
 
 	public TestComposite(Composite parent, int style) {
 		super(parent, style);
@@ -27,38 +23,48 @@ public class TestComposite extends AbstractFoxBPMComposite{
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		System.out.println("BIND我执行了");
 		startEvent = (StartEvent) eObject;
-//		bind(Bpmn2Package.Literals.BASE_ELEMENT__ID, text);
-//		m_bindingContext = initDataBindings();
-	}
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		IObservableValue observeTextTextObserveWidget = WidgetProperties.text(SWT.Modify).observe(text);
-		IObservableValue startEventIdObserveValue = EMFObservables.observeValue(startEvent, Literals.BASE_ELEMENT__ID);
-		bindingContext.bindValue(observeTextTextObserveWidget, startEventIdObserveValue, null, null);
-		//
-		return bindingContext;
+		bind(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText);
+		bind(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText);
 	}
 
 	@Override
 	public Composite createUI(Composite parent) {
-		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		composite.setLayout(new GridLayout(2, false));
+		Composite detailComposite = new Composite(parent, SWT.NONE);
+		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		detailComposite.setLayout(new GridLayout(2, false));
+		Label idLabel = new Label(detailComposite, SWT.NONE);
+		idLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		idLabel.setText("编号");
+
+		idText = new Text(detailComposite, SWT.BORDER);
+		idText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		idText.setEditable(false);
 		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
+		Label nameLabel = new Label(detailComposite, SWT.NONE);
+		nameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		nameLabel.setText("名称");
+
+		nameText = new Text(detailComposite, SWT.BORDER);
+		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label lblNewLabel = new Label(detailComposite, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNewLabel.setText("测试");
+		lblNewLabel.setText("属性");
 		
-		text = new Text(composite, SWT.BORDER);
+		text = new Text(detailComposite, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		return composite;
+		
+		return parent;
 	}
 
 	@Override
 	public String setSectionTitle() {
-		return "测试属性";
+		return "详细属性";
+	}
+
+	@Override
+	public String setDescId() {
+		return "start_event_desc";
 	}
 }
