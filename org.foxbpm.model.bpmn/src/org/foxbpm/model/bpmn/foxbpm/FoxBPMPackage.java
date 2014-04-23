@@ -504,13 +504,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__NAME = 47;
 
 	/**
+	 * The feature id for the '<em><b>Is Create Record</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__IS_CREATE_RECORD = 48;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 48;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 49;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -3004,6 +3013,17 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDocumentRoot_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsCreateRecord <em>Is Create Record</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Create Record</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsCreateRecord()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_IsCreateRecord();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4902,6 +4922,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__NAME = eINSTANCE.getDocumentRoot_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Create Record</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__IS_CREATE_RECORD = eINSTANCE.getDocumentRoot_IsCreateRecord();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
