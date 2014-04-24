@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.propertytab;
+package org.foxbpm.bpmn.designer.ui.propertytab.section.event;
 
 import org.eclipse.bpmn2.StartEvent;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
@@ -8,29 +8,29 @@ import org.eclipse.swt.SWT;
 import org.eclipse.ui.IWorkbenchPart;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMPropertySection;
+import org.foxbpm.bpmn.designer.ui.propertytab.composite.event.StartEventPropertyComposite;
 
-public class TestFoxBPMPropertySection extends AbstractFoxBPMPropertySection {
+public class StartEventPropertySection extends AbstractFoxBPMPropertySection {
 
-	@Override
-	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-		boolean enabled = eObject instanceof StartEvent;
-		return enabled;
-	}
-
-	public TestFoxBPMPropertySection() {
-		
+	public StartEventPropertySection() {
 	}
 
 	@Override
 	protected AbstractFoxBPMComposite createSectionRoot() {
-		return new TestComposite(parent, SWT.NONE);
+		return new StartEventPropertyComposite(parent, SWT.NONE);
 	}
 
 	@Override
 	protected EObject getBusinessObjectForSelection(ISelection selection) {
 		EObject be = BusinessObjectUtil.getBusinessObjectForSelection(selection);
 		return be;
+	}
+
+	@Override
+	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
+		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
+		boolean enabled = eObject instanceof StartEvent;
+		return enabled;
 	}
 
 }

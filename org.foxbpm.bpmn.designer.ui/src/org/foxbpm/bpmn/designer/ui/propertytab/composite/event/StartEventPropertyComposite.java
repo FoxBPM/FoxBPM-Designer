@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.propertytab;
+package org.foxbpm.bpmn.designer.ui.propertytab.composite.event;
 
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.StartEvent;
@@ -11,13 +11,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 
-public class TestComposite extends AbstractFoxBPMComposite{
+public class StartEventPropertyComposite extends AbstractFoxBPMComposite{
 	private StartEvent startEvent;
-	private Text text;
+	private Text descText;
 	private Text idText;
 	private Text nameText;
 
-	public TestComposite(Composite parent, int style) {
+	public StartEventPropertyComposite(Composite parent, int style) {
 		super(parent, style);
 	}
 
@@ -26,6 +26,7 @@ public class TestComposite extends AbstractFoxBPMComposite{
 		startEvent = (StartEvent) eObject;
 		bind(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText);
 		bind(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText);
+		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText);
 	}
 
 	@Override
@@ -48,12 +49,14 @@ public class TestComposite extends AbstractFoxBPMComposite{
 		nameText = new Text(detailComposite, SWT.BORDER);
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
-		Label lblNewLabel = new Label(detailComposite, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblNewLabel.setText("属性");
+		Label descLabel = new Label(detailComposite, SWT.NONE);
+		descLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		descLabel.setText("描述");
 		
-		text = new Text(detailComposite, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		descText = new Text(detailComposite, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
+		GridData gd_descText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_descText.heightHint = 50;
+		descText.setLayoutData(gd_descText);
 		
 		return parent;
 	}

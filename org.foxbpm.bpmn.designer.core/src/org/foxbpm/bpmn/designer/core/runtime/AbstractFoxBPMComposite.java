@@ -5,6 +5,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.Bpmn2Factory;
+import org.eclipse.bpmn2.Documentation;
 import org.eclipse.bpmn2.modeler.core.Bpmn2TabbedPropertySheetPage;
 import org.eclipse.bpmn2.modeler.core.merrimac.IConstants;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.ListAndDetailCompositeBase;
@@ -85,13 +88,14 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 		gl_composite.horizontalSpacing = 0;
 		composite.setLayout(gl_composite);
 		label = new Label(composite, SWT.V_SCROLL);
-		label.setText(getDescFromProperties(setDescId()) ==null ? "":getDescFromProperties(setDescId()));
+		label.setText(getDescFromProperties(setDescId()) == null ? "" : getDescFromProperties(setDescId()));
 		GridData gd_text_1 = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_text_1.heightHint = 50;
 		label.setLayoutData(gd_text_1);
 		formToolkit.adapt(label, true, true);
 		sctnNewSection.setClient(composite);
 		sctnNewSection.setText("描述");
+		sctnNewSection.setExpanded(false);
 
 		// 详细属性页section
 		Section detailSection = formToolkit.createSection(this, Section.TITLE_BAR);
@@ -112,14 +116,14 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 
 	private String getDescFromProperties(String id) {
 		Bundle bundle = Platform.getBundle("org.foxbpm.bpmn.designer.base");
-		//为了WB能展现加的这句话
-		if(bundle==null)
+		// 为了WB能展现加的这句话
+		if (bundle == null)
 			return "";
 		String proPath = null;
 		try {
 			proPath = FileLocator.resolve(bundle.getEntry("resources/description.properties")).getPath();
-			if(proPath ==null)
-				return"";
+			if (proPath == null)
+				return "";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -132,7 +136,7 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 	}
 
 	public abstract String setDescId();
-	
+
 	public abstract String setSectionTitle();
 
 	public abstract Composite createUI(Composite parent);
@@ -174,21 +178,21 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 
 	public void setBusinessObject(EObject businessObject) {
 		getDiagramEditor();
-		if (diagramEditor==null)
+		if (diagramEditor == null)
 			diagramEditor = ModelUtil.getEditor(businessObject);
 		addDomainListener();
 		removeChangeListener(businessObject);
 		this.businessObject = businessObject;
 		addChangeListener(businessObject);
-		
+
 		if (businessObject != null) {
 			createUIBindings(businessObject);
 			redrawPage();
 		}
-		
+
 		// Do initial validation to force display of error message if any
-    	Notification n = new ENotificationImpl((InternalEObject) businessObject, 0, null, null, null, false);
-    	validate(n);
+		Notification n = new ENotificationImpl((InternalEObject) businessObject, 0, null, null, null, false);
+		validate(n);
 	}
 
 	@Override
@@ -199,33 +203,33 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 		ModelUtil.disposeChildWidgets(this);
 		super.dispose();
 	}
-	
+
 	protected void addDomainListener() {
-		if (editingDomain==null) {
-			editingDomain = (TransactionalEditingDomainImpl)getDiagramEditor().getEditingDomain();
+		if (editingDomain == null) {
+			editingDomain = (TransactionalEditingDomainImpl) getDiagramEditor().getEditingDomain();
 			editingDomain.addResourceSetListener(this);
 		}
 	}
-	
+
 	protected void removeDomainListener() {
-		if (editingDomain!=null) {
+		if (editingDomain != null) {
 			editingDomain.removeResourceSetListener(this);
 		}
 	}
-	
+
 	protected void addChangeListener(EObject object) {
-		if (object!=null && !object.eAdapters().contains(this))
+		if (object != null && !object.eAdapters().contains(this))
 			object.eAdapters().add(this);
 	}
-	
+
 	protected void removeChangeListener(EObject object) {
-		if (object!=null && object.eAdapters().contains(this)) {
+		if (object != null && object.eAdapters().contains(this)) {
 			object.eSetDeliver(false);
 			object.eAdapters().remove(this);
 			object.eSetDeliver(true);
 		}
 	}
-	
+
 	protected void cleanBindings() {
 		ModelUtil.disposeChildWidgets(this);
 	}
@@ -415,17 +419,15 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 	}
 
 	public void redrawPage() {
-		if (getPropertySection()!=null) {
+		if (getPropertySection() != null) {
 			getPropertySection().layout();
 			getParent().layout();
 			layout();
-		}
-		else
-		{
+		} else {
 			ModelUtil.recursivelayout(getParent());
 		}
 	}
-	
+
 	@Override
 	public boolean isAggregatePrecommitListener() {
 		return false;
@@ -458,7 +460,8 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 					editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 						@Override
 						protected void doExecute() {
-//							System.out.println("ui value is: " + e.diff.getNewValue());
+							// System.out.println("ui value is: " +
+							// e.diff.getNewValue());
 							be.eSet(a, e.diff.getNewValue());
 						}
 					});
@@ -474,17 +477,17 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 
 		IObservableValue startEventNameObserveValue = EMFObservables.observeValue(be, a);
 		startEventNameObserveValue.addValueChangeListener(new IValueChangeListener() {
-			
+
 			@Override
 			public void handleValueChange(ValueChangeEvent event) {
-//				System.out.println("model value is: " + (String) be.eGet(a));
-				if(!(text.getText().equals((String) be.eGet(a))))
+				// System.out.println("model value is: " + (String) be.eGet(a));
+				if (!(text.getText().equals((String) be.eGet(a))))
 					text.setText((String) be.eGet(a));
 				text.setSelection(text.getText().length());
 			}
 		});
 	}
-	
+
 	protected void bind(final EStructuralFeature a, final Combo combo) {
 		final EObject be = this.getBusinessObject();
 		Object eGet = be.eGet(a);
@@ -502,7 +505,8 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 					editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 						@Override
 						protected void doExecute() {
-//							System.out.println("ui value is: " + e.diff.getNewValue());
+							// System.out.println("ui value is: " +
+							// e.diff.getNewValue());
 							be.eSet(a, e.diff.getNewValue());
 						}
 					});
@@ -518,12 +522,68 @@ public abstract class AbstractFoxBPMComposite extends Composite implements Resou
 
 		IObservableValue startEventNameObserveValue = EMFObservables.observeValue(be, a);
 		startEventNameObserveValue.addValueChangeListener(new IValueChangeListener() {
-			
+
 			@Override
 			public void handleValueChange(ValueChangeEvent event) {
-//				System.out.println("model value is: " + (String) be.eGet(a));
-				if(!(combo.getText().equals((String) be.eGet(a))))
+				// System.out.println("model value is: " + (String) be.eGet(a));
+				if (!(combo.getText().equals((String) be.eGet(a))))
 					combo.setText((String) be.eGet(a));
+			}
+		});
+	}
+
+	protected void bindDocumentation(final EStructuralFeature a, final Text text) {
+		final EObject be = this.getBusinessObject();
+		final BaseElement baseElement = (BaseElement) be;
+
+		if (baseElement.getDocumentation().size() == 0 || baseElement.getDocumentation().get(0).getText() == null) {
+			text.setText("");
+		} else {
+			text.setText(baseElement.getDocumentation().get(0).getText());
+		}
+
+		IObservableValue textObserver = WidgetProperties.text(SWT.Modify).observe(text);
+		textObserver.addValueChangeListener(new IValueChangeListener() {
+
+			@Override
+			public void handleValueChange(final ValueChangeEvent e) {
+				TransactionalEditingDomain editingDomain = ((BPMN2Editor) getDiagramEditor()).getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if (baseElement.getDocumentation().size() == 0) {
+							final Documentation value = Bpmn2Factory.eINSTANCE.createDocumentation();
+							ModelUtil.setID(value, be.eResource());
+							value.setText(e.diff.getNewValue().toString());
+							baseElement.getDocumentation().add(value);
+						} else {
+							baseElement.getDocumentation().get(0).setText(e.diff.getNewValue().toString());
+						}
+					}
+				});
+				if (((BPMN2Editor) getDiagramEditor()).getDiagnostics() != null) {
+					// revert the change and display error status message.
+					List<Documentation> documentationList = baseElement.getDocumentation();
+					if (!text.getText().equals(documentationList.get(0).getText())) {
+
+						documentationList.get(0).setText(e.diff.getNewValue().toString());
+					}
+					// bpmn2Editor.showErrorMessage(bpmn2Editor.getDiagnostics().getMessage());
+				}
+			}
+		});
+
+		IObservableValue startEventNameObserveValue = EMFObservables.observeValue(be, a);
+		startEventNameObserveValue.addValueChangeListener(new IValueChangeListener() {
+
+			@Override
+			public void handleValueChange(ValueChangeEvent event) {
+				// System.out.println("model value is: " + (String) be.eGet(a));
+				List<Documentation> documentationList = baseElement.getDocumentation();
+				if (!text.getText().equals(documentationList.get(0).getText())) {
+
+					text.setText(documentationList.get(0).getText());
+				}
 			}
 		});
 	}
