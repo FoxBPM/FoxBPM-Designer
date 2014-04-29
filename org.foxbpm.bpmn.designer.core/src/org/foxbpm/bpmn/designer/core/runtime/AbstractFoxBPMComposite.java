@@ -38,6 +38,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -93,12 +94,24 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 
 		Composite detailComposite = new Composite(detailSection, SWT.NONE);
 		detailComposite.setLayout(new GridLayout(2, false));
-
+		formToolkit.adapt(detailComposite);
 		detailSection.setClient(detailComposite);
 
-		formToolkit.adapt(createUI((Composite) detailSection.getClient()));
+		adaptAllcontrols(createUI((Composite) detailSection.getClient()));
 
 		formToolkit.paintBordersFor(sctnNewSection);
+	}
+
+	private void adaptAllcontrols(Control c) {
+		if(c instanceof Composite) {
+			Composite composite = (Composite) c;
+			for (Control c1 : composite.getChildren()) {
+				adaptAllcontrols(c1);
+			}
+			formToolkit.adapt(composite);
+		}else {
+			formToolkit.adapt(c, true, true);
+		}
 	}
 
 	private String getDescFromProperties(String id) {
