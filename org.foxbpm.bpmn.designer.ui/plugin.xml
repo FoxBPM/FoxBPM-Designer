@@ -53,6 +53,15 @@
                 commandId="org.foxbpm.bpmn.designer.ui.command"
                 style="push">
           </command>
+          <visibleWhen
+                checkEnabled="false">
+             <with
+                   variable="activeWorkbenchWindow.activePerspective">
+                <equals
+                      value="org.foxbpm.bpmn.designer.ui.foxbpmperspective">
+                </equals>
+             </with>
+          </visibleWhen>
        </menu>
     </menuContribution>
  </extension>
@@ -226,6 +235,11 @@
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.section.event.StartEventPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.startevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.section.task.UserTaskPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.usertask"
         label="通用">
   </propertyTab>
 
