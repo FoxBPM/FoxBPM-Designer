@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Base
+Bundle-SymbolicName: org.foxbpm.bpmn.designer.base
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.foxbpm.bpmn.designer.base.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.foxbpm.bpmn.designer.base,
+ org.foxbpm.bpmn.designer.base.utils
