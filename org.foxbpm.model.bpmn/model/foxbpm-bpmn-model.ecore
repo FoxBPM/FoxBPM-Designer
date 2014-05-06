@@ -2,7 +2,7 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="foxbpm" nsURI="http://www.foxbpm.org/foxbpm" nsPrefix="foxbpm">
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="此XML Schema定义的BPMN 2.0的扩展元素是Founder公司拓展的属性。&#xA;&#x9;&#x9;"/>
+    <details key="documentation" value="此XML Schema定义的BPMN 2.0的扩展元素是FXOBPM拓展的属性。&#xA;&#x9;&#x9;"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="DocumentRoot">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -604,14 +604,14 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectorParameterInputs"
-        upperBound="-1" eType="#//ConnectorParameterInputs" containment="true" resolveProxies="false">
+        upperBound="-1" eType="#//ConnectorParameterInput" containment="true" resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectorParameterOutputs"
-        upperBound="-1" eType="#//ConnectorParameterOutputs" containment="true" resolveProxies="false">
+        upperBound="-1" eType="#//ConnectorParameterOutput" containment="true" resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="namespace" value="##targetNamespace"/>
         <details key="name" value="connectorParameterOutputs"/>
@@ -619,7 +619,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectorParameterOutputsDef"
-        upperBound="-1" eType="#//ConnectorParameterOutputsDef" containment="true"
+        upperBound="-1" eType="#//ConnectorParameterOutputDef" containment="true"
         resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="name" value="connectorParameterOutputsDef"/>
@@ -671,7 +671,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterInputs">
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterInput">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -701,8 +701,10 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterOutputs">
-    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterOutput">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="ConnectorParameterOutput"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="variableTarget" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="attribute"/>
@@ -714,6 +716,12 @@
         <details key="name" value="expression"/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outputId" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="attribute"/>
+        <details key="name" value="output"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -735,7 +743,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterOutputsDef">
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectorParameterOutputDef">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="attribute"/>

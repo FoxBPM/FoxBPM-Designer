@@ -100,12 +100,12 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 				return createConnectorInstanceAdapter();
 			}
 			@Override
-			public Adapter caseConnectorParameterInputs(ConnectorParameterInputs object) {
-				return createConnectorParameterInputsAdapter();
+			public Adapter caseConnectorParameterInput(ConnectorParameterInput object) {
+				return createConnectorParameterInputAdapter();
 			}
 			@Override
-			public Adapter caseConnectorParameterOutputs(ConnectorParameterOutputs object) {
-				return createConnectorParameterOutputsAdapter();
+			public Adapter caseConnectorParameterOutput(ConnectorParameterOutput object) {
+				return createConnectorParameterOutputAdapter();
 			}
 			@Override
 			public Adapter caseLoopDataInputCollection(LoopDataInputCollection object) {
@@ -116,8 +116,8 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 				return createLoopDataOutputCollectionAdapter();
 			}
 			@Override
-			public Adapter caseConnectorParameterOutputsDef(ConnectorParameterOutputsDef object) {
-				return createConnectorParameterOutputsDefAdapter();
+			public Adapter caseConnectorParameterOutputDef(ConnectorParameterOutputDef object) {
+				return createConnectorParameterOutputDefAdapter();
 			}
 			@Override
 			public Adapter caseFormUri(FormUri object) {
@@ -340,30 +340,30 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs <em>Connector Parameter Inputs</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput <em>Connector Parameter Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput
 	 * @generated
 	 */
-	public Adapter createConnectorParameterInputsAdapter() {
+	public Adapter createConnectorParameterInputAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs <em>Connector Parameter Outputs</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput <em>Connector Parameter Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput
 	 * @generated
 	 */
-	public Adapter createConnectorParameterOutputsAdapter() {
+	public Adapter createConnectorParameterOutputAdapter() {
 		return null;
 	}
 
@@ -396,16 +396,16 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef <em>Connector Parameter Outputs Def</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef <em>Connector Parameter Output Def</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef
 	 * @generated
 	 */
-	public Adapter createConnectorParameterOutputsDefAdapter() {
+	public Adapter createConnectorParameterOutputDefAdapter() {
 		return null;
 	}
 

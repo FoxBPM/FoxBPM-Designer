@@ -11,28 +11,28 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Connector Parameter Inputs</b></em>'.
+ * An implementation of the model object '<em><b>Connector Parameter Input</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl#getDataType <em>Data Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl#getIsExecute <em>Is Execute</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl#getDataType <em>Data Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl#getIsExecute <em>Is Execute</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container implements ConnectorParameterInputs {
+public class ConnectorParameterInputImpl extends MinimalEObjectImpl.Container implements ConnectorParameterInput {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -128,7 +128,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConnectorParameterInputsImpl() {
+	protected ConnectorParameterInputImpl() {
 		super();
 	}
 
@@ -139,7 +139,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMPackage.Literals.CONNECTOR_PARAMETER_INPUTS;
+		return FoxBPMPackage.Literals.CONNECTOR_PARAMETER_INPUT;
 	}
 
 	/**
@@ -160,7 +160,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__ID, oldId, id));
 	}
 
 	/**
@@ -181,7 +181,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__NAME, oldName, name));
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		String oldDataType = dataType;
 		dataType = newDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__DATA_TYPE, oldDataType, dataType));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__DATA_TYPE, oldDataType, dataType));
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -238,14 +238,14 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION, null, msgs);
 			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -266,7 +266,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		String oldIsExecute = isExecute;
 		isExecute = newIsExecute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE, oldIsExecute, isExecute));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__IS_EXECUTE, oldIsExecute, isExecute));
 	}
 
 	/**
@@ -277,7 +277,7 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -291,15 +291,15 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__ID:
 				return getId();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__NAME:
 				return getName();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__DATA_TYPE:
 				return getDataType();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION:
 				return getExpression();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__IS_EXECUTE:
 				return getIsExecute();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -313,19 +313,19 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__ID:
 				setId((String)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__NAME:
 				setName((String)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__DATA_TYPE:
 				setDataType((String)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION:
 				setExpression((Expression)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__IS_EXECUTE:
 				setIsExecute((String)newValue);
 				return;
 		}
@@ -340,19 +340,19 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION:
 				setExpression((Expression)null);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__IS_EXECUTE:
 				setIsExecute(IS_EXECUTE_EDEFAULT);
 				return;
 		}
@@ -367,15 +367,15 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__EXPRESSION:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__EXPRESSION:
 				return expression != null;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT__IS_EXECUTE:
 				return IS_EXECUTE_EDEFAULT == null ? isExecute != null : !IS_EXECUTE_EDEFAULT.equals(isExecute);
 		}
 		return super.eIsSet(featureID);
@@ -403,4 +403,4 @@ public class ConnectorParameterInputsImpl extends MinimalEObjectImpl.Container i
 		return result.toString();
 	}
 
-} //ConnectorParameterInputsImpl
+} //ConnectorParameterInputImpl

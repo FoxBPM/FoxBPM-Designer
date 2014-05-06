@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_Kb-w8Mm8EeO0sOxvRirFBQ" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_LZN1QMm8EeO0sOxvRirFBQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_LZPDYMm8EeO0sOxvRirFBQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_LZPqcMm8EeO0sOxvRirFBQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_NS9vsMm9EeO0sOxvRirFBQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmorgconfig.ecore#//FoxBPMOrgConfig/dataBaseId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NS9vscm9EeO0sOxvRirFBQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QJB94Mm9EeO0sOxvRirFBQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmorgconfig.ecore#//FoxBPMOrgConfig/isDefaultDataBaseId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QJB94cm9EeO0sOxvRirFBQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_LZPqccm8EeO0sOxvRirFBQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_LZPqcsm8EeO0sOxvRirFBQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_LZPqc8m8EeO0sOxvRirFBQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_LZQRgMm8EeO0sOxvRirFBQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_LZQRgcm8EeO0sOxvRirFBQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_LZQRgsm8EeO0sOxvRirFBQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_LZQRg8m8EeO0sOxvRirFBQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_LZN1Qcm8EeO0sOxvRirFBQ" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="foxbpmorgconfig.ecore#//FoxBPMOrgConfig"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LZN1Qsm8EeO0sOxvRirFBQ" x="192" y="136"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Kb-w8cm8EeO0sOxvRirFBQ"/>
+  <element xmi:type="ecore:EPackage" href="foxbpmorgconfig.ecore#/"/>
+</notation:Diagram>

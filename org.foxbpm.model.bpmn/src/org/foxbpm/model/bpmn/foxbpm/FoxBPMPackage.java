@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.EReference;
  * </ul>
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
- * 此XML Schema定义的BPMN 2.0的扩展元素是Founder公司拓展的属性。
+ * 此XML Schema定义的BPMN 2.0的扩展元素是FXOBPM拓展的属性。
  * 		
  * <!-- end-model-doc -->
  * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory
@@ -1159,14 +1159,14 @@ public interface FoxBPMPackage extends EPackage {
 	int CONNECTOR_INSTANCE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl <em>Connector Parameter Inputs</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl <em>Connector Parameter Input</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterInput()
 	 * @generated
 	 */
-	int CONNECTOR_PARAMETER_INPUTS = 8;
+	int CONNECTOR_PARAMETER_INPUT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1175,7 +1175,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS__ID = 0;
+	int CONNECTOR_PARAMETER_INPUT__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1184,7 +1184,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS__NAME = 1;
+	int CONNECTOR_PARAMETER_INPUT__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -1193,7 +1193,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS__DATA_TYPE = 2;
+	int CONNECTOR_PARAMETER_INPUT__DATA_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1202,7 +1202,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS__EXPRESSION = 3;
+	int CONNECTOR_PARAMETER_INPUT__EXPRESSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Is Execute</b></em>' attribute.
@@ -1211,35 +1211,35 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE = 4;
+	int CONNECTOR_PARAMETER_INPUT__IS_EXECUTE = 4;
 
 	/**
-	 * The number of structural features of the '<em>Connector Parameter Inputs</em>' class.
+	 * The number of structural features of the '<em>Connector Parameter Input</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS_FEATURE_COUNT = 5;
+	int CONNECTOR_PARAMETER_INPUT_FEATURE_COUNT = 5;
 
 	/**
-	 * The number of operations of the '<em>Connector Parameter Inputs</em>' class.
+	 * The number of operations of the '<em>Connector Parameter Input</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_INPUTS_OPERATION_COUNT = 0;
+	int CONNECTOR_PARAMETER_INPUT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsImpl <em>Connector Parameter Outputs</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputImpl <em>Connector Parameter Output</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsImpl
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutput()
 	 * @generated
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS = 9;
+	int CONNECTOR_PARAMETER_OUTPUT = 9;
 
 	/**
 	 * The feature id for the '<em><b>Variable Target</b></em>' attribute.
@@ -1248,7 +1248,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS__VARIABLE_TARGET = 0;
+	int CONNECTOR_PARAMETER_OUTPUT__VARIABLE_TARGET = 0;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1257,25 +1257,34 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS__EXPRESSION = 1;
+	int CONNECTOR_PARAMETER_OUTPUT__EXPRESSION = 1;
 
 	/**
-	 * The number of structural features of the '<em>Connector Parameter Outputs</em>' class.
+	 * The feature id for the '<em><b>Output Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_FEATURE_COUNT = 2;
+	int CONNECTOR_PARAMETER_OUTPUT__OUTPUT_ID = 2;
 
 	/**
-	 * The number of operations of the '<em>Connector Parameter Outputs</em>' class.
+	 * The number of structural features of the '<em>Connector Parameter Output</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_OPERATION_COUNT = 0;
+	int CONNECTOR_PARAMETER_OUTPUT_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Connector Parameter Output</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTOR_PARAMETER_OUTPUT_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.LoopDataInputCollectionImpl <em>Loop Data Input Collection</em>}' class.
@@ -1352,14 +1361,14 @@ public interface FoxBPMPackage extends EPackage {
 	int LOOP_DATA_OUTPUT_COLLECTION_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl <em>Connector Parameter Outputs Def</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl <em>Connector Parameter Output Def</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputsDef()
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputDef()
 	 * @generated
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF = 12;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF = 12;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -1368,7 +1377,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF__ID = 0;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1377,7 +1386,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME = 1;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
@@ -1386,25 +1395,25 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE = 2;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE = 2;
 
 	/**
-	 * The number of structural features of the '<em>Connector Parameter Outputs Def</em>' class.
+	 * The number of structural features of the '<em>Connector Parameter Output Def</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF_FEATURE_COUNT = 3;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF_FEATURE_COUNT = 3;
 
 	/**
-	 * The number of operations of the '<em>Connector Parameter Outputs Def</em>' class.
+	 * The number of operations of the '<em>Connector Parameter Output Def</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_PARAMETER_OUTPUTS_DEF_OPERATION_COUNT = 0;
+	int CONNECTOR_PARAMETER_OUTPUT_DEF_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormUriImpl <em>Form Uri</em>}' class.
@@ -3622,101 +3631,112 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getConnectorInstance_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs <em>Connector Parameter Inputs</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput <em>Connector Parameter Input</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Connector Parameter Inputs</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs
+	 * @return the meta object for class '<em>Connector Parameter Input</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput
 	 * @generated
 	 */
-	EClass getConnectorParameterInputs();
+	EClass getConnectorParameterInput();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getId()
-	 * @see #getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getId()
+	 * @see #getConnectorParameterInput()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterInputs_Id();
+	EAttribute getConnectorParameterInput_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getName()
-	 * @see #getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getName()
+	 * @see #getConnectorParameterInput()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterInputs_Name();
+	EAttribute getConnectorParameterInput_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getDataType <em>Data Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getDataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Data Type</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getDataType()
-	 * @see #getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getDataType()
+	 * @see #getConnectorParameterInput()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterInputs_DataType();
+	EAttribute getConnectorParameterInput_DataType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getExpression()
-	 * @see #getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getExpression()
+	 * @see #getConnectorParameterInput()
 	 * @generated
 	 */
-	EReference getConnectorParameterInputs_Expression();
+	EReference getConnectorParameterInput_Expression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getIsExecute <em>Is Execute</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getIsExecute <em>Is Execute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Execute</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs#getIsExecute()
-	 * @see #getConnectorParameterInputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput#getIsExecute()
+	 * @see #getConnectorParameterInput()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterInputs_IsExecute();
+	EAttribute getConnectorParameterInput_IsExecute();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs <em>Connector Parameter Outputs</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput <em>Connector Parameter Output</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Connector Parameter Outputs</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs
+	 * @return the meta object for class '<em>Connector Parameter Output</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput
 	 * @generated
 	 */
-	EClass getConnectorParameterOutputs();
+	EClass getConnectorParameterOutput();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs#getVariableTarget <em>Variable Target</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getVariableTarget <em>Variable Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Variable Target</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs#getVariableTarget()
-	 * @see #getConnectorParameterOutputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getVariableTarget()
+	 * @see #getConnectorParameterOutput()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterOutputs_VariableTarget();
+	EAttribute getConnectorParameterOutput_VariableTarget();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs#getExpression()
-	 * @see #getConnectorParameterOutputs()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getExpression()
+	 * @see #getConnectorParameterOutput()
 	 * @generated
 	 */
-	EReference getConnectorParameterOutputs_Expression();
+	EReference getConnectorParameterOutput_Expression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getOutputId <em>Output Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Output Id</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput#getOutputId()
+	 * @see #getConnectorParameterOutput()
+	 * @generated
+	 */
+	EAttribute getConnectorParameterOutput_OutputId();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection <em>Loop Data Input Collection</em>}'.
@@ -3761,47 +3781,47 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getLoopDataOutputCollection_Expression();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef <em>Connector Parameter Outputs Def</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef <em>Connector Parameter Output Def</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Connector Parameter Outputs Def</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef
+	 * @return the meta object for class '<em>Connector Parameter Output Def</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef
 	 * @generated
 	 */
-	EClass getConnectorParameterOutputsDef();
+	EClass getConnectorParameterOutputDef();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getId()
-	 * @see #getConnectorParameterOutputsDef()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getId()
+	 * @see #getConnectorParameterOutputDef()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterOutputsDef_Id();
+	EAttribute getConnectorParameterOutputDef_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getName()
-	 * @see #getConnectorParameterOutputsDef()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getName()
+	 * @see #getConnectorParameterOutputDef()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterOutputsDef_Name();
+	EAttribute getConnectorParameterOutputDef_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getDataType <em>Data Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getDataType <em>Data Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Data Type</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getDataType()
-	 * @see #getConnectorParameterOutputsDef()
+	 * @see org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getDataType()
+	 * @see #getConnectorParameterOutputDef()
 	 * @generated
 	 */
-	EAttribute getConnectorParameterOutputsDef_DataType();
+	EAttribute getConnectorParameterOutputDef_DataType();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.FormUri <em>Form Uri</em>}'.
@@ -5386,14 +5406,14 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute CONNECTOR_INSTANCE__TYPE = eINSTANCE.getConnectorInstance_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl <em>Connector Parameter Inputs</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl <em>Connector Parameter Input</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputsImpl
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterInputs()
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterInputImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterInput()
 		 * @generated
 		 */
-		EClass CONNECTOR_PARAMETER_INPUTS = eINSTANCE.getConnectorParameterInputs();
+		EClass CONNECTOR_PARAMETER_INPUT = eINSTANCE.getConnectorParameterInput();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5401,7 +5421,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_INPUTS__ID = eINSTANCE.getConnectorParameterInputs_Id();
+		EAttribute CONNECTOR_PARAMETER_INPUT__ID = eINSTANCE.getConnectorParameterInput_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5409,7 +5429,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_INPUTS__NAME = eINSTANCE.getConnectorParameterInputs_Name();
+		EAttribute CONNECTOR_PARAMETER_INPUT__NAME = eINSTANCE.getConnectorParameterInput_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
@@ -5417,7 +5437,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_INPUTS__DATA_TYPE = eINSTANCE.getConnectorParameterInputs_DataType();
+		EAttribute CONNECTOR_PARAMETER_INPUT__DATA_TYPE = eINSTANCE.getConnectorParameterInput_DataType();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -5425,7 +5445,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONNECTOR_PARAMETER_INPUTS__EXPRESSION = eINSTANCE.getConnectorParameterInputs_Expression();
+		EReference CONNECTOR_PARAMETER_INPUT__EXPRESSION = eINSTANCE.getConnectorParameterInput_Expression();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Execute</b></em>' attribute feature.
@@ -5433,17 +5453,17 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_INPUTS__IS_EXECUTE = eINSTANCE.getConnectorParameterInputs_IsExecute();
+		EAttribute CONNECTOR_PARAMETER_INPUT__IS_EXECUTE = eINSTANCE.getConnectorParameterInput_IsExecute();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsImpl <em>Connector Parameter Outputs</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputImpl <em>Connector Parameter Output</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsImpl
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputs()
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutput()
 		 * @generated
 		 */
-		EClass CONNECTOR_PARAMETER_OUTPUTS = eINSTANCE.getConnectorParameterOutputs();
+		EClass CONNECTOR_PARAMETER_OUTPUT = eINSTANCE.getConnectorParameterOutput();
 
 		/**
 		 * The meta object literal for the '<em><b>Variable Target</b></em>' attribute feature.
@@ -5451,7 +5471,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_OUTPUTS__VARIABLE_TARGET = eINSTANCE.getConnectorParameterOutputs_VariableTarget();
+		EAttribute CONNECTOR_PARAMETER_OUTPUT__VARIABLE_TARGET = eINSTANCE.getConnectorParameterOutput_VariableTarget();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -5459,7 +5479,15 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONNECTOR_PARAMETER_OUTPUTS__EXPRESSION = eINSTANCE.getConnectorParameterOutputs_Expression();
+		EReference CONNECTOR_PARAMETER_OUTPUT__EXPRESSION = eINSTANCE.getConnectorParameterOutput_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Output Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONNECTOR_PARAMETER_OUTPUT__OUTPUT_ID = eINSTANCE.getConnectorParameterOutput_OutputId();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.LoopDataInputCollectionImpl <em>Loop Data Input Collection</em>}' class.
@@ -5498,14 +5526,14 @@ public interface FoxBPMPackage extends EPackage {
 		EReference LOOP_DATA_OUTPUT_COLLECTION__EXPRESSION = eINSTANCE.getLoopDataOutputCollection_Expression();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl <em>Connector Parameter Outputs Def</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl <em>Connector Parameter Output Def</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputsDef()
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getConnectorParameterOutputDef()
 		 * @generated
 		 */
-		EClass CONNECTOR_PARAMETER_OUTPUTS_DEF = eINSTANCE.getConnectorParameterOutputsDef();
+		EClass CONNECTOR_PARAMETER_OUTPUT_DEF = eINSTANCE.getConnectorParameterOutputDef();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5513,7 +5541,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_OUTPUTS_DEF__ID = eINSTANCE.getConnectorParameterOutputsDef_Id();
+		EAttribute CONNECTOR_PARAMETER_OUTPUT_DEF__ID = eINSTANCE.getConnectorParameterOutputDef_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5521,7 +5549,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME = eINSTANCE.getConnectorParameterOutputsDef_Name();
+		EAttribute CONNECTOR_PARAMETER_OUTPUT_DEF__NAME = eINSTANCE.getConnectorParameterOutputDef_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
@@ -5529,7 +5557,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE = eINSTANCE.getConnectorParameterOutputsDef_DataType();
+		EAttribute CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE = eINSTANCE.getConnectorParameterOutputDef_DataType();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormUriImpl <em>Form Uri</em>}' class.

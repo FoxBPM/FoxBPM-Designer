@@ -284,7 +284,7 @@ public interface ConnectorInstance extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Connector Parameter Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs}.
+	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Connector Parameter Inputs</em>' containment reference list isn't clear,
@@ -297,11 +297,11 @@ public interface ConnectorInstance extends EObject {
 	 *        extendedMetaData="namespace='##targetNamespace' kind='element'"
 	 * @generated
 	 */
-	EList<ConnectorParameterInputs> getConnectorParameterInputs();
+	EList<ConnectorParameterInput> getConnectorParameterInputs();
 
 	/**
 	 * Returns the value of the '<em><b>Connector Parameter Outputs</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs}.
+	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Connector Parameter Outputs</em>' containment reference list isn't clear,
@@ -314,11 +314,11 @@ public interface ConnectorInstance extends EObject {
 	 *        extendedMetaData="namespace='##targetNamespace' name='connectorParameterOutputs' kind='element'"
 	 * @generated
 	 */
-	EList<ConnectorParameterOutputs> getConnectorParameterOutputs();
+	EList<ConnectorParameterOutput> getConnectorParameterOutputs();
 
 	/**
 	 * Returns the value of the '<em><b>Connector Parameter Outputs Def</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef}.
+	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Connector Parameter Outputs Def</em>' containment reference list isn't clear,
@@ -331,7 +331,7 @@ public interface ConnectorInstance extends EObject {
 	 *        extendedMetaData="name='connectorParameterOutputsDef' namespace='##targetNamespace' kind='element'"
 	 * @generated
 	 */
-	EList<ConnectorParameterOutputsDef> getConnectorParameterOutputsDef();
+	EList<ConnectorParameterOutputDef> getConnectorParameterOutputsDef();
 
 	/**
 	 * Returns the value of the '<em><b>Skip Comment</b></em>' containment reference.

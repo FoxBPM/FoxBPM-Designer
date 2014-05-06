@@ -94,22 +94,22 @@ public interface FoxBPMFactory extends EFactory {
 	ConnectorInstance createConnectorInstance();
 
 	/**
-	 * Returns a new object of class '<em>Connector Parameter Inputs</em>'.
+	 * Returns a new object of class '<em>Connector Parameter Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connector Parameter Inputs</em>'.
+	 * @return a new object of class '<em>Connector Parameter Input</em>'.
 	 * @generated
 	 */
-	ConnectorParameterInputs createConnectorParameterInputs();
+	ConnectorParameterInput createConnectorParameterInput();
 
 	/**
-	 * Returns a new object of class '<em>Connector Parameter Outputs</em>'.
+	 * Returns a new object of class '<em>Connector Parameter Output</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connector Parameter Outputs</em>'.
+	 * @return a new object of class '<em>Connector Parameter Output</em>'.
 	 * @generated
 	 */
-	ConnectorParameterOutputs createConnectorParameterOutputs();
+	ConnectorParameterOutput createConnectorParameterOutput();
 
 	/**
 	 * Returns a new object of class '<em>Loop Data Input Collection</em>'.
@@ -130,13 +130,13 @@ public interface FoxBPMFactory extends EFactory {
 	LoopDataOutputCollection createLoopDataOutputCollection();
 
 	/**
-	 * Returns a new object of class '<em>Connector Parameter Outputs Def</em>'.
+	 * Returns a new object of class '<em>Connector Parameter Output Def</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connector Parameter Outputs Def</em>'.
+	 * @return a new object of class '<em>Connector Parameter Output Def</em>'.
 	 * @generated
 	 */
-	ConnectorParameterOutputsDef createConnectorParameterOutputsDef();
+	ConnectorParameterOutputDef createConnectorParameterOutputDef();
 
 	/**
 	 * Returns a new object of class '<em>Form Uri</em>'.

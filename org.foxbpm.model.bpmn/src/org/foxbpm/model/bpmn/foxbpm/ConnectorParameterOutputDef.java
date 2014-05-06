@@ -6,23 +6,23 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Connector Parameter Outputs Def</b></em>'.
+ * A representation of the model object '<em><b>Connector Parameter Output Def</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getDataType <em>Data Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputsDef()
+ * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputDef()
  * @model
  * @generated
  */
-public interface ConnectorParameterOutputsDef extends EObject {
+public interface ConnectorParameterOutputDef extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputsDef_Id()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputDef_Id()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -41,7 +41,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -60,7 +60,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputsDef_Name()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputDef_Name()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -68,7 +68,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -87,7 +87,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Type</em>' attribute.
 	 * @see #setDataType(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputsDef_DataType()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorParameterOutputDef_DataType()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -95,7 +95,7 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	String getDataType();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef#getDataType <em>Data Type</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef#getDataType <em>Data Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Data Type</em>' attribute.
@@ -104,4 +104,4 @@ public interface ConnectorParameterOutputsDef extends EObject {
 	 */
 	void setDataType(String value);
 
-} // ConnectorParameterOutputsDef
+} // ConnectorParameterOutputDef

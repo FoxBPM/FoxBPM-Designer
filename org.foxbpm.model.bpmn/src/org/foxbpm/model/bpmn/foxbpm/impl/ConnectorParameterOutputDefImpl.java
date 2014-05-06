@@ -9,25 +9,25 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Connector Parameter Outputs Def</b></em>'.
+ * An implementation of the model object '<em><b>Connector Parameter Output Def</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputsDefImpl#getDataType <em>Data Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorParameterOutputDefImpl#getDataType <em>Data Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Container implements ConnectorParameterOutputsDef {
+public class ConnectorParameterOutputDefImpl extends MinimalEObjectImpl.Container implements ConnectorParameterOutputDef {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -93,7 +93,7 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConnectorParameterOutputsDefImpl() {
+	protected ConnectorParameterOutputDefImpl() {
 		super();
 	}
 
@@ -104,7 +104,7 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMPackage.Literals.CONNECTOR_PARAMETER_OUTPUTS_DEF;
+		return FoxBPMPackage.Literals.CONNECTOR_PARAMETER_OUTPUT_DEF;
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__ID, oldId, id));
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__NAME, oldName, name));
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 		String oldDataType = dataType;
 		dataType = newDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE, oldDataType, dataType));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE, oldDataType, dataType));
 	}
 
 	/**
@@ -178,11 +178,11 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__ID:
 				return getId();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__NAME:
 				return getName();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE:
 				return getDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -196,13 +196,13 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__ID:
 				setId((String)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__NAME:
 				setName((String)newValue);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE:
 				setDataType((String)newValue);
 				return;
 		}
@@ -217,13 +217,13 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE:
 				setDataType(DATA_TYPE_EDEFAULT);
 				return;
 		}
@@ -238,11 +238,11 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__ID:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__NAME:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF__DATA_TYPE:
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF__DATA_TYPE:
 				return DATA_TYPE_EDEFAULT == null ? dataType != null : !DATA_TYPE_EDEFAULT.equals(dataType);
 		}
 		return super.eIsSet(featureID);
@@ -268,4 +268,4 @@ public class ConnectorParameterOutputsDefImpl extends MinimalEObjectImpl.Contain
 		return result.toString();
 	}
 
-} //ConnectorParameterOutputsDefImpl
+} //ConnectorParameterOutputDefImpl

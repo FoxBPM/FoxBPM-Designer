@@ -3,25 +3,19 @@
 package org.foxbpm.model.bpmn.foxbpm.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
-import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInputs;
-import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputs;
-import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputsDef;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutputDef;
 import org.foxbpm.model.bpmn.foxbpm.Documentation;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.SkipComment;
@@ -237,7 +231,7 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConnectorParameterInputs> connectorParameterInputs;
+	protected EList<ConnectorParameterInput> connectorParameterInputs;
 
 	/**
 	 * The cached value of the '{@link #getConnectorParameterOutputs() <em>Connector Parameter Outputs</em>}' containment reference list.
@@ -247,7 +241,7 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConnectorParameterOutputs> connectorParameterOutputs;
+	protected EList<ConnectorParameterOutput> connectorParameterOutputs;
 
 	/**
 	 * The cached value of the '{@link #getConnectorParameterOutputsDef() <em>Connector Parameter Outputs Def</em>}' containment reference list.
@@ -257,7 +251,7 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ConnectorParameterOutputsDef> connectorParameterOutputsDef;
+	protected EList<ConnectorParameterOutputDef> connectorParameterOutputsDef;
 
 	/**
 	 * The cached value of the '{@link #getSkipComment() <em>Skip Comment</em>}' containment reference.
@@ -584,9 +578,9 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConnectorParameterInputs> getConnectorParameterInputs() {
+	public EList<ConnectorParameterInput> getConnectorParameterInputs() {
 		if (connectorParameterInputs == null) {
-			connectorParameterInputs = new EObjectContainmentEList<ConnectorParameterInputs>(ConnectorParameterInputs.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS);
+			connectorParameterInputs = new EObjectContainmentEList<ConnectorParameterInput>(ConnectorParameterInput.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS);
 		}
 		return connectorParameterInputs;
 	}
@@ -596,9 +590,9 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConnectorParameterOutputs> getConnectorParameterOutputs() {
+	public EList<ConnectorParameterOutput> getConnectorParameterOutputs() {
 		if (connectorParameterOutputs == null) {
-			connectorParameterOutputs = new EObjectContainmentEList<ConnectorParameterOutputs>(ConnectorParameterOutputs.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS);
+			connectorParameterOutputs = new EObjectContainmentEList<ConnectorParameterOutput>(ConnectorParameterOutput.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS);
 		}
 		return connectorParameterOutputs;
 	}
@@ -608,9 +602,9 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ConnectorParameterOutputsDef> getConnectorParameterOutputsDef() {
+	public EList<ConnectorParameterOutputDef> getConnectorParameterOutputsDef() {
 		if (connectorParameterOutputsDef == null) {
-			connectorParameterOutputsDef = new EObjectContainmentEList<ConnectorParameterOutputsDef>(ConnectorParameterOutputsDef.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS_DEF);
+			connectorParameterOutputsDef = new EObjectContainmentEList<ConnectorParameterOutputDef>(ConnectorParameterOutputDef.class, this, FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS_DEF);
 		}
 		return connectorParameterOutputsDef;
 	}
@@ -919,15 +913,15 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS:
 				getConnectorParameterInputs().clear();
-				getConnectorParameterInputs().addAll((Collection<? extends ConnectorParameterInputs>)newValue);
+				getConnectorParameterInputs().addAll((Collection<? extends ConnectorParameterInput>)newValue);
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS:
 				getConnectorParameterOutputs().clear();
-				getConnectorParameterOutputs().addAll((Collection<? extends ConnectorParameterOutputs>)newValue);
+				getConnectorParameterOutputs().addAll((Collection<? extends ConnectorParameterOutput>)newValue);
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS_DEF:
 				getConnectorParameterOutputsDef().clear();
-				getConnectorParameterOutputsDef().addAll((Collection<? extends ConnectorParameterOutputsDef>)newValue);
+				getConnectorParameterOutputsDef().addAll((Collection<? extends ConnectorParameterOutputDef>)newValue);
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__SKIP_COMMENT:
 				setSkipComment((SkipComment)newValue);

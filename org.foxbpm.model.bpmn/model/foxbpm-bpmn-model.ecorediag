@@ -380,19 +380,19 @@
     <children xmi:type="notation:Node" xmi:id="_mVh7ycXMEeOb9caI1cUYMA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_mVii0MXMEeOb9caI1cUYMA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_mVii2MXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs/id"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVii2cXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVii2sXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs/name"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVii28XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVjw8MXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs/dataType"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput/dataType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVjw8cXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVkYAMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs/isExecute"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput/isExecute"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVkYAcXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVii0cXMEeOb9caI1cUYMA"/>
@@ -405,14 +405,18 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVii18XMEeOb9caI1cUYMA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mVh7x8XMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs"/>
+    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mVh7yMXMEeOb9caI1cUYMA" x="2187" y="157"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_mVkYAsXMEeOb9caI1cUYMA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_mVkYBcXMEeOb9caI1cUYMA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_mVkYBsXMEeOb9caI1cUYMA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_i8FBYNQqEeOW6tmZmAx_ug" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutput/outputId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_i8FBYdQqEeOW6tmZmAx_ug"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_mVk_EMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputs/variableTarget"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutput/variableTarget"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVk_EcXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVkYB8XMEeOb9caI1cUYMA"/>
@@ -425,7 +429,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVkYDcXMEeOb9caI1cUYMA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mVkYA8XMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputs"/>
+    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutput"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mVkYBMXMEeOb9caI1cUYMA" x="2398" y="157"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_mVk_EsXMEeOb9caI1cUYMA" type="1001">
@@ -464,15 +468,15 @@
     <children xmi:type="notation:Node" xmi:id="_mVlmLMXMEeOb9caI1cUYMA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_mVlmLcXMEeOb9caI1cUYMA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_mVmNNMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputsDef/id"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputDef/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVmNNcXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVmNNsXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputsDef/name"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputDef/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVmNN8XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVmNOMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputsDef/dataType"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputDef/dataType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVmNOcXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVlmLsXMEeOb9caI1cUYMA"/>
@@ -485,7 +489,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVmNM8XMEeOb9caI1cUYMA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mVlmKsXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputsDef"/>
+    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputDef"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mVlmK8XMEeOb9caI1cUYMA" x="3333" y="157"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_mVmNOsXMEeOb9caI1cUYMA" type="1001">
@@ -1419,7 +1423,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWJm5cXMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWJm5sXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInputs/expression"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorParameterInput/expression"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWJm58XMEeOb9caI1cUYMA" points="[0, 0, 183, 76]$[-181, -61, 2, 15]$[-183, -76, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhUVAMXMEeOb9caI1cUYMA" id="(0.4966887417218543,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhUVAcXMEeOb9caI1cUYMA" id="(0.5294117647058824,1.0)"/>
@@ -1433,7 +1437,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWKN5cXMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWKN5sXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutputs/expression"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorParameterOutput/expression"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWKN58XMEeOb9caI1cUYMA" points="[0, 0, 395, 76]$[-392, -61, 3, 15]$[-395, -76, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhPcgcXMEeOb9caI1cUYMA" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhPcgsXMEeOb9caI1cUYMA" id="(0.5686274509803921,1.0)"/>

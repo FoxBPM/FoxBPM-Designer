@@ -114,15 +114,15 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS: {
-				ConnectorParameterInputs connectorParameterInputs = (ConnectorParameterInputs)theEObject;
-				T result = caseConnectorParameterInputs(connectorParameterInputs);
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT: {
+				ConnectorParameterInput connectorParameterInput = (ConnectorParameterInput)theEObject;
+				T result = caseConnectorParameterInput(connectorParameterInput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS: {
-				ConnectorParameterOutputs connectorParameterOutputs = (ConnectorParameterOutputs)theEObject;
-				T result = caseConnectorParameterOutputs(connectorParameterOutputs);
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT: {
+				ConnectorParameterOutput connectorParameterOutput = (ConnectorParameterOutput)theEObject;
+				T result = caseConnectorParameterOutput(connectorParameterOutput);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -138,9 +138,9 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF: {
-				ConnectorParameterOutputsDef connectorParameterOutputsDef = (ConnectorParameterOutputsDef)theEObject;
-				T result = caseConnectorParameterOutputsDef(connectorParameterOutputsDef);
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF: {
+				ConnectorParameterOutputDef connectorParameterOutputDef = (ConnectorParameterOutputDef)theEObject;
+				T result = caseConnectorParameterOutputDef(connectorParameterOutputDef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -403,32 +403,32 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Inputs</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Input</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Inputs</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Input</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConnectorParameterInputs(ConnectorParameterInputs object) {
+	public T caseConnectorParameterInput(ConnectorParameterInput object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Outputs</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Output</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Outputs</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Output</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConnectorParameterOutputs(ConnectorParameterOutputs object) {
+	public T caseConnectorParameterOutput(ConnectorParameterOutput object) {
 		return null;
 	}
 
@@ -463,17 +463,17 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Outputs Def</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Connector Parameter Output Def</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Outputs Def</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Connector Parameter Output Def</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConnectorParameterOutputsDef(ConnectorParameterOutputsDef object) {
+	public T caseConnectorParameterOutputDef(ConnectorParameterOutputDef object) {
 		return null;
 	}
 

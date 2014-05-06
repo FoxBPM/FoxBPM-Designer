@@ -65,11 +65,11 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 			case FoxBPMPackage.DATA_VARIABLE: return createDataVariable();
 			case FoxBPMPackage.DOCUMENTATION: return createDocumentation();
 			case FoxBPMPackage.CONNECTOR_INSTANCE: return createConnectorInstance();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUTS: return createConnectorParameterInputs();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS: return createConnectorParameterOutputs();
+			case FoxBPMPackage.CONNECTOR_PARAMETER_INPUT: return createConnectorParameterInput();
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT: return createConnectorParameterOutput();
 			case FoxBPMPackage.LOOP_DATA_INPUT_COLLECTION: return createLoopDataInputCollection();
 			case FoxBPMPackage.LOOP_DATA_OUTPUT_COLLECTION: return createLoopDataOutputCollection();
-			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUTS_DEF: return createConnectorParameterOutputsDef();
+			case FoxBPMPackage.CONNECTOR_PARAMETER_OUTPUT_DEF: return createConnectorParameterOutputDef();
 			case FoxBPMPackage.FORM_URI: return createFormUri();
 			case FoxBPMPackage.LOOP_MAXIMUM: return createLoopMaximum();
 			case FoxBPMPackage.SKIP_STRATEGY: return createSkipStrategy();
@@ -212,9 +212,9 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConnectorParameterInputs createConnectorParameterInputs() {
-		ConnectorParameterInputsImpl connectorParameterInputs = new ConnectorParameterInputsImpl();
-		return connectorParameterInputs;
+	public ConnectorParameterInput createConnectorParameterInput() {
+		ConnectorParameterInputImpl connectorParameterInput = new ConnectorParameterInputImpl();
+		return connectorParameterInput;
 	}
 
 	/**
@@ -222,9 +222,9 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConnectorParameterOutputs createConnectorParameterOutputs() {
-		ConnectorParameterOutputsImpl connectorParameterOutputs = new ConnectorParameterOutputsImpl();
-		return connectorParameterOutputs;
+	public ConnectorParameterOutput createConnectorParameterOutput() {
+		ConnectorParameterOutputImpl connectorParameterOutput = new ConnectorParameterOutputImpl();
+		return connectorParameterOutput;
 	}
 
 	/**
@@ -252,9 +252,9 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConnectorParameterOutputsDef createConnectorParameterOutputsDef() {
-		ConnectorParameterOutputsDefImpl connectorParameterOutputsDef = new ConnectorParameterOutputsDefImpl();
-		return connectorParameterOutputsDef;
+	public ConnectorParameterOutputDef createConnectorParameterOutputDef() {
+		ConnectorParameterOutputDefImpl connectorParameterOutputDef = new ConnectorParameterOutputDefImpl();
+		return connectorParameterOutputDef;
 	}
 
 	/**
