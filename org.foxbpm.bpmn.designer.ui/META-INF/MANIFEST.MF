@@ -32,6 +32,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.jface.databinding,
  com.ibm.icu,
  org.eclipse.emf.databinding,
- org.eclipse.emf.databinding.edit
+ org.eclipse.emf.databinding.edit,
+ org.eclipse.jface.text,
+ org.codehaus.groovy,
+ org.codehaus.groovy.eclipse,
+ org.codehaus.groovy.eclipse.codeassist.completion,
+ org.codehaus.groovy.eclipse.core,
+ org.codehaus.groovy.eclipse.refactoring,
+ org.codehaus.groovy.eclipse.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

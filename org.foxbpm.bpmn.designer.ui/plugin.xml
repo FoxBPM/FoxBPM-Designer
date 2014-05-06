@@ -231,6 +231,9 @@
      <enable
            object="EndEvent">
      </enable>
+          <enable
+           object="SequenceFlow">
+     </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.section.event.StartEventPropertySection"
