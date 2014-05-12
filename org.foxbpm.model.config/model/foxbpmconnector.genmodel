@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.foxbpm.model.config/src" modelPluginID="org.foxbpm.model.config"
+    modelName="foxbpmconnector" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>foxbpmconnector.ecore</foreignModel>
+  <genPackages prefix="Connector" basePackage="org.foxbpm.model.config" resource="XML"
+      disposableProviderFactory="true" ecorePackage="foxbpmconnector.ecore#/">
+    <genClasses ecoreClass="foxbpmconnector.ecore#//ConnectorDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/note"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/categoryId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//ConnectorDefinition/input"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//ConnectorDefinition/output"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//ConnectorDefinition/page"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/version"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//ConnectorDefinition/definitionImpl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ConnectorDefinition/connrctorType"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Input">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Input/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Input/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Input/mandatory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Input/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Input/isExecute"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Output">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Output/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Output/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Output/type"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Page">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Page/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Page/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Page/note"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Page/widget"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="foxbpmconnector.ecore#//Widget">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Widget/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Widget/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Widget/inputId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Widget/widgetExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Text">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Text/EReference0"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Password"/>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//TextArea"/>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Checkbox"/>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Select">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Select/items"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//RadioGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//RadioGroup/choices"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Group">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Group/optional"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Group/widget"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Table">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//Table/colsCaption"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Table/cols"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Table/fixedCols"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//List"/>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//ScriptEditor"/>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Items">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Items/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Items/value"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//Choices">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Choices/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//Choices/value"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//ColsCaption">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ColsCaption/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//ColsCaption/value"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//WidgetExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//WidgetExpression/expressionValue"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//DefinitionImpl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//DefinitionImpl/className"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//DefinitionImpl/packageName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//DefinitionImpl/jarDependencies"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//JarDependencies">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnector.ecore#//JarDependencies/jarDependency"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnector.ecore#//JarDependency">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnector.ecore#//JarDependency/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

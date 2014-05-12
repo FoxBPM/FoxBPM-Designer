@@ -9,7 +9,10 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.foxbpm.model.config.foxbpmconfig,
  org.foxbpm.model.config.foxbpmconfig.impl,
- org.foxbpm.model.config.foxbpmconfig.util
+ org.foxbpm.model.config.foxbpmconfig.util,
+ org.foxbpm.model.config.connector,
+ org.foxbpm.model.config.connector.impl,
+ org.foxbpm.model.config.connector.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi;visibility:=reexport

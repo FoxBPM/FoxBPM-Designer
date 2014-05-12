@@ -20,4 +20,18 @@
             type="foxbpmconfig"
             class="org.foxbpm.model.config.foxbpmconfig.util.FoxBPMConfigResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated foxbpmconnector -->
+      <package
+            uri="http://www.foxbpm.org/connector"
+            class="org.foxbpm.model.config.connector.ConnectorPackage"
+            genModel="model/foxbpmconnector.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated foxbpmconnector -->
+      <parser
+            type="connector"
+            class="org.foxbpm.model.config.connector.util.ConnectorResourceFactoryImpl"/>
+   </extension>
 </plugin>
