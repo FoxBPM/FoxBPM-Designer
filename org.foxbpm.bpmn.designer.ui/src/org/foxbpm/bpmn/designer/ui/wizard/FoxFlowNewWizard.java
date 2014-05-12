@@ -23,4 +23,10 @@ public class FoxFlowNewWizard extends Wizard implements INewWizard {
 		return false;
 	}
 
+	@Override
+	public void addPages() {
+		NewProcessWizardPage newProcessWizardPage = new NewProcessWizardPage();
+		this.addPage(newProcessWizardPage);
+	}
+
 }

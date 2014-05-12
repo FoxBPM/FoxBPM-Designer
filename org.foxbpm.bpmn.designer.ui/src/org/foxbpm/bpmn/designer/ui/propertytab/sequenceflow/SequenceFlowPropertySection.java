@@ -1,6 +1,6 @@
-package org.foxbpm.bpmn.designer.ui.propertytab.section.task;
+package org.foxbpm.bpmn.designer.ui.propertytab.sequenceflow;
 
-import org.eclipse.bpmn2.UserTask;
+import org.eclipse.bpmn2.SequenceFlow;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
@@ -8,16 +8,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.ui.IWorkbenchPart;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMPropertySection;
-import org.foxbpm.bpmn.designer.ui.propertytab.composite.task.UserTaskPropertyComposite;
 
-public class UserTaskPropertySection extends AbstractFoxBPMPropertySection {
+public class SequenceFlowPropertySection extends AbstractFoxBPMPropertySection {
 
-	public UserTaskPropertySection() {
+	public SequenceFlowPropertySection() {
 	}
 
 	@Override
 	protected AbstractFoxBPMComposite createSectionRoot() {
-		return new UserTaskPropertyComposite(parent, SWT.NONE);
+		return new SequenceFlowPropertyComposite(parent, SWT.NONE);
 	}
 
 	@Override
@@ -28,9 +27,9 @@ public class UserTaskPropertySection extends AbstractFoxBPMPropertySection {
 
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject be = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-		boolean enable = be instanceof UserTask;
-		return enable;
+		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
+		boolean enabled = eObject instanceof SequenceFlow;
+		return enabled;
 	}
 
 }
