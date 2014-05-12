@@ -34,4 +34,18 @@
             type="connector"
             class="org.foxbpm.model.config.connector.util.ConnectorResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated foxbpmconnectormenu -->
+      <package
+            uri="http://www.foxbpm.org/connectormenu"
+            class="org.foxbpm.model.config.connectormenu.ConnectormenuPackage"
+            genModel="model/foxbpmconnectormenu.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated foxbpmconnectormenu -->
+      <parser
+            type="connectormenu"
+            class="org.foxbpm.model.config.connectormenu.util.ConnectormenuResourceFactoryImpl"/>
+   </extension>
 </plugin>
