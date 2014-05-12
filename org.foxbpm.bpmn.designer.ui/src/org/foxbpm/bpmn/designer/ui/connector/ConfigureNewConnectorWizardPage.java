@@ -13,6 +13,7 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.dialogs.Dialog;
@@ -62,6 +63,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.PlatformUI;
+import org.foxbpm.model.config.connector.ConnectorFactory;
+import org.foxbpm.model.config.connector.ConnectorPackage;
 
 public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPage {
 
@@ -124,31 +127,28 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		setTitle("创建连接器");
 
 		// 初始化model
-		/*
-		 * FlowConnectorPackage.eINSTANCE.eClass(); FlowConnectorFactory
-		 * newFactory = FlowConnectorFactory.eINSTANCE; FlowConnectorDefinition
-		 * newConnector = newFactory.createFlowConnectorDefinition(); Input
-		 * newinput = newFactory.createInput(); Page newPage =
-		 * newFactory.createPage(); Output newoutput =
-		 * newFactory.createOutput(); DefinitionImpl definitionImpl =
-		 * newFactory.createDefinitionImpl(); this.newConnector = newConnector;
-		 * this.newFactory = newFactory;
-		 * this.newConnector.setDefinitionImpl(definitionImpl);
-		 * ConnectormenuFactory menufactory = ConnectormenuFactory.eINSTANCE;
-		 * Node node = menufactory.createNode(); this.node = node;
-		 * this.node.setName("");
-		 * 
-		 * this.pages = new ArrayList<Page>(); this.newCreateCategoryID = new
-		 * ArrayList<String>(); //读取Menu的xml XMIResource menuresource =
-		 * (XMIResource) new
-		 * ResourceSetImpl().getResource(URI.createFileURI(ConnectorUtil
-		 * .getMenuConnectorPath()), true); Menu menu = (Menu)
-		 * menuresource.getContents().get(0); // Menu menu =
-		 * EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		 * menu = FlowConnectorConfigUtil.getFlowConnectorMenu();
-		 * //通过下面这一个方法就不需要再递归得到所有节点 nodelist = EMFUtil.getAll(menu.eResource(),
-		 * Node.class);
-		 */
+		
+		//初始化model
+//		FlowConnectorPackage.eINSTANCE.eClass();
+//		FlowConnectorFactory newFactory = FlowConnectorFactory.eINSTANCE;
+//		FlowConnectorDefinition newConnector = newFactory.createFlowConnectorDefinition();
+//		Input newinput = newFactory.createInput();
+//		Page newPage = newFactory.createPage();
+//		Output newoutput = newFactory.createOutput();
+//		DefinitionImpl definitionImpl = newFactory.createDefinitionImpl();
+//		this.newConnector = newConnector;
+//		this.newFactory = newFactory;
+//		this.newConnector.setDefinitionImpl(definitionImpl);
+//		ConnectormenuFactory menufactory = ConnectormenuFactory.eINSTANCE;
+//		Node node = menufactory.createNode();
+//		this.node = node;
+//		this.node.setName("");
+//		
+//		this.pages = new ArrayList<Page>();
+//		this.newCreateCategoryID = new ArrayList<String>();
+//		
+//		menu = FlowConnectorConfigUtil.getFlowConnectorMenu();
+//		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
 		this.openType = "create";
 	}
@@ -658,8 +658,8 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 												 * .getPage().add(cpd
 												 * .getPage()); int index =
 												 * ((List
-												 * <Page>)pagetableViewer.getInput
-												 * ()).indexOf(page);
+												 * <Page>)pagetableViewer.
+												 * getInput ()).indexOf(page);
 												 * ((List<Page
 												 * >)pagetableViewer.getInput
 												 * ()).remove(page);
@@ -698,8 +698,9 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 												 * ((List<Page>)pagetableViewer
 												 * .getInput()).remove(page);
 												 * ((List
-												 * <Page>)pagetableViewer.getInput
-												 * ()).add(idx - 1, page); }
+												 * <Page>)pagetableViewer.
+												 * getInput ()).add(idx - 1,
+												 * page); }
 												 * pagetableViewer.refresh();
 												 * if(selection != null)
 												 * pagetableViewer
@@ -733,8 +734,8 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 												 * ((List<Page>)pagetableViewer
 												 * .getInput()).size() - 1) {
 												 * ((List
-												 * <Page>)pagetableViewer.getInput
-												 * ()).remove(pageTo);
+												 * <Page>)pagetableViewer.
+												 * getInput ()).remove(pageTo);
 												 * ((List<Page
 												 * >)pagetableViewer.getInput
 												 * ()).add(idx + 1, pageTo); }
@@ -2017,9 +2018,9 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 								 * .getSelection()).getFirstElement(); index =
 								 * -1; if(outputparameter!=null) { index =
 								 * ((List
-								 * <Output>)outputtableViewer.getInput()).indexOf
-								 * (outputparameter); } if (outputdeleteButton
-								 * != null) {
+								 * <Output>)outputtableViewer.getInput()).
+								 * indexOf (outputparameter); } if
+								 * (outputdeleteButton != null) {
 								 * outputdeleteButton.setEnabled(outputparameter
 								 * != null); } if(outputdownButton != null){
 								 * outputdownButton.setEnabled(outputparameter!=
