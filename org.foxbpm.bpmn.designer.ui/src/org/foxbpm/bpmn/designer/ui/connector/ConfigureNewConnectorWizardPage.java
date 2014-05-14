@@ -12,11 +12,13 @@ import java.util.regex.Pattern;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.core.IPackageFragment;
-import org.eclipse.jface.databinding.swt.SWTObservables;
-import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -42,7 +44,6 @@ import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
@@ -63,10 +64,26 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.PlatformUI;
+import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
+import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
+import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
+import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.ConnectorFactory;
-import org.foxbpm.model.config.connector.ConnectorPackage;
+import org.foxbpm.model.config.connector.ConnectorPackage.Literals;
+import org.foxbpm.model.config.connector.DefinitionImpl;
+import org.foxbpm.model.config.connector.Input;
+import org.foxbpm.model.config.connector.Output;
+import org.foxbpm.model.config.connector.Page;
+import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
+import org.foxbpm.model.config.connectormenu.Menu;
+import org.foxbpm.model.config.connectormenu.Node;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 
-public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPage {
+public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
 	private static String CONNECTORDEFAULTICON = "connector.png";
 
@@ -113,6 +130,14 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	private TreeViewer categorytreeViewer;
 	private Button categorycreateButton;
 	private List<String> newCreateCategoryID;
+	private List<Page> pages;
+	private ConnectorDefinition connectorDefinition;
+	private Node node;
+	private Menu menu;
+	private Composite categoryComposite;
+	private Button createCateButton;
+	private List<Node> nodelist;
+	private List<ITreeElement> categorytreeElements;
 
 	/**
 	 * 构造函数
@@ -127,28 +152,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		setTitle("创建连接器");
 
 		// 初始化model
-		
-		//初始化model
-//		FlowConnectorPackage.eINSTANCE.eClass();
-//		FlowConnectorFactory newFactory = FlowConnectorFactory.eINSTANCE;
-//		FlowConnectorDefinition newConnector = newFactory.createFlowConnectorDefinition();
-//		Input newinput = newFactory.createInput();
-//		Page newPage = newFactory.createPage();
-//		Output newoutput = newFactory.createOutput();
-//		DefinitionImpl definitionImpl = newFactory.createDefinitionImpl();
-//		this.newConnector = newConnector;
-//		this.newFactory = newFactory;
-//		this.newConnector.setDefinitionImpl(definitionImpl);
-//		ConnectormenuFactory menufactory = ConnectormenuFactory.eINSTANCE;
-//		Node node = menufactory.createNode();
-//		this.node = node;
-//		this.node.setName("");
-//		
-//		this.pages = new ArrayList<Page>();
-//		this.newCreateCategoryID = new ArrayList<String>();
-//		
-//		menu = FlowConnectorConfigUtil.getFlowConnectorMenu();
-//		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+		connectorDefinition = ConnectorFactory.eINSTANCE.createConnectorDefinition();
+		DefinitionImpl definitionImpl = ConnectorFactory.eINSTANCE.createDefinitionImpl();
+		connectorDefinition.setDefinitionImpl(definitionImpl);
+		ConnectormenuFactory menufactory = ConnectormenuFactory.eINSTANCE;
+		node = menufactory.createNode();
+		node.setName("");
+
+		pages = new ArrayList<Page>();
+		this.newCreateCategoryID = new ArrayList<String>();
+
+		menu = ConnectorUtil.getFlowConnectorMenu();
+		// menu = menufactory.createMenu();
+		nodelist = menu.eResource() == null ? new ArrayList<Node>() : EMFUtil.getAll(menu.eResource(), Node.class);
 
 		this.openType = "create";
 	}
@@ -160,30 +176,32 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	 * @param pageName
 	 * @param connector
 	 */
-	/*
-	 * public ConfigureNewConnectorWizardPage(boolean isClass, String pageName,
-	 * FlowConnectorDefinition connector) { super(isClass, pageName);
-	 * setDescription("设置连接器的描述信息"); setTitle("编辑连接器");
-	 * 
-	 * // 初始化model FlowConnectorPackage.eINSTANCE.eClass(); FlowConnectorFactory
-	 * newFactory = FlowConnectorFactory.eINSTANCE; Input newinput =
-	 * newFactory.createInput(); Page newPage = newFactory.createPage(); Output
-	 * newoutput = newFactory.createOutput(); this.newConnector = connector;
-	 * this.newFactory = newFactory; this.newCreateCategoryID = new
-	 * ArrayList<String>(); //读取Menu的xml XMIResource menuresource =
-	 * (XMIResource) new
-	 * ResourceSetImpl().getResource(URI.createFileURI(ConnectorUtil
-	 * .getMenuConnectorPath()), true); Menu menu = (Menu)
-	 * menuresource.getContents().get(0); // Menu menu =
-	 * EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-	 * menu = FlowConnectorConfigUtil.getFlowConnectorMenu(); nodelist =
-	 * EMFUtil.getAll(menu.eResource(), Node.class);
-	 * 
-	 * for (Node nd : nodelist) { if
-	 * (nd.getId().equals(connector.getCategoryId())){ this.node = nd; } }
-	 * 
-	 * this.openType = "edit"; }
-	 */
+
+	public ConfigureNewConnectorWizardPage(boolean isClass, String pageName, ConnectorDefinition connector) {
+		super(isClass, pageName);
+		setDescription("设置连接器的描述信息");
+		setTitle("编辑连接器");
+
+		// 初始化model
+		this.connectorDefinition = connector;
+		this.newCreateCategoryID = new ArrayList<String>();
+		// 读取Menu的xml
+		String menuPath = ConnectorUtil.getMenuConnectorPath();
+		XMIResource menuresource = (XMIResource) new ResourceSetImpl().getResource(URI.createFileURI(menuPath), true);
+		Menu menu = (Menu) menuresource.getContents().get(0);
+		// Menu menu =
+		// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
+		menu = ConnectorUtil.getFlowConnectorMenu();
+		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+
+		for (Node nd : nodelist) {
+			if (nd.getId().equals(connector.getCategoryId())) {
+				this.node = nd;
+			}
+		}
+
+		this.openType = "edit";
+	}
 
 	@Override
 	public void createControl(Composite parent) {
@@ -207,7 +225,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		connectoridtext.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				connectorclassnametext.setText(connectoridtext.getText());
-				connectorpackagenametext.setText("com.founder.fix.fixflow.expand.flowconnector" + "." + connectoridtext.getText());
+				connectorpackagenametext.setText("org.foxbpm.flowconnector" + "." + connectoridtext.getText());
 				setPageComplete(isPageComplete());
 			}
 		});
@@ -319,14 +337,89 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 						connectoriconButton.setText("...");
 					}
 					// 这个连接器的图标名称需要改成和连接器ID一样的名字，由于这个里面可能还没有输入id所以改成到保存代码再修改
-					// newConnector.setIcon(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(res));
+					 connectorDefinition.setIcon(new File(res).getName());
 				}
 			}
 		});
 
 		Label labelcategory = new Label(composite, SWT.NONE);
-		labelcategory.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 4, 1));
 		labelcategory.setText("分类");
+
+		// treeViewer获取数据
+		categorytreeElements = (List<ITreeElement>) ConnectorUtil.reloadTreeNodes();
+		categorytreeViewer = new TreeViewer(composite, SWT.BORDER);
+		categorytreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			public void selectionChanged(SelectionChangedEvent event) {
+				ITreeElement treeElementselect = (ITreeElement) ((IStructuredSelection) categorytreeViewer.getSelection()).getFirstElement();
+				if (treeElementselect != null && openType.equals("create")) {
+					connectorDefinition.setCategoryId(treeElementselect.getId());
+					node.setId(treeElementselect.getId());
+					node.setName(treeElementselect.getName());
+				}
+				setPageComplete(isPageComplete());
+			}
+		});
+		categorytree = categorytreeViewer.getTree();
+		GridData gd_categorytree = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		gd_categorytree.heightHint = 55;
+		categorytree.setLayoutData(gd_categorytree);
+
+		categoryComposite = new Composite(composite, SWT.NONE);
+		GridLayout gl_categoryComposite = new GridLayout(1, false);
+		gl_categoryComposite.verticalSpacing = 1;
+		gl_categoryComposite.marginWidth = 0;
+		gl_categoryComposite.marginHeight = 0;
+		gl_categoryComposite.horizontalSpacing = 0;
+		categoryComposite.setLayout(gl_categoryComposite);
+
+		createCateButton = new Button(categoryComposite, SWT.NONE);
+		createCateButton.setText("创建");
+		createCateButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+
+				// 这个里面弹出来新建分类的
+				String selName = "";
+				ITreeElement treeElementselect = (ITreeElement) ((IStructuredSelection) categorytreeViewer.getSelection()).getFirstElement();
+				if (treeElementselect != null) {
+					// selName = treeElementselect.getName();
+					connectorDefinition.setCategoryId(treeElementselect.getId());
+				}
+				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements);
+				if (dialog.open() == InputDialog.OK) {
+					// 回填到界面上,新增一个树节点出来
+					if (dialog.getSelTreeElement() != null) {
+						Node node = ConnectormenuFactory.eINSTANCE.createNode();
+						node.setId(dialog.getSelTreeElement().getId());
+						node.setName(dialog.getSelTreeElement().getName());
+						node.setIco(dialog.getSelTreeElement().getIcon());
+						// 把新建的分类对应的ID记录保存起来，供保存menu时候去刷新图标
+						newCreateCategoryID.add(dialog.getSelTreeElement().getId());
+						if (!nodelist.contains(node)) {
+							if (nodelist.size() > 0)
+								nodelist.add(nodelist.size() - 1, node);
+							else
+								nodelist.add(node);
+						}
+						categorytreeElements = dialog.getTreeElements();
+						// 选中刚才创建的分类
+						categorytreeViewer.refresh();
+						categorytreeViewer.expandToLevel(treeElementselect, 1);
+						categorytreeViewer.setSelection(new StructuredSelection(dialog.getSelTreeElement()));
+						// 这个里面还需要根据categorytreeElements对menu进行实时更改
+						modifyMenuByTreeElement(ConfigureNewConnectorWizardPage.this.menu, dialog.getSelTreeElement());
+					}
+				}
+			}
+		});
+
+		// 设置标签提供器
+		categorytreeViewer.setLabelProvider(new TreeViewerLabelProvider());
+		// 设置内容提供器
+		categorytreeViewer.setContentProvider(new TreeViewerContentProvider());
+		// 设置内容
+		categorytreeViewer.setInput(categorytreeElements);
 
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setText("输入");
@@ -371,7 +464,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 		tableViewer.setLabelProvider(new TableLabelProvider());
 		tableViewer.setContentProvider(new ContentProvider_1());
-		// tableViewer.setInput(this.newConnector.getInput());
+		tableViewer.setInput(this.connectorDefinition.getInput());
 
 		Composite inputcomposite = new Composite(composite, SWT.NONE);
 		GridLayout gl_composite_1 = new GridLayout(1, false);
@@ -390,29 +483,20 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		inputcreateButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
-			public void handleEvent(Event event) {/*
-												 * Input input =
-												 * newFactory.createInput();
-												 * input.setId("inputId"+
-												 * ((List)
-												 * tableViewer.getInput())
-												 * .size());
-												 * input.setMandatory("Mandatory"
-												 * );
-												 * input.setIsExecute("true");
-												 * input
-												 * .setType("java.lang.String");
-												 * input.setDefaultValue("");
-												 * newConnector
-												 * .getInput().add(input);
-												 * 
-												 * tableViewer.refresh();
-												 * tableViewer
-												 * .editElement(input, 0);
-												 * setPageComplete
-												 * (isPageComplete());
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				Input input = ConnectorFactory.eINSTANCE.createInput();
+				input.setId("inputId" + ((List) tableViewer.getInput()).size());
+				input.setMandatory("Mandatory");
+				input.setIsExecute("true");
+				input.setType("java.lang.String");
+				input.setDefaultValue("");
+				connectorDefinition.getInput().add(input);
+
+				tableViewer.refresh();
+				tableViewer.editElement(input, 0);
+				setPageComplete(isPageComplete());
+				updateButtons();
+
 			}
 		});
 
@@ -424,30 +508,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		inputupButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * tableViewer.getSelection();
-												 * Input inputSel = (Input)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * ((List<Input>)tableViewer
-												 * .getInput
-												 * ()).indexOf(inputSel); if
-												 * (idx != 0) {
-												 * ((List<Input>)tableViewer
-												 * .getInput
-												 * ()).remove(inputSel);
-												 * ((List<Input
-												 * >)tableViewer.getInput
-												 * ()).add(idx - 1, inputSel); }
-												 * tableViewer.refresh();
-												 * if(selection != null)
-												 * tableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				Input inputSel = (Input) selection.getFirstElement();
+				int idx = ((List<Input>) tableViewer.getInput()).indexOf(inputSel);
+				if (idx != 0) {
+					((List<Input>) tableViewer.getInput()).remove(inputSel);
+					((List<Input>) tableViewer.getInput()).add(idx - 1, inputSel);
+				}
+				tableViewer.refresh();
+				if (selection != null)
+					tableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -459,31 +532,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		inputdownButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * tableViewer.getSelection();
-												 * Input inputTo = (Input)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * ((List<Input>)tableViewer
-												 * .getInput
-												 * ()).indexOf(inputTo); if (idx
-												 * != ((List<Input>)tableViewer.
-												 * getInput()).size() - 1) {
-												 * ((List
-												 * <Input>)tableViewer.getInput
-												 * ()).remove(inputTo);
-												 * ((List<Input
-												 * >)tableViewer.getInput
-												 * ()).add(idx + 1, inputTo); }
-												 * tableViewer.refresh();
-												 * if(selection != null)
-												 * tableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				Input inputTo = (Input) selection.getFirstElement();
+				int idx = ((List<Input>) tableViewer.getInput()).indexOf(inputTo);
+				if (idx != ((List<Input>) tableViewer.getInput()).size() - 1) {
+					((List<Input>) tableViewer.getInput()).remove(inputTo);
+					((List<Input>) tableViewer.getInput()).add(idx + 1, inputTo);
+				}
+				tableViewer.refresh();
+				if (selection != null)
+					tableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -507,8 +568,8 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 					return;
 
 				for (int i = 0; i < objs.length; i++) {
-					// Input colInput = (Input) objs[i];
-					// newConnector.getInput().remove(colInput);
+					Input colInput = (Input) objs[i];
+					connectorDefinition.getInput().remove(colInput);
 				}
 				tableViewer.refresh();
 				setPageComplete(isPageComplete());
@@ -554,7 +615,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@Override
 			public void update(ViewerCell cell) {
-				// cell.setText(((Page)cell.getElement()).getId());
+				cell.setText(((Page) cell.getElement()).getId());
 			}
 		});
 
@@ -567,7 +628,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 			@Override
 			public void update(ViewerCell cell) {
 				// 这个里面先用getName试试，后面问了具体再改
-				// cell.setText(((Page)cell.getElement()).getName());
+				cell.setText(((Page) cell.getElement()).getName());
 			}
 		});
 
@@ -579,13 +640,12 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@Override
 			public void update(ViewerCell cell) {
-				// cell.setText(((Page)cell.getElement()).getWidget().size() +
-				// "");
+				cell.setText(((Page) cell.getElement()).getWidget().size() + "");
 			}
 		});
 
 		pagetableViewer.setContentProvider(new ArrayContentProvider());
-		// pagetableViewer.setInput(newConnector.getPage());
+		pagetableViewer.setInput(this.connectorDefinition.getPage());
 
 		Composite pagecomposite = new Composite(composite, SWT.NONE);
 		GridLayout gl_pagecomposite = new GridLayout(1, false);
@@ -603,24 +663,17 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		pagecreateButton.setText("创建");
 		pagecreateButton.addListener(SWT.Selection, new Listener() {
 			@SuppressWarnings("unchecked")
-			public void handleEvent(Event event) {/*
-												 * CreateNewPageDialog cpd = new
-												 * CreateNewPageDialog
-												 * (getShell(), newConnector);
-												 * cpd.setBlockOnOpen(true);
-												 * if(cpd != null && cpd.open()
-												 * == InputDialog.OK){
-												 * newConnector
-												 * .getPage().add(cpd
-												 * .getPage());
-												 * ((EList<Page>)pagetableViewer
-												 * .
-												 * getInput()).add(cpd.getPage()
-												 * ); pagetableViewer.refresh();
-												 * setPageComplete
-												 * (isPageComplete());
-												 * updateButtons(); }
-												 */
+			public void handleEvent(Event event) {
+				CreateNewPageDialog cpd = new CreateNewPageDialog(getShell(), connectorDefinition);
+				cpd.setBlockOnOpen(true);
+				if (cpd != null && cpd.open() == InputDialog.OK) {
+					connectorDefinition.getPage().add(cpd.getPage());
+					((EList<Page>) pagetableViewer.getInput()).add(cpd.getPage());
+					pagetableViewer.refresh();
+					setPageComplete(isPageComplete());
+					updateButtons();
+				}
+
 			}
 		});
 
@@ -634,43 +687,24 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * //先注释了，改好了那个Dialog就放出来
-												 * if(!pagetableViewer
-												 * .getSelection().isEmpty()){
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * pagetableViewer
-												 * .getSelection(); Page page =
-												 * (Page)
-												 * selection.getFirstElement();
-												 * CreateNewPageDialog cpd = new
-												 * CreateNewPageDialog
-												 * (getShell(), page,
-												 * newConnector);
-												 * cpd.setBlockOnOpen(true);
-												 * if(cpd != null && cpd.open()
-												 * == InputDialog.OK){
-												 * newConnector
-												 * .getPage().remove(page);
-												 * newConnector
-												 * .getPage().add(cpd
-												 * .getPage()); int index =
-												 * ((List
-												 * <Page>)pagetableViewer.
-												 * getInput ()).indexOf(page);
-												 * ((List<Page
-												 * >)pagetableViewer.getInput
-												 * ()).remove(page);
-												 * ((List<Page>
-												 * )pagetableViewer.getInput
-												 * ()).add(index,
-												 * cpd.getPage());
-												 * pagetableViewer.refresh();
-												 * setPageComplete
-												 * (isPageComplete()); } }
-												 */
+			public void handleEvent(Event event) {
+				// 先注释了，改好了那个Dialog就放出来
+				if (!pagetableViewer.getSelection().isEmpty()) {
+					IStructuredSelection selection = (IStructuredSelection) pagetableViewer.getSelection();
+					Page page = (Page) selection.getFirstElement();
+					CreateNewPageDialog cpd = new CreateNewPageDialog(getShell(), page, connectorDefinition);
+					cpd.setBlockOnOpen(true);
+					if (cpd != null && cpd.open() == InputDialog.OK) {
+						connectorDefinition.getPage().remove(page);
+						connectorDefinition.getPage().add(cpd.getPage());
+						int index = ((List<Page>) pagetableViewer.getInput()).indexOf(page);
+						((List<Page>) pagetableViewer.getInput()).remove(page);
+						((List<Page>) pagetableViewer.getInput()).add(index, cpd.getPage());
+						pagetableViewer.refresh();
+						setPageComplete(isPageComplete());
+					}
+				}
+
 			}
 		});
 
@@ -683,30 +717,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * pagetableViewer
-												 * .getSelection(); Page page =
-												 * (Page)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * ((List<Page>)pagetableViewer
-												 * .getInput()).indexOf(page);
-												 * if (idx != 0) {
-												 * ((List<Page>)pagetableViewer
-												 * .getInput()).remove(page);
-												 * ((List
-												 * <Page>)pagetableViewer.
-												 * getInput ()).add(idx - 1,
-												 * page); }
-												 * pagetableViewer.refresh();
-												 * if(selection != null)
-												 * pagetableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) pagetableViewer.getSelection();
+				Page page = (Page) selection.getFirstElement();
+				int idx = ((List<Page>) pagetableViewer.getInput()).indexOf(page);
+				if (idx != 0) {
+					((List<Page>) pagetableViewer.getInput()).remove(page);
+					((List<Page>) pagetableViewer.getInput()).add(idx - 1, page);
+				}
+				pagetableViewer.refresh();
+				if (selection != null)
+					pagetableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -719,32 +742,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * pagetableViewer
-												 * .getSelection(); Page pageTo
-												 * = (Page)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * ((List<Page>)pagetableViewer
-												 * .getInput()).indexOf(pageTo);
-												 * if (idx !=
-												 * ((List<Page>)pagetableViewer
-												 * .getInput()).size() - 1) {
-												 * ((List
-												 * <Page>)pagetableViewer.
-												 * getInput ()).remove(pageTo);
-												 * ((List<Page
-												 * >)pagetableViewer.getInput
-												 * ()).add(idx + 1, pageTo); }
-												 * pagetableViewer.refresh();
-												 * if(selection != null)
-												 * pagetableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) pagetableViewer.getSelection();
+				Page pageTo = (Page) selection.getFirstElement();
+				int idx = ((List<Page>) pagetableViewer.getInput()).indexOf(pageTo);
+				if (idx != ((List<Page>) pagetableViewer.getInput()).size() - 1) {
+					((List<Page>) pagetableViewer.getInput()).remove(pageTo);
+					((List<Page>) pagetableViewer.getInput()).add(idx + 1, pageTo);
+				}
+				pagetableViewer.refresh();
+				if (selection != null)
+					pagetableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -757,32 +767,26 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * ISelection sel =
-												 * pagetableViewer
-												 * .getSelection(); if (sel ==
-												 * null) return; Object[] objs =
-												 * ((IStructuredSelection)
-												 * sel).toArray(); if (objs ==
-												 * null || objs.length == 0)
-												 * return; boolean b =
-												 * MessageDialog
-												 * .openConfirm(null, "警告",
-												 * "你确认要删除吗？"); if (!b) return;
-												 * 
-												 * for (int i = 0; i <
-												 * objs.length; i++) { Page col
-												 * = (Page) objs[i];
-												 * ((List<Page>
-												 * )pagetableViewer.getInput
-												 * ()).remove(col);
-												 * newConnector.
-												 * getPage().remove(col); }
-												 * pagetableViewer.refresh();
-												 * setPageComplete
-												 * (isPageComplete());
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				ISelection sel = pagetableViewer.getSelection();
+				if (sel == null)
+					return;
+				Object[] objs = ((IStructuredSelection) sel).toArray();
+				if (objs == null || objs.length == 0)
+					return;
+				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+				if (!b)
+					return;
+
+				for (int i = 0; i < objs.length; i++) {
+					Page col = (Page) objs[i];
+					((List<Page>) pagetableViewer.getInput()).remove(col);
+					connectorDefinition.getPage().remove(col);
+				}
+				pagetableViewer.refresh();
+				setPageComplete(isPageComplete());
+				updateButtons();
+
 			}
 		});
 
@@ -844,36 +848,24 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("rawtypes")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * Output output =
-												 * newFactory.createOutput();
-												 * 
-												 * if(newConnector.getOutput()
-												 * == null){
-												 * newConnector.getOutput
-												 * ().add(output); }
-												 * 
-												 * output.setId("outputfield" +
-												 * (
-												 * (List)outputtableViewer.getInput
-												 * ()).size());
-												 * output.setName("name" +
-												 * ((List
-												 * )outputtableViewer.getInput
-												 * ()).size());
-												 * output.setType("java.lang.String"
-												 * );
-												 * 
-												 * newConnector.getOutput().add(
-												 * output);
-												 * 
-												 * outputtableViewer.refresh();
-												 * outputtableViewer
-												 * .editElement(output, 0);
-												 * setPageComplete
-												 * (isPageComplete());
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				Output output = ConnectorFactory.eINSTANCE.createOutput();
+
+				if (connectorDefinition.getOutput() == null) {
+					connectorDefinition.getOutput().add(output);
+				}
+
+				output.setId("outputfield" + ((List) outputtableViewer.getInput()).size());
+				output.setName("name" + ((List) outputtableViewer.getInput()).size());
+				output.setType("java.lang.String");
+
+				connectorDefinition.getOutput().add(output);
+
+				outputtableViewer.refresh();
+				outputtableViewer.editElement(output, 0);
+				setPageComplete(isPageComplete());
+				updateButtons();
+
 			}
 		});
 
@@ -887,29 +879,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * outputtableViewer
-												 * .getSelection(); Output
-												 * output = (Output)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * newConnector.getOutput
-												 * ().indexOf(output); if (idx
-												 * != 0) {
-												 * newConnector.getOutput
-												 * ().remove(output);
-												 * newConnector
-												 * .getOutput().add(idx-1,
-												 * output); }
-												 * outputtableViewer.refresh();
-												 * if(selection != null)
-												 * outputtableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) outputtableViewer.getSelection();
+				Output output = (Output) selection.getFirstElement();
+				int idx = connectorDefinition.getOutput().indexOf(output);
+				if (idx != 0) {
+					connectorDefinition.getOutput().remove(output);
+					connectorDefinition.getOutput().add(idx - 1, output);
+				}
+				outputtableViewer.refresh();
+				if (selection != null)
+					outputtableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -923,33 +905,19 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 
 			@SuppressWarnings("unchecked")
 			@Override
-			public void handleEvent(Event event) {/*
-												 * IStructuredSelection
-												 * selection =
-												 * (IStructuredSelection)
-												 * outputtableViewer
-												 * .getSelection(); Output
-												 * output = (Output)
-												 * selection.getFirstElement();
-												 * int idx =
-												 * ((List<Output>)outputtableViewer
-												 * .getInput()).indexOf(output);
-												 * if (idx !=
-												 * ((List<Output>)outputtableViewer
-												 * .getInput()).size() - 1) {
-												 * ((List
-												 * <Output>)outputtableViewer
-												 * .getInput()).remove(output);
-												 * (
-												 * (List<Output>)outputtableViewer
-												 * .getInput()).add(idx + 1,
-												 * output); }
-												 * outputtableViewer.refresh();
-												 * if(selection != null)
-												 * outputtableViewer
-												 * .setSelection(selection);
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) outputtableViewer.getSelection();
+				Output output = (Output) selection.getFirstElement();
+				int idx = ((List<Output>) outputtableViewer.getInput()).indexOf(output);
+				if (idx != ((List<Output>) outputtableViewer.getInput()).size() - 1) {
+					((List<Output>) outputtableViewer.getInput()).remove(output);
+					((List<Output>) outputtableViewer.getInput()).add(idx + 1, output);
+				}
+				outputtableViewer.refresh();
+				if (selection != null)
+					outputtableViewer.setSelection(selection);
+				updateButtons();
+
 			}
 		});
 
@@ -962,29 +930,25 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		outputdeleteButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
-			public void handleEvent(Event event) {/*
-												 * ISelection sel =
-												 * outputtableViewer
-												 * .getSelection(); if (sel ==
-												 * null) return; Object[] objs =
-												 * ((IStructuredSelection)
-												 * sel).toArray(); if (objs ==
-												 * null || objs.length == 0)
-												 * return; boolean b =
-												 * MessageDialog
-												 * .openConfirm(null, "警告",
-												 * "你确认要删除吗？"); if (!b) return;
-												 * 
-												 * for (int i = 0; i <
-												 * objs.length; i++) { Output
-												 * col = (Output) objs[i];
-												 * newConnector
-												 * .getOutput().remove(col); }
-												 * outputtableViewer.refresh();
-												 * setPageComplete
-												 * (isPageComplete());
-												 * updateButtons();
-												 */
+			public void handleEvent(Event event) {
+				ISelection sel = outputtableViewer.getSelection();
+				if (sel == null)
+					return;
+				Object[] objs = ((IStructuredSelection) sel).toArray();
+				if (objs == null || objs.length == 0)
+					return;
+				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+				if (!b)
+					return;
+
+				for (int i = 0; i < objs.length; i++) {
+					Output col = (Output) objs[i];
+					connectorDefinition.getOutput().remove(col);
+				}
+				outputtableViewer.refresh();
+				setPageComplete(isPageComplete());
+				updateButtons();
+
 			}
 		});
 
@@ -1044,371 +1008,76 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		tableViewer.setCellModifier(new ICellModifier() {
 
 			@Override
-			public void modify(Object element, String property, Object value) {/*
-																				 * TableItem
-																				 * tableitem
-																				 * =
-																				 * (
-																				 * TableItem
-																				 * )
-																				 * element
-																				 * ;
-																				 * Input
-																				 * input
-																				 * =
-																				 * (
-																				 * Input
-																				 * )
-																				 * tableitem
-																				 * .
-																				 * getData
-																				 * (
-																				 * )
-																				 * ;
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "INPUTID"
-																				 * )
-																				 * )
-																				 * {
-																				 * input
-																				 * .
-																				 * setId
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * ;
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "INPUTMANDATORY"
-																				 * )
-																				 * )
-																				 * {
-																				 * if
-																				 * (
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * equals
-																				 * (
-																				 * "是"
-																				 * )
-																				 * )
-																				 * input
-																				 * .
-																				 * setMandatory
-																				 * (
-																				 * "Mandatory"
-																				 * )
-																				 * ;
-																				 * else
-																				 * if
-																				 * (
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * equals
-																				 * (
-																				 * "否"
-																				 * )
-																				 * )
-																				 * input
-																				 * .
-																				 * setMandatory
-																				 * (
-																				 * "Optional"
-																				 * )
-																				 * ;
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "ISEXCUTE"
-																				 * )
-																				 * )
-																				 * {
-																				 * if
-																				 * (
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * equals
-																				 * (
-																				 * "是"
-																				 * )
-																				 * )
-																				 * input
-																				 * .
-																				 * setIsExecute
-																				 * (
-																				 * "true"
-																				 * )
-																				 * ;
-																				 * else
-																				 * if
-																				 * (
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * equals
-																				 * (
-																				 * "否"
-																				 * )
-																				 * )
-																				 * {
-																				 * input
-																				 * .
-																				 * setIsExecute
-																				 * (
-																				 * "false"
-																				 * )
-																				 * ;
-																				 * 
-																				 * (
-																				 * (
-																				 * ComboBoxViewerCellEditor
-																				 * )
-																				 * cellEditorInPut
-																				 * [
-																				 * 3
-																				 * ]
-																				 * )
-																				 * .
-																				 * setValue
-																				 * (
-																				 * "java.lang.String"
-																				 * )
-																				 * ;
-																				 * input
-																				 * .
-																				 * setType
-																				 * (
-																				 * "java.lang.String"
-																				 * )
-																				 * ;
-																				 * }
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "INPUTTYPE"
-																				 * )
-																				 * )
-																				 * {
-																				 * if
-																				 * (
-																				 * value
-																				 * ==
-																				 * null
-																				 * )
-																				 * {
-																				 * input
-																				 * .
-																				 * setType
-																				 * (
-																				 * ""
-																				 * )
-																				 * ;
-																				 * }
-																				 * else
-																				 * {
-																				 * input
-																				 * .
-																				 * setType
-																				 * (
-																				 * (
-																				 * (
-																				 * DataTypeDef
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * getTypeValue
-																				 * (
-																				 * )
-																				 * )
-																				 * ;
-																				 * if
-																				 * (
-																				 * !
-																				 * (
-																				 * (
-																				 * DataTypeDef
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * getTypeValue
-																				 * (
-																				 * )
-																				 * .
-																				 * equals
-																				 * (
-																				 * "java.lang.String"
-																				 * )
-																				 * )
-																				 * {
-																				 * (
-																				 * (
-																				 * ComboBoxViewerCellEditor
-																				 * )
-																				 * cellEditorInPut
-																				 * [
-																				 * 2
-																				 * ]
-																				 * )
-																				 * .
-																				 * setValue
-																				 * (
-																				 * "true"
-																				 * )
-																				 * ;
-																				 * input
-																				 * .
-																				 * setIsExecute
-																				 * (
-																				 * "true"
-																				 * )
-																				 * ;
-																				 * }
-																				 * }
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "INPUTDEFAULT"
-																				 * )
-																				 * )
-																				 * {
-																				 * input
-																				 * .
-																				 * setDefaultValue
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * ;
-																				 * }
-																				 * setPageComplete
-																				 * (
-																				 * isPageComplete
-																				 * (
-																				 * )
-																				 * )
-																				 * ;
-																				 * tableViewer
-																				 * .
-																				 * refresh
-																				 * (
-																				 * )
-																				 * ;
-																				 */
+			public void modify(Object element, String property, Object value) {
+				TableItem tableitem = (TableItem) element;
+				Input input = (Input) tableitem.getData();
+				if (property.equals("INPUTID")) {
+					input.setId((String) value);
+				}
+				if (property.equals("INPUTMANDATORY")) {
+					if (((String) value).equals("是"))
+						input.setMandatory("Mandatory");
+					else if (((String) value).equals("否"))
+						input.setMandatory("Optional");
+				}
+				if (property.equals("ISEXCUTE")) {
+					if (((String) value).equals("是"))
+						input.setIsExecute("true");
+					else if (((String) value).equals("否")) {
+						input.setIsExecute("false");
+
+						((ComboBoxViewerCellEditor) cellEditorInPut[3]).setValue("java.lang.String");
+						input.setType("java.lang.String");
+					}
+				}
+				if (property.equals("INPUTTYPE")) {
+					if (value == null) {
+						input.setType("");
+					} else {
+						// input.setType(((DataTypeDef) value).getTypeValue());
+						// if (!((DataTypeDef)
+						// value).getTypeValue().equals("java.lang.String")) {
+						// ((ComboBoxViewerCellEditor)
+						// cellEditorInPut[2]).setValue("true");
+						// input.setIsExecute("true");
+						// }
+					}
+				}
+				if (property.equals("INPUTDEFAULT")) {
+					input.setDefaultValue((String) value);
+				}
+				setPageComplete(isPageComplete());
+				tableViewer.refresh();
+
 			}
 
 			@Override
-			public Object getValue(Object element, String property) {/*
-																	 * Input
-																	 * input =
-																	 * (Input)
-																	 * element;
-																	 * 
-																	 * if
-																	 * (property
-																	 * .equals(
-																	 * "INPUTID"
-																	 * )) {
-																	 * return
-																	 * input
-																	 * .getId();
-																	 * } if
-																	 * (property
-																	 * .equals(
-																	 * "INPUTMANDATORY"
-																	 * )) { if
-																	 * (input
-																	 * .getMandatory
-																	 * (
-																	 * ).equals(
-																	 * "Optional"
-																	 * )) return
-																	 * "否"; else
-																	 * return
-																	 * "是"; } if
-																	 * (
-																	 * property.
-																	 * equals
-																	 * ("ISEXCUTE"
-																	 * )) { if
-																	 * (input
-																	 * .getIsExecute
-																	 * (
-																	 * ).equals(
-																	 * "false"))
-																	 * return
-																	 * "否"; else
-																	 * return
-																	 * "是"; } if
-																	 * (
-																	 * property.
-																	 * equals
-																	 * ("INPUTTYPE"
-																	 * )) {
-																	 * return
-																	 * DataVarUtil
-																	 * .
-																	 * getDataTypeDefByDataVariableDataType
-																	 * (
-																	 * input.getType
-																	 * ()); } if
-																	 * (
-																	 * property.
-																	 * equals(
-																	 * "INPUTDEFAULT"
-																	 * )) {
-																	 * return
-																	 * input.
-																	 * getDefaultValue
-																	 * (); }
-																	 */
+			public Object getValue(Object element, String property) {
+				Input input = (Input) element;
+
+				if (property.equals("INPUTID")) {
+					return input.getId();
+				}
+				if (property.equals("INPUTMANDATORY")) {
+					if (input.getMandatory().equals("Optional"))
+						return "否";
+					else
+						return "是";
+				}
+				if (property.equals("ISEXCUTE")) {
+					if (input.getIsExecute().equals("false"))
+						return "否";
+					else
+						return "是";
+				}
+				if (property.equals("INPUTTYPE")) {
+					// return
+					// DataVarUtil.getDataTypeDefByDataVariableDataType(input.getType());
+				}
+				if (property.equals("INPUTDEFAULT")) {
+					return input.getDefaultValue();
+				}
+
 				return null;
 			}
 
@@ -1435,187 +1104,40 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		outputtableViewer.setCellEditors(cellEditor);
 		outputtableViewer.setCellModifier(new ICellModifier() {
 
-			public void modify(Object element, String property, Object value) {/*
-																				 * TableItem
-																				 * tableitem
-																				 * =
-																				 * (
-																				 * TableItem
-																				 * )
-																				 * element
-																				 * ;
-																				 * Output
-																				 * output
-																				 * =
-																				 * (
-																				 * Output
-																				 * )
-																				 * tableitem
-																				 * .
-																				 * getData
-																				 * (
-																				 * )
-																				 * ;
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "PARAID"
-																				 * )
-																				 * )
-																				 * {
-																				 * output
-																				 * .
-																				 * setId
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * ;
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "PARANAME"
-																				 * )
-																				 * )
-																				 * {
-																				 * output
-																				 * .
-																				 * setName
-																				 * (
-																				 * (
-																				 * String
-																				 * )
-																				 * value
-																				 * )
-																				 * ;
-																				 * }
-																				 * if
-																				 * (
-																				 * property
-																				 * .
-																				 * equals
-																				 * (
-																				 * "PARATYPE"
-																				 * )
-																				 * )
-																				 * {
-																				 * if
-																				 * (
-																				 * value
-																				 * ==
-																				 * null
-																				 * )
-																				 * {
-																				 * output
-																				 * .
-																				 * setType
-																				 * (
-																				 * ""
-																				 * )
-																				 * ;
-																				 * }
-																				 * else
-																				 * {
-																				 * output
-																				 * .
-																				 * setType
-																				 * (
-																				 * (
-																				 * (
-																				 * DataTypeDef
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * getTypeValue
-																				 * (
-																				 * )
-																				 * )
-																				 * ;
-																				 * }
-																				 * /
-																				 * /
-																				 * outputparameter
-																				 * .
-																				 * setDataType
-																				 * (
-																				 * sources
-																				 * [
-																				 * (
-																				 * (
-																				 * Integer
-																				 * )
-																				 * value
-																				 * )
-																				 * .
-																				 * intValue
-																				 * (
-																				 * )
-																				 * ]
-																				 * )
-																				 * ;
-																				 * }
-																				 * setPageComplete
-																				 * (
-																				 * isPageComplete
-																				 * (
-																				 * )
-																				 * )
-																				 * ;
-																				 * outputtableViewer
-																				 * .
-																				 * refresh
-																				 * (
-																				 * )
-																				 * ;
-																				 */
+			public void modify(Object element, String property, Object value) {
+				TableItem tableitem = (TableItem) element;
+				Output output = (Output) tableitem.getData();
+				if (property.equals("PARAID")) {
+					output.setId((String) value);
+				}
+				if (property.equals("PARANAME")) {
+					output.setName((String) value);
+				}
+				if (property.equals("PARATYPE")) {
+					if (value == null) {
+						output.setType("");
+					} else {
+						// output.setType(((DataTypeDef)value).getTypeValue());
+					}
+				}
+				setPageComplete(isPageComplete());
+				outputtableViewer.refresh();
 			}
 
-			public Object getValue(Object element, String property) {/*
-																	 * Output
-																	 * output =
-																	 * (Output)
-																	 * element;
-																	 * 
-																	 * if
-																	 * (property
-																	 * .equals(
-																	 * "PARAID"
-																	 * )) {
-																	 * return
-																	 * output
-																	 * .getId();
-																	 * } if
-																	 * (property
-																	 * .equals(
-																	 * "PARANAME"
-																	 * )) {
-																	 * return
-																	 * output
-																	 * .getName
-																	 * (); } if
-																	 * (
-																	 * property.
-																	 * equals
-																	 * ("PARATYPE"
-																	 * )) {
-																	 * return
-																	 * DataVarUtil
-																	 * .
-																	 * getDataTypeDefByDataVariableDataType
-																	 * (output.
-																	 * getType
-																	 * ()); }
-																	 */
+			public Object getValue(Object element, String property) {
+				Output output = (Output) element;
+
+				if (property.equals("PARAID")) {
+					return output.getId();
+				}
+				if (property.equals("PARANAME")) {
+					return output.getName();
+				}
+				if (property.equals("PARATYPE")) {
+					// return
+					// DataVarUtil.getDataTypeDefByDataVariableDataType(output.getType());
+				}
+
 				return null;
 			}
 
@@ -1626,12 +1148,12 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		});
 		outputtableViewer.setLabelProvider(new TableLabelProvider_1());
 		outputtableViewer.setContentProvider(new ContentProvider_2());
-		// outputtableViewer.setInput(this.newConnector.getOutput());
+		outputtableViewer.setInput(this.connectorDefinition.getOutput());
 	}
 
 	// 获取到新连接器用于保存到文件
 	/*
-	 * public FlowConnectorDefinition getNewConnector() { return newConnector; }
+	 * public ConnectorDefinition getNewConnector() { return newConnector; }
 	 */
 
 	// 获取到新连接器对应的分类menu用于保存到文件
@@ -1663,57 +1185,27 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 			return null;
 		}
 
-		public String getColumnText(Object element, int columnIndex) {/*
-																	 * Input
-																	 * input =
-																	 * (Input)
-																	 * element;
-																	 * switch
-																	 * (columnIndex
-																	 * ) { case
-																	 * 0: return
-																	 * input
-																	 * .getId();
-																	 * case 1:
-																	 * if
-																	 * (input.
-																	 * getMandatory
-																	 * (
-																	 * ).equals(
-																	 * "Optional"
-																	 * )) return
-																	 * "否"; else
-																	 * //if
-																	 * (input
-																	 * .getMandatory
-																	 * (
-																	 * ).equals(
-																	 * "Mandatory"
-																	 * )) return
-																	 * "是"; case
-																	 * 2: if
-																	 * (input
-																	 * .getIsExecute
-																	 * () !=
-																	 * null &&
-																	 * input
-																	 * .getIsExecute
-																	 * (
-																	 * ).equals(
-																	 * "false"))
-																	 * return
-																	 * "否"; else
-																	 * return
-																	 * "是"; case
-																	 * 3: return
-																	 * input
-																	 * .getType
-																	 * (); case
-																	 * 4: return
-																	 * input.
-																	 * getDefaultValue
-																	 * (); }
-																	 */
+		public String getColumnText(Object element, int columnIndex) {
+			Input input = (Input) element;
+			switch (columnIndex) {
+			case 0:
+				return input.getId();
+			case 1:
+				if (input.getMandatory().equals("Optional"))
+					return "否";
+				else
+					// if (input.getMandatory().equals("Mandatory"))
+					return "是";
+			case 2:
+				if (input.getIsExecute() != null && input.getIsExecute().equals("false"))
+					return "否";
+				else
+					return "是";
+			case 3:
+				return input.getType();
+			case 4:
+				return input.getDefaultValue();
+			}
 			return null;
 		}
 	}
@@ -1721,7 +1213,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	private static class ContentProvider_1 implements IStructuredContentProvider {
 		public Object[] getElements(Object inputElement) {
 			if (inputElement != null) {
-				// return ((List<Input>)inputElement).toArray();
+				return ((List<Input>) inputElement).toArray();
 			}
 			return new Object[0];
 		}
@@ -1739,27 +1231,16 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 			return null;
 		}
 
-		public String getColumnText(Object element, int columnIndex) {/*
-																	 * Output
-																	 * output =
-																	 * (Output)
-																	 * element;
-																	 * switch
-																	 * (columnIndex
-																	 * ) { case
-																	 * 0: return
-																	 * output
-																	 * .getId();
-																	 * case 1:
-																	 * return
-																	 * output
-																	 * .getName
-																	 * (); case
-																	 * 2: return
-																	 * output
-																	 * .getType
-																	 * (); }
-																	 */
+		public String getColumnText(Object element, int columnIndex) {
+			Output output = (Output) element;
+			switch (columnIndex) {
+			case 0:
+				return output.getId();
+			case 1:
+				return output.getName();
+			case 2:
+				return output.getType();
+			}
 			return null;
 		}
 	}
@@ -1767,7 +1248,7 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	private static class ContentProvider_2 implements IStructuredContentProvider {
 		public Object[] getElements(Object inputElement) {
 			if (inputElement != null) {
-				// return ((List<Output>)inputElement).toArray();
+				return ((List<Output>) inputElement).toArray();
 			}
 			return new Object[0];
 		}
@@ -1782,15 +1263,18 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	private static class ContentProvider implements IStructuredContentProvider {
 		@SuppressWarnings("unchecked")
 		public Object[] getElements(Object inputElement) {
-			return null;
-			/*
-			 * if (inputElement instanceof List) {
-			 * 
-			 * @SuppressWarnings("rawtypes") List list = (List) inputElement;
-			 * Node node = ConnectormenuFactory.eINSTANCE.createNode();
-			 * node.setName("创建..."); if(!list.contains(node)) list.add(node);
-			 * return list.toArray(); } else { return new Object[0]; }
-			 */
+			if (inputElement instanceof List) {
+
+				@SuppressWarnings("rawtypes")
+				List list = (List) inputElement;
+				Node node = ConnectormenuFactory.eINSTANCE.createNode();
+				node.setName("创建...");
+				if (!list.contains(node))
+					list.add(node);
+				return list.toArray();
+			} else {
+				return new Object[0];
+			}
 		}
 
 		public void dispose() {
@@ -1800,32 +1284,15 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		}
 	}
 
-	private static class ViewerLabelProvider extends LabelProvider {/*
-																	 * public
-																	 * Image
-																	 * getImage
-																	 * (Object
-																	 * element)
-																	 * { return
-																	 * super
-																	 * .getImage
-																	 * (
-																	 * element);
-																	 * } public
-																	 * String
-																	 * getText
-																	 * (Object
-																	 * element)
-																	 * { Node
-																	 * treeElement
-																	 * = (Node)
-																	 * element;
-																	 * return
-																	 * treeElement
-																	 * .
-																	 * getName()
-																	 * ; }
-																	 */
+	private static class ViewerLabelProvider extends LabelProvider {
+		public Image getImage(Object element) {
+			return super.getImage(element);
+		}
+
+		public String getText(Object element) {
+			Node treeElement = (Node) element;
+			return treeElement.getName();
+		}
 	}
 
 	private class ViewerLabelProvider1 extends LabelProvider {
@@ -1861,75 +1328,93 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	 * 
 	 * @return
 	 */
-	/*
-	 * public List<Input> getinputs(){ List<Input> getinputs = new
-	 * ArrayList<Input>(); for(Input input : newConnector.getInput()){
-	 * getinputs.add(input); } return getinputs; }
-	 */
+
+	public List<Input> getinputs() {
+		List<Input> getinputs = new ArrayList<Input>();
+		for (Input input : connectorDefinition.getInput()) {
+			getinputs.add(input);
+		}
+		return getinputs;
+	}
 
 	@Override
-	public boolean isPageComplete() {/*
-									 * boolean OutputNamesAreUnique =
-									 * allParaNamesAreUnique(getinputs(),
-									 * newConnector.getOutput()); boolean
-									 * PageIdAreUnique = allPageIdUnique();
-									 * 
-									 * StringBuffer sb = new StringBuffer();
-									 * if(connectoridtext.getText() == null ||
-									 * connectoridtext.getText().equals(""))
-									 * sb.append("连接器ID为空");
-									 * if(connectoridtext.getText() != null &&
-									 * !(connectoridtext.getText().equals("")))
-									 * { Pattern pattern =
-									 * Pattern.compile("^[A-Z][A-Za-z0-9]+$");
-									 * Pattern pattern1 =
-									 * Pattern.compile("^[A-Z]$"); Matcher
-									 * matcher = null;
-									 * 
-									 * if(connectoridtext.getText().length()>1)
-									 * { matcher =
-									 * pattern.matcher(connectoridtext
-									 * .getText()); }else{ matcher =
-									 * pattern1.matcher
-									 * (connectoridtext.getText()); }
-									 * 
-									 * if(!matcher.matches()){ if(sb.length()>0)
-									 * sb.append(",");
-									 * sb.append("连接器ID的名称应遵循java类的命名规范\n"); } }
-									 * if(connectornametext.getText() == null ||
-									 * connectornametext.getText().equals("")){
-									 * if(sb.length()>0) sb.append(",");
-									 * sb.append("连接器名称为空"); }
-									 * if(connectorclassnametext.getText() ==
-									 * null ||
-									 * connectorclassnametext.getText().equals
-									 * ("")){ if(sb.length()>0) sb.append(",");
-									 * sb.append("连接器类名为空"); }
-									 * if(connectordesctext.getText() == null ||
-									 * connectordesctext.getText().equals("")){
-									 * if(sb.length()>0) sb.append(",");
-									 * sb.append("连接器描述为空"); }
-									 * //上面两个先弃用，但是控件还保留在界面上，后期需要全部删除的 if (null
-									 * ==
-									 * ((IStructuredSelection)categorytreeViewer
-									 * .getSelection()).getFirstElement()) {
-									 * if(sb.length()>0) sb.append(",");
-									 * sb.append("请选择分类"); }
-									 * if(!OutputNamesAreUnique){
-									 * if(sb.length()>0) sb.append(",");
-									 * sb.append("存在相同的字段名"); }
-									 * if(!PageIdAreUnique){ if(sb.length()>0)
-									 * sb.append(","); sb.append("存在相同的页面名"); }
-									 * 
-									 * if(sb.length()>0){
-									 * ConfigureNewConnectorWizardPage
-									 * .this.setErrorMessage(sb.toString());
-									 * return false; }else{
-									 * ConfigureNewConnectorWizardPage
-									 * .this.setErrorMessage(null); return true;
-									 * }
-									 */
-		return true;
+	public boolean isPageComplete() {
+
+		boolean OutputNamesAreUnique = allParaNamesAreUnique(getinputs(), connectorDefinition.getOutput());
+		boolean PageIdAreUnique = allPageIdUnique();
+
+		StringBuffer sb = new StringBuffer();
+		if (connectoridtext.getText() == null || connectoridtext.getText().equals(""))
+			sb.append("连接器ID为空");
+		if (connectoridtext.getText() != null && !(connectoridtext.getText().equals(""))) {
+			Pattern pattern = Pattern.compile("^[A-Z][A-Za-z0-9]+$");
+			Pattern pattern1 = Pattern.compile("^[A-Z]$");
+			Matcher matcher = null;
+
+			if (connectoridtext.getText().length() > 1) {
+				matcher = pattern.matcher(connectoridtext.getText());
+			} else {
+				matcher = pattern1.matcher(connectoridtext.getText());
+			}
+
+			if (!matcher.matches()) {
+				if (sb.length() > 0)
+					sb.append(",");
+				sb.append("连接器ID的名称应遵循java类的命名规范\n");
+			}
+		}
+		if (connectornametext.getText() == null || connectornametext.getText().equals("")) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器名称为空");
+		}
+		if (connectorclassnametext.getText() == null || connectorclassnametext.getText().equals("")) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器类名为空");
+		}
+		if (connectordesctext.getText() == null || connectordesctext.getText().equals("")) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器描述为空");
+		}
+		// if(customCategoryComposite.getVisible() &&
+		// (categoryNameText.getText() == null ||
+		// categoryNameText.getText().equals(""))){
+		// if(sb.length()>0)
+		// sb.append(",");
+		// sb.append("分类目录为空");
+		// }
+		// if(customCategoryComposite.getVisible() && hassamecat == true){
+		// if(sb.length()>0)
+		// sb.append(",");
+		// sb.append("已存在该分类名称");
+		// }
+		// 上面两个先弃用，但是控件还保留在界面上，后期需要全部删除的
+		// if (null == ((IStructuredSelection)
+		// categorytreeViewer.getSelection()).getFirstElement()) {
+		// if (sb.length() > 0)
+		// sb.append(",");
+		// sb.append("请选择分类");
+		// }
+		if (!OutputNamesAreUnique) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("存在相同的字段名");
+		}
+		if (!PageIdAreUnique) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("存在相同的页面名");
+		}
+
+		if (sb.length() > 0) {
+			ConfigureNewConnectorWizardPage.this.setErrorMessage(sb.toString());
+			return false;
+		} else {
+			ConfigureNewConnectorWizardPage.this.setErrorMessage(null);
+			return true;
+		}
 	}
 
 	/**
@@ -1937,166 +1422,121 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 	 * 
 	 * @return
 	 */
-	/*
-	 * private boolean allPageIdUnique() { List<Page> pageList =
-	 * newConnector.getPage(); Set<String> pageIds = new HashSet<String>(); for
-	 * (Page page : pageList) { if (pageIds.contains(page.getId())) { return
-	 * false; } else { pageIds.add(page.getId()); } } return true; }
-	 */
+
+	private boolean allPageIdUnique() {
+		List<Page> pageList = connectorDefinition.getPage();
+		Set<String> pageIds = new HashSet<String>();
+		for (Page page : pageList) {
+			if (pageIds.contains(page.getId())) {
+				return false;
+			} else {
+				pageIds.add(page.getId());
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * 验证字段唯一
 	 * 
 	 * @return
 	 */
-	/*
-	 * private boolean allParaNamesAreUnique(List<Input> inputs, List<Output>
-	 * outputs) { Set<String> parameterNames = new HashSet<String>(); for (Input
-	 * inputParameter : inputs) { if
-	 * (parameterNames.contains(inputParameter.getId())) { return false; } else
-	 * { parameterNames.add(inputParameter.getId()); } } for (Output
-	 * outputParameter : outputs) { if
-	 * (parameterNames.contains(outputParameter.getId())) { return false; } else
-	 * { parameterNames.add(outputParameter.getId()); } } return true; }
-	 */
+
+	private boolean allParaNamesAreUnique(List<Input> inputs, List<Output> outputs) {
+		Set<String> parameterNames = new HashSet<String>();
+		for (Input inputParameter : inputs) {
+			if (parameterNames.contains(inputParameter.getId())) {
+				return false;
+			} else {
+				parameterNames.add(inputParameter.getId());
+			}
+		}
+		for (Output outputParameter : outputs) {
+			if (parameterNames.contains(outputParameter.getId())) {
+				return false;
+			} else {
+				parameterNames.add(outputParameter.getId());
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * 设置按钮可用性
 	 */
 	@SuppressWarnings("unchecked")
-	public void updateButtons() {/*
-								 * Object[] objs = null; ISelection sel =
-								 * pagetableViewer.getSelection(); if(sel !=
-								 * null) { objs = ((IStructuredSelection)
-								 * sel).toArray(); } Object selectedPage =
-								 * ((IStructuredSelection
-								 * )pagetableViewer.getSelection
-								 * ()).getFirstElement(); int index = 0; while
-								 * (selectedPage != null &&
-								 * pagetableViewer.getElementAt(index) != null
-								 * && !
-								 * selectedPage.equals(pagetableViewer.getElementAt
-								 * (index))) { index++; }
-								 * pagedeleteButton.setEnabled(selectedPage !=
-								 * null); pageeditButton.setEnabled(selectedPage
-								 * != null && objs != null && objs.length<2);
-								 * pageupButton.setEnabled(selectedPage != null
-								 * && index != 0 && objs != null &&
-								 * objs.length<2);
-								 * pagedownButton.setEnabled(selectedPage !=
-								 * null && index !=
-								 * pagetableViewer.getTable().getItemCount() - 1
-								 * && objs != null && objs.length<2);
-								 * 
-								 * if(outputtableViewer != null){ Object[] objs1
-								 * = null; ISelection sel1 =
-								 * outputtableViewer.getSelection(); if(sel1 !=
-								 * null) { objs1 = ((IStructuredSelection)
-								 * sel1).toArray(); } Object selectedPage1 =
-								 * ((IStructuredSelection
-								 * )outputtableViewer.getSelection
-								 * ()).getFirstElement(); index = 0; while
-								 * (selectedPage != null && selectedPage1 !=
-								 * null && outputtableViewer.getElementAt(index)
-								 * != null && !
-								 * selectedPage1.equals(outputtableViewer
-								 * .getElementAt(index))) { index++; }
-								 * outputdownButton.setEnabled(selectedPage1 !=
-								 * null && index !=
-								 * outputtableViewer.getTable().getItemCount() -
-								 * 1 && objs1 != null && objs1.length<2) ;
-								 * outputupButton.setEnabled(selectedPage1 !=
-								 * null && index != 0 && objs1 != null &&
-								 * objs1.length<2) ; }
-								 * 
-								 * Object[] objs1 = null; ISelection sel1 =
-								 * outputtableViewer.getSelection(); if(sel1 !=
-								 * null) { objs1 = ((IStructuredSelection)
-								 * sel1).toArray(); } Output outputparameter =
-								 * (Output)
-								 * ((IStructuredSelection)outputtableViewer
-								 * .getSelection()).getFirstElement(); index =
-								 * -1; if(outputparameter!=null) { index =
-								 * ((List
-								 * <Output>)outputtableViewer.getInput()).
-								 * indexOf (outputparameter); } if
-								 * (outputdeleteButton != null) {
-								 * outputdeleteButton.setEnabled(outputparameter
-								 * != null); } if(outputdownButton != null){
-								 * outputdownButton.setEnabled(outputparameter!=
-								 * null && index <
-								 * ((List<Output>)outputtableViewer
-								 * .getInput()).size()-1 && objs1 != null &&
-								 * objs1.length<2); } if(outputupButton !=
-								 * null){
-								 * outputupButton.setEnabled(outputparameter!=
-								 * null && index > 0 && objs1 != null &&
-								 * objs1.length<2); }
-								 * 
-								 * //输入按钮对应状态 Object[] objsInPut = null;
-								 * ISelection selInPut =
-								 * tableViewer.getSelection(); if(selInPut !=
-								 * null) { objsInPut = ((IStructuredSelection)
-								 * selInPut).toArray(); } Input input = (Input)
-								 * (
-								 * (IStructuredSelection)tableViewer.getSelection
-								 * ()).getFirstElement(); index = -1;
-								 * if(input!=null) { index =
-								 * ((List<Input>)tableViewer
-								 * .getInput()).indexOf(input); } if
-								 * (inputdeleteButton != null) {
-								 * inputdeleteButton.setEnabled(input != null);
-								 * } if(inputdownButton != null){
-								 * inputdownButton.setEnabled(input!= null &&
-								 * index <
-								 * ((List<Input>)tableViewer.getInput()).
-								 * size()-1 && objsInPut != null &&
-								 * objsInPut.length<2); } if(inputupButton !=
-								 * null){ inputupButton.setEnabled(input!= null
-								 * && index > 0 && objsInPut != null &&
-								 * objsInPut.length<2); }
-								 */
-	}
+	public void updateButtons() {
 
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		/*
-		 * // IObservableValue connectoridtextObserveTextObserveWidget =
-		 * SWTObservables.observeText(connectoridtext, SWT.Modify);
-		 * IObservableValue connectorConnectorIdObserveValue =
-		 * EMFObservables.observeValue(newConnector,
-		 * Literals.FLOW_CONNECTOR_DEFINITION__ID);
-		 * bindingContext.bindValue(connectoridtextObserveTextObserveWidget,
-		 * connectorConnectorIdObserveValue, null, null); // IObservableValue
-		 * connectornametextObserveTextObserveWidget =
-		 * SWTObservables.observeText(connectornametext, SWT.Modify);
-		 * IObservableValue connectorConnectorNameObserveValue =
-		 * EMFObservables.observeValue(newConnector,
-		 * Literals.FLOW_CONNECTOR_DEFINITION__NAME);
-		 * bindingContext.bindValue(connectornametextObserveTextObserveWidget,
-		 * connectorConnectorNameObserveValue, null, null); // IObservableValue
-		 * connectordesctextObserveTextObserveWidget =
-		 * SWTObservables.observeText(connectordesctext, SWT.Modify);
-		 * IObservableValue connectorConnectorNoteObserveValue =
-		 * EMFObservables.observeValue(newConnector,
-		 * Literals.FLOW_CONNECTOR_DEFINITION__NOTE);
-		 * bindingContext.bindValue(connectordesctextObserveTextObserveWidget,
-		 * connectorConnectorNoteObserveValue, null, null); // IObservableValue
-		 * connectorclassnametextObserveTextObserveWidget =
-		 * SWTObservables.observeText(connectorclassnametext, SWT.Modify);
-		 * IObservableValue connectorClassNameObserveValue =
-		 * EMFObservables.observeValue(newConnector.getDefinitionImpl(),
-		 * Literals.DEFINITION_IMPL__CLASS_NAME);
-		 * bindingContext.bindValue(connectorclassnametextObserveTextObserveWidget
-		 * , connectorClassNameObserveValue, null, null); // IObservableValue
-		 * connectorpackagenametextObserveTextObserveWidget =
-		 * SWTObservables.observeText(connectorpackagenametext, SWT.Modify);
-		 * IObservableValue connectorPackageNameObserveValue =
-		 * EMFObservables.observeValue(newConnector.getDefinitionImpl(),
-		 * Literals.DEFINITION_IMPL__PACKAGE_NAME);
-		 * bindingContext.bindValue(connectorpackagenametextObserveTextObserveWidget
-		 * , connectorPackageNameObserveValue, null, null); //
-		 */return bindingContext;
+		Object[] objs = null;
+		ISelection sel = pagetableViewer.getSelection();
+		if (sel != null) {
+			objs = ((IStructuredSelection) sel).toArray();
+		}
+		Object selectedPage = ((IStructuredSelection) pagetableViewer.getSelection()).getFirstElement();
+		int index = 0;
+		while (selectedPage != null && pagetableViewer.getElementAt(index) != null && !selectedPage.equals(pagetableViewer.getElementAt(index))) {
+			index++;
+		}
+		pagedeleteButton.setEnabled(selectedPage != null);
+		pageeditButton.setEnabled(selectedPage != null && objs != null && objs.length < 2);
+		pageupButton.setEnabled(selectedPage != null && index != 0 && objs != null && objs.length < 2);
+		pagedownButton.setEnabled(selectedPage != null && index != pagetableViewer.getTable().getItemCount() - 1 && objs != null && objs.length < 2);
+
+		if (outputtableViewer != null) {
+			Object[] objs1 = null;
+			ISelection sel1 = outputtableViewer.getSelection();
+			if (sel1 != null) {
+				objs1 = ((IStructuredSelection) sel1).toArray();
+			}
+			Object selectedPage1 = ((IStructuredSelection) outputtableViewer.getSelection()).getFirstElement();
+			index = 0;
+			while (selectedPage != null && selectedPage1 != null && outputtableViewer.getElementAt(index) != null && !selectedPage1.equals(outputtableViewer.getElementAt(index))) {
+				index++;
+			}
+			outputdownButton.setEnabled(selectedPage1 != null && index != outputtableViewer.getTable().getItemCount() - 1 && objs1 != null && objs1.length < 2);
+			outputupButton.setEnabled(selectedPage1 != null && index != 0 && objs1 != null && objs1.length < 2);
+		}
+
+		Object[] objs1 = null;
+		ISelection sel1 = outputtableViewer.getSelection();
+		if (sel1 != null) {
+			objs1 = ((IStructuredSelection) sel1).toArray();
+		}
+		Output outputparameter = (Output) ((IStructuredSelection) outputtableViewer.getSelection()).getFirstElement();
+		index = -1;
+		if (outputparameter != null) {
+			index = ((List<Output>) outputtableViewer.getInput()).indexOf(outputparameter);
+		}
+		if (outputdeleteButton != null) {
+			outputdeleteButton.setEnabled(outputparameter != null);
+		}
+		if (outputdownButton != null) {
+			outputdownButton.setEnabled(outputparameter != null && index < ((List<Output>) outputtableViewer.getInput()).size() - 1 && objs1 != null && objs1.length < 2);
+		}
+		if (outputupButton != null) {
+			outputupButton.setEnabled(outputparameter != null && index > 0 && objs1 != null && objs1.length < 2);
+		}
+
+		// 输入按钮对应状态
+		Object[] objsInPut = null;
+		ISelection selInPut = tableViewer.getSelection();
+		if (selInPut != null) {
+			objsInPut = ((IStructuredSelection) selInPut).toArray();
+		}
+		Input input = (Input) ((IStructuredSelection) tableViewer.getSelection()).getFirstElement();
+		index = -1;
+		if (input != null) {
+			index = ((List<Input>) tableViewer.getInput()).indexOf(input);
+		}
+		if (inputdeleteButton != null) {
+			inputdeleteButton.setEnabled(input != null);
+		}
+		if (inputdownButton != null) {
+			inputdownButton.setEnabled(input != null && index < ((List<Input>) tableViewer.getInput()).size() - 1 && objsInPut != null && objsInPut.length < 2);
+		}
+		if (inputupButton != null) {
+			inputupButton.setEnabled(input != null && index > 0 && objsInPut != null && objsInPut.length < 2);
+		}
 	}
 
 	public String getOpenType() {
@@ -2107,4 +1547,60 @@ public class ConfigureNewConnectorWizardPage extends ConfigureConnectorWizardPag
 		return is;
 	}
 
+	public ConnectorDefinition getConnectorDefinition() {
+		return connectorDefinition;
+	}
+
+	public Node getNode() {
+		return node;
+	}
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	// 对传入的treeElement先得到对应的父节点的ID，根据父节点ID去menu中所有nodes中找出对应的node，然后在该node下加一个node出来
+	private void modifyMenuByTreeElement(Menu menu, ITreeElement treeElement) {
+		if (treeElement != null) {
+			Node nodeitem = ConnectormenuFactory.eINSTANCE.createNode();
+			nodeitem.setId(treeElement.getId());
+			nodeitem.setIco(treeElement.getIcon());
+			nodeitem.setName(treeElement.getName());
+			if (treeElement.getParent() != null) {
+				for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
+					if (node.getId().equals(treeElement.getParent().getId())) {
+						node.getNode().add(nodeitem);
+						break;
+					}
+				}
+			} else {
+				menu.getNode().add(nodeitem);
+			}
+		}
+	}
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		IObservableValue observeTextConnectoridtextObserveWidget = WidgetProperties.text(SWT.Modify).observe(connectoridtext);
+		IObservableValue connectorDefinitionIdObserveValue = EMFObservables.observeValue(connectorDefinition, Literals.CONNECTOR_DEFINITION__ID);
+		bindingContext.bindValue(observeTextConnectoridtextObserveWidget, connectorDefinitionIdObserveValue, null, null);
+		//
+		IObservableValue observeTextConnectornametextObserveWidget = WidgetProperties.text(SWT.Modify).observe(connectornametext);
+		IObservableValue connectorDefinitionNameObserveValue = EMFObservables.observeValue(connectorDefinition, Literals.CONNECTOR_DEFINITION__NAME);
+		bindingContext.bindValue(observeTextConnectornametextObserveWidget, connectorDefinitionNameObserveValue, null, null);
+		//
+		IObservableValue observeTextConnectordesctextObserveWidget = WidgetProperties.text(SWT.Modify).observe(connectordesctext);
+		IObservableValue connectorDefinitionNoteObserveValue = EMFObservables.observeValue(connectorDefinition, Literals.CONNECTOR_DEFINITION__NOTE);
+		bindingContext.bindValue(observeTextConnectordesctextObserveWidget, connectorDefinitionNoteObserveValue, null, null);
+		//
+		IObservableValue observeTextConnectorpackagenametextObserveWidget = WidgetProperties.text(SWT.Modify).observe(connectorpackagenametext);
+		IObservableValue connectorDefinitionPackageNameObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.CONNECTOR_DEFINITION__DEFINITION_IMPL, Literals.DEFINITION_IMPL__PACKAGE_NAME)).observe(connectorDefinition);
+		bindingContext.bindValue(observeTextConnectorpackagenametextObserveWidget, connectorDefinitionPackageNameObserveValue, null, null);
+		//
+		IObservableValue observeTextConnectorclassnametextObserveWidget = WidgetProperties.text(SWT.Modify).observe(connectorclassnametext);
+		IObservableValue connectorDefinitionClassNameObserveValue = EMFProperties.value(FeaturePath.fromList(Literals.CONNECTOR_DEFINITION__DEFINITION_IMPL, Literals.DEFINITION_IMPL__CLASS_NAME)).observe(connectorDefinition);
+		bindingContext.bindValue(observeTextConnectorclassnametextObserveWidget, connectorDefinitionClassNameObserveValue, null, null);
+		//
+		return bindingContext;
+	}
 }

@@ -8,9 +8,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-public class CreateFixConnectorWizardDialog extends WizardDialog {
+public class CreateConnectorWizardDialog extends WizardDialog {
 
-	public CreateFixConnectorWizardDialog(Shell parentShell, IWizard newWizard) {
+	public CreateConnectorWizardDialog(Shell parentShell, IWizard newWizard) {
 		super(parentShell, newWizard);
 		setHelpAvailable(false);
 	}

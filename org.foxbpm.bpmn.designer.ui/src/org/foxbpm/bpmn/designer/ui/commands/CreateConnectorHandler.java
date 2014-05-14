@@ -8,7 +8,7 @@ import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.bpmn.designer.ui.connector.ConnectorWizardCreationWizard;
-import org.foxbpm.bpmn.designer.ui.connector.CreateFixConnectorWizardDialog;
+import org.foxbpm.bpmn.designer.ui.connector.CreateConnectorWizardDialog;
 
 public class CreateConnectorHandler implements IHandler {
 
@@ -35,8 +35,8 @@ public class CreateConnectorHandler implements IHandler {
 				window.getShell(), cwcp);
 			cfwd.open();
 		}*/
-		ConnectorWizardCreationWizard cwcp = new ConnectorWizardCreationWizard(true);
-		CreateFixConnectorWizardDialog cfwd = new CreateFixConnectorWizardDialog(Display.getDefault().getActiveShell(), cwcp);
+		ConnectorWizardCreationWizard cwcp = new ConnectorWizardCreationWizard();
+		CreateConnectorWizardDialog cfwd = new CreateConnectorWizardDialog(Display.getDefault().getActiveShell(), cwcp);
 		cfwd.open();
 		return null;
 	}

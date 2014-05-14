@@ -47,6 +47,11 @@ public class FoxBPMExpViewer extends ContentViewer {
 	public FoxBPMExpViewer(Composite composite, int style) {
 		createControl(composite, style);
 	}
+	
+	public FoxBPMExpViewer(Composite composite, int style, EObject eObject) {
+		createControl(composite, style);
+		this.eObject = eObject;
+	}
 
 	@Override
 	public Control getControl() {
@@ -225,5 +230,10 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public void seteObject(EObject eObject) {
 		this.eObject = eObject;
+	}
+	
+	public void setEnabled(boolean isEnable) {
+		this.contentAssistText.setEnabled(isEnable);
+		this.toolbar.setEnabled(isEnable);
 	}
 }
