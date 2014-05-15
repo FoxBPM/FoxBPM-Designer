@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 
 public class OverrideNewWizard extends WizardDialog {

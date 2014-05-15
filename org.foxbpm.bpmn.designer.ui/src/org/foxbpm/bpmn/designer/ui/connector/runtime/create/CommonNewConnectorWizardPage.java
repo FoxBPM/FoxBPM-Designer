@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.runtime;
+package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.foxbpm.bpmn.designer.ui.connector.Constant;
+import org.foxbpm.bpmn.designer.ui.connector.definition.Constant;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;

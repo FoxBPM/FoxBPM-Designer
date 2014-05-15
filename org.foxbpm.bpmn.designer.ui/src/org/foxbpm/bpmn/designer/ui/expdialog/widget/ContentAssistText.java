@@ -35,6 +35,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
+import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 
 /**
@@ -48,9 +49,13 @@ public class ContentAssistText extends Composite {
 	private boolean drawBorder = true;
 	private ToolBar tb;
 	private boolean isReadOnly = false;
+	private FoxBPMExpViewer foxBPMExpViewer;
 	
-	public ContentAssistText(Composite parent, int style) {
+	public ContentAssistText(FoxBPMExpViewer foxBPMExpViewer, Composite parent, int style) {
 		super(parent, SWT.NONE);
+		
+		this.foxBPMExpViewer = foxBPMExpViewer;
+		
 		Point margins = new Point(3, 3);
 		if ((style & SWT.BORDER) == 0){
 			drawBorder = false;
@@ -174,6 +179,10 @@ public class ContentAssistText extends Composite {
 
 	public ToolBar getToolbar() {
 		return tb;
+	}
+
+	public FoxBPMExpViewer getFoxBPMExpViewer() {
+		return foxBPMExpViewer;
 	}
 
 

@@ -87,6 +87,11 @@ public class FoxBPMExpDialog extends Dialog {
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
 		super(parentShell);
 		this.expression = expression;
+		if(this.expression == null) {
+			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
+			this.expression.setName("");
+			this.expression.setValue("");
+		}
 		this.textcontrol = text;
 	}
 
@@ -350,7 +355,9 @@ public class FoxBPMExpDialog extends Dialog {
 
 	@Override
 	protected void okPressed() {
-		expression = FoxBPMFactory.eINSTANCE.createExpression();
+		if(expression!=null) {
+			expression = FoxBPMFactory.eINSTANCE.createExpression();
+		}
 		ModelUtil.setID(expression);
 		expression.setName(displaytext.getText());
 		expression.setValue(document.get());

@@ -83,7 +83,7 @@ public class FoxBPMExpViewer extends ContentViewer {
 	}
 	
 	protected void createTextControl(int style) {
-		contentAssistText = new ContentAssistText(control, style);
+		contentAssistText = new ContentAssistText(this, control, style);
 		textControl = contentAssistText.getTextControl();
 //		textControl.addDisposeListener(disposeListener);
 		textTooltip = new DefaultToolTip(textControl) {

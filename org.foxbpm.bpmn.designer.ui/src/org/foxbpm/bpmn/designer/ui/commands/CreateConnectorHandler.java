@@ -7,8 +7,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.swt.widgets.Display;
-import org.foxbpm.bpmn.designer.ui.connector.ConnectorWizardCreationWizard;
-import org.foxbpm.bpmn.designer.ui.connector.CreateConnectorWizardDialog;
+import org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard;
+import org.foxbpm.bpmn.designer.ui.connector.definition.CreateConnectorWizardDialog;
 
 public class CreateConnectorHandler implements IHandler {
 

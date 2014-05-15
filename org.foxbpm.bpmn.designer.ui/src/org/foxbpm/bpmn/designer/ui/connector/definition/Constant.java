@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector;
+package org.foxbpm.bpmn.designer.ui.connector.definition;
 
 import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.config.connector.Checkbox;

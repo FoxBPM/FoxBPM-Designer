@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.runtime;
+package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
 import java.util.ArrayList;
 import java.util.List;

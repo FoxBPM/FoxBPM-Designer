@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector;
+package org.foxbpm.bpmn.designer.ui.connector.definition;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;

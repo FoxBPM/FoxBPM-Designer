@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector;
+package org.foxbpm.bpmn.designer.ui.connector.definition;
 
 import java.io.File;
 import java.io.FileInputStream;

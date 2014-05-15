@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.runtime;
+package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.SelectNewConnectorWizardPage;
+import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
@@ -178,20 +182,14 @@ public class AddNewConnectorWizard extends DynamicPageWizard {
 						}
 
 						if (control instanceof Text) {
-							Text text = (Text) control;
-							expression.setValue(text.getText().trim());
-						}/* else if (control instanceof ExpressionCombo) {
-							ExpressionCombo expressionCombo = (ExpressionCombo) control;
-							if (expressionCombo.getExpressionTo() != null) {
-								expression.setValue(expressionCombo.getExpressionTo() == null ? "" : expressionCombo.getExpressionTo().getExpressionText().trim());
-								expression.setName(expressionCombo.getExpressionTo() == null ? "" : expressionCombo.getExpressionTo().getName());
+							if(control.getParent() instanceof ContentAssistText) {
+								FoxBPMExpViewer foxBPMExpViewer = ((ContentAssistText) control.getParent()).getFoxBPMExpViewer();
+								expression = foxBPMExpViewer.getExpression();
+							} else{
+								Text text = (Text) control;
+								expression.setValue(text.getText().trim());
 							}
-						}*/
-						/*
-						 * else if(control instanceof Combo) { Combo combo =
-						 * (Combo) control;
-						 * expression.setValue(combo.getText().trim()); }
-						 */
+						}
 						else if (control instanceof Button) {
 							Button button = (Button) control;
 							expression.setValue(button.getText().trim());

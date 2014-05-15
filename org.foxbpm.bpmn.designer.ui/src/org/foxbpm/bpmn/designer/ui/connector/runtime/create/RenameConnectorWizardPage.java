@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.runtime;
+package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.UserTask;
@@ -17,13 +17,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.LifeCycleWidget;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
-import org.eclipse.swt.widgets.Control;
 
 public class RenameConnectorWizardPage extends WizardPage {
 
@@ -57,7 +58,6 @@ public class RenameConnectorWizardPage extends WizardPage {
 
 	private EObject be;
 
-	private Group group;
 	private Label label_1;
 	private Label label_2;
 	private Label label_3;

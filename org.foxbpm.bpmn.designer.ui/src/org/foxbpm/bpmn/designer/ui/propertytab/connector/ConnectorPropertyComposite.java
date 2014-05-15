@@ -38,8 +38,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.AddNewConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.modify.ModifyNewConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
@@ -130,20 +131,16 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 			public void handleEvent(Event event) {
 				if (!treeViewer.getSelection().isEmpty()) {
 //					// 得到当前选中的ConnectorInstance对象
-//					IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
-//					ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
-//
-//					// 根据类型启动不同对话框
-//					WizardDialog dialog = null;
-//					if (connectorInstance.getType() == null || connectorInstance.getType().equals(""))
-//						dialog = new OverrideWizard(getShell(), new ModifyConnectorWizard(getBusinessObject(), (BPMN2Editor) getDiagramEditor(), connectorInstance));
-//					else
-//						dialog = new OverrideNewWizard(getShell(), new ModifyNewConnectorWizard(getBusinessObject(), (BPMN2Editor) getDiagramEditor(), connectorInstance));
-//
-//					dialog.setPageSize(-1, 470); // -1代表宽度自适应, 240为高度
-//					if (dialog.open() == InputDialog.OK) {
-//						treeViewer.refresh();
-//					}
+					IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
+					ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
+
+					// 根据类型启动不同对话框
+					WizardDialog dialog = new OverrideNewWizard(getShell(), new ModifyNewConnectorWizard(getBusinessObject(), (BPMN2Editor) getDiagramEditor(), connectorInstance));
+
+					dialog.setPageSize(-1, 470); // -1代表宽度自适应, 240为高度
+					if (dialog.open() == InputDialog.OK) {
+						treeViewer.refresh();
+					}
 				}
 			}
 		});
@@ -151,14 +148,66 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 		removeButton = new Button(buttonsComposite, SWT.NONE);
 		removeButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		removeButton.setText("删除");
+		removeButton.addListener(SWT.Selection, new Listener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handleEvent(Event event) {
+				if (!treeViewer.getSelection().isEmpty()) {
+					// 得到当前选中的ConnectorInstance对象
+					IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
+					ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
+					deleteConnectorInstance(connectorInstance);
+					((List<ConnectorInstance>) treeViewer.getInput()).remove(connectorInstance);
+					treeViewer.refresh();
+					updateButtons();
+				}
+			}
+		});
 
 		upButton = new Button(buttonsComposite, SWT.NONE);
 		upButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		upButton.setText("向上");
+		upButton.addListener(SWT.Selection, new Listener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
+				ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
+				int idx = ((List<ConnectorInstance>) treeViewer.getInput()).indexOf(connectorInstance);
+				if (idx != 0) {
+					((List<ConnectorInstance>) treeViewer.getInput()).remove(connectorInstance);
+					deleteConnectorInstance(connectorInstance);
+					((List<ConnectorInstance>) treeViewer.getInput()).add(idx - 1, connectorInstance);
+					addConnectorInstance(connectorInstance, idx - 1);
+				}
+				treeViewer.refresh();
+				updateButtons();
+			}
+		});
 
 		downButton = new Button(buttonsComposite, SWT.NONE);
 		downButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		downButton.setText("向下");
+		downButton.addListener(SWT.Selection, new Listener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
+				ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
+				int idx = ((List<ConnectorInstance>) treeViewer.getInput()).indexOf(connectorInstance);
+				if (idx != ((List<ConnectorInstance>) treeViewer.getInput()).size() - 1) {
+					((List<ConnectorInstance>) treeViewer.getInput()).remove(connectorInstance);
+					deleteConnectorInstance(connectorInstance);
+					((List<ConnectorInstance>) treeViewer.getInput()).add(idx + 1, connectorInstance);
+					addConnectorInstance(connectorInstance, idx + 1);
+				}
+				treeViewer.refresh();
+				updateButtons();
+			}
+		});
 
 		updateButtons();
 		return parent;
