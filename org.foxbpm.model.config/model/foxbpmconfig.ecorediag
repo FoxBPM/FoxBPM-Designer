@@ -115,6 +115,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//ResourcePath/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_FCK-8cCNEeO1BMr_-HJMKw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_p7UVsNvQEeOv9cfZAj2dhg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//ResourcePath/type"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p7UVsdvQEeOv9cfZAj2dhg"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_QDGVwMCNEeO1BMr_-HJMKw" type="2001">
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//ResourcePath/src"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_QDGVwcCNEeO1BMr_-HJMKw"/>

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getPhysicalPath <em>Physical Path</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getVirtualPath <em>Virtual Path</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -179,5 +180,31 @@ public interface ResourcePath extends EObject {
 	 * @generated
 	 */
 	void setProjectName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Type</em>' attribute.
+	 * @see #setType(String)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getResourcePath_Type()
+	 * @model extendedMetaData="kind='attribute'"
+	 * @generated
+	 */
+	String getType();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getType <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @see #getType()
+	 * @generated
+	 */
+	void setType(String value);
 
 } // ResourcePath

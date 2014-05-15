@@ -372,13 +372,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int RESOURCE_PATH__PROJECT_NAME = 5;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_PATH__TYPE = 6;
+
+	/**
 	 * The number of structural features of the '<em>Resource Path</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_FEATURE_COUNT = 6;
+	int RESOURCE_PATH_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Resource Path</em>' class.
@@ -731,6 +740,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getResourcePath_ProjectName();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.ResourcePath#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ResourcePath#getType()
+	 * @see #getResourcePath()
+	 * @generated
+	 */
+	EAttribute getResourcePath_Type();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.MailInfo <em>Mail Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1032,6 +1052,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RESOURCE_PATH__PROJECT_NAME = eINSTANCE.getResourcePath_ProjectName();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RESOURCE_PATH__TYPE = eINSTANCE.getResourcePath_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.MailInfoImpl <em>Mail Info</em>}' class.
