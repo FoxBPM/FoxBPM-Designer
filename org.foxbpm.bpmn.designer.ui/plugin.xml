@@ -4,10 +4,15 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <wizard
+            category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
             name="%wizard.name">
       </wizard>
+      <category
+            id="org.foxbpm.bpmn.designer.ui.category"
+            name="FoxBPM">
+      </category>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -31,15 +36,41 @@
    </extension>
  <extension
        point="org.eclipse.ui.commands">
+    <category
+          id="org.foxbpm.bpmn.designer.ui.category.connector"
+          name="连接器">
+    </category>
     <command
-          id="org.foxbpm.bpmn.designer.ui.command"
-          name="%command.name">
+          categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
+          id="org.foxbpm.bpmn.designer.ui.command.createconnector"
+          name="%command.createconnector.name">
+    </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
+          id="org.foxbpm.bpmn.designer.ui.command.editconnector"
+          name="编辑连接器">
+    </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
+          id="org.foxbpm.bpmn.designer.ui.command.connectortest"
+          name="测试连接器">
+    </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
+          id="org.foxbpm.bpmn.designer.ui.command.connectorimp"
+          name="导入连接器">
+    </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
+          id="org.foxbpm.bpmn.designer.ui.command.connectorexp"
+          name="导出连接器">
     </command>
  </extension>
  <extension
        point="org.eclipse.ui.handlers">
     <handler
-          commandId="org.foxbpm.bpmn.designer.ui.command">
+          class="org.foxbpm.bpmn.designer.ui.commands.CreateConnectorHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.createconnector">
     </handler>
  </extension>
  <extension
@@ -49,10 +80,6 @@
           locationURI="menu:org.eclipse.ui.main.menu?after=additions">
        <menu
              label="FoxBPM">
-          <command
-                commandId="org.foxbpm.bpmn.designer.ui.command"
-                style="push">
-          </command>
           <visibleWhen
                 checkEnabled="false">
              <with
@@ -62,6 +89,42 @@
                 </equals>
              </with>
           </visibleWhen>
+          <menu
+                label="连接器">
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.createconnector"
+                   label="创建连接器"
+                   style="push">
+             </command>
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.editconnector"
+                   label="编辑连接器"
+                   style="push">
+             </command>
+             <separator
+                   name="org.foxbpm.bpmn.designer.ui.separator"
+                   visible="true">
+             </separator>
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.connectortest"
+                   label="测试连接器"
+                   style="push">
+             </command>
+             <separator
+                   name="org.foxbpm.bpmn.designer.ui.separator2"
+                   visible="true">
+             </separator>
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.connectorimp"
+                   label="导入连接器"
+                   style="push">
+             </command>
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.connectorexp"
+                   label="导出连接器"
+                   style="push">
+             </command>
+          </menu>
        </menu>
     </menuContribution>
  </extension>
@@ -189,6 +252,37 @@
           natureId="org.foxbpm.bpmn.designer.ui.foxbpmproject">
     </image>
  </extension>
+ <extension
+       point="org.codehaus.groovy.eclipse.ui.syntaxHighlightingExtension">
+    <highlightingExtender
+          extender="org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMSyntaxHighlighting"
+          natureID="org.foxbpm.bpmn.designer.ui.highlightingExtender">
+    </highlightingExtender>
+ </extension>
+ <extension
+       point="org.codehaus.groovy.eclipse.codeassist.completion.completionProposalProvider">
+    <proposalProvider
+          proposalProvider="org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMProposalProvider">
+       <appliesTo
+             projectNature="org.eclipse.jdt.groovy.core.groovyNature">
+       </appliesTo>
+       <appliesTo
+             projectNature="org.eclipse.jdt.core.javanature">
+       </appliesTo>
+    </proposalProvider>
+ </extension>
+ <extension
+       point="org.codehaus.groovy.eclipse.codeassist.completion.completionProposalFilter">
+    <proposalFilter
+          proposalFilter="org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMProposalFilter">
+       <appliesTo
+             projectNature="org.eclipse.jdt.groovy.core.groovyNature">
+       </appliesTo>
+       <appliesTo
+             projectNature="org.eclipse.jdt.core.javanature">
+       </appliesTo>
+    </proposalFilter>
+ </extension>
 	<extension point="org.foxbpm.runtime">
 		<runtime class="org.eclipse.bpmn2.modeler.ui.DefaultBpmn2RuntimeExtension"
 			description="%runtime.description" id="org.eclipse.bpmn2.modeler.runtime.none"
@@ -236,14 +330,24 @@
      </enable>
   </modelEnablement>
   <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.section.event.StartEventPropertySection"
+        class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.startevent"
         label="通用">
   </propertyTab>
   <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.section.task.UserTaskPropertySection"
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.usertask"
         label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.sequenceflow.SequenceFlowPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.sequenceflow"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.connector.ConnectorPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
+        label="连接器">
   </propertyTab>
 
 		<!-- ======================================== -->
@@ -256,4 +360,18 @@
 
 
 	</extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferenceInitializer">
+    </initializer>
+ </extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          id="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          name="流程设计器">
+    </page>
+ </extension>
 </plugin>
