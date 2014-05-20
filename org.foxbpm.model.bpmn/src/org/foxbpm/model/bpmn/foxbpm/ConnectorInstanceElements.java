@@ -63,7 +63,7 @@ public interface ConnectorInstanceElements extends EObject {
 	 * @return the value of the '<em>Connector Instance</em>' containment reference list.
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorInstanceElements_ConnectorInstance()
 	 * @model containment="true"
-	 *        extendedMetaData="namespace='##targetNamespace' wildcards='' name=''"
+	 *        extendedMetaData="namespace='##targetNamespace' wildcards='' name='connectorInstance' kind='element'"
 	 * @generated
 	 */
 	EList<ConnectorInstance> getConnectorInstance();

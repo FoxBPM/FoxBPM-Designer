@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
+import org.foxbpm.bpmn.designer.ui.actor.runtime.create.AddNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 
@@ -112,10 +113,10 @@ public class OverrideNewWizard extends WizardDialog {
 	 * 
 	 * @return
 	 */
-//	public ConnectorInstance getActorAddedValue() {
-//		ConnectorInstance connectorInstance = ((AddNewActorConnectorWizard) wizard).getConnectorInstance();
-//		return connectorInstance;
-//	}
+	public ConnectorInstance getActorAddedValue() {
+		ConnectorInstance connectorInstance = ((AddNewActorConnectorWizard) wizard).getConnectorInstance();
+		return connectorInstance;
+	}
 
 	/**
 	 * 返回创建的连接器实例

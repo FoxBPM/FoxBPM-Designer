@@ -26,18 +26,20 @@ public class TreeViewerNewFactory {
 	 */
 	public static List<ITreeElement> reloadTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-		// Menu
-		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
 
-		Menu root = ConnectorUtil.getFlowConnectorMenu();
+//		Menu root = ConnectorUtil.getFlowConnectorMenu();
 
 		// 分拆menu成为ITreeElement树
-		if (root != null) {
-			EList<Node> nodes = root.getNode();
-			// 递归查找node节点
-			getTreeElements(nodes, null, elements);
-		}
+//		if (root != null) {
+//			EList<Node> nodes = root.getNode();
+//			// 递归查找node节点
+//			getTreeElements(nodes, null, elements);
+//		}
 
+		List<Node> nodes = ConnectorUtil.getNodesFromConnectorPath(ConnectorUtil.FLOWCONNECTORMENU);
+		// 递归查找node节点
+		getActorTreeElements(nodes, null, elements);
+		
 		return elements;
 	}
 	
@@ -48,17 +50,18 @@ public class TreeViewerNewFactory {
 	 */
 	public static List<ITreeElement> reloadActorTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-		// Menu
-		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-
-		Menu root = ConnectorUtil.getActorConnectorMenu();
+//		Menu root = ConnectorUtil.getActorConnectorMenu();
 
 		// 分拆menu成为ITreeElement树
-		if (root != null) {
-			EList<Node> nodes = root.getNode();
-			// 递归查找node节点
-			getActorTreeElements(nodes, null, elements);
-		}
+//		if (root != null) {
+//			EList<Node> nodes = root.getNode();
+//			// 递归查找node节点
+//			getActorTreeElements(nodes, null, elements);
+//		}
+		
+		List<Node> nodes = ConnectorUtil.getNodesFromConnectorPath(ConnectorUtil.ACTORCONNECTORMENU);
+		// 递归查找node节点
+		getActorTreeElements(nodes, null, elements);
 
 		return elements;
 	}
@@ -145,7 +148,7 @@ public class TreeViewerNewFactory {
 		if (nodes != null && nodes.size() > 0) {
 			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
 				Node node = (Node) iterator.next();
-				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), ConnectorUtil.getMenuActorConnectorIconPathByIconName(node.getIco()), "");
+				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
 				EList<Node> nodeitems = node.getNode();
 				if (nodeitems != null && nodeitems.size() > 0) {
 					getActorTreeElementsNodes(nodeitems, parentElement, elements);
@@ -166,7 +169,7 @@ public class TreeViewerNewFactory {
 	 * @param element
 	 * @param elements
 	 */
-	private static void getTreeElements(EList<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
+	private static void getTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
 		if (nodes != null && nodes.size() > 0) {
 			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
 				Node node = (Node) iterator.next();
@@ -205,12 +208,12 @@ public class TreeViewerNewFactory {
 	 * @param element
 	 * @param elements
 	 */
-	private static void getActorTreeElements(EList<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
+	private static void getActorTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
 		if (nodes != null && nodes.size() > 0) {
 			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
 				Node node = (Node) iterator.next();
 
-				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), ConnectorUtil.getMenuActorConnectorIconPathByIconName(node.getIco()), "");
+				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
 
 				EList<MenuConnector> connectors = node.getMenuConnector();
 				if (connectors != null && connectors.size() > 0) {

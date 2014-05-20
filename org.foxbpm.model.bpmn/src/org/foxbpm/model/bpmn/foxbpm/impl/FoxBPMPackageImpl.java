@@ -3701,7 +3701,8 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "namespace", "##targetNamespace",
 			 "wildcards", "",
-			 "name", ""
+			 "name", "connectorInstance",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (timeExpressionEClass, 

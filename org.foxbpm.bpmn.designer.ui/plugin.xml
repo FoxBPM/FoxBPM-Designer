@@ -349,7 +349,7 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
-  <propertyTab
+   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAssignmentPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab1"
         label="任务分配">
@@ -363,6 +363,20 @@
 
 
 
+</extension>
 
-	</extension>
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferenceInitializer">
+    </initializer>
+ </extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          id="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          name="流程设计器">
+    </page>
+ </extension>
 </plugin>

@@ -1131,7 +1131,8 @@
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="namespace" value="##targetNamespace"/>
         <details key="wildcards" value=""/>
-        <details key="name" value=""/>
+        <details key="name" value="connectorInstance"/>
+        <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
