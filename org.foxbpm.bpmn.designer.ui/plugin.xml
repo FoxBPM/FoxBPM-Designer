@@ -349,6 +349,11 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAssignmentPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab1"
+        label="任务分配">
+  </propertyTab>
 
 		<!-- ======================================== -->
 		<!-- ===  Model Enablements and Profiles ==== -->
