@@ -37,6 +37,7 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -115,6 +116,8 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 	}
 
 	private String getDescFromProperties(String id) {
+		if(id==null || id.equals(""))
+			return "暂无信息";
 		Bundle bundle = Platform.getBundle("org.foxbpm.bpmn.designer.base");
 		// 为了WB能展现加的这句话
 		if (bundle == null)
@@ -296,4 +299,27 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 
 		bindingContext.bindValue(observable, uiObserveValue, null, null);
 	}
+	
+	protected void bindCombo(EStructuralFeature a, Combo combo, final EObject element) {
+		EMFDataBindingContext bindingContext = new EMFDataBindingContext();
+
+		IObservableValue uiObserveValue = EMFEditObservables.observeValue(getDiagramEditor().getEditingDomain(), element, a);
+
+		observable = SWTObservables.observeDelayedValue(0, WidgetProperties.text().observe(combo));
+
+		observable.addChangeListener(new IChangeListener() {
+
+			public void handleChange(ChangeEvent event) {
+				if (element != null) {
+					IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+					if (part instanceof BPMN2Editor) {
+						((BPMN2Editor) getDiagramEditor()).refresh();
+					}
+				}
+			}
+		});
+
+		bindingContext.bindValue(observable, uiObserveValue, null, null);
+	}
+	
 }

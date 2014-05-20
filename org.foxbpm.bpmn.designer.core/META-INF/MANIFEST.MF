@@ -23,7 +23,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.databinding.property,
  org.eclipse.emf.databinding,
  org.foxbpm.bpmn.designer.base;bundle-version="1.0.0",
- org.eclipse.emf.databinding.edit
+ org.eclipse.emf.databinding.edit,
+ org.foxbpm.model.bpmn;bundle-version="0.1.0",
+ org.foxbpm.model.config;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.swt,

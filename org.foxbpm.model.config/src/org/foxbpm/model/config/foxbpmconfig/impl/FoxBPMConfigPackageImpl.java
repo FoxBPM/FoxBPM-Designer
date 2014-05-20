@@ -357,6 +357,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getResourcePath_Type() {
+		return (EAttribute)resourcePathEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMailInfo() {
 		return mailInfoEClass;
 	}
@@ -472,6 +481,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(resourcePathEClass, RESOURCE_PATH__PHYSICAL_PATH);
 		createEAttribute(resourcePathEClass, RESOURCE_PATH__VIRTUAL_PATH);
 		createEAttribute(resourcePathEClass, RESOURCE_PATH__PROJECT_NAME);
+		createEAttribute(resourcePathEClass, RESOURCE_PATH__TYPE);
 
 		mailInfoEClass = createEClass(MAIL_INFO);
 		createEAttribute(mailInfoEClass, MAIL_INFO__MAIL_ADDRESS);
@@ -541,6 +551,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getResourcePath_PhysicalPath(), ecorePackage.getEString(), "physicalPath", null, 0, 1, ResourcePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourcePath_VirtualPath(), ecorePackage.getEString(), "virtualPath", null, 0, 1, ResourcePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getResourcePath_ProjectName(), ecorePackage.getEString(), "projectName", null, 0, 1, ResourcePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getResourcePath_Type(), ecorePackage.getEString(), "type", null, 0, 1, ResourcePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mailInfoEClass, MailInfo.class, "MailInfo", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMailInfo_MailAddress(), ecorePackage.getEString(), "mailAddress", null, 1, 1, MailInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -671,6 +682,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   new String[] {
 			 "kind", "attribute"
 		   });			
+		addAnnotation
+		  (getResourcePath_Type(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
 		addAnnotation
 		  (mailInfoEClass, 
 		   source, 

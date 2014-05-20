@@ -25,6 +25,7 @@ import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathImpl#getPhysicalPath <em>Physical Path</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathImpl#getVirtualPath <em>Virtual Path</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathImpl#getProjectName <em>Project Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -150,6 +151,26 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 	 * @ordered
 	 */
 	protected String projectName = PROJECT_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -301,6 +322,27 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.RESOURCE_PATH__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -316,6 +358,8 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 				return getVirtualPath();
 			case FoxBPMConfigPackage.RESOURCE_PATH__PROJECT_NAME:
 				return getProjectName();
+			case FoxBPMConfigPackage.RESOURCE_PATH__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -345,6 +389,9 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 				return;
 			case FoxBPMConfigPackage.RESOURCE_PATH__PROJECT_NAME:
 				setProjectName((String)newValue);
+				return;
+			case FoxBPMConfigPackage.RESOURCE_PATH__TYPE:
+				setType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -376,6 +423,9 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 			case FoxBPMConfigPackage.RESOURCE_PATH__PROJECT_NAME:
 				setProjectName(PROJECT_NAME_EDEFAULT);
 				return;
+			case FoxBPMConfigPackage.RESOURCE_PATH__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -400,6 +450,8 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 				return VIRTUAL_PATH_EDEFAULT == null ? virtualPath != null : !VIRTUAL_PATH_EDEFAULT.equals(virtualPath);
 			case FoxBPMConfigPackage.RESOURCE_PATH__PROJECT_NAME:
 				return PROJECT_NAME_EDEFAULT == null ? projectName != null : !PROJECT_NAME_EDEFAULT.equals(projectName);
+			case FoxBPMConfigPackage.RESOURCE_PATH__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -426,6 +478,8 @@ public class ResourcePathImpl extends MinimalEObjectImpl.Container implements Re
 		result.append(virtualPath);
 		result.append(", projectName: ");
 		result.append(projectName);
+		result.append(", type: ");
+		result.append(type);
 		result.append(')');
 		return result.toString();
 	}

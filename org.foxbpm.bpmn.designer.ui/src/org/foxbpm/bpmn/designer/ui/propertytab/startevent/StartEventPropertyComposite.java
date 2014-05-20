@@ -1,7 +1,7 @@
-package org.foxbpm.bpmn.designer.ui.propertytab.composite.task;
+package org.foxbpm.bpmn.designer.ui.propertytab.startevent;
 
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.bpmn2.UserTask;
+import org.eclipse.bpmn2.StartEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
@@ -11,21 +11,21 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 
-public class UserTaskPropertyComposite extends AbstractFoxBPMComposite{
-	private UserTask userTask;
+public class StartEventPropertyComposite extends AbstractFoxBPMComposite{
+	private StartEvent startEvent;
 	private Text descText;
 	private Text idText;
 	private Text nameText;
 
-	public UserTaskPropertyComposite(Composite parent, int style) {
+	public StartEventPropertyComposite(Composite parent, int style) {
 		super(parent, style);
 	}
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		userTask = (UserTask) eObject;
-		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, userTask);
-		bindText(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText, userTask);
+		startEvent = (StartEvent) eObject;
+		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, startEvent);
+		bindText(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText, startEvent);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText);
 	}
 
@@ -63,6 +63,6 @@ public class UserTaskPropertyComposite extends AbstractFoxBPMComposite{
 
 	@Override
 	public String setDescId() {
-		return "user_task_desc";
+		return "start_event_desc";
 	}
 }

@@ -39,6 +39,12 @@ Require-Bundle: org.eclipse.ui,
  org.codehaus.groovy.eclipse.codeassist.completion,
  org.codehaus.groovy.eclipse.core,
  org.codehaus.groovy.eclipse.refactoring,
- org.codehaus.groovy.eclipse.ui
+ org.codehaus.groovy.eclipse.ui,
+ org.eclipse.jdt.groovy.core,
+ org.eclipse.jdt.core,
+ org.eclipse.ui.editors,
+ org.foxbpm.bpmn.designer.base;bundle-version="1.0.0",
+ org.foxbpm.model.bpmn;bundle-version="0.1.0",
+ org.foxbpm.model.config;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
