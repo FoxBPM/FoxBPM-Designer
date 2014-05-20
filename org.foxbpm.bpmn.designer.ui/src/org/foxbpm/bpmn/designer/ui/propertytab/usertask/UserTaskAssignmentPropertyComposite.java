@@ -14,6 +14,7 @@ import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -228,15 +229,6 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-//				PotentialOwner potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
-//				ModelUtil.setID(potentialOwner,userTask.eResource());
-//				FeatureMap.Entry extensionAttributeEntry = new SimpleFeatureMapEntry((Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__RESOURCE_TYPE, ((GroupInfoTo)typecomboViewer.getElementAt(typecombo.getSelectionIndex())).getTypeId());
-//				potentialOwner.getAnyAttribute().add(extensionAttributeEntry);
-//				FeatureMap.Entry extensionAttributeEntry1 = new SimpleFeatureMapEntry((Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__INCLUDE_EXCLUSION, inorexcludecombo.getData(inorexcludecombo.getSelectionIndex()+"").toString());
-//				potentialOwner.getAnyAttribute().add(extensionAttributeEntry1);
-//				FeatureMap.Entry extensionAttributeEntry2 = new SimpleFeatureMapEntry((Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__IS_CONTAINS_SUB, (containsubCheckButton.getSelection()));
-//				potentialOwner.getAnyAttribute().add(extensionAttributeEntry2);
-				
 				UserTask userTask = (UserTask) getBusinessObject();
 				PotentialOwner potentialOwner = null;
 				
@@ -250,10 +242,10 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				if (potentialOwner.getExtensionValues().size() > 0) {
 					for (ExtensionAttributeValue extensionAttributeValue : potentialOwner.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
-						if (objectElement != null) {
-							ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement;
-							connectorInstanceElements.setConnrctorType("actorconnector");
+						FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+						if (objectElement != null && objectElement.size()>0) {
+							ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
+							connectorInstanceElements.setConnrctorType("actorConnector");
 							connectorInstanceElements.getConnectorInstance().add(connectorInstance);
 							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
 									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
@@ -263,6 +255,7 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				} else {
 					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
 					ConnectorInstanceElements connectorInstanceElements = FoxBPMFactory.eINSTANCE.createConnectorInstanceElements();
+					connectorInstanceElements.setConnrctorType("actorConnector");
 					connectorInstanceElements.getConnectorInstance().add(connectorInstance);
 					
 					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS,
@@ -285,17 +278,21 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 			@Override
 			protected void doExecute() {
 				UserTask userTask = (UserTask) getBusinessObject();
+				PotentialOwner potentialOwner = null;
 				
-				PotentialOwner potentialOwner = (PotentialOwner) userTask.getResources().get(0);
+				if(userTask.getResources().size()==0) {
+					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
+					userTask.getResources().add(potentialOwner);
+				} else {
+					potentialOwner = (PotentialOwner) userTask.getResources().get(0);
+				}
 
 				if (potentialOwner.getExtensionValues().size() > 0) {
 
 					for (ExtensionAttributeValue extensionAttributeValue : potentialOwner.getExtensionValues()) {
-
-						FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-								(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstance);
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						extensionElements.remove(extensionElementEntry);
+						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) extensionElements.getValue(0);
+						connectorInstanceElements.getConnectorInstance().remove(connectorInstance);
 
 					}
 				}
@@ -314,25 +311,38 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 			@Override
 			protected void doExecute() {
 				UserTask userTask = (UserTask) getBusinessObject();
+				PotentialOwner potentialOwner = null;
 				
-				PotentialOwner potentialOwner = (PotentialOwner) userTask.getResources().get(0);
+				if(userTask.getResources().size()==0) {
+					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
+					userTask.getResources().add(potentialOwner);
+				} else {
+					potentialOwner = (PotentialOwner) userTask.getResources().get(0);
+				}
 				
 				if (potentialOwner.getExtensionValues().size() > 0) {
 					for (ExtensionAttributeValue extensionAttributeValue : potentialOwner.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, true);
-						if (objectElement != null) {
+						FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+						if (objectElement != null && objectElement.size()>0) {
+							ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
+							connectorInstanceElements.setConnrctorType("actorConnector");
+							connectorInstanceElements.getConnectorInstance().add(connectorInstance);
 							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, connectorInstance);
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 							extensionElements.add(index, extensionElementEntry);
 						}
 					}
 				} else {
 					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
-					potentialOwner.getExtensionValues().add(extensionElement);
-					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND,
-							connectorInstance);
-					extensionElement.getValue().add(index, extensionElementEntry);
+					ConnectorInstanceElements connectorInstanceElements = FoxBPMFactory.eINSTANCE.createConnectorInstanceElements();
+					connectorInstanceElements.setConnrctorType("actorConnector");
+					connectorInstanceElements.getConnectorInstance().add(connectorInstance);
+					
+					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS,
+							connectorInstanceElements);
+					extensionElement.getValue().add(extensionElementEntry);
+					potentialOwner.getExtensionValues().add(index, extensionElement);
 				}
 			}
 		});
@@ -447,15 +457,14 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		if (potentialOwner.getExtensionValues().size() > 0) {
 			for (ExtensionAttributeValue extensionAttributeValue : potentialOwner.getExtensionValues()) {
 				FeatureMap extensionElements = extensionAttributeValue.getValue();
-				Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, true);
-				if (objectElement != null) {
-
-					List<ConnectorInstance> connectorInstanceList = (List<ConnectorInstance>) objectElement;
-					for (ConnectorInstance connectorInstance : connectorInstanceList) {
-						if (connectorInstance.getType() != null && connectorInstance.getType().equals("actorconnector") || connectorInstance.getType() == null)
+				FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+				if (objectElement != null && objectElement.size()>0) {
+					ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
+					for (ConnectorInstance connectorInstance : connectorInstanceElements.getConnectorInstance()) {
+						if(connectorInstanceElements.getConnrctorType()!=null && connectorInstanceElements.getConnrctorType().equals("actorConnector")) {
 							connectorInstances.add(connectorInstance);
+						}
 					}
-
 				}
 			}
 		}

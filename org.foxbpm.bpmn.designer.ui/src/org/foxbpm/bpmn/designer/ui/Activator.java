@@ -12,7 +12,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ZipUtils;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -45,7 +44,7 @@ public class Activator extends AbstractUIPlugin {
 			protected IStatus run(IProgressMonitor monitor) {
 				// do something long running
 				monitor.beginTask("正在初始化资源文件", 2);
-				PropertiesUtil.writeProperties(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath", "D:/connector");
+				PropertiesUtil.writeProperties(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath", "D:/connector/");
 				monitor.worked(1);
 				// 下载
 				try {

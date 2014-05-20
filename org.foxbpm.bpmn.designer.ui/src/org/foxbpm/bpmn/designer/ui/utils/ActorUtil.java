@@ -9,13 +9,11 @@ import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,7 +21,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.bpmn.designer.ui.tree.EntityElement;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.model.config.connector.Checkbox;
@@ -48,7 +45,7 @@ import org.foxbpm.model.config.connectormenu.Node;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
 
-public class ConnectorUtil {
+public class ActorUtil {
 	public static String FLOWCONNECTORPATH = "flowConnector-path";
 
 	public static String ACTORCONNECTORPATH = "actorConnector-path";
@@ -60,8 +57,6 @@ public class ConnectorUtil {
 	public static String OLDCONNECTORMENU = "FlowConnectorMenu.xml";
 
 	public static String OLDCONNECTORPATH = "connector-path";
-	
-	public static HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
 	/**
 	 * 得到连接器所存放的路径
@@ -80,7 +75,7 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getConnectorPath() {
-		return PropertiesUtil.readValue(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath");
+		return "D:/connector/";
 	}
 
 	/**
@@ -182,6 +177,7 @@ public class ConnectorUtil {
 		return file.getName();
 	}
 
+
 	/**
 	 * 根据连接器菜单加载分类树
 	 * 
@@ -190,7 +186,7 @@ public class ConnectorUtil {
 	public static List<ITreeElement> reloadTreeNodes() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 		// Menu
-		Menu root = ConnectorUtil.getFlowConnectorMenu();
+		Menu root = ActorUtil.getFlowConnectorMenu();
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -235,6 +231,9 @@ public class ConnectorUtil {
 		}
 	}
 
+
+
+
 	/**
 	 * 根据处理者选择器ID得到对应处理者选择器文件存放路径
 	 * 
@@ -242,7 +241,7 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getActorConnectorPathById(String connectorId) {
-		return getConnectorPath() + connectorId;
+		return getActorConnectorAllPath() + connectorId;
 	}
 
 	/**
@@ -252,47 +251,9 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getActorConnectorXMLPath(String connectorId) {
-		// 第一遍遍历，是所有分类
-		for (File file : new File(ConnectorUtil.getConnectorPath()).listFiles()) {
-			if (file.isDirectory()) {
-				for (File filePath : file.listFiles()) {
-					if (filePath.isDirectory()) {
-						for (File folder : filePath.listFiles()) {
-							// 如果是目录再遍历一遍，就是所有连接器，找到对应ID的文件夹
-							if (folder.isDirectory() && folder.getName().equals(connectorId)) {
-								for (File xml : folder.listFiles()) {
-									// 如果是xml文件则为该连接器的xml
-									if (xml.exists() && xml.getName().equals("FixConnector.xml")) {
-										return xml.getAbsolutePath();
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		// return getConnectorPath() + connectorId + "/FixConnector.xml";
-		return null;
-	}
-	
-	public static String getConnectorXMLPathByConnectorId(String connectorId, String path) {
-		getLoop(path);
-		return hashMap.get(connectorId).toString();
+		return getActorConnectorAllPath() + connectorId + "/FixConnector.xml";
 	}
 
-	private static void getLoop(String path) {
-		for (File directory : new File(path).listFiles()) {
-			if(directory.isDirectory()) {
-				getLoop(directory.getAbsolutePath());
-			} else {
-				if(directory.getName().indexOf(".xml")!=-1) {
-					hashMap.put(directory.getParentFile().getName(), directory.getAbsolutePath());
-				}
-			}
-		}
-	}
-	
 	public static ResourcePath getFlowConnectorPath() {
 		ResourcePathConfig resourcePathConfig = FoxBPMConfigUtil.getFoxBPMConfig().getResourcePathConfig();
 		List<ResourcePath> resourcePaths = resourcePathConfig.getResourcePath();
@@ -345,9 +306,30 @@ public class ConnectorUtil {
 	 */
 	public static String getFlowConnectorAllPath() {
 
-		// return ProjectUtil.getProjectPath(getFlowConnectorProjectName()) +
-		// "/" + getFlowConnectorPath().getVirtualPath();
-		return ConnectorUtil.getConnectorPath();
+//		return ProjectUtil.getProjectPath(getFlowConnectorProjectName()) + "/" + getFlowConnectorPath().getVirtualPath();
+		return ActorUtil.getConnectorPath();
+	}
+
+	/**
+	 * 获取处理者选择器文件夹路径
+	 * 
+	 * @return
+	 */
+	public static String getActorConnectorAllPath() {
+
+		return ProjectUtil.getProjectPath(getActorConnectorProjectName()) + "/" + getActorConnectorPath().getVirtualPath();
+
+	}
+
+	/**
+	 * 获取老选择器文件夹路径
+	 * 
+	 * @return
+	 */
+	public static String getOldConnectorAllPath() {
+
+		return ProjectUtil.getProjectPath(getOldConnectorProjectName()) + "/" + getOldConnectorPath().getVirtualPath();
+
 	}
 
 	/**
@@ -359,6 +341,8 @@ public class ConnectorUtil {
 	public static String getFlowConnectorPathById(String connectorId) {
 		return getFlowConnectorAllPath() + connectorId;
 	}
+
+
 
 	/**
 	 * 根据Menu上的连接器ID找到对应的连接器对象
@@ -386,11 +370,7 @@ public class ConnectorUtil {
 	 */
 	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId) {
 		try {
-			String xmlPath = getConnectorXMLPathByConnectorId(connectorId, ConnectorUtil.getConnectorPath());
-			if(xmlPath == null) {
-				return null;
-			}
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(xmlPath);
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getActorConnectorXMLPath(connectorId));
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -415,7 +395,7 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getActorConnectorMenuPath() {
-		return getConnectorPath() + ACTORCONNECTORMENU;
+		return getActorConnectorAllPath() + ACTORCONNECTORMENU;
 	}
 
 	/**
@@ -433,7 +413,7 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getMenuActorConnectorIconPath() {
-		return getConnectorPath() + "ico/";
+		return getActorConnectorAllPath() + "ico/";
 	}
 
 	/**
@@ -495,7 +475,7 @@ public class ConnectorUtil {
 	 */
 	public static Menu getActorConnectorMenu() {
 
-		return EMFUtil.getConnectorMenuConfig(getConnectorPath() + ACTORCONNECTORMENU);
+		return EMFUtil.getConnectorMenuConfig(getActorConnectorAllPath() + ACTORCONNECTORMENU);
 	}
 
 	/**
@@ -529,11 +509,11 @@ public class ConnectorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(ConnectorUtil.getMenuFlowConnectorIconPath())) {
+								if (!node.getIco().contains(FlowConnectorConfigUtil.getMenuFlowConnectorIconPath())) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(ConnectorUtil.getMenuFlowConnectorIconPath() + ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
+									File menuoutfile = new File(FlowConnectorConfigUtil.getMenuFlowConnectorIconPath() + FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -543,7 +523,7 @@ public class ConnectorUtil {
 									menuoutStream.close();
 								}
 								// 完了拷贝图标之后进行node的icon重设
-								node.setIco(ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
+								node.setIco(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
 							}
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -573,7 +553,7 @@ public class ConnectorUtil {
 		}
 
 		// 刷新工程
-		// ProjectUtil.refreshProject(getFlowConnectorProjectName());
+//		ProjectUtil.refreshProject(getFlowConnectorProjectName());
 	}
 
 	/**
@@ -591,7 +571,7 @@ public class ConnectorUtil {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getConnectorPath() + ACTORCONNECTORMENU));
+		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getActorConnectorAllPath() + ACTORCONNECTORMENU));
 		resource.setEncoding("UTF-8");
 
 		resource.getContents().add(menu);
@@ -603,7 +583,7 @@ public class ConnectorUtil {
 		}
 
 		// 刷新工程
-		// ProjectUtil.refreshProject(getActorConnectorProjectName());
+//		ProjectUtil.refreshProject(getActorConnectorProjectName());
 
 	}
 
@@ -628,11 +608,11 @@ public class ConnectorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(ConnectorUtil.getMenuActorConnectorIconPath())) {
+								if (!node.getIco().contains(FlowConnectorConfigUtil.getMenuActorConnectorIconPath())) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(ConnectorUtil.getMenuActorConnectorIconPath() + ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
+									File menuoutfile = new File(FlowConnectorConfigUtil.getMenuActorConnectorIconPath() + FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -642,7 +622,7 @@ public class ConnectorUtil {
 									menuoutStream.close();
 								}
 								// 完了拷贝图标之后进行node的icon重设
-								node.setIco(ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
+								node.setIco(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
 							}
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -660,7 +640,7 @@ public class ConnectorUtil {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getConnectorPath() + ACTORCONNECTORMENU));
+		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getActorConnectorAllPath() + ACTORCONNECTORMENU));
 		resource.setEncoding("UTF-8");
 
 		resource.getContents().add(menu);
@@ -672,7 +652,7 @@ public class ConnectorUtil {
 		}
 
 		// 刷新工程
-		// ProjectUtil.refreshProject(getActorConnectorProjectName());
+//		ProjectUtil.refreshProject(getActorConnectorProjectName());
 
 	}
 
@@ -695,25 +675,24 @@ public class ConnectorUtil {
 		return null;
 	}
 
-	public static String downLoadConnector() throws IOException {
-		String connectorPath = getConnectorPath();
-		Authenticator.setDefault(new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("111", "111".toCharArray());
-			}
-		});
+	public static String downLoadConnector() {
+		String connectorPath = "D:/connector/test";
+		Authenticator.setDefault(new Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication("111", "111".toCharArray()); } });  
 		URL url = null;
 		File file = null;
-		// url = new
-		// URL("http://172.16.40.89:8080/foxbpm-webapps-rest/service/connectors");
-		url = new URL("http://172.16.40.89:8010/foxbpm/service/connectors");
-		file = File.createTempFile(System.currentTimeMillis() + "test", ".zip");
-		FileUtils.copyURLToFile(url, file);
-		ZipUtils.unZip(file.getPath(), connectorPath);
-
+		try {
+//			url = new URL("http://172.16.40.89:8080/foxbpm-webapps-rest/service/connectors");
+			url = new URL("http://172.16.40.89:8010/foxbpm/service/connectors");
+			file = File.createTempFile(System.currentTimeMillis()+"test", ".zip");
+			FileUtils.copyURLToFile(url, file);
+			ZipUtils.unZip(file.getPath(), connectorPath);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		return connectorPath;
 	}
-
+	
 	public static ConnectorDefinition createFlowConnectorDefinition() {
 		return ConnectorFactory.eINSTANCE.createConnectorDefinition();
 	}
@@ -780,44 +759,5 @@ public class ConnectorUtil {
 
 	public static WidgetExpression createWidgetExpression() {
 		return ConnectorFactory.eINSTANCE.createWidgetExpression();
-	}
-
-	/**
-	 * 递归找到对应类型的所有menu上的连接器节点
-	 * 
-	 * @param type
-	 *            FLOWCONNECTORMENU或ACTORCONNECTORMENU
-	 * @return
-	 */
-	public static List<Node> getNodesFromConnectorPath(String type) {
-		List<Node> nodes = new ArrayList<Node>();
-		File connectorPath = new File(getConnectorPath());
-		getFileChild(connectorPath.getAbsolutePath(), nodes, type);
-		return nodes;
-	}
-
-	public static void getFileChild(String path, List<Node> nodes, String type) {
-		File filePath = new File(path);
-		for (File file : filePath.listFiles()) {
-			if (file.isDirectory()) {
-				// XML文件
-				File xmlFile = new File(file.getAbsolutePath() + "/" + type);
-				if (xmlFile.exists()) {
-					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					nodes.addAll(menu.getNode());
-				} else {
-					getFileChild(file.getAbsolutePath(), nodes, type);
-				}
-			} else {
-				// XML文件
-				File xmlFile = new File(file.getAbsolutePath());
-				if (file.getAbsolutePath().indexOf(type)!=-1 && xmlFile.exists()) {
-					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					nodes.addAll(menu.getNode());
-				} else {
-					// do nothing
-				}
-			}
-		}
 	}
 }

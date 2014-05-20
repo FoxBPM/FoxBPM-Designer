@@ -10,6 +10,7 @@ import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -44,6 +45,8 @@ import org.foxbpm.bpmn.designer.ui.connector.runtime.modify.ModifyNewConnectorWi
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
+import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
@@ -130,7 +133,7 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 			@Override
 			public void handleEvent(Event event) {
 				if (!treeViewer.getSelection().isEmpty()) {
-//					// 得到当前选中的ConnectorInstance对象
+					// // 得到当前选中的ConnectorInstance对象
 					IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
 					ConnectorInstance connectorInstance = (ConnectorInstance) selection.getFirstElement();
 
@@ -232,19 +235,26 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				if (baseElement.getExtensionValues().size() > 0) {
 					for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, true);
-						if (objectElement != null) {
+						FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+						if (objectElement != null && objectElement.size()>0) {
+							ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
+							connectorInstanceElements.setConnrctorType("flowConnector");
+							connectorInstanceElements.getConnectorInstance().add(connectorInstance);
 							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, connectorInstance);
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 							extensionElements.add(extensionElementEntry);
 						}
 					}
 				} else {
 					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
-					baseElement.getExtensionValues().add(extensionElement);
-					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE,
-							connectorInstance);
+					ConnectorInstanceElements connectorInstanceElements = FoxBPMFactory.eINSTANCE.createConnectorInstanceElements();
+					connectorInstanceElements.setConnrctorType("flowConnector");
+					connectorInstanceElements.getConnectorInstance().add(connectorInstance);
+
+					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+							(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 					extensionElement.getValue().add(extensionElementEntry);
+					baseElement.getExtensionValues().add(extensionElement);
 				}
 			}
 		});
@@ -265,12 +275,9 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				if (baseElement.getExtensionValues().size() > 0) {
 
 					for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
-
-						FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-								(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, connectorInstance);
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						extensionElements.remove(extensionElementEntry);
-
+						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) extensionElements.getValue(0);
+						connectorInstanceElements.getConnectorInstance().remove(connectorInstance);
 					}
 				}
 			}
@@ -291,19 +298,27 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				if (baseElement.getExtensionValues().size() > 0) {
 					for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, true);
+						Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+
+						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement;
+						connectorInstanceElements.setConnrctorType("flowConnector");
+						connectorInstanceElements.getConnectorInstance().add(connectorInstance);
+
 						if (objectElement != null) {
 							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, connectorInstance);
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 							extensionElements.add(index, extensionElementEntry);
 						}
 					}
 				} else {
 					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
-					baseElement.getExtensionValues().add(extensionElement);
-					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND,
-							connectorInstance);
+					ConnectorInstanceElements connectorInstanceElements = FoxBPMFactory.eINSTANCE.createConnectorInstanceElements();
+					connectorInstanceElements.setConnrctorType("flowConnector");
+					connectorInstanceElements.getConnectorInstance().add(connectorInstance);
+					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+							(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 					extensionElement.getValue().add(index, extensionElementEntry);
+					baseElement.getExtensionValues().add(extensionElement);
 				}
 			}
 		});
@@ -412,15 +427,15 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 		if (baseElement.getExtensionValues().size() > 0) {
 			for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
 				FeatureMap extensionElements = extensionAttributeValue.getValue();
-				Object objectElement = extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE, true);
-				if (objectElement != null) {
-
-					List<ConnectorInstance> connectorInstanceList = (List<ConnectorInstance>) objectElement;
-					for (ConnectorInstance connectorInstance : connectorInstanceList) {
-						if (connectorInstance.getType() != null && connectorInstance.getType().equals("flowconnector") || connectorInstance.getType() == null)
+				FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(
+						FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+				if (objectElement != null && objectElement.size() > 0) {
+					ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
+					for (ConnectorInstance connectorInstance : connectorInstanceElements.getConnectorInstance()) {
+						if (connectorInstanceElements.getConnrctorType() != null && connectorInstanceElements.getConnrctorType().equals("flowConnector")) {
 							connectorInstances.add(connectorInstance);
+						}
 					}
-
 				}
 			}
 		}
