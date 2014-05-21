@@ -101,7 +101,7 @@ Export-Package: org.apache.commons.io,
  org.apache.tools.zip,
  org.foxbpm.bpmn.designer.base,
  org.foxbpm.bpmn.designer.base.utils
-Bundle-ClassPath: lib/commons-io-2.4.jar,
- .,
+Bundle-ClassPath: .,
  lib/ant-1.9.2.jar,
+ lib/commons-io-2.4.jar,
  lib/httpclient-4.3.3.jar
