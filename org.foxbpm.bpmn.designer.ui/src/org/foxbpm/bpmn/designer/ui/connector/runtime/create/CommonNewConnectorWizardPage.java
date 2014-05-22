@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.definition.Constant;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
@@ -112,7 +112,7 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 				final String id = widget.getId();
 				String name = widget.getName();
 				String type = Constant.WidgetConstant.getTypeWidget(widget);
-				Input input = FlowConnectorConfigUtil.getInputFromId(connector, widget.getInputId());
+				Input input = ConnectorUtil.getInputFromId(connector, widget.getInputId());
 
 				final boolean isRequired = input.getMandatory().equals("Mandatory") ? true : false;
 				// final boolean isRequired = false;

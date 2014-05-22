@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.runtime;
+package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
 import java.util.List;
 
@@ -22,9 +22,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.create.CommonNewConnectorWizardPage;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.create.OutputNewConnectorWizardPage;
+import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;

@@ -14,6 +14,8 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.databinding.EMFProperties;
+import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.jdt.core.IPackageFragment;
@@ -69,7 +71,6 @@ import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.ConnectorFactory;
 import org.foxbpm.model.config.connector.ConnectorPackage.Literals;
@@ -80,8 +81,6 @@ import org.foxbpm.model.config.connector.Page;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.FeaturePath;
 
 public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
@@ -149,7 +148,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	public ConfigureNewConnectorWizardPage(boolean isClass, String pageName) {
 		super(isClass, pageName);
 		setDescription("设置连接器的描述信息");
-		setTitle("创建连接器");
+		setTitle(pageName);
 
 		// 初始化model
 		connectorDefinition = ConnectorFactory.eINSTANCE.createConnectorDefinition();
@@ -963,7 +962,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
 		updateButtons();
 		setControl(mainComposite);
-		m_bindingContext = initDataBindings();
+//		m_bindingContext = initDataBindings();
 	}
 
 	/*

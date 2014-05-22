@@ -1,7 +1,5 @@
 package org.foxbpm.bpmn.designer.ui.commands;
 
-import java.io.File;
-
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;

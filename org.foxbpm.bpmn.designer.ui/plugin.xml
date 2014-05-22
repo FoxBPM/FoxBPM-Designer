@@ -65,12 +65,38 @@
           id="org.foxbpm.bpmn.designer.ui.command.connectorexp"
           name="导出连接器">
     </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.actor"
+          id="org.foxbpm.bpmn.designer.ui.command.createactor"
+          name="创建选择器">
+    </command>
+    <command
+          categoryId="org.foxbpm.bpmn.designer.ui.category.actor"
+          id="org.foxbpm.bpmn.designer.ui.command.editactor"
+          name="编辑选择器">
+    </command>
+    <category
+          id="org.foxbpm.bpmn.designer.ui.category.actor"
+          name="选择器">
+    </category>
  </extension>
  <extension
        point="org.eclipse.ui.handlers">
     <handler
           class="org.foxbpm.bpmn.designer.ui.commands.CreateConnectorHandler"
           commandId="org.foxbpm.bpmn.designer.ui.command.createconnector">
+    </handler>
+    <handler
+          class="org.foxbpm.bpmn.designer.ui.commands.CreateActorHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.createactor">
+    </handler>
+    <handler
+          class="org.foxbpm.bpmn.designer.ui.commands.EditConnectorHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.editconnector">
+    </handler>
+    <handler
+          class="org.foxbpm.bpmn.designer.ui.commands.EditActorHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.editactor">
     </handler>
  </extension>
  <extension
@@ -122,6 +148,19 @@
              <command
                    commandId="org.foxbpm.bpmn.designer.ui.command.connectorexp"
                    label="导出连接器"
+                   style="push">
+             </command>
+          </menu>
+          <menu
+                label="选择器">
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command.createactor"
+                   label="创建选择器"
+                   style="push">
+             </command>
+             <command
+                   commandId="org.foxbpm.bpmn.designer.ui.command2"
+                   label="编辑选择器"
                    style="push">
              </command>
           </menu>

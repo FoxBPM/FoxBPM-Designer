@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput;
@@ -214,7 +214,7 @@ public class ModifyNewConnectorWizard extends Wizard {
 						// 分类进行数据处理
 						if (control instanceof Label) {
 							Label label = (Label) control;
-							Input input = FlowConnectorConfigUtil.getInputFromId(TreeViewerNewFactory
+							Input input = ConnectorUtil.getInputFromId(TreeViewerNewFactory
 									.getConnector(connectorInstance.getConnectorId()),
 										((Widget) label.getData()).getInputId());
 							

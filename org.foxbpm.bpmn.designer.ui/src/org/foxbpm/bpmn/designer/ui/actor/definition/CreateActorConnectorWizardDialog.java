@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.definition;
+package org.foxbpm.bpmn.designer.ui.actor.definition;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.wizard.IWizard;
@@ -8,9 +8,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 
-public class CreateConnectorWizardDialog extends WizardDialog {
+public class CreateActorConnectorWizardDialog extends WizardDialog {
 
-	public CreateConnectorWizardDialog(Shell parentShell, IWizard newWizard) {
+	public CreateActorConnectorWizardDialog(Shell parentShell, IWizard newWizard) {
 		super(parentShell, newWizard);
 		setHelpAvailable(false);
 	}

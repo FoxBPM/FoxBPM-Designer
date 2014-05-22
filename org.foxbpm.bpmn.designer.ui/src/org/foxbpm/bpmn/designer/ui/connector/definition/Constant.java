@@ -1,6 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.connector.definition;
 
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.config.connector.Checkbox;
 import org.foxbpm.model.config.connector.Group;
 import org.foxbpm.model.config.connector.Password;
@@ -35,23 +35,23 @@ public class Constant {
          */
         public static Widget getWidgetType(String type) {
     		if(type.equals(WIDGET_ARRAY[0]))
-    			return FlowConnectorConfigUtil.createWidgetText();
+    			return ConnectorUtil.createWidgetText();
     		if(type.equals(WIDGET_ARRAY[1]))
-    			return FlowConnectorConfigUtil.createWidgetTextArea();
+    			return ConnectorUtil.createWidgetTextArea();
     		if(type.equals(WIDGET_ARRAY[2]))
-    			return FlowConnectorConfigUtil.createWidgetPassword();
+    			return ConnectorUtil.createWidgetPassword();
     		if(type.equals(WIDGET_ARRAY[3]))
-    			return FlowConnectorConfigUtil.createWidgetCheckbox();
+    			return ConnectorUtil.createWidgetCheckbox();
     		if(type.equals(WIDGET_ARRAY[4]))
-    			return FlowConnectorConfigUtil.createWidgetSelect();
+    			return ConnectorUtil.createWidgetSelect();
     		if(type.equals(WIDGET_ARRAY[5]))
-    			return FlowConnectorConfigUtil.createWidgetGroup();
+    			return ConnectorUtil.createWidgetGroup();
     		if(type.equals(WIDGET_ARRAY[6]))
-    			return FlowConnectorConfigUtil.createWidgetRadioGroup();
+    			return ConnectorUtil.createWidgetRadioGroup();
     		if(type.equals(WIDGET_ARRAY[7]))
-    			return FlowConnectorConfigUtil.createWidgetScriptEditor();
+    			return ConnectorUtil.createWidgetScriptEditor();
     		if(type.equals(WIDGET_ARRAY[8]))
-    			return FlowConnectorConfigUtil.createWidgetTable();
+    			return ConnectorUtil.createWidgetTable();
     		return null;
     	}
         

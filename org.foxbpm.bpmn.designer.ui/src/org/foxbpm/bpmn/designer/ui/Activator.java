@@ -1,5 +1,6 @@
 package org.foxbpm.bpmn.designer.ui;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -44,7 +45,8 @@ public class Activator extends AbstractUIPlugin {
 			protected IStatus run(IProgressMonitor monitor) {
 				// do something long running
 				monitor.beginTask("正在初始化资源文件", 2);
-				PropertiesUtil.writeProperties(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath", "D:/connector/");
+				if(!new File(Platform.getInstallLocation().getURL().getPath() + "path.properties").exists())
+					PropertiesUtil.writeProperties(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath", "D:/connector/");
 				monitor.worked(1);
 				// 下载
 				try {

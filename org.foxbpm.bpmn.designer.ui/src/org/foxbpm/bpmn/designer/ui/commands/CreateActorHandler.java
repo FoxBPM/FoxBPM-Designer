@@ -5,10 +5,10 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.swt.widgets.Display;
-import org.foxbpm.bpmn.designer.ui.connector.definition.modify.EditConnectorWizard;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
+import org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard;
+import org.foxbpm.bpmn.designer.ui.actor.definition.CreateActorConnectorWizardDialog;
 
-public class EditConnectorHandler implements IHandler {
+public class CreateActorHandler implements IHandler {
 
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
@@ -22,9 +22,9 @@ public class EditConnectorHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		OverrideNewWizard dialog = new OverrideNewWizard(Display.getDefault().getActiveShell(), new EditConnectorWizard());
-		dialog.setPageSize(-1, 400); // -1代表宽度自适应, 240为高度
-		dialog.open();
+		ActorConnectorWizardCreationWizard cwcp = new ActorConnectorWizardCreationWizard();
+		CreateActorConnectorWizardDialog cfwd = new CreateActorConnectorWizardDialog(Display.getDefault().getActiveShell(), cwcp);
+		cfwd.open();
 		return null;
 	}
 

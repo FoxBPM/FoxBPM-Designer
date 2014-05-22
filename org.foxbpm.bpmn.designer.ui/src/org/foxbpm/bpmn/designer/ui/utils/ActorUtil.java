@@ -509,11 +509,11 @@ public class ActorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(FlowConnectorConfigUtil.getMenuFlowConnectorIconPath())) {
+								if (!node.getIco().contains(ConnectorUtil.getMenuFlowConnectorIconPath())) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(FlowConnectorConfigUtil.getMenuFlowConnectorIconPath() + FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
+									File menuoutfile = new File(ConnectorUtil.getMenuFlowConnectorIconPath() + ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -523,7 +523,7 @@ public class ActorUtil {
 									menuoutStream.close();
 								}
 								// 完了拷贝图标之后进行node的icon重设
-								node.setIco(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
+								node.setIco(ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
 							}
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -608,11 +608,11 @@ public class ActorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(FlowConnectorConfigUtil.getMenuActorConnectorIconPath())) {
+								if (!node.getIco().contains(ConnectorUtil.getMenuActorConnectorIconPath())) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(FlowConnectorConfigUtil.getMenuActorConnectorIconPath() + FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
+									File menuoutfile = new File(ConnectorUtil.getMenuActorConnectorIconPath() + ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -622,7 +622,7 @@ public class ActorUtil {
 									menuoutStream.close();
 								}
 								// 完了拷贝图标之后进行node的icon重设
-								node.setIco(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(node.getIco()));
+								node.setIco(ConnectorUtil.getFlowConnectorMenuIconName(node.getIco()));
 							}
 						} catch (IOException e) {
 							e.printStackTrace();

@@ -14,11 +14,9 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
-import org.foxbpm.bpmn.designer.ui.connector.runtime.SelectNewConnectorWizardPage;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput;
@@ -169,7 +167,7 @@ public class AddNewConnectorWizard extends DynamicPageWizard {
 						// 分类进行数据处理
 						if (control instanceof Label) {
 							Label label = (Label) control;
-							Input input = FlowConnectorConfigUtil.getInputFromId(ConnectorUtil
+							Input input = ConnectorUtil.getInputFromId(ConnectorUtil
 									.getFlowConnectorByMenuConnectorId(connectorInstance.getConnectorId()),
 										((Widget) label.getData()).getInputId());
 							

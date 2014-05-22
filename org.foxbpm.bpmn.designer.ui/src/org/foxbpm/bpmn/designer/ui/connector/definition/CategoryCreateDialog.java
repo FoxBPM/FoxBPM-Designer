@@ -35,7 +35,6 @@ import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.tree.EntityElement;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FlowConnectorConfigUtil;
 import org.foxbpm.model.config.connectormenu.Node;
 
 public class CategoryCreateDialog extends TitleAreaDialog {
