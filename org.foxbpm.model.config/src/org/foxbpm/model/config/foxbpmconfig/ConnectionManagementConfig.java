@@ -4,8 +4,6 @@ package org.foxbpm.model.config.foxbpmconfig;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection Management Config</b></em>'.
@@ -18,8 +16,8 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig#getSelected <em>Selected</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig#getConnectionManagement <em>Connection Management</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig#getSelected <em>Selected</em>}</li>
  * </ul>
  * </p>
  *
@@ -27,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ConnectionManagementConfig extends EObject {
+public interface ConnectionManagementConfig extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Selected</b></em>' attribute.
 	 * <!-- begin-user-doc -->

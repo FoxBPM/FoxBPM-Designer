@@ -3,21 +3,14 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagement;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
@@ -29,14 +22,24 @@ import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ConnectionManagementConfigImpl#getSelected <em>Selected</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ConnectionManagementConfigImpl#getConnectionManagement <em>Connection Management</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ConnectionManagementConfigImpl#getSelected <em>Selected</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container implements ConnectionManagementConfig {
+public class ConnectionManagementConfigImpl extends BaseConfigImpl implements ConnectionManagementConfig {
+	/**
+	 * The cached value of the '{@link #getConnectionManagement() <em>Connection Management</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionManagement()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConnectionManagement> connectionManagement;
+
 	/**
 	 * The default value of the '{@link #getSelected() <em>Selected</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -56,16 +59,6 @@ public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container
 	 * @ordered
 	 */
 	protected String selected = SELECTED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getConnectionManagement() <em>Connection Management</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConnectionManagement()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ConnectionManagement> connectionManagement;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -141,10 +134,10 @@ public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
-				return getSelected();
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT:
 				return getConnectionManagement();
+			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
+				return getSelected();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,12 +151,12 @@ public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
-				setSelected((String)newValue);
-				return;
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT:
 				getConnectionManagement().clear();
 				getConnectionManagement().addAll((Collection<? extends ConnectionManagement>)newValue);
+				return;
+			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
+				setSelected((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,11 +170,11 @@ public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
-				setSelected(SELECTED_EDEFAULT);
-				return;
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT:
 				getConnectionManagement().clear();
+				return;
+			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
+				setSelected(SELECTED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -195,10 +188,10 @@ public class ConnectionManagementConfigImpl extends MinimalEObjectImpl.Container
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
-				return SELECTED_EDEFAULT == null ? selected != null : !SELECTED_EDEFAULT.equals(selected);
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT:
 				return connectionManagement != null && !connectionManagement.isEmpty();
+			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG__SELECTED:
+				return SELECTED_EDEFAULT == null ? selected != null : !SELECTED_EDEFAULT.equals(selected);
 		}
 		return super.eIsSet(featureID);
 	}

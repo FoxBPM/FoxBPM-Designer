@@ -60,6 +60,43 @@ public interface FoxBPMConfigPackage extends EPackage {
 	FoxBPMConfigPackage eINSTANCE = org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getBaseConfig()
+	 * @generated
+	 */
+	int BASE_CONFIG = 9;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG__PARAMS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Base Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Base Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl <em>Fox BPM Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,13 +107,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int FOX_BPM_CONFIG = 0;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOX_BPM_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG__VERSION = 0;
+	int FOX_BPM_CONFIG__VERSION = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Path Config</b></em>' containment reference.
@@ -85,7 +131,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG__RESOURCE_PATH_CONFIG = 1;
+	int FOX_BPM_CONFIG__RESOURCE_PATH_CONFIG = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Sys Mail Config</b></em>' containment reference.
@@ -94,7 +140,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG__SYS_MAIL_CONFIG = 2;
+	int FOX_BPM_CONFIG__SYS_MAIL_CONFIG = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Connection Management Config</b></em>' containment reference.
@@ -103,7 +149,16 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG = 3;
+	int FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG = BASE_CONFIG_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Task Command Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOX_BPM_CONFIG__TASK_COMMAND_CONFIG = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Fox BPM Config</em>' class.
@@ -112,7 +167,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG_FEATURE_COUNT = 4;
+	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Fox BPM Config</em>' class.
@@ -121,7 +176,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG_OPERATION_COUNT = 0;
+	int FOX_BPM_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.SysMailConfigImpl <em>Sys Mail Config</em>}' class.
@@ -134,13 +189,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int SYS_MAIL_CONFIG = 1;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SYS_MAIL_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Mail Info</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SYS_MAIL_CONFIG__MAIL_INFO = 0;
+	int SYS_MAIL_CONFIG__MAIL_INFO = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Selected</b></em>' attribute.
@@ -149,7 +213,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYS_MAIL_CONFIG__SELECTED = 1;
+	int SYS_MAIL_CONFIG__SELECTED = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Sys Mail Config</em>' class.
@@ -158,7 +222,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYS_MAIL_CONFIG_FEATURE_COUNT = 2;
+	int SYS_MAIL_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Sys Mail Config</em>' class.
@@ -167,7 +231,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SYS_MAIL_CONFIG_OPERATION_COUNT = 0;
+	int SYS_MAIL_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ConnectionManagementConfigImpl <em>Connection Management Config</em>}' class.
@@ -180,13 +244,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int CONNECTION_MANAGEMENT_CONFIG = 2;
 
 	/**
-	 * The feature id for the '<em><b>Selected</b></em>' attribute.
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_CONFIG__SELECTED = 0;
+	int CONNECTION_MANAGEMENT_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
 
 	/**
 	 * The feature id for the '<em><b>Connection Management</b></em>' containment reference list.
@@ -195,7 +259,16 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT = 1;
+	int CONNECTION_MANAGEMENT_CONFIG__CONNECTION_MANAGEMENT = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Selected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_MANAGEMENT_CONFIG__SELECTED = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Connection Management Config</em>' class.
@@ -204,7 +277,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_CONFIG_FEATURE_COUNT = 2;
+	int CONNECTION_MANAGEMENT_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Connection Management Config</em>' class.
@@ -213,7 +286,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_CONFIG_OPERATION_COUNT = 0;
+	int CONNECTION_MANAGEMENT_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ConnectionManagementImpl <em>Connection Management</em>}' class.
@@ -226,13 +299,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int CONNECTION_MANAGEMENT = 3;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION_MANAGEMENT__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT__ID = 0;
+	int CONNECTION_MANAGEMENT__ID = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,7 +323,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT__NAME = 1;
+	int CONNECTION_MANAGEMENT__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Class Impl</b></em>' attribute.
@@ -250,7 +332,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT__CLASS_IMPL = 2;
+	int CONNECTION_MANAGEMENT__CLASS_IMPL = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Connection Management</em>' class.
@@ -259,7 +341,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_FEATURE_COUNT = 3;
+	int CONNECTION_MANAGEMENT_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Connection Management</em>' class.
@@ -268,7 +350,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_MANAGEMENT_OPERATION_COUNT = 0;
+	int CONNECTION_MANAGEMENT_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathConfigImpl <em>Resource Path Config</em>}' class.
@@ -281,13 +363,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int RESOURCE_PATH_CONFIG = 4;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_PATH_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Resource Path</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_CONFIG__RESOURCE_PATH = 0;
+	int RESOURCE_PATH_CONFIG__RESOURCE_PATH = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Resource Path Config</em>' class.
@@ -296,7 +387,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_CONFIG_FEATURE_COUNT = 1;
+	int RESOURCE_PATH_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Resource Path Config</em>' class.
@@ -305,7 +396,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_CONFIG_OPERATION_COUNT = 0;
+	int RESOURCE_PATH_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathImpl <em>Resource Path</em>}' class.
@@ -318,13 +409,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int RESOURCE_PATH = 5;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOURCE_PATH__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__ID = 0;
+	int RESOURCE_PATH__ID = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -333,7 +433,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__NAME = 1;
+	int RESOURCE_PATH__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Src</b></em>' attribute.
@@ -342,7 +442,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__SRC = 2;
+	int RESOURCE_PATH__SRC = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Physical Path</b></em>' attribute.
@@ -351,7 +451,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__PHYSICAL_PATH = 3;
+	int RESOURCE_PATH__PHYSICAL_PATH = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Virtual Path</b></em>' attribute.
@@ -360,7 +460,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__VIRTUAL_PATH = 4;
+	int RESOURCE_PATH__VIRTUAL_PATH = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
@@ -369,7 +469,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__PROJECT_NAME = 5;
+	int RESOURCE_PATH__PROJECT_NAME = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -378,7 +478,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH__TYPE = 6;
+	int RESOURCE_PATH__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Resource Path</em>' class.
@@ -387,7 +487,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_FEATURE_COUNT = 7;
+	int RESOURCE_PATH_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Resource Path</em>' class.
@@ -396,7 +496,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOURCE_PATH_OPERATION_COUNT = 0;
+	int RESOURCE_PATH_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.MailInfoImpl <em>Mail Info</em>}' class.
@@ -409,13 +509,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int MAIL_INFO = 6;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAIL_INFO__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
 	 * The feature id for the '<em><b>Mail Address</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__MAIL_ADDRESS = 0;
+	int MAIL_INFO__MAIL_ADDRESS = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Mail Name</b></em>' attribute.
@@ -424,7 +533,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__MAIL_NAME = 1;
+	int MAIL_INFO__MAIL_NAME = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Smtp Host</b></em>' attribute.
@@ -433,7 +542,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__SMTP_HOST = 2;
+	int MAIL_INFO__SMTP_HOST = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Smtp Port</b></em>' attribute.
@@ -442,7 +551,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__SMTP_PORT = 3;
+	int MAIL_INFO__SMTP_PORT = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>User Name</b></em>' attribute.
@@ -451,7 +560,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__USER_NAME = 4;
+	int MAIL_INFO__USER_NAME = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -460,7 +569,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO__PASSWORD = 5;
+	int MAIL_INFO__PASSWORD = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Mail Info</em>' class.
@@ -469,7 +578,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO_FEATURE_COUNT = 6;
+	int MAIL_INFO_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Mail Info</em>' class.
@@ -478,7 +587,201 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAIL_INFO_OPERATION_COUNT = 0;
+	int MAIL_INFO_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl <em>Task Command Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandConfig()
+	 * @generated
+	 */
+	int TASK_COMMAND_CONFIG = 7;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Task Command Definitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Task Command Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Task Command Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl <em>Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getParam()
+	 * @generated
+	 */
+	int PARAM = 8;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_OPERATION_COUNT = 0;
+
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl <em>Task Command Definition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandDefinition()
+	 * @generated
+	 */
+	int TASK_COMMAND_DEFINITION = 10;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__ID = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Command</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__COMMAND = BASE_CONFIG_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Cmd</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__CMD = BASE_CONFIG_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Filter</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__FILTER = BASE_CONFIG_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Is Enabled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__IS_ENABLED = BASE_CONFIG_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Task Command Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Task Command Definition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 
 	/**
@@ -534,6 +837,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFoxBPMConfig_ConnectionManagementConfig();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getTaskCommandConfig <em>Task Command Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Task Command Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getTaskCommandConfig()
+	 * @see #getFoxBPMConfig()
+	 * @generated
+	 */
+	EReference getFoxBPMConfig_TaskCommandConfig();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.SysMailConfig <em>Sys Mail Config</em>}'.
@@ -827,6 +1141,167 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getMailInfo_Password();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig <em>Task Command Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Task Command Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig
+	 * @generated
+	 */
+	EClass getTaskCommandConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions <em>Task Command Definitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Task Command Definitions</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions()
+	 * @see #getTaskCommandConfig()
+	 * @generated
+	 */
+	EReference getTaskCommandConfig_TaskCommandDefinitions();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.Param <em>Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Param</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param
+	 * @generated
+	 */
+	EClass getParam();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.Param#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getKey()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.Param#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getValue()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Base Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BaseConfig
+	 * @generated
+	 */
+	EClass getBaseConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BaseConfig#getParams()
+	 * @see #getBaseConfig()
+	 * @generated
+	 */
+	EReference getBaseConfig_Params();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition <em>Task Command Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Task Command Definition</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition
+	 * @generated
+	 */
+	EClass getTaskCommandDefinition();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand <em>Command</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Command</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Command();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd <em>Cmd</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Cmd</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Cmd();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter <em>Filter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Filter</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Filter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled <em>Is Enabled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Enabled</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_IsEnabled();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EAttribute getTaskCommandDefinition_Type();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -890,6 +1365,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG = eINSTANCE.getFoxBPMConfig_ConnectionManagementConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Task Command Config</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOX_BPM_CONFIG__TASK_COMMAND_CONFIG = eINSTANCE.getFoxBPMConfig_TaskCommandConfig();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.SysMailConfigImpl <em>Sys Mail Config</em>}' class.
@@ -1118,6 +1601,134 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAIL_INFO__PASSWORD = eINSTANCE.getMailInfo_Password();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl <em>Task Command Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandConfig()
+		 * @generated
+		 */
+		EClass TASK_COMMAND_CONFIG = eINSTANCE.getTaskCommandConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Task Command Definitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = eINSTANCE.getTaskCommandConfig_TaskCommandDefinitions();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl <em>Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getParam()
+		 * @generated
+		 */
+		EClass PARAM = eINSTANCE.getParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__KEY = eINSTANCE.getParam_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__VALUE = eINSTANCE.getParam_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getBaseConfig()
+		 * @generated
+		 */
+		EClass BASE_CONFIG = eINSTANCE.getBaseConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASE_CONFIG__PARAMS = eINSTANCE.getBaseConfig_Params();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl <em>Task Command Definition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandDefinition()
+		 * @generated
+		 */
+		EClass TASK_COMMAND_DEFINITION = eINSTANCE.getTaskCommandDefinition();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__ID = eINSTANCE.getTaskCommandDefinition_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__NAME = eINSTANCE.getTaskCommandDefinition_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Command</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__COMMAND = eINSTANCE.getTaskCommandDefinition_Command();
+
+		/**
+		 * The meta object literal for the '<em><b>Cmd</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__CMD = eINSTANCE.getTaskCommandDefinition_Cmd();
+
+		/**
+		 * The meta object literal for the '<em><b>Filter</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__FILTER = eINSTANCE.getTaskCommandDefinition_Filter();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Enabled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__IS_ENABLED = eINSTANCE.getTaskCommandDefinition_IsEnabled();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_DEFINITION__TYPE = eINSTANCE.getTaskCommandDefinition_Type();
 
 	}
 

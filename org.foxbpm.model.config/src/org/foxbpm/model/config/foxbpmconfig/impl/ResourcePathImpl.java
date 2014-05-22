@@ -3,12 +3,8 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
@@ -31,7 +27,7 @@ import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
  *
  * @generated
  */
-public class ResourcePathImpl extends MinimalEObjectImpl.Container implements ResourcePath {
+public class ResourcePathImpl extends BaseConfigImpl implements ResourcePath {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

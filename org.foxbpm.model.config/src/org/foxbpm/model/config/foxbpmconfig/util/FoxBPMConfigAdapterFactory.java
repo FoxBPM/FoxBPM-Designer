@@ -96,6 +96,22 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createMailInfoAdapter();
 			}
 			@Override
+			public Adapter caseTaskCommandConfig(TaskCommandConfig object) {
+				return createTaskCommandConfigAdapter();
+			}
+			@Override
+			public Adapter caseParam(Param object) {
+				return createParamAdapter();
+			}
+			@Override
+			public Adapter caseBaseConfig(BaseConfig object) {
+				return createBaseConfigAdapter();
+			}
+			@Override
+			public Adapter caseTaskCommandDefinition(TaskCommandDefinition object) {
+				return createTaskCommandDefinitionAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -210,6 +226,62 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMailInfoAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig <em>Task Command Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig
+	 * @generated
+	 */
+	public Adapter createTaskCommandConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.Param <em>Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param
+	 * @generated
+	 */
+	public Adapter createParamAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BaseConfig
+	 * @generated
+	 */
+	public Adapter createBaseConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition <em>Task Command Definition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition
+	 * @generated
+	 */
+	public Adapter createTaskCommandDefinitionAdapter() {
 		return null;
 	}
 

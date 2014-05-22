@@ -2,7 +2,6 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +29,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ResourcePath extends EObject {
+public interface ResourcePath extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -3,12 +3,8 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.MailInfo;
 
@@ -30,7 +26,7 @@ import org.foxbpm.model.config.foxbpmconfig.MailInfo;
  *
  * @generated
  */
-public class MailInfoImpl extends MinimalEObjectImpl.Container implements MailInfo {
+public class MailInfoImpl extends BaseConfigImpl implements MailInfo {
 	/**
 	 * The default value of the '{@link #getMailAddress() <em>Mail Address</em>}' attribute.
 	 * <!-- begin-user-doc -->

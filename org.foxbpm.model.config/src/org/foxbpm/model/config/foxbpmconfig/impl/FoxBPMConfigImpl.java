@@ -4,18 +4,15 @@ package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
 import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
+import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,12 +25,13 @@ import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getResourcePathConfig <em>Resource Path Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getSysMailConfig <em>Sys Mail Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getConnectionManagementConfig <em>Connection Management Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getTaskCommandConfig <em>Task Command Config</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements FoxBPMConfig {
+public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 	/**
 	 * The default value of the '{@link #getVersion() <em>Version</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -83,6 +81,16 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 	 * @ordered
 	 */
 	protected ConnectionManagementConfig connectionManagementConfig;
+
+	/**
+	 * The cached value of the '{@link #getTaskCommandConfig() <em>Task Command Config</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTaskCommandConfig()
+	 * @generated
+	 * @ordered
+	 */
+	protected TaskCommandConfig taskCommandConfig;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -258,6 +266,49 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TaskCommandConfig getTaskCommandConfig() {
+		return taskCommandConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTaskCommandConfig(TaskCommandConfig newTaskCommandConfig, NotificationChain msgs) {
+		TaskCommandConfig oldTaskCommandConfig = taskCommandConfig;
+		taskCommandConfig = newTaskCommandConfig;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG, oldTaskCommandConfig, newTaskCommandConfig);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTaskCommandConfig(TaskCommandConfig newTaskCommandConfig) {
+		if (newTaskCommandConfig != taskCommandConfig) {
+			NotificationChain msgs = null;
+			if (taskCommandConfig != null)
+				msgs = ((InternalEObject)taskCommandConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG, null, msgs);
+			if (newTaskCommandConfig != null)
+				msgs = ((InternalEObject)newTaskCommandConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG, null, msgs);
+			msgs = basicSetTaskCommandConfig(newTaskCommandConfig, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG, newTaskCommandConfig, newTaskCommandConfig));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -267,6 +318,8 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 				return basicSetSysMailConfig(null, msgs);
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG:
 				return basicSetConnectionManagementConfig(null, msgs);
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
+				return basicSetTaskCommandConfig(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -287,6 +340,8 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 				return getSysMailConfig();
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG:
 				return getConnectionManagementConfig();
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
+				return getTaskCommandConfig();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -310,6 +365,9 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 				return;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG:
 				setConnectionManagementConfig((ConnectionManagementConfig)newValue);
+				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
+				setTaskCommandConfig((TaskCommandConfig)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -335,6 +393,9 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG:
 				setConnectionManagementConfig((ConnectionManagementConfig)null);
 				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
+				setTaskCommandConfig((TaskCommandConfig)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -355,6 +416,8 @@ public class FoxBPMConfigImpl extends MinimalEObjectImpl.Container implements Fo
 				return sysMailConfig != null;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG:
 				return connectionManagementConfig != null;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
+				return taskCommandConfig != null;
 		}
 		return super.eIsSet(featureID);
 	}

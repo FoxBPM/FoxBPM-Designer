@@ -63,6 +63,10 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG: return createResourcePathConfig();
 			case FoxBPMConfigPackage.RESOURCE_PATH: return createResourcePath();
 			case FoxBPMConfigPackage.MAIL_INFO: return createMailInfo();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG: return createTaskCommandConfig();
+			case FoxBPMConfigPackage.PARAM: return createParam();
+			case FoxBPMConfigPackage.BASE_CONFIG: return createBaseConfig();
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: return createTaskCommandDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -136,6 +140,46 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 	public MailInfo createMailInfo() {
 		MailInfoImpl mailInfo = new MailInfoImpl();
 		return mailInfo;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TaskCommandConfig createTaskCommandConfig() {
+		TaskCommandConfigImpl taskCommandConfig = new TaskCommandConfigImpl();
+		return taskCommandConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Param createParam() {
+		ParamImpl param = new ParamImpl();
+		return param;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseConfig createBaseConfig() {
+		BaseConfigImpl baseConfig = new BaseConfigImpl();
+		return baseConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TaskCommandDefinition createTaskCommandDefinition() {
+		TaskCommandDefinitionImpl taskCommandDefinition = new TaskCommandDefinitionImpl();
+		return taskCommandDefinition;
 	}
 
 	/**

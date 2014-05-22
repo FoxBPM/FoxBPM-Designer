@@ -4,8 +4,6 @@ package org.foxbpm.model.config.foxbpmconfig;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Sys Mail Config</b></em>'.
@@ -27,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model extendedMetaData="name='SysMailConfig'"
  * @generated
  */
-public interface SysMailConfig extends EObject {
+public interface SysMailConfig extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Mail Info</b></em>' containment reference list.
 	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.MailInfo}.

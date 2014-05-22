@@ -6,43 +6,44 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
-import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
-import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
+import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
+import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Resource Path Config</b></em>'.
+ * An implementation of the model object '<em><b>Task Command Config</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathConfigImpl#getResourcePath <em>Resource Path</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl#getTaskCommandDefinitions <em>Task Command Definitions</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePathConfig {
+public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommandConfig {
 	/**
-	 * The cached value of the '{@link #getResourcePath() <em>Resource Path</em>}' containment reference list.
+	 * The cached value of the '{@link #getTaskCommandDefinitions() <em>Task Command Definitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourcePath()
+	 * @see #getTaskCommandDefinitions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ResourcePath> resourcePath;
+	protected EList<TaskCommandDefinition> taskCommandDefinitions;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ResourcePathConfigImpl() {
+	protected TaskCommandConfigImpl() {
 		super();
 	}
 
@@ -53,7 +54,7 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMConfigPackage.Literals.RESOURCE_PATH_CONFIG;
+		return FoxBPMConfigPackage.Literals.TASK_COMMAND_CONFIG;
 	}
 
 	/**
@@ -61,11 +62,11 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ResourcePath> getResourcePath() {
-		if (resourcePath == null) {
-			resourcePath = new EObjectContainmentEList<ResourcePath>(ResourcePath.class, this, FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH);
+	public EList<TaskCommandDefinition> getTaskCommandDefinitions() {
+		if (taskCommandDefinitions == null) {
+			taskCommandDefinitions = new EObjectContainmentEList<TaskCommandDefinition>(TaskCommandDefinition.class, this, FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS);
 		}
-		return resourcePath;
+		return taskCommandDefinitions;
 	}
 
 	/**
@@ -76,8 +77,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return ((InternalEList<?>)getResourcePath()).basicRemove(otherEnd, msgs);
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
+				return ((InternalEList<?>)getTaskCommandDefinitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -90,8 +91,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return getResourcePath();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
+				return getTaskCommandDefinitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,9 +106,9 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				getResourcePath().clear();
-				getResourcePath().addAll((Collection<? extends ResourcePath>)newValue);
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
+				getTaskCommandDefinitions().clear();
+				getTaskCommandDefinitions().addAll((Collection<? extends TaskCommandDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -121,8 +122,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				getResourcePath().clear();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
+				getTaskCommandDefinitions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -136,10 +137,10 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return resourcePath != null && !resourcePath.isEmpty();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
+				return taskCommandDefinitions != null && !taskCommandDefinitions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ResourcePathConfigImpl
+} //TaskCommandConfigImpl

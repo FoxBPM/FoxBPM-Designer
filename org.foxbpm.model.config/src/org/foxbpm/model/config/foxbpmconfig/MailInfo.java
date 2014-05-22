@@ -2,7 +2,6 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model extendedMetaData="name='MailInfo'"
  * @generated
  */
-public interface MailInfo extends EObject {
+public interface MailInfo extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Mail Address</b></em>' attribute.
 	 * <!-- begin-user-doc -->
