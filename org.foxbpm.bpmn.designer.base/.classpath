@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/jackson-core-asl-1.9.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jackson-mapper-asl-1.9.9.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.restlet-2.0.15.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/ant-1.9.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-io-2.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/httpclient-4.3.3.jar"/>
