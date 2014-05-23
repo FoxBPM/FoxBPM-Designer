@@ -85,6 +85,42 @@ public interface FoxBPMConfigFactory extends EFactory {
 	MailInfo createMailInfo();
 
 	/**
+	 * Returns a new object of class '<em>Task Command Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Task Command Config</em>'.
+	 * @generated
+	 */
+	TaskCommandConfig createTaskCommandConfig();
+
+	/**
+	 * Returns a new object of class '<em>Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Param</em>'.
+	 * @generated
+	 */
+	Param createParam();
+
+	/**
+	 * Returns a new object of class '<em>Base Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Base Config</em>'.
+	 * @generated
+	 */
+	BaseConfig createBaseConfig();
+
+	/**
+	 * Returns a new object of class '<em>Task Command Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Task Command Definition</em>'.
+	 * @generated
+	 */
+	TaskCommandDefinition createTaskCommandDefinition();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

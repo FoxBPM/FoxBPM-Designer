@@ -4,8 +4,6 @@ package org.foxbpm.model.config.foxbpmconfig;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Resource Path Config</b></em>'.
@@ -26,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ResourcePathConfig extends EObject {
+public interface ResourcePathConfig extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Resource Path</b></em>' containment reference list.
 	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.ResourcePath}.

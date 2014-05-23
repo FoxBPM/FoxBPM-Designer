@@ -3,46 +3,52 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.foxbpm.model.config.foxbpmconfig.BaseConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
-import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
-import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
+import org.foxbpm.model.config.foxbpmconfig.Param;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Resource Path Config</b></em>'.
+ * An implementation of the model object '<em><b>Base Config</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ResourcePathConfigImpl#getResourcePath <em>Resource Path</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl#getParams <em>Params</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePathConfig {
+public class BaseConfigImpl extends MinimalEObjectImpl.Container implements BaseConfig {
 	/**
-	 * The cached value of the '{@link #getResourcePath() <em>Resource Path</em>}' containment reference list.
+	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResourcePath()
+	 * @see #getParams()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ResourcePath> resourcePath;
-
+	protected EList<Param> params;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ResourcePathConfigImpl() {
+	protected BaseConfigImpl() {
 		super();
 	}
 
@@ -53,7 +59,7 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMConfigPackage.Literals.RESOURCE_PATH_CONFIG;
+		return FoxBPMConfigPackage.Literals.BASE_CONFIG;
 	}
 
 	/**
@@ -61,11 +67,11 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ResourcePath> getResourcePath() {
-		if (resourcePath == null) {
-			resourcePath = new EObjectContainmentEList<ResourcePath>(ResourcePath.class, this, FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH);
+	public EList<Param> getParams() {
+		if (params == null) {
+			params = new EObjectContainmentEList<Param>(Param.class, this, FoxBPMConfigPackage.BASE_CONFIG__PARAMS);
 		}
-		return resourcePath;
+		return params;
 	}
 
 	/**
@@ -76,8 +82,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return ((InternalEList<?>)getResourcePath()).basicRemove(otherEnd, msgs);
+			case FoxBPMConfigPackage.BASE_CONFIG__PARAMS:
+				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -90,8 +96,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return getResourcePath();
+			case FoxBPMConfigPackage.BASE_CONFIG__PARAMS:
+				return getParams();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,9 +111,9 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				getResourcePath().clear();
-				getResourcePath().addAll((Collection<? extends ResourcePath>)newValue);
+			case FoxBPMConfigPackage.BASE_CONFIG__PARAMS:
+				getParams().clear();
+				getParams().addAll((Collection<? extends Param>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -121,8 +127,8 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				getResourcePath().clear();
+			case FoxBPMConfigPackage.BASE_CONFIG__PARAMS:
+				getParams().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -136,10 +142,10 @@ public class ResourcePathConfigImpl extends BaseConfigImpl implements ResourcePa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG__RESOURCE_PATH:
-				return resourcePath != null && !resourcePath.isEmpty();
+			case FoxBPMConfigPackage.BASE_CONFIG__PARAMS:
+				return params != null && !params.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //ResourcePathConfigImpl
+} //BaseConfigImpl

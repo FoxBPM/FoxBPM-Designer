@@ -69,42 +69,75 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG: {
 				FoxBPMConfig foxBPMConfig = (FoxBPMConfig)theEObject;
 				T result = caseFoxBPMConfig(foxBPMConfig);
+				if (result == null) result = caseBaseConfig(foxBPMConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.SYS_MAIL_CONFIG: {
 				SysMailConfig sysMailConfig = (SysMailConfig)theEObject;
 				T result = caseSysMailConfig(sysMailConfig);
+				if (result == null) result = caseBaseConfig(sysMailConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT_CONFIG: {
 				ConnectionManagementConfig connectionManagementConfig = (ConnectionManagementConfig)theEObject;
 				T result = caseConnectionManagementConfig(connectionManagementConfig);
+				if (result == null) result = caseBaseConfig(connectionManagementConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.CONNECTION_MANAGEMENT: {
 				ConnectionManagement connectionManagement = (ConnectionManagement)theEObject;
 				T result = caseConnectionManagement(connectionManagement);
+				if (result == null) result = caseBaseConfig(connectionManagement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.RESOURCE_PATH_CONFIG: {
 				ResourcePathConfig resourcePathConfig = (ResourcePathConfig)theEObject;
 				T result = caseResourcePathConfig(resourcePathConfig);
+				if (result == null) result = caseBaseConfig(resourcePathConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.RESOURCE_PATH: {
 				ResourcePath resourcePath = (ResourcePath)theEObject;
 				T result = caseResourcePath(resourcePath);
+				if (result == null) result = caseBaseConfig(resourcePath);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case FoxBPMConfigPackage.MAIL_INFO: {
 				MailInfo mailInfo = (MailInfo)theEObject;
 				T result = caseMailInfo(mailInfo);
+				if (result == null) result = caseBaseConfig(mailInfo);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG: {
+				TaskCommandConfig taskCommandConfig = (TaskCommandConfig)theEObject;
+				T result = caseTaskCommandConfig(taskCommandConfig);
+				if (result == null) result = caseBaseConfig(taskCommandConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.PARAM: {
+				Param param = (Param)theEObject;
+				T result = caseParam(param);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.BASE_CONFIG: {
+				BaseConfig baseConfig = (BaseConfig)theEObject;
+				T result = caseBaseConfig(baseConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: {
+				TaskCommandDefinition taskCommandDefinition = (TaskCommandDefinition)theEObject;
+				T result = caseTaskCommandDefinition(taskCommandDefinition);
+				if (result == null) result = caseBaseConfig(taskCommandDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -214,6 +247,66 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMailInfo(MailInfo object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Task Command Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Task Command Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTaskCommandConfig(TaskCommandConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Param</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParam(Param object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Base Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Base Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBaseConfig(BaseConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Task Command Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Task Command Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTaskCommandDefinition(TaskCommandDefinition object) {
 		return null;
 	}
 

@@ -3,21 +3,14 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.MailInfo;
 import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
@@ -36,7 +29,7 @@ import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
  *
  * @generated
  */
-public class SysMailConfigImpl extends MinimalEObjectImpl.Container implements SysMailConfig {
+public class SysMailConfigImpl extends BaseConfigImpl implements SysMailConfig {
 	/**
 	 * The cached value of the '{@link #getMailInfo() <em>Mail Info</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

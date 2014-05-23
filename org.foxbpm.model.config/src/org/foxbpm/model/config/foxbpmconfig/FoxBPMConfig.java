@@ -2,7 +2,6 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getResourcePathConfig <em>Resource Path Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getSysMailConfig <em>Sys Mail Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getConnectionManagementConfig <em>Connection Management Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getTaskCommandConfig <em>Task Command Config</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface FoxBPMConfig extends EObject {
+public interface FoxBPMConfig extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Version</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -128,5 +128,32 @@ public interface FoxBPMConfig extends EObject {
 	 * @generated
 	 */
 	void setConnectionManagementConfig(ConnectionManagementConfig value);
+
+	/**
+	 * Returns the value of the '<em><b>Task Command Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Task Command Config</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Task Command Config</em>' containment reference.
+	 * @see #setTaskCommandConfig(TaskCommandConfig)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getFoxBPMConfig_TaskCommandConfig()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
+	 * @generated
+	 */
+	TaskCommandConfig getTaskCommandConfig();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getTaskCommandConfig <em>Task Command Config</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Task Command Config</em>' containment reference.
+	 * @see #getTaskCommandConfig()
+	 * @generated
+	 */
+	void setTaskCommandConfig(TaskCommandConfig value);
 
 } // FoxBPMConfig
