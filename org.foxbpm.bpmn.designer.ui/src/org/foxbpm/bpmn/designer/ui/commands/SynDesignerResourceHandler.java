@@ -48,12 +48,19 @@ public class SynDesignerResourceHandler implements IHandler {
 						@Override
 						public void run() {
 							MessageDialog.openInformation(null, "提示", "同步设计器资源失败，原因是\n" + e.getMessage());
-							return;
 						}
 					});
 //					e.printStackTrace();
 				}
 				monitor.worked(1);
+				
+				Display.getDefault().syncExec(new Runnable() {
+					
+					@Override
+					public void run() {
+						MessageDialog.openInformation(null, "提示", "同步设计器资源成功");
+					}
+				});
 				return Status.OK_STATUS;
 			}
 		};
@@ -61,7 +68,6 @@ public class SynDesignerResourceHandler implements IHandler {
 		// Start the Job
 		job.schedule();
 		
-		MessageDialog.openInformation(null, "提示", "同步设计器资源成功");
 		return null;
 	}
 
