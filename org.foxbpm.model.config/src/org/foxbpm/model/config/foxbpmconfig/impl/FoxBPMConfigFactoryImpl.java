@@ -66,7 +66,7 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG: return createTaskCommandConfig();
 			case FoxBPMConfigPackage.PARAM: return createParam();
 			case FoxBPMConfigPackage.BASE_CONFIG: return createBaseConfig();
-			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION: return createTaskCommandModelDefinition();
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: return createTaskCommandDefinition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -177,9 +177,9 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TaskCommandModelDefinition createTaskCommandModelDefinition() {
-		TaskCommandModelDefinitionImpl taskCommandModelDefinition = new TaskCommandModelDefinitionImpl();
-		return taskCommandModelDefinition;
+	public TaskCommandDefinition createTaskCommandDefinition() {
+		TaskCommandDefinitionImpl taskCommandDefinition = new TaskCommandDefinitionImpl();
+		return taskCommandDefinition;
 	}
 
 	/**

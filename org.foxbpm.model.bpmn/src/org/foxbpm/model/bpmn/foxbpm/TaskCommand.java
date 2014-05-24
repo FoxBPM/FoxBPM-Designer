@@ -6,7 +6,7 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Task Command Model</b></em>'.
+ * A representation of the model object '<em><b>Task Command</b></em>'.
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -18,23 +18,23 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getCommandType <em>Command Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getOrderId <em>Order Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsVerification <em>Is Verification</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSaveData <em>Is Save Data</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSimulationRun <em>Is Simulation Run</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getParameterExpression <em>Parameter Expression</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getCommandType <em>Command Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getOrderId <em>Order Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification <em>Is Verification</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData <em>Is Save Data</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun <em>Is Simulation Run</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getParameterExpression <em>Parameter Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel()
- * @model extendedMetaData="name='TaskCommandModel'"
+ * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand()
+ * @model extendedMetaData="name='TaskCommand'"
  * @generated
  */
-public interface TaskCommandModel extends EObject {
+public interface TaskCommand extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -45,14 +45,14 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_Id()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_Id()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 * @generated
 	 */
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -71,14 +71,14 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_Name()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_Name()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -97,14 +97,14 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Command Type</em>' attribute.
 	 * @see #setCommandType(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_CommandType()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_CommandType()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 * @generated
 	 */
 	String getCommandType();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getCommandType <em>Command Type</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getCommandType <em>Command Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Command Type</em>' attribute.
@@ -123,7 +123,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(Expression)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_Expression()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_Expression()
 	 * @model containment="true"
 	 *        extendedMetaData="namespace='##targetNamespace' kind='element'"
 	 * @generated
@@ -131,7 +131,7 @@ public interface TaskCommandModel extends EObject {
 	Expression getExpression();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getExpression <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Expression</em>' containment reference.
@@ -150,7 +150,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Order Id</em>' attribute.
 	 * @see #setOrderId(int)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_OrderId()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_OrderId()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.Int"
 	 *        extendedMetaData="namespace='' kind='attribute'"
 	 * @generated
@@ -158,7 +158,7 @@ public interface TaskCommandModel extends EObject {
 	int getOrderId();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getOrderId <em>Order Id</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getOrderId <em>Order Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Order Id</em>' attribute.
@@ -176,7 +176,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Verification</em>' attribute.
 	 * @see #setIsVerification(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_IsVerification()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_IsVerification()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -184,7 +184,7 @@ public interface TaskCommandModel extends EObject {
 	String getIsVerification();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsVerification <em>Is Verification</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification <em>Is Verification</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Verification</em>' attribute.
@@ -202,7 +202,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Save Data</em>' attribute.
 	 * @see #setIsSaveData(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_IsSaveData()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_IsSaveData()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -210,7 +210,7 @@ public interface TaskCommandModel extends EObject {
 	String getIsSaveData();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSaveData <em>Is Save Data</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData <em>Is Save Data</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Save Data</em>' attribute.
@@ -228,7 +228,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Simulation Run</em>' attribute.
 	 * @see #setIsSimulationRun(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_IsSimulationRun()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_IsSimulationRun()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -236,7 +236,7 @@ public interface TaskCommandModel extends EObject {
 	String getIsSimulationRun();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSimulationRun <em>Is Simulation Run</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun <em>Is Simulation Run</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Simulation Run</em>' attribute.
@@ -255,7 +255,7 @@ public interface TaskCommandModel extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Expression</em>' containment reference.
 	 * @see #setParameterExpression(Expression)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommandModel_ParameterExpression()
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand_ParameterExpression()
 	 * @model containment="true"
 	 *        extendedMetaData="namespace='##targetNamespace' kind='element'"
 	 * @generated
@@ -263,7 +263,7 @@ public interface TaskCommandModel extends EObject {
 	Expression getParameterExpression();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getParameterExpression <em>Parameter Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getParameterExpression <em>Parameter Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Parameter Expression</em>' containment reference.
@@ -272,4 +272,4 @@ public interface TaskCommandModel extends EObject {
 	 */
 	void setParameterExpression(Expression value);
 
-} // TaskCommandModel
+} // TaskCommand

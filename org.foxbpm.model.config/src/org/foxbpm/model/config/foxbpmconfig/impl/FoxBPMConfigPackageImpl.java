@@ -19,7 +19,7 @@ import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
 import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
-import org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition;
+import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -103,7 +103,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass taskCommandModelDefinitionEClass = null;
+	private EClass taskCommandDefinitionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -477,7 +477,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskCommandConfig_TaskCommandModelDefinitions() {
+	public EReference getTaskCommandConfig_TaskCommandDefinitions() {
 		return (EReference)taskCommandConfigEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -531,8 +531,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTaskCommandModelDefinition() {
-		return taskCommandModelDefinitionEClass;
+	public EClass getTaskCommandDefinition() {
+		return taskCommandDefinitionEClass;
 	}
 
 	/**
@@ -540,8 +540,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Id() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(0);
+	public EAttribute getTaskCommandDefinition_Id() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -549,8 +549,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Name() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(1);
+	public EAttribute getTaskCommandDefinition_Name() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -558,8 +558,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Command() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(2);
+	public EAttribute getTaskCommandDefinition_Command() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -567,8 +567,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Cmd() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(3);
+	public EAttribute getTaskCommandDefinition_Cmd() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -576,8 +576,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Filter() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(4);
+	public EAttribute getTaskCommandDefinition_Filter() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -585,8 +585,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_IsEnabled() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(5);
+	public EAttribute getTaskCommandDefinition_IsEnabled() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -594,8 +594,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommandModelDefinition_Type() {
-		return (EAttribute)taskCommandModelDefinitionEClass.getEStructuralFeatures().get(6);
+	public EAttribute getTaskCommandDefinition_Type() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -667,7 +667,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(mailInfoEClass, MAIL_INFO__PASSWORD);
 
 		taskCommandConfigEClass = createEClass(TASK_COMMAND_CONFIG);
-		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_MODEL_DEFINITIONS);
+		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS);
 
 		paramEClass = createEClass(PARAM);
 		createEAttribute(paramEClass, PARAM__KEY);
@@ -676,14 +676,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		baseConfigEClass = createEClass(BASE_CONFIG);
 		createEReference(baseConfigEClass, BASE_CONFIG__PARAMS);
 
-		taskCommandModelDefinitionEClass = createEClass(TASK_COMMAND_MODEL_DEFINITION);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__ID);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__NAME);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__COMMAND);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__CMD);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__FILTER);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED);
-		createEAttribute(taskCommandModelDefinitionEClass, TASK_COMMAND_MODEL_DEFINITION__TYPE);
+		taskCommandDefinitionEClass = createEClass(TASK_COMMAND_DEFINITION);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__ID);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__NAME);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__COMMAND);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__CMD);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__FILTER);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__IS_ENABLED);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__TYPE);
 	}
 
 	/**
@@ -722,7 +722,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		resourcePathEClass.getESuperTypes().add(this.getBaseConfig());
 		mailInfoEClass.getESuperTypes().add(this.getBaseConfig());
 		taskCommandConfigEClass.getESuperTypes().add(this.getBaseConfig());
-		taskCommandModelDefinitionEClass.getESuperTypes().add(this.getBaseConfig());
+		taskCommandDefinitionEClass.getESuperTypes().add(this.getBaseConfig());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(foxBPMConfigEClass, FoxBPMConfig.class, "FoxBPMConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -766,7 +766,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getMailInfo_Password(), ecorePackage.getEString(), "password", null, 1, 1, MailInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskCommandConfigEClass, TaskCommandConfig.class, "TaskCommandConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTaskCommandConfig_TaskCommandModelDefinitions(), this.getTaskCommandModelDefinition(), null, "taskCommandModelDefinitions", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTaskCommandConfig_TaskCommandDefinitions(), this.getTaskCommandDefinition(), null, "taskCommandDefinitions", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParam_Key(), ecorePackage.getEString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -775,14 +775,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEClass(baseConfigEClass, BaseConfig.class, "BaseConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBaseConfig_Params(), this.getParam(), null, "params", null, 0, -1, BaseConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(taskCommandModelDefinitionEClass, TaskCommandModelDefinition.class, "TaskCommandModelDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getTaskCommandModelDefinition_Id(), ecorePackage.getEString(), "id", null, 1, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_Command(), ecorePackage.getEString(), "command", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_Cmd(), ecorePackage.getEString(), "cmd", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_Filter(), ecorePackage.getEString(), "filter", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_IsEnabled(), ecorePackage.getEString(), "isEnabled", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommandModelDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TaskCommandModelDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(taskCommandDefinitionEClass, TaskCommandDefinition.class, "TaskCommandDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getTaskCommandDefinition_Id(), ecorePackage.getEString(), "id", null, 1, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Name(), ecorePackage.getEString(), "name", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Command(), ecorePackage.getEString(), "command", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Cmd(), ecorePackage.getEString(), "cmd", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Filter(), ecorePackage.getEString(), "filter", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_IsEnabled(), ecorePackage.getEString(), "isEnabled", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -960,7 +960,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "kind", "attribute"
 		   });				
 		addAnnotation
-		  (getTaskCommandConfig_TaskCommandModelDefinitions(), 
+		  (getTaskCommandConfig_TaskCommandDefinitions(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
@@ -986,49 +986,49 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "kind", "element"
 		   });		
 		addAnnotation
-		  (taskCommandModelDefinitionEClass, 
+		  (taskCommandDefinitionEClass, 
 		   source, 
 		   new String[] {
 			 "name", "TaskCommandDefinition"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Id(), 
+		  (getTaskCommandDefinition_Id(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Name(), 
+		  (getTaskCommandDefinition_Name(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Command(), 
+		  (getTaskCommandDefinition_Command(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Cmd(), 
+		  (getTaskCommandDefinition_Cmd(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Filter(), 
+		  (getTaskCommandDefinition_Filter(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_IsEnabled(), 
+		  (getTaskCommandDefinition_IsEnabled(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getTaskCommandModelDefinition_Type(), 
+		  (getTaskCommandDefinition_Type(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"

@@ -108,13 +108,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__TASK_SUBJECT = 3;
 
 	/**
-	 * The feature id for the '<em><b>Task Command Model</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Task Commands</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__TASK_COMMAND_MODEL = 4;
+	int DOCUMENT_ROOT__TASK_COMMANDS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -641,14 +641,14 @@ public interface FoxBPMPackage extends EPackage {
 	int TASK_SUBJECT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl <em>Task Command Model</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl <em>Task Command</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl
-	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskCommand()
 	 * @generated
 	 */
-	int TASK_COMMAND_MODEL = 3;
+	int TASK_COMMAND = 3;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -657,7 +657,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__ID = 0;
+	int TASK_COMMAND__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -666,7 +666,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__NAME = 1;
+	int TASK_COMMAND__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Command Type</b></em>' attribute.
@@ -675,7 +675,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__COMMAND_TYPE = 2;
+	int TASK_COMMAND__COMMAND_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -684,7 +684,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__EXPRESSION = 3;
+	int TASK_COMMAND__EXPRESSION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Order Id</b></em>' attribute.
@@ -693,7 +693,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__ORDER_ID = 4;
+	int TASK_COMMAND__ORDER_ID = 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Verification</b></em>' attribute.
@@ -702,7 +702,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__IS_VERIFICATION = 5;
+	int TASK_COMMAND__IS_VERIFICATION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Is Save Data</b></em>' attribute.
@@ -711,7 +711,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__IS_SAVE_DATA = 6;
+	int TASK_COMMAND__IS_SAVE_DATA = 6;
 
 	/**
 	 * The feature id for the '<em><b>Is Simulation Run</b></em>' attribute.
@@ -720,7 +720,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__IS_SIMULATION_RUN = 7;
+	int TASK_COMMAND__IS_SIMULATION_RUN = 7;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Expression</b></em>' containment reference.
@@ -729,25 +729,25 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL__PARAMETER_EXPRESSION = 8;
+	int TASK_COMMAND__PARAMETER_EXPRESSION = 8;
 
 	/**
-	 * The number of structural features of the '<em>Task Command Model</em>' class.
+	 * The number of structural features of the '<em>Task Command</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_FEATURE_COUNT = 9;
+	int TASK_COMMAND_FEATURE_COUNT = 9;
 
 	/**
-	 * The number of operations of the '<em>Task Command Model</em>' class.
+	 * The number of operations of the '<em>Task Command</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_OPERATION_COUNT = 0;
+	int TASK_COMMAND_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ResourceFilterImpl <em>Resource Filter</em>}' class.
@@ -2538,15 +2538,15 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getDocumentRoot_TaskSubject();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommandModel <em>Task Command Model</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommands <em>Task Commands</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Task Command Model</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommandModel()
+	 * @return the meta object for the containment reference list '<em>Task Commands</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommands()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EReference getDocumentRoot_TaskCommandModel();
+	EReference getDocumentRoot_TaskCommands();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getResourceType <em>Resource Type</em>}'.
@@ -3119,113 +3119,113 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getTaskSubject_Name();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel <em>Task Command Model</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand <em>Task Command</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Task Command Model</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel
+	 * @return the meta object for class '<em>Task Command</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand
 	 * @generated
 	 */
-	EClass getTaskCommandModel();
+	EClass getTaskCommand();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getId()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getId()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_Id();
+	EAttribute getTaskCommand_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getName()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getName()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_Name();
+	EAttribute getTaskCommand_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getCommandType <em>Command Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getCommandType <em>Command Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Command Type</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getCommandType()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getCommandType()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_CommandType();
+	EAttribute getTaskCommand_CommandType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getExpression()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getExpression()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EReference getTaskCommandModel_Expression();
+	EReference getTaskCommand_Expression();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getOrderId <em>Order Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getOrderId <em>Order Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Order Id</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getOrderId()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getOrderId()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_OrderId();
+	EAttribute getTaskCommand_OrderId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsVerification <em>Is Verification</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification <em>Is Verification</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Verification</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsVerification()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_IsVerification();
+	EAttribute getTaskCommand_IsVerification();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSaveData <em>Is Save Data</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData <em>Is Save Data</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Save Data</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSaveData()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_IsSaveData();
+	EAttribute getTaskCommand_IsSaveData();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSimulationRun <em>Is Simulation Run</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun <em>Is Simulation Run</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Simulation Run</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getIsSimulationRun()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModel_IsSimulationRun();
+	EAttribute getTaskCommand_IsSimulationRun();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getParameterExpression <em>Parameter Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getParameterExpression <em>Parameter Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Parameter Expression</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel#getParameterExpression()
-	 * @see #getTaskCommandModel()
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getParameterExpression()
+	 * @see #getTaskCommand()
 	 * @generated
 	 */
-	EReference getTaskCommandModel_ParameterExpression();
+	EReference getTaskCommand_ParameterExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.ResourceFilter <em>Resource Filter</em>}'.
@@ -4592,12 +4592,12 @@ public interface FoxBPMPackage extends EPackage {
 		EReference DOCUMENT_ROOT__TASK_SUBJECT = eINSTANCE.getDocumentRoot_TaskSubject();
 
 		/**
-		 * The meta object literal for the '<em><b>Task Command Model</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Task Commands</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT_ROOT__TASK_COMMAND_MODEL = eINSTANCE.getDocumentRoot_TaskCommandModel();
+		EReference DOCUMENT_ROOT__TASK_COMMANDS = eINSTANCE.getDocumentRoot_TaskCommands();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
@@ -5020,14 +5020,14 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute TASK_SUBJECT__NAME = eINSTANCE.getTaskSubject_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl <em>Task Command Model</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl <em>Task Command</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl
-		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskCommandModel()
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskCommand()
 		 * @generated
 		 */
-		EClass TASK_COMMAND_MODEL = eINSTANCE.getTaskCommandModel();
+		EClass TASK_COMMAND = eINSTANCE.getTaskCommand();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -5035,7 +5035,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__ID = eINSTANCE.getTaskCommandModel_Id();
+		EAttribute TASK_COMMAND__ID = eINSTANCE.getTaskCommand_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -5043,7 +5043,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__NAME = eINSTANCE.getTaskCommandModel_Name();
+		EAttribute TASK_COMMAND__NAME = eINSTANCE.getTaskCommand_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Command Type</b></em>' attribute feature.
@@ -5051,7 +5051,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__COMMAND_TYPE = eINSTANCE.getTaskCommandModel_CommandType();
+		EAttribute TASK_COMMAND__COMMAND_TYPE = eINSTANCE.getTaskCommand_CommandType();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -5059,7 +5059,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TASK_COMMAND_MODEL__EXPRESSION = eINSTANCE.getTaskCommandModel_Expression();
+		EReference TASK_COMMAND__EXPRESSION = eINSTANCE.getTaskCommand_Expression();
 
 		/**
 		 * The meta object literal for the '<em><b>Order Id</b></em>' attribute feature.
@@ -5067,7 +5067,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__ORDER_ID = eINSTANCE.getTaskCommandModel_OrderId();
+		EAttribute TASK_COMMAND__ORDER_ID = eINSTANCE.getTaskCommand_OrderId();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Verification</b></em>' attribute feature.
@@ -5075,7 +5075,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__IS_VERIFICATION = eINSTANCE.getTaskCommandModel_IsVerification();
+		EAttribute TASK_COMMAND__IS_VERIFICATION = eINSTANCE.getTaskCommand_IsVerification();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Save Data</b></em>' attribute feature.
@@ -5083,7 +5083,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__IS_SAVE_DATA = eINSTANCE.getTaskCommandModel_IsSaveData();
+		EAttribute TASK_COMMAND__IS_SAVE_DATA = eINSTANCE.getTaskCommand_IsSaveData();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Simulation Run</b></em>' attribute feature.
@@ -5091,7 +5091,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL__IS_SIMULATION_RUN = eINSTANCE.getTaskCommandModel_IsSimulationRun();
+		EAttribute TASK_COMMAND__IS_SIMULATION_RUN = eINSTANCE.getTaskCommand_IsSimulationRun();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Expression</b></em>' containment reference feature.
@@ -5099,7 +5099,7 @@ public interface FoxBPMPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TASK_COMMAND_MODEL__PARAMETER_EXPRESSION = eINSTANCE.getTaskCommandModel_ParameterExpression();
+		EReference TASK_COMMAND__PARAMETER_EXPRESSION = eINSTANCE.getTaskCommand_ParameterExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ResourceFilterImpl <em>Resource Filter</em>}' class.

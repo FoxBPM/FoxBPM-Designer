@@ -60,7 +60,7 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 			case FoxBPMPackage.DOCUMENT_ROOT: return createDocumentRoot();
 			case FoxBPMPackage.EXPRESSION: return createExpression();
 			case FoxBPMPackage.TASK_SUBJECT: return createTaskSubject();
-			case FoxBPMPackage.TASK_COMMAND_MODEL: return createTaskCommandModel();
+			case FoxBPMPackage.TASK_COMMAND: return createTaskCommand();
 			case FoxBPMPackage.RESOURCE_FILTER: return createResourceFilter();
 			case FoxBPMPackage.DATA_VARIABLE: return createDataVariable();
 			case FoxBPMPackage.DOCUMENTATION: return createDocumentation();
@@ -162,9 +162,9 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TaskCommandModel createTaskCommandModel() {
-		TaskCommandModelImpl taskCommandModel = new TaskCommandModelImpl();
-		return taskCommandModel;
+	public TaskCommand createTaskCommand() {
+		TaskCommandImpl taskCommand = new TaskCommandImpl();
+		return taskCommand;
 	}
 
 	/**

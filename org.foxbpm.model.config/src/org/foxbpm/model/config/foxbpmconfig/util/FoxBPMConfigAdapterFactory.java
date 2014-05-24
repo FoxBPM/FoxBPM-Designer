@@ -108,8 +108,8 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createBaseConfigAdapter();
 			}
 			@Override
-			public Adapter caseTaskCommandModelDefinition(TaskCommandModelDefinition object) {
-				return createTaskCommandModelDefinitionAdapter();
+			public Adapter caseTaskCommandDefinition(TaskCommandDefinition object) {
+				return createTaskCommandDefinitionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -272,16 +272,16 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition <em>Task Command Model Definition</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition <em>Task Command Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition
 	 * @generated
 	 */
-	public Adapter createTaskCommandModelDefinitionAdapter() {
+	public Adapter createTaskCommandDefinitionAdapter() {
 		return null;
 	}
 

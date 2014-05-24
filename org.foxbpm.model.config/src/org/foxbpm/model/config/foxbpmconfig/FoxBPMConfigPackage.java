@@ -610,13 +610,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
 
 	/**
-	 * The feature id for the '<em><b>Task Command Model Definitions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Task Command Definitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_CONFIG__TASK_COMMAND_MODEL_DEFINITIONS = BASE_CONFIG_FEATURE_COUNT + 0;
+	int TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Task Command Config</em>' class.
@@ -684,14 +684,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl <em>Task Command Model Definition</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl <em>Task Command Definition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl
-	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandDefinition()
 	 * @generated
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION = 10;
+	int TASK_COMMAND_DEFINITION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
@@ -700,7 +700,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__PARAMS = BASE_CONFIG__PARAMS;
+	int TASK_COMMAND_DEFINITION__PARAMS = BASE_CONFIG__PARAMS;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -709,7 +709,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__ID = BASE_CONFIG_FEATURE_COUNT + 0;
+	int TASK_COMMAND_DEFINITION__ID = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -718,7 +718,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
+	int TASK_COMMAND_DEFINITION__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Command</b></em>' attribute.
@@ -727,7 +727,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__COMMAND = BASE_CONFIG_FEATURE_COUNT + 2;
+	int TASK_COMMAND_DEFINITION__COMMAND = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Cmd</b></em>' attribute.
@@ -736,7 +736,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__CMD = BASE_CONFIG_FEATURE_COUNT + 3;
+	int TASK_COMMAND_DEFINITION__CMD = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Filter</b></em>' attribute.
@@ -745,7 +745,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__FILTER = BASE_CONFIG_FEATURE_COUNT + 4;
+	int TASK_COMMAND_DEFINITION__FILTER = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Enabled</b></em>' attribute.
@@ -754,7 +754,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED = BASE_CONFIG_FEATURE_COUNT + 5;
+	int TASK_COMMAND_DEFINITION__IS_ENABLED = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -763,25 +763,25 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
+	int TASK_COMMAND_DEFINITION__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
-	 * The number of structural features of the '<em>Task Command Model Definition</em>' class.
+	 * The number of structural features of the '<em>Task Command Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
+	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
 
 	/**
-	 * The number of operations of the '<em>Task Command Model Definition</em>' class.
+	 * The number of operations of the '<em>Task Command Definition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_MODEL_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
@@ -1150,15 +1150,15 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EClass getTaskCommandConfig();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandModelDefinitions <em>Task Command Model Definitions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions <em>Task Command Definitions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Task Command Model Definitions</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandModelDefinitions()
+	 * @return the meta object for the containment reference list '<em>Task Command Definitions</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions()
 	 * @see #getTaskCommandConfig()
 	 * @generated
 	 */
-	EReference getTaskCommandConfig_TaskCommandModelDefinitions();
+	EReference getTaskCommandConfig_TaskCommandDefinitions();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.Param <em>Param</em>}'.
@@ -1214,91 +1214,91 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EReference getBaseConfig_Params();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition <em>Task Command Model Definition</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition <em>Task Command Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Task Command Model Definition</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition
+	 * @return the meta object for class '<em>Task Command Definition</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition
 	 * @generated
 	 */
-	EClass getTaskCommandModelDefinition();
+	EClass getTaskCommandDefinition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getId()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Id();
+	EAttribute getTaskCommandDefinition_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getName()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Name();
+	EAttribute getTaskCommandDefinition_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCommand <em>Command</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand <em>Command</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Command</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCommand()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Command();
+	EAttribute getTaskCommandDefinition_Command();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCmd <em>Cmd</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd <em>Cmd</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Cmd</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCmd()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Cmd();
+	EAttribute getTaskCommandDefinition_Cmd();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getFilter <em>Filter</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter <em>Filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Filter</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getFilter()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Filter();
+	EAttribute getTaskCommandDefinition_Filter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getIsEnabled <em>Is Enabled</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled <em>Is Enabled</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Is Enabled</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getIsEnabled()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_IsEnabled();
+	EAttribute getTaskCommandDefinition_IsEnabled();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getType()
-	 * @see #getTaskCommandModelDefinition()
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 */
-	EAttribute getTaskCommandModelDefinition_Type();
+	EAttribute getTaskCommandDefinition_Type();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1612,12 +1612,12 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EClass TASK_COMMAND_CONFIG = eINSTANCE.getTaskCommandConfig();
 
 		/**
-		 * The meta object literal for the '<em><b>Task Command Model Definitions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Task Command Definitions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_MODEL_DEFINITIONS = eINSTANCE.getTaskCommandConfig_TaskCommandModelDefinitions();
+		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = eINSTANCE.getTaskCommandConfig_TaskCommandDefinitions();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl <em>Param</em>}' class.
@@ -1664,14 +1664,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EReference BASE_CONFIG__PARAMS = eINSTANCE.getBaseConfig_Params();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl <em>Task Command Model Definition</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl <em>Task Command Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl
-		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandModelDefinition()
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getTaskCommandDefinition()
 		 * @generated
 		 */
-		EClass TASK_COMMAND_MODEL_DEFINITION = eINSTANCE.getTaskCommandModelDefinition();
+		EClass TASK_COMMAND_DEFINITION = eINSTANCE.getTaskCommandDefinition();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -1679,7 +1679,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__ID = eINSTANCE.getTaskCommandModelDefinition_Id();
+		EAttribute TASK_COMMAND_DEFINITION__ID = eINSTANCE.getTaskCommandDefinition_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1687,7 +1687,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__NAME = eINSTANCE.getTaskCommandModelDefinition_Name();
+		EAttribute TASK_COMMAND_DEFINITION__NAME = eINSTANCE.getTaskCommandDefinition_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Command</b></em>' attribute feature.
@@ -1695,7 +1695,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__COMMAND = eINSTANCE.getTaskCommandModelDefinition_Command();
+		EAttribute TASK_COMMAND_DEFINITION__COMMAND = eINSTANCE.getTaskCommandDefinition_Command();
 
 		/**
 		 * The meta object literal for the '<em><b>Cmd</b></em>' attribute feature.
@@ -1703,7 +1703,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__CMD = eINSTANCE.getTaskCommandModelDefinition_Cmd();
+		EAttribute TASK_COMMAND_DEFINITION__CMD = eINSTANCE.getTaskCommandDefinition_Cmd();
 
 		/**
 		 * The meta object literal for the '<em><b>Filter</b></em>' attribute feature.
@@ -1711,7 +1711,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__FILTER = eINSTANCE.getTaskCommandModelDefinition_Filter();
+		EAttribute TASK_COMMAND_DEFINITION__FILTER = eINSTANCE.getTaskCommandDefinition_Filter();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Enabled</b></em>' attribute feature.
@@ -1719,7 +1719,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED = eINSTANCE.getTaskCommandModelDefinition_IsEnabled();
+		EAttribute TASK_COMMAND_DEFINITION__IS_ENABLED = eINSTANCE.getTaskCommandDefinition_IsEnabled();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -1727,7 +1727,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TASK_COMMAND_MODEL_DEFINITION__TYPE = eINSTANCE.getTaskCommandModelDefinition_Type();
+		EAttribute TASK_COMMAND_DEFINITION__TYPE = eINSTANCE.getTaskCommandDefinition_Type();
 
 	}
 

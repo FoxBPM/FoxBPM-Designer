@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandModelDefinitions <em>Task Command Model Definitions</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions <em>Task Command Definitions</em>}</li>
  * </ul>
  * </p>
  *
@@ -28,19 +28,19 @@ import org.eclipse.emf.common.util.EList;
 public interface TaskCommandConfig extends BaseConfig {
 
 	/**
-	 * Returns the value of the '<em><b>Task Command Model Definitions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition}.
+	 * Returns the value of the '<em><b>Task Command Definitions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Task Command Model Definitions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Task Command Definitions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Task Command Model Definitions</em>' containment reference list.
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandConfig_TaskCommandModelDefinitions()
+	 * @return the value of the '<em>Task Command Definitions</em>' containment reference list.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandConfig_TaskCommandDefinitions()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element' name='taskCommandDefinitions'"
 	 * @generated
 	 */
-	EList<TaskCommandModelDefinition> getTaskCommandModelDefinitions();
+	EList<TaskCommandDefinition> getTaskCommandDefinitions();
 } // TaskCommandConfig

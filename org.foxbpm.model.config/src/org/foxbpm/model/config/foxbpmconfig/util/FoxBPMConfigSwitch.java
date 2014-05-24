@@ -134,10 +134,10 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION: {
-				TaskCommandModelDefinition taskCommandModelDefinition = (TaskCommandModelDefinition)theEObject;
-				T result = caseTaskCommandModelDefinition(taskCommandModelDefinition);
-				if (result == null) result = caseBaseConfig(taskCommandModelDefinition);
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: {
+				TaskCommandDefinition taskCommandDefinition = (TaskCommandDefinition)theEObject;
+				T result = caseTaskCommandDefinition(taskCommandDefinition);
+				if (result == null) result = caseBaseConfig(taskCommandDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -296,17 +296,17 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Task Command Model Definition</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Task Command Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Task Command Model Definition</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Task Command Definition</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTaskCommandModelDefinition(TaskCommandModelDefinition object) {
+	public T caseTaskCommandDefinition(TaskCommandDefinition object) {
 		return null;
 	}
 
