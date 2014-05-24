@@ -17,6 +17,14 @@ public class FoxBPMDesignerUtil {
 	public static String getPropertiesPath() {
 		return Platform.getInstallLocation().getURL().getPath() + "path.properties";
 	}
+	
+	/**
+	 * 取flowresource文件夹路径
+	 * @return
+	 */
+	public static String getFlowResourcePath() {
+		return Platform.getInstallLocation().getURL().getPath() + "flowresource";
+	}
 
 	/**
 	 * 读取properties文件返回map

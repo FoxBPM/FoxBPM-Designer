@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.bpmn.designer.ui.tree.EntityElement;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.model.config.connector.Checkbox;
@@ -80,7 +79,11 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getConnectorPath() {
-		return PropertiesUtil.readValue(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath");
+		if(FoxBPMDesignerUtil.getServicePath().equals("path")) {
+			MessageDialog.openInformation(null, "提示", "请先在设计器根目录的配置文件(path.properties)中更改服务地址(service)");
+			return "";
+		}
+		return FoxBPMDesignerUtil.getServicePath() + "/connector/";
 	}
 
 	/**
@@ -709,7 +712,7 @@ public class ConnectorUtil {
 		url = new URL("http://172.16.40.89:8010/foxbpm/service/connectors");
 		file = File.createTempFile(System.currentTimeMillis() + "test", ".zip");
 		FileUtils.copyURLToFile(url, file);
-		ZipUtils.unZip(file.getPath(), connectorPath);
+		ZipUtils.unZip(file.getPath(), FoxBPMDesignerUtil.getServicePath());
 
 		return connectorPath;
 	}
