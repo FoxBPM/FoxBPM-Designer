@@ -783,7 +783,6 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 */
 	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
-
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
 	 * <!-- begin-user-doc -->

@@ -421,7 +421,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDocumentRoot_TaskCommand() {
+	public EReference getDocumentRoot_TaskCommands() {
 		return (EReference)documentRootEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -2105,7 +2105,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(documentRootEClass, DOCUMENT_ROOT__XMLNS_PREFIX_MAP);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__XSI_SCHEMA_LOCATION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_SUBJECT);
-		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_COMMAND);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_COMMANDS);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__RESOURCE_TYPE);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__RESOURCE_FILTER);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__DATA_VARIABLE);
@@ -2367,7 +2367,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getDocumentRoot_XMLNSPrefixMap(), ecorePackage.getEStringToStringMapEntry(), null, "xMLNSPrefixMap", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_XSISchemaLocation(), ecorePackage.getEStringToStringMapEntry(), null, "xSISchemaLocation", null, 0, -1, null, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_TaskSubject(), this.getTaskSubject(), null, "taskSubject", null, 0, -2, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getDocumentRoot_TaskCommand(), this.getTaskCommand(), null, "taskCommand", null, 0, -1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_TaskCommands(), this.getTaskCommand(), null, "taskCommands", null, 0, -1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_ResourceType(), theXMLTypePackage.getString(), "resourceType", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_ResourceFilter(), this.getResourceFilter(), null, "resourceFilter", null, 0, -1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_DataVariable(), this.getDataVariable(), null, "dataVariable", null, 0, -1, null, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2645,12 +2645,12 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
-		  (getDocumentRoot_TaskCommand(), 
+		  (getDocumentRoot_TaskCommands(), 
 		   source, 
 		   new String[] {
 			 "namespace", "##targetNamespace",
 			 "kind", "element",
-			 "name", "taskCommand"
+			 "name", "taskCommands"
 		   });		
 		addAnnotation
 		  (getDocumentRoot_ResourceType(), 
@@ -3032,6 +3032,12 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "kind", "attribute",
 			 "name", "name"
 		   });			
+		addAnnotation
+		  (taskCommandEClass, 
+		   source, 
+		   new String[] {
+			 "name", "TaskCommand"
+		   });		
 		addAnnotation
 		  (getTaskCommand_Expression(), 
 		   source, 

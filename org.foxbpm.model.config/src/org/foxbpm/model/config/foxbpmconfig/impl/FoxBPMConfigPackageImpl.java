@@ -6,9 +6,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.foxbpm.model.config.foxbpmconfig.BaseConfig;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagement;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;

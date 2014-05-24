@@ -31,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskCommand()
- * @model
+ * @model extendedMetaData="name='TaskCommand'"
  * @generated
  */
 public interface TaskCommand extends EObject {

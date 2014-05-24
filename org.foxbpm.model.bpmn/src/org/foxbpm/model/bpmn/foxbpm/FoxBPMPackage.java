@@ -108,13 +108,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__TASK_SUBJECT = 3;
 
 	/**
-	 * The feature id for the '<em><b>Task Command</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Task Commands</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__TASK_COMMAND = 4;
+	int DOCUMENT_ROOT__TASK_COMMANDS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -2538,15 +2538,15 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getDocumentRoot_TaskSubject();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommand <em>Task Command</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommands <em>Task Commands</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Task Command</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommand()
+	 * @return the meta object for the containment reference list '<em>Task Commands</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommands()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EReference getDocumentRoot_TaskCommand();
+	EReference getDocumentRoot_TaskCommands();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getResourceType <em>Resource Type</em>}'.
@@ -4592,12 +4592,12 @@ public interface FoxBPMPackage extends EPackage {
 		EReference DOCUMENT_ROOT__TASK_SUBJECT = eINSTANCE.getDocumentRoot_TaskSubject();
 
 		/**
-		 * The meta object literal for the '<em><b>Task Command</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Task Commands</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOCUMENT_ROOT__TASK_COMMAND = eINSTANCE.getDocumentRoot_TaskCommand();
+		EReference DOCUMENT_ROOT__TASK_COMMANDS = eINSTANCE.getDocumentRoot_TaskCommands();
 
 		/**
 		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.

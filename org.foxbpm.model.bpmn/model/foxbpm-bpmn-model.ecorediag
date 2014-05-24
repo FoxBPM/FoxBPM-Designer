@@ -975,7 +975,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWAc48XMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWAc5MXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//DocumentRoot/taskCommand"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//DocumentRoot/taskCommands"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWAc5cXMEeOb9caI1cUYMA" points="[0, 0, 1198, 486]$[-1112, -61, 86, 425]$[-1114, -426, 84, 60]$[-1198, -486, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhU8E8XMEeOb9caI1cUYMA" id="(0.14798206278026907,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhU8FMXMEeOb9caI1cUYMA" id="(0.4965986394557823,1.0)"/>
