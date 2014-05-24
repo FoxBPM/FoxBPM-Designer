@@ -410,6 +410,11 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab1"
         label="任务分配">
   </propertyTab>
+   <propertyTab
+         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskcommandPropertySection"
+         id="org.foxbpm.bpmn.designer.ui.propertyTab.taskcommand"
+         label="任务命令">
+   </propertyTab>
 
 		<!-- ======================================== -->
 		<!-- ===  Model Enablements and Profiles ==== -->
