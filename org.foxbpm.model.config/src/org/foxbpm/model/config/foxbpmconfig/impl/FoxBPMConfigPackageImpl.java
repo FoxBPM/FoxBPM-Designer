@@ -477,7 +477,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTaskCommandConfig_TaskCommandDefinitions() {
+	public EReference getTaskCommandConfig_TaskCommandDefinition() {
 		return (EReference)taskCommandConfigEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -667,7 +667,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(mailInfoEClass, MAIL_INFO__PASSWORD);
 
 		taskCommandConfigEClass = createEClass(TASK_COMMAND_CONFIG);
-		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS);
+		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION);
 
 		paramEClass = createEClass(PARAM);
 		createEAttribute(paramEClass, PARAM__KEY);
@@ -766,7 +766,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getMailInfo_Password(), ecorePackage.getEString(), "password", null, 1, 1, MailInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskCommandConfigEClass, TaskCommandConfig.class, "TaskCommandConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTaskCommandConfig_TaskCommandDefinitions(), this.getTaskCommandDefinition(), null, "taskCommandDefinitions", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTaskCommandConfig_TaskCommandDefinition(), this.getTaskCommandDefinition(), null, "taskCommandDefinition", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParam_Key(), ecorePackage.getEString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -960,11 +960,11 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "kind", "attribute"
 		   });				
 		addAnnotation
-		  (getTaskCommandConfig_TaskCommandDefinitions(), 
+		  (getTaskCommandConfig_TaskCommandDefinition(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
-			 "name", "taskCommandDefinitions"
+			 "name", "taskCommandDefinition"
 		   });		
 		addAnnotation
 		  (getParam_Key(), 

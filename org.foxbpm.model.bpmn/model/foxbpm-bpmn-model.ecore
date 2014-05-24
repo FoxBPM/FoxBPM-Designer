@@ -44,13 +44,13 @@
         <details key="namespace" value="##targetNamespace"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="taskCommands" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskCommand" upperBound="-1"
         eType="#//TaskCommand" volatile="true" transient="true" derived="true" containment="true"
         resolveProxies="false">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
-        <details key="name" value="taskCommands"/>
+        <details key="name" value="taskCommand"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="resourceType" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
