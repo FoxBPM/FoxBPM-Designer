@@ -6,6 +6,7 @@
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
+            icon="icons/fox_16.ico"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
             name="%wizard.name">
       </wizard>
@@ -79,6 +80,10 @@
           id="org.foxbpm.bpmn.designer.ui.category.actor"
           name="选择器">
     </category>
+    <command
+          id="org.foxbpm.bpmn.designer.ui.command.processoper"
+          name="流程操作">
+    </command>
  </extension>
  <extension
        point="org.eclipse.ui.handlers">
@@ -97,6 +102,10 @@
     <handler
           class="org.foxbpm.bpmn.designer.ui.commands.EditActorHandler"
           commandId="org.foxbpm.bpmn.designer.ui.command.editactor">
+    </handler>
+    <handler
+          class="org.foxbpm.bpmn.designer.ui.commands.ProcessOperHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.processoper">
     </handler>
  </extension>
  <extension
@@ -165,6 +174,14 @@
              </command>
           </menu>
        </menu>
+    </menuContribution>
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+       <command
+             commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
+             style="push">
+       </command>
     </menuContribution>
  </extension>
  <extension

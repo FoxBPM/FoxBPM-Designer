@@ -29,7 +29,6 @@ import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
-import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommandModel;
 
@@ -246,7 +245,7 @@ public class BpmnModelUtil {
 	
 	
 	
-	public static void updateBpmnModelFile(BPMN2Editor bpmn2Editor,final String processId,final String processName,final ProcessValidationLevel processValidationLevel) {
+	public static void updateBpmnModelFile(BPMN2Editor bpmn2Editor,final String processId,final String processName) {
 		final ModelHandler modelHandler=bpmn2Editor.getModelHandler();
 		final Resource resource=modelHandler.getResource();
 		
@@ -258,7 +257,6 @@ public class BpmnModelUtil {
 				Process process=getProcess(resource);
 				process.setId(processId);
 				process.setName(processName);
-				process.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__VALIDATION_LEVEL, processValidationLevel);
 			}
 		});
 	}
