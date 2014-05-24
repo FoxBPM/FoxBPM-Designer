@@ -41,13 +41,14 @@ public class SynDesignerResourceHandler implements IHandler {
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector();
+					ConnectorUtil.downLoadConnector("syn");
 				} catch (final IOException e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
 						@Override
 						public void run() {
-							MessageDialog.openInformation(null, "提示", "同步设计器资源失败，原因是\n" + e.getMessage());							
+							MessageDialog.openInformation(null, "提示", "同步设计器资源失败，原因是\n" + e.getMessage());
+							return;
 						}
 					});
 //					e.printStackTrace();

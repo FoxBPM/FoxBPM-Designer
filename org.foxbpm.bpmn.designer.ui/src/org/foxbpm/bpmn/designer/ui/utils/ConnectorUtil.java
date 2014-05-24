@@ -60,6 +60,8 @@ public class ConnectorUtil {
 
 	public static String OLDCONNECTORPATH = "connector-path";
 	
+	public static String DOWNLOADURL = "http://172.16.40.89:8010/foxbpm/service/flowconfig";
+	
 	public static HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
 	/**
@@ -698,7 +700,7 @@ public class ConnectorUtil {
 		return null;
 	}
 
-	public static String downLoadConnector() throws IOException {
+	public static String downLoadConnector(String type) throws IOException {
 		String connectorPath = getConnectorPath();
 		Authenticator.setDefault(new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -709,10 +711,21 @@ public class ConnectorUtil {
 		File file = null;
 		// url = new
 		// URL("http://172.16.40.89:8080/foxbpm-webapps-rest/service/connectors");
-		url = new URL("http://172.16.40.89:8010/foxbpm/service/connectors");
-		file = File.createTempFile(System.currentTimeMillis() + "test", ".zip");
+		url = new URL(DOWNLOADURL);
+		file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
 		FileUtils.copyURLToFile(url, file);
-		ZipUtils.unZip(file.getPath(), FoxBPMDesignerUtil.getServicePath());
+		
+		String servicePath = FoxBPMDesignerUtil.getServicePath();
+		File serviceDirectory = new File(servicePath);
+		
+		if(!type.equals("start")) {
+			//强制删除服务目录下文件
+			for (File tempFile : serviceDirectory.listFiles()) {
+				FileUtils.forceDelete(tempFile);
+			}
+		}
+		
+		ZipUtils.unZip(file.getPath(), servicePath);
 
 		return connectorPath;
 	}

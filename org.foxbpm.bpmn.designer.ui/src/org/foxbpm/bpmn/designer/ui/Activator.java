@@ -50,7 +50,7 @@ public class Activator extends AbstractUIPlugin {
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector();
+					ConnectorUtil.downLoadConnector("start");
 				} catch (final IOException e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
