@@ -13,30 +13,30 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
-import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
+import org.foxbpm.model.bpmn.foxbpm.TaskCommandModel;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Task Command</b></em>'.
+ * An implementation of the model object '<em><b>Task Command Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getCommandType <em>Command Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getExpression <em>Expression</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getOrderId <em>Order Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsVerification <em>Is Verification</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsSaveData <em>Is Save Data</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsSimulationRun <em>Is Simulation Run</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getParameterExpression <em>Parameter Expression</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getCommandType <em>Command Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getOrderId <em>Order Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getIsVerification <em>Is Verification</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getIsSaveData <em>Is Save Data</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getIsSimulationRun <em>Is Simulation Run</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandModelImpl#getParameterExpression <em>Parameter Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TaskCommandImpl extends MinimalEObjectImpl.Container implements TaskCommand {
+public class TaskCommandModelImpl extends MinimalEObjectImpl.Container implements TaskCommandModel {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -202,7 +202,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TaskCommandImpl() {
+	protected TaskCommandModelImpl() {
 		super();
 	}
 
@@ -213,7 +213,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMPackage.Literals.TASK_COMMAND;
+		return FoxBPMPackage.Literals.TASK_COMMAND_MODEL;
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__ID, oldId, id));
 	}
 
 	/**
@@ -255,7 +255,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__NAME, oldName, name));
 	}
 
 	/**
@@ -276,7 +276,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldCommandType = commandType;
 		commandType = newCommandType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__COMMAND_TYPE, oldCommandType, commandType));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__COMMAND_TYPE, oldCommandType, commandType));
 	}
 
 	/**
@@ -297,7 +297,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		Expression oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -312,14 +312,14 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION, null, msgs);
 			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND__EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION, newExpression, newExpression));
 	}
 
 	/**
@@ -340,7 +340,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		int oldOrderId = orderId;
 		orderId = newOrderId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__ORDER_ID, oldOrderId, orderId));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__ORDER_ID, oldOrderId, orderId));
 	}
 
 	/**
@@ -361,7 +361,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldIsVerification = isVerification;
 		isVerification = newIsVerification;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION, oldIsVerification, isVerification));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__IS_VERIFICATION, oldIsVerification, isVerification));
 	}
 
 	/**
@@ -382,7 +382,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldIsSaveData = isSaveData;
 		isSaveData = newIsSaveData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA, oldIsSaveData, isSaveData));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__IS_SAVE_DATA, oldIsSaveData, isSaveData));
 	}
 
 	/**
@@ -403,7 +403,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		String oldIsSimulationRun = isSimulationRun;
 		isSimulationRun = newIsSimulationRun;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN, oldIsSimulationRun, isSimulationRun));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__IS_SIMULATION_RUN, oldIsSimulationRun, isSimulationRun));
 	}
 
 	/**
@@ -424,7 +424,7 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		Expression oldParameterExpression = parameterExpression;
 		parameterExpression = newParameterExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION, oldParameterExpression, newParameterExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION, oldParameterExpression, newParameterExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -439,14 +439,14 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		if (newParameterExpression != parameterExpression) {
 			NotificationChain msgs = null;
 			if (parameterExpression != null)
-				msgs = ((InternalEObject)parameterExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)parameterExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION, null, msgs);
 			if (newParameterExpression != null)
-				msgs = ((InternalEObject)newParameterExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newParameterExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION, null, msgs);
 			msgs = basicSetParameterExpression(newParameterExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION, newParameterExpression, newParameterExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION, newParameterExpression, newParameterExpression));
 	}
 
 	/**
@@ -457,9 +457,9 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMPackage.TASK_COMMAND__EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION:
 				return basicSetExpression(null, msgs);
-			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION:
 				return basicSetParameterExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -473,23 +473,23 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMPackage.TASK_COMMAND__ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ID:
 				return getId();
-			case FoxBPMPackage.TASK_COMMAND__NAME:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__NAME:
 				return getName();
-			case FoxBPMPackage.TASK_COMMAND__COMMAND_TYPE:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__COMMAND_TYPE:
 				return getCommandType();
-			case FoxBPMPackage.TASK_COMMAND__EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION:
 				return getExpression();
-			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ORDER_ID:
 				return getOrderId();
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_VERIFICATION:
 				return getIsVerification();
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SAVE_DATA:
 				return getIsSaveData();
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SIMULATION_RUN:
 				return getIsSimulationRun();
-			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION:
 				return getParameterExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -503,31 +503,31 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMPackage.TASK_COMMAND__ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ID:
 				setId((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__NAME:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__NAME:
 				setName((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__COMMAND_TYPE:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__COMMAND_TYPE:
 				setCommandType((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION:
 				setExpression((Expression)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ORDER_ID:
 				setOrderId((Integer)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_VERIFICATION:
 				setIsVerification((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SAVE_DATA:
 				setIsSaveData((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SIMULATION_RUN:
 				setIsSimulationRun((String)newValue);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION:
 				setParameterExpression((Expression)newValue);
 				return;
 		}
@@ -542,31 +542,31 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.TASK_COMMAND__ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__NAME:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__COMMAND_TYPE:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__COMMAND_TYPE:
 				setCommandType(COMMAND_TYPE_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION:
 				setExpression((Expression)null);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ORDER_ID:
 				setOrderId(ORDER_ID_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_VERIFICATION:
 				setIsVerification(IS_VERIFICATION_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SAVE_DATA:
 				setIsSaveData(IS_SAVE_DATA_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SIMULATION_RUN:
 				setIsSimulationRun(IS_SIMULATION_RUN_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION:
 				setParameterExpression((Expression)null);
 				return;
 		}
@@ -581,23 +581,23 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMPackage.TASK_COMMAND__ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case FoxBPMPackage.TASK_COMMAND__NAME:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FoxBPMPackage.TASK_COMMAND__COMMAND_TYPE:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__COMMAND_TYPE:
 				return COMMAND_TYPE_EDEFAULT == null ? commandType != null : !COMMAND_TYPE_EDEFAULT.equals(commandType);
-			case FoxBPMPackage.TASK_COMMAND__EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__EXPRESSION:
 				return expression != null;
-			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__ORDER_ID:
 				return orderId != ORDER_ID_EDEFAULT;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_VERIFICATION:
 				return IS_VERIFICATION_EDEFAULT == null ? isVerification != null : !IS_VERIFICATION_EDEFAULT.equals(isVerification);
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SAVE_DATA:
 				return IS_SAVE_DATA_EDEFAULT == null ? isSaveData != null : !IS_SAVE_DATA_EDEFAULT.equals(isSaveData);
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__IS_SIMULATION_RUN:
 				return IS_SIMULATION_RUN_EDEFAULT == null ? isSimulationRun != null : !IS_SIMULATION_RUN_EDEFAULT.equals(isSimulationRun);
-			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
+			case FoxBPMPackage.TASK_COMMAND_MODEL__PARAMETER_EXPRESSION:
 				return parameterExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -631,4 +631,4 @@ public class TaskCommandImpl extends MinimalEObjectImpl.Container implements Tas
 		return result.toString();
 	}
 
-} //TaskCommandImpl
+} //TaskCommandModelImpl

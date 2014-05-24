@@ -5,27 +5,27 @@ package org.foxbpm.model.config.foxbpmconfig;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Task Command Definition</b></em>'.
+ * A representation of the model object '<em><b>Task Command Model Definition</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand <em>Command</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd <em>Cmd</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter <em>Filter</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled <em>Is Enabled</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCommand <em>Command</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCmd <em>Cmd</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getFilter <em>Filter</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getIsEnabled <em>Is Enabled</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition()
+ * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition()
  * @model extendedMetaData="name='TaskCommandDefinition'"
  * @generated
  */
-public interface TaskCommandDefinition extends BaseConfig {
+public interface TaskCommandModelDefinition extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -36,7 +36,7 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Id</em>' attribute.
 	 * @see #setId(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Id()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Id()
 	 * @model required="true"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
@@ -44,7 +44,7 @@ public interface TaskCommandDefinition extends BaseConfig {
 	String getId();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getId <em>Id</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getId <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Id</em>' attribute.
@@ -63,14 +63,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Name()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Name()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Name</em>' attribute.
@@ -89,14 +89,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Command</em>' attribute.
 	 * @see #setCommand(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Command()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Command()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getCommand();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommand <em>Command</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCommand <em>Command</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Command</em>' attribute.
@@ -115,14 +115,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Cmd</em>' attribute.
 	 * @see #setCmd(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Cmd()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Cmd()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getCmd();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCmd <em>Cmd</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getCmd <em>Cmd</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Cmd</em>' attribute.
@@ -141,14 +141,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Filter</em>' attribute.
 	 * @see #setFilter(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Filter()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Filter()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getFilter();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getFilter <em>Filter</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getFilter <em>Filter</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Filter</em>' attribute.
@@ -167,14 +167,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Enabled</em>' attribute.
 	 * @see #setIsEnabled(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_IsEnabled()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_IsEnabled()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getIsEnabled();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled <em>Is Enabled</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getIsEnabled <em>Is Enabled</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Enabled</em>' attribute.
@@ -193,14 +193,14 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_Type()
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandModelDefinition_Type()
 	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getType();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
@@ -209,4 +209,4 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 */
 	void setType(String value);
 
-} // TaskCommandDefinition
+} // TaskCommandModelDefinition

@@ -112,13 +112,13 @@ public interface FoxBPMConfigFactory extends EFactory {
 	BaseConfig createBaseConfig();
 
 	/**
-	 * Returns a new object of class '<em>Task Command Definition</em>'.
+	 * Returns a new object of class '<em>Task Command Model Definition</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Task Command Definition</em>'.
+	 * @return a new object of class '<em>Task Command Model Definition</em>'.
 	 * @generated
 	 */
-	TaskCommandDefinition createTaskCommandDefinition();
+	TaskCommandModelDefinition createTaskCommandModelDefinition();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getXMLNSPrefixMap <em>XMLNS Prefix Map</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getXSISchemaLocation <em>XSI Schema Location</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskSubject <em>Task Subject</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommand <em>Task Command</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskCommandModel <em>Task Command Model</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getResourceFilter <em>Resource Filter</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getDataVariable <em>Data Variable</em>}</li>
@@ -156,21 +156,21 @@ public interface DocumentRoot extends EObject {
 	void setTaskSubject(TaskSubject value);
 
 	/**
-	 * Returns the value of the '<em><b>Task Command</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.TaskCommand}.
+	 * Returns the value of the '<em><b>Task Command Model</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Task Command</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Task Command Model</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Task Command</em>' containment reference list.
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_TaskCommand()
+	 * @return the value of the '<em>Task Command Model</em>' containment reference list.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_TaskCommandModel()
 	 * @model containment="true" transient="true" volatile="true" derived="true"
-	 *        extendedMetaData="namespace='##targetNamespace' kind='element' name='taskCommand'"
+	 *        extendedMetaData="namespace='##targetNamespace' kind='element' name='taskCommandModel'"
 	 * @generated
 	 */
-	EList<TaskCommand> getTaskCommand();
+	EList<TaskCommandModel> getTaskCommandModel();
 
 	/**
 	 * Returns the value of the '<em><b>Resource Type</b></em>' attribute.

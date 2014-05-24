@@ -3,28 +3,22 @@
 package org.foxbpm.model.bpmn.foxbpm.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EStringToStringMapEntryImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
@@ -44,7 +38,7 @@ import org.foxbpm.model.bpmn.foxbpm.ReceiveMessage;
 import org.foxbpm.model.bpmn.foxbpm.ResourceFilter;
 import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
 import org.foxbpm.model.bpmn.foxbpm.SubProcessToDataSourceMapping;
-import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
+import org.foxbpm.model.bpmn.foxbpm.TaskCommandModel;
 import org.foxbpm.model.bpmn.foxbpm.TaskPriority;
 import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
 
@@ -59,7 +53,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getXMLNSPrefixMap <em>XMLNS Prefix Map</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getXSISchemaLocation <em>XSI Schema Location</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskSubject <em>Task Subject</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskCommand <em>Task Command</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskCommandModel <em>Task Command Model</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getResourceFilter <em>Resource Filter</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getDataVariable <em>Data Variable</em>}</li>
@@ -907,8 +901,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TaskCommand> getTaskCommand() {
-		return getMixed().list(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND);
+	public EList<TaskCommandModel> getTaskCommandModel() {
+		return getMixed().list(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND_MODEL);
 	}
 
 	/**
@@ -2061,8 +2055,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return ((InternalEList<?>)getXSISchemaLocation()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return basicSetTaskSubject(null, msgs);
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
-				return ((InternalEList<?>)getTaskCommand()).basicRemove(otherEnd, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND_MODEL:
+				return ((InternalEList<?>)getTaskCommandModel()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:
 				return ((InternalEList<?>)getResourceFilter()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__DATA_VARIABLE:
@@ -2120,8 +2114,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				else return getXSISchemaLocation().map();
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return getTaskSubject();
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
-				return getTaskCommand();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND_MODEL:
+				return getTaskCommandModel();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				return getResourceType();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:
@@ -2235,9 +2229,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				setTaskSubject((TaskSubject)newValue);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
-				getTaskCommand().clear();
-				getTaskCommand().addAll((Collection<? extends TaskCommand>)newValue);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND_MODEL:
+				getTaskCommandModel().clear();
+				getTaskCommandModel().addAll((Collection<? extends TaskCommandModel>)newValue);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				setResourceType((String)newValue);
@@ -2400,8 +2394,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				setTaskSubject((TaskSubject)null);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
-				getTaskCommand().clear();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND_MODEL:
+				getTaskCommandModel().clear();
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				setResourceType(RESOURCE_TYPE_EDEFAULT);
@@ -2555,8 +2549,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return xSISchemaLocation != null && !xSISchemaLocation.isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return getTaskSubject() != null;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
-				return !getTaskCommand().isEmpty();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND_MODEL:
+				return !getTaskCommandModel().isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				return RESOURCE_TYPE_EDEFAULT == null ? resourceType != null : !RESOURCE_TYPE_EDEFAULT.equals(resourceType);
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:

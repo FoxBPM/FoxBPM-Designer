@@ -184,31 +184,31 @@
     <children xmi:type="notation:Node" xmi:id="_mVccM8XMEeOb9caI1cUYMA" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_mVccNMXMEeOb9caI1cUYMA" type="5001">
       <children xmi:type="notation:Node" xmi:id="_mVccPMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/id"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVccPcXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVccPsXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/name"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVccP8XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVdDQMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/commandType"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/commandType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDQcXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVdDQsXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/orderId"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/orderId"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDQ8XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVdDRMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isVerification"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/isVerification"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDRcXMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVdDRsXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isSaveData"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/isSaveData"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDR8XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVdDSMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isSimulationRun"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/isSimulationRun"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDScXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVccNcXMEeOb9caI1cUYMA"/>
@@ -221,7 +221,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVccO8XMEeOb9caI1cUYMA"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_mVccMcXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//TaskCommand"/>
+    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//TaskCommandModel"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mVccMsXMEeOb9caI1cUYMA" x="268" y="157"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_mVdqUMXMEeOb9caI1cUYMA" type="1001">
@@ -975,7 +975,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWAc48XMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWAc5MXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//DocumentRoot/taskCommand"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//DocumentRoot/taskCommandModel"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWAc5cXMEeOb9caI1cUYMA" points="[0, 0, 1198, 486]$[-1112, -61, 86, 425]$[-1114, -426, 84, 60]$[-1198, -486, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhU8E8XMEeOb9caI1cUYMA" id="(0.14798206278026907,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhU8FMXMEeOb9caI1cUYMA" id="(0.4965986394557823,1.0)"/>
@@ -1241,7 +1241,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWF8ecXMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWF8esXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//TaskCommand/expression"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/expression"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWF8e8XMEeOb9caI1cUYMA" points="[0, 0, -1715, 76]$[1715, -76, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQMXMEeOb9caI1cUYMA" id="(0.3333333333333333,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQcXMEeOb9caI1cUYMA" id="(0.06862745098039216,1.0)"/>
@@ -1255,7 +1255,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWF8gcXMEeOb9caI1cUYMA" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_mWF8gsXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//TaskCommand/parameterExpression"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//TaskCommandModel/parameterExpression"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWF8g8XMEeOb9caI1cUYMA" points="[0, 0, -1670, 76]$[1670, -76, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQsXMEeOb9caI1cUYMA" id="(0.6666666666666666,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQ8XMEeOb9caI1cUYMA" id="(0.10784313725490197,1.0)"/>

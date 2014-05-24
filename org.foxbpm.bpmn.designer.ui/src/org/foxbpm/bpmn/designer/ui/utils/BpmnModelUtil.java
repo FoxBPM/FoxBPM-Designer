@@ -31,7 +31,7 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
-import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
+import org.foxbpm.model.bpmn.foxbpm.TaskCommandModel;
 
 
 
@@ -131,9 +131,9 @@ public class BpmnModelUtil {
 		return ModelUtil.getDiagramType(object);
 	}
 
-	public static TaskCommand createTaskCommand() {
+	public static TaskCommandModel createTaskCommand() {
 
-		TaskCommand taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommand();
+		TaskCommandModel taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommandModel();
 		taskCommand.setId("Advance_1");
 		taskCommand.setName("启动提交");
 		taskCommand.setCommandType("startandsubmit");
@@ -150,9 +150,9 @@ public class BpmnModelUtil {
 
 	}
 
-	public static TaskCommand createTaskViewCommand() {
+	public static TaskCommandModel createTaskViewCommand() {
 
-		TaskCommand taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommand();
+		TaskCommandModel taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommandModel();
 		taskCommand.setId("Advance_ProcessStatus");
 		taskCommand.setName("流程状态");
 		taskCommand.setCommandType("processStatus");
@@ -191,7 +191,7 @@ public class BpmnModelUtil {
 		ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
 		userTask.getExtensionValues().add(extensionElement);
 		FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-				(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND,
+				(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND_MODEL,
 				createTaskViewCommand());
 		extensionElement.getValue().add(extensionElementEntry);
 

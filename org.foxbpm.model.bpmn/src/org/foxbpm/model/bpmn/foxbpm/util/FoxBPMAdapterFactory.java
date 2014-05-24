@@ -80,8 +80,8 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 				return createTaskSubjectAdapter();
 			}
 			@Override
-			public Adapter caseTaskCommand(TaskCommand object) {
-				return createTaskCommandAdapter();
+			public Adapter caseTaskCommandModel(TaskCommandModel object) {
+				return createTaskCommandModelAdapter();
 			}
 			@Override
 			public Adapter caseResourceFilter(ResourceFilter object) {
@@ -270,16 +270,16 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand <em>Task Command</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommandModel <em>Task Command Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommandModel
 	 * @generated
 	 */
-	public Adapter createTaskCommandAdapter() {
+	public Adapter createTaskCommandModelAdapter() {
 		return null;
 	}
 

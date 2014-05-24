@@ -248,31 +248,31 @@
     <children xmi:type="notation:Node" xmi:id="_PwO24-F4EeOIZ4N5DWtYjw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_PwO25OF4EeOIZ4N5DWtYjw" type="5001">
       <children xmi:type="notation:Node" xmi:id="_p9rbMOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/id"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/id"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_p9rbMeF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_r8USIOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/name"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_r8USIeF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_toYyYOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/command"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/command"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_toYyYeF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_xdbxUOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/cmd"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/cmd"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_xdbxUeF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_zEz-0OF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/filter"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/filter"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_zEz-0eF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_0ma7gOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/isEnabled"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/isEnabled"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_0ma7geF4EeOIZ4N5DWtYjw"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_2Y3JgOF4EeOIZ4N5DWtYjw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/type"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandModelDefinition/type"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_2Y3JgeF4EeOIZ4N5DWtYjw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PwPd8OF4EeOIZ4N5DWtYjw"/>
@@ -285,7 +285,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PwPd9uF4EeOIZ4N5DWtYjw"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_PwO24eF4EeOIZ4N5DWtYjw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//TaskCommandDefinition"/>
+    <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//TaskCommandModelDefinition"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_PwO24uF4EeOIZ4N5DWtYjw" x="632" y="256"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Jh8sAcCEEeOH6bgf6xYTrA"/>
@@ -405,7 +405,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_dNg7YeF4EeOIZ4N5DWtYjw" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_dNg7YuF4EeOIZ4N5DWtYjw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpmconfig.ecore#//TaskCommandConfig/taskCommandDefinitions"/>
+    <element xmi:type="ecore:EReference" href="foxbpmconfig.ecore#//TaskCommandConfig/taskCommandModelDefinitions"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_dNg7Y-F4EeOIZ4N5DWtYjw" points="[3, 5, -32, -56]$[36, 45, 1, -16]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dNiwkOF4EeOIZ4N5DWtYjw" id="(0.6984126984126984,0.8809523809523809)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dNiwkeF4EeOIZ4N5DWtYjw" id="(0.23943661971830985,0.40476190476190477)"/>

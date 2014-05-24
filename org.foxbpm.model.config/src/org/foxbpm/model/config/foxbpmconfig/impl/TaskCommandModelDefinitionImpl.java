@@ -9,28 +9,28 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
-import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
+import org.foxbpm.model.config.foxbpmconfig.TaskCommandModelDefinition;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Task Command Definition</b></em>'.
+ * An implementation of the model object '<em><b>Task Command Model Definition</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getId <em>Id</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getCommand <em>Command</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getCmd <em>Cmd</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getFilter <em>Filter</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getIsEnabled <em>Is Enabled</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getCommand <em>Command</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getCmd <em>Cmd</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getFilter <em>Filter</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getIsEnabled <em>Is Enabled</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandModelDefinitionImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCommandDefinition {
+public class TaskCommandModelDefinitionImpl extends BaseConfigImpl implements TaskCommandModelDefinition {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -176,7 +176,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TaskCommandDefinitionImpl() {
+	protected TaskCommandModelDefinitionImpl() {
 		super();
 	}
 
@@ -187,7 +187,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return FoxBPMConfigPackage.Literals.TASK_COMMAND_DEFINITION;
+		return FoxBPMConfigPackage.Literals.TASK_COMMAND_MODEL_DEFINITION;
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldId = id;
 		id = newId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__ID, oldId, id));
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__NAME, oldName, name));
 	}
 
 	/**
@@ -250,7 +250,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldCommand = command;
 		command = newCommand;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND, oldCommand, command));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__COMMAND, oldCommand, command));
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldCmd = cmd;
 		cmd = newCmd;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__CMD, oldCmd, cmd));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__CMD, oldCmd, cmd));
 	}
 
 	/**
@@ -292,7 +292,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldFilter = filter;
 		filter = newFilter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__FILTER, oldFilter, filter));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__FILTER, oldFilter, filter));
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldIsEnabled = isEnabled;
 		isEnabled = newIsEnabled;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__IS_ENABLED, oldIsEnabled, isEnabled));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED, oldIsEnabled, isEnabled));
 	}
 
 	/**
@@ -334,7 +334,7 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		String oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__TYPE, oldType, type));
 	}
 
 	/**
@@ -345,19 +345,19 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__ID:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__ID:
 				return getId();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__NAME:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__NAME:
 				return getName();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__COMMAND:
 				return getCommand();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__CMD:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__CMD:
 				return getCmd();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__FILTER:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__FILTER:
 				return getFilter();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__IS_ENABLED:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED:
 				return getIsEnabled();
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__TYPE:
 				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -371,25 +371,25 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__ID:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__ID:
 				setId((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__NAME:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__NAME:
 				setName((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__COMMAND:
 				setCommand((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__CMD:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__CMD:
 				setCmd((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__FILTER:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__FILTER:
 				setFilter((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__IS_ENABLED:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED:
 				setIsEnabled((String)newValue);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__TYPE:
 				setType((String)newValue);
 				return;
 		}
@@ -404,25 +404,25 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__ID:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__ID:
 				setId(ID_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__NAME:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__COMMAND:
 				setCommand(COMMAND_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__CMD:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__CMD:
 				setCmd(CMD_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__FILTER:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__FILTER:
 				setFilter(FILTER_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__IS_ENABLED:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED:
 				setIsEnabled(IS_ENABLED_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
 		}
@@ -437,19 +437,19 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__ID:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__ID:
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__NAME:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__COMMAND:
 				return COMMAND_EDEFAULT == null ? command != null : !COMMAND_EDEFAULT.equals(command);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__CMD:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__CMD:
 				return CMD_EDEFAULT == null ? cmd != null : !CMD_EDEFAULT.equals(cmd);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__FILTER:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__FILTER:
 				return FILTER_EDEFAULT == null ? filter != null : !FILTER_EDEFAULT.equals(filter);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__IS_ENABLED:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__IS_ENABLED:
 				return IS_ENABLED_EDEFAULT == null ? isEnabled != null : !IS_ENABLED_EDEFAULT.equals(isEnabled);
-			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
+			case FoxBPMConfigPackage.TASK_COMMAND_MODEL_DEFINITION__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
@@ -483,4 +483,4 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		return result.toString();
 	}
 
-} //TaskCommandDefinitionImpl
+} //TaskCommandModelDefinitionImpl

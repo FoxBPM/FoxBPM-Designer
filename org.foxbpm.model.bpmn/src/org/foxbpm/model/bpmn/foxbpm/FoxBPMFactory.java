@@ -49,13 +49,13 @@ public interface FoxBPMFactory extends EFactory {
 	TaskSubject createTaskSubject();
 
 	/**
-	 * Returns a new object of class '<em>Task Command</em>'.
+	 * Returns a new object of class '<em>Task Command Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Task Command</em>'.
+	 * @return a new object of class '<em>Task Command Model</em>'.
 	 * @generated
 	 */
-	TaskCommand createTaskCommand();
+	TaskCommandModel createTaskCommandModel();
 
 	/**
 	 * Returns a new object of class '<em>Resource Filter</em>'.
