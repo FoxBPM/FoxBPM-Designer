@@ -23,6 +23,11 @@ public class ProcessTo {
 	protected String processName;
 	
 	/**
+	 * 流程更新ID
+	 */
+	protected String deploymentId;
+	
+	/**
 	 * 流程版本号
 	 */
 	protected int version;
@@ -56,6 +61,12 @@ public class ProcessTo {
 	}
 	public void setVersion(int version) {
 		this.version = version;
+	}
+	public String getDeploymentId() {
+		return deploymentId;
+	}
+	public void setDeploymentId(String deploymentId) {
+		this.deploymentId = deploymentId;
 	}
 	
 	

@@ -38,6 +38,25 @@ public class EMFUtil {
 		}
 		return l;
 	}
+	
+	/**
+	 * 读EMF文件
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static Resource readEMFFile(String path) {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
+
+		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
+		try {
+			resource.load(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return resource;
+	}
 
 	/**
 	 * 加载所有的数据变量

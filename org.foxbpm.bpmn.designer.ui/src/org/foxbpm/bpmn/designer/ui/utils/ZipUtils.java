@@ -72,6 +72,51 @@ public class ZipUtils {
 	}
 
 	/**
+	 * 压缩多个文件
+	 * @param sourceDir 文件列表数组
+	 * @param zipFile 文件名
+	 */
+	public static void zipMultiFile(String[] sourceDir, File zipFile) {
+
+		OutputStream os;
+
+		try {
+
+			os = new FileOutputStream(zipFile);
+
+			BufferedOutputStream bos = new BufferedOutputStream(os);
+
+			ZipOutputStream zos = new ZipOutputStream(bos);
+
+			for (int i = 0; i < sourceDir.length; i++) {
+				File file = new File(sourceDir[i]);
+				String basePath = null;
+
+				if (file.isDirectory()) {
+
+					basePath = file.getPath();
+
+				} else {// 直接压缩单个文件时，取父目录
+
+					basePath = file.getParent();
+
+				}
+				
+				zipFile(file, basePath, zos);
+			}
+
+			zos.closeEntry();
+
+			zos.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+
+	}
+	
+	/**
 	 * 功能：执行文件压缩成zip文件
 	 * 
 	 * @param source

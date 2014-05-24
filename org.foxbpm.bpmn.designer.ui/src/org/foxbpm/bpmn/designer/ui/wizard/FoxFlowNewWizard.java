@@ -60,7 +60,7 @@ public class FoxFlowNewWizard extends Wizard implements INewWizard {
 					String containerName = container.getFullPath().toOSString();
 					IResource resource = root.findMember(new Path(containerName));
 					IContainer container = (IContainer) resource;
-					final IFile file = container.getFile(new Path(fileName));
+					final IFile file = container.getFile(new Path(processName));
 					try {
 						String iofilePath = FoxBPMDesignerUtil.getTempleteFilePath();
 						File iofile = new File(iofilePath);
@@ -104,7 +104,7 @@ public class FoxFlowNewWizard extends Wizard implements INewWizard {
 		
 		BPMN2MultiPageEditor bpmn2MultiPageEditor = (BPMN2MultiPageEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		BPMN2Editor bpmn2Editor = bpmn2MultiPageEditor.getDesignEditor();
-		BpmnModelUtil.updateBpmnModelFile(bpmn2Editor, fileName.substring(0, fileName.lastIndexOf(".")), processName);
+		BpmnModelUtil.updateBpmnModelFile(bpmn2Editor, fileName, processName.substring(0, processName.lastIndexOf(".")));
 //		try {
 			bpmn2MultiPageEditor.doSave(new NullProgressMonitor());
 //			bpmn2Editor.getDiagramBehavior().getModelHandler().getResource().save(null);
