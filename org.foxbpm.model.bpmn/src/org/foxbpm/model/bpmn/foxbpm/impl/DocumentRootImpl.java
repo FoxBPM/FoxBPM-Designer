@@ -53,7 +53,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getXMLNSPrefixMap <em>XMLNS Prefix Map</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getXSISchemaLocation <em>XSI Schema Location</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskSubject <em>Task Subject</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskCommands <em>Task Commands</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskCommand <em>Task Command</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getResourceFilter <em>Resource Filter</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getDataVariable <em>Data Variable</em>}</li>
@@ -901,8 +901,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TaskCommand> getTaskCommands() {
-		return getMixed().list(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMANDS);
+	public EList<TaskCommand> getTaskCommand() {
+		return getMixed().list(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND);
 	}
 
 	/**
@@ -2055,8 +2055,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return ((InternalEList<?>)getXSISchemaLocation()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return basicSetTaskSubject(null, msgs);
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMANDS:
-				return ((InternalEList<?>)getTaskCommands()).basicRemove(otherEnd, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
+				return ((InternalEList<?>)getTaskCommand()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:
 				return ((InternalEList<?>)getResourceFilter()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__DATA_VARIABLE:
@@ -2114,8 +2114,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				else return getXSISchemaLocation().map();
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return getTaskSubject();
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMANDS:
-				return getTaskCommands();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
+				return getTaskCommand();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				return getResourceType();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:
@@ -2229,9 +2229,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				setTaskSubject((TaskSubject)newValue);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMANDS:
-				getTaskCommands().clear();
-				getTaskCommands().addAll((Collection<? extends TaskCommand>)newValue);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
+				getTaskCommand().clear();
+				getTaskCommand().addAll((Collection<? extends TaskCommand>)newValue);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				setResourceType((String)newValue);
@@ -2394,8 +2394,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				setTaskSubject((TaskSubject)null);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMANDS:
-				getTaskCommands().clear();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
+				getTaskCommand().clear();
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				setResourceType(RESOURCE_TYPE_EDEFAULT);
@@ -2549,8 +2549,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return xSISchemaLocation != null && !xSISchemaLocation.isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_SUBJECT:
 				return getTaskSubject() != null;
-			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMANDS:
-				return !getTaskCommands().isEmpty();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_COMMAND:
+				return !getTaskCommand().isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_TYPE:
 				return RESOURCE_TYPE_EDEFAULT == null ? resourceType != null : !RESOURCE_TYPE_EDEFAULT.equals(resourceType);
 			case FoxBPMPackage.DOCUMENT_ROOT__RESOURCE_FILTER:

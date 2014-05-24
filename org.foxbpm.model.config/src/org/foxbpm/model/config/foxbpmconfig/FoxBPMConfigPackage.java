@@ -610,13 +610,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
 
 	/**
-	 * The feature id for the '<em><b>Task Command Definitions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Task Command Definition</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = BASE_CONFIG_FEATURE_COUNT + 0;
+	int TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Task Command Config</em>' class.
@@ -1150,15 +1150,15 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EClass getTaskCommandConfig();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions <em>Task Command Definitions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinition <em>Task Command Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Task Command Definitions</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinitions()
+	 * @return the meta object for the containment reference list '<em>Task Command Definition</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinition()
 	 * @see #getTaskCommandConfig()
 	 * @generated
 	 */
-	EReference getTaskCommandConfig_TaskCommandDefinitions();
+	EReference getTaskCommandConfig_TaskCommandDefinition();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.Param <em>Param</em>}'.
@@ -1612,12 +1612,12 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EClass TASK_COMMAND_CONFIG = eINSTANCE.getTaskCommandConfig();
 
 		/**
-		 * The meta object literal for the '<em><b>Task Command Definitions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Task Command Definition</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS = eINSTANCE.getTaskCommandConfig_TaskCommandDefinitions();
+		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION = eINSTANCE.getTaskCommandConfig_TaskCommandDefinition();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl <em>Param</em>}' class.

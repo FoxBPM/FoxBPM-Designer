@@ -190,7 +190,7 @@ public class BpmnModelUtil {
 		ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
 		userTask.getExtensionValues().add(extensionElement);
 		FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
-				(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMANDS,
+				(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_COMMAND,
 				createTaskViewCommand());
 		extensionElement.getValue().add(extensionElementEntry);
 
