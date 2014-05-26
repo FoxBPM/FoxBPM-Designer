@@ -279,11 +279,11 @@ public class NewProcessWizardPage extends WizardPage {
 	}
 
 	public String getProcessIdText() {
-		return processIdText.getText() + ".bpmn";
+		return processIdText.getText();
 	}
 
 	public String getProcessNameText() {
-		return processNameText.getText();
+		return processNameText.getText() + ".bpmn";
 	}
 
 	public String getValidationLevel() {

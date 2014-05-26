@@ -45,7 +45,7 @@ public class ProcessOperHandler implements IHandler {
 	    
 //	    if(file)
 	    
-		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), file.getName());
+		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), file);
 		processOperDialog.open();
 		return null;
 	}

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,7 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.bpmn.designer.ui.tree.EntityElement;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.model.config.connector.Checkbox;
@@ -61,6 +60,8 @@ public class ConnectorUtil {
 
 	public static String OLDCONNECTORPATH = "connector-path";
 	
+	public static String DOWNLOADURL = "http://172.16.40.89:8010/foxbpm/service/flowconfig";
+	
 	public static HashMap<String, Object> hashMap = new HashMap<String, Object>();
 
 	/**
@@ -80,7 +81,11 @@ public class ConnectorUtil {
 	 * @return
 	 */
 	public static String getConnectorPath() {
-		return PropertiesUtil.readValue(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath");
+		if(FoxBPMDesignerUtil.getServicePath().equals("path")) {
+			MessageDialog.openInformation(null, "提示", "请先在设计器根目录的配置文件(path.properties)中更改服务地址(service)");
+			return "";
+		}
+		return FoxBPMDesignerUtil.getServicePath() + "/connector/";
 	}
 
 	/**
@@ -695,7 +700,7 @@ public class ConnectorUtil {
 		return null;
 	}
 
-	public static String downLoadConnector() throws IOException {
+	public static String downLoadConnector(String type) throws IOException {
 		String connectorPath = getConnectorPath();
 		Authenticator.setDefault(new Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -706,10 +711,21 @@ public class ConnectorUtil {
 		File file = null;
 		// url = new
 		// URL("http://172.16.40.89:8080/foxbpm-webapps-rest/service/connectors");
-		url = new URL("http://172.16.40.89:8010/foxbpm/service/connectors");
-		file = File.createTempFile(System.currentTimeMillis() + "test", ".zip");
+		url = new URL(DOWNLOADURL);
+		file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
 		FileUtils.copyURLToFile(url, file);
-		ZipUtils.unZip(file.getPath(), connectorPath);
+		
+		String servicePath = FoxBPMDesignerUtil.getServicePath();
+		File serviceDirectory = new File(servicePath);
+		
+		if(!type.equals("start")) {
+			//强制删除服务目录下文件
+			for (File tempFile : serviceDirectory.listFiles()) {
+				FileUtils.forceDelete(tempFile);
+			}
+		}
+		
+		ZipUtils.unZip(file.getPath(), servicePath);
 
 		return connectorPath;
 	}

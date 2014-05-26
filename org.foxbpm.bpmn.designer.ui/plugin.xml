@@ -84,6 +84,10 @@
           id="org.foxbpm.bpmn.designer.ui.command.processoper"
           name="流程操作">
     </command>
+    <command
+          id="org.foxbpm.bpmn.designer.ui.command.downloadres"
+          name="同步设计器资源">
+    </command>
  </extension>
  <extension
        point="org.eclipse.ui.handlers">
@@ -106,6 +110,10 @@
     <handler
           class="org.foxbpm.bpmn.designer.ui.commands.ProcessOperHandler"
           commandId="org.foxbpm.bpmn.designer.ui.command.processoper">
+    </handler>
+    <handler
+          class="org.foxbpm.bpmn.designer.ui.commands.SynDesignerResourceHandler"
+          commandId="org.foxbpm.bpmn.designer.ui.command.downloadres">
     </handler>
  </extension>
  <extension
@@ -182,6 +190,19 @@
              commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
              style="push">
        </command>
+    </menuContribution>
+    <menuContribution
+          allPopups="false"
+          locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+       <toolbar
+             id="org.foxbpm.bpmn.designer.ui.toolbar.synres">
+          <command
+                commandId="org.foxbpm.bpmn.designer.ui.command.downloadres"
+                icon="icons/fox_16.ico"
+                style="push"
+                tooltip="同步设计器资源">
+          </command>
+       </toolbar>
     </menuContribution>
  </extension>
  <extension
@@ -450,6 +471,11 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
+   <propertyTab
+         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskcommandPropertySection"
+         id="org.foxbpm.bpmn.designer.ui.propertyTab.taskcommand"
+         label="任务命令">
+   </propertyTab>
 
 		<!-- ======================================== -->
 		<!-- ===  Model Enablements and Profiles ==== -->

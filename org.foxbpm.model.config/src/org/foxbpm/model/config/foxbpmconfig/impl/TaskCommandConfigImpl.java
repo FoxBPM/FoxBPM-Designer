@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -21,7 +20,7 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl#getTaskCommandDefinitions <em>Task Command Definitions</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandConfigImpl#getTaskCommandDefinition <em>Task Command Definition</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,15 +28,14 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
  */
 public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommandConfig {
 	/**
-	 * The cached value of the '{@link #getTaskCommandDefinitions() <em>Task Command Definitions</em>}' containment reference list.
+	 * The cached value of the '{@link #getTaskCommandDefinition() <em>Task Command Definition</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTaskCommandDefinitions()
+	 * @see #getTaskCommandDefinition()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TaskCommandDefinition> taskCommandDefinitions;
-
+	protected EList<TaskCommandDefinition> taskCommandDefinition;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,11 +60,11 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TaskCommandDefinition> getTaskCommandDefinitions() {
-		if (taskCommandDefinitions == null) {
-			taskCommandDefinitions = new EObjectContainmentEList<TaskCommandDefinition>(TaskCommandDefinition.class, this, FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS);
+	public EList<TaskCommandDefinition> getTaskCommandDefinition() {
+		if (taskCommandDefinition == null) {
+			taskCommandDefinition = new EObjectContainmentEList<TaskCommandDefinition>(TaskCommandDefinition.class, this, FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION);
 		}
-		return taskCommandDefinitions;
+		return taskCommandDefinition;
 	}
 
 	/**
@@ -77,8 +75,8 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
-				return ((InternalEList<?>)getTaskCommandDefinitions()).basicRemove(otherEnd, msgs);
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION:
+				return ((InternalEList<?>)getTaskCommandDefinition()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -91,8 +89,8 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
-				return getTaskCommandDefinitions();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION:
+				return getTaskCommandDefinition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -106,9 +104,9 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
-				getTaskCommandDefinitions().clear();
-				getTaskCommandDefinitions().addAll((Collection<? extends TaskCommandDefinition>)newValue);
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION:
+				getTaskCommandDefinition().clear();
+				getTaskCommandDefinition().addAll((Collection<? extends TaskCommandDefinition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -122,8 +120,8 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
-				getTaskCommandDefinitions().clear();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION:
+				getTaskCommandDefinition().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -137,8 +135,8 @@ public class TaskCommandConfigImpl extends BaseConfigImpl implements TaskCommand
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITIONS:
-				return taskCommandDefinitions != null && !taskCommandDefinitions.isEmpty();
+			case FoxBPMConfigPackage.TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION:
+				return taskCommandDefinition != null && !taskCommandDefinition.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

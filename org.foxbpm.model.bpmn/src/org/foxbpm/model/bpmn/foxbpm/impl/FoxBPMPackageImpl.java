@@ -3033,6 +3033,12 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "name", "name"
 		   });			
 		addAnnotation
+		  (taskCommandEClass, 
+		   source, 
+		   new String[] {
+			 "name", "TaskCommand"
+		   });		
+		addAnnotation
 		  (getTaskCommand_Expression(), 
 		   source, 
 		   new String[] {

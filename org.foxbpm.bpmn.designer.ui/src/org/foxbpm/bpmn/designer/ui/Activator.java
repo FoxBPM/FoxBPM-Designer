@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -13,6 +12,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -45,12 +45,12 @@ public class Activator extends AbstractUIPlugin {
 			protected IStatus run(IProgressMonitor monitor) {
 				// do something long running
 				monitor.beginTask("正在初始化资源文件", 2);
-				if(!new File(Platform.getInstallLocation().getURL().getPath() + "path.properties").exists())
-					PropertiesUtil.writeProperties(Platform.getInstallLocation().getURL().getPath() + "path.properties", "connectorPath", "D:/connector/");
+				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists())
+					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector();
+					ConnectorUtil.downLoadConnector("start");
 				} catch (final IOException e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
