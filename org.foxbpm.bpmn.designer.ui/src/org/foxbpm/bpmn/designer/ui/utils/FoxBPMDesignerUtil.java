@@ -41,6 +41,10 @@ public class FoxBPMDesignerUtil {
 	public static String getServicePath() {
 		return PropertiesUtil.readProperties(getPropertiesPath()).get("service").toString() + "/";
 	}
+	
+	public static String getServicePathPath() {
+		return getProperties().get("servicePath").toString() + "/" ;
+	}
 
 	/**
 	 * 返回临时目录中的流程模板文件路径

@@ -60,7 +60,7 @@ public class ConnectorUtil {
 
 	public static String OLDCONNECTORPATH = "connector-path";
 	
-	public static String DOWNLOADURL = "http://172.16.40.89:8010/foxbpm/service/flowconfig";
+	public static String DOWNLOADURL = FoxBPMDesignerUtil.getServicePathPath() + "flowconfig";
 	
 	public static HashMap<String, Object> hashMap = new HashMap<String, Object>();
 

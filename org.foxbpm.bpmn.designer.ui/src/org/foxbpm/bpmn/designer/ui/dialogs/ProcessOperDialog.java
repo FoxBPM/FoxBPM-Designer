@@ -202,7 +202,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	}
 
 	private void publishProcess() {
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getProperties().get("servicePath").toString() + "model/deployments");
+		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployments");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		File file = null;
 		try {
@@ -228,7 +228,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		Definitions definitions = ModelUtil.getDefinitions(EMFUtil.readEMFFile(iFile.getLocationURI().getPath()));
 		Process process = (Process) definitions.getRootElements().get(0);
 		
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getProperties().get("servicePath").toString() + "process-definitions?key=" + process.getId());
+		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + process.getId());
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
 		Representation result = client.get();
 		try {
