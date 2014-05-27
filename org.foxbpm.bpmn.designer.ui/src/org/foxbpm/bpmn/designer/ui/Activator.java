@@ -3,8 +3,11 @@ package org.foxbpm.bpmn.designer.ui;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -44,7 +47,18 @@ public class Activator extends AbstractUIPlugin {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// do something long running
-				monitor.beginTask("正在初始化资源文件", 2);
+				monitor.beginTask("正在初始化资源文件", 3);
+				
+				File fakeGroovyFile = new File(FoxBPMDesignerUtil.getFakeGroovyFilePath());
+				if(!fakeGroovyFile.exists()) {
+					try {
+						fakeGroovyFile.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				monitor.worked(1);
+				
 				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists())
 					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
 				monitor.worked(1);

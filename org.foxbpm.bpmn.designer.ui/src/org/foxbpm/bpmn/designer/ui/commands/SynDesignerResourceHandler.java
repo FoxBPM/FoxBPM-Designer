@@ -50,7 +50,8 @@ public class SynDesignerResourceHandler implements IHandler {
 							MessageDialog.openInformation(null, "提示", "同步设计器资源失败，原因是\n" + e.getMessage());
 						}
 					});
-//					e.printStackTrace();
+					e.printStackTrace();
+					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
 				

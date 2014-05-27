@@ -7,10 +7,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.jdt.ui.PreferenceConstants;
@@ -53,9 +52,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.handlers.IHandlerActivation;
 import org.eclipse.ui.handlers.IHandlerService;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
@@ -309,16 +309,19 @@ public class FoxBPMExpDialog extends Dialog {
 
 		diagramEditorSelectionProvider = site.getSelectionProvider();
 
-		IPath path = Path.fromOSString("src/test.groovy");
-		IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getProject("TTT").getFile(path);
+//		IPath path = Path.fromOSString(FoxBPMDesignerUtil.getFakeGroovyFilePath());
+//		IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 
 		editor = new FoxBPMGroovyEditor(store);
 		try {
 
-			input = new FileEditorInput(ifile);
+			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(FoxBPMDesignerUtil.getFakeGroovyFilePath()));
+			if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
+				input = new FileStoreEditorInput(fileStore);
+			}
+			
 			editor.getDocumentProvider().connect(input);
 			document = editor.getDocumentProvider().getDocument(input);
-			// input = new StringInput("", "groovy");
 			editor.init(site, input);
 
 			editor.createPartControl(editorcomposite);

@@ -43,7 +43,11 @@ public class FoxBPMDesignerUtil {
 	}
 	
 	public static String getServicePathPath() {
-		return getProperties().get("servicePath").toString() + "/" ;
+		if(getProperties().get("servicePath").toString().lastIndexOf("/") == getProperties().get("servicePath").toString().length()-1) {
+			return getProperties().get("servicePath").toString();
+		} else {
+			return getProperties().get("servicePath").toString() + "/";
+		}
 	}
 
 	/**
@@ -84,5 +88,13 @@ public class FoxBPMDesignerUtil {
 	public static FoxBPMConfig getFoxBPMConfig() {
 		FoxBPMConfig foxBPMConfig = (FoxBPMConfig) EMFUtil.readEMFFile(getTempleteConfigFilePath()).getContents().get(0);
 		return foxBPMConfig;
+	}
+	
+	/**
+	 * 拿假的groovy文件
+	 * @return
+	 */
+	public static String getFakeGroovyFilePath() {
+		return Platform.getInstallLocation().getURL().getPath() + "fake.groovy";
 	}
 }
