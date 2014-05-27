@@ -160,7 +160,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 				// 打开原文件（connector图标）
 				FileInputStream fis = new FileInputStream(((ConfigureActorConnectorWizardPage) ccwd).getIconPath());
 				// 打开连接到目标文件的输出流
-				File outfile = new File(ConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
+				File outfile = new File(ConnectorUtil.getDefinitionActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
 						+ ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
 				FileOutputStream outStream = new FileOutputStream(outfile);
 
@@ -181,7 +181,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "处理者选择器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateActorConnectorJavaClassReturnInputStream(connector);
-		File file = new File(ConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
+		File file = new File(ConnectorUtil.getDefinitionActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
 				+ ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {

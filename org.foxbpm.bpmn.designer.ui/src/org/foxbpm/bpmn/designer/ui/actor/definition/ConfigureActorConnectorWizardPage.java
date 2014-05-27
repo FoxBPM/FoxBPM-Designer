@@ -305,7 +305,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		if (newConnector.getIcon() != null) {
 			try {
 				connectoriconButton.setText("");
-				is = new FileInputStream(ConnectorUtil.getActorConnectorIconPathByIconName(newConnector.getId(), newConnector.getIcon()));
+				is = new FileInputStream(ConnectorUtil.getDefinitionActorConnectorIconPathByIconName(newConnector.getId(), newConnector.getIcon()));
 				if (connectoriconButton.getImage() != null && !connectoriconButton.getImage().isDisposed()) {
 					connectoriconButton.getImage().dispose();
 				}

@@ -252,8 +252,18 @@ public class ConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static String getActorConnectorPathById(String connectorId) {
+	public static String getDefinitionActorConnectorPathById(String connectorId) {
 		return getDefinitionConnectorPath() + connectorId;
+	}
+	
+	/**
+	 * 根据处理者选择器ID得到对应处理者选择器文件存放路径
+	 * 
+	 * @param connectorId
+	 * @return
+	 */
+	public static String getRuntimeActorConnectorPathById(String connectorId) {
+		return getRuntimeConnectorPath() + connectorId;
 	}
 
 	/**
@@ -272,8 +282,19 @@ public class ConnectorUtil {
 	 * @param iconName
 	 * @return
 	 */
-	public static String getActorConnectorIconPathByIconName(String connectorId, String iconName) {
-		return getActorConnectorPathById(connectorId) + "/" + iconName;
+	public static String getDefinitionActorConnectorIconPathByIconName(String connectorId, String iconName) {
+		return getDefinitionActorConnectorPathById(connectorId) + "/" + iconName;
+	}
+	
+	/**
+	 * 根据图标的名称得到处理者选择器图标所存放的路径
+	 * 
+	 * @param connectorId
+	 * @param iconName
+	 * @return
+	 */
+	public static String getRuntimeActorConnectorIconPathByIconName(String connectorId, String iconName) {
+		return getRuntimeActorConnectorPathById(connectorId) + "/" + iconName;
 	}
 
 	/**

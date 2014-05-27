@@ -133,7 +133,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						return;
 
 					// 删除目录
-					File file = new File(ConnectorUtil.getActorConnectorPathById(connector.getId()));
+					File file = new File(ConnectorUtil.getDefinitionActorConnectorPathById(connector.getId()));
 					// File file = new
 					// File(ConnectorUtil.getConnectorPathById(connector.getConnectorId()));
 					deleteFile(file);
@@ -230,7 +230,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						getAllMenuConnector(nodesel);
 						if (menuConnectorIdStringList.size() > 0) {
 							for (String idString : menuConnectorIdStringList) {
-								file = new File(ConnectorUtil.getActorConnectorPathById(idString));
+								file = new File(ConnectorUtil.getDefinitionActorConnectorPathById(idString));
 								deleteFile(file);
 							}
 						}

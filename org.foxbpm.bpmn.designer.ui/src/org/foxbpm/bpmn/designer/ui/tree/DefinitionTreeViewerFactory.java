@@ -224,7 +224,7 @@ public class DefinitionTreeViewerFactory {
 						if(ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								ConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
+								ConnectorUtil.getDefinitionActorConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
 										.getIcon()), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
 						parentElement.addChild(childElement);
 					}
