@@ -27,7 +27,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -54,7 +53,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
@@ -83,9 +81,6 @@ import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
 
 public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
-
-	private static String CONNECTORDEFAULTICON = "connector.png";
-
 	private DataBindingContext m_bindingContext;
 	private Text connectorclassnametext;
 	private Text connectorpackagenametext;
@@ -96,17 +91,10 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private Text connectoridtext;
 	private Text connectornametext;
 	private Text connectordesctext;
-	private Text categoryNameText;
-	private Button btnCategory;
-	private Combo connectortypecombo;
-	private ComboViewer comboViewer;
 	private Button connectoriconButton;
 	private String iconPath;
 	private String customCategoryIconPath;
-	private String customCategoryName;
-	private String categoryId;
 	private Composite composite;
-	private Composite customCategoryComposite;
 	private Button inputcreateButton;
 	private Button inputupButton;
 	private Button inputdownButton;
@@ -120,14 +108,12 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private Button outputupButton;
 	private Button outputdownButton;
 	private Button outputdeleteButton;
-	private boolean hassamecat = false;
 	private String openType;
 	private FileInputStream is;
 	private Table table;
 	private TableViewer tableViewer;
 	private Tree categorytree;
 	private TreeViewer categorytreeViewer;
-	private Button categorycreateButton;
 	private List<String> newCreateCategoryID;
 	private List<Page> pages;
 	private ConnectorDefinition connectorDefinition;
@@ -161,7 +147,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		pages = new ArrayList<Page>();
 		this.newCreateCategoryID = new ArrayList<String>();
 
-		menu = ConnectorUtil.getFlowConnectorMenu();
+		menu = ConnectorUtil.getDefinitionFlowConnectorMenu();
 		// menu = menufactory.createMenu();
 		nodelist = menu.eResource() == null ? new ArrayList<Node>() : EMFUtil.getAll(menu.eResource(), Node.class);
 
@@ -185,12 +171,12 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		this.connectorDefinition = connector;
 		this.newCreateCategoryID = new ArrayList<String>();
 		// 读取Menu的xml
-		String menuPath = ConnectorUtil.getMenuConnectorPath();
+		String menuPath = ConnectorUtil.getFlowConnectorMenuPath();
 		XMIResource menuresource = (XMIResource) new ResourceSetImpl().getResource(URI.createFileURI(menuPath), true);
 		Menu menu = (Menu) menuresource.getContents().get(0);
 		// Menu menu =
 		// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		menu = ConnectorUtil.getFlowConnectorMenu();
+		menu = ConnectorUtil.getDefinitionFlowConnectorMenu();
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
 		for (Node nd : nodelist) {
@@ -962,7 +948,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
 		updateButtons();
 		setControl(mainComposite);
-//		m_bindingContext = initDataBindings();
+		m_bindingContext = initDataBindings();
 	}
 
 	/*

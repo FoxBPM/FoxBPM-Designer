@@ -23,6 +23,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateFlowConnectorJava;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FileUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -71,7 +72,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		// 先得到连接器对应的MenuConnector
 		ConnectorDefinition connector = ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector();
 		// 取得连接器之后立马改掉Icon
-		connector.setIcon(connector.getId() + "." + getExtensionName(ConnectorUtil.getFlowConnectorMenuIconName(connector.getIcon())));
+		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(ConnectorUtil.getConnectorMenuIconName(connector.getIcon())));
 		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
@@ -142,7 +143,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		String path =ConnectorUtil.getConnectorPath() + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + "/ActorConnector.xml";
+		String path =ConnectorUtil.getDefinitionConnectorPath() + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + "/ActorConnector.xml";
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
 		resource.setEncoding("UTF-8");
 
@@ -220,18 +221,5 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 //		} catch (PartInitException e) {
 //		}
 		return true;
-	}
-
-	/*
-	 * Java文件操作 获取文件扩展名
-	 */
-	private static String getExtensionName(String filename) {
-		if ((filename != null) && (filename.length() > 0)) {
-			int dot = filename.lastIndexOf('.');
-			if ((dot > -1) && (dot < (filename.length() - 1))) {
-				return filename.substring(dot + 1);
-			}
-		}
-		return filename;
 	}
 }

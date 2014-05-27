@@ -23,7 +23,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.definition.Constant;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
@@ -72,7 +72,7 @@ public class ModifyNewCommonConnectorWizardPage extends WizardPage {
 		super(pageName, title, titleImage);
 		this.page = page;
 		this.connectorInstance = connectorInstance;
-		this.connector = TreeViewerNewFactory.getActorConnector(connectorInstance.getConnectorId());;
+		this.connector = RuntimeTreeViewerFactory.getActorConnector(connectorInstance.getConnectorId());;
 
 		// title信息
 		setTitle(title);

@@ -22,6 +22,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FileUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -47,14 +48,14 @@ public class ConnectorWizardCreationWizard extends Wizard {
 	public ConnectorWizardCreationWizard(ConnectorDefinition newConnector) {
 		this.newConnector = newConnector;
 	}
-	
+
 	@Override
 	public void addPages() {
 		if (newConnector == null)
 			ccwd = new ConfigureNewConnectorWizardPage(true, "创建连接器");
 		else
 			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector);
-		
+
 		addPage(ccwd);
 	}
 
@@ -72,8 +73,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// 先得到连接器对应的MenuConnector
 		ConnectorDefinition connector = ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition();
 		// 取得连接器之后立马改掉Icon
-		// connector.setIcon(connector.getId() + "." +
-		// getExtensionName(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(connector.getIcon())));
+//		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(ConnectorUtil.getFlowConnectorMenuIconName(connector.getIcon())));
 		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
@@ -139,7 +139,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// Obtain a new resource set
 		ResourceSet resSet = new ResourceSetImpl();
 
-		String path = ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/FlowConnector.xml";
+		String path = ConnectorUtil.getDefinitionConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/FlowConnector.xml";
 
 		// Create a resource
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
@@ -158,7 +158,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 				// 打开原文件（connector图标）
 				FileInputStream fis = new FileInputStream(((ConfigureNewConnectorWizardPage) ccwd).getIconPath());
 				// 打开连接到目标文件的输出流
-				File outfile = new File(ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
+				File outfile = new File(ConnectorUtil.getDefinitionConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
 						+ ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getIcon());
 				FileOutputStream outStream = new FileOutputStream(outfile);
 
@@ -179,7 +179,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "连接器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateConnectorJavaClassReturnInputStream(connector);
-		File file = new File(ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
+		File file = new File(ConnectorUtil.getDefinitionConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
 				+ ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {
@@ -224,18 +224,5 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// } catch (PartInitException e) {
 		// }
 		return true;
-	}
-
-	/*
-	 * Java文件操作 获取文件扩展名
-	 */
-	private static String getExtensionName(String filename) {
-		if ((filename != null) && (filename.length() > 0)) {
-			int dot = filename.lastIndexOf('.');
-			if ((dot > -1) && (dot < (filename.length() - 1))) {
-				return filename.substring(dot + 1);
-			}
-		}
-		return filename;
 	}
 }

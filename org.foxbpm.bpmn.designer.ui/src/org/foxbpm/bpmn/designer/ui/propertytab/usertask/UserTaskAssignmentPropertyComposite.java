@@ -45,7 +45,7 @@ import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.create.AddNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.modify.ModifyNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
@@ -400,7 +400,7 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				String decoration = " -- "
 				// + getType(d.getEventType())
 				// + " -- "
-						+ (TreeViewerNewFactory.getActorConnector(d.getConnectorId()) == null ? "" : TreeViewerNewFactory.getActorConnector(d.getConnectorId()).getName());
+						+ (RuntimeTreeViewerFactory.getActorConnector(d.getConnectorId()) == null ? "" : RuntimeTreeViewerFactory.getActorConnector(d.getConnectorId()).getName());
 				styledString.append(d.getConnectorInstanceName());
 				styledString.append(decoration, StyledString.DECORATIONS_STYLER);
 				cell.setText(styledString.getString());

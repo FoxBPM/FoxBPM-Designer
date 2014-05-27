@@ -18,7 +18,7 @@ public class CreateActorConnector implements IWorkbenchWindowActionDelegate {
 	
 	@Override
 	public void run(IAction action) {
-		String connectPathString = ConnectorUtil.getConnectorPath();
+		String connectPathString = ConnectorUtil.getDefinitionConnectorPath();
 		File file = new File(connectPathString);
 		if(!file.exists()){
 			MessageDialog.openWarning(window.getShell(), "提示", "找不到选择器存放路径，请设置");

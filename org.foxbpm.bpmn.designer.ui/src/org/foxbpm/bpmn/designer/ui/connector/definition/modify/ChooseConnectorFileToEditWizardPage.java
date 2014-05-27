@@ -29,7 +29,7 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 	private Button wizardRadioButton;
 	private Button fileRadioButton;
 	private Text txtjava;
-	
+
 	/**
 	 * Create the wizard.
 	 */
@@ -42,6 +42,7 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 
 	/**
 	 * Create contents of the wizard.
+	 * 
 	 * @param parent
 	 */
 	public void createControl(Composite parent) {
@@ -54,7 +55,7 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 		gl_container.marginHeight = 0;
 		gl_container.horizontalSpacing = 0;
 		container.setLayout(gl_container);
-		
+
 		Composite composite = new Composite(container, SWT.NONE);
 		GridLayout gl_composite = new GridLayout(2, false);
 		gl_composite.marginRight = 15;
@@ -64,7 +65,7 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 		composite.setLayout(gl_composite);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		composite.setBounds(0, 0, 64, 64);
-		
+
 		wizardRadioButton = new Button(composite, SWT.RADIO);
 		wizardRadioButton.setSelection(true);
 		wizardRadioButton.addSelectionListener(new SelectionAdapter() {
@@ -74,12 +75,12 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 			}
 		});
 		wizardRadioButton.setText("使用向导");
-		
+
 		txtjava = new Text(composite, SWT.READ_ONLY);
 		txtjava.setForeground(SWTResourceManager.getColor(220, 20, 60));
 		txtjava.setText("注意：使用此方式编辑会导致连接器java文件重写！");
 		txtjava.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
+
 		fileRadioButton = new Button(composite, SWT.RADIO);
 		fileRadioButton.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		fileRadioButton.addSelectionListener(new SelectionAdapter() {
@@ -89,46 +90,48 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 			}
 		});
 		fileRadioButton.setText("修改文件");
-		
+
 		checkboxTreeViewer = new CheckboxTreeViewer(composite, SWT.BORDER);
 		Tree tree = checkboxTreeViewer.getTree();
 		tree.setEnabled(false);
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		checkboxTreeViewer.setLabelProvider(new ViewerLabelProvider());
 		checkboxTreeViewer.setContentProvider(new TreeContentProvider());
-//		checkboxTreeViewer.setInput(getFilesInConnectorPath());
+		// checkboxTreeViewer.setInput(getFilesInConnectorPath());
 	}
-	
+
 	public List<String> getFilesInConnectorPath() {
 		List<String> filenames = new ArrayList<String>();
-		File d = new File(ConnectorUtil.getConnectorPathById(connector.getId()));// 建立当前目录中文件的File对象
+		File d = new File(ConnectorUtil.getFlowConnectorPathById(connector.getId()));// 建立当前目录中文件的File对象
 		File[] fl = d.listFiles();// 取得目录中所有文件的File对象数组
 		for (int i = 0; i < fl.length; i++) {
-			 // 目录下的文件：
-			 File e = fl[i];
-			 if (e.isFile()) {
-				 filenames.add(e.getName());
-//				 System.out.println(e.getName());
-			 }
+			// 目录下的文件：
+			File e = fl[i];
+			if (e.isFile()) {
+				filenames.add(e.getName());
+				// System.out.println(e.getName());
+			}
 		}
 		return filenames;
 	}
-	
+
 	private static class ViewerLabelProvider extends LabelProvider {
 		public Image getImage(Object element) {
 			return super.getImage(element);
 		}
+
 		public String getText(Object element) {
 			return super.getText(element);
 		}
 	}
-	
-	
+
 	private static class TreeContentProvider implements ITreeContentProvider {
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 		}
+
 		public void dispose() {
 		}
+
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof List) {
 				@SuppressWarnings("rawtypes")
@@ -138,17 +141,19 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 				return new Object[0];
 			}
 		}
+
 		public Object[] getChildren(Object parentElement) {
 			return null;
 		}
+
 		public Object getParent(Object element) {
 			return null;
 		}
+
 		public boolean hasChildren(Object element) {
 			return false;
 		}
 	}
-
 
 	public ConnectorDefinition getConnector() {
 		return connector;

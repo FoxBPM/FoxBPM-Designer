@@ -3,11 +3,8 @@ package org.foxbpm.bpmn.designer.ui;
 import java.io.File;
 import java.io.IOException;
 
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -59,8 +56,10 @@ public class Activator extends AbstractUIPlugin {
 				}
 				monitor.worked(1);
 				
-				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists())
+				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists()) {
+					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "connectorDefinitionPath", "path");
 					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
+				}
 				monitor.worked(1);
 				// 下载
 				try {

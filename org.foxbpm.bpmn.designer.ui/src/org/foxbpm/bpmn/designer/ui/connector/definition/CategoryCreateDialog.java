@@ -39,7 +39,7 @@ import org.foxbpm.model.config.connectormenu.Node;
 
 public class CategoryCreateDialog extends TitleAreaDialog {
 
-	private static String CATEGORYDEFAULTICON = "category.png";
+	private static String CATEGORYDEFAULTICON = "connector.png";
 	
 	private Text textname;
 	private Button buttonicon;
@@ -196,7 +196,7 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 		btnIsCreateRoot.setLayoutData(gd_btnIsCreateRoot);
 		btnIsCreateRoot.setText("是否作为根节点创建分类");
 		
-		CategoryCreateDialog.this.iconpath = ConnectorUtil.getConnectorPath()+CATEGORYDEFAULTICON;
+		CategoryCreateDialog.this.iconpath = ConnectorUtil.getConnectorIconPath() + CATEGORYDEFAULTICON;
 		if (new File(iconpath).exists()) {
 			try {
 				is = new FileInputStream(iconpath);

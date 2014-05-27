@@ -42,7 +42,7 @@ import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.modify.ModifyNewConnectorWizard;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
@@ -377,9 +377,9 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				String decoration = " -- "
 						+ getType(d.getEventType())
 						+ " -- "
-						+ (TreeViewerNewFactory.getConnector(d.getConnectorId()) == null ? (ConnectorUtil.getFlowConnectorByMenuConnectorId(d.getConnectorId()) == null ? "" : ConnectorUtil
-								.getFlowConnectorByMenuConnectorId(d.getConnectorId()).getName()) : (TreeViewerNewFactory.getConnector(d.getConnectorId()).getName() == null ? ""
-								: TreeViewerNewFactory.getConnector(d.getConnectorId()).getName()));
+						+ (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()) == null ? (ConnectorUtil.getFlowConnectorByMenuConnectorId(d.getConnectorId()) == null ? "" : ConnectorUtil
+								.getFlowConnectorByMenuConnectorId(d.getConnectorId()).getName()) : (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName() == null ? ""
+								: RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName()));
 				styledString.append(d.getConnectorInstanceName());
 				styledString.append(decoration, StyledString.DECORATIONS_STYLER);
 				cell.setText(styledString.getString());

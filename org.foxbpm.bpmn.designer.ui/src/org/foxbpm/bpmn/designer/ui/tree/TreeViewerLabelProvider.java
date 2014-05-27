@@ -1,5 +1,7 @@
 package org.foxbpm.bpmn.designer.ui.tree;
 
+import java.io.File;
+
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -8,6 +10,7 @@ import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 
 public class TreeViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
 
@@ -51,7 +54,7 @@ public class TreeViewerLabelProvider extends StyledCellLabelProvider implements 
 	public Image getImage(Object element) {
 		ITreeElement tElement = (ITreeElement) element;
 		try {
-			String imagePath = tElement.getIcon(); // 要读取的图片文件的路径
+			String imagePath = tElement.getIcon().indexOf(File.separator)==-1 && tElement.getIcon().indexOf("/")==-1?ConnectorUtil.getConnectorIconPath() + tElement.getIcon() : tElement.getIcon(); // 要读取的图片文件的路径
 			return new Image(PlatformUI.getWorkbench().getDisplay(),
 					new ImageData(imagePath).scaledTo(16, 16));
 		} catch (Exception e) {

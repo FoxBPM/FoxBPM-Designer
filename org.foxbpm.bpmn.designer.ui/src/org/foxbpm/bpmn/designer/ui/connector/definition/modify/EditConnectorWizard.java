@@ -26,33 +26,33 @@ public class EditConnectorWizard extends DynamicPageWizard {
 
 	@Override
 	public boolean performFinish() {
-		if (chooseFlowConnectorFileToEditWizardPage.getWizardRadioButton().getSelection()) {
-			ConnectorWizardCreationWizard cwcp = new ConnectorWizardCreationWizard(selectNewConnectorWizardPage.getConnector());
-			CreateFixConnectorWizardDialog cfwd = new CreateFixConnectorWizardDialog(new Shell(SWT.PRIMARY_MODAL), cwcp);
-			cfwd.open();
-			return true;
-		}
-		if (chooseFlowConnectorFileToEditWizardPage.getFileRadioButton().getSelection()) {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getOldConnectorProjectName());
-
-			Object[] files = chooseFlowConnectorFileToEditWizardPage.getCheckboxTreeViewer().getCheckedElements();
-
-			for (Object object : files) {
-				try {
-					File file = new File(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString());
-					String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
-					IFile ifile = project.getFile(relativePath);
-					// 打开编辑器
-					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
-					IDE.openEditor(page, ifile);
-				} catch (PartInitException e) {
-				}
-			}
-
-			return true;
-		}
+//		if (chooseFlowConnectorFileToEditWizardPage.getWizardRadioButton().getSelection()) {
+//			ConnectorWizardCreationWizard cwcp = new ConnectorWizardCreationWizard(selectNewConnectorWizardPage.getConnector());
+//			CreateFixConnectorWizardDialog cfwd = new CreateFixConnectorWizardDialog(new Shell(SWT.PRIMARY_MODAL), cwcp);
+//			cfwd.open();
+//			return true;
+//		}
+//		if (chooseFlowConnectorFileToEditWizardPage.getFileRadioButton().getSelection()) {
+//			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+//
+//			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getOldConnectorProjectName());
+//
+//			Object[] files = chooseFlowConnectorFileToEditWizardPage.getCheckboxTreeViewer().getCheckedElements();
+//
+//			for (Object object : files) {
+//				try {
+//					File file = new File(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString());
+//					String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
+//					IFile ifile = project.getFile(relativePath);
+//					// 打开编辑器
+//					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
+//					IDE.openEditor(page, ifile);
+//				} catch (PartInitException e) {
+//				}
+//			}
+//
+//			return true;
+//		}
 		return false;
 	}
 

@@ -23,7 +23,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -51,7 +50,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
@@ -68,9 +66,9 @@ import org.foxbpm.bpmn.designer.ui.connector.definition.CreateNewPageDialog;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
-import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.ConnectorFactory;
 import org.foxbpm.model.config.connector.ConnectorPackage;
@@ -94,21 +92,14 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 	private Text connectoridtext;
 	private Text connectornametext;
 	private Text connectordesctext;
-	private Text categoryNameText;
-	private Button btnCategory;
-	private Combo connectortypecombo;
-	private ComboViewer comboViewer;
 	private Button connectoriconButton;
 	private String iconPath;
 	private ConnectorDefinition newConnector;
 	private Menu menu;
 	private ConnectorFactory newFactory;
 	private String customCategoryIconPath;
-	private String customCategoryName;
-	private String categoryId;
 	private Node node;
 	private Composite composite;
-	private Composite customCategoryComposite;
 	private List<Node> nodelist;
 	private Button inputcreateButton;
 	private Button inputupButton;
@@ -119,7 +110,6 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 	private Button pageupButton;
 	private Button pagedownButton;
 	private Button pagedeleteButton;
-	private boolean hassamecat = false;
 	private List<Page> pages;
 	private String openType;
 	private FileInputStream is;
@@ -146,9 +136,6 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		ConnectorPackage.eINSTANCE.eClass();
 		ConnectorFactory newFactory = ConnectorFactory.eINSTANCE;
 		ConnectorDefinition newConnector = newFactory.createConnectorDefinition();
-		Input newinput = newFactory.createInput();
-		Page newPage = newFactory.createPage();
-		Output newoutput = newFactory.createOutput();
 		DefinitionImpl definitionImpl = newFactory.createDefinitionImpl();
 		this.newConnector = newConnector;
 		this.newFactory = newFactory;
@@ -182,9 +169,6 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		// 初始化model
 		ConnectorPackage.eINSTANCE.eClass();
 		ConnectorFactory newFactory = ConnectorFactory.eINSTANCE;
-		Input newinput = newFactory.createInput();
-		Page newPage = newFactory.createPage();
-		Output newoutput = newFactory.createOutput();
 		this.newConnector = connector;
 		this.newFactory = newFactory;
 		this.newCreateCategoryID = new ArrayList<String>();
@@ -312,7 +296,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 						connectoriconButton.setText("...");
 					}
 					//这个连接器的图标名称需要改成和连接器ID一样的名字，由于这个里面可能还没有输入id所以改成到保存代码再修改
-					newConnector.setIcon(ConnectorUtil.getFlowConnectorMenuIconName(res));
+					newConnector.setIcon(ConnectorUtil.getConnectorMenuIconName(res));
 				}
 			}
 		});
@@ -333,8 +317,8 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 			}
 		} else {
 			// 如果是创建就给connectoriconButton一个默认图标
-			this.setIconPath(ConnectorUtil.getMenuActorConnectorIconPath() + CONNECTORDEFAULTICON);
-			newConnector.setIcon(ConnectorUtil.getFlowConnectorMenuIconName(iconPath));
+			this.setIconPath(ConnectorUtil.getConnectorIconPath() + CONNECTORDEFAULTICON);
+			newConnector.setIcon(ConnectorUtil.getConnectorMenuIconName(iconPath));
 			if (new File(this.getIconPath()).exists()) {
 				try {
 					is = new FileInputStream(this.getIconPath());
@@ -361,7 +345,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		}
 		
 		// treeViewer获取数据
-		categorytreeElements = (List<ITreeElement>) TreeViewerNewFactory.reloadActorTreeNodes();
+		categorytreeElements = (List<ITreeElement>) RuntimeTreeViewerFactory.reloadActorTreeNodes();
 		categorytreeViewer = new TreeViewer(composite, SWT.BORDER);
 		categorytreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
