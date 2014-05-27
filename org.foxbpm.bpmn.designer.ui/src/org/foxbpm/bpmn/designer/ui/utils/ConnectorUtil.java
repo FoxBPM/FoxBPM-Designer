@@ -718,7 +718,7 @@ public class ConnectorUtil {
 		String servicePath = FoxBPMDesignerUtil.getServicePath();
 		File serviceDirectory = new File(servicePath);
 		
-		if(!type.equals("start")) {
+		if(!type.equals("start") && serviceDirectory.exists()) {
 			//强制删除服务目录下文件
 			for (File tempFile : serviceDirectory.listFiles()) {
 				FileUtils.forceDelete(tempFile);
