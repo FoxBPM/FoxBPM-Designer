@@ -73,7 +73,8 @@ public class Activator extends AbstractUIPlugin {
 							MessageDialog.openInformation(null, "提示", "下载连接器失败，原因是\n" + e.getMessage());							
 						}
 					});
-//					e.printStackTrace();
+					e.printStackTrace();
+					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
 				return Status.OK_STATUS;
