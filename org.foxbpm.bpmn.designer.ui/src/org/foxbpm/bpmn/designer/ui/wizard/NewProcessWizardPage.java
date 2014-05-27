@@ -159,7 +159,7 @@ public class NewProcessWizardPage extends WizardPage {
 			return false;
 		
 		IContainer container = getFileContainer();
-		fileName = processIdText.getText() + "_" + getProcessVerText() + ".bpmn";
+		fileName = getProcessIdText();
 		if (fileName.length() == 0) {
 			setErrorMessage("流程编号不能为空");
 			return false;
@@ -281,7 +281,7 @@ public class NewProcessWizardPage extends WizardPage {
 	}
 
 	public String getProcessIdText() {
-		return processIdText.getText() + ".bpmn";
+		return processIdText.getText() + "_" + getProcessVerText() + ".bpmn";
 	}
 
 	public String getProcessNameText() {
