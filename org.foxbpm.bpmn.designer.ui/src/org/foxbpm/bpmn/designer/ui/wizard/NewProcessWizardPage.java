@@ -37,6 +37,7 @@ public class NewProcessWizardPage extends WizardPage {
 	private ISelection selection;
 	private IResource diagramContainer;
 	private Text processVerText;
+	private String fileName;
 
 	/**
 	 * Create the wizard.
@@ -98,7 +99,7 @@ public class NewProcessWizardPage extends WizardPage {
 		processIdText.addModifyListener(new ModifyListener() {
 			@Override
 			public void modifyText(ModifyEvent e) {
-
+				dialogChanged(true);
 			}
 		});
 
@@ -158,7 +159,7 @@ public class NewProcessWizardPage extends WizardPage {
 			return false;
 		
 		IContainer container = getFileContainer();
-		String fileName = processIdText.getText();
+		fileName = processIdText.getText() + "_" + getProcessVerText() + ".bpmn";
 		if (fileName.length() == 0) {
 			setErrorMessage("流程编号不能为空");
 			return false;
@@ -181,7 +182,7 @@ public class NewProcessWizardPage extends WizardPage {
 //		}
 		IResource file = container.findMember(fileName);
 		if (file!=null) {
-			setErrorMessage("没有该文件");
+			setErrorMessage("已存在该版本的流程文件");
 			return false;
 		}
 		
@@ -204,6 +205,7 @@ public class NewProcessWizardPage extends WizardPage {
 			setErrorMessage("版本只能输入数字");
 			return false;
 		}
+		
 		return true;
 	}
 	
@@ -225,28 +227,28 @@ public class NewProcessWizardPage extends WizardPage {
 	}
 
 	private void updateFilename() {
-		String fileType = "process" + "_" + getProcessVerText(); //$NON-NLS-1$
-		String filename = fileType+".bpmn";
+		String fileType = "process"; //$NON-NLS-1$
+		fileName = getProcessIdText()  + "_" + getProcessVerText() + ".bpmn";
 		
 		IContainer container = getFileContainer();
 		if (container!=null) {
 			String text = container.getFullPath().toString();
 			if (text!=null && !text.equals(containerText.getText()))
 				containerText.setText(text);
-			if(container.findMember(filename)!=null) {
-				for (int i=1; ; ++i) {
-					filename = fileType+"_" + i + ".bpmn"; //$NON-NLS-1$
-					IResource file = container.findMember(filename);
-					if (file==null) {
-						break;
-					}
-				}
-			}
+//			if(container.findMember(filename)!=null) {
+//				for (int i=1; ; ++i) {
+//					filename = fileType+"_" + i + ".bpmn"; //$NON-NLS-1$
+//					IResource file = container.findMember(filename);
+//					if (file==null) {
+//						break;
+//					}
+//				}
+//			}
 		}
 
-		String oldFileText = processIdText.getText();
-		if (filename!=null && !filename.equals(oldFileText))
-			processIdText.setText(filename.substring(0, filename.lastIndexOf(".")));
+//		String oldFileText = processIdText.getText();
+//		if (filename!=null && !filename.equals(oldFileText))
+//			processIdText.setText(filename.substring(0, filename.lastIndexOf("_")));
 	}
 	
 	private IContainer getFileContainer() {
@@ -279,11 +281,11 @@ public class NewProcessWizardPage extends WizardPage {
 	}
 
 	public String getProcessIdText() {
-		return processIdText.getText();
+		return processIdText.getText() + ".bpmn";
 	}
 
 	public String getProcessNameText() {
-		return processNameText.getText() + ".bpmn";
+		return processNameText.getText();
 	}
 
 	public String getValidationLevel() {
