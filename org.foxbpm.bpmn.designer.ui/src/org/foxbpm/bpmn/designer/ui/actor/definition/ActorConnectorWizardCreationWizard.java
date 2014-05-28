@@ -77,6 +77,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
+		menuConnector.setIco(connector.getIcon());
 		// node根据id可以获取到对应的menu里面的哪个Node,然后再在对应的Node下面加上menuConnector就可以保存了
 		Menu menu = ((ConfigureActorConnectorWizardPage) ccwd).getMenu();
 		Node node = ((ConfigureActorConnectorWizardPage) ccwd).getNode();

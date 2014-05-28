@@ -258,7 +258,6 @@ public class SelectNewActorConnectorWizardPage extends WizardPage {
 
 	@Override
 	public IWizardPage getPreviousPage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

@@ -22,7 +22,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FileUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -78,6 +77,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
+		menuConnector.setIco(connector.getIcon());
 		// node根据id可以获取到对应的menu里面的哪个Node,然后再在对应的Node下面加上menuConnector就可以保存了
 		Menu menu = ((ConfigureNewConnectorWizardPage) ccwd).getMenu();
 		Node node = ((ConfigureNewConnectorWizardPage) ccwd).getNode();

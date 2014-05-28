@@ -39,6 +39,7 @@ import org.foxbpm.model.config.connector.Text;
 import org.foxbpm.model.config.connector.TextArea;
 import org.foxbpm.model.config.connector.WidgetExpression;
 import org.foxbpm.model.config.connectormenu.Menu;
+import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.Representation;
@@ -481,7 +482,13 @@ public class ConnectorUtil {
 				File xmlFile = new File(file.getAbsolutePath() + "/" + type);
 				if (xmlFile.exists()) {
 					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					nodes.addAll(menu.getNode());
+					for (Node node : menu.getNode()) {
+						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
+						for (MenuConnector connector : node.getMenuConnector()) {
+							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" +  connector.getId() + "/" + connector.getIco());
+						}
+						nodes.add(node);
+					}
 				} else {
 					getFileChild(file.getAbsolutePath(), nodes, type);
 				}
@@ -490,7 +497,13 @@ public class ConnectorUtil {
 				File xmlFile = new File(file.getAbsolutePath());
 				if (file.getAbsolutePath().indexOf(type)!=-1 && xmlFile.exists()) {
 					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					nodes.addAll(menu.getNode());
+					for (Node node : menu.getNode()) {
+						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
+						for (MenuConnector connector : node.getMenuConnector()) {
+							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" +  connector.getId() + "/" + connector.getIco());
+						}
+						nodes.add(node);
+					}
 				} else {
 					// do nothing
 				}
