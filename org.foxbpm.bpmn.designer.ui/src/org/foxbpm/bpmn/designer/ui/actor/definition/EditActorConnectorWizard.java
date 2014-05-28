@@ -2,9 +2,12 @@ package org.foxbpm.bpmn.designer.ui.actor.definition;
 
 import java.io.File;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
@@ -25,33 +28,26 @@ public class EditActorConnectorWizard extends DynamicPageWizard {
 	
 	@Override
 	public boolean performFinish() {
-//			if (chooseFlowConnectorFileToEditWizardPage.getWizardRadioButton().getSelection()) {
-//				ActorConnectorWizardCreationWizard cwcp = new ActorConnectorWizardCreationWizard(selectNewConnectorWizardPage.getConnector());
-//				CreateActorConnectorWizardDialog cfwd = new CreateActorConnectorWizardDialog(new Shell(SWT.PRIMARY_MODAL), cwcp);
-//				cfwd.open();
-//				return true;
-//			}
-//			if (chooseFlowConnectorFileToEditWizardPage.getFileRadioButton().getSelection()) {
-//				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-//
-//				IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getActorConnectorProjectName());
-//
-//				Object[] files = chooseFlowConnectorFileToEditWizardPage.getCheckboxTreeViewer().getCheckedElements();
-//
-//				for (Object object : files) {
-//					try {
-//						File file = new File(ConnectorUtil.getActorConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString());
-//						String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
-//						IFile ifile = project.getFile(relativePath);
-//						// 打开编辑器
-//						ProjectUtil.refreshProject(ConnectorUtil.getActorConnectorProjectName());
-//						IDE.openEditor(page, ifile);
-//					} catch (PartInitException e) {
-//					}
-//				}
-//
-//				return true;
-//			}
+			if (chooseFlowConnectorFileToEditWizardPage.getWizardRadioButton().getSelection()) {
+				ActorConnectorWizardCreationWizard cwcp = new ActorConnectorWizardCreationWizard(selectNewConnectorWizardPage.getConnector());
+				CreateActorConnectorWizardDialog cfwd = new CreateActorConnectorWizardDialog(new Shell(SWT.PRIMARY_MODAL), cwcp);
+				cfwd.open();
+				return true;
+			}
+			if (chooseFlowConnectorFileToEditWizardPage.getFileRadioButton().getSelection()) {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				Object[] files = chooseFlowConnectorFileToEditWizardPage.getCheckboxTreeViewer().getCheckedElements();
+
+				for (Object object : files) {
+					try {
+						IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+						IDE.openEditorOnFileStore(page, fileStore);
+					} catch (PartInitException e) {
+					}
+				}
+
+				return true;
+			}
 		return false;
 	}
 

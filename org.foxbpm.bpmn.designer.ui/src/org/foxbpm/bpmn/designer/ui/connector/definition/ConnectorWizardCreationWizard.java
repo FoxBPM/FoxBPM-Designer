@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,6 +23,10 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
@@ -72,7 +79,8 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// 先得到连接器对应的MenuConnector
 		ConnectorDefinition connector = ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition();
 		// 取得连接器之后立马改掉Icon
-//		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(ConnectorUtil.getFlowConnectorMenuIconName(connector.getIcon())));
+		// connector.setIcon(connector.getId() + "." +
+		// FileUtil.getExtensionName(ConnectorUtil.getFlowConnectorMenuIconName(connector.getIcon())));
 		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
@@ -206,23 +214,13 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			e1.printStackTrace();
 		}
 
-		// IWorkbenchPage page =
-		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		//
-		// IProject project =
-		// ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getConnectorPath());
-		// String relativePath =
-		// file.toString().substring(project.getLocation().toString().length() +
-		// 1);
-		// IFile ifile = project.getFile(relativePath);
-		//
-		// try {
-		// // 打开编辑器
-		// //
-		// ProjectUtil.refreshProject(FlowConnectorConfigUtil.getOldConnectorProjectName());
-		// IDE.openEditor(page, ifile);
-		// } catch (PartInitException e) {
-		// }
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		try {
+			// 打开编辑器
+			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(file.getAbsolutePath()));
+			IDE.openEditorOnFileStore(page, fileStore);
+		} catch (PartInitException e) {
+		}
 		return true;
 	}
 }

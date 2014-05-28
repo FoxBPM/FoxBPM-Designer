@@ -176,7 +176,7 @@
                    style="push">
              </command>
              <command
-                   commandId="org.foxbpm.bpmn.designer.ui.command2"
+                   commandId="org.foxbpm.bpmn.designer.ui.command.editactor"
                    label="编辑选择器"
                    style="push">
              </command>

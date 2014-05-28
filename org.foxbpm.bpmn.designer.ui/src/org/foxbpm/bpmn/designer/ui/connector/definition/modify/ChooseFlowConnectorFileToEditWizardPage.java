@@ -97,7 +97,7 @@ public class ChooseFlowConnectorFileToEditWizardPage extends WizardPage {
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		checkboxTreeViewer.setLabelProvider(new ViewerLabelProvider());
 		checkboxTreeViewer.setContentProvider(new TreeContentProvider());
-		// checkboxTreeViewer.setInput(getFilesInConnectorPath());
+//		checkboxTreeViewer.setInput(getFilesInConnectorPath());
 	}
 
 	public List<String> getFilesInConnectorPath() {

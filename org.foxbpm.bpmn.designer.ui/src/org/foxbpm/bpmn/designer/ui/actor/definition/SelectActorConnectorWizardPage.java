@@ -37,7 +37,6 @@ import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
@@ -253,7 +252,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					MessageDialog.openInformation(null, "提示", "删除成功");
 
 					// 刷新树
-					elements = (List<ITreeElement>) RuntimeTreeViewerFactory.reloadActorTree();
+					elements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTree();
 					treeViewer.setInput(elements);
 					treeViewer.refresh();
 					if (!parentIdString.equals("")) {
@@ -324,7 +323,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = RuntimeTreeViewerFactory.getActorConnector(element.getId());
+					connector = DefinitionTreeViewerFactory.getActorConnector(element.getId());
 
 					editConnectorWizard.getchChooseFlowConnectorFileToEditWizardPage().setConnector(connector);
 

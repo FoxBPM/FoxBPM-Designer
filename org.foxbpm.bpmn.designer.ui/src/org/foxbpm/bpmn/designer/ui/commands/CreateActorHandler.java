@@ -1,12 +1,18 @@
 package org.foxbpm.bpmn.designer.ui.commands;
 
+import java.io.File;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard;
 import org.foxbpm.bpmn.designer.ui.actor.definition.CreateActorConnectorWizardDialog;
+import org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard;
+import org.foxbpm.bpmn.designer.ui.connector.definition.CreateConnectorWizardDialog;
+import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 
 public class CreateActorHandler implements IHandler {
 
@@ -22,10 +28,17 @@ public class CreateActorHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		ActorConnectorWizardCreationWizard cwcp = new ActorConnectorWizardCreationWizard();
-		CreateActorConnectorWizardDialog cfwd = new CreateActorConnectorWizardDialog(Display.getDefault().getActiveShell(), cwcp);
-		cfwd.open();
-		return null;
+		String connectPathString = ConnectorUtil.getDefinitionConnectorPath();
+		File file = new File(connectPathString);
+		if(!file.exists()){
+			MessageDialog.openWarning(Display.getDefault().getActiveShell(), "提示", "找不到选择器存放路径，请设置");
+			return null;
+		}else{
+			ActorConnectorWizardCreationWizard cwcp = new ActorConnectorWizardCreationWizard();
+			CreateActorConnectorWizardDialog cfwd = new CreateActorConnectorWizardDialog(Display.getDefault().getActiveShell(), cwcp);
+			cfwd.open();
+			return null;
+		}
 	}
 
 	@Override

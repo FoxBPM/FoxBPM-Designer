@@ -563,6 +563,28 @@ public class ConnectorUtil {
 		return null;
 	}
 	
+	/**
+	 * 根据Menu上的连接器ID找到对应的处理者选择器对象(定义)
+	 * 
+	 * @param connectorId
+	 * @return
+	 */
+	public static ConnectorDefinition getDefinitionActorConnectorByMenuConnectorId(String connectorId) {
+		try {
+			String xmlPath = getConnectorXMLPathByConnectorId(connectorId, getDefinitionConnectorPath());
+			if(xmlPath == null) {
+				return null;
+			}
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(xmlPath);
+			if (connector.getId().equals(connectorId)) {
+				return connector;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public static String getConnectorXMLPathByConnectorId(String connectorId, String path) {
 		getLoop(path);
 		return hashMap.get(connectorId).toString();

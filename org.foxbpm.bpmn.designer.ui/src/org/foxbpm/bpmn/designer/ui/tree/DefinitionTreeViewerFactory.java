@@ -39,7 +39,7 @@ public class DefinitionTreeViewerFactory {
 		}
 
 		// 递归查找node节点
-		getActorTreeElements(nodes, null, elements);
+//		getActorTreeElements(nodes, null, elements);
 		
 		return elements;
 	}
@@ -63,7 +63,7 @@ public class DefinitionTreeViewerFactory {
 		}
 		
 		// 递归查找node节点
-		getActorTreeElements(nodes, null, elements);
+//		getActorTreeElements(nodes, null, elements);
 
 		return elements;
 	}
@@ -221,7 +221,7 @@ public class DefinitionTreeViewerFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(ConnectorUtil.getDefinitionActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
 								ConnectorUtil.getDefinitionActorConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())

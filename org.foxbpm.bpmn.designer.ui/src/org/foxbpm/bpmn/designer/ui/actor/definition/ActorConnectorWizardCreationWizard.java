@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,6 +23,10 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateFlowConnectorJava;
 import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
@@ -209,18 +216,13 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			e1.printStackTrace();
 		}
 
-//		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-//
-//		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getActorConnectorProjectName());
-//		String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
-//		IFile ifile = project.getFile(relativePath);
-//
-//		try {
-//			// 打开编辑器
-//			ProjectUtil.refreshProject(ConnectorUtil.getActorConnectorProjectName());
-//			IDE.openEditor(page, ifile);
-//		} catch (PartInitException e) {
-//		}
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		try {
+			// 打开编辑器
+			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(file.getAbsolutePath()));
+			IDE.openEditorOnFileStore(page, fileStore);
+		} catch (PartInitException e) {
+		}
 		return true;
 	}
 }

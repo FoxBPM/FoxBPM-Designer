@@ -177,6 +177,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		// Menu menu =
 		// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
 		menu = ConnectorUtil.getDefinitionFlowConnectorMenu();
+		this.menu = menu;
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
 		for (Node nd : nodelist) {

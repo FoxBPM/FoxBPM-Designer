@@ -253,7 +253,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					MessageDialog.openInformation(null, "提示", "删除成功");
 
 					// 刷新树
-					elements = (List<ITreeElement>) RuntimeTreeViewerFactory.reloadTree();
+					elements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadTree();
 					treeViewer.setInput(elements);
 					treeViewer.refresh();
 					if (!parentIdString.equals("")) {
