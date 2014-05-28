@@ -64,7 +64,7 @@ public class Activator extends AbstractUIPlugin {
 				// 下载
 				try {
 					ConnectorUtil.downLoadConnector("start");
-				} catch (final IOException e) {
+				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
 						@Override

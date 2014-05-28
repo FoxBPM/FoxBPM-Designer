@@ -1,7 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.commands;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -42,7 +41,7 @@ public class SynDesignerResourceHandler implements IHandler {
 				// 下载
 				try {
 					ConnectorUtil.downLoadConnector("syn");
-				} catch (final IOException e) {
+				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
 						@Override

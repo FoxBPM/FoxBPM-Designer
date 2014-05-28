@@ -112,7 +112,7 @@ public class ConnectorUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String downLoadConnector(String type) throws IOException {
+	public static String downLoadConnector(String type) throws Exception {
 		String connectorPath = getRuntimeConnectorPath();
 //		Authenticator.setDefault(new Authenticator() {
 //			protected PasswordAuthentication getPasswordAuthentication() {
