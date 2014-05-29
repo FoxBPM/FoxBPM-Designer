@@ -324,7 +324,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = RuntimeTreeViewerFactory.getConnector(element.getId());
+					connector = DefinitionTreeViewerFactory.getConnector(element.getId());
 
 					editConnectorWizard.getchChooseFlowConnectorFileToEditWizardPage().setConnector(connector);
 
