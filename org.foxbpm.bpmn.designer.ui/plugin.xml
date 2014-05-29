@@ -427,6 +427,11 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.endevent.EndEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.endevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.usertask"
         label="通用">
@@ -456,11 +461,11 @@
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskJumpStrategyPropertySection"
         label="跳过策略">
   </propertyTab>
-  <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskCommandPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskCommandPropertySection"
-        label="任务命令">
-  </propertyTab>
+   <propertyTab
+         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskcommandPropertySection"
+         id="org.foxbpm.bpmn.designer.ui.propertyTab.taskcommand"
+         label="任务命令">
+   </propertyTab>
    <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAssignmentPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab1"
@@ -471,11 +476,6 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
-   <propertyTab
-         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskcommandPropertySection"
-         id="org.foxbpm.bpmn.designer.ui.propertyTab.taskcommand"
-         label="任务命令">
-   </propertyTab>
 
 		<!-- ======================================== -->
 		<!-- ===  Model Enablements and Profiles ==== -->
