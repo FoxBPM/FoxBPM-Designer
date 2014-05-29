@@ -263,9 +263,9 @@ public class RuntimeConnectorUtil {
 			fileOutputStream = new FileOutputStream(file);
 			result.write(fileOutputStream);
 
-			 if (new File(file.getPath()).exists()) {
+			 if (new File(servicePath).exists()) {
 				 // 强制删除服务目录下文件
-				for (File tempFile : new File(file.getPath()).listFiles()) {
+				for (File tempFile : new File(servicePath).listFiles()) {
 					 FileUtils.forceDelete(tempFile);
 			 	}
 			 }
