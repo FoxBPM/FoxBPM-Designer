@@ -41,6 +41,14 @@ public class FoxBPMDesignerUtil {
 	public static String getServicePath() {
 		return PropertiesUtil.readProperties(getPropertiesPath()).get("service").toString() + "/";
 	}
+	
+	public static String getServicePathPath() {
+		if(getProperties().get("servicePath").toString().lastIndexOf("/") == getProperties().get("servicePath").toString().length()-1) {
+			return getProperties().get("servicePath").toString();
+		} else {
+			return getProperties().get("servicePath").toString() + "/";
+		}
+	}
 
 	/**
 	 * 返回临时目录中的流程模板文件路径
@@ -80,5 +88,13 @@ public class FoxBPMDesignerUtil {
 	public static FoxBPMConfig getFoxBPMConfig() {
 		FoxBPMConfig foxBPMConfig = (FoxBPMConfig) EMFUtil.readEMFFile(getTempleteConfigFilePath()).getContents().get(0);
 		return foxBPMConfig;
+	}
+	
+	/**
+	 * 拿假的groovy文件
+	 * @return
+	 */
+	public static String getFakeGroovyFilePath() {
+		return Platform.getInstallLocation().getURL().getPath() + "fake.groovy";
 	}
 }

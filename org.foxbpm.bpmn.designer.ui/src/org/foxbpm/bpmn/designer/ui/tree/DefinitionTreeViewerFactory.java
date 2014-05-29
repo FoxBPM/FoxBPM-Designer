@@ -5,18 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 
-public class TreeViewerNewFactory {
+public class DefinitionTreeViewerFactory {
 
 	/**
 	 * 
 	 */
-	public TreeViewerNewFactory() {
+	public DefinitionTreeViewerFactory() {
 	}
 
 	/**
@@ -27,18 +27,19 @@ public class TreeViewerNewFactory {
 	public static List<ITreeElement> reloadTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 
-//		Menu root = ConnectorUtil.getFlowConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
 
+		EList<Node> nodes = null;
+		
 		// 分拆menu成为ITreeElement树
-//		if (root != null) {
-//			EList<Node> nodes = root.getNode();
-//			// 递归查找node节点
-//			getTreeElements(nodes, null, elements);
-//		}
+		if (root != null) {
+			nodes = root.getNode();
+			// 递归查找node节点
+			getTreeElements(nodes, null, elements);
+		}
 
-		List<Node> nodes = ConnectorUtil.getNodesFromConnectorPath(ConnectorUtil.FLOWCONNECTORMENU);
 		// 递归查找node节点
-		getActorTreeElements(nodes, null, elements);
+//		getActorTreeElements(nodes, null, elements);
 		
 		return elements;
 	}
@@ -50,18 +51,19 @@ public class TreeViewerNewFactory {
 	 */
 	public static List<ITreeElement> reloadActorTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-//		Menu root = ConnectorUtil.getActorConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
 
-		// 分拆menu成为ITreeElement树
-//		if (root != null) {
-//			EList<Node> nodes = root.getNode();
-//			// 递归查找node节点
-//			getActorTreeElements(nodes, null, elements);
-//		}
+		EList<Node> nodes = null;
 		
-		List<Node> nodes = ConnectorUtil.getNodesFromConnectorPath(ConnectorUtil.ACTORCONNECTORMENU);
+		// 分拆menu成为ITreeElement树
+		if (root != null) {
+			nodes = root.getNode();
+			// 递归查找node节点
+			getActorTreeElements(nodes, null, elements);
+		}
+		
 		// 递归查找node节点
-		getActorTreeElements(nodes, null, elements);
+//		getActorTreeElements(nodes, null, elements);
 
 		return elements;
 	}
@@ -76,7 +78,7 @@ public class TreeViewerNewFactory {
 
 		// Menu
 		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = ConnectorUtil.getFlowConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -99,7 +101,7 @@ public class TreeViewerNewFactory {
 
 		// Menu
 		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = ConnectorUtil.getActorConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -180,11 +182,11 @@ public class TreeViewerNewFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								ConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+								DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId())
+										.getIcon()), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()).getNote());
 						parentElement.addChild(childElement);
 					}
 				}
@@ -219,11 +221,11 @@ public class TreeViewerNewFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								ConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+								DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
+										.getIcon()), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
 						parentElement.addChild(childElement);
 					}
 				}
@@ -247,7 +249,7 @@ public class TreeViewerNewFactory {
 	 * @return
 	 */
 	public static ConnectorDefinition getConnector(String connectorId) {
-		return ConnectorUtil.getFlowConnectorByMenuConnectorId(connectorId);
+		return DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(connectorId);
 	}
 	
 	/**
@@ -257,7 +259,7 @@ public class TreeViewerNewFactory {
 	 * @return
 	 */
 	public static ConnectorDefinition getActorConnector(String connectorId) {
-		return ConnectorUtil.getActorConnectorByMenuConnectorId(connectorId);
+		return DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(connectorId);
 	}
 
 }

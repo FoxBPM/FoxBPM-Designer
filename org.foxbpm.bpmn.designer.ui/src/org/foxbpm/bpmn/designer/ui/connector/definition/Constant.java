@@ -1,6 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.connector.definition;
 
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.Checkbox;
 import org.foxbpm.model.config.connector.Group;
 import org.foxbpm.model.config.connector.Password;
@@ -35,23 +35,23 @@ public class Constant {
          */
         public static Widget getWidgetType(String type) {
     		if(type.equals(WIDGET_ARRAY[0]))
-    			return ConnectorUtil.createWidgetText();
+    			return DefinitionConnectorUtil.createWidgetText();
     		if(type.equals(WIDGET_ARRAY[1]))
-    			return ConnectorUtil.createWidgetTextArea();
+    			return DefinitionConnectorUtil.createWidgetTextArea();
     		if(type.equals(WIDGET_ARRAY[2]))
-    			return ConnectorUtil.createWidgetPassword();
+    			return DefinitionConnectorUtil.createWidgetPassword();
     		if(type.equals(WIDGET_ARRAY[3]))
-    			return ConnectorUtil.createWidgetCheckbox();
+    			return DefinitionConnectorUtil.createWidgetCheckbox();
     		if(type.equals(WIDGET_ARRAY[4]))
-    			return ConnectorUtil.createWidgetSelect();
+    			return DefinitionConnectorUtil.createWidgetSelect();
     		if(type.equals(WIDGET_ARRAY[5]))
-    			return ConnectorUtil.createWidgetGroup();
+    			return DefinitionConnectorUtil.createWidgetGroup();
     		if(type.equals(WIDGET_ARRAY[6]))
-    			return ConnectorUtil.createWidgetRadioGroup();
+    			return DefinitionConnectorUtil.createWidgetRadioGroup();
     		if(type.equals(WIDGET_ARRAY[7]))
-    			return ConnectorUtil.createWidgetScriptEditor();
+    			return DefinitionConnectorUtil.createWidgetScriptEditor();
     		if(type.equals(WIDGET_ARRAY[8]))
-    			return ConnectorUtil.createWidgetTable();
+    			return DefinitionConnectorUtil.createWidgetTable();
     		return null;
     	}
         

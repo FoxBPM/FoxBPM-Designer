@@ -513,13 +513,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__IS_CREATE_RECORD = 48;
 
 	/**
+	 * The feature id for the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__IS_AUTO_CLAIM = 49;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 49;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 50;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -3033,6 +3042,17 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDocumentRoot_IsCreateRecord();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Auto Claim</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_IsAutoClaim();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4950,6 +4970,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__IS_CREATE_RECORD = eINSTANCE.getDocumentRoot_IsCreateRecord();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Auto Claim</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__IS_AUTO_CLAIM = eINSTANCE.getDocumentRoot_IsAutoClaim();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.

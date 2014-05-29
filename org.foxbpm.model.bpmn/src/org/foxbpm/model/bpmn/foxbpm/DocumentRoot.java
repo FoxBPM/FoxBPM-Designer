@@ -66,6 +66,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConnectorInstanceElements <em>Connector Instance Elements</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsCreateRecord <em>Is Create Record</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}</li>
  * </ul>
  * </p>
  *
@@ -1309,5 +1310,32 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setIsCreateRecord(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Auto Claim</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Auto Claim</em>' attribute.
+	 * @see #setIsAutoClaim(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_IsAutoClaim()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute'"
+	 * @generated
+	 */
+	String getIsAutoClaim();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Auto Claim</em>' attribute.
+	 * @see #getIsAutoClaim()
+	 * @generated
+	 */
+	void setIsAutoClaim(String value);
 
 } // DocumentRoot

@@ -24,17 +24,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.create.CommonNewConnectorWizardPage;
+import org.foxbpm.bpmn.designer.ui.tree.ActorTreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Page;
 
-/**
- * @author wangzhiwei
- * 
- */
 public class SelectNewActorConnectorWizardPage extends WizardPage {
 
 	private ConnectorFilter filter;
@@ -131,14 +127,14 @@ public class SelectNewActorConnectorWizardPage extends WizardPage {
 		viewer.addFilter(filter);
 
 		// tableViewer获取数据
-		List<ITreeElement> elements = (List<ITreeElement>) TreeViewerNewFactory.reloadActorTree();
+		List<ITreeElement> elements = (List<ITreeElement>) RuntimeTreeViewerFactory.reloadActorTree();
 
 		if (elements != null && elements.size() > 0) {
 			// 设置内容提供器
 			viewer.setContentProvider(new TreeViewerContentProvider());
 
 			// 设置标签提供器
-			viewer.setLabelProvider(new TreeViewerLabelProvider());
+			viewer.setLabelProvider(new ActorTreeViewerLabelProvider());
 
 			// 设置内容
 			viewer.setInput(elements);
@@ -182,7 +178,7 @@ public class SelectNewActorConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = TreeViewerNewFactory.getActorConnector(element.getId());
+					connector = RuntimeTreeViewerFactory.getActorConnector(element.getId());
 
 					if (connector != null) {
 						// 获取所有的page
@@ -258,7 +254,6 @@ public class SelectNewActorConnectorWizardPage extends WizardPage {
 
 	@Override
 	public IWizardPage getPreviousPage() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

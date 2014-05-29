@@ -98,6 +98,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConnectorInstanceElements <em>Connector Instance Elements</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsCreateRecord <em>Is Create Record</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsAutoClaim <em>Is Auto Claim</em>}</li>
  * </ul>
  * </p>
  *
@@ -813,6 +814,26 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected String isCreateRecord = IS_CREATE_RECORD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIsAutoClaim() <em>Is Auto Claim</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAutoClaim()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IS_AUTO_CLAIM_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIsAutoClaim() <em>Is Auto Claim</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIsAutoClaim()
+	 * @generated
+	 * @ordered
+	 */
+	protected String isAutoClaim = IS_AUTO_CLAIM_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2044,6 +2065,27 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getIsAutoClaim() {
+		return isAutoClaim;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsAutoClaim(String newIsAutoClaim) {
+		String oldIsAutoClaim = isAutoClaim;
+		isAutoClaim = newIsAutoClaim;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM, oldIsAutoClaim, isAutoClaim));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2204,6 +2246,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getName();
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				return getIsCreateRecord();
+			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
+				return getIsAutoClaim();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2370,6 +2414,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				setIsCreateRecord((String)newValue);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
+				setIsAutoClaim((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2529,6 +2576,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				setIsCreateRecord(IS_CREATE_RECORD_EDEFAULT);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
+				setIsAutoClaim(IS_AUTO_CLAIM_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2639,6 +2689,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				return IS_CREATE_RECORD_EDEFAULT == null ? isCreateRecord != null : !IS_CREATE_RECORD_EDEFAULT.equals(isCreateRecord);
+			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
+				return IS_AUTO_CLAIM_EDEFAULT == null ? isAutoClaim != null : !IS_AUTO_CLAIM_EDEFAULT.equals(isAutoClaim);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2709,6 +2761,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 		result.append(name);
 		result.append(", isCreateRecord: ");
 		result.append(isCreateRecord);
+		result.append(", isAutoClaim: ");
+		result.append(isAutoClaim);
 		result.append(')');
 		return result.toString();
 	}

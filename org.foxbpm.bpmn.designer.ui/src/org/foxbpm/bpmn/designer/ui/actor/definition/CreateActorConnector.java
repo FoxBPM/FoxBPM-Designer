@@ -7,7 +7,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 
 public class CreateActorConnector implements IWorkbenchWindowActionDelegate {
@@ -18,7 +18,7 @@ public class CreateActorConnector implements IWorkbenchWindowActionDelegate {
 	
 	@Override
 	public void run(IAction action) {
-		String connectPathString = ConnectorUtil.getConnectorPath();
+		String connectPathString = DefinitionConnectorUtil.getActorConnectorPath();
 		File file = new File(connectPathString);
 		if(!file.exists()){
 			MessageDialog.openWarning(window.getShell(), "提示", "找不到选择器存放路径，请设置");

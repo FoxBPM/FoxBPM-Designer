@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,8 +23,13 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.Wizard;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FileUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -47,14 +55,14 @@ public class ConnectorWizardCreationWizard extends Wizard {
 	public ConnectorWizardCreationWizard(ConnectorDefinition newConnector) {
 		this.newConnector = newConnector;
 	}
-	
+
 	@Override
 	public void addPages() {
 		if (newConnector == null)
 			ccwd = new ConfigureNewConnectorWizardPage(true, "创建连接器");
 		else
 			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector);
-		
+
 		addPage(ccwd);
 	}
 
@@ -72,12 +80,12 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// 先得到连接器对应的MenuConnector
 		ConnectorDefinition connector = ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition();
 		// 取得连接器之后立马改掉Icon
-		// connector.setIcon(connector.getId() + "." +
-		// getExtensionName(FlowConnectorConfigUtil.getFlowConnectorMenuIconName(connector.getIcon())));
+		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(FileUtil.getFileName(connector.getIcon())));
 		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
+		menuConnector.setIco(connector.getIcon());
 		// node根据id可以获取到对应的menu里面的哪个Node,然后再在对应的Node下面加上menuConnector就可以保存了
 		Menu menu = ((ConfigureNewConnectorWizardPage) ccwd).getMenu();
 		Node node = ((ConfigureNewConnectorWizardPage) ccwd).getNode();
@@ -127,7 +135,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 
 		// 传入getNewCreateCategoryID()是为了保存哪些是新建的分类。供保存方法识别并更新保存到xml
 		if (menu != null) {
-			ConnectorUtil.saveFlowConnectorMenu(menu, ((ConfigureNewConnectorWizardPage) ccwd).getNewCreateCategoryID());
+			DefinitionConnectorUtil.saveFlowConnectorMenu(menu, ((ConfigureNewConnectorWizardPage) ccwd).getNewCreateCategoryID());
 		}
 
 		// Register the XMI resource factory for the .website extension
@@ -139,7 +147,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// Obtain a new resource set
 		ResourceSet resSet = new ResourceSetImpl();
 
-		String path = ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/FlowConnector.xml";
+		String path = DefinitionConnectorUtil.getFlowConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/FlowConnector.xml";
 
 		// Create a resource
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
@@ -158,7 +166,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 				// 打开原文件（connector图标）
 				FileInputStream fis = new FileInputStream(((ConfigureNewConnectorWizardPage) ccwd).getIconPath());
 				// 打开连接到目标文件的输出流
-				File outfile = new File(ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
+				File outfile = new File(DefinitionConnectorUtil.getFlowConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
 						+ ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getIcon());
 				FileOutputStream outStream = new FileOutputStream(outfile);
 
@@ -179,7 +187,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "连接器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateConnectorJavaClassReturnInputStream(connector);
-		File file = new File(ConnectorUtil.getConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
+		File file = new File(DefinitionConnectorUtil.getFlowConnectorPath() + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + "/"
 				+ ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {
@@ -206,36 +214,13 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			e1.printStackTrace();
 		}
 
-		// IWorkbenchPage page =
-		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		//
-		// IProject project =
-		// ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getConnectorPath());
-		// String relativePath =
-		// file.toString().substring(project.getLocation().toString().length() +
-		// 1);
-		// IFile ifile = project.getFile(relativePath);
-		//
-		// try {
-		// // 打开编辑器
-		// //
-		// ProjectUtil.refreshProject(FlowConnectorConfigUtil.getOldConnectorProjectName());
-		// IDE.openEditor(page, ifile);
-		// } catch (PartInitException e) {
-		// }
-		return true;
-	}
-
-	/*
-	 * Java文件操作 获取文件扩展名
-	 */
-	private static String getExtensionName(String filename) {
-		if ((filename != null) && (filename.length() > 0)) {
-			int dot = filename.lastIndexOf('.');
-			if ((dot > -1) && (dot < (filename.length() - 1))) {
-				return filename.substring(dot + 1);
-			}
+		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		try {
+			// 打开编辑器
+			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(file.getAbsolutePath()));
+			IDE.openEditorOnFileStore(page, fileStore);
+		} catch (PartInitException e) {
 		}
-		return filename;
+		return true;
 	}
 }

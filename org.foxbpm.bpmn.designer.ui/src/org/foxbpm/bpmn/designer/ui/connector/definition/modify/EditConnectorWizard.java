@@ -1,10 +1,8 @@
 package org.foxbpm.bpmn.designer.ui.connector.definition.modify;
 
-import java.io.File;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
@@ -13,8 +11,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ProjectUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 public class EditConnectorWizard extends DynamicPageWizard {
 	private SelectNewConnectorWizardPage selectNewConnectorWizardPage;
@@ -35,18 +32,23 @@ public class EditConnectorWizard extends DynamicPageWizard {
 		if (chooseFlowConnectorFileToEditWizardPage.getFileRadioButton().getSelection()) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(ConnectorUtil.getOldConnectorProjectName());
 
 			Object[] files = chooseFlowConnectorFileToEditWizardPage.getCheckboxTreeViewer().getCheckedElements();
 
 			for (Object object : files) {
 				try {
-					File file = new File(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString());
-					String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
-					IFile ifile = project.getFile(relativePath);
-					// 打开编辑器
-					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
-					IDE.openEditor(page, ifile);
+//					File file = new File(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString());
+//					String relativePath = file.toString().substring(project.getLocation().toString().length() + 1);
+//					IFile ifile = project.getFile(relativePath);
+//					// 打开编辑器
+//					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
+					
+					IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+//					IEditorInput input = null;
+//					if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
+//						input = new FileStoreEditorInput(fileStore);
+//					}
+					IDE.openEditorOnFileStore(page, fileStore);
 				} catch (PartInitException e) {
 				}
 			}

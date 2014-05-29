@@ -26,7 +26,7 @@ import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerNewFactory;
+import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Output;
 import org.foxbpm.model.config.connector.Page;
@@ -126,7 +126,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 		viewer.addFilter(filter);
 
 		// tableViewer获取数据
-		List<ITreeElement> elements = (List<ITreeElement>) TreeViewerNewFactory.reloadTree();
+		List<ITreeElement> elements = (List<ITreeElement>) RuntimeTreeViewerFactory.reloadTree();
 
 		if (elements != null && elements.size() > 0) {
 			// 设置内容提供器
@@ -177,7 +177,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = TreeViewerNewFactory.getConnector(element.getId());
+					connector = RuntimeTreeViewerFactory.getConnector(element.getId());
 
 					if (connector != null) {
 						// 获取所有的page

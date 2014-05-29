@@ -1,7 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.commands;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -14,8 +13,8 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 
 public class SynDesignerResourceHandler implements IHandler {
 
@@ -41,8 +40,8 @@ public class SynDesignerResourceHandler implements IHandler {
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector("syn");
-				} catch (final IOException e) {
+					RuntimeConnectorUtil.downLoadConnector("syn");
+				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
 						@Override
@@ -50,7 +49,8 @@ public class SynDesignerResourceHandler implements IHandler {
 							MessageDialog.openInformation(null, "提示", "同步设计器资源失败，原因是\n" + e.getMessage());
 						}
 					});
-//					e.printStackTrace();
+					e.printStackTrace();
+					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
 				

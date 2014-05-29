@@ -11,8 +11,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -44,14 +44,27 @@ public class Activator extends AbstractUIPlugin {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				// do something long running
-				monitor.beginTask("正在初始化资源文件", 2);
-				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists())
+				monitor.beginTask("正在初始化资源文件", 3);
+				
+				File fakeGroovyFile = new File(FoxBPMDesignerUtil.getFakeGroovyFilePath());
+				if(!fakeGroovyFile.exists()) {
+					try {
+						fakeGroovyFile.createNewFile();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				monitor.worked(1);
+				
+				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists()) {
+					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "connectorDefinitionPath", "path");
 					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
+				}
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector("start");
-				} catch (final IOException e) {
+					RuntimeConnectorUtil.downLoadConnector("start");
+				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
 						@Override
@@ -59,7 +72,8 @@ public class Activator extends AbstractUIPlugin {
 							MessageDialog.openInformation(null, "提示", "下载连接器失败，原因是\n" + e.getMessage());							
 						}
 					});
-//					e.printStackTrace();
+					e.printStackTrace();
+					return Status.CANCEL_STATUS;
 				}
 				monitor.worked(1);
 				return Status.OK_STATUS;
