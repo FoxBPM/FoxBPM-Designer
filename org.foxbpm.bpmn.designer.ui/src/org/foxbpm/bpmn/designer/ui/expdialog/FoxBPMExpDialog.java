@@ -82,10 +82,12 @@ public class FoxBPMExpDialog extends Dialog {
 	 */
 	public FoxBPMExpDialog(Shell parentShell) {
 		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
 	}
 
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
 		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
 		this.expression = expression;
 		if(this.expression == null) {
 			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -206,7 +208,7 @@ public class FoxBPMExpDialog extends Dialog {
 		StyledText control = viewer.getTextWidget();
 
 		ToolBar toolBar = new ToolBar(operatorcomposite, SWT.FLAT | SWT.RIGHT);
-		GridData gd_toolBar = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		GridData gd_toolBar = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
 		gd_toolBar.widthHint = 393;
 		toolBar.setLayoutData(gd_toolBar);
 
@@ -290,9 +292,9 @@ public class FoxBPMExpDialog extends Dialog {
 			}
 		});
 
-		ToolItem tltmNewItem_Name = new ToolItem(toolBar, SWT.NONE);
-		tltmNewItem_Name.setText("ExpressionName");
-		tltmNewItem_Name.addSelectionListener(new GroovyOperatorSelectionAdapter("//FixFlow_ExpressionName:", document, control));
+//		ToolItem tltmNewItem_Name = new ToolItem(toolBar, SWT.NONE);
+//		tltmNewItem_Name.setText("ExpressionName");
+//		tltmNewItem_Name.addSelectionListener(new GroovyOperatorSelectionAdapter("//FixFlow_ExpressionName:", document, control));
 	}
 
 	private void createEditor(Composite composite) {
