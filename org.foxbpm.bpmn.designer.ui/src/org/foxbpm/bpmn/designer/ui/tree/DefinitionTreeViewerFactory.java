@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
@@ -27,7 +27,7 @@ public class DefinitionTreeViewerFactory {
 	public static List<ITreeElement> reloadTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 
-		Menu root = ConnectorUtil.getDefinitionFlowConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
 
 		EList<Node> nodes = null;
 		
@@ -51,7 +51,7 @@ public class DefinitionTreeViewerFactory {
 	 */
 	public static List<ITreeElement> reloadActorTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-		Menu root = ConnectorUtil.getActorConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
 
 		EList<Node> nodes = null;
 		
@@ -78,7 +78,7 @@ public class DefinitionTreeViewerFactory {
 
 		// Menu
 		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = ConnectorUtil.getDefinitionFlowConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -101,7 +101,7 @@ public class DefinitionTreeViewerFactory {
 
 		// Menu
 		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = ConnectorUtil.getActorConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -182,11 +182,11 @@ public class DefinitionTreeViewerFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								ConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), ConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+								DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId())
+										.getIcon()), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()).getNote());
 						parentElement.addChild(childElement);
 					}
 				}
@@ -221,11 +221,11 @@ public class DefinitionTreeViewerFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(ConnectorUtil.getDefinitionActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								ConnectorUtil.getDefinitionActorConnectorIconPathByIconName(menuConnector.getId(), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), ConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+								DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
+										.getIcon()), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
 						parentElement.addChild(childElement);
 					}
 				}
@@ -249,7 +249,7 @@ public class DefinitionTreeViewerFactory {
 	 * @return
 	 */
 	public static ConnectorDefinition getConnector(String connectorId) {
-		return ConnectorUtil.getFlowConnectorByMenuConnectorId(connectorId);
+		return DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(connectorId);
 	}
 	
 	/**
@@ -259,7 +259,7 @@ public class DefinitionTreeViewerFactory {
 	 * @return
 	 */
 	public static ConnectorDefinition getActorConnector(String connectorId) {
-		return ConnectorUtil.getActorConnectorByMenuConnectorId(connectorId);
+		return DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(connectorId);
 	}
 
 }

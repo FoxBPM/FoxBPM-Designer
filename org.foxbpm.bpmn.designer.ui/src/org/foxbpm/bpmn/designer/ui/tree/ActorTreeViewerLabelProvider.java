@@ -12,12 +12,12 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
-public class TreeViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
+public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
 
 	/**
 	 * 
 	 */
-	public TreeViewerLabelProvider() {
+	public ActorTreeViewerLabelProvider() {
 	}
 
 	/* (non-Javadoc)
@@ -54,7 +54,7 @@ public class TreeViewerLabelProvider extends StyledCellLabelProvider implements 
 	public Image getImage(Object element) {
 		ITreeElement tElement = (ITreeElement) element;
 		try {
-			String imagePath = tElement.getIcon().indexOf(File.separator)==-1 && tElement.getIcon().indexOf("/")==-1?DefinitionConnectorUtil.getFlowConnectorIconPath() + tElement.getIcon() : tElement.getIcon(); // 要读取的图片文件的路径
+			String imagePath = tElement.getIcon().indexOf(File.separator)==-1 && tElement.getIcon().indexOf("/")==-1?DefinitionConnectorUtil.getActorConnectorIconPath() + tElement.getIcon() : tElement.getIcon(); // 要读取的图片文件的路径
 			return new Image(PlatformUI.getWorkbench().getDisplay(),
 					new ImageData(imagePath).scaledTo(16, 16));
 		} catch (Exception e) {

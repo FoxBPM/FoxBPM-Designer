@@ -38,7 +38,7 @@ import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -132,7 +132,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 						return;
 
 					// 删除目录
-					File file = new File(ConnectorUtil.getFlowConnectorPathById(connector.getId()));
+					File file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId()));
 					// File file = new
 					// File(ConnectorUtil.getConnectorPathById(connector.getConnectorId()));
 					deleteFile(file);
@@ -140,7 +140,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					// 读取Menu的XML
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(ConnectorUtil.getFlowConnectorMenuPath()), true);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath()), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
 					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
@@ -205,7 +205,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					Resource resource = resourceSet.getResource(URI.createFileURI(ConnectorUtil.getFlowConnectorMenuPath()), true);
+					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath()), true);
 					// register package in local resource registry
 					resourceSet.getPackageRegistry().put(FoxBPMPackage.eINSTANCE.getNsURI(), FoxBPMPackage.eINSTANCE);
 					// load resource
@@ -230,7 +230,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 						getAllMenuConnector(nodesel);
 						if (menuConnectorIdStringList.size() > 0) {
 							for (String idString : menuConnectorIdStringList) {
-								file = new File(ConnectorUtil.getFlowConnectorPathById(idString));
+								file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(idString));
 								deleteFile(file);
 							}
 						}

@@ -12,7 +12,7 @@ import org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreation
 import org.foxbpm.bpmn.designer.ui.actor.definition.CreateActorConnectorWizardDialog;
 import org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateConnectorWizardDialog;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 public class CreateActorHandler implements IHandler {
 
@@ -28,7 +28,7 @@ public class CreateActorHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		String connectPathString = ConnectorUtil.getDefinitionConnectorPath();
+		String connectPathString = DefinitionConnectorUtil.getActorConnectorPath();
 		File file = new File(connectPathString);
 		if(!file.exists()){
 			MessageDialog.openWarning(Display.getDefault().getActiveShell(), "提示", "找不到选择器存放路径，请设置");

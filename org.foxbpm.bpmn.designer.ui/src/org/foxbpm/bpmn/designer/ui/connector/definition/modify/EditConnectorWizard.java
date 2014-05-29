@@ -11,7 +11,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 public class EditConnectorWizard extends DynamicPageWizard {
 	private SelectNewConnectorWizardPage selectNewConnectorWizardPage;
@@ -43,7 +43,7 @@ public class EditConnectorWizard extends DynamicPageWizard {
 //					// 打开编辑器
 //					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
 					
-					IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+					IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
 //					IEditorInput input = null;
 //					if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
 //						input = new FileStoreEditorInput(fileStore);

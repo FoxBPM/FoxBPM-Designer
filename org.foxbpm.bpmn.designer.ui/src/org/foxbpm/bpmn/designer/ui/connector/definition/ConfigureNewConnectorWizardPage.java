@@ -67,8 +67,9 @@ import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.ui.utils.FileUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.ConnectorFactory;
 import org.foxbpm.model.config.connector.ConnectorPackage.Literals;
@@ -123,6 +124,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private Button createCateButton;
 	private List<Node> nodelist;
 	private List<ITreeElement> categorytreeElements;
+	private static String CONNECTORDEFAULTICON = "category.png";
 
 	/**
 	 * 构造函数
@@ -147,7 +149,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		pages = new ArrayList<Page>();
 		this.newCreateCategoryID = new ArrayList<String>();
 
-		menu = ConnectorUtil.getDefinitionFlowConnectorMenu();
+		menu = DefinitionConnectorUtil.getFlowConnectorMenu();
 		// menu = menufactory.createMenu();
 		nodelist = menu.eResource() == null ? new ArrayList<Node>() : EMFUtil.getAll(menu.eResource(), Node.class);
 
@@ -171,12 +173,12 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		this.connectorDefinition = connector;
 		this.newCreateCategoryID = new ArrayList<String>();
 		// 读取Menu的xml
-		String menuPath = ConnectorUtil.getFlowConnectorMenuPath();
+		String menuPath = DefinitionConnectorUtil.getFlowConnectorMenuPath();
 		XMIResource menuresource = (XMIResource) new ResourceSetImpl().getResource(URI.createFileURI(menuPath), true);
 		Menu menu = (Menu) menuresource.getContents().get(0);
 		// Menu menu =
 		// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		menu = ConnectorUtil.getDefinitionFlowConnectorMenu();
+		menu = DefinitionConnectorUtil.getFlowConnectorMenu();
 		this.menu = menu;
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
@@ -328,11 +330,44 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 			}
 		});
 
+		if (connectorDefinition.getIcon() != null) {
+			try {
+				connectoriconButton.setText("");
+				is = new FileInputStream(DefinitionConnectorUtil.getActorConnectorIconPathByIconName(connectorDefinition.getId(), connectorDefinition.getIcon()));
+				if (connectoriconButton.getImage() != null && !connectoriconButton.getImage().isDisposed()) {
+					connectoriconButton.getImage().dispose();
+				}
+				connectoriconButton.setImage(new Image(PlatformUI.getWorkbench().getDisplay(), new ImageData(is).scaledTo(16, 16)));
+				is.close();
+			} catch (Exception ex) {
+				connectoriconButton.setImage(null);
+				connectoriconButton.setText("...");
+			}
+		} else {
+			// 如果是创建就给connectoriconButton一个默认图标
+			this.setIconPath(DefinitionConnectorUtil.getActorConnectorIconPath() + CONNECTORDEFAULTICON);
+			connectorDefinition.setIcon(FileUtil.getFileName(iconPath));
+			if (new File(this.getIconPath()).exists()) {
+				try {
+					is = new FileInputStream(this.getIconPath());
+					if (connectoriconButton.getImage() != null && !connectoriconButton.getImage().isDisposed()) {
+						connectoriconButton.getImage().dispose();
+					}
+					connectoriconButton.setText("");
+					connectoriconButton.setImage(new Image(PlatformUI.getWorkbench().getDisplay(), new ImageData(is).scaledTo(16, 16)));
+					is.close();
+				} catch (Exception ex) {
+					connectoriconButton.setImage(null);
+					connectoriconButton.setText("...");
+				}
+			}
+		}
+		
 		Label labelcategory = new Label(composite, SWT.NONE);
 		labelcategory.setText("分类");
 
 		// treeViewer获取数据
-		categorytreeElements = (List<ITreeElement>) ConnectorUtil.reloadTreeNodes();
+		categorytreeElements = (List<ITreeElement>) DefinitionConnectorUtil.reloadTreeNodes();
 		categorytreeViewer = new TreeViewer(composite, SWT.BORDER);
 		categorytreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -372,7 +407,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 					// selName = treeElementselect.getName();
 					connectorDefinition.setCategoryId(treeElementselect.getId());
 				}
-				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements);
+				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements, "connector");
 				if (dialog.open() == InputDialog.OK) {
 					// 回填到界面上,新增一个树节点出来
 					if (dialog.getSelTreeElement() != null) {

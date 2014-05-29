@@ -43,7 +43,7 @@ import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.create.AddNewConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.modify.ModifyNewConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
@@ -235,8 +235,9 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				if (baseElement.getExtensionValues().size() > 0) {
 					for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
-						if (objectElement != null && objectElement.size()>0) {
+						FeatureEList<ConnectorInstanceElements> objectElement = (FeatureEList<ConnectorInstanceElements>) extensionElements.get(
+								FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, true);
+						if (objectElement != null && objectElement.size() > 0) {
 							ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) objectElement.get(0);
 							connectorInstanceElements.setConnrctorType("flowConnector");
 							connectorInstanceElements.getConnectorInstance().add(connectorInstance);
@@ -337,7 +338,7 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 		public String getText(Object element) {
 			ConnectorInstance treeElement = (ConnectorInstance) element;
 			return treeElement.getConnectorInstanceName() + " -- " + getType(treeElement.getEventType()) + "--"
-					+ ConnectorUtil.getFlowConnectorByMenuConnectorId(treeElement.getConnectorInstanceId()).getNote();
+					+ RuntimeConnectorUtil.getFlowConnectorByMenuConnectorId(treeElement.getConnectorInstanceId()).getNote();
 		}
 
 		public String getType(String type) {
@@ -377,9 +378,9 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				String decoration = " -- "
 						+ getType(d.getEventType())
 						+ " -- "
-						+ (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()) == null ? (ConnectorUtil.getFlowConnectorByMenuConnectorId(d.getConnectorId()) == null ? "" : ConnectorUtil
-								.getFlowConnectorByMenuConnectorId(d.getConnectorId()).getName()) : (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName() == null ? ""
-								: RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName()));
+						+ (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()) == null ? (RuntimeConnectorUtil.getFlowConnectorByMenuConnectorId(d.getConnectorId()) == null ? ""
+								: RuntimeConnectorUtil.getFlowConnectorByMenuConnectorId(d.getConnectorId()).getName())
+								: (RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName() == null ? "" : RuntimeTreeViewerFactory.getConnector(d.getConnectorId()).getName()));
 				styledString.append(d.getConnectorInstanceName());
 				styledString.append(decoration, StyledString.DECORATIONS_STYLER);
 				cell.setText(styledString.getString());

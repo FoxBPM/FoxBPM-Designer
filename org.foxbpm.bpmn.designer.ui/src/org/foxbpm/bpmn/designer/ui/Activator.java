@@ -11,8 +11,8 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -63,7 +63,7 @@ public class Activator extends AbstractUIPlugin {
 				monitor.worked(1);
 				// 下载
 				try {
-					ConnectorUtil.downLoadConnector("start");
+					RuntimeConnectorUtil.downLoadConnector("start");
 				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						

@@ -16,7 +16,8 @@ import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput;
@@ -30,7 +31,6 @@ import org.foxbpm.model.bpmn.foxbpm.TimeSkipExpression;
 import org.foxbpm.model.config.connector.Input;
 import org.foxbpm.model.config.connector.Output;
 import org.foxbpm.model.config.connector.Widget;
-
 
 public class AddNewConnectorWizard extends DynamicPageWizard {
 
@@ -118,31 +118,28 @@ public class AddNewConnectorWizard extends DynamicPageWizard {
 		connectorInstance.setType("flowconnector");
 
 		// 增加跳过策略
-		if(skipComment.getExpression()!=null && skipComment.getExpression().getValue()!=null&&!skipComment.getExpression().getValue().equals("")){
+		if (skipComment.getExpression() != null && skipComment.getExpression().getValue() != null && !skipComment.getExpression().getValue().equals("")) {
 			connectorInstance.setSkipComment(skipComment);
-		}else{
+		} else {
 			connectorInstance.setSkipComment(null);
 		}
-		
-		
-		boolean isTimeExecute=renameConnectorWizardPage.getCheckButton().getSelection();
-		
+
+		boolean isTimeExecute = renameConnectorWizardPage.getCheckButton().getSelection();
+
 		connectorInstance.setIsTimeExecute(isTimeExecute);
-		
-		if(isTimeExecute){
-			TimeExpression timeExpression=FoxBPMFactory.eINSTANCE.createTimeExpression();
-			Expression expressionTime=renameConnectorWizardPage.getTimeFoxBPMExpViewer().getExpression();
+
+		if (isTimeExecute) {
+			TimeExpression timeExpression = FoxBPMFactory.eINSTANCE.createTimeExpression();
+			Expression expressionTime = renameConnectorWizardPage.getTimeFoxBPMExpViewer().getExpression();
 			timeExpression.setExpression(expressionTime);
 			connectorInstance.setTimeExpression(timeExpression);
-			
-			
-			TimeSkipExpression timeExpressionSkip=FoxBPMFactory.eINSTANCE.createTimeSkipExpression();
-			Expression expressionTimeSkip=renameConnectorWizardPage.getSkipFoxBPMExpViewer().getExpression();
+
+			TimeSkipExpression timeExpressionSkip = FoxBPMFactory.eINSTANCE.createTimeSkipExpression();
+			Expression expressionTimeSkip = renameConnectorWizardPage.getSkipFoxBPMExpViewer().getExpression();
 			timeExpressionSkip.setExpression(expressionTimeSkip);
 			connectorInstance.setTimeSkipExpression(timeExpressionSkip);
-			
-			
-		}else{
+
+		} else {
 			connectorInstance.setTimeExpression(null);
 			connectorInstance.setTimeSkipExpression(null);
 		}
@@ -167,10 +164,9 @@ public class AddNewConnectorWizard extends DynamicPageWizard {
 						// 分类进行数据处理
 						if (control instanceof Label) {
 							Label label = (Label) control;
-							Input input = ConnectorUtil.getInputFromId(ConnectorUtil
-									.getFlowConnectorByMenuConnectorId(connectorInstance.getConnectorId()),
-										((Widget) label.getData()).getInputId());
-							
+							Input input = RuntimeConnectorUtil.getInputFromId(RuntimeConnectorUtil.getFlowConnectorByMenuConnectorId(connectorInstance.getConnectorId()),
+									((Widget) label.getData()).getInputId());
+
 							connectorParameterInput = FoxBPMFactory.eINSTANCE.createConnectorParameterInput();
 							connectorParameterInput.setId(((Widget) label.getData()).getInputId());
 							connectorParameterInput.setName(((Widget) label.getData()).getName());
@@ -180,15 +176,14 @@ public class AddNewConnectorWizard extends DynamicPageWizard {
 						}
 
 						if (control instanceof Text) {
-							if(control.getParent() instanceof ContentAssistText) {
+							if (control.getParent() instanceof ContentAssistText) {
 								FoxBPMExpViewer foxBPMExpViewer = ((ContentAssistText) control.getParent()).getFoxBPMExpViewer();
 								expression = foxBPMExpViewer.getExpression();
-							} else{
+							} else {
 								Text text = (Text) control;
 								expression.setValue(text.getText().trim());
 							}
-						}
-						else if (control instanceof Button) {
+						} else if (control instanceof Button) {
 							Button button = (Button) control;
 							expression.setValue(button.getText().trim());
 						}

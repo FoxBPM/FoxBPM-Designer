@@ -15,7 +15,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ProjectUtil;
 
 public class EditActorConnectorWizard extends DynamicPageWizard {
@@ -40,7 +40,7 @@ public class EditActorConnectorWizard extends DynamicPageWizard {
 
 				for (Object object : files) {
 					try {
-						IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(ConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+						IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getActorConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
 						IDE.openEditorOnFileStore(page, fileStore);
 					} catch (PartInitException e) {
 					}

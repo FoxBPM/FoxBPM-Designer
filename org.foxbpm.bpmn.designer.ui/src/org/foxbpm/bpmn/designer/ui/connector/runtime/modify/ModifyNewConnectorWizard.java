@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -19,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
 import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterOutput;
@@ -214,7 +213,7 @@ public class ModifyNewConnectorWizard extends Wizard {
 						// 分类进行数据处理
 						if (control instanceof Label) {
 							Label label = (Label) control;
-							Input input = ConnectorUtil.getInputFromId(RuntimeTreeViewerFactory
+							Input input = RuntimeConnectorUtil.getInputFromId(RuntimeTreeViewerFactory
 									.getConnector(connectorInstance.getConnectorId()),
 										((Widget) label.getData()).getInputId());
 							

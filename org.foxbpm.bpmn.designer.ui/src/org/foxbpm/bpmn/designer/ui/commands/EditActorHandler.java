@@ -10,7 +10,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.bpmn.designer.ui.actor.definition.EditActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 public class EditActorHandler implements IHandler {
 
@@ -26,7 +26,7 @@ public class EditActorHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		String connectPathString = ConnectorUtil.getDefinitionConnectorPath();
+		String connectPathString = DefinitionConnectorUtil.getActorConnectorPath();
 		File file = new File(connectPathString);
 		if (!file.exists()) {
 			MessageDialog.openWarning(Display.getDefault().getActiveShell(), "提示", "找不到处理者选择器存放路径，请设置");

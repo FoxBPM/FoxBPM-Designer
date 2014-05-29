@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 
 public class ChooseConnectorFileToEditWizardPage extends WizardPage {
@@ -102,7 +102,7 @@ public class ChooseConnectorFileToEditWizardPage extends WizardPage {
 
 	public List<String> getFilesInConnectorPath() {
 		List<String> filenames = new ArrayList<String>();
-		File d = new File(ConnectorUtil.getFlowConnectorPathById(connector.getId()));// 建立当前目录中文件的File对象
+		File d = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId()));// 建立当前目录中文件的File对象
 		File[] fl = d.listFiles();// 取得目录中所有文件的File对象数组
 		for (int i = 0; i < fl.length; i++) {
 			// 目录下的文件：

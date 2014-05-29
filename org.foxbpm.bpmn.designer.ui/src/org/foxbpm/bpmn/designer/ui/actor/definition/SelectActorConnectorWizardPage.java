@@ -33,11 +33,11 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
+import org.foxbpm.bpmn.designer.ui.tree.ActorTreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
-import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -132,7 +132,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						return;
 
 					// 删除目录
-					File file = new File(ConnectorUtil.getDefinitionActorConnectorPathById(connector.getId()));
+					File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(connector.getId()));
 					// File file = new
 					// File(ConnectorUtil.getConnectorPathById(connector.getConnectorId()));
 					deleteFile(file);
@@ -140,7 +140,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					// 读取Menu的XML
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(ConnectorUtil.getActorConnectorMenuPath()), true);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath()), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
 					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
@@ -205,7 +205,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					Resource resource = resourceSet.getResource(URI.createFileURI(ConnectorUtil.getActorConnectorMenuPath()), true);
+					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath()), true);
 					// register package in local resource registry
 					resourceSet.getPackageRegistry().put(FoxBPMPackage.eINSTANCE.getNsURI(), FoxBPMPackage.eINSTANCE);
 					// load resource
@@ -229,7 +229,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						getAllMenuConnector(nodesel);
 						if (menuConnectorIdStringList.size() > 0) {
 							for (String idString : menuConnectorIdStringList) {
-								file = new File(ConnectorUtil.getDefinitionActorConnectorPathById(idString));
+								file = new File(DefinitionConnectorUtil.getActorConnectorPathById(idString));
 								deleteFile(file);
 							}
 						}
@@ -277,7 +277,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 		treeViewer.setContentProvider(new TreeViewerContentProvider());
 
 		// 设置标签提供器
-		treeViewer.setLabelProvider(new TreeViewerLabelProvider());
+		treeViewer.setLabelProvider(new ActorTreeViewerLabelProvider());
 
 		// 设置内容
 		treeViewer.setInput(elements);

@@ -34,12 +34,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.tree.EntityElement;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
-import org.foxbpm.bpmn.designer.ui.utils.ConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connectormenu.Node;
 
 public class CategoryCreateDialog extends TitleAreaDialog {
 
-	private static String CATEGORYDEFAULTICON = "connector.png";
+	private static String ACTORCATEGORYDEFAULTICON = "connector.png";
+	private static String CONNECTORCATEGORYDEFAULTICON = "category.png";
 	
 	private Text textname;
 	private Button buttonicon;
@@ -55,6 +56,7 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 	private ITreeElement pareElement = null;
 	private Text textPareCategory;
 	private boolean isCreateRoot;
+	private String type;
 	
 	public ITreeElement getSelTreeElement() {
 		return selTreeElement;
@@ -104,11 +106,12 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 		setHelpAvailable(false);
 	}
 	
-	public CategoryCreateDialog(Shell parentShell,ITreeElement selElement,List<ITreeElement> lists) {
+	public CategoryCreateDialog(Shell parentShell,ITreeElement selElement,List<ITreeElement> lists, String type) {
 		super(parentShell);
 		setHelpAvailable(false);
 		this.pareElement = selElement;
 		this.treeElements = lists;
+		this.type = type;
 	}
 
 	public CategoryCreateDialog(Shell parentShell, List<Node> nodelist2, String nodename, List<ITreeElement> lists) {
@@ -196,7 +199,12 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 		btnIsCreateRoot.setLayoutData(gd_btnIsCreateRoot);
 		btnIsCreateRoot.setText("是否作为根节点创建分类");
 		
-		CategoryCreateDialog.this.iconpath = ConnectorUtil.getConnectorIconPath() + CATEGORYDEFAULTICON;
+		if(type!=null && type.equals("connector")) {
+			iconpath = DefinitionConnectorUtil.getFlowConnectorIconPath() + CONNECTORCATEGORYDEFAULTICON;
+		}
+		else if(type!=null && type.equals("actor")) {
+			iconpath = DefinitionConnectorUtil.getActorConnectorIconPath() + ACTORCATEGORYDEFAULTICON;
+		}
 		if (new File(iconpath).exists()) {
 			try {
 				is = new FileInputStream(iconpath);

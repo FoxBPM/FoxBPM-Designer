@@ -1,8 +1,11 @@
 package org.foxbpm.bpmn.designer.ui.utils;
 
+import java.io.File;
+
 public class FileUtil {
 	/**
 	 * Java文件操作 获取文件扩展名
+	 * 
 	 * @param filename
 	 * @return
 	 */
@@ -14,5 +17,18 @@ public class FileUtil {
 			}
 		}
 		return filename;
+	}
+
+	/**
+	 * 返回文件名
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public static String getFileName(String path) {
+		if (path == null)
+			return "";
+		File file = new File(path);
+		return file.getName();
 	}
 }
