@@ -360,6 +360,21 @@
        </appliesTo>
     </proposalFilter>
  </extension>
+
+ <extension
+       point="org.eclipse.core.runtime.preferences">
+    <initializer
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferenceInitializer">
+    </initializer>
+ </extension>
+ <extension
+       point="org.eclipse.ui.preferencePages">
+    <page
+          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          id="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
+          name="流程设计器">
+    </page>
+ </extension>
 	<extension point="org.foxbpm.runtime">
 		<runtime class="org.eclipse.bpmn2.modeler.ui.DefaultBpmn2RuntimeExtension"
 			description="%runtime.description" id="org.eclipse.bpmn2.modeler.runtime.none"
@@ -422,14 +437,39 @@
         label="通用">
   </propertyTab>
   <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.connector.ConnectorPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
-        label="连接器">
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
+        label="高级属性">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskPropertySection"
+        label="任务信息">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskFormPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskFormPropertySection"
+        label="表单信息">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskJumpStrategyPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskJumpStrategyPropertySection"
+        label="跳过策略">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskCommandPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskTaskCommandPropertySection"
+        label="任务命令">
   </propertyTab>
    <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAssignmentPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab1"
         label="任务分配">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.connector.ConnectorPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
+        label="连接器">
   </propertyTab>
    <propertyTab
          class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskcommandPropertySection"
@@ -446,19 +486,4 @@
 
 
 </extension>
-
- <extension
-       point="org.eclipse.core.runtime.preferences">
-    <initializer
-          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferenceInitializer">
-    </initializer>
- </extension>
- <extension
-       point="org.eclipse.ui.preferencePages">
-    <page
-          class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
-          id="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
-          name="流程设计器">
-    </page>
- </extension>
 </plugin>
