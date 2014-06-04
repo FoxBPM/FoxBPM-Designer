@@ -311,9 +311,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignPolicyType" eType="#//AssignPolicyType"
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="assignPolicyType"/>
+        <details key="name" value=""/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
+        <details key="wildcards" value=""/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPersistence" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"
@@ -386,6 +387,14 @@
         <details key="name" value="completeTaskDescription"/>
         <details key="kind" value="element"/>
         <details key="namespace" value="##targetNamespace"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formParamContainer" eType="#//FormParamContainer"
+        containment="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="formParamContainer"/>
+        <details key="namespace" value="##targetNamespace"/>
+        <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -1232,6 +1241,40 @@
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
         <details key="namespace" value="##targetNamespace"/>
+        <details key="wildcards" value=""/>
+        <details key="name" value=""/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormParamContainer">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="name" value="FormParamContainer"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formParam" upperBound="-1"
+        eType="#//FormParam" containment="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="namespace" value="##targetNamespace"/>
+        <details key="kind" value="element"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FormParam">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramKey">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="namespace" value=""/>
+        <details key="kind" value="attribute"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramType">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="kind" value="attribute"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+        containment="true">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="namespace" value="##targetNamespace"/>
+        <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
