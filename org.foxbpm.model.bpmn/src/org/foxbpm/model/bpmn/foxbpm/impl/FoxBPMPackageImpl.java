@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
+import org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
@@ -23,6 +24,8 @@ import org.foxbpm.model.bpmn.foxbpm.Documentation;
 import org.foxbpm.model.bpmn.foxbpm.ExpectedExecutionTime;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FilterConditions;
+import org.foxbpm.model.bpmn.foxbpm.FormParam;
+import org.foxbpm.model.bpmn.foxbpm.FormParamContainer;
 import org.foxbpm.model.bpmn.foxbpm.FormUri;
 import org.foxbpm.model.bpmn.foxbpm.FormUriView;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
@@ -42,6 +45,7 @@ import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
 import org.foxbpm.model.bpmn.foxbpm.SubProcessToDataSourceMapping;
 import org.foxbpm.model.bpmn.foxbpm.TableExpression;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
+import org.foxbpm.model.bpmn.foxbpm.TaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.TaskPriority;
 import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
 import org.foxbpm.model.bpmn.foxbpm.TimeExpression;
@@ -299,6 +303,34 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	private EClass listExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass taskDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass completeTaskDescriptionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass formParamContainerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass formParamEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -828,6 +860,33 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 */
 	public EAttribute getDocumentRoot_IsAutoClaim() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(49);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_TaskDescription() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(50);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_CompleteTaskDescription() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(51);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_FormParamContainer() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(52);
 	}
 
 	/**
@@ -2077,6 +2136,96 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTaskDescription() {
+		return taskDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTaskDescription_Expression() {
+		return (EReference)taskDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getCompleteTaskDescription() {
+		return completeTaskDescriptionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getCompleteTaskDescription_Expression() {
+		return (EReference)completeTaskDescriptionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFormParamContainer() {
+		return formParamContainerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFormParamContainer_FormParam() {
+		return (EReference)formParamContainerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFormParam() {
+		return formParamEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFormParam_ParamKey() {
+		return (EAttribute)formParamEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFormParam_ParamType() {
+		return (EAttribute)formParamEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFormParam_Expression() {
+		return (EReference)formParamEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getProcessValidationLevel() {
 		return processValidationLevelEEnum;
 	}
@@ -2160,6 +2309,9 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__NAME);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__IS_CREATE_RECORD);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__IS_AUTO_CLAIM);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_DESCRIPTION);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
 
 		expressionEClass = createEClass(EXPRESSION);
 		createEAttribute(expressionEClass, EXPRESSION__VALUE);
@@ -2333,6 +2485,20 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		listExpressionEClass = createEClass(LIST_EXPRESSION);
 		createEReference(listExpressionEClass, LIST_EXPRESSION__EXPRESSIONS);
 
+		taskDescriptionEClass = createEClass(TASK_DESCRIPTION);
+		createEReference(taskDescriptionEClass, TASK_DESCRIPTION__EXPRESSION);
+
+		completeTaskDescriptionEClass = createEClass(COMPLETE_TASK_DESCRIPTION);
+		createEReference(completeTaskDescriptionEClass, COMPLETE_TASK_DESCRIPTION__EXPRESSION);
+
+		formParamContainerEClass = createEClass(FORM_PARAM_CONTAINER);
+		createEReference(formParamContainerEClass, FORM_PARAM_CONTAINER__FORM_PARAM);
+
+		formParamEClass = createEClass(FORM_PARAM);
+		createEAttribute(formParamEClass, FORM_PARAM__PARAM_KEY);
+		createEAttribute(formParamEClass, FORM_PARAM__PARAM_TYPE);
+		createEReference(formParamEClass, FORM_PARAM__EXPRESSION);
+
 		// Create enums
 		processValidationLevelEEnum = createEEnum(PROCESS_VALIDATION_LEVEL);
 	}
@@ -2423,6 +2589,9 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getDocumentRoot_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_IsCreateRecord(), theXMLTypePackage.getString(), "isCreateRecord", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_IsAutoClaim(), theXMLTypePackage.getString(), "isAutoClaim", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_TaskDescription(), this.getTaskDescription(), null, "taskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_CompleteTaskDescription(), this.getCompleteTaskDescription(), null, "completeTaskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_FormParamContainer(), this.getFormParamContainer(), null, "formParamContainer", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpression_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2595,6 +2764,20 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 
 		initEClass(listExpressionEClass, ListExpression.class, "ListExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getListExpression_Expressions(), this.getExpression(), null, "expressions", null, 0, -1, ListExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(taskDescriptionEClass, TaskDescription.class, "TaskDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTaskDescription_Expression(), this.getExpression(), null, "expression", null, 0, 1, TaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(completeTaskDescriptionEClass, CompleteTaskDescription.class, "CompleteTaskDescription", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompleteTaskDescription_Expression(), this.getExpression(), null, "expression", null, 0, 1, CompleteTaskDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(formParamContainerEClass, FormParamContainer.class, "FormParamContainer", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFormParamContainer_FormParam(), this.getFormParam(), null, "formParam", null, 0, -1, FormParamContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(formParamEClass, FormParam.class, "FormParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFormParam_ParamKey(), theXMLTypePackage.getString(), "paramKey", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFormParam_ParamType(), theXMLTypePackage.getString(), "paramType", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFormParam_Expression(), this.getExpression(), null, "expression", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processValidationLevelEEnum, ProcessValidationLevel.class, "ProcessValidationLevel");
@@ -2932,9 +3115,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getDocumentRoot_AssignPolicyType(), 
 		   source, 
 		   new String[] {
-			 "name", "assignPolicyType",
+			 "name", "",
 			 "namespace", "##targetNamespace",
-			 "kind", "element"
+			 "kind", "element",
+			 "wildcards", ""
 		   });		
 		addAnnotation
 		  (getDocumentRoot_IsPersistence(), 
@@ -2992,6 +3176,29 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "namespace", "##targetNamespace",
 			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_TaskDescription(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_CompleteTaskDescription(), 
+		   source, 
+		   new String[] {
+			 "name", "completeTaskDescription",
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_FormParamContainer(), 
+		   source, 
+		   new String[] {
+			 "name", "formParamContainer",
+			 "namespace", "##targetNamespace",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (expressionEClass, 
@@ -3784,6 +3991,62 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "name", "expressions",
 			 "kind", "element",
 			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getTaskDescription_Expression(), 
+		   source, 
+		   new String[] {
+			 "name", "expression",
+			 "namespace", "##targetNamespace",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (completeTaskDescriptionEClass, 
+		   source, 
+		   new String[] {
+			 "name", "CompleteTaskDescription"
+		   });		
+		addAnnotation
+		  (getCompleteTaskDescription_Expression(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "##targetNamespace",
+			 "wildcards", "",
+			 "name", ""
+		   });		
+		addAnnotation
+		  (formParamContainerEClass, 
+		   source, 
+		   new String[] {
+			 "name", "FormParamContainer"
+		   });		
+		addAnnotation
+		  (getFormParamContainer_FormParam(), 
+		   source, 
+		   new String[] {
+			 "namespace", "##targetNamespace",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getFormParam_ParamKey(), 
+		   source, 
+		   new String[] {
+			 "namespace", "",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getFormParam_ParamType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getFormParam_Expression(), 
+		   source, 
+		   new String[] {
+			 "namespace", "##targetNamespace",
+			 "kind", "element"
 		   });
 	}
 

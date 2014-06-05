@@ -278,6 +278,30 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMPackage.TASK_DESCRIPTION: {
+				TaskDescription taskDescription = (TaskDescription)theEObject;
+				T result = caseTaskDescription(taskDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.COMPLETE_TASK_DESCRIPTION: {
+				CompleteTaskDescription completeTaskDescription = (CompleteTaskDescription)theEObject;
+				T result = caseCompleteTaskDescription(completeTaskDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.FORM_PARAM_CONTAINER: {
+				FormParamContainer formParamContainer = (FormParamContainer)theEObject;
+				T result = caseFormParamContainer(formParamContainer);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.FORM_PARAM: {
+				FormParam formParam = (FormParam)theEObject;
+				T result = caseFormParam(formParam);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -804,6 +828,66 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseListExpression(ListExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Task Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Task Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTaskDescription(TaskDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complete Task Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complete Task Description</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompleteTaskDescription(CompleteTaskDescription object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Form Param Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Form Param Container</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFormParamContainer(FormParamContainer object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Form Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Form Param</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFormParam(FormParam object) {
 		return null;
 	}
 

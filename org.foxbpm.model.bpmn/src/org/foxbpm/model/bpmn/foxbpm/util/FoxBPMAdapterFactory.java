@@ -208,6 +208,22 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 				return createListExpressionAdapter();
 			}
 			@Override
+			public Adapter caseTaskDescription(TaskDescription object) {
+				return createTaskDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseCompleteTaskDescription(CompleteTaskDescription object) {
+				return createCompleteTaskDescriptionAdapter();
+			}
+			@Override
+			public Adapter caseFormParamContainer(FormParamContainer object) {
+				return createFormParamContainerAdapter();
+			}
+			@Override
+			public Adapter caseFormParam(FormParam object) {
+				return createFormParamAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -714,6 +730,62 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createListExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.TaskDescription <em>Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskDescription
+	 * @generated
+	 */
+	public Adapter createTaskDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription <em>Complete Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription
+	 * @generated
+	 */
+	public Adapter createCompleteTaskDescriptionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.FormParamContainer <em>Form Param Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParamContainer
+	 * @generated
+	 */
+	public Adapter createFormParamContainerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.FormParam <em>Form Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParam
+	 * @generated
+	 */
+	public Adapter createFormParamAdapter() {
 		return null;
 	}
 

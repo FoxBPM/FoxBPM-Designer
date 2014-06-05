@@ -92,6 +92,10 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 			case FoxBPMPackage.TIME_SKIP_EXPRESSION: return createTimeSkipExpression();
 			case FoxBPMPackage.TABLE_EXPRESSION: return createTableExpression();
 			case FoxBPMPackage.LIST_EXPRESSION: return createListExpression();
+			case FoxBPMPackage.TASK_DESCRIPTION: return createTaskDescription();
+			case FoxBPMPackage.COMPLETE_TASK_DESCRIPTION: return createCompleteTaskDescription();
+			case FoxBPMPackage.FORM_PARAM_CONTAINER: return createFormParamContainer();
+			case FoxBPMPackage.FORM_PARAM: return createFormParam();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -475,6 +479,46 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	public ListExpression createListExpression() {
 		ListExpressionImpl listExpression = new ListExpressionImpl();
 		return listExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TaskDescription createTaskDescription() {
+		TaskDescriptionImpl taskDescription = new TaskDescriptionImpl();
+		return taskDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompleteTaskDescription createCompleteTaskDescription() {
+		CompleteTaskDescriptionImpl completeTaskDescription = new CompleteTaskDescriptionImpl();
+		return completeTaskDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormParamContainer createFormParamContainer() {
+		FormParamContainerImpl formParamContainer = new FormParamContainerImpl();
+		return formParamContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormParam createFormParam() {
+		FormParamImpl formParam = new FormParamImpl();
+		return formParam;
 	}
 
 	/**

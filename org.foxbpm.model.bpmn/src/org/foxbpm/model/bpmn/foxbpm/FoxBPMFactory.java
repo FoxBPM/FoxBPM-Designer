@@ -337,6 +337,42 @@ public interface FoxBPMFactory extends EFactory {
 	ListExpression createListExpression();
 
 	/**
+	 * Returns a new object of class '<em>Task Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Task Description</em>'.
+	 * @generated
+	 */
+	TaskDescription createTaskDescription();
+
+	/**
+	 * Returns a new object of class '<em>Complete Task Description</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complete Task Description</em>'.
+	 * @generated
+	 */
+	CompleteTaskDescription createCompleteTaskDescription();
+
+	/**
+	 * Returns a new object of class '<em>Form Param Container</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Form Param Container</em>'.
+	 * @generated
+	 */
+	FormParamContainer createFormParamContainer();
+
+	/**
+	 * Returns a new object of class '<em>Form Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Form Param</em>'.
+	 * @generated
+	 */
+	FormParam createFormParam();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

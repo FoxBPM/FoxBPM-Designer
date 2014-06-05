@@ -67,6 +67,9 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsCreateRecord <em>Is Create Record</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}</li>
  * </ul>
  * </p>
  *
@@ -1116,7 +1119,7 @@ public interface DocumentRoot extends EObject {
 	 * @see #setAssignPolicyType(AssignPolicyType)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_AssignPolicyType()
 	 * @model containment="true"
-	 *        extendedMetaData="name='assignPolicyType' namespace='##targetNamespace' kind='element'"
+	 *        extendedMetaData="name='' namespace='##targetNamespace' kind='element' wildcards=''"
 	 * @generated
 	 */
 	AssignPolicyType getAssignPolicyType();
@@ -1337,5 +1340,86 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setIsAutoClaim(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Task Description</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Task Description</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Task Description</em>' containment reference.
+	 * @see #setTaskDescription(TaskDescription)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_TaskDescription()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element' namespace='##targetNamespace'"
+	 * @generated
+	 */
+	TaskDescription getTaskDescription();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Task Description</em>' containment reference.
+	 * @see #getTaskDescription()
+	 * @generated
+	 */
+	void setTaskDescription(TaskDescription value);
+
+	/**
+	 * Returns the value of the '<em><b>Complete Task Description</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Complete Task Description</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Complete Task Description</em>' containment reference.
+	 * @see #setCompleteTaskDescription(CompleteTaskDescription)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_CompleteTaskDescription()
+	 * @model containment="true"
+	 *        extendedMetaData="name='completeTaskDescription' kind='element' namespace='##targetNamespace'"
+	 * @generated
+	 */
+	CompleteTaskDescription getCompleteTaskDescription();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Complete Task Description</em>' containment reference.
+	 * @see #getCompleteTaskDescription()
+	 * @generated
+	 */
+	void setCompleteTaskDescription(CompleteTaskDescription value);
+
+	/**
+	 * Returns the value of the '<em><b>Form Param Container</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Form Param Container</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Form Param Container</em>' containment reference.
+	 * @see #setFormParamContainer(FormParamContainer)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_FormParamContainer()
+	 * @model containment="true"
+	 *        extendedMetaData="name='formParamContainer' namespace='##targetNamespace' kind='element'"
+	 * @generated
+	 */
+	FormParamContainer getFormParamContainer();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Form Param Container</em>' containment reference.
+	 * @see #getFormParamContainer()
+	 * @generated
+	 */
+	void setFormParamContainer(FormParamContainer value);
 
 } // DocumentRoot

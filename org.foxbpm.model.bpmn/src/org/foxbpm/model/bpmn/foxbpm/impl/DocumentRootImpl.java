@@ -20,12 +20,14 @@ import org.eclipse.emf.ecore.util.EcoreEMap;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
+import org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
 import org.foxbpm.model.bpmn.foxbpm.DataSourceToSubProcessMapping;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.DocumentRoot;
 import org.foxbpm.model.bpmn.foxbpm.ExpectedExecutionTime;
+import org.foxbpm.model.bpmn.foxbpm.FormParamContainer;
 import org.foxbpm.model.bpmn.foxbpm.FormUri;
 import org.foxbpm.model.bpmn.foxbpm.FormUriView;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
@@ -39,6 +41,7 @@ import org.foxbpm.model.bpmn.foxbpm.ResourceFilter;
 import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
 import org.foxbpm.model.bpmn.foxbpm.SubProcessToDataSourceMapping;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
+import org.foxbpm.model.bpmn.foxbpm.TaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.TaskPriority;
 import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
 
@@ -99,6 +102,9 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsCreateRecord <em>Is Create Record</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsAutoClaim <em>Is Auto Claim</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskDescription <em>Task Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getFormParamContainer <em>Form Param Container</em>}</li>
  * </ul>
  * </p>
  *
@@ -834,6 +840,36 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected String isAutoClaim = IS_AUTO_CLAIM_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getTaskDescription() <em>Task Description</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTaskDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected TaskDescription taskDescription;
+
+	/**
+	 * The cached value of the '{@link #getCompleteTaskDescription() <em>Complete Task Description</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCompleteTaskDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected CompleteTaskDescription completeTaskDescription;
+
+	/**
+	 * The cached value of the '{@link #getFormParamContainer() <em>Form Param Container</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormParamContainer()
+	 * @generated
+	 * @ordered
+	 */
+	protected FormParamContainer formParamContainer;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2086,6 +2122,135 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public TaskDescription getTaskDescription() {
+		return taskDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTaskDescription(TaskDescription newTaskDescription, NotificationChain msgs) {
+		TaskDescription oldTaskDescription = taskDescription;
+		taskDescription = newTaskDescription;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION, oldTaskDescription, newTaskDescription);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTaskDescription(TaskDescription newTaskDescription) {
+		if (newTaskDescription != taskDescription) {
+			NotificationChain msgs = null;
+			if (taskDescription != null)
+				msgs = ((InternalEObject)taskDescription).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION, null, msgs);
+			if (newTaskDescription != null)
+				msgs = ((InternalEObject)newTaskDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION, null, msgs);
+			msgs = basicSetTaskDescription(newTaskDescription, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION, newTaskDescription, newTaskDescription));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompleteTaskDescription getCompleteTaskDescription() {
+		return completeTaskDescription;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCompleteTaskDescription(CompleteTaskDescription newCompleteTaskDescription, NotificationChain msgs) {
+		CompleteTaskDescription oldCompleteTaskDescription = completeTaskDescription;
+		completeTaskDescription = newCompleteTaskDescription;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, oldCompleteTaskDescription, newCompleteTaskDescription);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCompleteTaskDescription(CompleteTaskDescription newCompleteTaskDescription) {
+		if (newCompleteTaskDescription != completeTaskDescription) {
+			NotificationChain msgs = null;
+			if (completeTaskDescription != null)
+				msgs = ((InternalEObject)completeTaskDescription).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, null, msgs);
+			if (newCompleteTaskDescription != null)
+				msgs = ((InternalEObject)newCompleteTaskDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, null, msgs);
+			msgs = basicSetCompleteTaskDescription(newCompleteTaskDescription, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, newCompleteTaskDescription, newCompleteTaskDescription));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FormParamContainer getFormParamContainer() {
+		return formParamContainer;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFormParamContainer(FormParamContainer newFormParamContainer, NotificationChain msgs) {
+		FormParamContainer oldFormParamContainer = formParamContainer;
+		formParamContainer = newFormParamContainer;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, oldFormParamContainer, newFormParamContainer);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFormParamContainer(FormParamContainer newFormParamContainer) {
+		if (newFormParamContainer != formParamContainer) {
+			NotificationChain msgs = null;
+			if (formParamContainer != null)
+				msgs = ((InternalEObject)formParamContainer).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, null, msgs);
+			if (newFormParamContainer != null)
+				msgs = ((InternalEObject)newFormParamContainer).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, null, msgs);
+			msgs = basicSetFormParamContainer(newFormParamContainer, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, newFormParamContainer, newFormParamContainer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2133,6 +2298,12 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return basicSetAssignPolicyType(null, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS:
 				return ((InternalEList<?>)getConnectorInstanceElements()).basicRemove(otherEnd, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
+				return basicSetTaskDescription(null, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
+				return basicSetCompleteTaskDescription(null, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
+				return basicSetFormParamContainer(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -2248,6 +2419,12 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getIsCreateRecord();
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
 				return getIsAutoClaim();
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
+				return getTaskDescription();
+			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
+				return getCompleteTaskDescription();
+			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
+				return getFormParamContainer();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2417,6 +2594,15 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
 				setIsAutoClaim((String)newValue);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
+				setTaskDescription((TaskDescription)newValue);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
+				setCompleteTaskDescription((CompleteTaskDescription)newValue);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
+				setFormParamContainer((FormParamContainer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2579,6 +2765,15 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
 				setIsAutoClaim(IS_AUTO_CLAIM_EDEFAULT);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
+				setTaskDescription((TaskDescription)null);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
+				setCompleteTaskDescription((CompleteTaskDescription)null);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
+				setFormParamContainer((FormParamContainer)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2691,6 +2886,12 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return IS_CREATE_RECORD_EDEFAULT == null ? isCreateRecord != null : !IS_CREATE_RECORD_EDEFAULT.equals(isCreateRecord);
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
 				return IS_AUTO_CLAIM_EDEFAULT == null ? isAutoClaim != null : !IS_AUTO_CLAIM_EDEFAULT.equals(isAutoClaim);
+			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
+				return taskDescription != null;
+			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
+				return completeTaskDescription != null;
+			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
+				return formParamContainer != null;
 		}
 		return super.eIsSet(featureID);
 	}

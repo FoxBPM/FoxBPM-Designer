@@ -522,13 +522,40 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__IS_AUTO_CLAIM = 49;
 
 	/**
+	 * The feature id for the '<em><b>Task Description</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__TASK_DESCRIPTION = 50;
+
+	/**
+	 * The feature id for the '<em><b>Complete Task Description</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION = 51;
+
+	/**
+	 * The feature id for the '<em><b>Form Param Container</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__FORM_PARAM_CONTAINER = 52;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 50;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 53;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -2482,6 +2509,172 @@ public interface FoxBPMPackage extends EPackage {
 	int LIST_EXPRESSION_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskDescriptionImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskDescription()
+	 * @generated
+	 */
+	int TASK_DESCRIPTION = 35;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_DESCRIPTION__EXPRESSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Task Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_DESCRIPTION_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Task Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_DESCRIPTION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.CompleteTaskDescriptionImpl <em>Complete Task Description</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.CompleteTaskDescriptionImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getCompleteTaskDescription()
+	 * @generated
+	 */
+	int COMPLETE_TASK_DESCRIPTION = 36;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLETE_TASK_DESCRIPTION__EXPRESSION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Complete Task Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLETE_TASK_DESCRIPTION_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Complete Task Description</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLETE_TASK_DESCRIPTION_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormParamContainerImpl <em>Form Param Container</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FormParamContainerImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getFormParamContainer()
+	 * @generated
+	 */
+	int FORM_PARAM_CONTAINER = 37;
+
+	/**
+	 * The feature id for the '<em><b>Form Param</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM_CONTAINER__FORM_PARAM = 0;
+
+	/**
+	 * The number of structural features of the '<em>Form Param Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM_CONTAINER_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Form Param Container</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM_CONTAINER_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormParamImpl <em>Form Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FormParamImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getFormParam()
+	 * @generated
+	 */
+	int FORM_PARAM = 38;
+
+	/**
+	 * The feature id for the '<em><b>Param Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM__PARAM_KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Param Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM__PARAM_TYPE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM__EXPRESSION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Form Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Form Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FORM_PARAM_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2489,7 +2682,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getProcessValidationLevel()
 	 * @generated
 	 */
-	int PROCESS_VALIDATION_LEVEL = 35;
+	int PROCESS_VALIDATION_LEVEL = 39;
 
 
 	/**
@@ -3051,6 +3244,39 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDocumentRoot_IsAutoClaim();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Task Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_TaskDescription();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Complete Task Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_CompleteTaskDescription();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Form Param Container</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_FormParamContainer();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
@@ -4537,6 +4763,112 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getListExpression_Expressions();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.TaskDescription <em>Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Task Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskDescription
+	 * @generated
+	 */
+	EClass getTaskDescription();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskDescription#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.TaskDescription#getExpression()
+	 * @see #getTaskDescription()
+	 * @generated
+	 */
+	EReference getTaskDescription_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription <em>Complete Task Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Complete Task Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription
+	 * @generated
+	 */
+	EClass getCompleteTaskDescription();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription#getExpression()
+	 * @see #getCompleteTaskDescription()
+	 * @generated
+	 */
+	EReference getCompleteTaskDescription_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.FormParamContainer <em>Form Param Container</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Form Param Container</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParamContainer
+	 * @generated
+	 */
+	EClass getFormParamContainer();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.FormParamContainer#getFormParam <em>Form Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Form Param</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParamContainer#getFormParam()
+	 * @see #getFormParamContainer()
+	 * @generated
+	 */
+	EReference getFormParamContainer_FormParam();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.FormParam <em>Form Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Form Param</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParam
+	 * @generated
+	 */
+	EClass getFormParam();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.FormParam#getParamKey <em>Param Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Param Key</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParam#getParamKey()
+	 * @see #getFormParam()
+	 * @generated
+	 */
+	EAttribute getFormParam_ParamKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.FormParam#getParamType <em>Param Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Param Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParam#getParamType()
+	 * @see #getFormParam()
+	 * @generated
+	 */
+	EAttribute getFormParam_ParamType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.FormParam#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FormParam#getExpression()
+	 * @see #getFormParam()
+	 * @generated
+	 */
+	EReference getFormParam_Expression();
+
+	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4978,6 +5310,30 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__IS_AUTO_CLAIM = eINSTANCE.getDocumentRoot_IsAutoClaim();
+
+		/**
+		 * The meta object literal for the '<em><b>Task Description</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__TASK_DESCRIPTION = eINSTANCE.getDocumentRoot_TaskDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Complete Task Description</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION = eINSTANCE.getDocumentRoot_CompleteTaskDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Form Param Container</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__FORM_PARAM_CONTAINER = eINSTANCE.getDocumentRoot_FormParamContainer();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -6150,6 +6506,94 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference LIST_EXPRESSION__EXPRESSIONS = eINSTANCE.getListExpression_Expressions();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskDescriptionImpl <em>Task Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.TaskDescriptionImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getTaskDescription()
+		 * @generated
+		 */
+		EClass TASK_DESCRIPTION = eINSTANCE.getTaskDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_DESCRIPTION__EXPRESSION = eINSTANCE.getTaskDescription_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.CompleteTaskDescriptionImpl <em>Complete Task Description</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.CompleteTaskDescriptionImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getCompleteTaskDescription()
+		 * @generated
+		 */
+		EClass COMPLETE_TASK_DESCRIPTION = eINSTANCE.getCompleteTaskDescription();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPLETE_TASK_DESCRIPTION__EXPRESSION = eINSTANCE.getCompleteTaskDescription_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormParamContainerImpl <em>Form Param Container</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FormParamContainerImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getFormParamContainer()
+		 * @generated
+		 */
+		EClass FORM_PARAM_CONTAINER = eINSTANCE.getFormParamContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Form Param</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FORM_PARAM_CONTAINER__FORM_PARAM = eINSTANCE.getFormParamContainer_FormParam();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.FormParamImpl <em>Form Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FormParamImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getFormParam()
+		 * @generated
+		 */
+		EClass FORM_PARAM = eINSTANCE.getFormParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Param Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_PARAM__PARAM_KEY = eINSTANCE.getFormParam_ParamKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Param Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FORM_PARAM__PARAM_TYPE = eINSTANCE.getFormParam_ParamType();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FORM_PARAM__EXPRESSION = eINSTANCE.getFormParam_Expression();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
