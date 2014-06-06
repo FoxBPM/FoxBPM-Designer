@@ -206,9 +206,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="skipStrategy" eType="#//SkipStrategy"
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="skipStrategy"/>
+        <details key="name" value=""/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
+        <details key="wildcards" value=""/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isContainsSub" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean">
@@ -1251,27 +1252,30 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="formParam" upperBound="-1"
         eType="#//FormParam" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
+        <details key="name" value="formParam"/>
+        <details key="namespace" value="##targetNamespace"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FormParam">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramKey" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramKey" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="namespace" value=""/>
         <details key="kind" value="attribute"/>
+        <details key="name" value="paramKey"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramType" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="attribute"/>
-        <details key="namespace" value=""/>
+        <details key="name" value="paramType"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="name" value="expression"/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
       </eAnnotations>

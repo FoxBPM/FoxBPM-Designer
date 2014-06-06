@@ -2775,7 +2775,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getFormParamContainer_FormParam(), this.getFormParam(), null, "formParam", null, 0, -1, FormParamContainer.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formParamEClass, FormParam.class, "FormParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getFormParam_ParamKey(), theXMLTypePackage.getString(), "paramKey", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFormParam_ParamKey(), theXMLTypePackage.getString(), "paramKey", null, 1, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormParam_ParamType(), theXMLTypePackage.getString(), "paramType", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFormParam_Expression(), this.getExpression(), null, "expression", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3010,9 +3010,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getDocumentRoot_SkipStrategy(), 
 		   source, 
 		   new String[] {
-			 "name", "skipStrategy",
+			 "name", "",
 			 "namespace", "##targetNamespace",
-			 "kind", "element"
+			 "kind", "element",
+			 "wildcards", ""
 		   });		
 		addAnnotation
 		  (getDocumentRoot_IsContainsSub(), 
@@ -4024,27 +4025,29 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getFormParamContainer_FormParam(), 
 		   source, 
 		   new String[] {
-			 "namespace", "##targetNamespace",
-			 "kind", "element"
+			 "kind", "element",
+			 "name", "formParam",
+			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
 		  (getFormParam_ParamKey(), 
 		   source, 
 		   new String[] {
-			 "namespace", "",
-			 "kind", "attribute"
+			 "kind", "attribute",
+			 "name", "paramKey"
 		   });		
 		addAnnotation
 		  (getFormParam_ParamType(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
-			 "namespace", ""
+			 "name", "paramType"
 		   });		
 		addAnnotation
 		  (getFormParam_Expression(), 
 		   source, 
 		   new String[] {
+			 "name", "expression",
 			 "namespace", "##targetNamespace",
 			 "kind", "element"
 		   });

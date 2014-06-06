@@ -3,7 +3,6 @@
 package org.foxbpm.model.bpmn.foxbpm;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -23,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface FormParamContainer extends EObject {
+
 	/**
 	 * Returns the value of the '<em><b>Form Param</b></em>' containment reference list.
 	 * The list contents are of type {@link org.foxbpm.model.bpmn.foxbpm.FormParam}.
@@ -35,7 +35,7 @@ public interface FormParamContainer extends EObject {
 	 * @return the value of the '<em>Form Param</em>' containment reference list.
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getFormParamContainer_FormParam()
 	 * @model containment="true"
-	 *        extendedMetaData="namespace='##targetNamespace' kind='element'"
+	 *        extendedMetaData="kind='element' name='formParam' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	EList<FormParam> getFormParam();
