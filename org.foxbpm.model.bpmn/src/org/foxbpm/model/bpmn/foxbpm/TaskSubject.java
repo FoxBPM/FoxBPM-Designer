@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  *
  * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getTaskSubject()
- * @model extendedMetaData="name='TaskSubject' kind='elementOnly'"
+ * @model extendedMetaData="name='TaskSubject'"
  * @generated
  */
 public interface TaskSubject extends EObject {

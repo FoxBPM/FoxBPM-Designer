@@ -968,7 +968,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_BPvz4euHEeOboOJlfPRpUA" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//TaskDescription"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BPwa8OuHEeOboOJlfPRpUA" x="944" y="264"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BPwa8OuHEeOboOJlfPRpUA" x="956" y="264"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_3MX1AOuHEeOboOJlfPRpUA" type="1001">
     <children xmi:type="notation:Node" xmi:id="_3MYcEOuHEeOboOJlfPRpUA" type="4001"/>

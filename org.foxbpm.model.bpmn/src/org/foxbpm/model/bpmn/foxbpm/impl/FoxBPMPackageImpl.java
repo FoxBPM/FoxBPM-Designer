@@ -3232,8 +3232,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (taskSubjectEClass, 
 		   source, 
 		   new String[] {
-			 "name", "TaskSubject",
-			 "kind", "elementOnly"
+			 "name", "TaskSubject"
 		   });			
 		addAnnotation
 		  (getTaskSubject_Expression(), 
