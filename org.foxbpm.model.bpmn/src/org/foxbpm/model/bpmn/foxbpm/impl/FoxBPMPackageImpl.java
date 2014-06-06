@@ -4031,7 +4031,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getFormParam_ParamKey(), 
 		   source, 
 		   new String[] {
-			 "namespace", "##targetNamespace",
+			 "namespace", "",
 			 "kind", "attribute"
 		   });		
 		addAnnotation
@@ -4039,7 +4039,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
-			 "namespace", "##targetNamespace"
+			 "namespace", ""
 		   });		
 		addAnnotation
 		  (getFormParam_Expression(), 
