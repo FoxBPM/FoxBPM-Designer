@@ -7,10 +7,6 @@ import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.UserTask;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.IValueChangeListener;
-import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
-import org.eclipse.emf.databinding.edit.EMFEditObservables;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -209,14 +205,18 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		FormUriView formUriView = (FormUriView) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI_VIEW, true);
 		Expression formUriformalExpression = null;
 		if(formUri==null) {
-			formUriformalExpression = null;
+			formUriformalExpression = FoxBPMFactory.eINSTANCE.createExpression();
+			formUriformalExpression.setName("");
+			formUriformalExpression.setValue("");
 		}else {
 			formUriformalExpression = (Expression) formUri.getExpression();
 		}
 		
-		Expression formUriViewformalExpression = null;
+		Expression formUriViewformalExpression = FoxBPMFactory.eINSTANCE.createExpression();
 		if(formUriView==null) {
-			formUriViewformalExpression = null;
+			formUriViewformalExpression = FoxBPMFactory.eINSTANCE.createExpression();
+			formUriViewformalExpression.setName("");
+			formUriViewformalExpression.setValue("");
 		}else {
 			formUriViewformalExpression = (Expression) formUriView.getExpression();
 		}
@@ -239,6 +239,15 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 					@Override
 					protected void doExecute() {
 						setFormUriExtensionExpression(userTask, event.getFormalExpression());
+						
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+						expression.setName(expName==null?"":expName.toString());
+						expression.setValue(formalExpression.getBody());
+						
+						//传递表达式对象
+						optFormViewer.setExpression(expression);
 					}
 				});
 
@@ -254,6 +263,15 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 					@Override
 					protected void doExecute() {
 						setFormUriViewExtensionExpression(userTask, event.getFormalExpression());
+						
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+						expression.setName(expName==null?"":expName.toString());
+						expression.setValue(formalExpression.getBody());
+						
+						//传递表达式对象
+						optFormViewer.setExpression(expression);
 					}
 				});
 

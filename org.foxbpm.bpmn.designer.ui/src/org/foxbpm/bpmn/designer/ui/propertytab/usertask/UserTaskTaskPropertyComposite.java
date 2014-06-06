@@ -161,7 +161,9 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 		
 		Expression taskSubjectExp = null;
 		if (taskSubject == null) {
-			taskSubjectExp = null;
+			taskSubjectExp = FoxBPMFactory.eINSTANCE.createExpression();
+			taskSubjectExp.setName("");
+			taskSubjectExp.setValue("");
 		} else {
 			taskSubjectExp = taskSubject.getExpression();
 		}
@@ -171,14 +173,18 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 
 		Expression taskDescriptionExp = null;
 		if (taskDescription == null) {
-			taskDescriptionExp = null;
+			taskDescriptionExp = FoxBPMFactory.eINSTANCE.createExpression();
+			taskDescriptionExp.setName("");
+			taskDescriptionExp.setValue("");
 		} else {
 			taskDescriptionExp = taskDescription.getExpression();
 		}
 
 		Expression completeTaskDescriptionExp = null;
 		if (completeTaskDescription == null) {
-			completeTaskDescriptionExp = null;
+			completeTaskDescriptionExp = FoxBPMFactory.eINSTANCE.createExpression();
+			completeTaskDescriptionExp.setName("");
+			completeTaskDescriptionExp.setValue("");
 		} else {
 			completeTaskDescriptionExp = completeTaskDescription.getExpression();
 		}
@@ -206,6 +212,15 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 					@Override
 					protected void doExecute() {
 						setTaskSubjectExtensionExpression(userTask, event.getFormalExpression());
+						
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+						expression.setName(expName==null?"":expName.toString());
+						expression.setValue(formalExpression.getBody());
+						
+						//传递表达式对象
+						taskNameViewer.setExpression(expression);
 					}
 				});
 			}
@@ -220,6 +235,15 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 					@Override
 					protected void doExecute() {
 						setTaskDescriptionExtensionExpression(userTask, event.getFormalExpression());
+					
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+						expression.setName(expName==null?"":expName.toString());
+						expression.setValue(formalExpression.getBody());
+						
+						//传递表达式对象
+						taskDescriptionViewer.setExpression(expression);
 					}
 				});
 			}
@@ -234,6 +258,15 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 					@Override
 					protected void doExecute() {
 						setCompeleteTaskDescriptionExtensionExpression(userTask, event.getFormalExpression());
+					
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+						expression.setName(expName==null?"":expName.toString());
+						expression.setValue(formalExpression.getBody());
+						
+						//传递表达式对象
+						filishedDescriptionViewer.setExpression(expression);
 					}
 				});
 			}
