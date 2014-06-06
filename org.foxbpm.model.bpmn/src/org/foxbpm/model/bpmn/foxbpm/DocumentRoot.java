@@ -143,7 +143,7 @@ public interface DocumentRoot extends EObject {
 	 * @return the value of the '<em>Task Subject</em>' containment reference.
 	 * @see #setTaskSubject(TaskSubject)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_TaskSubject()
-	 * @model containment="true" upper="-2" transient="true" volatile="true" derived="true"
+	 * @model containment="true" transient="true" volatile="true" derived="true"
 	 *        extendedMetaData="kind='element' name='taskSubject' namespace='##targetNamespace'"
 	 * @generated
 	 */
