@@ -188,6 +188,8 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 			if (formParamContainer == null) {
 				formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
 			}
+		}else {
+			formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
 		}
 
 		tableViewer.setContentProvider(new ContentProvider());
@@ -196,7 +198,13 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		
 //		bindFormParamContainer();
 
-		ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
+		ExtensionAttributeValue extensionAttributeValue = null;
+		if(userTask.getExtensionValues().size()>0) {
+			extensionAttributeValue = userTask.getExtensionValues().get(0);
+		}else {
+			extensionAttributeValue = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+		}
+		
 		FormUri formUri = (FormUri) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI, true);
 		FormUriView formUriView = (FormUriView) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI_VIEW, true);
 		Expression formUriformalExpression = null;
@@ -358,9 +366,9 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 						if (property.equals("PARAMEMP")) {
 							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
 						}
-						tableViewer.refresh();
 					}
 				});
+				tableViewer.refresh();
 			}
 
 			public Object getValue(Object element, String property) {
@@ -424,16 +432,17 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
-				formParamContainer = (FormParamContainer) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, true);
-				if(formParamContainer == null) {
+				if(formParamContainer == null)
 					formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
-					formParamContainer.getFormParam().add(formParam);
-					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
-					FeatureMap extensionElements = extensionAttributeValue.getValue();
-					extensionElements.add(extensionElementEntry);
-				}else{
-					formParamContainer.getFormParam().add(formParam);
+				formParamContainer.getFormParam().add(formParam);
+				FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
+				
+				if (userTask.getExtensionValues().size() > 0) {
+					userTask.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+				} else {
+					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+					extensionElement.getValue().add(extensionElementEntry);
+					userTask.getExtensionValues().add(extensionElement);
 				}
 			}
 		});
@@ -444,34 +453,18 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 			@Override
 			protected void doExecute() {
-				ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
-				formParamContainer = (FormParamContainer) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, true);
-				if(formParamContainer == null) {
+				if(formParamContainer == null)
 					formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
-					formParamContainer.getFormParam().remove(formParam);
-					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
-					FeatureMap extensionElements = extensionAttributeValue.getValue();
-					extensionElements.remove(extensionElementEntry);
-				}else{
-					formParamContainer.getFormParam().remove(formParam);
+				formParamContainer.getFormParam().remove(formParam);
+				FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
+				
+				if (userTask.getExtensionValues().size() > 0) {
+					userTask.getExtensionValues().get(0).getValue().remove(extensionElementEntry);
+				} else {
+					ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+					extensionElement.getValue().add(extensionElementEntry);
+					userTask.getExtensionValues().remove(extensionElement);
 				}
-			}
-		});
-	}
-	
-	private void bindFormParamContainer() {
-		IObservableValue uiObserveValue = EMFEditObservables.observeValue(getDiagramEditor().getEditingDomain(), userTask, FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
-		uiObserveValue.addValueChangeListener(new IValueChangeListener() {
-			
-			@Override
-			public void handleValueChange(ValueChangeEvent event) {
-				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
-				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-					@Override
-					protected void doExecute() {
-						
-					}
-				});
 			}
 		});
 	}
