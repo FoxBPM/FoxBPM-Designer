@@ -1,7 +1,9 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
+import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.UserTask;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.IValueChangeListener;
@@ -9,6 +11,8 @@ import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.databinding.swt.SWTObservables;
@@ -24,12 +28,17 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.foxbpm.bpmn.designer.base.utils.StringUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.ExpectedExecutionTime;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
+import org.foxbpm.model.bpmn.foxbpm.TaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.TaskPriority;
+import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
 
 public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 	private UserTask userTask;
@@ -135,7 +144,101 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 	public void createUIBindings(EObject eObject) {
 		userTask = (UserTask) eObject;
 
-		ExtensionAttributeValue extensionElement = userTask.getExtensionValues().get(0);
+		ExtensionAttributeValue extensionElement = null;
+		if (userTask.getExtensionValues().size() > 0) {
+			extensionElement = userTask.getExtensionValues().get(0);
+		} else {
+			extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+		}
+
+		TaskSubject taskSubject = null;
+		FeatureMap extensionElements = extensionElement.getValue();
+		for (Entry entry : extensionElements) {
+			if (entry.getValue() instanceof TaskSubject) {
+				taskSubject = (TaskSubject) entry.getValue();
+			}
+		}
+		
+		Expression taskSubjectExp = null;
+		if (taskSubject == null) {
+			taskSubjectExp = null;
+		} else {
+			taskSubjectExp = taskSubject.getExpression();
+		}
+		
+		TaskDescription taskDescription = (TaskDescription) extensionElement.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_DESCRIPTION, true);
+		CompleteTaskDescription completeTaskDescription = (CompleteTaskDescription) extensionElement.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, true);
+
+		Expression taskDescriptionExp = null;
+		if (taskDescription == null) {
+			taskDescriptionExp = null;
+		} else {
+			taskDescriptionExp = taskDescription.getExpression();
+		}
+
+		Expression completeTaskDescriptionExp = null;
+		if (completeTaskDescription == null) {
+			completeTaskDescriptionExp = null;
+		} else {
+			completeTaskDescriptionExp = completeTaskDescription.getExpression();
+		}
+
+		// viewer上控件值
+		taskNameViewer.getTextControl().setText(taskSubjectExp == null ? "" : taskSubjectExp.getName());
+		taskDescriptionViewer.getTextControl().setText(taskDescriptionExp == null ? "" : taskDescriptionExp.getName());
+		filishedDescriptionViewer.getTextControl().setText(completeTaskDescriptionExp == null ? "" : completeTaskDescriptionExp.getName());
+
+		// 传递表达式对象
+		taskNameViewer.setExpression(taskSubjectExp);
+		taskDescriptionViewer.setExpression(taskDescriptionExp);
+		filishedDescriptionViewer.setExpression(completeTaskDescriptionExp);
+
+		taskNameViewer.seteObject(userTask);
+		taskDescriptionViewer.seteObject(userTask);
+		filishedDescriptionViewer.seteObject(userTask);
+
+		taskNameViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						setTaskSubjectExtensionExpression(userTask, event.getFormalExpression());
+					}
+				});
+			}
+		});
+
+		taskDescriptionViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						setTaskDescriptionExtensionExpression(userTask, event.getFormalExpression());
+					}
+				});
+			}
+		});
+
+		filishedDescriptionViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						setCompeleteTaskDescriptionExtensionExpression(userTask, event.getFormalExpression());
+					}
+				});
+			}
+		});
+
 		Object taskPriorityObj = extensionElement.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_PRIORITY, true);
 		if (taskPriorityObj == null) {
 			// 默认给值
@@ -325,5 +428,125 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 			}
 
 		});
+	}
+
+	private void setTaskSubjectExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
+
+		for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
+
+			FeatureMap extensionElements = extensionAttributeValue.getValue();
+			for (Entry entry : extensionElements) {
+				if (entry.getValue() instanceof TaskSubject) {
+					if (formalExpression == null) {
+						extensionElements.remove(entry);
+					} else {
+						TaskSubject taskSubject = (TaskSubject) entry.getValue();
+						taskSubject.getExpression().setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+						taskSubject.getExpression().setValue(formalExpression.getBody());
+					}
+
+					return;
+				}
+			}
+
+		}
+		if (formalExpression != null) {
+			TaskSubject taskSubject = FoxBPMFactory.eINSTANCE.createTaskSubject();
+
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			expression.setValue(formalExpression.getBody());
+			taskSubject.setExpression(expression);
+
+			FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_SUBJECT, taskSubject);
+
+			if (baseElement.getExtensionValues().size() > 0) {
+				baseElement.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+			} else {
+				ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+				extensionElement.getValue().add(extensionElementEntry);
+				baseElement.getExtensionValues().add(extensionElement);
+			}
+		}
+	}
+
+	private void setTaskDescriptionExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
+
+		for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
+
+			FeatureMap extensionElements = extensionAttributeValue.getValue();
+			for (Entry entry : extensionElements) {
+				if (entry.getValue() instanceof TaskDescription) {
+					if (formalExpression == null) {
+						extensionElements.remove(entry);
+					} else {
+						TaskDescription taskDescription = (TaskDescription) entry.getValue();
+						taskDescription.getExpression().setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+						taskDescription.getExpression().setValue(formalExpression.getBody());
+					}
+
+					return;
+				}
+			}
+
+		}
+		if (formalExpression != null) {
+			TaskDescription taskDescription = FoxBPMFactory.eINSTANCE.createTaskDescription();
+
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			expression.setValue(formalExpression.getBody());
+			taskDescription.setExpression(expression);
+
+			FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__TASK_DESCRIPTION, taskDescription);
+
+			if (baseElement.getExtensionValues().size() > 0) {
+				baseElement.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+			} else {
+				ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+				extensionElement.getValue().add(extensionElementEntry);
+				baseElement.getExtensionValues().add(extensionElement);
+			}
+		}
+	}
+	
+	private void setCompeleteTaskDescriptionExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
+
+		for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
+
+			FeatureMap extensionElements = extensionAttributeValue.getValue();
+			for (Entry entry : extensionElements) {
+				if (entry.getValue() instanceof CompleteTaskDescription) {
+					if (formalExpression == null) {
+						extensionElements.remove(entry);
+					} else {
+						CompleteTaskDescription completeTaskDescription = (CompleteTaskDescription) entry.getValue();
+						completeTaskDescription.getExpression().setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+						completeTaskDescription.getExpression().setValue(formalExpression.getBody());
+					}
+
+					return;
+				}
+			}
+
+		}
+		if (formalExpression != null) {
+			CompleteTaskDescription completeTaskDescription = FoxBPMFactory.eINSTANCE.createCompleteTaskDescription();
+
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			expression.setValue(formalExpression.getBody());
+			completeTaskDescription.setExpression(expression);
+
+			FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION, completeTaskDescription);
+
+			if (baseElement.getExtensionValues().size() > 0) {
+				baseElement.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+			} else {
+				ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+				extensionElement.getValue().add(extensionElementEntry);
+				baseElement.getExtensionValues().add(extensionElement);
+			}
+		}
 	}
 }
