@@ -1,23 +1,40 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.bpmn2.BaseElement;
+import org.eclipse.bpmn2.Bpmn2Factory;
+import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.UserTask;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.databinding.observable.value.IValueChangeListener;
+import org.eclipse.core.databinding.observable.value.ValueChangeEvent;
+import org.eclipse.emf.databinding.edit.EMFEditObservables;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
-import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.ViewForm;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -26,22 +43,28 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
+import org.foxbpm.bpmn.designer.ui.custom.ExpDialogCellEditor;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FormParam;
+import org.foxbpm.model.bpmn.foxbpm.FormParamContainer;
+import org.foxbpm.model.bpmn.foxbpm.FormUri;
+import org.foxbpm.model.bpmn.foxbpm.FormUriView;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 	private UserTask userTask;
-	private FoxBPMExpViewer optFormViewer;//操作表单
-	private FoxBPMExpViewer browseFormViewer;//浏览表单
-	private TableViewer formParamsViewer;//表单参数查看器
-	//表格中列的索引号
-	public static final int PARAM=0;
-	public static final int TYPE=1;
-	public static final int VALUE=2;
-	public static final String[] COLUMN_NAMES=new String[]{"参数","类型","值"};
-	public static final String[] PARAM_TYPES=new String[]{"String","Date","int","float"};
+	private FoxBPMExpViewer optFormViewer;// 操作表单
+	private FoxBPMExpViewer browseFormViewer;// 浏览表单
+	private Table table;
+	private TableViewer tableViewer;
+	private FormParamContainer formParamContainer;
+	private Button addButton;
+	private Button removeButton;
 
 	public UserTaskFormPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -54,259 +77,390 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public Composite createUI(Composite parent) {
-		Composite detailComposite=new Composite(parent, SWT.NONE);
-		detailComposite.setLayout(new GridLayout(2, false));
+		Composite detailComposite = new Composite(parent, SWT.NONE);
+		detailComposite.setLayout(new GridLayout(3, false));
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label optFormLabel=new Label(detailComposite, SWT.NONE);
+
+		Label optFormLabel = new Label(detailComposite, SWT.NONE);
 		optFormLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		optFormLabel.setText("操作表单");
-		optFormViewer=new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		optFormViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = optFormViewer.getControl();
-		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		Label browseFormLabel=new Label(detailComposite, SWT.NONE);
+		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+
+		Label browseFormLabel = new Label(detailComposite, SWT.NONE);
 		browseFormLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		browseFormLabel.setText("浏览表单");
-		browseFormViewer=new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		browseFormViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_1 = browseFormViewer.getControl();
-		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
-		ViewForm viewForm = new ViewForm(detailComposite, SWT.BORDER);
-		GridData gd_viewForm = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
-		gd_viewForm.heightHint = 200;
-		viewForm.setLayoutData(gd_viewForm);
-		ToolBar toolBar=new ToolBar(viewForm, SWT.NONE);
-		final ToolItem addItem=new ToolItem(toolBar, SWT.PUSH);
-		addItem.setToolTipText("增加参数");
-		addItem.setText("+");
-		final ToolItem deleteItem=new ToolItem(toolBar, SWT.PUSH);
-		deleteItem.setToolTipText("删除参数");
-		deleteItem.setText("x");
-		viewForm.setTopRight(toolBar);
-		
-		Label formParaLabel=new Label(viewForm, SWT.NULL);
-		formParaLabel.setText("表单参数");
-		viewForm.setTopLeft(formParaLabel);
-		
-		Composite tableComposite=new Composite(viewForm, SWT.NONE);
-		tableComposite.setLayout(new GridLayout(1, false));
-		tableComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		//创建tableViewer对象
-		formParamsViewer=new TableViewer(tableComposite,SWT.FULL_SELECTION);
-		final Table formParamsTable=formParamsViewer.getTable();
-		//创建表头
-		for (int i = 0; i < COLUMN_NAMES.length; i++) {
-			TableColumn tableColumn=new TableColumn(formParamsTable, SWT.CENTER);
-			tableColumn.setText(COLUMN_NAMES[i]);
-			if (i==0) {
-				tableColumn.setWidth(200);
-			}else if (i==1) {
-				tableColumn.setWidth(150);
-			}else if (i==2) {
-				tableColumn.setWidth(350);
-			}
-		}
-		formParamsTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		//设置表头和表格线可见
-		formParamsTable.setHeaderVisible(true);
-		formParamsTable.setLinesVisible(true);
-		formParamsViewer.setContentProvider(new ArrayContentProvider());
-		formParamsViewer.setLabelProvider(new FormParamLabelProvider()); 
-		formParamsViewer.setInput(new ArrayList<FormParamsEO>());
-		
-		//设置列属性
-		formParamsViewer.setColumnProperties(COLUMN_NAMES);
-		//设置单元格编辑器对象数组
-		CellEditor[] cellEditors=new CellEditor[3];
-		cellEditors[0]=new TextCellEditor(formParamsTable);
-		cellEditors[1]=new ComboBoxCellEditor(formParamsTable, PARAM_TYPES,SWT.READ_ONLY);
-		cellEditors[2]=new TextCellEditor(formParamsTable);
-		formParamsViewer.setCellEditors(cellEditors);
-		formParamsViewer.setCellModifier(new ICellModifier() {
-			
-			@Override
-			public void modify(Object element, String property, Object value) {
-				TableItem tableItem=(TableItem)element;
-				FormParamsEO formParamsEO=(FormParamsEO)tableItem.getData();
-				if (property.equals(COLUMN_NAMES[0])) {
-					formParamsEO.setParameter(value.toString());
-				}else if (property.equals(COLUMN_NAMES[1])) {
-					int selectedIndex=(Integer)value;
-					if (selectedIndex==-1) {
-						return;
-					}
-					formParamsEO.setType(PARAM_TYPES[selectedIndex]);
-				}else if (property.equals(COLUMN_NAMES[2])) {
-					formParamsEO.setValue(value.toString());
-				}
-				formParamsViewer.refresh();
-			}
-			
-			@Override
-			public Object getValue(Object element, String property) {
-				FormParamsEO formParamsEO=(FormParamsEO)element;
-				if (property.equals(COLUMN_NAMES[0])) {
-					return formParamsEO.getParameter();
-				}else if (property.equals(COLUMN_NAMES[1])) {
-					return getTypeIndex(formParamsEO.getType());
-				}else if (property.equals(COLUMN_NAMES[2])) {
-					return formParamsEO.getValue();
-				}
-				return null;
-			}
-			
-			@Override
-			public boolean canModify(Object element, String property) {
-				return true;
-			}
-			
-			/**
-			 * @param typeValue
-			 * @return 选中下拉框的索引值
-			 */
-			private Integer getTypeIndex(String typeValue){
-				for (int i = 0; i < PARAM_TYPES.length; i++) {
-					if (typeValue.equals(PARAM_TYPES[i])) {
-						return i;
-					}
-				}
-				return -1;
-			}
-		});
-		
-		viewForm.setContent(tableComposite);
-		
-		Listener listener=new Listener() {
-			
-			@Override
-			@SuppressWarnings("unchecked")
-			public void handleEvent(Event event) {
-				if (event.widget==addItem) {
-					List<FormParamsEO> fomFormParamsEOs=(List<FormParamsEO>)formParamsViewer.getInput();
-					fomFormParamsEOs.add(new FormParamsEO("","String",""));
-					formParamsViewer.refresh();
-				}else if (event.widget==deleteItem) {
-					if (formParamsTable.getSelectionIndex()>-1) {
-						List<FormParamsEO> fomFormParamsEOs=(List<FormParamsEO>)formParamsViewer.getInput();
-						fomFormParamsEOs.remove(formParamsTable.getSelectionIndex());
-						formParamsViewer.refresh();
-					}
-				}
-			}
-		};
-		addItem.addListener(SWT.Selection,listener);
-		deleteItem.addListener(SWT.Selection, listener);
-		
+		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+
+		tableViewer = new TableViewer(detailComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		table = tableViewer.getTable();
+		table.setLinesVisible(true);
+		table.setHeaderVisible(true);
+		GridData gd_table = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		gd_table.heightHint = 80;
+		table.setLayoutData(gd_table);
+
+		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn paramKeyColumn = tableViewerColumn.getColumn();
+		paramKeyColumn.setWidth(150);
+		paramKeyColumn.setText("参数键");
+
+		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn paramValueColumn = tableViewerColumn_1.getColumn();
+		paramValueColumn.setWidth(150);
+		paramValueColumn.setText("参数类型");
+
+		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
+		TableColumn expColumn = tableViewerColumn_2.getColumn();
+		expColumn.setWidth(300);
+		expColumn.setText("表达式");
+
+		Composite composite = new Composite(detailComposite, SWT.NONE);
+		GridLayout gl_composite = new GridLayout(1, false);
+		gl_composite.verticalSpacing = 1;
+		gl_composite.marginWidth = 0;
+		gl_composite.marginHeight = 0;
+		gl_composite.horizontalSpacing = 0;
+		composite.setLayout(gl_composite);
+
+		addButton = new Button(composite, SWT.NONE);
+		addButton.setText("添加");
+
+		removeButton = new Button(composite, SWT.NONE);
+		removeButton.setSize(80, 27);
+		removeButton.setText("删除");
+
+		createCellModifier();
 		return parent;
 	}
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		userTask=(UserTask)eObject;
+		userTask = (UserTask) eObject;
+
+		optFormViewer.seteObject(userTask);
+		browseFormViewer.seteObject(userTask);
 		
-	}
-	
-	private class FormParamsEO{
-		private String parameter;//参数
-		private String type;//类型
-		private String value;//值
-		
-		public FormParamsEO(){
-			
-		}
-		
-		public FormParamsEO(String parameter){
-			this.parameter=parameter;
-		}
-		public FormParamsEO(String parameter,String type,String value){
-			this(parameter);
-			this.type=type;
-			this.value=value;
-		}
-		/**
-		 * @return the parameter
-		 */
-		public String getParameter() {
-			return parameter;
-		}
-		/**
-		 * @param parameter the parameter to set
-		 */
-		public void setParameter(String parameter) {
-			this.parameter = parameter;
-		}
-		/**
-		 * @return the type
-		 */
-		public String getType() {
-			return type;
-		}
-		/**
-		 * @param type the type to set
-		 */
-		public void setType(String type) {
-			this.type = type;
-		}
-		/**
-		 * @return the value
-		 */
-		public String getValue() {
-			return value;
-		}
-		/**
-		 * @param value the value to set
-		 */
-		public void setValue(String value) {
-			this.value = value;
+		addButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				FormParam formParam = FoxBPMFactory.eINSTANCE.createFormParam();
+				formParam.setParamKey("参数键" + ((List<FormParam>) tableViewer.getInput()).size());
+				formParam.setParamType("参数类型" + ((List<FormParam>) tableViewer.getInput()).size());
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				expression.setName("表达式");
+				expression.setValue("");
+				formParam.setExpression(expression);
+				addFormParam(formParam);
+				tableViewer.refresh();
+			}
+		});
+
+		removeButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				ISelection sel = tableViewer.getSelection();
+				if (sel == null)
+					return;
+				Object[] objs = ((IStructuredSelection) sel).toArray();
+				if (objs == null || objs.length == 0)
+					return;
+				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+				if (!b)
+					return;
+
+				for (int i = 0; i < objs.length; i++) {
+					FormParam col = (FormParam) objs[i];
+					deleteFormParam(col);
+				}
+				tableViewer.refresh();
+			}
+		});
+
+		if (userTask.getExtensionValues().size() > 0) {
+			ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
+			formParamContainer = (FormParamContainer) extensionAttributeValue.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
+			if (formParamContainer == null) {
+				formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
+			}
 		}
 
-//		@Override
-//		public int hashCode() {
-//			final int prime = 31;
-//			int result = 1;
-//			result = prime * result + ((parameter == null) ? 0 : parameter.hashCode());
-//			return result;
-//		}
-//
-//		@Override
-//		public boolean equals(Object obj) {
-//			if (this==obj) {
-//				return true;
-//			}
-//			if (obj instanceof FormParamsEO) {
-//				if (getClass()!=obj.getClass()) {
-//					return false;
-//				}
-//				FormParamsEO other=(FormParamsEO)obj;
-//				return other.getParameter().equals(parameter);
-//			}
-//			return false;
-//		}
+		tableViewer.setContentProvider(new ContentProvider());
+		tableViewer.setLabelProvider(new TableLabelProvider());
+		tableViewer.setInput(formParamContainer.getFormParam());
 		
-	}
-	
-	private class FormParamLabelProvider extends LabelProvider implements ITableLabelProvider{
+//		bindFormParamContainer();
 
-		@Override
+		ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
+		FormUri formUri = (FormUri) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI, true);
+		FormUriView formUriView = (FormUriView) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI_VIEW, true);
+		Expression formUriformalExpression = (Expression) formUri.getExpression();
+		Expression formUriViewformalExpression = (Expression) formUriView.getExpression();
+
+		//viewer上控件值
+		optFormViewer.getTextControl().setText(formUriformalExpression==null? "": formUriformalExpression.getName());
+		browseFormViewer.getTextControl().setText(formUriViewformalExpression==null? "": formUriViewformalExpression.getName());
+		
+		//传递表达式对象
+		optFormViewer.setExpression(formUriformalExpression);
+		browseFormViewer.setExpression(formUriViewformalExpression);
+		
+		optFormViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						setFormUriExtensionExpression(userTask, event.getFormalExpression());
+					}
+				});
+
+			}
+		});
+
+		browseFormViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						setFormUriViewExtensionExpression(userTask, event.getFormalExpression());
+					}
+				});
+
+			}
+		});
+	}
+
+	private void setFormUriExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
+
+		for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
+
+			FeatureMap extensionElements = extensionAttributeValue.getValue();
+			for (Entry entry : extensionElements) {
+				if (entry.getValue() instanceof FormUri) {
+					if (formalExpression == null) {
+						extensionElements.remove(entry);
+					} else {
+						FormUri formUri = (FormUri) entry.getValue();
+						formUri.getExpression().setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+						formUri.getExpression().setValue(formalExpression.getBody());
+					}
+
+					return;
+				}
+			}
+
+		}
+		if (formalExpression != null) {
+			FormUri formUri = FoxBPMFactory.eINSTANCE.createFormUri();
+
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			expression.setValue(formalExpression.getBody());
+			formUri.setExpression(expression);
+
+			FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI, formUri);
+
+			if (baseElement.getExtensionValues().size() > 0) {
+				baseElement.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+			} else {
+				ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+				extensionElement.getValue().add(extensionElementEntry);
+				baseElement.getExtensionValues().add(extensionElement);
+			}
+		}
+	}
+
+	private void setFormUriViewExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
+
+		for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
+
+			FeatureMap extensionElements = extensionAttributeValue.getValue();
+			for (Entry entry : extensionElements) {
+				if (entry.getValue() instanceof FormUriView) {
+					if (formalExpression == null) {
+						extensionElements.remove(entry);
+					} else {
+						FormUriView formUriView = (FormUriView) entry.getValue();
+						formUriView.getExpression().setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+						formUriView.getExpression().setValue(formalExpression.getBody());
+					}
+
+					return;
+				}
+			}
+
+		}
+		if (formalExpression != null) {
+			FormUriView formUriView = FoxBPMFactory.eINSTANCE.createFormUriView();
+
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			expression.setValue(formalExpression.getBody());
+			formUriView.setExpression(expression);
+
+			FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI_VIEW, formUriView);
+
+			if (baseElement.getExtensionValues().size() > 0) {
+				baseElement.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+			} else {
+				ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+				extensionElement.getValue().add(extensionElementEntry);
+				baseElement.getExtensionValues().add(extensionElement);
+			}
+		}
+	}
+
+	private void createCellModifier() {
+		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
+		cellEditor[0] = new TextCellEditor(table);
+		cellEditor[1] = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
+		cellEditor[2] = new ExpDialogCellEditor(table, getShell());
+		tableViewer.setColumnProperties(new String[] { "PARAMKEY", "PARAMTYPE", "PARAMEMP" });
+		tableViewer.setCellEditors(cellEditor);
+		tableViewer.setCellModifier(new ICellModifier() {
+
+			public void modify(final Object element, final String property, final Object value) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						TableItem tableitem = (TableItem) element;
+						FormParam formParam = (FormParam) tableitem.getData();
+						if (property.equals("PARAMKEY")) {
+							formParam.setParamKey((String) value);
+						}
+						if (property.equals("PARAMTYPE")) {
+							formParam.setParamType((String) value);
+						}
+						if (property.equals("PARAMEMP")) {
+							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
+						}
+						tableViewer.refresh();
+					}
+				});
+			}
+
+			public Object getValue(Object element, String property) {
+				FormParam formParam = (FormParam) element;
+
+				if (property.equals("PARAMKEY")) {
+					return formParam.getParamKey();
+				}
+				if (property.equals("PARAMTYPE")) {
+					return formParam.getParamType();
+				}
+				if (property.equals("PARAMEMP")) {
+					((ExpDialogCellEditor) cellEditor[2]).setExpression(formParam.getExpression());
+					return formParam.getExpression().getName();
+				}
+				return null;
+			}
+
+			public boolean canModify(Object element, String property) {
+				return element instanceof FormParam;
+			}
+		});
+	}
+
+	private static class ContentProvider implements IStructuredContentProvider {
+		public Object[] getElements(Object inputElement) {
+			if (inputElement != null) {
+				return ((List<FormParam>) inputElement).toArray();
+			}
+			return new Object[0];
+		}
+
+		public void dispose() {
+		}
+
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
+	}
+
+	private class TableLabelProvider extends LabelProvider implements ITableLabelProvider {
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
-		@Override
 		public String getColumnText(Object element, int columnIndex) {
-			FormParamsEO formParamsEO=(FormParamsEO)element;
-			if (columnIndex==PARAM) {
-				return formParamsEO.getParameter();
-			}else if (columnIndex==TYPE) {
-				return formParamsEO.getType();
-			}else if (columnIndex==VALUE) {
-				return formParamsEO.getValue();
+			FormParam formParam = (FormParam) element;
+			switch (columnIndex) {
+			case 0:
+				return formParam.getParamKey();
+			case 1:
+				return formParam.getParamType();
+			case 2:
+				return formParam.getExpression().getName();
 			}
-			return "";
+			return null;
 		}
-		
+	}
+
+	private void addFormParam(final FormParam formParam) {
+		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
+				formParamContainer = (FormParamContainer) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, true);
+				if(formParamContainer == null) {
+					formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
+					formParamContainer.getFormParam().add(formParam);
+					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
+					FeatureMap extensionElements = extensionAttributeValue.getValue();
+					extensionElements.add(extensionElementEntry);
+				}else{
+					formParamContainer.getFormParam().add(formParam);
+				}
+			}
+		});
 	}
 	
-
+	private void deleteFormParam(final FormParam formParam) {
+		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+			@Override
+			protected void doExecute() {
+				ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
+				formParamContainer = (FormParamContainer) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, true);
+				if(formParamContainer == null) {
+					formParamContainer = FoxBPMFactory.eINSTANCE.createFormParamContainer();
+					formParamContainer.getFormParam().remove(formParam);
+					FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry((org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER, formParamContainer);
+					FeatureMap extensionElements = extensionAttributeValue.getValue();
+					extensionElements.remove(extensionElementEntry);
+				}else{
+					formParamContainer.getFormParam().remove(formParam);
+				}
+			}
+		});
+	}
+	
+	private void bindFormParamContainer() {
+		IObservableValue uiObserveValue = EMFEditObservables.observeValue(getDiagramEditor().getEditingDomain(), userTask, FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
+		uiObserveValue.addValueChangeListener(new IValueChangeListener() {
+			
+			@Override
+			public void handleValueChange(ValueChangeEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						
+					}
+				});
+			}
+		});
+	}
 }
