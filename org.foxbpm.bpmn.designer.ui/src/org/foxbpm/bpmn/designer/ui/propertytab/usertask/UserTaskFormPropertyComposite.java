@@ -199,8 +199,20 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		ExtensionAttributeValue extensionAttributeValue = userTask.getExtensionValues().get(0);
 		FormUri formUri = (FormUri) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI, true);
 		FormUriView formUriView = (FormUriView) extensionAttributeValue.getValue().get(FoxBPMPackage.Literals.DOCUMENT_ROOT__FORM_URI_VIEW, true);
-		Expression formUriformalExpression = (Expression) formUri.getExpression();
-		Expression formUriViewformalExpression = (Expression) formUriView.getExpression();
+		Expression formUriformalExpression = null;
+		if(formUri==null) {
+			formUriformalExpression = null;
+		}else {
+			formUriformalExpression = (Expression) formUri.getExpression();
+		}
+		
+		Expression formUriViewformalExpression = null;
+		if(formUriView==null) {
+			formUriViewformalExpression = null;
+		}else {
+			formUriViewformalExpression = (Expression) formUriView.getExpression();
+		}
+		
 
 		//viewer上控件值
 		optFormViewer.getTextControl().setText(formUriformalExpression==null? "": formUriformalExpression.getName());
