@@ -1259,13 +1259,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="FormParam">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramKey" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="namespace" value=""/>
+        <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="attribute"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="paramType" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="attribute"/>
+        <details key="namespace" value="##targetNamespace"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"

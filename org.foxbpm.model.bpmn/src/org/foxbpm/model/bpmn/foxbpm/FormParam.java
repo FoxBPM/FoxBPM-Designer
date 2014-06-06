@@ -35,7 +35,7 @@ public interface FormParam extends EObject {
 	 * @see #setParamKey(String)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getFormParam_ParamKey()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="namespace='' kind='attribute'"
+	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute'"
 	 * @generated
 	 */
 	String getParamKey();
@@ -62,7 +62,7 @@ public interface FormParam extends EObject {
 	 * @see #setParamType(String)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getFormParam_ParamType()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='attribute'"
+	 *        extendedMetaData="kind='attribute' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	String getParamType();

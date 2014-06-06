@@ -4031,14 +4031,15 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getFormParam_ParamKey(), 
 		   source, 
 		   new String[] {
-			 "namespace", "",
+			 "namespace", "##targetNamespace",
 			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (getFormParam_ParamType(), 
 		   source, 
 		   new String[] {
-			 "kind", "attribute"
+			 "kind", "attribute",
+			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
 		  (getFormParam_Expression(), 
