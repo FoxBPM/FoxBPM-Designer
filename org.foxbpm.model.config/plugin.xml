@@ -48,4 +48,18 @@
             type="connectormenu"
             class="org.foxbpm.model.config.connectormenu.util.ConnectormenuResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated foxbpmstyle -->
+      <package
+            uri="http://www.foxbpm.org/style"
+            class="org.foxbpm.model.config.style.StylePackage"
+            genModel="model/foxbpmstyle.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated foxbpmstyle -->
+      <parser
+            type="style"
+            class="org.foxbpm.model.config.style.util.StyleResourceFactoryImpl"/>
+   </extension>
 </plugin>
