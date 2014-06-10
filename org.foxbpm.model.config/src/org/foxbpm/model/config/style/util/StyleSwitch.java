@@ -66,9 +66,9 @@ public class StyleSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG: {
-				FixFlowStyleConfig fixFlowStyleConfig = (FixFlowStyleConfig)theEObject;
-				T result = caseFixFlowStyleConfig(fixFlowStyleConfig);
+			case StylePackage.FOX_BPM_STYLE_CONFIG: {
+				FoxBPMStyleConfig foxBPMStyleConfig = (FoxBPMStyleConfig)theEObject;
+				T result = caseFoxBPMStyleConfig(foxBPMStyleConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -95,17 +95,17 @@ public class StyleSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Fix Flow Style Config</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Fox BPM Style Config</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Fix Flow Style Config</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Fox BPM Style Config</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFixFlowStyleConfig(FixFlowStyleConfig object) {
+	public T caseFoxBPMStyleConfig(FoxBPMStyleConfig object) {
 		return null;
 	}
 

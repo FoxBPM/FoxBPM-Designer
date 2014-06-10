@@ -13,7 +13,7 @@
       <styles xmi:type="notation:FilteringStyle" xmi:id="_-SMlCPBlEeOY7cdcmn624g"/>
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_-SL98fBlEeOY7cdcmn624g" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
-    <element xmi:type="ecore:EClass" href="foxbpmstyle.ecore#//FixFlowStyleConfig"/>
+    <element xmi:type="ecore:EClass" href="foxbpmstyle.ecore#//FoxBPMStyleConfig"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-SL98vBlEeOY7cdcmn624g" x="25" y="439"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_-SMlCfBlEeOY7cdcmn624g" type="1001">
@@ -115,7 +115,7 @@
     </children>
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_-SPBR_BlEeOY7cdcmn624g" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_-SPBSPBlEeOY7cdcmn624g" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpmstyle.ecore#//FixFlowStyleConfig/elementStyleConfig"/>
+    <element xmi:type="ecore:EReference" href="foxbpmstyle.ecore#//FoxBPMStyleConfig/elementStyleConfig"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-SPBSfBlEeOY7cdcmn624g" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-WvGwPBlEeOY7cdcmn624g" id="(0.4954128440366973,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-Wvt0PBlEeOY7cdcmn624g" id="(0.49606299212598426,1.0)"/>

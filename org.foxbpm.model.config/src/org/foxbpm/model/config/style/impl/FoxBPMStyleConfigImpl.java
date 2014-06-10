@@ -12,23 +12,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.foxbpm.model.config.style.ElementStyleConfig;
-import org.foxbpm.model.config.style.FixFlowStyleConfig;
+import org.foxbpm.model.config.style.FoxBPMStyleConfig;
 import org.foxbpm.model.config.style.StylePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Fix Flow Style Config</b></em>'.
+ * An implementation of the model object '<em><b>Fox BPM Style Config</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.style.impl.FixFlowStyleConfigImpl#getElementStyleConfig <em>Element Style Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.style.impl.FoxBPMStyleConfigImpl#getElementStyleConfig <em>Element Style Config</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container implements FixFlowStyleConfig {
+public class FoxBPMStyleConfigImpl extends MinimalEObjectImpl.Container implements FoxBPMStyleConfig {
 	/**
 	 * The cached value of the '{@link #getElementStyleConfig() <em>Element Style Config</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FixFlowStyleConfigImpl() {
+	protected FoxBPMStyleConfigImpl() {
 		super();
 	}
 
@@ -55,7 +55,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return StylePackage.Literals.FIX_FLOW_STYLE_CONFIG;
+		return StylePackage.Literals.FOX_BPM_STYLE_CONFIG;
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 		ElementStyleConfig oldElementStyleConfig = elementStyleConfig;
 		elementStyleConfig = newElementStyleConfig;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, oldElementStyleConfig, newElementStyleConfig);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, oldElementStyleConfig, newElementStyleConfig);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -91,14 +91,14 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 		if (newElementStyleConfig != elementStyleConfig) {
 			NotificationChain msgs = null;
 			if (elementStyleConfig != null)
-				msgs = ((InternalEObject)elementStyleConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, null, msgs);
+				msgs = ((InternalEObject)elementStyleConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, null, msgs);
 			if (newElementStyleConfig != null)
-				msgs = ((InternalEObject)newElementStyleConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, null, msgs);
+				msgs = ((InternalEObject)newElementStyleConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, null, msgs);
 			msgs = basicSetElementStyleConfig(newElementStyleConfig, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, newElementStyleConfig, newElementStyleConfig));
+			eNotify(new ENotificationImpl(this, Notification.SET, StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG, newElementStyleConfig, newElementStyleConfig));
 	}
 
 	/**
@@ -109,7 +109,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
+			case StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
 				return basicSetElementStyleConfig(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -123,7 +123,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
+			case StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
 				return getElementStyleConfig();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -137,7 +137,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
+			case StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
 				setElementStyleConfig((ElementStyleConfig)newValue);
 				return;
 		}
@@ -152,7 +152,7 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
+			case StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
 				setElementStyleConfig((ElementStyleConfig)null);
 				return;
 		}
@@ -167,10 +167,10 @@ public class FixFlowStyleConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
+			case StylePackage.FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG:
 				return elementStyleConfig != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //FixFlowStyleConfigImpl
+} //FoxBPMStyleConfigImpl

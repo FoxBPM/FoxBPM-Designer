@@ -6,12 +6,10 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.foxbpm.model.config.style.ElementStyle;
 import org.foxbpm.model.config.style.ElementStyleConfig;
-import org.foxbpm.model.config.style.FixFlowStyleConfig;
+import org.foxbpm.model.config.style.FoxBPMStyleConfig;
 import org.foxbpm.model.config.style.Style;
 import org.foxbpm.model.config.style.StyleFactory;
 import org.foxbpm.model.config.style.StylePackage;
@@ -28,7 +26,7 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fixFlowStyleConfigEClass = null;
+	private EClass foxBPMStyleConfigEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,8 +115,8 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFixFlowStyleConfig() {
-		return fixFlowStyleConfigEClass;
+	public EClass getFoxBPMStyleConfig() {
+		return foxBPMStyleConfigEClass;
 	}
 
 	/**
@@ -126,8 +124,8 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFixFlowStyleConfig_ElementStyleConfig() {
-		return (EReference)fixFlowStyleConfigEClass.getEStructuralFeatures().get(0);
+	public EReference getFoxBPMStyleConfig_ElementStyleConfig() {
+		return (EReference)foxBPMStyleConfigEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -293,8 +291,8 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		fixFlowStyleConfigEClass = createEClass(FIX_FLOW_STYLE_CONFIG);
-		createEReference(fixFlowStyleConfigEClass, FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG);
+		foxBPMStyleConfigEClass = createEClass(FOX_BPM_STYLE_CONFIG);
+		createEReference(foxBPMStyleConfigEClass, FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG);
 
 		elementStyleConfigEClass = createEClass(ELEMENT_STYLE_CONFIG);
 		createEReference(elementStyleConfigEClass, ELEMENT_STYLE_CONFIG__ELEMENT_STYLE);
@@ -345,8 +343,8 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 		// Add supertypes to classes
 
 		// Initialize classes, features, and operations; add parameters
-		initEClass(fixFlowStyleConfigEClass, FixFlowStyleConfig.class, "FixFlowStyleConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFixFlowStyleConfig_ElementStyleConfig(), this.getElementStyleConfig(), null, "elementStyleConfig", null, 0, 1, FixFlowStyleConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(foxBPMStyleConfigEClass, FoxBPMStyleConfig.class, "FoxBPMStyleConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFoxBPMStyleConfig_ElementStyleConfig(), this.getElementStyleConfig(), null, "elementStyleConfig", null, 0, 1, FoxBPMStyleConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementStyleConfigEClass, ElementStyleConfig.class, "ElementStyleConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getElementStyleConfig_ElementStyle(), this.getElementStyle(), null, "elementStyle", null, 0, -1, ElementStyleConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -383,13 +381,13 @@ public class StylePackageImpl extends EPackageImpl implements StylePackage {
 	protected void createExtendedMetaDataAnnotations() {
 		String source = "http:///org/eclipse/emf/ecore/util/ExtendedMetaData";		
 		addAnnotation
-		  (fixFlowStyleConfigEClass, 
+		  (foxBPMStyleConfigEClass, 
 		   source, 
 		   new String[] {
-			 "name", "fixFlowStyleConfig"
+			 "name", "foxBPMStyleConfig"
 		   });		
 		addAnnotation
-		  (getFixFlowStyleConfig_ElementStyleConfig(), 
+		  (getFoxBPMStyleConfig_ElementStyleConfig(), 
 		   source, 
 		   new String[] {
 			 "name", "elementStyleConfig",

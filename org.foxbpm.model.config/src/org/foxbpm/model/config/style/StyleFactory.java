@@ -22,13 +22,13 @@ public interface StyleFactory extends EFactory {
 	StyleFactory eINSTANCE = org.foxbpm.model.config.style.impl.StyleFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Fix Flow Style Config</em>'.
+	 * Returns a new object of class '<em>Fox BPM Style Config</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Fix Flow Style Config</em>'.
+	 * @return a new object of class '<em>Fox BPM Style Config</em>'.
 	 * @generated
 	 */
-	FixFlowStyleConfig createFixFlowStyleConfig();
+	FoxBPMStyleConfig createFoxBPMStyleConfig();
 
 	/**
 	 * Returns a new object of class '<em>Element Style Config</em>'.

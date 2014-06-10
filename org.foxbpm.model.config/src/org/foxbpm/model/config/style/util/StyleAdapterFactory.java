@@ -68,8 +68,8 @@ public class StyleAdapterFactory extends AdapterFactoryImpl {
 	protected StyleSwitch<Adapter> modelSwitch =
 		new StyleSwitch<Adapter>() {
 			@Override
-			public Adapter caseFixFlowStyleConfig(FixFlowStyleConfig object) {
-				return createFixFlowStyleConfigAdapter();
+			public Adapter caseFoxBPMStyleConfig(FoxBPMStyleConfig object) {
+				return createFoxBPMStyleConfigAdapter();
 			}
 			@Override
 			public Adapter caseElementStyleConfig(ElementStyleConfig object) {
@@ -104,16 +104,16 @@ public class StyleAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.style.FixFlowStyleConfig <em>Fix Flow Style Config</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.style.FoxBPMStyleConfig <em>Fox BPM Style Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.config.style.FixFlowStyleConfig
+	 * @see org.foxbpm.model.config.style.FoxBPMStyleConfig
 	 * @generated
 	 */
-	public Adapter createFixFlowStyleConfigAdapter() {
+	public Adapter createFoxBPMStyleConfigAdapter() {
 		return null;
 	}
 

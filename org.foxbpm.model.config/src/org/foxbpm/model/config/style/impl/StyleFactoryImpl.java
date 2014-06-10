@@ -56,7 +56,7 @@ public class StyleFactoryImpl extends EFactoryImpl implements StyleFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case StylePackage.FIX_FLOW_STYLE_CONFIG: return createFixFlowStyleConfig();
+			case StylePackage.FOX_BPM_STYLE_CONFIG: return createFoxBPMStyleConfig();
 			case StylePackage.ELEMENT_STYLE_CONFIG: return createElementStyleConfig();
 			case StylePackage.ELEMENT_STYLE: return createElementStyle();
 			case StylePackage.STYLE: return createStyle();
@@ -70,9 +70,9 @@ public class StyleFactoryImpl extends EFactoryImpl implements StyleFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FixFlowStyleConfig createFixFlowStyleConfig() {
-		FixFlowStyleConfigImpl fixFlowStyleConfig = new FixFlowStyleConfigImpl();
-		return fixFlowStyleConfig;
+	public FoxBPMStyleConfig createFoxBPMStyleConfig() {
+		FoxBPMStyleConfigImpl foxBPMStyleConfig = new FoxBPMStyleConfigImpl();
+		return foxBPMStyleConfig;
 	}
 
 	/**

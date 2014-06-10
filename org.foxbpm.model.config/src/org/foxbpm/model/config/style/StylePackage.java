@@ -57,14 +57,14 @@ public interface StylePackage extends EPackage {
 	StylePackage eINSTANCE = org.foxbpm.model.config.style.impl.StylePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.config.style.impl.FixFlowStyleConfigImpl <em>Fix Flow Style Config</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.config.style.impl.FoxBPMStyleConfigImpl <em>Fox BPM Style Config</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.config.style.impl.FixFlowStyleConfigImpl
-	 * @see org.foxbpm.model.config.style.impl.StylePackageImpl#getFixFlowStyleConfig()
+	 * @see org.foxbpm.model.config.style.impl.FoxBPMStyleConfigImpl
+	 * @see org.foxbpm.model.config.style.impl.StylePackageImpl#getFoxBPMStyleConfig()
 	 * @generated
 	 */
-	int FIX_FLOW_STYLE_CONFIG = 0;
+	int FOX_BPM_STYLE_CONFIG = 0;
 
 	/**
 	 * The feature id for the '<em><b>Element Style Config</b></em>' containment reference.
@@ -73,25 +73,25 @@ public interface StylePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG = 0;
+	int FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG = 0;
 
 	/**
-	 * The number of structural features of the '<em>Fix Flow Style Config</em>' class.
+	 * The number of structural features of the '<em>Fox BPM Style Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_STYLE_CONFIG_FEATURE_COUNT = 1;
+	int FOX_BPM_STYLE_CONFIG_FEATURE_COUNT = 1;
 
 	/**
-	 * The number of operations of the '<em>Fix Flow Style Config</em>' class.
+	 * The number of operations of the '<em>Fox BPM Style Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_STYLE_CONFIG_OPERATION_COUNT = 0;
+	int FOX_BPM_STYLE_CONFIG_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.style.impl.ElementStyleConfigImpl <em>Element Style Config</em>}' class.
@@ -287,25 +287,25 @@ public interface StylePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.config.style.FixFlowStyleConfig <em>Fix Flow Style Config</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.style.FoxBPMStyleConfig <em>Fox BPM Style Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Fix Flow Style Config</em>'.
-	 * @see org.foxbpm.model.config.style.FixFlowStyleConfig
+	 * @return the meta object for class '<em>Fox BPM Style Config</em>'.
+	 * @see org.foxbpm.model.config.style.FoxBPMStyleConfig
 	 * @generated
 	 */
-	EClass getFixFlowStyleConfig();
+	EClass getFoxBPMStyleConfig();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.style.FixFlowStyleConfig#getElementStyleConfig <em>Element Style Config</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.style.FoxBPMStyleConfig#getElementStyleConfig <em>Element Style Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Element Style Config</em>'.
-	 * @see org.foxbpm.model.config.style.FixFlowStyleConfig#getElementStyleConfig()
-	 * @see #getFixFlowStyleConfig()
+	 * @see org.foxbpm.model.config.style.FoxBPMStyleConfig#getElementStyleConfig()
+	 * @see #getFoxBPMStyleConfig()
 	 * @generated
 	 */
-	EReference getFixFlowStyleConfig_ElementStyleConfig();
+	EReference getFoxBPMStyleConfig_ElementStyleConfig();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.style.ElementStyleConfig <em>Element Style Config</em>}'.
@@ -493,14 +493,14 @@ public interface StylePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.config.style.impl.FixFlowStyleConfigImpl <em>Fix Flow Style Config</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.config.style.impl.FoxBPMStyleConfigImpl <em>Fox BPM Style Config</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.config.style.impl.FixFlowStyleConfigImpl
-		 * @see org.foxbpm.model.config.style.impl.StylePackageImpl#getFixFlowStyleConfig()
+		 * @see org.foxbpm.model.config.style.impl.FoxBPMStyleConfigImpl
+		 * @see org.foxbpm.model.config.style.impl.StylePackageImpl#getFoxBPMStyleConfig()
 		 * @generated
 		 */
-		EClass FIX_FLOW_STYLE_CONFIG = eINSTANCE.getFixFlowStyleConfig();
+		EClass FOX_BPM_STYLE_CONFIG = eINSTANCE.getFoxBPMStyleConfig();
 
 		/**
 		 * The meta object literal for the '<em><b>Element Style Config</b></em>' containment reference feature.
@@ -508,7 +508,7 @@ public interface StylePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FIX_FLOW_STYLE_CONFIG__ELEMENT_STYLE_CONFIG = eINSTANCE.getFixFlowStyleConfig_ElementStyleConfig();
+		EReference FOX_BPM_STYLE_CONFIG__ELEMENT_STYLE_CONFIG = eINSTANCE.getFoxBPMStyleConfig_ElementStyleConfig();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.style.impl.ElementStyleConfigImpl <em>Element Style Config</em>}' class.
