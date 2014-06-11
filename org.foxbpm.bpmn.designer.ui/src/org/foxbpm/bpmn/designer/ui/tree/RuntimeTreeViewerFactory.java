@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
+import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;

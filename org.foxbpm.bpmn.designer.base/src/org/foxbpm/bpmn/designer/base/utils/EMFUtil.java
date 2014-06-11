@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.utils;
+package org.foxbpm.bpmn.designer.base.utils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
+import org.foxbpm.model.config.style.FoxBPMStyleConfig;
 
 public class EMFUtil {
 
@@ -38,7 +39,7 @@ public class EMFUtil {
 		}
 		return l;
 	}
-	
+
 	/**
 	 * 读EMF文件
 	 * 
@@ -136,55 +137,36 @@ public class EMFUtil {
 	// }
 
 	/**
-	 * 加载所有的FixFlowStyleConfig配置信息
+	 * 加载所有的FoxBPMStyleConfig配置信息
 	 * 
 	 * @return
 	 */
-	// public static FixFlowStyleConfig getStyleConfig(String filePath) {
-	//
-	// FixFlowStyleConfig fixFlowStyleConfig=null;
-	//
-	// ResourceSet resourceSet = new ResourceSetImpl();
-	//
-	// resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-	// .put("xml", new XMIResourceFactoryImpl());
-	//
-	//
-	//
-	// Resource resource = resourceSet.getResource(URI.createFileURI(filePath),
-	// true);
-	//
-	// // register package in local resource registry
-	// resourceSet.getPackageRegistry().put(
-	// CoreconfigPackage.eINSTANCE.getNsURI(),
-	// CoreconfigPackage.eINSTANCE);
-	// // load resource
-	// try {
-	// resource.load(null);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// fixFlowStyleConfig = (FixFlowStyleConfig) resource.getContents().get(0);
-	//
-	// return fixFlowStyleConfig;
-	//
-	// }
+	public static FoxBPMStyleConfig getStyleConfig(String filePath) {
 
-	// public static ScriptLanguage getScriptLanguage() {
-	// ScriptLanguageConfig
-	// scriptLanguageConfig=FixFlowConfigUtil.getFixFlowConfig().getScriptLanguageConfig();
-	//
-	//
-	// for (ScriptLanguage scriptLanguage :
-	// scriptLanguageConfig.getScriptLanguage()) {
-	// if(scriptLanguage.getId().equals(scriptLanguageConfig.getSelected())){
-	// return scriptLanguage;
-	// }
-	// }
-	// return null;
-	//
-	// }
+		FoxBPMStyleConfig fixFlowStyleConfig = null;
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
+
+		Resource resource = resourceSet.getResource(URI.createFileURI(filePath), true);
+
+		// register package in local resource registry
+		resourceSet.getPackageRegistry().put(FoxBPMConfigPackage.eINSTANCE.getNsURI(), FoxBPMConfigPackage.eINSTANCE);
+
+		// load resource
+		try {
+			resource.load(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		fixFlowStyleConfig = (FoxBPMStyleConfig) resource.getContents().get(0);
+
+		return fixFlowStyleConfig;
+
+	}
 
 	/**
 	 * 加载所有的fixflowconfig配置信息
@@ -279,29 +261,34 @@ public class EMFUtil {
 
 	}
 
-//	public static SqlMappingConfig getSqlMappingConfig(String sqlMappingConfigXMLPath) {
-//
-//		SqlMappingConfig sqlMappingConfig = null;
-//
-//		ResourceSet resourceSet = new ResourceSetImpl();
-//
-//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-//
-//		Resource resource = resourceSet.getResource(URI.createFileURI(sqlMappingConfigXMLPath), true);
-//
-//		// register package in local resource registry
-//		resourceSet.getPackageRegistry().put(CoreconfigPackage.eINSTANCE.getNsURI(), CoreconfigPackage.eINSTANCE);
-//		// load resource
-//		try {
-//			resource.load(null);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		sqlMappingConfig = (SqlMappingConfig) resource.getContents().get(0);
-//
-//		return sqlMappingConfig;
-//
-//	}
+	// public static SqlMappingConfig getSqlMappingConfig(String
+	// sqlMappingConfigXMLPath) {
+	//
+	// SqlMappingConfig sqlMappingConfig = null;
+	//
+	// ResourceSet resourceSet = new ResourceSetImpl();
+	//
+	// resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml",
+	// new XMIResourceFactoryImpl());
+	//
+	// Resource resource =
+	// resourceSet.getResource(URI.createFileURI(sqlMappingConfigXMLPath),
+	// true);
+	//
+	// // register package in local resource registry
+	// resourceSet.getPackageRegistry().put(CoreconfigPackage.eINSTANCE.getNsURI(),
+	// CoreconfigPackage.eINSTANCE);
+	// // load resource
+	// try {
+	// resource.load(null);
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// sqlMappingConfig = (SqlMappingConfig) resource.getContents().get(0);
+	//
+	// return sqlMappingConfig;
+	//
+	// }
 
 }

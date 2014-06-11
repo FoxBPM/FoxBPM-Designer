@@ -3,7 +3,7 @@ package org.foxbpm.bpmn.designer.ui.connector.definition;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import org.foxbpm.bpmn.designer.ui.utils.CreateJavaClassUtil;
+import org.foxbpm.bpmn.designer.base.utils.CreateJavaClassUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
 import org.foxbpm.model.config.connector.Output;

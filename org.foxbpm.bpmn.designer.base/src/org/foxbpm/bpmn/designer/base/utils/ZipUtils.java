@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.utils;
+package org.foxbpm.bpmn.designer.base.utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

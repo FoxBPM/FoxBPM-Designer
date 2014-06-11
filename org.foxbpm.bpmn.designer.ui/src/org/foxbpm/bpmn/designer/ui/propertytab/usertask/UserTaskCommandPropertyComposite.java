@@ -1,23 +1,14 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.UserTask;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -42,18 +33,14 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.dialogs.CreateNewTaskDialog;
-import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
-import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
 import org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl;
-import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
-import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigFactory;
-import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
 public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
