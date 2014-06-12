@@ -77,11 +77,11 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 		items = new String[] { "非常低", "低", "一般", "高", "非常高" };
 		priorityCombo.setLayoutData(gd_priorityCombo);
 		priorityCombo.setItems(items);
-		priorityCombo.setData("非常低", "lowest");
-		priorityCombo.setData("低", "low");
-		priorityCombo.setData("一般", "normal");
-		priorityCombo.setData("高", "high");
-		priorityCombo.setData("非常高", "highest");
+		priorityCombo.setData("非常低", "0");
+		priorityCombo.setData("低", "20");
+		priorityCombo.setData("一般", "40");
+		priorityCombo.setData("高", "60");
+		priorityCombo.setData("非常高", "80");
 		priorityCombo.select(2);
 
 		Label taskTypeLabel = new Label(detailComposite, SWT.NONE);

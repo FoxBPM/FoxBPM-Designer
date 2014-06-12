@@ -108,7 +108,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn idColumn = tableViewerColumn.getColumn();
 		idColumn.setMoveable(true);
-		idColumn.setWidth(150);
+		idColumn.setWidth(100);
 		idColumn.setText("流程编号");
 
 		TableViewerColumn tableViewerColumn_2 = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -120,7 +120,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn processKeyColumn = tableViewerColumn_1.getColumn();
 		processKeyColumn.setMoveable(true);
-		processKeyColumn.setWidth(100);
+		processKeyColumn.setWidth(150);
 		processKeyColumn.setText("流程唯一键");
 
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer, SWT.NONE);
@@ -177,6 +177,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		button.setText("确定");
 		Button button_1 = createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 		button_1.setText("取消");
+		m_bindingContext = initDataBindings();
 	}
 
 	/**
@@ -185,20 +186,6 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	@Override
 	protected Point getInitialSize() {
 		return new Point(561, 473);
-	}
-
-	protected DataBindingContext initDataBindings() {
-		DataBindingContext bindingContext = new DataBindingContext();
-		//
-		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-		IObservableMap[] observeMaps = PojoObservables.observeMaps(listContentProvider.getKnownElements(), ProcessTo.class, new String[] { "processId", "processName", "processKey", "version" });
-		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMaps));
-		tableViewer.setContentProvider(listContentProvider);
-		//
-		IObservableList selfList = Properties.selfList(ProcessTo.class).observe(processTos);
-		tableViewer.setInput(selfList);
-		//
-		return bindingContext;
 	}
 
 	private void publishProcess() {
@@ -240,14 +227,28 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			
 			for(JsonNode json :dataArray){
 				ProcessTo processTo = new ProcessTo();
-				processTo.setProcessId(json.get("id").toString());
-				processTo.setProcessKey(json.get("key").toString());
-				processTo.setProcessName(json.get("name").toString());
-				processTo.setDeploymentId(json.get("deploymentId").toString());
+				processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
+				processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
+				processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
+				processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
+				processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
 				processTos.add(processTo);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	protected DataBindingContext initDataBindings() {
+		DataBindingContext bindingContext = new DataBindingContext();
+		//
+		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
+		IObservableMap[] observeMaps = PojoObservables.observeMaps(listContentProvider.getKnownElements(), ProcessTo.class, new String[]{"processKey", "processName", "processId", "version"});
+		tableViewer.setLabelProvider(new ObservableMapLabelProvider(observeMaps));
+		tableViewer.setContentProvider(listContentProvider);
+		//
+		IObservableList selfList = Properties.selfList(ProcessTo.class).observe(processTos);
+		tableViewer.setInput(selfList);
+		//
+		return bindingContext;
 	}
 }
