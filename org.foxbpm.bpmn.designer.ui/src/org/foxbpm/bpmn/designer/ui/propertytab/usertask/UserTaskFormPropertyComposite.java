@@ -16,7 +16,6 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
-import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -27,7 +26,6 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -115,44 +113,6 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		TableColumn expColumn = tableViewerColumn_2.getColumn();
 		expColumn.setWidth(300);
 		expColumn.setText("表达式");
-		tableViewerColumn_2.setEditingSupport(new EditingSupport(tableViewer) {
-			ExpDialogCellEditor expDialogCellEditor = new ExpDialogCellEditor(table, getShell());
-			
-			@Override
-			protected void setValue(final Object element, final Object value) {
-				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
-				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-					@Override
-					protected void doExecute() {
-						((FormParam)element).setExpression(((Expression)value));
-						getViewer().update(element, null);
-					}
-				});
-			}
-			
-			@Override
-			protected Object getValue(Object element) {
-				((ExpDialogCellEditor)getCellEditor(element)).setExpression(((FormParam)element).getExpression());
-				return ((FormParam)element).getExpression().getName();
-			}
-			
-			@Override
-			protected CellEditor getCellEditor(Object element) {
-				expDialogCellEditor.setExpression(((FormParam)element).getExpression());
-				return expDialogCellEditor;
-			}
-			
-			@Override
-			protected boolean canEdit(Object element) {
-				return element instanceof FormParam;
-			}
-
-			@Override
-			protected void saveCellEditorValue(CellEditor cellEditor, ViewerCell cell) {
-				Object value = ((ExpDialogCellEditor)cellEditor).getExpression();
-				setValue(cell.getElement(), value);
-			}
-		});
 
 		Composite composite = new Composite(detailComposite, SWT.NONE);
 		GridLayout gl_composite = new GridLayout(1, false);
@@ -400,10 +360,11 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 	}
 
 	private void createCellModifier() {
+		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
 		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
 		cellEditor[0] = new TextCellEditor(table);
 		cellEditor[1] = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
-//		cellEditor[2] = new ExpDialogCellEditor(table, getShell());
+		cellEditor[2] = new ExpDialogCellEditor(table, getShell(), editingDomain);
 		tableViewer.setColumnProperties(new String[] { "PARAMKEY", "PARAMTYPE", "PARAMEMP" });
 		tableViewer.setCellEditors(cellEditor);
 		tableViewer.setCellModifier(new ICellModifier() {
@@ -421,9 +382,9 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 						if (property.equals("PARAMTYPE")) {
 							formParam.setParamType((String) value);
 						}
-//						if (property.equals("PARAMEMP")) {
+						if (property.equals("PARAMEMP")) {
 //							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
-//						}
+						}
 					}
 				});
 				tableViewer.refresh();
@@ -438,10 +399,10 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 				if (property.equals("PARAMTYPE")) {
 					return formParam.getParamType();
 				}
-//				if (property.equals("PARAMEMP")) {
-//					((ExpDialogCellEditor) cellEditor[2]).setExpression(formParam.getExpression());
-//					return formParam.getExpression().getName();
-//				}
+				if (property.equals("PARAMEMP")) {
+					((ExpDialogCellEditor) cellEditor[2]).setExpression(formParam.getExpression());
+					return formParam.getExpression().getName();
+				}
 				return null;
 			}
 
