@@ -1241,7 +1241,7 @@
         <details key="kind" value="element"/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="wildcards" value=""/>
-        <details key="name" value=""/>
+        <details key="name" value="expression"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

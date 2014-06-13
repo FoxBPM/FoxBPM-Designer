@@ -33,7 +33,7 @@ public interface CompleteTaskDescription extends EObject {
 	 * @see #setExpression(Expression)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getCompleteTaskDescription_Expression()
 	 * @model containment="true"
-	 *        extendedMetaData="kind='element' namespace='##targetNamespace' wildcards='' name=''"
+	 *        extendedMetaData="kind='element' namespace='##targetNamespace' wildcards='' name='expression'"
 	 * @generated
 	 */
 	Expression getExpression();

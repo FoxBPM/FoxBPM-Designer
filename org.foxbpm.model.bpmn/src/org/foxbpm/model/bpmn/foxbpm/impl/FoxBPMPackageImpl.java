@@ -4013,7 +4013,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "kind", "element",
 			 "namespace", "##targetNamespace",
 			 "wildcards", "",
-			 "name", ""
+			 "name", "expression"
 		   });		
 		addAnnotation
 		  (formParamContainerEClass, 
