@@ -47,4 +47,13 @@ public class ExpDialogCellEditor extends DialogCellEditor {
 		this.text.setText(expression.getName());
 	}
 
+	@Override
+	protected void updateContents(Object value) {
+		if(expression!=null) {
+			super.updateContents(expression.getName());
+		}else {
+			super.updateContents(value);
+		}
+	}
+
 }
