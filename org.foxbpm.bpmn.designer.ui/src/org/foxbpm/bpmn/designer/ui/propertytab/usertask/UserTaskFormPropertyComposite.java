@@ -364,7 +364,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
 		cellEditor[0] = new TextCellEditor(table);
 		cellEditor[1] = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
-		cellEditor[2] = new ExpDialogCellEditor(table, getShell(), editingDomain);
+		cellEditor[2] = new ExpDialogCellEditor(table, getShell(), editingDomain, tableViewer);
 		tableViewer.setColumnProperties(new String[] { "PARAMKEY", "PARAMTYPE", "PARAMEMP" });
 		tableViewer.setCellEditors(cellEditor);
 		tableViewer.setCellModifier(new ICellModifier() {

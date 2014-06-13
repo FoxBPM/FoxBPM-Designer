@@ -3,6 +3,7 @@ package org.foxbpm.bpmn.designer.ui.custom;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.DialogCellEditor;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
@@ -19,13 +20,15 @@ public class ExpDialogCellEditor extends DialogCellEditor {
 	private Text text;
 	private Table table;
 	private TransactionalEditingDomain editingDomain;
+	private TableViewer tableViewer;
 
-	public ExpDialogCellEditor(Composite parent, Shell shell, TransactionalEditingDomain editingDomain) {
+	public ExpDialogCellEditor(Composite parent, Shell shell, TransactionalEditingDomain editingDomain, TableViewer tableViewer) {
 		super(parent);
 		this.shell = shell;
 		this.text = new Text(shell, SWT.NONE);
 		this.table = (Table) parent;
 		this.editingDomain = editingDomain;
+		this.tableViewer = tableViewer;
 	}
 
 	@Override
@@ -35,6 +38,7 @@ public class ExpDialogCellEditor extends DialogCellEditor {
 		if(InputDialog.OK == foxBPMExpDialog.open()) {
 			expression = foxBPMExpDialog.getExpression();
 		}
+		tableViewer.refresh();
 		return expression == null?"":expression.getName();
 	}
 
@@ -46,14 +50,4 @@ public class ExpDialogCellEditor extends DialogCellEditor {
 		this.expression = expression;
 		this.text.setText(expression.getName());
 	}
-
-	@Override
-	protected void updateContents(Object value) {
-		if(expression!=null) {
-			super.updateContents(expression.getName());
-		}else {
-			super.updateContents(value);
-		}
-	}
-
 }
