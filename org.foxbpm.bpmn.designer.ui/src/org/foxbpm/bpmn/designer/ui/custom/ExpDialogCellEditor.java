@@ -27,7 +27,7 @@ public class ExpDialogCellEditor extends DialogCellEditor {
 		if(InputDialog.OK == foxBPMExpDialog.open()) {
 			expression = foxBPMExpDialog.getExpression();
 		}
-		return expression.getName();
+		return expression == null?"":expression.getName();
 	}
 
 	public Expression getExpression() {
