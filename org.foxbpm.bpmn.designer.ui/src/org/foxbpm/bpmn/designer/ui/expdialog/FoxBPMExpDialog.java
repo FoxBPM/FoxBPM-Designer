@@ -386,12 +386,14 @@ public class FoxBPMExpDialog extends Dialog {
 		expression.setName(displaytext.getText());
 		expression.setValue(document.get());
 		setExpression(expression);
-		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-			@Override
-			protected void doExecute() {
-				formParam.setExpression(expression);
-			}
-		});
+		if(editingDomain!=null) {
+			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+				@Override
+				protected void doExecute() {
+					formParam.setExpression(expression);
+				}
+			});
+		}
 		super.okPressed();
 		
 		close();
