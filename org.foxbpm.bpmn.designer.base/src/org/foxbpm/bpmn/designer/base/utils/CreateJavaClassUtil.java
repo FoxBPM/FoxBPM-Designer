@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.utils;
+package org.foxbpm.bpmn.designer.base.utils;
 
 public class CreateJavaClassUtil {
 

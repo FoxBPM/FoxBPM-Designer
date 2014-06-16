@@ -12,6 +12,8 @@ import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jdt.ui.PreferenceConstants;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.Dialog;
@@ -55,8 +57,9 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
-import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
 
@@ -73,6 +76,8 @@ public class FoxBPMExpDialog extends Dialog {
 	private Text displaytext;
 	private Expression expression;
 	private Text textcontrol;
+	private FormParam formParam;
+	private TransactionalEditingDomain editingDomain;
 
 	/**
 	 * Create the dialog.
@@ -95,6 +100,20 @@ public class FoxBPMExpDialog extends Dialog {
 			this.expression.setValue("");
 		}
 		this.textcontrol = text;
+	}
+	
+	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression, Text text) {
+		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		this.expression = expression;
+		if(this.expression == null) {
+			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
+			this.expression.setName("");
+			this.expression.setValue("");
+		}
+		this.textcontrol = text;
+		this.formParam = formParam;
+		this.editingDomain = editingDomain;
 	}
 
 	/**
@@ -367,6 +386,14 @@ public class FoxBPMExpDialog extends Dialog {
 		expression.setName(displaytext.getText());
 		expression.setValue(document.get());
 		setExpression(expression);
+		if(editingDomain!=null) {
+			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+				@Override
+				protected void doExecute() {
+					formParam.setExpression(expression);
+				}
+			});
+		}
 		super.okPressed();
 		
 		close();

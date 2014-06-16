@@ -15,7 +15,10 @@ Export-Package: org.foxbpm.model.config.foxbpmconfig,
  org.foxbpm.model.config.connector.util,
  org.foxbpm.model.config.connectormenu,
  org.foxbpm.model.config.connectormenu.impl,
- org.foxbpm.model.config.connectormenu.util
+ org.foxbpm.model.config.connectormenu.util,
+ org.foxbpm.model.config.style,
+ org.foxbpm.model.config.style.impl,
+ org.foxbpm.model.config.style.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.xmi;visibility:=reexport

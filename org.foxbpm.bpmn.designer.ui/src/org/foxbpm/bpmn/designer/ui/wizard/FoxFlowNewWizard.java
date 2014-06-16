@@ -29,8 +29,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.utils.BpmnModelUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
 
 public class FoxFlowNewWizard extends Wizard implements INewWizard {
 	private ISelection selection;

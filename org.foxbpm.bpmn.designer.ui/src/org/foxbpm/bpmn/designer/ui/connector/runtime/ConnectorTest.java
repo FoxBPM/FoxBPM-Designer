@@ -7,7 +7,7 @@ import java.net.PasswordAuthentication;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.foxbpm.bpmn.designer.ui.utils.ZipUtils;
+import org.foxbpm.bpmn.designer.base.utils.ZipUtils;
 
 public class ConnectorTest {
 

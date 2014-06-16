@@ -10,9 +10,9 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
-import org.foxbpm.bpmn.designer.ui.utils.FoxBPMDesignerUtil;
-import org.foxbpm.bpmn.designer.ui.utils.RuntimeConnectorUtil;
+import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.osgi.framework.BundleContext;
 
 /**

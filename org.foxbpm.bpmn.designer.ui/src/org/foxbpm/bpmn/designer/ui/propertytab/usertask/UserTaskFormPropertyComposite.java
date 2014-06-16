@@ -360,10 +360,11 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 	}
 
 	private void createCellModifier() {
+		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
 		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
 		cellEditor[0] = new TextCellEditor(table);
 		cellEditor[1] = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
-		cellEditor[2] = new ExpDialogCellEditor(table, getShell());
+		cellEditor[2] = new ExpDialogCellEditor(table, getShell(), editingDomain, tableViewer);
 		tableViewer.setColumnProperties(new String[] { "PARAMKEY", "PARAMTYPE", "PARAMEMP" });
 		tableViewer.setCellEditors(cellEditor);
 		tableViewer.setCellModifier(new ICellModifier() {
@@ -382,7 +383,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 							formParam.setParamType((String) value);
 						}
 						if (property.equals("PARAMEMP")) {
-							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
+//							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
 						}
 					}
 				});
