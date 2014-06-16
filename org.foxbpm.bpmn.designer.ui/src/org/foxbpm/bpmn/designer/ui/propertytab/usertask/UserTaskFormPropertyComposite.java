@@ -242,9 +242,11 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 						
 						FormalExpression formalExpression = event.getFormalExpression();
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
-						expression.setName(expName==null?"":expName.toString());
-						expression.setValue(formalExpression.getBody());
+						if(formalExpression!=null) {
+							Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+							expression.setName(expName==null?"":expName.toString());
+							expression.setValue(formalExpression.getBody());
+						}
 						
 						//传递表达式对象
 						optFormViewer.setExpression(expression);
@@ -266,9 +268,11 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 						
 						FormalExpression formalExpression = event.getFormalExpression();
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-						Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
-						expression.setName(expName==null?"":expName.toString());
-						expression.setValue(formalExpression.getBody());
+						if(formalExpression!=null) {
+							Object expName = formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME);
+							expression.setName(expName==null?"":expName.toString());
+							expression.setValue(formalExpression.getBody());
+						}
 						
 						//传递表达式对象
 						optFormViewer.setExpression(expression);
