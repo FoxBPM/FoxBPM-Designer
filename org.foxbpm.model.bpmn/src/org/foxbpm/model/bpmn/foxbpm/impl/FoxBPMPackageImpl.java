@@ -894,6 +894,15 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getDocumentRoot_ConvergType() {
+		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(53);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExpression() {
 		return expressionEClass;
 	}
@@ -2312,6 +2321,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_DESCRIPTION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
+		createEAttribute(documentRootEClass, DOCUMENT_ROOT__CONVERG_TYPE);
 
 		expressionEClass = createEClass(EXPRESSION);
 		createEAttribute(expressionEClass, EXPRESSION__VALUE);
@@ -2592,6 +2602,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getDocumentRoot_TaskDescription(), this.getTaskDescription(), null, "taskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_CompleteTaskDescription(), this.getCompleteTaskDescription(), null, "completeTaskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FormParamContainer(), this.getFormParamContainer(), null, "formParamContainer", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_ConvergType(), theXMLTypePackage.getString(), "convergType", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpression_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3102,7 +3113,9 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   source, 
 		   new String[] {
 			 "namespace", "##targetNamespace",
-			 "kind", "attribute"
+			 "kind", "attribute",
+			 "wildcards", "",
+			 "name", ""
 		   });		
 		addAnnotation
 		  (getDocumentRoot_TaskPriority(), 
@@ -3200,6 +3213,14 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "name", "formParamContainer",
 			 "namespace", "##targetNamespace",
 			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_ConvergType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute",
+			 "namespace", "##targetNamespace",
+			 "name", "convergType"
 		   });		
 		addAnnotation
 		  (expressionEClass, 

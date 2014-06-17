@@ -91,6 +91,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/orderId"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVZ_8cXMEeOb9caI1cUYMA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_P6TCsPXNEeOWIM6ufjKM2A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/convergType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_P6TCsfXNEeOWIM6ufjKM2A"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_mVZ_8sXMEeOb9caI1cUYMA" type="2001">
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/isPersistence"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVZ_88XMEeOb9caI1cUYMA"/>
