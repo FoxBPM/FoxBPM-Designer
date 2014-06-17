@@ -930,6 +930,15 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExpression_Mixed() {
+		return (EAttribute)expressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTaskSubject() {
 		return taskSubjectEClass;
 	}
@@ -2317,6 +2326,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(expressionEClass, EXPRESSION__VALUE);
 		createEAttribute(expressionEClass, EXPRESSION__ID);
 		createEAttribute(expressionEClass, EXPRESSION__NAME);
+		createEAttribute(expressionEClass, EXPRESSION__MIXED);
 
 		taskSubjectEClass = createEClass(TASK_SUBJECT);
 		createEReference(taskSubjectEClass, TASK_SUBJECT__EXPRESSION);
@@ -2597,6 +2607,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getExpression_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExpression_Id(), theXMLTypePackage.getString(), "id", null, 1, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExpression_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExpression_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskSubjectEClass, TaskSubject.class, "TaskSubject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskSubject_Expression(), this.getExpression(), null, "expression", null, 0, 1, TaskSubject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3206,14 +3217,14 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   source, 
 		   new String[] {
 			 "name", "Expression",
-			 "kind", "simple"
+			 "kind", "mixed"
 		   });			
 		addAnnotation
 		  (getExpression_Value(), 
 		   source, 
 		   new String[] {
 			 "name", ":0",
-			 "kind", "simple"
+			 "kind", "mixed"
 		   });		
 		addAnnotation
 		  (getExpression_Id(), 
@@ -3228,6 +3239,13 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "kind", "attribute",
 			 "name", "name"
+		   });		
+		addAnnotation
+		  (getExpression_Mixed(), 
+		   source, 
+		   new String[] {
+			 "name", ":mixed",
+			 "kind", "elementWildcard"
 		   });		
 		addAnnotation
 		  (taskSubjectEClass, 
