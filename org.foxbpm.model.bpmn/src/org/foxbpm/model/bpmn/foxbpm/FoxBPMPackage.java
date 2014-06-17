@@ -613,13 +613,22 @@ public interface FoxBPMPackage extends EPackage {
 	int EXPRESSION__NAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__MIXED = 3;
+
+	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = 3;
+	int EXPRESSION_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Expression</em>' class.
@@ -2427,6 +2436,15 @@ public interface FoxBPMPackage extends EPackage {
 	int TABLE_EXPRESSION__NAME = EXPRESSION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_EXPRESSION__MIXED = EXPRESSION__MIXED;
+
+	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2489,6 +2507,15 @@ public interface FoxBPMPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIST_EXPRESSION__NAME = EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_EXPRESSION__MIXED = EXPRESSION__MIXED;
 
 	/**
 	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
@@ -3340,6 +3367,17 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getExpression_Name();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.foxbpm.model.bpmn.foxbpm.Expression#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Expression#getMixed()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EAttribute getExpression_Mixed();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.TaskSubject <em>Task Subject</em>}'.
@@ -5396,6 +5434,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXPRESSION__NAME = eINSTANCE.getExpression_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPRESSION__MIXED = eINSTANCE.getExpression_Mixed();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskSubjectImpl <em>Task Subject</em>}' class.

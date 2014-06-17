@@ -3,6 +3,7 @@
 package org.foxbpm.model.bpmn.foxbpm;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.FeatureMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,11 +21,12 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getId <em>Id</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getMixed <em>Mixed</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getExpression()
- * @model extendedMetaData="name='Expression' kind='simple'"
+ * @model extendedMetaData="name='Expression' kind='mixed'"
  * @generated
  */
 public interface Expression extends EObject {
@@ -40,7 +42,7 @@ public interface Expression extends EObject {
 	 * @see #setValue(String)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getExpression_Value()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="name=':0' kind='simple'"
+	 *        extendedMetaData="name=':0' kind='mixed'"
 	 * @generated
 	 */
 	String getValue();
@@ -108,5 +110,22 @@ public interface Expression extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Mixed</b></em>' attribute list.
+	 * The list contents are of type {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mixed</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mixed</em>' attribute list.
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getExpression_Mixed()
+	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
+	 *        extendedMetaData="name=':mixed' kind='elementWildcard'"
+	 * @generated
+	 */
+	FeatureMap getMixed();
 
 } // Expression
