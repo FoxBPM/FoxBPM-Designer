@@ -7,6 +7,8 @@ import java.util.List;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.Documentation;
+import org.eclipse.bpmn2.GatewayDirection;
+import org.eclipse.bpmn2.ParallelGateway;
 import org.eclipse.bpmn2.modeler.core.Bpmn2TabbedPropertySheetPage;
 import org.eclipse.bpmn2.modeler.core.merrimac.clad.ListAndDetailCompositeBase;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
@@ -26,6 +28,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.IValidator;
@@ -277,6 +280,47 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 			}
 		});
 	}
+	
+	protected void bindDocumentation(final EStructuralFeature a, final Text text, final EObject be) {
+		final BaseElement baseElement = (BaseElement) be;
+
+		if (baseElement.getDocumentation().size() == 0 || baseElement.getDocumentation().get(0).getText() == null) {
+			text.setText("");
+		} else {
+			text.setText(baseElement.getDocumentation().get(0).getText());
+		}
+
+		IObservableValue textObserver = WidgetProperties.text(SWT.Modify).observe(text);
+		textObserver.addValueChangeListener(new IValueChangeListener() {
+
+			@Override
+			public void handleValueChange(final ValueChangeEvent e) {
+				TransactionalEditingDomainImpl editingDomain = (TransactionalEditingDomainImpl) getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if (baseElement.getDocumentation().size() == 0) {
+							final Documentation value = Bpmn2Factory.eINSTANCE.createDocumentation();
+							ModelUtil.setID(value, be.eResource());
+							value.setText(e.diff.getNewValue().toString());
+							baseElement.getDocumentation().add(value);
+						} else {
+							baseElement.getDocumentation().get(0).setText(e.diff.getNewValue().toString());
+						}
+					}
+				});
+				if (((BPMN2Editor) getDiagramEditor()).getDiagnostics() != null) {
+					// revert the change and display error status message.
+					List<Documentation> documentationList = baseElement.getDocumentation();
+					if (!text.getText().equals(documentationList.get(0).getText())) {
+
+						documentationList.get(0).setText(e.diff.getNewValue().toString());
+					}
+					// bpmn2Editor.showErrorMessage(bpmn2Editor.getDiagnostics().getMessage());
+				}
+			}
+		});
+	}
 
 	protected void bindText(EStructuralFeature a, Text text, final EObject element) {
 		EMFDataBindingContext bindingContext = new EMFDataBindingContext();
@@ -322,4 +366,36 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 		bindingContext.bindValue(observable, uiObserveValue, null, null);
 	}
 	
+	protected void bindGatewayDirection(final Combo combo) {
+		final ParallelGateway parallelGateway = (ParallelGateway) getBusinessObject();
+		GatewayDirection gatewayDirection = parallelGateway.getGatewayDirection();
+		// Unspecified
+		// 分
+		if (gatewayDirection == GatewayDirection.DIVERGING) {
+			combo.select(0);
+		}
+		// 合
+		if (gatewayDirection == GatewayDirection.CONVERGING) {
+			combo.select(1);
+		}
+
+		IObservableValue textObserver = SWTObservables.observeText(combo);
+		textObserver.addValueChangeListener(new IValueChangeListener() {
+
+			@Override
+			public void handleValueChange(final ValueChangeEvent e) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if (combo.getSelectionIndex() == 0) {
+							parallelGateway.setGatewayDirection(GatewayDirection.DIVERGING);
+						} else {
+							parallelGateway.setGatewayDirection(GatewayDirection.CONVERGING);
+						}
+					}
+				});
+			}
+		});
+	}
 }

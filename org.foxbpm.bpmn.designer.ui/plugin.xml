@@ -461,6 +461,26 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.process.ProcessPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.process"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.parallelgateway.ParallelGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.parallelgateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.inclusivegateway.InclusiveGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.inclusivegateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.exclusivegateway.ExclusiveGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.exclusivegateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         label="高级属性">
@@ -494,21 +514,6 @@
         class="org.foxbpm.bpmn.designer.ui.propertytab.connector.ConnectorPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
-  </propertyTab>
-  <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.parallelgateway.ParallelGatewayPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertyTab.parallelgateway"
-        label="通用">
-  </propertyTab>
-  <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.inclusivegateway.InclusiveGatewayPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertyTab.inclusivegateway"
-        label="通用">
-  </propertyTab>
-  <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.exclusivegateway.ExclusiveGatewayPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertyTab.exclusivegateway"
-        label="通用">
   </propertyTab>
 
 		<!-- ======================================== -->
