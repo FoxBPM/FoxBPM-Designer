@@ -70,6 +70,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -1065,7 +1066,7 @@ public interface DocumentRoot extends EObject {
 	 * @see #setOrderId(int)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_OrderId()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.Int"
-	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute'"
+	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute' wildcards='' name=''"
 	 * @generated
 	 */
 	int getOrderId();
@@ -1421,5 +1422,32 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setFormParamContainer(FormParamContainer value);
+
+	/**
+	 * Returns the value of the '<em><b>Converg Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Converg Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Converg Type</em>' attribute.
+	 * @see #setConvergType(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_ConvergType()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="kind='attribute' namespace='##targetNamespace' name='convergType'"
+	 * @generated
+	 */
+	String getConvergType();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Converg Type</em>' attribute.
+	 * @see #getConvergType()
+	 * @generated
+	 */
+	void setConvergType(String value);
 
 } // DocumentRoot

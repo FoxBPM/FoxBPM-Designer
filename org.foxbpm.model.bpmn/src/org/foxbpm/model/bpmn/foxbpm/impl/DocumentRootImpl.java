@@ -105,6 +105,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskDescription <em>Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getFormParamContainer <em>Form Param Container</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConvergType <em>Converg Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -870,6 +871,26 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected FormParamContainer formParamContainer;
+
+	/**
+	 * The default value of the '{@link #getConvergType() <em>Converg Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConvergType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONVERG_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getConvergType() <em>Converg Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConvergType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String convergType = CONVERG_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2251,6 +2272,27 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getConvergType() {
+		return convergType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConvergType(String newConvergType) {
+		String oldConvergType = convergType;
+		convergType = newConvergType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE, oldConvergType, convergType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2425,6 +2467,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getCompleteTaskDescription();
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				return getFormParamContainer();
+			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
+				return getConvergType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2603,6 +2647,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				setFormParamContainer((FormParamContainer)newValue);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
+				setConvergType((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2774,6 +2821,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				setFormParamContainer((FormParamContainer)null);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
+				setConvergType(CONVERG_TYPE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -2892,6 +2942,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return completeTaskDescription != null;
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				return formParamContainer != null;
+			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
+				return CONVERG_TYPE_EDEFAULT == null ? convergType != null : !CONVERG_TYPE_EDEFAULT.equals(convergType);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -2964,6 +3016,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 		result.append(isCreateRecord);
 		result.append(", isAutoClaim: ");
 		result.append(isAutoClaim);
+		result.append(", convergType: ");
+		result.append(convergType);
 		result.append(')');
 		return result.toString();
 	}

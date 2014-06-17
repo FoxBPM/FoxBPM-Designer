@@ -549,13 +549,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__FORM_PARAM_CONTAINER = 52;
 
 	/**
+	 * The feature id for the '<em><b>Converg Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__CONVERG_TYPE = 53;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 53;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 54;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -3306,6 +3315,17 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getDocumentRoot_FormParamContainer();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Converg Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_ConvergType();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5372,6 +5392,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOCUMENT_ROOT__FORM_PARAM_CONTAINER = eINSTANCE.getDocumentRoot_FormParamContainer();
+
+		/**
+		 * The meta object literal for the '<em><b>Converg Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__CONVERG_TYPE = eINSTANCE.getDocumentRoot_ConvergType();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
