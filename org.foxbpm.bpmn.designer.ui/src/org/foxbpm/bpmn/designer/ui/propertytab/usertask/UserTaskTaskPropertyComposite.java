@@ -100,7 +100,7 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 
 		Label taskNameLabel = new Label(detailComposite, SWT.NONE);
 		taskNameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		taskNameLabel.setText("任务名称");
+		taskNameLabel.setText("任务主题");
 		taskNameViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = taskNameViewer.getControl();
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
