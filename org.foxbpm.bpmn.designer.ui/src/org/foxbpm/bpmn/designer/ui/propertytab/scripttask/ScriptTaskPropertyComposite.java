@@ -75,7 +75,7 @@ public class ScriptTaskPropertyComposite extends AbstractFoxBPMComposite{
 
 						if (event.getFormalExpression() != null) {
 							getBusinessObject().eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__SCRIPT_NAME, event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
-							scriptTask.setScriptFormat(FoxBPMDesignerUtil.getProperties().get("ScriptFormat").toString());
+							scriptTask.setScriptFormat(FoxBPMDesignerUtil.getFoxBPMConfig().getScriptLanguageConfig().getSelected()==null?"groovy" : FoxBPMDesignerUtil.getFoxBPMConfig().getScriptLanguageConfig().getSelected());
 							scriptTask.setScript(event.getFormalExpression().getBody());
 						} else {
 							scriptTask.setScriptFormat(null);
