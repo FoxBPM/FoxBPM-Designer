@@ -11,6 +11,7 @@ import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
+import org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig;
 import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
 
@@ -26,6 +27,7 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getSysMailConfig <em>Sys Mail Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getConnectionManagementConfig <em>Connection Management Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getTaskCommandConfig <em>Task Command Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getScriptLanguageConfig <em>Script Language Config</em>}</li>
  * </ul>
  * </p>
  *
@@ -91,6 +93,16 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 	 * @ordered
 	 */
 	protected TaskCommandConfig taskCommandConfig;
+
+	/**
+	 * The cached value of the '{@link #getScriptLanguageConfig() <em>Script Language Config</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScriptLanguageConfig()
+	 * @generated
+	 * @ordered
+	 */
+	protected ScriptLanguageConfig scriptLanguageConfig;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -309,6 +321,49 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ScriptLanguageConfig getScriptLanguageConfig() {
+		return scriptLanguageConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScriptLanguageConfig(ScriptLanguageConfig newScriptLanguageConfig, NotificationChain msgs) {
+		ScriptLanguageConfig oldScriptLanguageConfig = scriptLanguageConfig;
+		scriptLanguageConfig = newScriptLanguageConfig;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG, oldScriptLanguageConfig, newScriptLanguageConfig);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setScriptLanguageConfig(ScriptLanguageConfig newScriptLanguageConfig) {
+		if (newScriptLanguageConfig != scriptLanguageConfig) {
+			NotificationChain msgs = null;
+			if (scriptLanguageConfig != null)
+				msgs = ((InternalEObject)scriptLanguageConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG, null, msgs);
+			if (newScriptLanguageConfig != null)
+				msgs = ((InternalEObject)newScriptLanguageConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG, null, msgs);
+			msgs = basicSetScriptLanguageConfig(newScriptLanguageConfig, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG, newScriptLanguageConfig, newScriptLanguageConfig));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -320,6 +375,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return basicSetConnectionManagementConfig(null, msgs);
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
 				return basicSetTaskCommandConfig(null, msgs);
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG:
+				return basicSetScriptLanguageConfig(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -342,6 +399,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return getConnectionManagementConfig();
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
 				return getTaskCommandConfig();
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG:
+				return getScriptLanguageConfig();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -368,6 +427,9 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
 				setTaskCommandConfig((TaskCommandConfig)newValue);
+				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG:
+				setScriptLanguageConfig((ScriptLanguageConfig)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -396,6 +458,9 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
 				setTaskCommandConfig((TaskCommandConfig)null);
 				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG:
+				setScriptLanguageConfig((ScriptLanguageConfig)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -418,6 +483,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return connectionManagementConfig != null;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__TASK_COMMAND_CONFIG:
 				return taskCommandConfig != null;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG:
+				return scriptLanguageConfig != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -112,6 +112,14 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createTaskCommandDefinitionAdapter();
 			}
 			@Override
+			public Adapter caseScriptLanguageConfig(ScriptLanguageConfig object) {
+				return createScriptLanguageConfigAdapter();
+			}
+			@Override
+			public Adapter caseScriptLanguage(ScriptLanguage object) {
+				return createScriptLanguageAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -282,6 +290,34 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTaskCommandDefinitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig <em>Script Language Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig
+	 * @generated
+	 */
+	public Adapter createScriptLanguageConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage <em>Script Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguage
+	 * @generated
+	 */
+	public Adapter createScriptLanguageAdapter() {
 		return null;
 	}
 

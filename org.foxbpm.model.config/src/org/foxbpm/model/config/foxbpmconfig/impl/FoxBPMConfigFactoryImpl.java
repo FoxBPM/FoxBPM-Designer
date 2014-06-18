@@ -67,6 +67,8 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 			case FoxBPMConfigPackage.PARAM: return createParam();
 			case FoxBPMConfigPackage.BASE_CONFIG: return createBaseConfig();
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: return createTaskCommandDefinition();
+			case FoxBPMConfigPackage.SCRIPT_LANGUAGE_CONFIG: return createScriptLanguageConfig();
+			case FoxBPMConfigPackage.SCRIPT_LANGUAGE: return createScriptLanguage();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -180,6 +182,26 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 	public TaskCommandDefinition createTaskCommandDefinition() {
 		TaskCommandDefinitionImpl taskCommandDefinition = new TaskCommandDefinitionImpl();
 		return taskCommandDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScriptLanguageConfig createScriptLanguageConfig() {
+		ScriptLanguageConfigImpl scriptLanguageConfig = new ScriptLanguageConfigImpl();
+		return scriptLanguageConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScriptLanguage createScriptLanguage() {
+		ScriptLanguageImpl scriptLanguage = new ScriptLanguageImpl();
+		return scriptLanguage;
 	}
 
 	/**

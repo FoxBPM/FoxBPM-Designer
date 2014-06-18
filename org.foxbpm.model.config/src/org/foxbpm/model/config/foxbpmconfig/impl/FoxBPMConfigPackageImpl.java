@@ -17,6 +17,8 @@ import org.foxbpm.model.config.foxbpmconfig.MailInfo;
 import org.foxbpm.model.config.foxbpmconfig.Param;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePathConfig;
+import org.foxbpm.model.config.foxbpmconfig.ScriptLanguage;
+import org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig;
 import org.foxbpm.model.config.foxbpmconfig.SysMailConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
@@ -104,6 +106,20 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * @generated
 	 */
 	private EClass taskCommandDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scriptLanguageConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scriptLanguageEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -218,6 +234,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EReference getFoxBPMConfig_TaskCommandConfig() {
 		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFoxBPMConfig_ScriptLanguageConfig() {
+		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -603,6 +628,60 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScriptLanguageConfig() {
+		return scriptLanguageConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getScriptLanguageConfig_ScriptLanguage() {
+		return (EReference)scriptLanguageConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getScriptLanguage() {
+		return scriptLanguageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScriptLanguage_Name() {
+		return (EAttribute)scriptLanguageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScriptLanguage_Id() {
+		return (EAttribute)scriptLanguageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getScriptLanguage_ClassImpl() {
+		return (EAttribute)scriptLanguageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FoxBPMConfigFactory getFoxBPMConfigFactory() {
 		return (FoxBPMConfigFactory)getEFactoryInstance();
 	}
@@ -632,6 +711,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__SYS_MAIL_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__TASK_COMMAND_CONFIG);
+		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG);
 
 		sysMailConfigEClass = createEClass(SYS_MAIL_CONFIG);
 		createEReference(sysMailConfigEClass, SYS_MAIL_CONFIG__MAIL_INFO);
@@ -684,6 +764,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__FILTER);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__IS_ENABLED);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__TYPE);
+
+		scriptLanguageConfigEClass = createEClass(SCRIPT_LANGUAGE_CONFIG);
+		createEReference(scriptLanguageConfigEClass, SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE);
+
+		scriptLanguageEClass = createEClass(SCRIPT_LANGUAGE);
+		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__NAME);
+		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__ID);
+		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__CLASS_IMPL);
 	}
 
 	/**
@@ -731,6 +819,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEReference(getFoxBPMConfig_SysMailConfig(), this.getSysMailConfig(), null, "sysMailConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_ConnectionManagementConfig(), this.getConnectionManagementConfig(), null, "connectionManagementConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_TaskCommandConfig(), this.getTaskCommandConfig(), null, "taskCommandConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFoxBPMConfig_ScriptLanguageConfig(), this.getScriptLanguageConfig(), null, "scriptLanguageConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sysMailConfigEClass, SysMailConfig.class, "SysMailConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSysMailConfig_MailInfo(), this.getMailInfo(), null, "mailInfo", null, 0, -1, SysMailConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -784,6 +873,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getTaskCommandDefinition_IsEnabled(), ecorePackage.getEString(), "isEnabled", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommandDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(scriptLanguageConfigEClass, ScriptLanguageConfig.class, "ScriptLanguageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScriptLanguageConfig_ScriptLanguage(), this.getScriptLanguage(), null, "scriptLanguage", null, 0, -1, ScriptLanguageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scriptLanguageEClass, ScriptLanguage.class, "ScriptLanguage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getScriptLanguage_Name(), ecorePackage.getEString(), "name", null, 0, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScriptLanguage_Id(), ecorePackage.getEString(), "id", null, 1, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScriptLanguage_ClassImpl(), ecorePackage.getEString(), "classImpl", null, 0, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -830,6 +927,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		  (getFoxBPMConfig_TaskCommandConfig(), 
 		   source, 
 		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getFoxBPMConfig_ScriptLanguageConfig(), 
+		   source, 
+		   new String[] {
+			 "name", "scriptLanguageConfig",
 			 "kind", "element"
 		   });		
 		addAnnotation
@@ -1031,6 +1135,46 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		  (getTaskCommandDefinition_Type(), 
 		   source, 
 		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (scriptLanguageConfigEClass, 
+		   source, 
+		   new String[] {
+			 "name", "scriptLanguageConfig"
+		   });		
+		addAnnotation
+		  (getScriptLanguageConfig_ScriptLanguage(), 
+		   source, 
+		   new String[] {
+			 "name", "scriptLanguage",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (scriptLanguageEClass, 
+		   source, 
+		   new String[] {
+			 "name", "scriptLanguage"
+		   });		
+		addAnnotation
+		  (getScriptLanguage_Name(), 
+		   source, 
+		   new String[] {
+			 "name", "name",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getScriptLanguage_Id(), 
+		   source, 
+		   new String[] {
+			 "name", "id",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getScriptLanguage_ClassImpl(), 
+		   source, 
+		   new String[] {
+			 "name", "classImpl",
 			 "kind", "attribute"
 		   });
 	}

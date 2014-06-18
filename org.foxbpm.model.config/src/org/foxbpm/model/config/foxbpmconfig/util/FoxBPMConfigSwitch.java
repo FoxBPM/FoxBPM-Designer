@@ -141,6 +141,18 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMConfigPackage.SCRIPT_LANGUAGE_CONFIG: {
+				ScriptLanguageConfig scriptLanguageConfig = (ScriptLanguageConfig)theEObject;
+				T result = caseScriptLanguageConfig(scriptLanguageConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.SCRIPT_LANGUAGE: {
+				ScriptLanguage scriptLanguage = (ScriptLanguage)theEObject;
+				T result = caseScriptLanguage(scriptLanguage);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -307,6 +319,36 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTaskCommandDefinition(TaskCommandDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Script Language Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Script Language Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScriptLanguageConfig(ScriptLanguageConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Script Language</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Script Language</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScriptLanguage(ScriptLanguage object) {
 		return null;
 	}
 

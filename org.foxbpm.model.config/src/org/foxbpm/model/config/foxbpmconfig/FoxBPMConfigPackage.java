@@ -161,13 +161,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int FOX_BPM_CONFIG__TASK_COMMAND_CONFIG = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Script Language Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG = BASE_CONFIG_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Fox BPM Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 5;
+	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Fox BPM Config</em>' class.
@@ -784,6 +793,98 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getScriptLanguageConfig()
+	 * @generated
+	 */
+	int SCRIPT_LANGUAGE_CONFIG = 11;
+
+	/**
+	 * The feature id for the '<em><b>Script Language</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Script Language Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_CONFIG_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Script Language Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_CONFIG_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageImpl <em>Script Language</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getScriptLanguage()
+	 * @generated
+	 */
+	int SCRIPT_LANGUAGE = 12;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE__ID = 1;
+
+	/**
+	 * The feature id for the '<em><b>Class Impl</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE__CLASS_IMPL = 2;
+
+	/**
+	 * The number of structural features of the '<em>Script Language</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Script Language</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_OPERATION_COUNT = 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -847,6 +948,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFoxBPMConfig_TaskCommandConfig();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getScriptLanguageConfig <em>Script Language Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Script Language Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getScriptLanguageConfig()
+	 * @see #getFoxBPMConfig()
+	 * @generated
+	 */
+	EReference getFoxBPMConfig_ScriptLanguageConfig();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.SysMailConfig <em>Sys Mail Config</em>}'.
@@ -1301,6 +1413,70 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getTaskCommandDefinition_Type();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig <em>Script Language Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Script Language Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig
+	 * @generated
+	 */
+	EClass getScriptLanguageConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getScriptLanguage <em>Script Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Script Language</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getScriptLanguage()
+	 * @see #getScriptLanguageConfig()
+	 * @generated
+	 */
+	EReference getScriptLanguageConfig_ScriptLanguage();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage <em>Script Language</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Script Language</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguage
+	 * @generated
+	 */
+	EClass getScriptLanguage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getName()
+	 * @see #getScriptLanguage()
+	 * @generated
+	 */
+	EAttribute getScriptLanguage_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getId()
+	 * @see #getScriptLanguage()
+	 * @generated
+	 */
+	EAttribute getScriptLanguage_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getClassImpl <em>Class Impl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Class Impl</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguage#getClassImpl()
+	 * @see #getScriptLanguage()
+	 * @generated
+	 */
+	EAttribute getScriptLanguage_ClassImpl();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1372,6 +1548,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FOX_BPM_CONFIG__TASK_COMMAND_CONFIG = eINSTANCE.getFoxBPMConfig_TaskCommandConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Script Language Config</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG = eINSTANCE.getFoxBPMConfig_ScriptLanguageConfig();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.SysMailConfigImpl <em>Sys Mail Config</em>}' class.
@@ -1728,6 +1912,58 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TASK_COMMAND_DEFINITION__TYPE = eINSTANCE.getTaskCommandDefinition_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getScriptLanguageConfig()
+		 * @generated
+		 */
+		EClass SCRIPT_LANGUAGE_CONFIG = eINSTANCE.getScriptLanguageConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Script Language</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE = eINSTANCE.getScriptLanguageConfig_ScriptLanguage();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageImpl <em>Script Language</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getScriptLanguage()
+		 * @generated
+		 */
+		EClass SCRIPT_LANGUAGE = eINSTANCE.getScriptLanguage();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCRIPT_LANGUAGE__NAME = eINSTANCE.getScriptLanguage_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCRIPT_LANGUAGE__ID = eINSTANCE.getScriptLanguage_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Impl</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCRIPT_LANGUAGE__CLASS_IMPL = eINSTANCE.getScriptLanguage_ClassImpl();
 
 	}
 
