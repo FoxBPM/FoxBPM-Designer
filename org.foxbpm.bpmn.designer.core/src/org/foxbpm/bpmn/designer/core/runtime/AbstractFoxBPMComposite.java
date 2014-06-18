@@ -344,6 +344,28 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 		bindingContext.bindValue(observable, uiObserveValue, null, null);
 	}
 	
+	protected void bindTextWithNoDelay(EStructuralFeature a, Text text, final EObject element) {
+		EMFDataBindingContext bindingContext = new EMFDataBindingContext();
+
+		IObservableValue uiObserveValue = EMFEditObservables.observeValue(getDiagramEditor().getEditingDomain(), element, a);
+
+		observable = SWTObservables.observeDelayedValue(0, SWTObservables.observeText(text, SWT.Modify));
+
+		observable.addChangeListener(new IChangeListener() {
+
+			public void handleChange(ChangeEvent event) {
+				if (element != null) {
+					IEditorPart part = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+					if (part instanceof BPMN2Editor) {
+						((BPMN2Editor) getDiagramEditor()).refresh();
+					}
+				}
+			}
+		});
+
+		bindingContext.bindValue(observable, uiObserveValue, null, null);
+	}
+	
 	protected void bindCombo(EStructuralFeature a, Combo combo, final EObject element) {
 		EMFDataBindingContext bindingContext = new EMFDataBindingContext();
 
@@ -370,6 +392,16 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 		final ParallelGateway parallelGateway = (ParallelGateway) getBusinessObject();
 		GatewayDirection gatewayDirection = parallelGateway.getGatewayDirection();
 		// Unspecified
+		if (gatewayDirection == GatewayDirection.UNSPECIFIED) {
+			combo.select(0);
+			TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+				@Override
+				protected void doExecute() {
+					parallelGateway.setGatewayDirection(GatewayDirection.DIVERGING);
+				}
+			});
+		}
 		// 分
 		if (gatewayDirection == GatewayDirection.DIVERGING) {
 			combo.select(0);

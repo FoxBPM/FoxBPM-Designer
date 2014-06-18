@@ -4,6 +4,8 @@ import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.GatewayDirection;
 import org.eclipse.bpmn2.ParallelGateway;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -35,7 +37,6 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, parallelGateway);
 		bindText(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText, parallelGateway);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText);
-		bindGatewayDirection(iotypeCombo);
 		
 		iotypeCombo.addSelectionListener(new SelectionListener() {
 			
@@ -50,6 +51,8 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
+		bindGatewayDirection(iotypeCombo);
+		
 		mergestrategyCombo.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -63,9 +66,11 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		bindText(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE, valueText, parallelGateway);
+		bindTextWithNoDelay(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE, valueText, parallelGateway);
 		
 		setMergeComboEnable();
+		
+		init();
 	}
 
 	@Override
@@ -106,8 +111,8 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 		mergestrategyCombo = new Combo(detailComposite, SWT.READ_ONLY);
 		mergestrategyCombo.setItems(new String[] { "线条数量", "令牌数量" });
 		mergestrategyCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		mergestrategyCombo.setData("线条数量", "tokenNum");
-		mergestrategyCombo.setData("令牌数量", "flowNum");
+		mergestrategyCombo.setData("线条数量", "flowNum");
+		mergestrategyCombo.setData("令牌数量", "tokenNum");
 		mergestrategyCombo.select(0);
 
 		Label descLabel = new Label(detailComposite, SWT.NONE);
@@ -132,11 +137,28 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 		return "parallel_gateway_desc";
 	}
 	
+	private void init() {
+		if(parallelGateway.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE).toString().equals("tokenNum")) {
+			mergestrategyCombo.select(1);
+		}else {
+			mergestrategyCombo.select(0);
+		}
+	}
+	
 	private void setMergeComboEnable() {
-		if(parallelGateway.getGatewayDirection()==GatewayDirection.DIVERGING) {
-			mergestrategyCombo.setEnabled(false);
-		}else{
+		if(parallelGateway.getGatewayDirection()==GatewayDirection.CONVERGING) {
 			mergestrategyCombo.setEnabled(true);
+			if(parallelGateway.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE)==null) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						parallelGateway.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE, mergestrategyCombo.getData(mergestrategyCombo.getItem(0)));
+					}
+				});
+			}
+		}else{
+			mergestrategyCombo.setEnabled(false);
 		}
 	}
 }
