@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getScriptLanguage <em>Script Language</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getSelected <em>Selected</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,5 +40,31 @@ public interface ScriptLanguageConfig extends EObject {
 	 * @generated
 	 */
 	EList<ScriptLanguage> getScriptLanguage();
+
+	/**
+	 * Returns the value of the '<em><b>Selected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Selected</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Selected</em>' attribute.
+	 * @see #setSelected(String)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getScriptLanguageConfig_Selected()
+	 * @model extendedMetaData="name='selected' kind='attribute'"
+	 * @generated
+	 */
+	String getSelected();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getSelected <em>Selected</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Selected</em>' attribute.
+	 * @see #getSelected()
+	 * @generated
+	 */
+	void setSelected(String value);
 
 } // ScriptLanguageConfig

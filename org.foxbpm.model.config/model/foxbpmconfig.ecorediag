@@ -291,6 +291,10 @@
   <children xmi:type="notation:Node" xmi:id="_CNbnAPayEeOnDqaWzY5eDQ" type="1001">
     <children xmi:type="notation:Node" xmi:id="_CNc1IPayEeOnDqaWzY5eDQ" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_CNdcMPayEeOnDqaWzY5eDQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_hq0lgPazEeOnDqaWzY5eDQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//ScriptLanguageConfig/selected"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hq0lgfazEeOnDqaWzY5eDQ"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_CNdcMfayEeOnDqaWzY5eDQ"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_CNdcMvayEeOnDqaWzY5eDQ"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_CNdcM_ayEeOnDqaWzY5eDQ"/>

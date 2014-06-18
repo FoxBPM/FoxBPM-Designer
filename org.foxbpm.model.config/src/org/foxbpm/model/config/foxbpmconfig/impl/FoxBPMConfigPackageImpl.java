@@ -646,6 +646,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getScriptLanguageConfig_Selected() {
+		return (EAttribute)scriptLanguageConfigEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScriptLanguage() {
 		return scriptLanguageEClass;
 	}
@@ -767,6 +776,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		scriptLanguageConfigEClass = createEClass(SCRIPT_LANGUAGE_CONFIG);
 		createEReference(scriptLanguageConfigEClass, SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE);
+		createEAttribute(scriptLanguageConfigEClass, SCRIPT_LANGUAGE_CONFIG__SELECTED);
 
 		scriptLanguageEClass = createEClass(SCRIPT_LANGUAGE);
 		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__NAME);
@@ -875,6 +885,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		initEClass(scriptLanguageConfigEClass, ScriptLanguageConfig.class, "ScriptLanguageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScriptLanguageConfig_ScriptLanguage(), this.getScriptLanguage(), null, "scriptLanguage", null, 0, -1, ScriptLanguageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScriptLanguageConfig_Selected(), ecorePackage.getEString(), "selected", null, 0, 1, ScriptLanguageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scriptLanguageEClass, ScriptLanguage.class, "ScriptLanguage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScriptLanguage_Name(), ecorePackage.getEString(), "name", null, 0, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1149,6 +1160,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   new String[] {
 			 "name", "scriptLanguage",
 			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getScriptLanguageConfig_Selected(), 
+		   source, 
+		   new String[] {
+			 "name", "selected",
+			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (scriptLanguageEClass, 

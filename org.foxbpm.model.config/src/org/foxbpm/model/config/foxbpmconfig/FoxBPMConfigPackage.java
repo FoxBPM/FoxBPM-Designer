@@ -812,13 +812,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Selected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCRIPT_LANGUAGE_CONFIG__SELECTED = 1;
+
+	/**
 	 * The number of structural features of the '<em>Script Language Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCRIPT_LANGUAGE_CONFIG_FEATURE_COUNT = 1;
+	int SCRIPT_LANGUAGE_CONFIG_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Script Language Config</em>' class.
@@ -1434,6 +1443,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EReference getScriptLanguageConfig_ScriptLanguage();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getSelected <em>Selected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Selected</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig#getSelected()
+	 * @see #getScriptLanguageConfig()
+	 * @generated
+	 */
+	EAttribute getScriptLanguageConfig_Selected();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguage <em>Script Language</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1930,6 +1950,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE = eINSTANCE.getScriptLanguageConfig_ScriptLanguage();
+
+		/**
+		 * The meta object literal for the '<em><b>Selected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SCRIPT_LANGUAGE_CONFIG__SELECTED = eINSTANCE.getScriptLanguageConfig_Selected();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageImpl <em>Script Language</em>}' class.
