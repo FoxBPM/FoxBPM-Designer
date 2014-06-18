@@ -47,13 +47,6 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite{
 		idText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		idText.setEditable(false);
 		
-		Label categoryLabel = new Label(detailComposite, SWT.NONE);
-		categoryLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		categoryLabel.setText("分类");
-		
-		categoryText = new Text(detailComposite, SWT.BORDER);
-		categoryText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		
 		Label uniLabel = new Label(detailComposite, SWT.NONE);
 		uniLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		uniLabel.setText("唯一编号");
@@ -61,20 +54,27 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite{
 		uniText = new Text(detailComposite, SWT.BORDER);
 		uniText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
+		Label nameLabel = new Label(detailComposite, SWT.NONE);
+		nameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		nameLabel.setText("名称");
+		
+				nameText = new Text(detailComposite, SWT.BORDER);
+				nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		Label categoryLabel = new Label(detailComposite, SWT.NONE);
+		categoryLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		categoryLabel.setText("分类");
+		
+		categoryText = new Text(detailComposite, SWT.BORDER);
+		categoryText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
 		Label tasksubjectLabel = new Label(detailComposite, SWT.NONE);
 		tasksubjectLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		tasksubjectLabel.setText("任务主题");
 		
 		FoxBPMExpViewer tasksubjectViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_1 = tasksubjectViewer.getControl();
-		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		
-		Label nameLabel = new Label(detailComposite, SWT.NONE);
-		nameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		nameLabel.setText("名称");
-
-		nameText = new Text(detailComposite, SWT.BORDER);
-		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 3, 1));
 		
 		Label operformLabel = new Label(detailComposite, SWT.NONE);
 		operformLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -84,15 +84,6 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite{
 		Control control = operformViewer.getControl();
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		
-		Label descLabel = new Label(detailComposite, SWT.NONE);
-		descLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		descLabel.setText("描述");
-		
-		descText = new Text(detailComposite, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
-		GridData gd_descText = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
-		gd_descText.heightHint = 50;
-		descText.setLayoutData(gd_descText);
-		
 		Label viewformLabel = new Label(detailComposite, SWT.NONE);
 		viewformLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		viewformLabel.setText("浏览表单");
@@ -100,6 +91,15 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite{
 		FoxBPMExpViewer viewformViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_2 = viewformViewer.getControl();
 		control_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		
+		Label descLabel = new Label(detailComposite, SWT.NONE);
+		descLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		descLabel.setText("描述");
+		
+		descText = new Text(detailComposite, SWT.BORDER | SWT.WRAP | SWT.H_SCROLL | SWT.V_SCROLL | SWT.CANCEL | SWT.MULTI);
+		GridData gd_descText = new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1);
+		gd_descText.heightHint = 50;
+		descText.setLayoutData(gd_descText);
 		
 		return parent;
 	}
