@@ -43,9 +43,9 @@ public class CreateFlowConnectorJava {
 		createJavaClassUtil.setPackageName(connector.getDefinitionImpl()
 				.getPackageName());
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.runtime.ExecutionContext;");
+				.createImport("org.foxbpm.engine.execution.ConnectorExecutionContext;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.action.ConnectorHandler;");
+				.createImport("org.foxbpm.engine.impl.connector.FlowConnectorHandler;");
 
 		String javaCodeString = createJavaClassUtil.generateJavaCode();
 		return javaCodeString;
@@ -72,13 +72,13 @@ public class CreateFlowConnectorJava {
 				.getPackageName());
 		createJavaClassUtil.createImport("java.util.*;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.connector.ActorConnectorHandler;");
+				.createImport("org.foxbpm.engine.impl.connector.ActorConnectorHandler;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.impl.identity.GroupTo;");
+				.createImport("org.foxbpm.engine.identity.Group;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.impl.identity.UserTo;");
+				.createImport("org.foxbpm.engine.identity.User;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.runtime.ExecutionContext;");
+				.createImport("org.foxbpm.engine.execution.ConnectorExecutionContext;");
 
 		String javaCodeString = createJavaClassUtil.generateJavaCode();
 		return javaCodeString;
