@@ -10,6 +10,7 @@ import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.ecore.util.FeatureMapUtil.FeatureEList;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -244,6 +245,13 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
 									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
 							extensionElements.add(extensionElementEntry);
+						}else {
+							ConnectorInstanceElements connectorInstanceElements = FoxBPMFactory.eINSTANCE.createConnectorInstanceElements();
+							connectorInstanceElements.setConnrctorType("flowConnector");
+							connectorInstanceElements.getConnectorInstance().add(connectorInstance);
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS, connectorInstanceElements);
+							extensionElements.add(extensionElementEntry);
 						}
 					}
 				} else {
@@ -277,7 +285,12 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 
 					for (ExtensionAttributeValue extensionAttributeValue : baseElement.getExtensionValues()) {
 						FeatureMap extensionElements = extensionAttributeValue.getValue();
-						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) extensionElements.getValue(0);
+						ConnectorInstanceElements connectorInstanceElements = null;
+						for (Entry entry : extensionElements) {
+							if(entry.getValue() instanceof ConnectorInstanceElements) {
+								connectorInstanceElements = (ConnectorInstanceElements) entry.getValue();
+							}
+						}
 						connectorInstanceElements.getConnectorInstance().remove(connectorInstance);
 					}
 				}
