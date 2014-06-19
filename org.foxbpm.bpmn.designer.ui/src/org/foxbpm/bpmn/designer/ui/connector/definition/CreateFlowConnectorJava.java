@@ -64,7 +64,6 @@ public class CreateFlowConnectorJava {
 					output.getId());
 		}
 
-		createJavaClassUtil.setImplement("ActorConnectorHandler");
 		createJavaClassUtil.setClassName(connector.getDefinitionImpl()
 				.getClassName());
 		createJavaClassUtil.createExecuteActorConnector();
@@ -80,7 +79,7 @@ public class CreateFlowConnectorJava {
 		createJavaClassUtil
 				.createImport("org.foxbpm.engine.execution.ConnectorExecutionContext;");
 
-		String javaCodeString = createJavaClassUtil.generateJavaCode();
+		String javaCodeString = createJavaClassUtil.generateActorJavaCode();
 		return javaCodeString;
 	}
 

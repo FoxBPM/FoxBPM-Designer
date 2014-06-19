@@ -11,6 +11,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.internal.resources.Project;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFObservables;
@@ -64,8 +66,14 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ListSelectionDialog;
+import org.eclipse.ui.model.BaseWorkbenchContentProvider;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.dialogs.ProjectContentProvider;
+import org.foxbpm.bpmn.designer.ui.dialogs.TreeSelectionDialog;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
@@ -80,6 +88,7 @@ import org.foxbpm.model.config.connector.Page;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private DataBindingContext m_bindingContext;
@@ -125,6 +134,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private List<Node> nodelist;
 	private List<ITreeElement> categorytreeElements;
 	private static String CONNECTORDEFAULTICON = "category.png";
+	private String packageName = null;
 
 	/**
 	 * 构造函数
@@ -213,7 +223,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		connectoridtext.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				connectorclassnametext.setText(connectoridtext.getText());
-				connectorpackagenametext.setText("org.foxbpm.flowconnector" + "." + connectoridtext.getText());
+				connectorpackagenametext.setText("请选择项目来确定包名" + "." + connectoridtext.getText());
 				setPageComplete(isPageComplete());
 			}
 		});
@@ -259,15 +269,23 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		connectorpackagenametext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
 		Button connectorpakageButton = new Button(composite, SWT.NONE);
-		connectorpakageButton.setEnabled(false);
 		connectorpakageButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		connectorpakageButton.setText("浏览");
 		connectorpakageButton.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
-				IPackageFragment selectedPackage = ConfigureNewConnectorWizardPage.this.choosePackage();
-				if (selectedPackage != null) {
-					connectorpackagenametext.setText(selectedPackage.getElementName());
+				packageName = null;
+				TreeSelectionDialog dlg = new TreeSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), new ProjectContentProvider(), new WorkbenchLabelProvider(), "选择项目:");
+				dlg.setTitle("Project Selection");
+				if (dlg != null && dlg.open() == InputDialog.OK) {
+					String projectName = ((Project)dlg.getSelection()).getName();
+					for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+						if(resourcePath.getProjectName().equals(projectName) && resourcePath.getType().equals("flowConnector")) {
+							packageName = resourcePath.getSrc().replace("/", ".");
+						}
+					}
+					connectorpackagenametext.setText(packageName == null?"找不到项目对应的包名，请在配置文件中配置":packageName + connectoridtext.getText());
 				}
+				setPageComplete(isPageComplete());
 			}
 		});
 
@@ -1393,6 +1411,11 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 			if (sb.length() > 0)
 				sb.append(",");
 			sb.append("连接器类名为空");
+		}
+		if (connectorpackagenametext.getText() == null || connectorpackagenametext.getText().equals("") || connectorpackagenametext.getText().equals("找不到项目对应的包名，请在配置文件中配置") || connectorpackagenametext.getText().indexOf("请选择项目来确定包名")!=-1) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器包名为空");
 		}
 		if (connectordesctext.getText() == null || connectordesctext.getText().equals("")) {
 			if (sb.length() > 0)
