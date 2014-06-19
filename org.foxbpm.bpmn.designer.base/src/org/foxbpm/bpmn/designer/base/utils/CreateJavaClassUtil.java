@@ -13,7 +13,7 @@ public class CreateJavaClassUtil {
 	protected String extend = "";
 
 	public CreateJavaClassUtil() {
-		implement = "ConnectorHandler";
+		implement = "FlowConnectorHandler";
 		extend = "ActorConnectorHandler";
 	}
 	
@@ -47,7 +47,7 @@ public class CreateJavaClassUtil {
 	}
 
 	public void createExecuteConnector() {
-		this.executeConnector = "\tpublic void execute(ExecutionContext executionContext) throws Exception {\n\n\t}\n\n";
+		this.executeConnector = "\tpublic void execute(ConnectorExecutionContext executionContext) throws Exception {\n\n\t}\n\n";
 	}
 	
 	public void createExecuteActorConnector() {
