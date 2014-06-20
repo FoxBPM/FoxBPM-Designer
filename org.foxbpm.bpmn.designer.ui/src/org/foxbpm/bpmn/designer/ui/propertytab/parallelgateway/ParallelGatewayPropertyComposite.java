@@ -138,7 +138,7 @@ public class ParallelGatewayPropertyComposite extends AbstractFoxBPMComposite {
 	}
 	
 	private void init() {
-		if(parallelGateway.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE).toString().equals("tokenNum")) {
+		if(parallelGateway.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE)!=null && parallelGateway.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CONVERG_TYPE).toString().equals("tokenNum")) {
 			mergestrategyCombo.select(1);
 		}else {
 			mergestrategyCombo.select(0);
