@@ -80,7 +80,7 @@ public class DefinitionConnectorUtil {
 			}else{
 				continue;
 			}
-			nodes = EMFUtil.getAll(menu.eResource(), Node.class);
+			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
 			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
 				for (MenuConnector connector : node.getMenuConnector()) {
 					// connector的具体路径
@@ -121,7 +121,7 @@ public class DefinitionConnectorUtil {
 			}else{
 				continue;
 			}
-			nodes = EMFUtil.getAll(menu.eResource(), Node.class);
+			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
 			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
 				for (MenuConnector connector : node.getMenuConnector()) {
 					// connector的具体路径
