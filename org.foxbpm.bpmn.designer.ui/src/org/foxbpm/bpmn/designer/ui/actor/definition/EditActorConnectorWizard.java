@@ -1,12 +1,7 @@
 package org.foxbpm.bpmn.designer.ui.actor.definition;
 
-import java.io.File;
-
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
@@ -16,7 +11,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.DynamicPageWizard;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
-import org.foxbpm.bpmn.designer.ui.utils.ProjectUtil;
 
 public class EditActorConnectorWizard extends DynamicPageWizard {
 	private SelectActorConnectorWizardPage selectNewConnectorWizardPage;
@@ -40,7 +34,7 @@ public class EditActorConnectorWizard extends DynamicPageWizard {
 
 				for (Object object : files) {
 					try {
-						IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getActorConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+						IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getActorConnectorPathById(selectNewConnectorWizardPage.getConnector().getId(), selectNewConnectorWizardPage.getConnector().getCategoryId()) + "/" + object.toString()));
 						IDE.openEditorOnFileStore(page, fileStore);
 					} catch (PartInitException e) {
 					}

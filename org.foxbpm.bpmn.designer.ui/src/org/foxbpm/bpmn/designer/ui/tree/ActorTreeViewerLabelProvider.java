@@ -1,7 +1,5 @@
 package org.foxbpm.bpmn.designer.ui.tree;
 
-import java.io.File;
-
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -11,9 +9,11 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
+import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
-
+	private ResourcePath resourcePath;
 	/**
 	 * 
 	 */
@@ -52,15 +52,17 @@ public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implem
 	 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
 	 */
 	public Image getImage(Object element) {
+		Image image = null;
 		ITreeElement tElement = (ITreeElement) element;
 		try {
-			String imagePath = tElement.getIcon().indexOf(File.separator)==-1 && tElement.getIcon().indexOf("/")==-1?DefinitionConnectorUtil.getActorConnectorIconPath() + tElement.getIcon() : tElement.getIcon(); // 要读取的图片文件的路径
+			String imagePath = resourcePath==null?tElement.getIcon():DefinitionConnectorUtil.getActorConnectorIconPath(resourcePath) + "/" + tElement.getIcon(); // 要读取的图片文件的路径
 			return new Image(PlatformUI.getWorkbench().getDisplay(),
 					new ImageData(imagePath).scaledTo(16, 16));
 		} catch (Exception e) {
 //			e.printStackTrace();
+			image = ImageUtil.getImageFromName("/connector/category.png");
 		}
-		return null;
+		return image;
 	}
 
 	/* (non-Javadoc)
@@ -85,6 +87,14 @@ public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implem
 			cell.setImage(getImage(e)) ;
 			cell.setStyleRanges(styledString.getStyleRanges());
 		}
+	}
+
+	public ResourcePath getResourcePath() {
+		return resourcePath;
+	}
+
+	public void setResourcePath(ResourcePath resourcePath) {
+		this.resourcePath = resourcePath;
 	}
 
 }

@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
 import org.foxbpm.bpmn.designer.ui.tree.ActorTreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
@@ -43,6 +44,7 @@ import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class SelectActorConnectorWizardPage extends WizardPage {
 	private Text searchtext;
@@ -132,15 +134,17 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						return;
 
 					// 删除目录
-					File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(connector.getId()));
+					File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(connector.getId(), connector.getCategoryId()));
 					// File file = new
 					// File(ConnectorUtil.getConnectorPathById(connector.getConnectorId()));
 					deleteFile(file);
+					FoxBPMDesignerUtil.refresh(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)));
 
 					// 读取Menu的XML
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath()), true);
+					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath(resourcePath)), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
 					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
@@ -205,8 +209,8 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath()), true);
-					// register package in local resource registry
+					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath(resourcePath)), true);					// register package in local resource registry
 					resourceSet.getPackageRegistry().put(FoxBPMPackage.eINSTANCE.getNsURI(), FoxBPMPackage.eINSTANCE);
 					// load resource
 					try {
@@ -229,8 +233,9 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						getAllMenuConnector(nodesel);
 						if (menuConnectorIdStringList.size() > 0) {
 							for (String idString : menuConnectorIdStringList) {
-								file = new File(DefinitionConnectorUtil.getActorConnectorPathById(idString));
+								file = new File(DefinitionConnectorUtil.getActorConnectorPathById(idString, nodesel.getId()));
 								deleteFile(file);
+								FoxBPMDesignerUtil.refresh(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)));
 							}
 						}
 					}
@@ -323,7 +328,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = DefinitionTreeViewerFactory.getActorConnector(element.getId());
+					connector = DefinitionTreeViewerFactory.getActorConnector(element.getId(), element.getRealName());//realName存的是node的Id);
 
 					editConnectorWizard.getchChooseFlowConnectorFileToEditWizardPage().setConnector(connector);
 

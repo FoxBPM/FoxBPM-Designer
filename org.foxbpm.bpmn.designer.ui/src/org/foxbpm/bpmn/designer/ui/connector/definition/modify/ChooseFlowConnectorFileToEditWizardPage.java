@@ -102,7 +102,7 @@ public class ChooseFlowConnectorFileToEditWizardPage extends WizardPage {
 
 	public List<String> getFilesInConnectorPath() {
 		List<String> filenames = new ArrayList<String>();
-		File d = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId()));// 建立当前目录中文件的File对象
+		File d = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId(), connector.getCategoryId()));// 建立当前目录中文件的File对象
 		File[] fl = d.listFiles();// 取得目录中所有文件的File对象数组
 		for (int i = 0; i < fl.length; i++) {
 			// 目录下的文件：

@@ -74,6 +74,7 @@ import org.foxbpm.bpmn.designer.ui.tree.ActorTreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
+import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.ConnectorFactory;
@@ -128,6 +129,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 	private List<ITreeElement> categorytreeElements;
 	private List<String> newCreateCategoryID;
 	private String packageName = null;
+	private ResourcePath resourcePath;
 	
 	/**
 	 * 构造函数
@@ -155,10 +157,8 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		
 		this.pages = new ArrayList<Page>();
 		this.newCreateCategoryID = new ArrayList<String>();
-		//读取Menu的xml
-		menu = DefinitionConnectorUtil.getActorConnectorMenu();
-		//通过下面这一个方法就不需要再递归得到所有节点
-		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+		
+		nodelist = new ArrayList<Node>();
 		
 		this.openType = "create";
 	}
@@ -180,8 +180,10 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		this.newConnector = connector;
 		this.newFactory = newFactory;
 		this.newCreateCategoryID = new ArrayList<String>();
-		//读取Menu的xml
-		menu = DefinitionConnectorUtil.getActorConnectorMenu();
+
+		resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+		menu = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
+		
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 		
 		for (Node nd : nodelist) {
@@ -273,10 +275,34 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 					for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
 						if(resourcePath.getProjectName().equals(projectName) && resourcePath.getType().equals("actorConnector")) {
 							packageName = resourcePath.getSrc().replace("/", ".");
+							ConfigureActorConnectorWizardPage.this.resourcePath = resourcePath;
+							break;
 						}
 					}
 					connectorpackagenametext.setText(packageName == null?"找不到项目对应的包名，请在配置文件中配置":packageName + connectoridtext.getText());
 				}
+				
+				((ActorTreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
+				categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTreeNodes(resourcePath);
+				categorytreeViewer.setInput(categorytreeElements);
+				categorytreeViewer.refresh();
+				
+				newConnector.setCategoryId(null);
+				
+				menu = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
+				nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+				
+				if(newConnector.getCategoryId() == null) {
+					//默认选择分类树上第一个节点
+					for (ITreeElement treeElement : categorytreeElements) {
+						if (treeElement.getId().equals(nodelist.get(0).getId())) {
+							categorytreeViewer.setSelection(new StructuredSelection(treeElement));
+							break;
+						}
+					}
+				}
+				
+				categorycreateButton.setEnabled(true);
 				setPageComplete(isPageComplete());
 			}
 		});
@@ -321,7 +347,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		if (newConnector.getIcon() != null) {
 			try {
 				connectoriconButton.setText("");
-				is = new FileInputStream(DefinitionConnectorUtil.getActorConnectorIconPathByIconName(newConnector.getId(), newConnector.getIcon()));
+				is = new FileInputStream(DefinitionConnectorUtil.getActorConnectorIconPathByIconName(newConnector.getId(), newConnector.getIcon(), node.getId()));
 				if (connectoriconButton.getImage() != null && !connectoriconButton.getImage().isDisposed()) {
 					connectoriconButton.getImage().dispose();
 				}
@@ -333,7 +359,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 			}
 		} else {
 			// 如果是创建就给connectoriconButton一个默认图标
-			this.setIconPath(DefinitionConnectorUtil.getActorConnectorIconPath() + CONNECTORDEFAULTICON);
+			this.setIconPath(CONNECTORDEFAULTICON);
 			newConnector.setIcon(FileUtil.getFileName(iconPath));
 			if (new File(this.getIconPath()).exists()) {
 				try {
@@ -354,14 +380,8 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		Label labelcategory = new Label(composite, SWT.NONE);
 		labelcategory.setText("分类");
 		
-		//如果是编辑时，不允许更改ID，防止保存时验证ID唯一时麻烦
-		if(openType.equals("edit")) {
-			connectoridtext.setEnabled(false);
-			connectorclassnametext.setEnabled(false);
-		}
-		
 		// treeViewer获取数据
-		categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTreeNodes();
+		categorytreeElements = new ArrayList<ITreeElement>();
 		categorytreeViewer = new TreeViewer(composite, SWT.BORDER);
 		categorytreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -401,7 +421,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 				if (treeElementselect != null) {
 					newConnector.setCategoryId(treeElementselect.getId());
 				}
-				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(),treeElementselect,categorytreeElements, "actor");
+				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements, "actor", resourcePath);
 				if(dialog.open() == Dialog.OK) {
 					//回填到界面上,新增一个树节点出来
 					if (dialog.getSelTreeElement()!=null) {
@@ -432,6 +452,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		gd_categorycreateButton.heightHint = 20;
 		categorycreateButton.setLayoutData(gd_categorycreateButton);
 		categorycreateButton.setText("创建");
+		categorycreateButton.setEnabled(false);
 		
 		//根如果是编辑的话就需要再设置一些东西
 		if(newConnector.getCategoryId() == null) {
@@ -816,6 +837,21 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 			}
 		});
 		
+		//如果是编辑时，不允许更改ID，防止保存时验证ID唯一时麻烦
+		if(openType.equals("edit")) {
+			connectoridtext.setEnabled(false);
+			connectorclassnametext.setEnabled(false);
+			connectorpakageButton.setEnabled(false);
+			((ActorTreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
+			categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTreeNodes(resourcePath);
+			categorytreeViewer.setInput(categorytreeElements);
+			categorytreeViewer.refresh();
+			categorytreeViewer.getTree().setEnabled(false);
+			
+			menu = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
+			nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+		}
+		
 		createCellModifierInput();
 		
 		updateButtons();
@@ -1179,11 +1215,11 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 			sb.append("选择器描述为空");
 		}
 		//上面两个先弃用，但是控件还保留在界面上，后期需要全部删除的
-		if (null == ((IStructuredSelection)categorytreeViewer.getSelection()).getFirstElement()) {
-			if(sb.length()>0)
-				sb.append(",");
-			sb.append("请选择分类");
-		}
+//		if (null == ((IStructuredSelection)categorytreeViewer.getSelection()).getFirstElement()) {
+//			if(sb.length()>0)
+//				sb.append(",");
+//			sb.append("请选择分类");
+//		}
 		if(!OutputNamesAreUnique){
 			if(sb.length()>0)
 				sb.append(",");
@@ -1318,6 +1354,14 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 
 	public FileInputStream getIs() {
 		return is;
+	}
+
+	public ResourcePath getResourcePath() {
+		return resourcePath;
+	}
+
+	public void setResourcePath(ResourcePath resourcePath) {
+		this.resourcePath = resourcePath;
 	}
 	
 }

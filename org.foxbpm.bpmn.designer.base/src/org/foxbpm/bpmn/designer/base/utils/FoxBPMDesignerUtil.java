@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
-import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
@@ -96,5 +104,49 @@ public class FoxBPMDesignerUtil {
 	 */
 	public static String getFakeGroovyFilePath() {
 		return Platform.getInstallLocation().getURL().getPath() + "fake.groovy";
+	}
+	
+	/**
+	 * 刷新项目
+	 * @param projectName 项目名称
+	 * @param type 类型 IResource.FOLDER,IResource.FILE
+	 */
+	public static void refresh(String projectName, String folder, int type) {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IProject project = workspace.getRoot().getProject(projectName);
+		IPath location = Path.fromOSString(folder);
+		
+		if(type==IResource.FILE) {
+			IFile file = (IFile) project.findMember(location);
+			try {
+				file.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}else if(type==IResource.FOLDER) {
+			IFolder iFolder = (IFolder) project.findMember(location);
+			try {
+				iFolder.refreshLocal(IResource.DEPTH_INFINITE, null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 刷新项目
+	 * @param folder
+	 * @param type 类型 IResource.FOLDER,IResource.FILE
+	 */
+	public static void refresh(String folder) {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IPath location = Path.fromOSString(folder);
+		
+		IFile file = workspace.getRoot().getFileForLocation(location);
+		try {
+			file.refreshLocal(IResource.DEPTH_INFINITE, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
+import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class DefinitionTreeViewerFactory {
 
@@ -27,19 +31,9 @@ public class DefinitionTreeViewerFactory {
 	public static List<ITreeElement> reloadTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 
-		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
+		List<Node> nodes = DefinitionConnectorUtil.getAllFlowConnectorNodes();
 
-		EList<Node> nodes = null;
-		
-		// 分拆menu成为ITreeElement树
-		if (root != null) {
-			nodes = root.getNode();
-			// 递归查找node节点
-			getTreeElements(nodes, null, elements);
-		}
-
-		// 递归查找node节点
-//		getActorTreeElements(nodes, null, elements);
+		getTreeElements(nodes, null, elements);
 		
 		return elements;
 	}
@@ -51,43 +45,28 @@ public class DefinitionTreeViewerFactory {
 	 */
 	public static List<ITreeElement> reloadActorTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
 
-		EList<Node> nodes = null;
+		List<Node> nodes = DefinitionConnectorUtil.getAllActorConnectorNodes();
 		
-		// 分拆menu成为ITreeElement树
-		if (root != null) {
-			nodes = root.getNode();
-			// 递归查找node节点
-			getActorTreeElements(nodes, null, elements);
-		}
-		
-		// 递归查找node节点
-//		getActorTreeElements(nodes, null, elements);
+		getActorTreeElements(nodes, null, elements);
 
 		return elements;
 	}
 
 	/**
-	 * 只加载树的根节点数据
+	 * 根据连接器菜单加载分类树
 	 * 
 	 * @return
 	 */
-	public static List<ITreeElement> reloadTreeNodes() {
+	public static List<ITreeElement> reloadTreeNodes(ResourcePath resourcePath) {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-
 		// Menu
-		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu(resourcePath);
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
 			getTreeElementsNodes(nodes, null, elements);
 		}
-		// 这个里面加入一个创建...，为了和页面上的一致 //不需要再加创建了，因为已经移植到主界面上去了。
-//		ITreeElement parentElementDefault = new EntityElement(null, java.util.UUID.randomUUID().toString(), "创建...", "创建...", "");
-		// ConnectorUtil.getMenuConnectorIconPathByIconName(node.getIco()), "");
-//		elements.add(parentElementDefault);
 		return elements;
 	}
 	
@@ -96,21 +75,15 @@ public class DefinitionTreeViewerFactory {
 	 * 
 	 * @return
 	 */
-	public static List<ITreeElement> reloadActorTreeNodes() {
+	public static List<ITreeElement> reloadActorTreeNodes(ResourcePath resourcePath) {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-
 		// Menu
-		// root=EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		Menu root = DefinitionConnectorUtil.getActorConnectorMenu();
+		Menu root = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
 			getActorTreeElementsNodes(nodes, null, elements);
 		}
-		// 这个里面加入一个创建...，为了和页面上的一致 //不需要再加创建了，因为已经移植到主界面上去了。
-//		ITreeElement parentElementDefault = new EntityElement(null, java.util.UUID.randomUUID().toString(), "创建...", "创建...", "");
-		// ConnectorUtil.getMenuConnectorIconPathByIconName(node.getIco()), "");
-//		elements.add(parentElementDefault);
 		return elements;
 	}
 
@@ -146,7 +119,7 @@ public class DefinitionTreeViewerFactory {
 	 * @param element
 	 * @param elements
 	 */
-	private static void getActorTreeElementsNodes(EList<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
+	private static void getActorTreeElementsNodes(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
 		if (nodes != null && nodes.size() > 0) {
 			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
 				Node node = (Node) iterator.next();
@@ -182,11 +155,12 @@ public class DefinitionTreeViewerFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
 							continue;
-						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+						String icon = DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
+						String note = DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
+						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
+								icon, note);
 						parentElement.addChild(childElement);
 					}
 				}
@@ -221,11 +195,13 @@ public class DefinitionTreeViewerFactory {
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
 						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
+						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
 							continue;
-						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
-								DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId())
-										.getIcon()), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()).getNote());
+						
+						String icon = DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
+						String note = DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
+						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
+								icon, note);
 						parentElement.addChild(childElement);
 					}
 				}
@@ -248,8 +224,8 @@ public class DefinitionTreeViewerFactory {
 	 * @param url
 	 * @return
 	 */
-	public static ConnectorDefinition getConnector(String connectorId) {
-		return DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(connectorId);
+	public static ConnectorDefinition getConnector(String connectorId, String nodeId) {
+		return DefinitionConnectorUtil.getFlowConnectorDefinitionById(connectorId, nodeId);
 	}
 	
 	/**
@@ -258,8 +234,7 @@ public class DefinitionTreeViewerFactory {
 	 * @param url
 	 * @return
 	 */
-	public static ConnectorDefinition getActorConnector(String connectorId) {
-		return DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(connectorId);
+	public static ConnectorDefinition getActorConnector(String connectorId, String nodeId) {
+		return DefinitionConnectorUtil.getActorConnectorDefinitionById(connectorId, nodeId);
 	}
-
 }
