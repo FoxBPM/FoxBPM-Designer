@@ -18,6 +18,7 @@ import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
 public class FoxBPMDesignerUtil {
+	public static final String PLUGIN_ID = "org.foxbpm.bpmn.designer.ui";
 	/**
 	 * 取临时读取的properties文件路径
 	 * @return
@@ -47,14 +48,18 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getServicePath() {
-		return PropertiesUtil.readProperties(getPropertiesPath()).get("service").toString() + "/";
+		String defaultPath = Platform.getInstallLocation().getURL().getPath() + "flowresource";
+		return Platform.getPreferencesService().
+				  getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/"; 
 	}
 	
 	public static String getServicePathPath() {
-		if(getProperties().get("servicePath").toString().lastIndexOf("/") == getProperties().get("servicePath").toString().length()-1) {
-			return getProperties().get("servicePath").toString();
+		String servicePath = Platform.getPreferencesService().
+				  getString(PLUGIN_ID, "serverAddress", "http://127.0.0.1:8080/foxbpm-webapps-rest/service/", null);
+		if(servicePath.lastIndexOf("/") == servicePath.length()-1) {
+			return servicePath;
 		} else {
-			return getProperties().get("servicePath").toString() + "/";
+			return servicePath + "/";
 		}
 	}
 
