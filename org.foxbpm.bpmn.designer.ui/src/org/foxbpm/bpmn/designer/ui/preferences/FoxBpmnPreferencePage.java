@@ -43,4 +43,10 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		return super.doGetPreferenceStore();
 	}
 
+	@Override
+	public boolean performOk() {
+		super.performOk();
+		return true;
+	}
+
 }

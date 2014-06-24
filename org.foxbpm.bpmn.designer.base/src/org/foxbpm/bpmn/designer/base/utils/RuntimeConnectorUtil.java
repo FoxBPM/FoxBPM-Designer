@@ -29,8 +29,6 @@ public class RuntimeConnectorUtil {
 
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
 	
-	public static String DOWNLOADURL = FoxBPMDesignerUtil.getServicePathPath() + "flowconfig";
-
 	public static HashMap<String, Object> allFlowConnectors = null;
 
 	/**
@@ -251,7 +249,7 @@ public class RuntimeConnectorUtil {
 
 		// REST方式
 		String servicePath = FoxBPMDesignerUtil.getServicePath();
-		ClientResource client = new ClientResource(DOWNLOADURL);
+		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "flowconfig");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
 		FileOutputStream fileOutputStream = null;
