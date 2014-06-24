@@ -280,29 +280,30 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 						}
 					}
 					connectorpackagenametext.setText(packageName == null?"找不到项目对应的包名，请在配置文件中配置":packageName + connectoridtext.getText());
-				}
 				
-				((ActorTreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
-				categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTreeNodes(resourcePath);
-				categorytreeViewer.setInput(categorytreeElements);
-				categorytreeViewer.refresh();
-				
-				newConnector.setCategoryId(null);
-				
-				menu = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
-				nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
-				
-				if(newConnector.getCategoryId() == null) {
-					//默认选择分类树上第一个节点
-					for (ITreeElement treeElement : categorytreeElements) {
-						if (treeElement.getId().equals(nodelist.get(0).getId())) {
-							categorytreeViewer.setSelection(new StructuredSelection(treeElement));
-							break;
+					((ActorTreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
+					categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadActorTreeNodes(resourcePath);
+					categorytreeViewer.setInput(categorytreeElements);
+					categorytreeViewer.refresh();
+					
+					newConnector.setCategoryId(null);
+					
+					menu = DefinitionConnectorUtil.getActorConnectorMenu(resourcePath);
+					nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+					
+					if(newConnector.getCategoryId() == null) {
+						//默认选择分类树上第一个节点
+						for (ITreeElement treeElement : categorytreeElements) {
+							if (treeElement.getId().equals(nodelist.get(0).getId())) {
+								categorytreeViewer.setSelection(new StructuredSelection(treeElement));
+								break;
+							}
 						}
 					}
+					
+					categorycreateButton.setEnabled(true);
 				}
 				
-				categorycreateButton.setEnabled(true);
 				setPageComplete(isPageComplete());
 			}
 		});

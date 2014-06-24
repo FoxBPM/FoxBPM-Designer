@@ -29,7 +29,7 @@ public class ProjectContentProvider extends BaseWorkbenchContentProvider {
 	        	List<Object> projects = Arrays.asList(adapter.getChildren(element));
 	        	List<Object> operlist = new ArrayList<Object>();
 	        	for (Object object : projects) {
-					if(hashSet.contains(((Project)object).getName())) {
+					if(((Project)object).isOpen() && hashSet.contains(((Project)object).getName())) {
 						operlist.add(object);
 					}
 				}

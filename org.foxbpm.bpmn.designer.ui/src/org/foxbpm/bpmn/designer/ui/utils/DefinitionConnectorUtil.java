@@ -7,10 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.internal.resources.Project;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
@@ -67,6 +70,27 @@ public class DefinitionConnectorUtil {
 	public static HashMap<String, Object> allActorConnectors = new HashMap<String, Object>();
 
 	/**
+	 * 过滤掉已关闭的项目
+	 * @return
+	 */
+	public static List<ResourcePath> getOpenProjectResourcePath() {
+		HashSet<String> hashSet = new HashSet<String>();
+		for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			if(project.isOpen()) {
+				hashSet.add(project.getName());
+			}
+		}
+		
+		List<ResourcePath> resourcePaths = new ArrayList<ResourcePath>();
+		for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+			if(hashSet.contains(resourcePath.getProjectName())) {
+				resourcePaths.add(resourcePath);
+			}
+		}
+		return resourcePaths;
+	}
+	
+	/**
 	 * 获取所有连接器节点
 	 * 
 	 * @return
@@ -74,7 +98,7 @@ public class DefinitionConnectorUtil {
 	public static List<Node> getAllFlowConnectorNodes() {
 		List<Node> nodes = new ArrayList<Node>();
 		Menu menu = null;
-		for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
 			if(resourcePath.getType().equals("flowConnector")) {
 				menu = getFlowConnectorMenu(resourcePath);
 			}else{
@@ -115,7 +139,7 @@ public class DefinitionConnectorUtil {
 	public static List<Node> getAllActorConnectorNodes() {
 		List<Node> nodes = new ArrayList<Node>();
 		Menu menu = null;
-		for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
 			if(resourcePath.getType().equals("actorConnector")) {
 				menu = getActorConnectorMenu(resourcePath);
 			}else{
