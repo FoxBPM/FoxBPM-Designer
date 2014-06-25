@@ -7,10 +7,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.internal.resources.Project;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,7 +23,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
@@ -42,7 +46,9 @@ import org.foxbpm.model.config.connector.Text;
 import org.foxbpm.model.config.connector.TextArea;
 import org.foxbpm.model.config.connector.WidgetExpression;
 import org.foxbpm.model.config.connectormenu.Menu;
+import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class DefinitionConnectorUtil {
 
@@ -51,63 +57,119 @@ public class DefinitionConnectorUtil {
 	public static String FLOWCONNECTORMENU = "FlowConnectorMenu.xml";
 
 	public static String ACTORCONNECTORMENU = "ActorConnectorMenu.xml";
-	
+
 	public static String FLOWCONNECTOR = "FlowConnector.xml";
 
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
 
-	public static HashMap<String, Object> hashMap = new HashMap<String, Object>();
+	private static String ACTORCATEGORYDEFAULTICON = "connector.png";
 
-	public static String getActorConnectorPath() {
-		if (FoxBPMDesignerUtil.getServicePath().equals("path")) {
-			MessageDialog.openInformation(null, "提示", "请先在设计器根目录的配置文件(path.properties)中更改服务地址(service)");
-			return "";
+	private static String CONNECTORCATEGORYDEFAULTICON = "category.png";
+
+	public static HashMap<String, Object> allFlowConnectors = new HashMap<String, Object>();
+	public static HashMap<String, Object> allActorConnectors = new HashMap<String, Object>();
+
+	/**
+	 * 过滤掉已关闭的项目
+	 * @return
+	 */
+	public static List<ResourcePath> getOpenProjectResourcePath() {
+		HashSet<String> hashSet = new HashSet<String>();
+		for (IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()) {
+			if(project.isOpen()) {
+				hashSet.add(project.getName());
+			}
 		}
-		return FoxBPMDesignerUtil.getProperties().get("actorConnectorPath").toString() + "/";
-	}
-
-	public static String getFlowConnectorPath() {
-		if (FoxBPMDesignerUtil.getServicePath().equals("path")) {
-			MessageDialog.openInformation(null, "提示", "请先在设计器根目录的配置文件(path.properties)中更改服务地址(service)");
-			return "";
+		
+		List<ResourcePath> resourcePaths = new ArrayList<ResourcePath>();
+		for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+			if(hashSet.contains(resourcePath.getProjectName())) {
+				resourcePaths.add(resourcePath);
+			}
 		}
-		return FoxBPMDesignerUtil.getProperties().get("flowConnectorPath").toString() + "/";
+		return resourcePaths;
 	}
-
+	
 	/**
-	 * 得到处理者选择器Menu图标所存放的路径
+	 * 获取所有连接器节点
 	 * 
 	 * @return
 	 */
-	public static String getActorConnectorIconPath() {
-		return getActorConnectorPath() + "ico/";
+	public static List<Node> getAllFlowConnectorNodes() {
+		List<Node> nodes = new ArrayList<Node>();
+		Menu menu = null;
+		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
+			if(resourcePath.getType().equals("flowConnector")) {
+				menu = getFlowConnectorMenu(resourcePath);
+			}else{
+				continue;
+			}
+			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
+			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
+				for (MenuConnector connector : node.getMenuConnector()) {
+					// connector的具体路径
+					String xmlFilePath = menu.eResource().getURI().devicePath();
+					String connectorPath = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/" + connector.getId() + "/";
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					// 连接器对象
+					ConnectorDefinition connectorDefinition = ((ConnectorDefinition) EMFUtil.readEMFFile(connectorPath + FLOWCONNECTOR).getContents().get(0));
+					// 菜单对象
+					map.put("menuobject", connector);
+					// 所在节点
+					map.put("node", node);
+					// 目录
+					map.put("path", connectorPath);
+					// 图标
+					map.put("ico", connectorPath + connectorDefinition.getIcon());
+					// 对象
+					map.put("object", connectorDefinition);
+					// 放到map里
+					allFlowConnectors.put(connector.getId() + node.getId(), map);
+				}
+			}
+		}
+		return nodes;
 	}
 
 	/**
-	 * 得到连接器Menu图标所存放的路径
+	 * 获取所有选择器节点
 	 * 
 	 * @return
 	 */
-	public static String getFlowConnectorIconPath() {
-		return getFlowConnectorPath() + "ico/";
-	}
-
-	/**
-	 * 得到处理者选择器Menu文件路径
-	 * 
-	 * @return
-	 */
-	public static String getActorConnectorMenuPath() {
-		return getActorConnectorPath() + ACTORCONNECTORMENU;
-	}
-
-	/**
-	 * 得到连接器Menu文件路径
-	 * 
-	 * @return
-	 */
-	public static String getFlowConnectorMenuPath() {
-		return getFlowConnectorPath() + FLOWCONNECTORMENU;
+	public static List<Node> getAllActorConnectorNodes() {
+		List<Node> nodes = new ArrayList<Node>();
+		Menu menu = null;
+		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
+			if(resourcePath.getType().equals("actorConnector")) {
+				menu = getActorConnectorMenu(resourcePath);
+			}else{
+				continue;
+			}
+			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
+			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
+				for (MenuConnector connector : node.getMenuConnector()) {
+					// connector的具体路径
+					String xmlFilePath = menu.eResource().getURI().devicePath();
+					String connectorPath = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/" + connector.getId() + "/";
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					// 连接器对象
+					ConnectorDefinition connectorDefinition = ((ConnectorDefinition) EMFUtil.readEMFFile(connectorPath + ACTORCONNECTOR).getContents().get(0));
+					// 菜单对象
+					map.put("menuobject", connector);
+					// 所在节点
+					map.put("node", node);
+					// 目录
+					map.put("path", connectorPath);
+					// 图标
+					map.put("ico", connectorPath + connectorDefinition.getIcon());
+					// 对象
+					map.put("object", connectorDefinition);
+					// 放到map里
+					allActorConnectors.put(connector.getId() + node.getId(), map);
+				}
+			}
+		}
+		return nodes;
 	}
 
 	/**
@@ -116,8 +178,9 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static String getActorConnectorPathById(String connectorId) {
-		return getActorConnectorPath() + connectorId;
+	public static String getActorConnectorPathById(String connectorId, String nodeId) {
+		getAllActorConnectorNodes();
+		return ((HashMap<String, Object>) allActorConnectors.get(connectorId + nodeId)).get("path").toString();
 	}
 
 	/**
@@ -126,8 +189,56 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static String getFlowConnectorPathById(String connectorId) {
-		return getFlowConnectorPath() + connectorId;
+	public static String getFlowConnectorPathById(String connectorId, String nodeId) {
+		getAllFlowConnectorNodes();
+		return ((HashMap<String, Object>) allFlowConnectors.get(connectorId + nodeId)).get("path").toString();
+	}
+
+	/**
+	 * 拿到连接器的路径
+	 * 
+	 * @param connectorId
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getConnectorPath(String connectorId, ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + connectorId);
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
+	/**
+	 * 拿到连接器根目录的路径
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getAllConnectorPath(ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath());
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
+	/**
+	 * 根据处理者选择器ID得到对应处理者选择器定义实例
+	 * 
+	 * @param connectorId
+	 * @return
+	 */
+	public static ConnectorDefinition getActorConnectorDefinitionById(String connectorId, String nodeId) {
+		getAllActorConnectorNodes();
+		return (ConnectorDefinition) ((HashMap<String, Object>) allActorConnectors.get(connectorId + nodeId)).get("object");
+	}
+
+	/**
+	 * 根据连接器ID得到对应连接器定义实例
+	 * 
+	 * @param connectorId
+	 * @return
+	 */
+	public static ConnectorDefinition getFlowConnectorDefinitionById(String connectorId, String nodeId) {
+		getAllFlowConnectorNodes();
+		return (ConnectorDefinition) ((HashMap<String, Object>) allFlowConnectors.get(connectorId + nodeId)).get("object");
 	}
 
 	/**
@@ -135,8 +246,8 @@ public class DefinitionConnectorUtil {
 	 * 
 	 * @return
 	 */
-	public static Menu getActorConnectorMenu() {
-		return EMFUtil.getConnectorMenuConfig(getActorConnectorMenuPath());
+	public static Menu getActorConnectorMenu(ResourcePath resourcePath) {
+		return EMFUtil.getConnectorMenuConfig(getActorConnectorMenuPath(resourcePath));
 	}
 
 	/**
@@ -144,8 +255,56 @@ public class DefinitionConnectorUtil {
 	 * 
 	 * @return
 	 */
-	public static Menu getFlowConnectorMenu() {
-		return EMFUtil.getConnectorMenuConfig(getFlowConnectorMenuPath());
+	public static Menu getFlowConnectorMenu(ResourcePath resourcePath) {
+		return EMFUtil.getConnectorMenuConfig(getFlowConnectorMenuPath(resourcePath));
+	}
+
+	/**
+	 * 获取选择器Menu路径
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getActorConnectorMenuPath(ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + ACTORCONNECTORMENU);
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
+	/**
+	 * 获取连接器Menu路径
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getFlowConnectorMenuPath(ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + FLOWCONNECTORMENU);
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
+	/**
+	 * 获取选择器Icon路径
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getActorConnectorIconPath(ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + "ico");
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
+	/**
+	 * 获取连接器Icon路径
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getFlowConnectorIconPath(ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + "ico");
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
 	}
 
 	/**
@@ -155,8 +314,8 @@ public class DefinitionConnectorUtil {
 	 * @param iconName
 	 * @return
 	 */
-	public static String getActorConnectorIconPathByIconName(String connectorId, String iconName) {
-		return getActorConnectorPathById(connectorId) + "/" + iconName;
+	public static String getActorConnectorIconPathByIconName(String connectorId, String nodeId, String iconName) {
+		return getActorConnectorPathById(connectorId, nodeId) + "/" + iconName;
 	}
 
 	/**
@@ -166,8 +325,8 @@ public class DefinitionConnectorUtil {
 	 * @param iconName
 	 * @return
 	 */
-	public static String getFlowConnectorIconPathByIconName(String connectorId, String iconName) {
-		return getFlowConnectorPathById(connectorId) + "/" + iconName;
+	public static String getFlowConnectorIconPathByIconName(String connectorId, String nodeId, String iconName) {
+		return getFlowConnectorPathById(connectorId, nodeId) + "/" + iconName;
 	}
 
 	/**
@@ -176,8 +335,8 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static String getActorConnectorMenuPath(String connectorId) {
-		return getActorConnectorPath() + connectorId + "/" + ACTORCONNECTOR;
+	public static String getActorConnectorXmlPath(String connectorId, String nodeId) {
+		return getActorConnectorPathById(connectorId, nodeId) + "/" + ACTORCONNECTOR;
 	}
 
 	/**
@@ -186,19 +345,45 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static String getFlowConnectorMenuPath(String connectorId) {
-		return getFlowConnectorPath() + connectorId + "/" + FLOWCONNECTOR;
+	public static String getFlowConnectorXmlPath(String connectorId, String nodeId) {
+		return getFlowConnectorPathById(connectorId, nodeId) + "/" + FLOWCONNECTOR;
 	}
-	
+
+	/**
+	 * 根据连接器ID得到对应连接器xml文件路径
+	 * 
+	 * @param connectorId
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getFlowConnectorXmlPath(String connectorId, ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath());
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath() + "/" + connectorId + "/" + FLOWCONNECTOR;
+		return xmlFilePath;
+	}
+
+	/**
+	 * 根据选择器ID得到对应选择器xml文件路径
+	 * 
+	 * @param connectorId
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getActorConnectorXmlPath(String connectorId, ResourcePath resourcePath) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath());
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath() + "/" + connectorId + "/" + ACTORCONNECTOR;
+		return xmlFilePath;
+	}
+
 	/**
 	 * 根据Menu上的连接器ID找到对应的连接器对象
 	 * 
 	 * @param connectorId
 	 * @return
 	 */
-	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId) {
+	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId, String nodeId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getFlowConnectorMenuPath(connectorId));
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getFlowConnectorXmlPath(connectorId, nodeId));
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -207,16 +392,36 @@ public class DefinitionConnectorUtil {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * 返回连接器默认图标
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getDefaultFlowConnectorIcoPath(ResourcePath resourcePath) {
+		return getFlowConnectorIconPath(resourcePath) + "/" + CONNECTORCATEGORYDEFAULTICON;
+	}
+
+	/**
+	 * 返回选择器默认图标
+	 * 
+	 * @param resourcePath
+	 * @return
+	 */
+	public static String getDefaultActorConnectorIcoPath(ResourcePath resourcePath) {
+		return getFlowConnectorIconPath(resourcePath) + "/" + ACTORCATEGORYDEFAULTICON;
+	}
+
 	/**
 	 * 根据Menu上的连接器ID找到对应的处理者选择器对象
 	 * 
 	 * @param connectorId
 	 * @return
 	 */
-	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId) {
+	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId, String nodeId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getActorConnectorMenuPath(connectorId));
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getActorConnectorXmlPath(connectorId, nodeId));
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -225,13 +430,13 @@ public class DefinitionConnectorUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 保存处理者选择器菜单
 	 * 
 	 * @param menu
 	 */
-	public static void saveActorConnectorMenu(Menu menu, List<String> newcategoryids) {
+	public static void saveActorConnectorMenu(Menu menu, List<String> newcategoryids, ResourcePath resourcePath) {
 
 		// 这个里面需要处理下新增加的分类图标的保存到对应的icon目录下面去
 		List<Node> lists = EMFUtil.getAll(menu.eResource(), Node.class);
@@ -247,11 +452,11 @@ public class DefinitionConnectorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(DefinitionConnectorUtil.getActorConnectorIconPath())) {
+								if (!node.getIco().contains(getFlowConnectorIconPath(resourcePath))) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(DefinitionConnectorUtil.getActorConnectorIconPath() + FileUtil.getFileName(node.getIco()));
+									File menuoutfile = new File(menu.eResource().getURI().devicePath() + FileUtil.getFileName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -279,7 +484,7 @@ public class DefinitionConnectorUtil {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getActorConnectorPath() + ACTORCONNECTORMENU));
+		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getActorConnectorMenuPath(resourcePath)));
 		resource.setEncoding("UTF-8");
 
 		resource.getContents().add(menu);
@@ -296,7 +501,7 @@ public class DefinitionConnectorUtil {
 	 * 
 	 * @param menu
 	 */
-	public static void saveFlowConnectorMenu(Menu menu, List<String> newcategoryids) {
+	public static void saveFlowConnectorMenu(Menu menu, List<String> newcategoryids, ResourcePath resourcePath) {
 		// 这个里面需要处理下新增加的分类图标的保存到对应的icon目录下面去
 		List<Node> lists = EMFUtil.getAll(menu.eResource(), Node.class);
 		if (lists.size() > 0) {
@@ -311,11 +516,11 @@ public class DefinitionConnectorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(DefinitionConnectorUtil.getFlowConnectorIconPath())) {
+								if (!node.getIco().contains(DefinitionConnectorUtil.getFlowConnectorIconPath(resourcePath))) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(DefinitionConnectorUtil.getFlowConnectorIconPath() + FileUtil.getFileName(node.getIco()));
+									File menuoutfile = new File(DefinitionConnectorUtil.getFlowConnectorIconPath(resourcePath) + FileUtil.getFileName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -343,7 +548,7 @@ public class DefinitionConnectorUtil {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getFlowConnectorPath() + FLOWCONNECTORMENU));
+		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getFlowConnectorMenuPath(resourcePath)));
 		resource.setEncoding("UTF-8");
 
 		resource.getContents().add(menu);
@@ -354,16 +559,16 @@ public class DefinitionConnectorUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 根据连接器菜单加载分类树
 	 * 
 	 * @return
 	 */
-	public static List<ITreeElement> reloadTreeNodes() {
+	public static List<ITreeElement> reloadTreeNodes(ResourcePath resourcePath) {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 		// Menu
-		Menu root = DefinitionConnectorUtil.getFlowConnectorMenu();
+		Menu root = getFlowConnectorMenu(resourcePath);
 		// 分拆menu成为ITreeElement树
 		if (root != null) {
 			EList<Node> nodes = root.getNode();
@@ -371,7 +576,7 @@ public class DefinitionConnectorUtil {
 		}
 		return elements;
 	}
-	
+
 	/**
 	 * 递归查找node节点并且只取所有node
 	 * 
@@ -396,7 +601,38 @@ public class DefinitionConnectorUtil {
 			}
 		}
 	}
-	
+
+	/**
+	 * 根据连接器实例找到对应的resourcesPath
+	 * 
+	 * @param connector
+	 * @return
+	 */
+	public static ResourcePath getResourcePathByConnectorPackageName(ConnectorDefinition connector) {
+		ResourcePath resourcePath = null;
+		for (ResourcePath rp : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+			if (connector.getDefinitionImpl().getPackageName().equals(rp.getSrc().replace("/", ".") + connector.getId())) {
+				resourcePath = rp;
+				break;
+			}
+		}
+		return resourcePath;
+	}
+
+	/**
+	 * 根据resourcePath找到对应类型的Menuxml路径
+	 * 
+	 * @param resourcePath
+	 * @param type
+	 *            Menu xml类型
+	 * @return
+	 */
+	public static String getProjectConnectorPathByResourcePathAndType(ResourcePath resourcePath, String type) {
+		IResource resource = ResourcesPlugin.getWorkspace().getRoot().getProject(resourcePath.getProjectName()).findMember(resourcePath.getVirtualPath() + type);
+		String xmlFilePath = resource == null ? null : resource.getLocationURI().getPath();
+		return xmlFilePath;
+	}
+
 	public static ConnectorDefinition createFlowConnectorDefinition() {
 		return ConnectorFactory.eINSTANCE.createConnectorDefinition();
 	}

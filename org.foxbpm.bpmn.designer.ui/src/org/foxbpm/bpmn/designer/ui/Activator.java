@@ -40,48 +40,48 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		
-		Job job = new Job("正在下载连接器") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				// do something long running
-				monitor.beginTask("正在初始化资源文件", 3);
-				
-				File fakeGroovyFile = new File(FoxBPMDesignerUtil.getFakeGroovyFilePath());
-				if(!fakeGroovyFile.exists()) {
-					try {
-						fakeGroovyFile.createNewFile();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
-				monitor.worked(1);
-				
-				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists()) {
-					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "connectorDefinitionPath", "path");
-					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
-				}
-				monitor.worked(1);
-				// 下载
-				try {
-					RuntimeConnectorUtil.downLoadConnector("start");
-				} catch (final Exception e) {
-					Display.getDefault().syncExec(new Runnable() {
-						
-						@Override
-						public void run() {
-							MessageDialog.openInformation(null, "提示", "下载连接器失败，原因是\n" + e.getMessage());							
-						}
-					});
-					e.printStackTrace();
-					return Status.CANCEL_STATUS;
-				}
-				monitor.worked(1);
-				return Status.OK_STATUS;
-			}
-		};
-
-		// Start the Job
-		job.schedule();
+//		Job job = new Job("正在下载连接器") {
+//			@Override
+//			protected IStatus run(IProgressMonitor monitor) {
+//				// do something long running
+//				monitor.beginTask("正在初始化资源文件", 3);
+//				
+//				File fakeGroovyFile = new File(FoxBPMDesignerUtil.getFakeGroovyFilePath());
+//				if(!fakeGroovyFile.exists()) {
+//					try {
+//						fakeGroovyFile.createNewFile();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//				monitor.worked(1);
+//				
+//				if(!new File(FoxBPMDesignerUtil.getPropertiesPath()).exists()) {
+//					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "connectorDefinitionPath", "path");
+//					PropertiesUtil.writeProperties(FoxBPMDesignerUtil.getPropertiesPath(), "service", "path");
+//				}
+//				monitor.worked(1);
+//				// 下载
+//				try {
+//					RuntimeConnectorUtil.downLoadConnector("start");
+//				} catch (final Exception e) {
+//					Display.getDefault().syncExec(new Runnable() {
+//						
+//						@Override
+//						public void run() {
+//							MessageDialog.openInformation(null, "提示", "下载连接器失败，原因是\n" + e.getMessage());							
+//						}
+//					});
+//					e.printStackTrace();
+//					return Status.CANCEL_STATUS;
+//				}
+//				monitor.worked(1);
+//				return Status.OK_STATUS;
+//			}
+//		};
+//
+//		// Start the Job
+//		job.schedule();
 	}
 
 	/*

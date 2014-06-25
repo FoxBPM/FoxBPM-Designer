@@ -11,14 +11,12 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.internal.resources.Project;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
-import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.InputDialog;
@@ -64,8 +62,13 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.dialogs.ProjectContentProvider;
+import org.foxbpm.bpmn.designer.ui.dialogs.TreeSelectionDialog;
+import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
@@ -80,6 +83,7 @@ import org.foxbpm.model.config.connector.Page;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private DataBindingContext m_bindingContext;
@@ -125,6 +129,8 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private List<Node> nodelist;
 	private List<ITreeElement> categorytreeElements;
 	private static String CONNECTORDEFAULTICON = "category.png";
+	private String packageName = null;
+	private ResourcePath resourcePath;
 
 	/**
 	 * 构造函数
@@ -149,10 +155,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		pages = new ArrayList<Page>();
 		this.newCreateCategoryID = new ArrayList<String>();
 
-		menu = DefinitionConnectorUtil.getFlowConnectorMenu();
-		// menu = menufactory.createMenu();
-		nodelist = menu.eResource() == null ? new ArrayList<Node>() : EMFUtil.getAll(menu.eResource(), Node.class);
-
+		nodelist = new ArrayList<Node>();
 		this.openType = "create";
 	}
 
@@ -172,14 +175,8 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		// 初始化model
 		this.connectorDefinition = connector;
 		this.newCreateCategoryID = new ArrayList<String>();
-		// 读取Menu的xml
-		String menuPath = DefinitionConnectorUtil.getFlowConnectorMenuPath();
-		XMIResource menuresource = (XMIResource) new ResourceSetImpl().getResource(URI.createFileURI(menuPath), true);
-		Menu menu = (Menu) menuresource.getContents().get(0);
-		// Menu menu =
-		// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
-		menu = DefinitionConnectorUtil.getFlowConnectorMenu();
-		this.menu = menu;
+		resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+		menu = DefinitionConnectorUtil.getFlowConnectorMenu(resourcePath);
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
 		for (Node nd : nodelist) {
@@ -213,7 +210,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		connectoridtext.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				connectorclassnametext.setText(connectoridtext.getText());
-				connectorpackagenametext.setText("org.foxbpm.flowconnector" + "." + connectoridtext.getText());
+				connectorpackagenametext.setText("请选择项目来确定包名" + "." + connectoridtext.getText());
 				setPageComplete(isPageComplete());
 			}
 		});
@@ -259,40 +256,50 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		connectorpackagenametext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 
 		Button connectorpakageButton = new Button(composite, SWT.NONE);
-		connectorpakageButton.setEnabled(false);
 		connectorpakageButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		connectorpakageButton.setText("浏览");
 		connectorpakageButton.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
-				IPackageFragment selectedPackage = ConfigureNewConnectorWizardPage.this.choosePackage();
-				if (selectedPackage != null) {
-					connectorpackagenametext.setText(selectedPackage.getElementName());
+				packageName = null;
+				TreeSelectionDialog dlg = new TreeSelectionDialog(getShell(), ResourcesPlugin.getWorkspace().getRoot(), new ProjectContentProvider(), new WorkbenchLabelProvider(), "选择项目:");
+				dlg.setTitle("Project Selection");
+				if (dlg != null && dlg.open() == InputDialog.OK) {
+					String projectName = ((Project)dlg.getSelection()).getName();
+					for (ResourcePath resourcePath : FoxBPMDesignerUtil.getFoxBPMConfig().getResourcePathConfig().getResourcePath()) {
+						if(resourcePath.getProjectName().equals(projectName) && resourcePath.getType().equals("flowConnector")) {
+							packageName = resourcePath.getSrc().replace("/", ".");
+							ConfigureNewConnectorWizardPage.this.resourcePath = resourcePath;
+							break;
+						}
+					}
+					connectorpackagenametext.setText(packageName == null?"找不到项目对应的包名，请在配置文件中配置":packageName + connectoridtext.getText());
+				
+					((TreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
+					categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadTreeNodes(resourcePath);
+					categorytreeViewer.setInput(categorytreeElements);
+					categorytreeViewer.refresh();
+					
+					connectorDefinition.setCategoryId(null);
+					
+					menu = DefinitionConnectorUtil.getFlowConnectorMenu(resourcePath);
+					nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
+					
+					if(connectorDefinition.getCategoryId() == null) {
+						//默认选择分类树上第一个节点
+						for (ITreeElement treeElement : categorytreeElements) {
+							if (treeElement.getId().equals(nodelist.get(0).getId())) {
+								categorytreeViewer.setSelection(new StructuredSelection(treeElement));
+								break;
+							}
+						}
+					}
+					
+					createCateButton.setEnabled(true);
 				}
+				
+				setPageComplete(isPageComplete());
 			}
 		});
-
-		// Label connectortypeLabel = new Label(composite, SWT.NONE);
-		// connectortypeLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
-		// false, false, 1, 1));
-		// connectortypeLabel.setText("分类");
-		//
-		// comboViewer = new ComboViewer(composite, SWT.READ_ONLY);
-		// connectortypecombo = comboViewer.getCombo();
-		// GridData gd_connectortypecombo = new GridData(SWT.LEFT, SWT.CENTER,
-		// false, false, 1, 1);
-		// gd_connectortypecombo.widthHint = 88;
-		// connectortypecombo.setLayoutData(gd_connectortypecombo);
-		// comboViewer.setLabelProvider(new ViewerLabelProvider());
-		// comboViewer.setContentProvider(new ContentProvider());
-		// comboViewer.setInput(nodelist);
-		//
-		// customCategoryComposite = createCustomCategoryComposite(composite);
-		// new Label(composite, SWT.NONE);
-
-		// 这个里面需要先将不需要的原先的分类设为不可见
-		// connectortypeLabel.setVisible(false);
-		// connectortypecombo.setVisible(false);
-		// customCategoryComposite.setVisible(false);
 
 		Label connectoriconLabel = new Label(composite, SWT.NONE);
 		connectoriconLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -333,7 +340,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		if (connectorDefinition.getIcon() != null) {
 			try {
 				connectoriconButton.setText("");
-				is = new FileInputStream(DefinitionConnectorUtil.getActorConnectorIconPathByIconName(connectorDefinition.getId(), connectorDefinition.getIcon()));
+				is = new FileInputStream(DefinitionConnectorUtil.getActorConnectorIconPathByIconName(connectorDefinition.getId(), connectorDefinition.getIcon(), node.getId()));
 				if (connectoriconButton.getImage() != null && !connectoriconButton.getImage().isDisposed()) {
 					connectoriconButton.getImage().dispose();
 				}
@@ -345,7 +352,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 			}
 		} else {
 			// 如果是创建就给connectoriconButton一个默认图标
-			this.setIconPath(DefinitionConnectorUtil.getActorConnectorIconPath() + CONNECTORDEFAULTICON);
+			this.setIconPath(CONNECTORDEFAULTICON);
 			connectorDefinition.setIcon(FileUtil.getFileName(iconPath));
 			if (new File(this.getIconPath()).exists()) {
 				try {
@@ -367,7 +374,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		labelcategory.setText("分类");
 
 		// treeViewer获取数据
-		categorytreeElements = (List<ITreeElement>) DefinitionConnectorUtil.reloadTreeNodes();
+		categorytreeElements = new ArrayList<ITreeElement>();
 		categorytreeViewer = new TreeViewer(composite, SWT.BORDER);
 		categorytreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -395,6 +402,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
 		createCateButton = new Button(categoryComposite, SWT.NONE);
 		createCateButton.setText("创建");
+		createCateButton.setEnabled(false);
 		createCateButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
@@ -407,7 +415,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 					// selName = treeElementselect.getName();
 					connectorDefinition.setCategoryId(treeElementselect.getId());
 				}
-				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements, "connector");
+				CategoryCreateDialog dialog = new CategoryCreateDialog(getShell(), treeElementselect, categorytreeElements, "connector", resourcePath);
 				if (dialog.open() == InputDialog.OK) {
 					// 回填到界面上,新增一个树节点出来
 					if (dialog.getSelTreeElement() != null) {
@@ -977,6 +985,15 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		if (openType.equals("edit")) {
 			connectoridtext.setEnabled(false);
 			connectorclassnametext.setEnabled(false);
+			connectorpakageButton.setEnabled(false);
+			((TreeViewerLabelProvider)categorytreeViewer.getLabelProvider()).setResourcePath(resourcePath);
+			categorytreeElements = (List<ITreeElement>) DefinitionTreeViewerFactory.reloadTreeNodes(resourcePath);
+			categorytreeViewer.setInput(categorytreeElements);
+			categorytreeViewer.refresh();
+			categorytreeViewer.getTree().setEnabled(false);
+			
+			menu = DefinitionConnectorUtil.getFlowConnectorMenu(resourcePath);
+			nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 		}
 
 		createCellModifierInput();
@@ -986,21 +1003,6 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		setControl(mainComposite);
 		m_bindingContext = initDataBindings();
 	}
-
-	/*
-	 * private ITreeElement
-	 * getCategoryTreeViewerSelectionById(List<ITreeElement> iTreeElements,
-	 * String categoryIdString) { ITreeElement treeElementResult = null; if
-	 * (null != iTreeElements && iTreeElements.size()>0) { for(ITreeElement
-	 * iTreeElement : iTreeElements){ if
-	 * (iTreeElement.getId().equals(categoryIdString)) { treeElementResult =
-	 * iTreeElement; return treeElementResult; } else { if
-	 * (iTreeElement.hasChildren()) { ITreeElement treeElementTemp =
-	 * getCategoryTreeViewerSelectionById
-	 * (iTreeElement.getChildren(),categoryIdString); if (null !=
-	 * treeElementTemp) { treeElementResult = treeElementTemp; } } } } } return
-	 * treeElementResult; }
-	 */
 
 	private void createCellModifierInput() {
 		final CellEditor[] cellEditorInPut = new CellEditor[table.getColumnCount()];
@@ -1394,6 +1396,11 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 				sb.append(",");
 			sb.append("连接器类名为空");
 		}
+		if (connectorpackagenametext.getText() == null || connectorpackagenametext.getText().equals("") || connectorpackagenametext.getText().equals("找不到项目对应的包名，请在配置文件中配置") || connectorpackagenametext.getText().indexOf("请选择项目来确定包名")!=-1) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器包名为空");
+		}
 		if (connectordesctext.getText() == null || connectordesctext.getText().equals("")) {
 			if (sb.length() > 0)
 				sb.append(",");
@@ -1623,5 +1630,9 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		bindingContext.bindValue(observeTextConnectorclassnametextObserveWidget, connectorDefinitionClassNameObserveValue, null, null);
 		//
 		return bindingContext;
+	}
+
+	public ResourcePath getResourcePath() {
+		return resourcePath;
 	}
 }

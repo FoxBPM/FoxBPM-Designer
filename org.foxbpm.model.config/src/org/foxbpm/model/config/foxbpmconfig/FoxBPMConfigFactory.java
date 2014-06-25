@@ -121,6 +121,24 @@ public interface FoxBPMConfigFactory extends EFactory {
 	TaskCommandDefinition createTaskCommandDefinition();
 
 	/**
+	 * Returns a new object of class '<em>Script Language Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Script Language Config</em>'.
+	 * @generated
+	 */
+	ScriptLanguageConfig createScriptLanguageConfig();
+
+	/**
+	 * Returns a new object of class '<em>Script Language</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Script Language</em>'.
+	 * @generated
+	 */
+	ScriptLanguage createScriptLanguage();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

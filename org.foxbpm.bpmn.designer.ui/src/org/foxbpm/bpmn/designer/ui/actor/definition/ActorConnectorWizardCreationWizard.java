@@ -12,8 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -29,6 +30,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateFlowConnectorJava;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
@@ -138,7 +140,8 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 
 		// 传入getNewCreateCategoryID()是为了保存哪些是新建的分类。供保存方法识别并更新保存到xml
 		if (menu != null) {
-			DefinitionConnectorUtil.saveActorConnectorMenu(menu, ((ConfigureActorConnectorWizardPage) ccwd).getNewCreateCategoryID());
+			DefinitionConnectorUtil.saveActorConnectorMenu(menu, ((ConfigureActorConnectorWizardPage) ccwd).getNewCreateCategoryID(),
+					((ConfigureActorConnectorWizardPage) ccwd).getResourcePath());
 		}
 
 		// Register the XMI resource factory for the .website extension
@@ -151,7 +154,8 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		String path =DefinitionConnectorUtil.getActorConnectorPath() + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + "/ActorConnector.xml";
+		String path = DefinitionConnectorUtil.getActorConnectorXmlPath(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
+				((ConfigureActorConnectorWizardPage) ccwd).getResourcePath());
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
 		resource.setEncoding("UTF-8");
 
@@ -166,10 +170,10 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			// 写入图标文件
 			if (null != ((ConfigureActorConnectorWizardPage) ccwd).getIconPath()) {
 				// 打开原文件（connector图标）
-				FileInputStream fis = new FileInputStream(((ConfigureActorConnectorWizardPage) ccwd).getIconPath());
+				FileInputStream fis = new FileInputStream(DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath()));
 				// 打开连接到目标文件的输出流
-				File outfile = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
-						+ ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
+				File outfile = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
+						((ConfigureActorConnectorWizardPage) ccwd).getNode().getId()) + "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
 				FileOutputStream outStream = new FileOutputStream(outfile);
 
 				while ((byteread = fis.read(buffer)) != -1) {
@@ -189,8 +193,9 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "处理者选择器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateActorConnectorJavaClassReturnInputStream(connector);
-		File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId()) + "/"
-				+ ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + ".java");
+		File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(), ((ConfigureActorConnectorWizardPage) ccwd)
+				.getNode().getId())
+				+ "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {
 			javafileOutputStream = new FileOutputStream(file);
@@ -216,11 +221,26 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			e1.printStackTrace();
 		}
 
+		// 刷新连接器目录
+		FoxBPMDesignerUtil
+						.refresh(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getProjectName(), ((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getVirtualPath(), org.eclipse.core.internal.resources.Resource.FOLDER);
+		
+//		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+//		try {
+//			// 打开编辑器
+//			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(file.getAbsolutePath()));
+//			IDE.openEditorOnFileStore(page, fileStore);
+//		} catch (PartInitException e) {
+//		}
+		
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getProjectName());
+		IFile ifile = (IFile) project.getFile(Path.fromOSString(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getVirtualPath() + connector.getId() + "/" + file.getName()));
+
 		try {
 			// 打开编辑器
-			IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(file.getAbsolutePath()));
-			IDE.openEditorOnFileStore(page, fileStore);
+			IDE.openEditor(page, ifile);
 		} catch (PartInitException e) {
 		}
 		return true;

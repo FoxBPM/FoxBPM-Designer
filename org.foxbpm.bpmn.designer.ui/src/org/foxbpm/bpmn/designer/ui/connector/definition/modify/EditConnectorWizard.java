@@ -43,7 +43,7 @@ public class EditConnectorWizard extends DynamicPageWizard {
 //					// 打开编辑器
 //					ProjectUtil.refreshProject(ConnectorUtil.getOldConnectorProjectName());
 					
-					IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId()) + "/" + object.toString()));
+					IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(DefinitionConnectorUtil.getFlowConnectorPathById(selectNewConnectorWizardPage.getConnector().getId(), selectNewConnectorWizardPage.getConnector().getCategoryId()) + "/" + object.toString()));
 //					IEditorInput input = null;
 //					if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
 //						input = new FileStoreEditorInput(fileStore);

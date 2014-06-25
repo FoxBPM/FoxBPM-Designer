@@ -43,9 +43,9 @@ public class CreateFlowConnectorJava {
 		createJavaClassUtil.setPackageName(connector.getDefinitionImpl()
 				.getPackageName());
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.runtime.ExecutionContext;");
+				.createImport("org.foxbpm.engine.execution.ConnectorExecutionContext;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.action.ConnectorHandler;");
+				.createImport("org.foxbpm.engine.impl.connector.FlowConnectorHandler;");
 
 		String javaCodeString = createJavaClassUtil.generateJavaCode();
 		return javaCodeString;
@@ -64,23 +64,17 @@ public class CreateFlowConnectorJava {
 					output.getId());
 		}
 
-		createJavaClassUtil.setImplement("ActorConnectorHandler");
 		createJavaClassUtil.setClassName(connector.getDefinitionImpl()
 				.getClassName());
 		createJavaClassUtil.createExecuteActorConnector();
 		createJavaClassUtil.setPackageName(connector.getDefinitionImpl()
 				.getPackageName());
-		createJavaClassUtil.createImport("java.util.*;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.connector.ActorConnectorHandler;");
+				.createImport("org.foxbpm.engine.impl.connector.ActorConnectorHandler;");
 		createJavaClassUtil
-				.createImport("org.foxbpm.core.impl.identity.GroupTo;");
-		createJavaClassUtil
-				.createImport("org.foxbpm.core.impl.identity.UserTo;");
-		createJavaClassUtil
-				.createImport("org.foxbpm.core.runtime.ExecutionContext;");
+				.createImport("org.foxbpm.engine.task.DelegateTask;");
 
-		String javaCodeString = createJavaClassUtil.generateJavaCode();
+		String javaCodeString = createJavaClassUtil.generateActorJavaCode();
 		return javaCodeString;
 	}
 

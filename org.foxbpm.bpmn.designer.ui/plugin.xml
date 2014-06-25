@@ -400,7 +400,9 @@
 			runtimeId="org.eclipse.bpmn2.modeler.runtime.none"
 			type="Process" profile="foxbpm">
 			
-			<category id="org.bpmn2.modeler.toolpalette.default.categories"/>
+			<category
+         id="org.bpmn2.modeler.toolpalette.default.categories">
+   </category>
 			
 			
 		</toolPalette>
@@ -420,6 +422,18 @@
           <enable
            object="SequenceFlow">
      </enable>
+          <enable
+                object="ScriptTask">
+          </enable>
+          <enable
+                object="ExclusiveGateway">
+          </enable>
+          <enable
+                object="InclusiveGateway">
+          </enable>
+          <enable
+                object="ParallelGateway">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -439,6 +453,31 @@
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.sequenceflow.SequenceFlowPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.sequenceflow"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.scripttask.ScriptTaskPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.scripttask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.process.ProcessPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.process"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.parallelgateway.ParallelGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.parallelgateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.inclusivegateway.InclusiveGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.inclusivegateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.exclusivegateway.ExclusiveGatewayPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.exclusivegateway"
         label="通用">
   </propertyTab>
   <propertyTab

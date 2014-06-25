@@ -1,6 +1,8 @@
 package org.foxbpm.bpmn.designer.ui.preferences;
 
+import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IWorkbench;
@@ -25,14 +27,26 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		Composite parent=getFieldEditorParent();
 		
 		StringFieldEditor serverAddressEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "服务器地址:", parent);
-		StringFieldEditor portEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_PORT, "端口：", parent);
 		StringFieldEditor usernameEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_USERNAME, "用户名：", parent);
 		StringFieldEditor passwordEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_PASSWORD, "密码：", parent);
+		DirectoryFieldEditor zipPathEditor=new DirectoryFieldEditor(FoxBpmnPreferenceConstants.P_ZIP_PATH, "解压路径：", parent);
+
 		
 		addField(serverAddressEditor);
-		addField(portEditor);
 		addField(usernameEditor);
 		addField(passwordEditor);
+		addField(zipPathEditor);
+	}
+
+	@Override
+	protected IPreferenceStore doGetPreferenceStore() {
+		return super.doGetPreferenceStore();
+	}
+
+	@Override
+	public boolean performOk() {
+		super.performOk();
+		return true;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -32,18 +33,19 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.ConnectorFilter;
 import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
-import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
+import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class SelectNewConnectorWizardPage extends WizardPage {
 	private Text searchtext;
@@ -132,15 +134,17 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 						return;
 
 					// 删除目录
-					File file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId()));
+					File file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId(), connector.getCategoryId()));
 					// File file = new
 					// File(ConnectorUtil.getConnectorPathById(connector.getConnectorId()));
 					deleteFile(file);
+					FoxBPMDesignerUtil.refresh(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)));
 
 					// 读取Menu的XML
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath()), true);
+					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath(resourcePath)), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
 					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
@@ -205,7 +209,8 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath()), true);
+					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
+					Resource resource = resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath(resourcePath)), true);
 					// register package in local resource registry
 					resourceSet.getPackageRegistry().put(FoxBPMPackage.eINSTANCE.getNsURI(), FoxBPMPackage.eINSTANCE);
 					// load resource
@@ -230,8 +235,9 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 						getAllMenuConnector(nodesel);
 						if (menuConnectorIdStringList.size() > 0) {
 							for (String idString : menuConnectorIdStringList) {
-								file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(idString));
+								file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(idString, nodesel.getId()));
 								deleteFile(file);
+								FoxBPMDesignerUtil.refresh(file.getAbsolutePath().substring(0, file.getAbsolutePath().lastIndexOf(File.separator)));
 							}
 						}
 					}
@@ -324,7 +330,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					}
 
 					// 获取该connetor
-					connector = DefinitionTreeViewerFactory.getConnector(element.getId());
+					connector = DefinitionTreeViewerFactory.getConnector(element.getId(), element.getRealName());//realName存的是node的Id);
 
 					editConnectorWizard.getchChooseFlowConnectorFileToEditWizardPage().setConnector(connector);
 

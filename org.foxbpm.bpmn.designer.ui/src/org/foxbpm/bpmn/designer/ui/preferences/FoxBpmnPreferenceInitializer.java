@@ -10,10 +10,10 @@ public class FoxBpmnPreferenceInitializer extends AbstractPreferenceInitializer 
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		// 设置默认的首选项值
-		store.setDefault(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "http://127.0.0.1");
-		store.setDefault(FoxBpmnPreferenceConstants.P_PORT, "8080");
-		store.setDefault(FoxBpmnPreferenceConstants.P_USERNAME, "xpzeng");
-		store.setDefault(FoxBpmnPreferenceConstants.P_PASSWORD, "123456");
+		store.setDefault(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "http://127.0.0.1:8080/foxbpm-webapps-rest/service/");
+		store.setDefault(FoxBpmnPreferenceConstants.P_USERNAME, "user");
+		store.setDefault(FoxBpmnPreferenceConstants.P_PASSWORD, "password");
+		store.setDefault(FoxBpmnPreferenceConstants.P_ZIP_PATH, "");
 	}
 
 }

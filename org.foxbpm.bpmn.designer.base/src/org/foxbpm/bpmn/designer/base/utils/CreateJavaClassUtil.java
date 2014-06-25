@@ -10,9 +10,11 @@ public class CreateJavaClassUtil {
 	protected String packageName = "";
 	protected String importValue = "";
 	protected String implement = "";
+	protected String extend = "";
 
 	public CreateJavaClassUtil() {
-		implement = "ConnectorHandler";
+		implement = "FlowConnectorHandler";
+		extend = "ActorConnectorHandler";
 	}
 	
 	public void createAttribute(String type, String name) {
@@ -45,25 +47,26 @@ public class CreateJavaClassUtil {
 	}
 
 	public void createExecuteConnector() {
-		this.executeConnector = "\tpublic void execute(ExecutionContext executionContext) throws Exception {\n\n\t}\n\n";
+		this.executeConnector = "\tpublic void execute(ConnectorExecutionContext executionContext) throws Exception {\n\n\t}\n\n";
 	}
 	
 	public void createExecuteActorConnector() {
-		this.executeConnector = "\t/**\r\n" +
-								 "\t* 获取用户类型处理者\r\n" +
-								 "\t* @param executionContext 流程上下文\r\n" +
-								 "\t* @return\r\n" +
-								 "\t*/\r\n";
-		this.executeConnector += "\tpublic List<UserTo> UserExecute(ExecutionContext executionContext) {\n\t\tList<UserTo> userTos = new ArrayList<UserTo>();\r\n" +
-								 "\t\t//加入UserTo UserTo userTo = new UserTo(\"用户编号\");\r\n\t\treturn userTos;\n\t}\n\n";
-		this.executeConnector += "\t/**\r\n" +
-								 "\t* 获取组类型处理者\r\n" +
-								 "\t* @param executionContext 流程上下文\r\n" +
-								 "\t* @return\r\n" +
-								 "\t*/\r\n";
-		this.executeConnector += "\tpublic List<GroupTo> GroupExecute(ExecutionContext executionContext) {\n"
-				+ "\t\tList<GroupTo> groupTos = new ArrayList<GroupTo>();\r\n"
-				+ "\t\t//加入Group 	GroupTo groupTo = new GroupTo(\"组编号\", \"组类型\");\r\n\t\treturn groupTos;\n\t}\n\n";
+		this.executeConnector = "\tpublic void assign(DelegateTask task) throws Exception {\n\n\t}\n\n";
+//		this.executeConnector = "\t/**\r\n" +
+//								 "\t* 获取用户类型处理者\r\n" +
+//								 "\t* @param executionContext 流程上下文\r\n" +
+//								 "\t* @return\r\n" +
+//								 "\t*/\r\n";
+//		this.executeConnector += "\tpublic List<UserTo> UserExecute(ExecutionContext executionContext) {\n\t\tList<UserTo> userTos = new ArrayList<UserTo>();\r\n" +
+//								 "\t\t//加入UserTo UserTo userTo = new UserTo(\"用户编号\");\r\n\t\treturn userTos;\n\t}\n\n";
+//		this.executeConnector += "\t/**\r\n" +
+//								 "\t* 获取组类型处理者\r\n" +
+//								 "\t* @param executionContext 流程上下文\r\n" +
+//								 "\t* @return\r\n" +
+//								 "\t*/\r\n";
+//		this.executeConnector += "\tpublic List<GroupTo> GroupExecute(ExecutionContext executionContext) {\n"
+//				+ "\t\tList<GroupTo> groupTos = new ArrayList<GroupTo>();\r\n"
+//				+ "\t\t//加入Group 	GroupTo groupTo = new GroupTo(\"组编号\", \"组类型\");\r\n\t\treturn groupTos;\n\t}\n\n";
 	}
 
 	public void setClassName(String className) {
@@ -74,6 +77,14 @@ public class CreateJavaClassUtil {
 		String codeString = packageName + "\n\n" + this.importValue
 				+ "\n\npublic class " + this.className
 				+ " implements " + implement + " {\n\n" + attribute
+				+ executeConnector + setter + getter + "}";
+		return codeString;
+	}
+	
+	public String generateActorJavaCode() {
+		String codeString = packageName + "\n\n" + this.importValue
+				+ "\n\npublic class " + this.className
+				+ " extends " + extend + " {\n\n" + attribute
 				+ executeConnector + setter + getter + "}";
 		return codeString;
 	}
@@ -103,16 +114,16 @@ public class CreateJavaClassUtil {
 		createJavaClassUtil.setImplement("ActorConnectorHandler");
 		createJavaClassUtil.createExecuteActorConnector();
 		createJavaClassUtil
-				.setPackageName("com.founder.fix.fixflow.core.connector");
+				.setPackageName("org.foxbpm.core.connector");
 		createJavaClassUtil.createImport("java.util.*");
 		createJavaClassUtil
-				.createImport("com.founder.fix.fixflow.core.connector.ActorConnectorHandler;");
+				.createImport("org.foxbpm.core.connector.ActorConnectorHandler;");
 		createJavaClassUtil
-				.createImport("com.founder.fix.fixflow.core.impl.identity.GroupTo;");
+				.createImport("org.foxbpm.core.impl.identity.GroupTo;");
 		createJavaClassUtil
-				.createImport("com.founder.fix.fixflow.core.impl.identity.UserTo;");
+				.createImport("org.foxbpm.core.impl.identity.UserTo;");
 		createJavaClassUtil
-				.createImport("com.founder.fix.fixflow.core.runtime.ExecutionContext;");
+				.createImport("org.foxbpm.core.runtime.ExecutionContext;");
 		System.out.print(createJavaClassUtil.generateJavaCode());
 	}
 
