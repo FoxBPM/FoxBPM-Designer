@@ -50,7 +50,7 @@ public class FoxBPMDesignerUtil {
 	public static String getServicePath() {
 		String defaultPath = Platform.getInstallLocation().getURL().getPath() + "flowresource";
 		return Platform.getPreferencesService().
-				  getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/"; 
+				  getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/serviceFiles/"; 
 	}
 	
 	public static String getServicePathPath() {
