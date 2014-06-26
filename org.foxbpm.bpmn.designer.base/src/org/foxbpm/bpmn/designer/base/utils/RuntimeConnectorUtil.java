@@ -250,6 +250,9 @@ public class RuntimeConnectorUtil {
 
 		// REST方式
 		String servicePath = FoxBPMDesignerUtil.getServicePath();
+		if(servicePath.equals("/")) {
+			throw new Exception("请先在首选项中配置解压路径");
+		}
 		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "flowconfig");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
