@@ -11,6 +11,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
 import org.foxbpm.model.config.connectormenu.Menu;
@@ -269,10 +270,25 @@ public class RuntimeConnectorUtil {
 		}
 			
 			 if (new File(servicePath).exists()) {
-				 // 强制删除服务目录下文件
-				for (File tempFile : new File(servicePath).listFiles()) {
-					 FileUtils.forceDelete(tempFile);
-			 	}
+				 Display.getDefault().syncExec(new Runnable() {
+					
+					@Override
+					public void run() {
+						boolean b = MessageDialog.openConfirm(null, "提示", "即将删除\n" + FoxBPMDesignerUtil.getServicePath() + "\n目录下的所有文件，是否确定该操作？");
+						if(b) {
+							 // 强制删除服务目录下文件
+							for (File tempFile : new File(FoxBPMDesignerUtil.getServicePath()).listFiles()) {
+								 try {
+									FileUtils.forceDelete(tempFile);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+						 	}
+						}else{
+							return;
+						}
+					}
+				});
 			 }
 			
 			ZipUtils.unZip(file.getPath(), servicePath);
