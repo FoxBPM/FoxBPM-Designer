@@ -70,6 +70,22 @@ public class FoxBPMDesignerUtil {
 	public static String getTempleteFilePath() {
 		return getServicePath() + "template/flow-template/default_process/default_process.bpmn";
 	}
+	
+	/**
+	 * 返回临时目录中的流程模板路径
+	 * @return
+	 */
+	public static String getTempletePath() {
+		return getServicePath() + "template/";
+	}
+	
+	/**
+	 * 返回临时目录中的流程节点模板路径
+	 * @return
+	 */
+	public static String getNodeTempletePath() {
+		return getServicePath() + "template/nodetemplate/";
+	}
 
 	/**
 	 * 取foxbpm.cfg.xml路径
