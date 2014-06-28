@@ -68,7 +68,7 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getTempleteFilePath() {
-		return getServicePath() + "template/flow-template/default_process/default_process.bpmn";
+		return getServicePath() + "template/flowtemplate/default_process/default_process.bpmn";
 	}
 	
 	/**
