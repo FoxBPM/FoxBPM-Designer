@@ -96,8 +96,16 @@ public class FoxBPMExpViewer extends ContentViewer {
 		textTooltip.setRespectMonitorBounds(true);
 		textTooltip.setPopupDelay(100);
 
-		typeDecoration = new ControlDecoration(contentAssistText.getToolbar(), SWT.LEFT, control);
-		typeDecoration.setMarginWidth(0);
+		Display.getCurrent().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(!contentAssistText.isDisposed() && !control.isDisposed()) {
+					typeDecoration = new ControlDecoration(contentAssistText.getToolbar(), SWT.LEFT, control);
+					typeDecoration.setMarginWidth(0);	
+				}
+			}
+		});
 
 //		messageDecoration = new ControlDecoration(contentAssistText, SWT.LEFT, control);
 //		messageDecoration.setShowHover(true);
