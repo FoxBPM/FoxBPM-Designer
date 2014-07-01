@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.foxbpm.model.config/src" modelPluginID="org.foxbpm.model.config"
+    modelName="foxbpmvariableconfig" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    language="" operationReflection="true" importOrganizing="true">
+  <foreignModel>foxbpmvariableconfig.ecore</foreignModel>
+  <genPackages prefix="Variableconfig" basePackage="org.foxbpm.model.config" resource="XML"
+      disposableProviderFactory="true" ecorePackage="foxbpmvariableconfig.ecore#/">
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DocumentRoot/dataVariableConfig"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableConfig/dataVariableType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableConfig/fixFlowDataVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableConfig/dataVariableDataType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableConfig/dataVariableBizTypeConfig"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//Type/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//Type/id"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableDataType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableDataType/dataTypeDef"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataTypeDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataTypeDef/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataTypeDef/typeValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataTypeDef/id"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//FixFlowDataVariable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//FixFlowDataVariable/dataVariableDef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//FixFlowDataVariable/type"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableDef/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableDef/dataType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableDef/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableDef/doc"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableBizTypeConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmvariableconfig.ecore#//DataVariableBizTypeConfig/dataVariableBizType"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmvariableconfig.ecore#//DataVariableBizType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableBizType/typeId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableBizType/typeName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmvariableconfig.ecore#//DataVariableBizType/img"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
