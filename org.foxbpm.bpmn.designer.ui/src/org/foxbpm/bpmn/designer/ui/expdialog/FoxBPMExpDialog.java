@@ -1,5 +1,8 @@
 package org.foxbpm.bpmn.designer.ui.expdialog;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -11,7 +14,9 @@ import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jdt.ui.PreferenceConstants;
@@ -20,14 +25,31 @@ import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.DoubleClickEvent;
+import org.eclipse.jface.viewers.IDoubleClickListener;
+import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -51,17 +73,26 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.FilteredTree;
+import org.eclipse.ui.dialogs.PatternFilter;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.handlers.IHandlerActivation;
 import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
+import org.foxbpm.model.config.variableconfig.DataVariableConfig;
+import org.foxbpm.model.config.variableconfig.DataVariableDef;
+import org.foxbpm.model.config.variableconfig.DataVariableType;
+import org.foxbpm.model.config.variableconfig.FixFlowDataVariable;
+import org.foxbpm.model.config.variableconfig.Type;
+import org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl;
 
 public class FoxBPMExpDialog extends Dialog {
 	private DataBindingContext m_bindingContext;
@@ -78,6 +109,10 @@ public class FoxBPMExpDialog extends Dialog {
 	private Text textcontrol;
 	private FormParam formParam;
 	private TransactionalEditingDomain editingDomain;
+	private DataVariableConfig dataVariableConfig;
+	private Map<String, FixFlowDataVariable> typeToDataVariableMap;//维护dataVariableType到FixFlowDataVariable的映射
+	private static final Object[] EMPTY_ARRAY=new Object[0];
+	private static final String EMPTY_STRING="";
 
 	/**
 	 * Create the dialog.
@@ -88,11 +123,12 @@ public class FoxBPMExpDialog extends Dialog {
 	public FoxBPMExpDialog(Shell parentShell) {
 		super(parentShell);
 		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		loadDataVariableConfig();
+		MapFixFlowDataVariableWithType();
 	}
 
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
-		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		this(parentShell);
 		this.expression = expression;
 		if(this.expression == null) {
 			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -103,15 +139,7 @@ public class FoxBPMExpDialog extends Dialog {
 	}
 	
 	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression, Text text) {
-		super(parentShell);
-		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
-		this.expression = expression;
-		if(this.expression == null) {
-			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
-			this.expression.setName("");
-			this.expression.setValue("");
-		}
-		this.textcontrol = text;
+		this(parentShell, expression, text);
 		this.formParam = formParam;
 		this.editingDomain = editingDomain;
 	}
@@ -172,30 +200,119 @@ public class FoxBPMExpDialog extends Dialog {
 
 		Composite docComposite = new Composite(container, SWT.NONE);
 		docComposite.setLayout(new GridLayout(1, false));
-		docComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		docComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-		Label lblNewLabel_1 = new Label(docComposite, SWT.NONE);
-		lblNewLabel_1.setBounds(0, 0, 61, 17);
-		lblNewLabel_1.setText("分类");
+		Label classifyLabel = new Label(docComposite, SWT.NONE);
+		classifyLabel.setText("分类");
 
-		ListViewer listViewer_1 = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
-		List list_1 = listViewer_1.getList();
-		list_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		ListViewer classifyListViewer = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
+		List classifyList = classifyListViewer.getList();
+		GridData gd_classifyList = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_classifyList.heightHint = 120;
+		classifyList.setLayoutData(gd_classifyList);
+		classifyListViewer.setContentProvider(ArrayContentProvider.getInstance());
+		classifyListViewer.setLabelProvider(new LabelProvider(){
 
-		Label label_1 = new Label(docComposite, SWT.NONE);
-		label_1.setText("函数");
+			@Override
+			public String getText(Object element) {
+				org.foxbpm.model.config.variableconfig.Type type=(Type)element;
+				FixFlowDataVariable fixFlowDataVariable=typeToDataVariableMap.get(type.getId());
+				int size=fixFlowDataVariable==null?0:fixFlowDataVariable.getDataVariableDef().size();
+				return type.getName() + "(" + size + ")";
+			}
+			
+		});
+		classifyListViewer.setInput(dataVariableConfig.getDataVariableType().getType());
+		
+		Label functionLabel = new Label(docComposite, SWT.NONE);
+		functionLabel.setText("函数");
+		
+		PatternFilter filter = new PatternFilter();
+		FilteredTree filteredTree = new FilteredTree(docComposite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
+		final TreeViewer functionTreeViewer=filteredTree.getViewer();
+		Tree FunctionTree = functionTreeViewer.getTree();
+		GridData gd_FunctionTree = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_FunctionTree.heightHint = 220;
+		FunctionTree.setLayoutData(gd_FunctionTree);
+		functionTreeViewer.setContentProvider(new FuncitonTreeContentProvider());
+		functionTreeViewer.setLabelProvider(new StyledFunctionTreeLabelProvider());
 
-		ListViewer listViewer_2 = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
-		List list_2 = listViewer_2.getList();
-		list_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		Label documentLabel = new Label(docComposite, SWT.NONE);
+		documentLabel.setText("文档");
+		
+		final Text docText=new Text(docComposite, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		GridData gd_docText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd_docText.heightHint = 100;
+		docText.setLayoutData(gd_docText);
+		
+		//绑定事件处理
+		classifyListViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				ISelection selection=event.getSelection();
+				if (selection.isEmpty()) {
+					functionTreeViewer.setInput(EMPTY_ARRAY);
+					docText.setText(EMPTY_STRING);
+					return;
+				}
+				Type selectedType=(Type)((IStructuredSelection)selection).getFirstElement();
+				FixFlowDataVariable fixFlowDataVariable=typeToDataVariableMap.get(selectedType.getId());
+				if (fixFlowDataVariable==null) {
+					functionTreeViewer.setInput(EMPTY_ARRAY);
+					docText.setText(EMPTY_STRING);
+				}else {
+					functionTreeViewer.setInput(fixFlowDataVariable);
+				}
+				
+			}
+		});
+		
+		functionTreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				ISelection selection=event.getSelection();
+				if (selection.isEmpty()) {
+					docText.setText(EMPTY_STRING);
+					return;
+				}
+				DataVariableDef selectedDataVariableDef=(DataVariableDef)((IStructuredSelection)selection).getFirstElement();
+				docText.setText(selectedDataVariableDef.getDoc());
+			}
+		});
 
-		Label label_4 = new Label(docComposite, SWT.NONE);
-		label_4.setText("文档");
+		functionTreeViewer.addDoubleClickListener(new IDoubleClickListener() {
+			
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				ISelection selection=event.getSelection();
+				if (selection.isEmpty()) {
+					return;
+				}
+				DataVariableDef dataVariableDef=(DataVariableDef)((IStructuredSelection)selection).getFirstElement();
+				@SuppressWarnings("restriction")
+				final SourceViewer srcViewer = (SourceViewer) editor.getViewer();
+                IDocument document = srcViewer.getDocument();
+                int offset = srcViewer.getTextWidget().getCaretOffset();
+                String before="";
+                try {
+					before = document.get(0, offset);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+                String toInsert=dataVariableDef.getValue();
+                if(offset == document.get().length()){
+                    document.set(before + toInsert);
+                } else {
+                    String after = document.get().substring(offset, document.get().length());
+                    document.set(before + toInsert + after);
+                }
 
-		ListViewer listViewer_3 = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
-		List list_3 = listViewer_3.getList();
-		list_3.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
-
+                srcViewer.getTextWidget().setCaretOffset(offset + toInsert.length());
+                srcViewer.getTextWidget().setFocus();
+			}
+		});
 		m_bindingContext = initDataBindings();
 		init();
 		
@@ -220,7 +337,7 @@ public class FoxBPMExpDialog extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(719, 626);
+		return new Point(800, 626);
 	}
 
 	public void createToolBar(Composite operatorcomposite) {
@@ -448,5 +565,105 @@ public class FoxBPMExpDialog extends Dialog {
 		bindingContext.bindValue(observeTextDisplaytextObserveWidget, expressionNameObserveValue, null, null);
 		//
 		return bindingContext;
+	}
+	
+	/**
+	 * 加载dataVariableConfig对象
+	 */
+	private void loadDataVariableConfig(){
+		Resource resource=EMFUtil.readEMFFile(FoxBPMDesignerUtil.getDataVariableConfigPath());
+		if (resource!=null) {
+			dataVariableConfig=(DataVariableConfig)resource.getContents().get(0);
+		}
+		
+	}
+	
+	/**
+	 * 映射dataVariableType到fixFlowDataVariable
+	 */
+	private void MapFixFlowDataVariableWithType(){
+		if (dataVariableConfig==null) {
+			return;
+		}
+		typeToDataVariableMap=new HashMap<String, FixFlowDataVariable>();
+		DataVariableType dataVariableType=dataVariableConfig.getDataVariableType();
+		EList<FixFlowDataVariable> fixFlowDataVariableList=dataVariableConfig.getFixFlowDataVariable();
+		for (Type type : dataVariableType.getType()) {
+			String type_id=type.getId();
+			for (FixFlowDataVariable fixFlowDataVariable : fixFlowDataVariableList) {
+				if (type_id.equals(fixFlowDataVariable.getType())) {
+					typeToDataVariableMap.put(type_id, fixFlowDataVariable);
+					break;
+				}
+			}
+		}
+	}
+	
+	private class StyledFunctionTreeLabelProvider extends StyledCellLabelProvider implements ILabelProvider{
+
+		@Override
+		public Image getImage(Object element) {
+			return null;
+		}
+
+		@Override
+		public String getText(Object element) {
+			DataVariableDef dataVariableDef=(DataVariableDef)element;
+			return dataVariableDef.getName()+" "+dataVariableDef.getDataType()+" "+dataVariableDef.getValue();
+		}
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() instanceof DataVariableDef) {
+				DataVariableDef dataVariableDef=(DataVariableDef)cell.getElement();
+				StyledString styledString=new StyledString();
+				//正常样式
+				styledString.append(dataVariableDef.getName()+" "+dataVariableDef.getDataType()+" ");
+				//特殊样式
+				styledString.append(dataVariableDef.getValue(),StyledString.DECORATIONS_STYLER);
+				cell.setText(styledString.getString());
+				cell.setStyleRanges(styledString.getStyleRanges());
+			}
+		}
+		
+	}
+	
+	private class FuncitonTreeContentProvider implements ITreeContentProvider{
+
+		@Override
+		public void dispose() {
+			
+		}
+
+		@Override
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Object[] getElements(Object inputElement) {
+			return getChildren(inputElement);
+		}
+
+		@Override
+		public Object[] getChildren(Object parentElement) {
+			if (parentElement instanceof FixFlowDataVariableImpl) {
+				FixFlowDataVariableImpl fixFlowDataVariable=(FixFlowDataVariableImpl)parentElement;
+				return fixFlowDataVariable.getDataVariableDef().toArray();
+			}
+			return EMPTY_ARRAY;
+		}
+
+		@Override
+		public Object getParent(Object element) {
+			return null;
+		}
+
+		@Override
+		public boolean hasChildren(Object element) {
+			return getChildren(element).length>0;
+		}
+		
 	}
 }
