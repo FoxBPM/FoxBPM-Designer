@@ -31,6 +31,8 @@ public class RuntimeConnectorUtil {
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
 
 	public static HashMap<String, Object> allFlowConnectors = null;
+	
+	private static boolean isOk = false;
 
 	/**
 	 * 得到运行时连接器所存放的路径
@@ -220,7 +222,7 @@ public class RuntimeConnectorUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String downLoadConnector(String type) throws Exception {
+	public static boolean downLoadConnector(String type) throws Exception {
 		String connectorPath = getAllConnectorPath();
 		// Authenticator.setDefault(new Authenticator() {
 		// protected PasswordAuthentication getPasswordAuthentication() {
@@ -258,8 +260,11 @@ public class RuntimeConnectorUtil {
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
 		FileOutputStream fileOutputStream = null;
+		
+		isOk = false;
+		
 		try {
-			File file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
+			final File file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
 			if (file.exists()) {
 				file.delete();
 			}
@@ -296,14 +301,14 @@ public class RuntimeConnectorUtil {
 									e.printStackTrace();
 								}
 							}
+							ZipUtils.unZip(file.getPath(), servicePath);
+							isOk = true;
 						} else {
 							return;
 						}
 					}
 				});
 			}
-
-			ZipUtils.unZip(file.getPath(), servicePath);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -311,6 +316,6 @@ public class RuntimeConnectorUtil {
 				fileOutputStream.close();
 		}
 
-		return connectorPath;
+		return isOk;
 	}
 }
