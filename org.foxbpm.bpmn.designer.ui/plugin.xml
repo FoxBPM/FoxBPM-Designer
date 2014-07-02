@@ -518,6 +518,46 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMUserTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.usertask"
+        type="org.eclipse.bpmn2.UserTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMStartEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.startevent"
+        type="org.eclipse.bpmn2.StartEvent">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMEndEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.endevent"
+        type="org.eclipse.bpmn2.EndEvent">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.gateway.FoxBPMInclusiveGatewayFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.inclusivegateway"
+        type="org.eclipse.bpmn2.InclusiveGateway">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.gateway.FoxBPMExclusiveGatewayFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.exclusivegateway"
+        type="org.eclipse.bpmn2.ExclusiveGateway">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.gateway.FoxBPMParallelGatewayFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.parallelgateway"
+        type="org.eclipse.bpmn2.ParallelGateway">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMScriptTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.scripttask"
+        type="org.eclipse.bpmn2.ScriptTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.lane.FoxBPMLaneFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.lane"
+        type="org.eclipse.bpmn2.Lane">
+  </featureContainer>
 
 		<!-- ======================================== -->
 		<!-- ===  Model Enablements and Profiles ==== -->
