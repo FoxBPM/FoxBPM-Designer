@@ -437,6 +437,24 @@
           <enable
                 object="Lane">
           </enable>
+          <enable
+                object="Association">
+          </enable>
+          <enable
+                object="ManualTask">
+          </enable>
+          <enable
+                object="TerminateEventDefinition">
+          </enable>
+          <enable
+                object="TimerEventDefinition">
+          </enable>
+          <enable
+                object="Group">
+          </enable>
+          <enable
+                object="TextAnnotation">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"

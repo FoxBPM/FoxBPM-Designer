@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.EndEvent;
-import org.eclipse.bpmn2.UserTask;
 import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
 import org.eclipse.bpmn2.modeler.core.features.event.AbstractCreateEventFeature;
 import org.eclipse.bpmn2.modeler.core.features.event.AbstractUpdateEventFeature;
@@ -15,7 +14,6 @@ import org.eclipse.bpmn2.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.bpmn2.modeler.ui.features.AbstractAppendNodeFeature;
 import org.eclipse.bpmn2.modeler.ui.features.event.EndEventFeatureContainer;
-import org.eclipse.bpmn2.modeler.ui.features.event.Messages;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -31,7 +29,6 @@ import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IPeService;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMEndEventFeatureContainer extends EndEventFeatureContainer {
 	
@@ -70,9 +67,15 @@ public class FoxBPMEndEventFeatureContainer extends EndEventFeatureContainer {
 	}
 
 	public static class CreateEndEventFeature extends AbstractCreateEventFeature<EndEvent> {
-
+		protected Resource resource;
+		
 		public CreateEndEventFeature(IFeatureProvider fp) {
 			super(fp, "结束事件", "创建一个结束事件");
+		}
+		
+		public CreateEndEventFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+			super(fp, name, desc);
+			this.resource = resource;
 		}
 
 		@Override
@@ -90,7 +93,7 @@ public class FoxBPMEndEventFeatureContainer extends EndEventFeatureContainer {
 
 		@Override
 		public EndEvent createBusinessObject(ICreateContext context) {
-			List<EndEvent> endEvents = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("end_event")), EndEvent.class);
+			List<EndEvent> endEvents = EMFUtil.getAll(resource, EndEvent.class);
 			if(endEvents != null && endEvents.size()>0) {
 				EndEvent endEvent = EcoreUtil.copy(endEvents.get(0));
 				endEvent.setId(null);

@@ -22,7 +22,6 @@ import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMInclusiveGatewayFeatureContainer extends InclusiveGatewayFeatureContainer {
 	@Override
@@ -48,9 +47,15 @@ public class FoxBPMInclusiveGatewayFeatureContainer extends InclusiveGatewayFeat
 	}
 
 	public static class CreateInclusiveGatewayFeature extends AbstractCreateGatewayFeature<InclusiveGateway> {
-
+		protected Resource resource;
+		
 		public CreateInclusiveGatewayFeature(IFeatureProvider fp) {
 			super(fp, "包容网关", "创建一个包容网关");
+		}
+		
+		public CreateInclusiveGatewayFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+			super(fp, name, desc);
+			this.resource = resource;
 		}
 
 		@Override
@@ -68,7 +73,7 @@ public class FoxBPMInclusiveGatewayFeatureContainer extends InclusiveGatewayFeat
 
 		@Override
 		public InclusiveGateway getBusinessObject(ICreateContext context) {
-			List<InclusiveGateway> inclusiveGateways = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("inclusive_gateway")), InclusiveGateway.class);
+			List<InclusiveGateway> inclusiveGateways = EMFUtil.getAll(resource, InclusiveGateway.class);
 			if(inclusiveGateways != null && inclusiveGateways.size()>0) {
 				InclusiveGateway inclusiveGateway = EcoreUtil.copy(inclusiveGateways.get(0));
 				inclusiveGateway.setId(null);

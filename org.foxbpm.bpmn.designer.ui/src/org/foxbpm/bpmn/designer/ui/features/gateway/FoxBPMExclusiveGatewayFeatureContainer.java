@@ -23,7 +23,6 @@ import org.eclipse.graphiti.features.context.IAddContext;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMExclusiveGatewayFeatureContainer extends ExclusiveGatewayFeatureContainer {
 	@Override
@@ -53,9 +52,15 @@ public class FoxBPMExclusiveGatewayFeatureContainer extends ExclusiveGatewayFeat
 	}
 
 	public static class CreateExclusiveGatewayFeature extends AbstractCreateGatewayFeature<ExclusiveGateway> {
-
+		protected Resource resource;
+		
 		public CreateExclusiveGatewayFeature(IFeatureProvider fp) {
 			super(fp, "排他网关", "创建一个排他网关");
+		}
+		
+		public CreateExclusiveGatewayFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+			super(fp, name, desc);
+			this.resource = resource;
 		}
 
 		@Override
@@ -73,7 +78,7 @@ public class FoxBPMExclusiveGatewayFeatureContainer extends ExclusiveGatewayFeat
 
 		@Override
 		public ExclusiveGateway createBusinessObject(ICreateContext context) {
-			List<ExclusiveGateway> exclusiveGateways = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("exclusive_gateway")), ExclusiveGateway.class);
+			List<ExclusiveGateway> exclusiveGateways = EMFUtil.getAll(resource, ExclusiveGateway.class);
 			if(exclusiveGateways != null && exclusiveGateways.size()>0) {
 				ExclusiveGateway exclusiveGateway = EcoreUtil.copy(exclusiveGateways.get(0));
 				exclusiveGateway.setId(null);

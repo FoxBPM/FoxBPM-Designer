@@ -18,7 +18,6 @@ import org.eclipse.graphiti.features.ICreateFeature;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMUserTaskFeatureContainer extends UserTaskFeatureContainer {
 	@Override
@@ -44,9 +43,15 @@ public class FoxBPMUserTaskFeatureContainer extends UserTaskFeatureContainer {
 	}
 
 	public static class CreateUserTaskFeature extends AbstractCreateTaskFeature<UserTask> {
-
+		protected Resource resource;
+		
 		public CreateUserTaskFeature(IFeatureProvider fp) {
 			super(fp, "人工任务", "创建一个人工任务");
+		}
+		
+		public CreateUserTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+			super(fp, name, desc);
+			this.resource = resource;
 		}
 
 		@Override
@@ -64,7 +69,7 @@ public class FoxBPMUserTaskFeatureContainer extends UserTaskFeatureContainer {
 
 		@Override
 		public UserTask createBusinessObject(ICreateContext context) {
-			List<UserTask> userTasks = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("user_task")), UserTask.class);
+			List<UserTask> userTasks = EMFUtil.getAll(resource, UserTask.class);
 			if(userTasks != null && userTasks.size()>0) {
 				UserTask userTask = EcoreUtil.copy(userTasks.get(0));
 				userTask.setId(null);

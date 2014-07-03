@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.StartEvent;
-import org.eclipse.bpmn2.UserTask;
 import org.eclipse.bpmn2.modeler.core.features.MultiUpdateFeature;
 import org.eclipse.bpmn2.modeler.core.features.event.AbstractCreateEventFeature;
 import org.eclipse.bpmn2.modeler.core.features.event.AbstractUpdateEventFeature;
@@ -12,7 +11,6 @@ import org.eclipse.bpmn2.modeler.core.features.event.AddEventFeature;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.bpmn2.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
-import org.eclipse.bpmn2.modeler.ui.features.event.Messages;
 import org.eclipse.bpmn2.modeler.ui.features.event.StartEventFeatureContainer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -35,7 +33,6 @@ import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IPeService;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMStartEventFeatureContainer extends StartEventFeatureContainer {
 	static final String INTERRUPTING = "interrupting"; //$NON-NLS-1$
@@ -76,9 +73,15 @@ public class FoxBPMStartEventFeatureContainer extends StartEventFeatureContainer
 	}
 
 	public static class CreateStartEventFeature extends AbstractCreateEventFeature<StartEvent> {
-
+		protected Resource resource;
+		
 		public CreateStartEventFeature(IFeatureProvider fp) {
 			super(fp, "开始节点", "创建一个开始节点");
+		}
+		
+		public CreateStartEventFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+			super(fp, name, desc);
+			this.resource = resource;
 		}
 
 		@Override
@@ -96,7 +99,7 @@ public class FoxBPMStartEventFeatureContainer extends StartEventFeatureContainer
 
 		@Override
 		public StartEvent getBusinessObject(ICreateContext context) {
-			List<StartEvent> startEvents = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("start_event")), StartEvent.class);
+			List<StartEvent> startEvents = EMFUtil.getAll(resource, StartEvent.class);
 			if(startEvents != null && startEvents.size()>0) {
 				StartEvent startEvent = EcoreUtil.copy(startEvents.get(0));
 				startEvent.setId(null);

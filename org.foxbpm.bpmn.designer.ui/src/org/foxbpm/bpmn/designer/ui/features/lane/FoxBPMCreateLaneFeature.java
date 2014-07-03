@@ -13,7 +13,6 @@
 package org.foxbpm.bpmn.designer.ui.features.lane;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.eclipse.bpmn2.Bpmn2Package;
 import org.eclipse.bpmn2.Lane;
@@ -24,22 +23,24 @@ import org.eclipse.bpmn2.modeler.core.features.AbstractBpmn2CreateFeature;
 import org.eclipse.bpmn2.modeler.core.utils.FeatureSupport;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.bpmn2.modeler.ui.ImageProvider;
-import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
-import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
-import org.foxbpm.bpmn.designer.base.utils.FlowModelUtils;
 
 public class FoxBPMCreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
-
+	protected Resource resource;
+	
 	private static int index = 1;
 
 	public FoxBPMCreateLaneFeature(IFeatureProvider fp) {
 		super(fp, "泳道", "创建一个泳道");
+	}
+	
+	public FoxBPMCreateLaneFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+		super(fp, name, desc);
+		this.resource = resource;
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class FoxBPMCreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 	@Override
 	public Object[] create(ICreateContext context) {
 		Lane lane = createBusinessObject(context);
-		lane.setName("Lane"+ModelUtil.getIDNumber(lane.getId()));
+		lane.setName("Lane "+ModelUtil.getIDNumber(lane.getId()));
 		addGraphicalRepresentation(context, lane);
 		return new Object[] { lane };
 	}
@@ -83,14 +84,6 @@ public class FoxBPMCreateLaneFeature extends AbstractBpmn2CreateFeature<Lane> {
 
 	@Override
 	public Lane createBusinessObject(ICreateContext context) {
-//		List<Lane> lanes = EMFUtil.getAll(((Resource)FlowModelUtils.MAP.get("lane")), Lane.class);
-//		if(lanes != null && lanes.size()>0) {
-//			Lane lane = EcoreUtil.copy(lanes.get(0));
-//			lane.setId(null);
-//			Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-//			ModelUtil.setID(lane, resource);
-//			return lane;
-//		}
 		Lane bo = null;
 		try {
 			ModelHandler mh = ModelHandlerLocator.getModelHandler(getDiagram().eResource());
