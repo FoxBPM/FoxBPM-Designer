@@ -96,6 +96,14 @@ public class FoxBPMDesignerUtil {
 	}
 	
 	/**
+	 * @return datavariableconfig.xml路径
+	 */
+	public static String getDataVariableConfigPath() {
+		return getServicePath() + "coreconfig/datavariableconfig.xml";
+	}
+	
+	
+	/**
 	 * 拿到所有启用为true的TaskCommand对象
 	 * 
 	 * @return
@@ -170,4 +178,5 @@ public class FoxBPMDesignerUtil {
 			e.printStackTrace();
 		}
 	}
+	
 }
