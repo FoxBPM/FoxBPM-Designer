@@ -68,7 +68,23 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getTempleteFilePath() {
-		return getServicePath() + "template/flow-template/default_process/default_process.bpmn";
+		return getServicePath() + "template/flowtemplate/default_process/default_process.bpmn";
+	}
+	
+	/**
+	 * 返回临时目录中的流程模板路径
+	 * @return
+	 */
+	public static String getTempletePath() {
+		return getServicePath() + "template/";
+	}
+	
+	/**
+	 * 返回临时目录中的流程节点模板路径
+	 * @return
+	 */
+	public static String getNodeTempletePath() {
+		return getServicePath() + "template/nodetemplate/";
 	}
 
 	/**
@@ -78,6 +94,14 @@ public class FoxBPMDesignerUtil {
 	public static String getTempleteConfigFilePath() {
 		return getServicePath() + "coreconfig/foxbpm.cfg.xml";
 	}
+	
+	/**
+	 * @return datavariableconfig.xml路径
+	 */
+	public static String getDataVariableConfigPath() {
+		return getServicePath() + "coreconfig/datavariableconfig.xml";
+	}
+	
 	
 	/**
 	 * 拿到所有启用为true的TaskCommand对象
@@ -154,4 +178,5 @@ public class FoxBPMDesignerUtil {
 			e.printStackTrace();
 		}
 	}
+	
 }

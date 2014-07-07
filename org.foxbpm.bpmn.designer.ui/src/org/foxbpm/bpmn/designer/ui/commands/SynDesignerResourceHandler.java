@@ -17,6 +17,7 @@ import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 
 public class SynDesignerResourceHandler implements IHandler {
+	private boolean isOk = false;
 
 	@Override
 	public void addHandlerListener(IHandlerListener handlerListener) {
@@ -40,7 +41,7 @@ public class SynDesignerResourceHandler implements IHandler {
 				monitor.worked(1);
 				// 下载
 				try {
-					RuntimeConnectorUtil.downLoadConnector("syn");
+					isOk = RuntimeConnectorUtil.downLoadConnector("syn");
 				} catch (final Exception e) {
 					Display.getDefault().syncExec(new Runnable() {
 						
@@ -54,14 +55,25 @@ public class SynDesignerResourceHandler implements IHandler {
 				}
 				monitor.worked(1);
 				
-				Display.getDefault().syncExec(new Runnable() {
-					
-					@Override
-					public void run() {
-						MessageDialog.openInformation(null, "提示", "同步设计器资源成功");
-					}
-				});
-				return Status.OK_STATUS;
+				if(isOk) {
+					Display.getDefault().syncExec(new Runnable() {
+						
+						@Override
+						public void run() {
+							MessageDialog.openInformation(null, "提示", "同步设计器资源成功");
+						}
+					});
+					return Status.OK_STATUS;
+				}else {
+					Display.getDefault().syncExec(new Runnable() {
+						
+						@Override
+						public void run() {
+							MessageDialog.openInformation(null, "提示", "同步操作未完成");
+						}
+					});
+					return Status.CANCEL_STATUS;
+				}
 			}
 		};
 

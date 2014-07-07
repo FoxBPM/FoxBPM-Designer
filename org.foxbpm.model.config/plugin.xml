@@ -62,4 +62,18 @@
             type="style"
             class="org.foxbpm.model.config.style.util.StyleResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated foxbpmvariableconfig -->
+      <package
+            uri="http://www.foxbpm.org/variableconfig"
+            class="org.foxbpm.model.config.variableconfig.VariableconfigPackage"
+            genModel="model/foxbpmvariableconfig.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated foxbpmvariableconfig -->
+      <parser
+            type="variableconfig"
+            class="org.foxbpm.model.config.variableconfig.util.VariableconfigResourceFactoryImpl"/>
+   </extension>
 </plugin>

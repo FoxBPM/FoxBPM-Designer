@@ -23,6 +23,9 @@ import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
@@ -42,6 +45,7 @@ import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.base.utils.ZipUtils;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.InputRepresentation;
 import org.restlet.representation.Representation;
@@ -55,6 +59,12 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private TableViewer tableViewer;
 	private IFile iFile;
 	private String curProcessId;
+	private String dbid = null;
+	private Button createNewButton;
+	private Button publishButton;
+	private Button updateButton;
+	private Button downloadButton;
+	private Button deleteButton;
 
 	/**
 	 * Create the dialog.
@@ -68,7 +78,18 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		this.iFile = iFile;
 		this.curProcessId = iFile.getName();
 	}
-
+	
+	/**
+	 * @wbp.parser.constructor
+	 */
+	public ProcessOperDialog(Shell parentShell) {
+		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		setHelpAvailable(false);
+		this.iFile = null;
+		this.curProcessId = null;
+	}
+	
 	/**
 	 * Create contents of the dialog.
 	 * 
@@ -93,13 +114,22 @@ public class ProcessOperDialog extends TitleAreaDialog {
 
 		curprotext = new Text(container, SWT.BORDER | SWT.READ_ONLY);
 		curprotext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		curprotext.setText(curProcessId);
+		curprotext.setText(curProcessId==null?"":curProcessId);
 
 		Label lblNewLabel = new Label(container, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		lblNewLabel.setText("流程列表");
 
 		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				IStructuredSelection iStructuredSelection = (IStructuredSelection) tableViewer.getSelection();
+				Object selected = iStructuredSelection.getFirstElement();
+				downloadButton.setEnabled(selected!=null);
+			}
+		});
 		table = tableViewer.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
@@ -137,9 +167,16 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		gl_composite.marginHeight = 0;
 		composite.setLayout(gl_composite);
 
-		Button publishButton = new Button(composite, SWT.NONE);
+		createNewButton = new Button(composite, SWT.NONE);
+		GridData gd_createNewButton = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		gd_createNewButton.widthHint = 60;
+		createNewButton.setLayoutData(gd_createNewButton);
+		createNewButton.setBounds(0, 0, 80, 27);
+		createNewButton.setText("创建");
+		
+		publishButton = new Button(composite, SWT.NONE);
 		publishButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		publishButton.setText("发布流程");
+		publishButton.setText("发布");
 		publishButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
@@ -151,15 +188,18 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			}
 		});
 
-		Button createNewButton = new Button(composite, SWT.NONE);
-		createNewButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		createNewButton.setBounds(0, 0, 80, 27);
-		createNewButton.setText("创建并发布");
-
-		Button updateButton = new Button(composite, SWT.NONE);
+		updateButton = new Button(composite, SWT.NONE);
 		updateButton.setEnabled(false);
 		updateButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		updateButton.setText("更新流程");
+		updateButton.setText("更新");
+		
+		downloadButton = new Button(composite, SWT.NONE);
+		downloadButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		downloadButton.setText("下载");
+		
+		deleteButton = new Button(composite, SWT.NONE);
+		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		deleteButton.setText("删除");
 
 		initTreeViewer();
 		m_bindingContext = initDataBindings();
@@ -203,6 +243,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 
 			Representation deployInput = new InputRepresentation(input);
 			Representation result = client.post(deployInput);
+			dbid = result.toString();
 			result.write(System.out);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -212,30 +253,71 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private void initTreeViewer() {
 		processTos = new ArrayList<ProcessTo>();
 		
-		Definitions definitions = ModelUtil.getDefinitions(EMFUtil.readEMFFile(iFile.getLocationURI().getPath()));
-		Process process = (Process) definitions.getRootElements().get(0);
-		
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + process.getId());
-		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
-		Representation result = client.get();
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			String resultString = result.getText();
-			JsonNode object= objectMapper.readTree(resultString);
-			System.out.println(resultString);
-			ArrayNode dataArray = (ArrayNode)object.get("data");
-			
-			for(JsonNode json :dataArray){
-				ProcessTo processTo = new ProcessTo();
-				processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
-				processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
-				processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
-				processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
-				processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
-				processTos.add(processTo);
+		if(iFile!=null) {
+			Definitions definitions = ModelUtil.getDefinitions(EMFUtil.readEMFFile(iFile.getLocationURI().getPath()));
+			Process process = (Process) definitions.getRootElements().get(0);
+			if(dbid == null) {
+				Object processDbid = process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID);
+				dbid = processDbid==null?null:processDbid.toString();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			ClientResource client = null;
+			if(dbid != null) {
+				client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + dbid);
+				client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+				Representation result = client.get();
+				try {
+					ObjectMapper objectMapper = new ObjectMapper();
+					String resultString = result.getText();
+					JsonNode object= objectMapper.readTree(resultString);
+					System.out.println(resultString);
+					ArrayNode dataArray = (ArrayNode)object.get("data");
+					
+					for(JsonNode json :dataArray){
+						ProcessTo processTo = new ProcessTo();
+						processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
+						processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
+						processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
+						processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
+						processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
+						processTos.add(processTo);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				publishButton.setEnabled(false);
+			} else{
+				updateButton.setEnabled(false);
+			}
+			downloadButton.setEnabled(false);
+		}else {
+			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions");
+			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			Representation result = client.get();
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				String resultString = result.getText();
+				JsonNode object= objectMapper.readTree(resultString);
+				System.out.println(resultString);
+				ArrayNode dataArray = (ArrayNode)object.get("data");
+				
+				for(JsonNode json :dataArray){
+					ProcessTo processTo = new ProcessTo();
+					processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
+					processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
+					processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
+					processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
+					processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
+					processTos.add(processTo);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			publishButton.setEnabled(false);
+			updateButton.setEnabled(false);
+			deleteButton.setEnabled(false);
+			createNewButton.setEnabled(false);
+			downloadButton.setEnabled(false);
 		}
 	}
 	protected DataBindingContext initDataBindings() {

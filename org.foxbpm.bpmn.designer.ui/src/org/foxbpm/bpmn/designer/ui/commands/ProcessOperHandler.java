@@ -5,9 +5,10 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -34,19 +35,28 @@ public class ProcessOperHandler implements IHandler {
 	    {
 	        IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
 	        Object firstElement = selection.getFirstElement();
-	        if (firstElement instanceof IAdaptable)
-	        {
+	        if (firstElement instanceof IFile) {
 	        	file = (IFile) ((IAdaptable) firstElement).getAdapter(IFile.class);
-//	            IProject project = (IProject)((IAdaptable)firstElement).getAdapter(IProject.class);
+//	            
+	        	ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), file);
+	    		
+	        	try {
+					processOperDialog.open();
+				} catch (Exception e) {
+					MessageDialog.openInformation(null, "提示", "无法打开流程操作对话框，原因是\n" + e.getMessage());
+					e.printStackTrace();
+				}
+	        	
+//	        	IProject project = (IProject)((IAdaptable)firstElement).getAdapter(IProject.class);
 //	            IPath path = project.getFullPath();
-//	            System.out.println(path);
+	        }else if(firstElement instanceof IPackageFragmentRoot || firstElement instanceof IFolder) {
+	        	ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell());
+	    		processOperDialog.open();
 	        }
 	    }
 	    
 //	    if(file)
 	    
-		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), file);
-		processOperDialog.open();
 		return null;
 	}
 

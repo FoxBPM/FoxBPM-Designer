@@ -152,6 +152,10 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 						public void modifyText(ModifyEvent e) {
 							// 验证输入内容
 							if (isRequired) {
+								Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+								expression.setName(foxBPMExpViewer.getTextControl().getText());
+								expression.setValue(foxBPMExpViewer.getTextControl().getText());
+								foxBPMExpViewer.setExpression(expression);
 								dataChange();
 							}
 						}

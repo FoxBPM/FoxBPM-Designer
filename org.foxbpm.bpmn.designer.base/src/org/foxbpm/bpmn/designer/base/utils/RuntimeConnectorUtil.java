@@ -29,8 +29,10 @@ public class RuntimeConnectorUtil {
 	public static String FLOWCONNECTOR = "FlowConnector.xml";
 
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
-	
+
 	public static HashMap<String, Object> allFlowConnectors = null;
+	
+	private static boolean isOk = false;
 
 	/**
 	 * 得到运行时连接器所存放的路径
@@ -66,12 +68,13 @@ public class RuntimeConnectorUtil {
 
 	/**
 	 * 加载所有目录下的连接器
-	 * @return 
+	 * 
+	 * @return
 	 */
 	public static HashMap<String, Object> getAllConnectors() {
-			allFlowConnectors = new HashMap<String, Object>();
-			File connectorPath = new File(getAllConnectorPath());
-			reloadAllConnectors(connectorPath.getAbsolutePath());
+		allFlowConnectors = new HashMap<String, Object>();
+		File connectorPath = new File(getAllConnectorPath());
+		reloadAllConnectors(connectorPath.getAbsolutePath());
 		return allFlowConnectors;
 	}
 
@@ -109,17 +112,17 @@ public class RuntimeConnectorUtil {
 		for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
 			node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
 			for (MenuConnector connector : node.getMenuConnector()) {
-				connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" +  connector.getId() + "/" + connector.getIco());
-				//connector的具体路径
+				connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
+				// connector的具体路径
 				String connectorPath = xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + connector.getId() + File.separator;
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				//对象
+				// 对象
 				map.put("object", connector);
-				//所在节点
+				// 所在节点
 				map.put("node", node);
-				//目录
+				// 目录
 				map.put("path", connectorPath);
-				//放到map里
+				// 放到map里
 				allFlowConnectors.put(connector.getId(), map);
 			}
 		}
@@ -133,7 +136,7 @@ public class RuntimeConnectorUtil {
 	 */
 	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>)getAllConnectors().get(connectorId)).get("path") + FLOWCONNECTOR);
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId)).get("path") + FLOWCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -142,7 +145,7 @@ public class RuntimeConnectorUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 根据Menu上的连接器ID找到对应的连接器对象
 	 * 
@@ -151,7 +154,7 @@ public class RuntimeConnectorUtil {
 	 */
 	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>)getAllConnectors().get(connectorId)).get("path") + ACTORCONNECTOR);
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId)).get("path") + ACTORCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -160,7 +163,7 @@ public class RuntimeConnectorUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * 递归找到对应类型的所有menu上的连接器节点
 	 * 
@@ -219,7 +222,7 @@ public class RuntimeConnectorUtil {
 	 * @return
 	 * @throws IOException
 	 */
-	public static String downLoadConnector(String type) throws Exception {
+	public static boolean downLoadConnector(String type) throws Exception {
 		String connectorPath = getAllConnectorPath();
 		// Authenticator.setDefault(new Authenticator() {
 		// protected PasswordAuthentication getPasswordAuthentication() {
@@ -249,49 +252,63 @@ public class RuntimeConnectorUtil {
 		// ZipUtils.unZip(file.getPath(), servicePath);
 
 		// REST方式
-		String servicePath = FoxBPMDesignerUtil.getServicePath();
-		if(servicePath.equals("/")) {
+		final String servicePath = FoxBPMDesignerUtil.getServicePath();
+		if (servicePath.equals("/")) {
 			throw new Exception("请先在首选项中配置解压路径");
 		}
 		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "flowconfig");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
 		FileOutputStream fileOutputStream = null;
+		
+		isOk = false;
+		
 		try {
-			File file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
+			final File file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
 			if (file.exists()) {
 				file.delete();
 			}
 			fileOutputStream = new FileOutputStream(file);
 			result.write(fileOutputStream);
 
-		if(!new File(servicePath).exists()) {
-			new File(servicePath).mkdir();
-		}
-			
-			 if (new File(servicePath).exists()) {
-				 Display.getDefault().syncExec(new Runnable() {
-					
+			if (!new File(servicePath).exists()) {
+				Display.getDefault().syncExec(new Runnable() {
+
 					@Override
 					public void run() {
-						boolean b = MessageDialog.openConfirm(null, "提示", "即将删除\n" + FoxBPMDesignerUtil.getServicePath() + "\n目录下的所有文件，是否确定该操作？");
-						if(b) {
-							 // 强制删除服务目录下文件
-							for (File tempFile : new File(FoxBPMDesignerUtil.getServicePath()).listFiles()) {
-								 try {
-									FileUtils.forceDelete(tempFile);
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-						 	}
-						}else{
+						boolean b = MessageDialog.openConfirm(null, "提示", FoxBPMDesignerUtil.getServicePath() + "\n目录不存在，是否创建该目录？");
+						if (b) {
+							new File(servicePath).mkdir();
+						} else {
 							return;
 						}
 					}
 				});
-			 }
-			
-			ZipUtils.unZip(file.getPath(), servicePath);
+			}
+
+			if (new File(servicePath).exists()) {
+				Display.getDefault().syncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						boolean b = MessageDialog.openConfirm(null, "提示", "即将清空\n" + FoxBPMDesignerUtil.getServicePath() + "\n目录下的所有文件，是否确定该操作？");
+						if (b) {
+							// 强制删除服务目录下文件
+							for (File tempFile : new File(FoxBPMDesignerUtil.getServicePath()).listFiles()) {
+								try {
+									FileUtils.forceDelete(tempFile);
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+							ZipUtils.unZip(file.getPath(), servicePath);
+							isOk = true;
+						} else {
+							return;
+						}
+					}
+				});
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
@@ -299,6 +316,6 @@ public class RuntimeConnectorUtil {
 				fileOutputStream.close();
 		}
 
-		return connectorPath;
+		return isOk;
 	}
 }
