@@ -73,13 +73,15 @@ public class FoxBPMInclusiveGatewayFeatureContainer extends InclusiveGatewayFeat
 
 		@Override
 		public InclusiveGateway getBusinessObject(ICreateContext context) {
-			List<InclusiveGateway> inclusiveGateways = EMFUtil.getAll(resource, InclusiveGateway.class);
-			if(inclusiveGateways != null && inclusiveGateways.size()>0) {
-				InclusiveGateway inclusiveGateway = EcoreUtil.copy(inclusiveGateways.get(0));
-				inclusiveGateway.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(inclusiveGateway, resource);
-				return inclusiveGateway;
+			if(resource!=null) {
+				List<InclusiveGateway> inclusiveGateways = EMFUtil.getAll(resource, InclusiveGateway.class);
+				if(inclusiveGateways != null && inclusiveGateways.size()>0) {
+					InclusiveGateway inclusiveGateway = EcoreUtil.copy(inclusiveGateways.get(0));
+					inclusiveGateway.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(inclusiveGateway, resource);
+					return inclusiveGateway;
+				}
 			}
 			return super.createBusinessObject(context);
 		}

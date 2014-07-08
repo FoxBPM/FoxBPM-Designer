@@ -115,13 +115,15 @@ public class FoxBPMStartTimerEventFeatureContainer extends TimerEventDefinitionC
 
 		@Override
 		public TimerEventDefinition getBusinessObject(ICreateContext context) {
-			List<TimerEventDefinition> timerEventDefinitions = EMFUtil.getAll(resource, TimerEventDefinition.class);
-			if(timerEventDefinitions != null && timerEventDefinitions.size()>0) {
-				TimerEventDefinition timerEventDefinition = EcoreUtil.copy(timerEventDefinitions.get(0));
-				timerEventDefinition.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(timerEventDefinition, resource);
-				return timerEventDefinition;
+			if(resource!=null) {
+				List<TimerEventDefinition> timerEventDefinitions = EMFUtil.getAll(resource, TimerEventDefinition.class);
+				if(timerEventDefinitions != null && timerEventDefinitions.size()>0) {
+					TimerEventDefinition timerEventDefinition = EcoreUtil.copy(timerEventDefinitions.get(0));
+					timerEventDefinition.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(timerEventDefinition, resource);
+					return timerEventDefinition;
+				}
 			}
 			return super.getBusinessObject(context);
 		}

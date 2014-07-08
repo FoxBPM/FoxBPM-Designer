@@ -79,13 +79,15 @@ public class FoxBPMCreateTextAnnotationFeature extends AbstractCreateArtifactFea
 
 	@Override
 	public TextAnnotation getBusinessObject(ICreateContext context) {
-		List<TextAnnotation> textAnnotations = EMFUtil.getAll(resource, TextAnnotation.class);
-		if(textAnnotations != null && textAnnotations.size()>0) {
-			TextAnnotation textAnnotation = EcoreUtil.copy(textAnnotations.get(0));
-			textAnnotation.setId(null);
-			Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-			ModelUtil.setID(textAnnotation, resource);
-			return textAnnotation;
+		if(resource!=null) {
+			List<TextAnnotation> textAnnotations = EMFUtil.getAll(resource, TextAnnotation.class);
+			if(textAnnotations != null && textAnnotations.size()>0) {
+				TextAnnotation textAnnotation = EcoreUtil.copy(textAnnotations.get(0));
+				textAnnotation.setId(null);
+				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+				ModelUtil.setID(textAnnotation, resource);
+				return textAnnotation;
+			}
 		}
 		return super.getBusinessObject(context);
 	}

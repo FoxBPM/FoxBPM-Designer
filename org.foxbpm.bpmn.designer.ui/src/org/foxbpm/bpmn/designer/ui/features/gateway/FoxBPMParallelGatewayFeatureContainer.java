@@ -71,13 +71,15 @@ public class FoxBPMParallelGatewayFeatureContainer extends ParallelGatewayFeatur
 
 		@Override
 		public ParallelGateway getBusinessObject(ICreateContext context) {
-			List<ParallelGateway> parallelGateways = EMFUtil.getAll(resource, ParallelGateway.class);
-			if(parallelGateways != null && parallelGateways.size()>0) {
-				ParallelGateway parallelGateway = EcoreUtil.copy(parallelGateways.get(0));
-				parallelGateway.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(parallelGateway, resource);
-				return parallelGateway;
+			if(resource!=null) {
+				List<ParallelGateway> parallelGateways = EMFUtil.getAll(resource, ParallelGateway.class);
+				if(parallelGateways != null && parallelGateways.size()>0) {
+					ParallelGateway parallelGateway = EcoreUtil.copy(parallelGateways.get(0));
+					parallelGateway.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(parallelGateway, resource);
+					return parallelGateway;
+				}
 			}
 			return super.createBusinessObject(context);
 		}

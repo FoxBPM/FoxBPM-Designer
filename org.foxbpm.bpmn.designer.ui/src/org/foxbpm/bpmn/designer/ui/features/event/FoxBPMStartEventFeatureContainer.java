@@ -99,13 +99,15 @@ public class FoxBPMStartEventFeatureContainer extends StartEventFeatureContainer
 
 		@Override
 		public StartEvent getBusinessObject(ICreateContext context) {
-			List<StartEvent> startEvents = EMFUtil.getAll(resource, StartEvent.class);
-			if(startEvents != null && startEvents.size()>0) {
-				StartEvent startEvent = EcoreUtil.copy(startEvents.get(0));
-				startEvent.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(startEvent, resource);
-				return startEvent;
+			if(resource!=null) {
+				List<StartEvent> startEvents = EMFUtil.getAll(resource, StartEvent.class);
+				if(startEvents != null && startEvents.size()>0) {
+					StartEvent startEvent = EcoreUtil.copy(startEvents.get(0));
+					startEvent.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(startEvent, resource);
+					return startEvent;
+				}
 			}
 			return super.createBusinessObject(context);
 		}
