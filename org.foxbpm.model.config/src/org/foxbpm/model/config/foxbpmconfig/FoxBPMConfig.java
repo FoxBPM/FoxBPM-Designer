@@ -17,6 +17,7 @@ package org.foxbpm.model.config.foxbpmconfig;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getConnectionManagementConfig <em>Connection Management Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getTaskCommandConfig <em>Task Command Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getScriptLanguageConfig <em>Script Language Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getEventListenerConfig <em>Event Listener Config</em>}</li>
  * </ul>
  * </p>
  *
@@ -183,5 +184,32 @@ public interface FoxBPMConfig extends BaseConfig {
 	 * @generated
 	 */
 	void setScriptLanguageConfig(ScriptLanguageConfig value);
+
+	/**
+	 * Returns the value of the '<em><b>Event Listener Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Event Listener Config</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Event Listener Config</em>' containment reference.
+	 * @see #setEventListenerConfig(EventListenerConfig)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getFoxBPMConfig_EventListenerConfig()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
+	 * @generated
+	 */
+	EventListenerConfig getEventListenerConfig();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getEventListenerConfig <em>Event Listener Config</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Event Listener Config</em>' containment reference.
+	 * @see #getEventListenerConfig()
+	 * @generated
+	 */
+	void setEventListenerConfig(EventListenerConfig value);
 
 } // FoxBPMConfig

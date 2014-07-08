@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.foxbpm.model.config.foxbpmconfig.BaseConfig;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagement;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
+import org.foxbpm.model.config.foxbpmconfig.EventListener;
+import org.foxbpm.model.config.foxbpmconfig.EventListenerConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigFactory;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
@@ -120,6 +122,20 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * @generated
 	 */
 	private EClass scriptLanguageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventListenerConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass eventListenerEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -243,6 +259,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EReference getFoxBPMConfig_ScriptLanguageConfig() {
 		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFoxBPMConfig_EventListenerConfig() {
+		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -691,6 +716,51 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEventListenerConfig() {
+		return eventListenerConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEventListenerConfig_EventListener() {
+		return (EReference)eventListenerConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEventListener() {
+		return eventListenerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEventListener_EventType() {
+		return (EAttribute)eventListenerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEventListener_ListenerClass() {
+		return (EAttribute)eventListenerEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FoxBPMConfigFactory getFoxBPMConfigFactory() {
 		return (FoxBPMConfigFactory)getEFactoryInstance();
 	}
@@ -721,6 +791,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__CONNECTION_MANAGEMENT_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__TASK_COMMAND_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG);
+		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG);
 
 		sysMailConfigEClass = createEClass(SYS_MAIL_CONFIG);
 		createEReference(sysMailConfigEClass, SYS_MAIL_CONFIG__MAIL_INFO);
@@ -782,6 +853,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__NAME);
 		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__ID);
 		createEAttribute(scriptLanguageEClass, SCRIPT_LANGUAGE__CLASS_IMPL);
+
+		eventListenerConfigEClass = createEClass(EVENT_LISTENER_CONFIG);
+		createEReference(eventListenerConfigEClass, EVENT_LISTENER_CONFIG__EVENT_LISTENER);
+
+		eventListenerEClass = createEClass(EVENT_LISTENER);
+		createEAttribute(eventListenerEClass, EVENT_LISTENER__EVENT_TYPE);
+		createEAttribute(eventListenerEClass, EVENT_LISTENER__LISTENER_CLASS);
 	}
 
 	/**
@@ -821,6 +899,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		mailInfoEClass.getESuperTypes().add(this.getBaseConfig());
 		taskCommandConfigEClass.getESuperTypes().add(this.getBaseConfig());
 		taskCommandDefinitionEClass.getESuperTypes().add(this.getBaseConfig());
+		eventListenerConfigEClass.getESuperTypes().add(this.getBaseConfig());
+		eventListenerEClass.getESuperTypes().add(this.getBaseConfig());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(foxBPMConfigEClass, FoxBPMConfig.class, "FoxBPMConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -830,6 +910,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEReference(getFoxBPMConfig_ConnectionManagementConfig(), this.getConnectionManagementConfig(), null, "connectionManagementConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_TaskCommandConfig(), this.getTaskCommandConfig(), null, "taskCommandConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_ScriptLanguageConfig(), this.getScriptLanguageConfig(), null, "scriptLanguageConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFoxBPMConfig_EventListenerConfig(), this.getEventListenerConfig(), null, "eventListenerConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sysMailConfigEClass, SysMailConfig.class, "SysMailConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSysMailConfig_MailInfo(), this.getMailInfo(), null, "mailInfo", null, 0, -1, SysMailConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -892,6 +973,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getScriptLanguage_Id(), ecorePackage.getEString(), "id", null, 1, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getScriptLanguage_ClassImpl(), ecorePackage.getEString(), "classImpl", null, 0, 1, ScriptLanguage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(eventListenerConfigEClass, EventListenerConfig.class, "EventListenerConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEventListenerConfig_EventListener(), this.getEventListener(), null, "eventListener", null, 0, -1, EventListenerConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventListenerEClass, EventListener.class, "EventListener", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEventListener_EventType(), ecorePackage.getEString(), "eventType", null, 0, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getEventListener_ListenerClass(), ecorePackage.getEString(), "listenerClass", null, 0, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -945,6 +1033,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   source, 
 		   new String[] {
 			 "name", "scriptLanguageConfig",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getFoxBPMConfig_EventListenerConfig(), 
+		   source, 
+		   new String[] {
 			 "kind", "element"
 		   });		
 		addAnnotation
@@ -1194,7 +1288,27 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   new String[] {
 			 "name", "classImpl",
 			 "kind", "attribute"
-		   });
+		   });			
+		addAnnotation
+		  (getEventListenerConfig_EventListener(), 
+		   source, 
+		   new String[] {
+			 "name", "eventListener",
+			 "kind", "element"
+		   });			
+		addAnnotation
+		  (getEventListener_EventType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });			
+		addAnnotation
+		  (getEventListener_ListenerClass(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute",
+			 "name", "listenerClass"
+		   });	
 	}
 
 } //FoxBPMConfigPackageImpl
