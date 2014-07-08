@@ -93,13 +93,15 @@ public class FoxBPMEndEventFeatureContainer extends EndEventFeatureContainer {
 
 		@Override
 		public EndEvent createBusinessObject(ICreateContext context) {
-			List<EndEvent> endEvents = EMFUtil.getAll(resource, EndEvent.class);
-			if(endEvents != null && endEvents.size()>0) {
-				EndEvent endEvent = EcoreUtil.copy(endEvents.get(0));
-				endEvent.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(endEvent, resource);
-				return endEvent;
+			if(resource != null) {
+				List<EndEvent> endEvents = EMFUtil.getAll(resource, EndEvent.class);
+				if(endEvents != null && endEvents.size()>0) {
+					EndEvent endEvent = EcoreUtil.copy(endEvents.get(0));
+					endEvent.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(endEvent, resource);
+					return endEvent;
+				}
 			}
 			return super.createBusinessObject(context);
 		}

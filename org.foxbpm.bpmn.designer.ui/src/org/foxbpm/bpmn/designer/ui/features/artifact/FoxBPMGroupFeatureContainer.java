@@ -222,13 +222,15 @@ public class FoxBPMGroupFeatureContainer extends GroupFeatureContainer {
 
 		@Override
 		public Group getBusinessObject(ICreateContext context) {
-			List<Group> groups = EMFUtil.getAll(resource, Group.class);
-			if(groups != null && groups.size()>0) {
-				Group group = EcoreUtil.copy(groups.get(0));
-				group.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(group, resource);
-				return group;
+			if(resource!=null) {
+				List<Group> groups = EMFUtil.getAll(resource, Group.class);
+				if(groups != null && groups.size()>0) {
+					Group group = EcoreUtil.copy(groups.get(0));
+					group.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(group, resource);
+					return group;
+				}
 			}
 			return super.getBusinessObject(context);
 		}
