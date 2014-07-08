@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getDataVariableType <em>Data Variable Type</em>}</li>
- *   <li>{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getFixFlowDataVariable <em>Fix Flow Data Variable</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getFoxBPMDataVariable <em>Fox BPM Data Variable</em>}</li>
  *   <li>{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getDataVariableDataType <em>Data Variable Data Type</em>}</li>
  *   <li>{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getDataVariableBizTypeConfig <em>Data Variable Biz Type Config</em>}</li>
  * </ul>
@@ -54,21 +54,21 @@ public interface DataVariableConfig extends EObject {
 	void setDataVariableType(DataVariableType value);
 
 	/**
-	 * Returns the value of the '<em><b>Fix Flow Data Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable}.
+	 * Returns the value of the '<em><b>Fox BPM Data Variable</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Fix Flow Data Variable</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Fox BPM Data Variable</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fix Flow Data Variable</em>' containment reference list.
-	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getDataVariableConfig_FixFlowDataVariable()
+	 * @return the value of the '<em>Fox BPM Data Variable</em>' containment reference list.
+	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getDataVariableConfig_FoxBPMDataVariable()
 	 * @model containment="true"
-	 *        extendedMetaData="name='fixFlowDataVariable' kind='element'"
+	 *        extendedMetaData="name='foxBPMDataVariable' kind='element'"
 	 * @generated
 	 */
-	EList<FixFlowDataVariable> getFixFlowDataVariable();
+	EList<FoxBPMDataVariable> getFoxBPMDataVariable();
 
 	/**
 	 * Returns the value of the '<em><b>Data Variable Data Type</b></em>' containment reference.

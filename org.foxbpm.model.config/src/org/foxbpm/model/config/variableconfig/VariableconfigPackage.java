@@ -144,13 +144,13 @@ public interface VariableconfigPackage extends EPackage {
 	int DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Fix Flow Data Variable</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Fox BPM Data Variable</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE = 1;
+	int DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE = 1;
 
 	/**
 	 * The feature id for the '<em><b>Data Variable Data Type</b></em>' containment reference.
@@ -364,14 +364,14 @@ public interface VariableconfigPackage extends EPackage {
 	int DATA_TYPE_DEF_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl <em>Fix Flow Data Variable</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl <em>Fox BPM Data Variable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl
-	 * @see org.foxbpm.model.config.variableconfig.impl.VariableconfigPackageImpl#getFixFlowDataVariable()
+	 * @see org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl
+	 * @see org.foxbpm.model.config.variableconfig.impl.VariableconfigPackageImpl#getFoxBPMDataVariable()
 	 * @generated
 	 */
-	int FIX_FLOW_DATA_VARIABLE = 6;
+	int FOX_BPM_DATA_VARIABLE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Data Variable Def</b></em>' containment reference list.
@@ -380,7 +380,7 @@ public interface VariableconfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF = 0;
+	int FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF = 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -389,25 +389,25 @@ public interface VariableconfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_DATA_VARIABLE__TYPE = 1;
+	int FOX_BPM_DATA_VARIABLE__TYPE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Fix Flow Data Variable</em>' class.
+	 * The number of structural features of the '<em>Fox BPM Data Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_DATA_VARIABLE_FEATURE_COUNT = 2;
+	int FOX_BPM_DATA_VARIABLE_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of operations of the '<em>Fix Flow Data Variable</em>' class.
+	 * The number of operations of the '<em>Fox BPM Data Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIX_FLOW_DATA_VARIABLE_OPERATION_COUNT = 0;
+	int FOX_BPM_DATA_VARIABLE_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.variableconfig.impl.DataVariableDefImpl <em>Data Variable Def</em>}' class.
@@ -642,15 +642,15 @@ public interface VariableconfigPackage extends EPackage {
 	EReference getDataVariableConfig_DataVariableType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getFixFlowDataVariable <em>Fix Flow Data Variable</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getFoxBPMDataVariable <em>Fox BPM Data Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Fix Flow Data Variable</em>'.
-	 * @see org.foxbpm.model.config.variableconfig.DataVariableConfig#getFixFlowDataVariable()
+	 * @return the meta object for the containment reference list '<em>Fox BPM Data Variable</em>'.
+	 * @see org.foxbpm.model.config.variableconfig.DataVariableConfig#getFoxBPMDataVariable()
 	 * @see #getDataVariableConfig()
 	 * @generated
 	 */
-	EReference getDataVariableConfig_FixFlowDataVariable();
+	EReference getDataVariableConfig_FoxBPMDataVariable();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.variableconfig.DataVariableConfig#getDataVariableDataType <em>Data Variable Data Type</em>}'.
@@ -792,36 +792,36 @@ public interface VariableconfigPackage extends EPackage {
 	EAttribute getDataTypeDef_Id();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable <em>Fix Flow Data Variable</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable <em>Fox BPM Data Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Fix Flow Data Variable</em>'.
-	 * @see org.foxbpm.model.config.variableconfig.FixFlowDataVariable
+	 * @return the meta object for class '<em>Fox BPM Data Variable</em>'.
+	 * @see org.foxbpm.model.config.variableconfig.FoxBPMDataVariable
 	 * @generated
 	 */
-	EClass getFixFlowDataVariable();
+	EClass getFoxBPMDataVariable();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getDataVariableDef <em>Data Variable Def</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getDataVariableDef <em>Data Variable Def</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Data Variable Def</em>'.
-	 * @see org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getDataVariableDef()
-	 * @see #getFixFlowDataVariable()
+	 * @see org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getDataVariableDef()
+	 * @see #getFoxBPMDataVariable()
 	 * @generated
 	 */
-	EReference getFixFlowDataVariable_DataVariableDef();
+	EReference getFoxBPMDataVariable_DataVariableDef();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getType <em>Type</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getType()
-	 * @see #getFixFlowDataVariable()
+	 * @see org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getType()
+	 * @see #getFoxBPMDataVariable()
 	 * @generated
 	 */
-	EAttribute getFixFlowDataVariable_Type();
+	EAttribute getFoxBPMDataVariable_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.variableconfig.DataVariableDef <em>Data Variable Def</em>}'.
@@ -1025,12 +1025,12 @@ public interface VariableconfigPackage extends EPackage {
 		EReference DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE = eINSTANCE.getDataVariableConfig_DataVariableType();
 
 		/**
-		 * The meta object literal for the '<em><b>Fix Flow Data Variable</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Fox BPM Data Variable</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE = eINSTANCE.getDataVariableConfig_FixFlowDataVariable();
+		EReference DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE = eINSTANCE.getDataVariableConfig_FoxBPMDataVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Variable Data Type</b></em>' containment reference feature.
@@ -1145,14 +1145,14 @@ public interface VariableconfigPackage extends EPackage {
 		EAttribute DATA_TYPE_DEF__ID = eINSTANCE.getDataTypeDef_Id();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl <em>Fix Flow Data Variable</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl <em>Fox BPM Data Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl
-		 * @see org.foxbpm.model.config.variableconfig.impl.VariableconfigPackageImpl#getFixFlowDataVariable()
+		 * @see org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl
+		 * @see org.foxbpm.model.config.variableconfig.impl.VariableconfigPackageImpl#getFoxBPMDataVariable()
 		 * @generated
 		 */
-		EClass FIX_FLOW_DATA_VARIABLE = eINSTANCE.getFixFlowDataVariable();
+		EClass FOX_BPM_DATA_VARIABLE = eINSTANCE.getFoxBPMDataVariable();
 
 		/**
 		 * The meta object literal for the '<em><b>Data Variable Def</b></em>' containment reference list feature.
@@ -1160,7 +1160,7 @@ public interface VariableconfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF = eINSTANCE.getFixFlowDataVariable_DataVariableDef();
+		EReference FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF = eINSTANCE.getFoxBPMDataVariable_DataVariableDef();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
@@ -1168,7 +1168,7 @@ public interface VariableconfigPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIX_FLOW_DATA_VARIABLE__TYPE = eINSTANCE.getFixFlowDataVariable_Type();
+		EAttribute FOX_BPM_DATA_VARIABLE__TYPE = eINSTANCE.getFoxBPMDataVariable_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.variableconfig.impl.DataVariableDefImpl <em>Data Variable Def</em>}' class.

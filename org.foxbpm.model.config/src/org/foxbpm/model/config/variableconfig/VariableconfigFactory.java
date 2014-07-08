@@ -76,13 +76,13 @@ public interface VariableconfigFactory extends EFactory {
 	DataTypeDef createDataTypeDef();
 
 	/**
-	 * Returns a new object of class '<em>Fix Flow Data Variable</em>'.
+	 * Returns a new object of class '<em>Fox BPM Data Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Fix Flow Data Variable</em>'.
+	 * @return a new object of class '<em>Fox BPM Data Variable</em>'.
 	 * @generated
 	 */
-	FixFlowDataVariable createFixFlowDataVariable();
+	FoxBPMDataVariable createFoxBPMDataVariable();
 
 	/**
 	 * Returns a new object of class '<em>Data Variable Def</em>'.

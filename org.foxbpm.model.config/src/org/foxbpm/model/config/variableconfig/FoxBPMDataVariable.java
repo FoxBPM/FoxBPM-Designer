@@ -8,22 +8,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Fix Flow Data Variable</b></em>'.
+ * A representation of the model object '<em><b>Fox BPM Data Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getDataVariableDef <em>Data Variable Def</em>}</li>
- *   <li>{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getDataVariableDef <em>Data Variable Def</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFixFlowDataVariable()
- * @model extendedMetaData="name='fixFlowDataVariable'"
+ * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFoxBPMDataVariable()
+ * @model extendedMetaData="name='foxBPMDataVariable'"
  * @generated
  */
-public interface FixFlowDataVariable extends EObject {
+public interface FoxBPMDataVariable extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Data Variable Def</b></em>' containment reference list.
 	 * The list contents are of type {@link org.foxbpm.model.config.variableconfig.DataVariableDef}.
@@ -34,7 +34,7 @@ public interface FixFlowDataVariable extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Variable Def</em>' containment reference list.
-	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFixFlowDataVariable_DataVariableDef()
+	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFoxBPMDataVariable_DataVariableDef()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element' name='dataVariableDef'"
 	 * @generated
@@ -51,7 +51,7 @@ public interface FixFlowDataVariable extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' attribute.
 	 * @see #setType(String)
-	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFixFlowDataVariable_Type()
+	 * @see org.foxbpm.model.config.variableconfig.VariableconfigPackage#getFoxBPMDataVariable_Type()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String" required="true"
 	 *        extendedMetaData="name='type' namespace='' kind='attribute'"
 	 * @generated
@@ -59,7 +59,7 @@ public interface FixFlowDataVariable extends EObject {
 	String getType();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable#getType <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Type</em>' attribute.
@@ -68,4 +68,4 @@ public interface FixFlowDataVariable extends EObject {
 	 */
 	void setType(String value);
 
-} // FixFlowDataVariable
+} // FoxBPMDataVariable

@@ -102,9 +102,9 @@ public class VariableconfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE: {
-				FixFlowDataVariable fixFlowDataVariable = (FixFlowDataVariable)theEObject;
-				T result = caseFixFlowDataVariable(fixFlowDataVariable);
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE: {
+				FoxBPMDataVariable foxBPMDataVariable = (FoxBPMDataVariable)theEObject;
+				T result = caseFoxBPMDataVariable(foxBPMDataVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -221,17 +221,17 @@ public class VariableconfigSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Fix Flow Data Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Fox BPM Data Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Fix Flow Data Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Fox BPM Data Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFixFlowDataVariable(FixFlowDataVariable object) {
+	public T caseFoxBPMDataVariable(FoxBPMDataVariable object) {
 		return null;
 	}
 

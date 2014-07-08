@@ -19,24 +19,24 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
-import org.foxbpm.model.config.variableconfig.FixFlowDataVariable;
+import org.foxbpm.model.config.variableconfig.FoxBPMDataVariable;
 import org.foxbpm.model.config.variableconfig.VariableconfigPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Fix Flow Data Variable</b></em>'.
+ * An implementation of the model object '<em><b>Fox BPM Data Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl#getDataVariableDef <em>Data Variable Def</em>}</li>
- *   <li>{@link org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl#getDataVariableDef <em>Data Variable Def</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implements FixFlowDataVariable {
+public class FoxBPMDataVariableImpl extends MinimalEObjectImpl.Container implements FoxBPMDataVariable {
 	/**
 	 * The cached value of the '{@link #getDataVariableDef() <em>Data Variable Def</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -72,7 +72,7 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FixFlowDataVariableImpl() {
+	protected FoxBPMDataVariableImpl() {
 		super();
 	}
 
@@ -83,7 +83,7 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return VariableconfigPackage.Literals.FIX_FLOW_DATA_VARIABLE;
+		return VariableconfigPackage.Literals.FOX_BPM_DATA_VARIABLE;
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	 */
 	public EList<DataVariableDef> getDataVariableDef() {
 		if (dataVariableDef == null) {
-			dataVariableDef = new EObjectContainmentEList<DataVariableDef>(DataVariableDef.class, this, VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF);
+			dataVariableDef = new EObjectContainmentEList<DataVariableDef>(DataVariableDef.class, this, VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF);
 		}
 		return dataVariableDef;
 	}
@@ -116,7 +116,7 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 		String oldType = type;
 		type = newType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__TYPE, oldType, type));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableconfigPackage.FOX_BPM_DATA_VARIABLE__TYPE, oldType, type));
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF:
 				return ((InternalEList<?>)getDataVariableDef()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -141,9 +141,9 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF:
 				return getDataVariableDef();
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__TYPE:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__TYPE:
 				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -158,11 +158,11 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF:
 				getDataVariableDef().clear();
 				getDataVariableDef().addAll((Collection<? extends DataVariableDef>)newValue);
 				return;
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__TYPE:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__TYPE:
 				setType((String)newValue);
 				return;
 		}
@@ -177,10 +177,10 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF:
 				getDataVariableDef().clear();
 				return;
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__TYPE:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
 		}
@@ -195,9 +195,9 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF:
 				return dataVariableDef != null && !dataVariableDef.isEmpty();
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE__TYPE:
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 		}
 		return super.eIsSet(featureID);
@@ -219,4 +219,4 @@ public class FixFlowDataVariableImpl extends MinimalEObjectImpl.Container implem
 		return result.toString();
 	}
 
-} //FixFlowDataVariableImpl
+} //FoxBPMDataVariableImpl
