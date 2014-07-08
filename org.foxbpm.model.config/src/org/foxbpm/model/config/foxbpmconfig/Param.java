@@ -2,6 +2,7 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -14,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getKey <em>Key</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getValue <em>Value</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getParams <em>Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,5 +75,22 @@ public interface Param extends EObject {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Params</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.Param}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Params</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Params</em>' containment reference list.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getParam_Params()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
+	 * @generated
+	 */
+	EList<Param> getParams();
 
 } // Param

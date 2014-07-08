@@ -2,13 +2,19 @@
  */
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.Param;
 
@@ -21,6 +27,7 @@ import org.foxbpm.model.config.foxbpmconfig.Param;
  * <ul>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getKey <em>Key</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getParams <em>Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,6 +73,16 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * @ordered
 	 */
 	protected String value = VALUE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParams()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Param> params;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +150,32 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Param> getParams() {
+		if (params == null) {
+			params = new EObjectContainmentEList<Param>(Param.class, this, FoxBPMConfigPackage.PARAM__PARAMS);
+		}
+		return params;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FoxBPMConfigPackage.PARAM__PARAMS:
+				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -140,6 +183,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return getKey();
 			case FoxBPMConfigPackage.PARAM__VALUE:
 				return getValue();
+			case FoxBPMConfigPackage.PARAM__PARAMS:
+				return getParams();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -149,6 +194,7 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -157,6 +203,10 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return;
 			case FoxBPMConfigPackage.PARAM__VALUE:
 				setValue((String)newValue);
+				return;
+			case FoxBPMConfigPackage.PARAM__PARAMS:
+				getParams().clear();
+				getParams().addAll((Collection<? extends Param>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,6 +226,9 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 			case FoxBPMConfigPackage.PARAM__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case FoxBPMConfigPackage.PARAM__PARAMS:
+				getParams().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,6 +245,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
 			case FoxBPMConfigPackage.PARAM__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case FoxBPMConfigPackage.PARAM__PARAMS:
+				return params != null && !params.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

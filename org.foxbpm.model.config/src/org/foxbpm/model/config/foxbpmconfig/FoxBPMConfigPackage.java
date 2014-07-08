@@ -683,13 +683,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__PARAMS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 2;
+	int PARAM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -1435,6 +1444,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getParam_Value();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.Param#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getParams()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EReference getParam_Params();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2030,6 +2050,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAM__VALUE = eINSTANCE.getParam_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAM__PARAMS = eINSTANCE.getParam_Params();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
