@@ -90,9 +90,9 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
 import org.foxbpm.model.config.variableconfig.DataVariableType;
-import org.foxbpm.model.config.variableconfig.FixFlowDataVariable;
+import org.foxbpm.model.config.variableconfig.FoxBPMDataVariable;
 import org.foxbpm.model.config.variableconfig.Type;
-import org.foxbpm.model.config.variableconfig.impl.FixFlowDataVariableImpl;
+import org.foxbpm.model.config.variableconfig.impl.FoxBPMDataVariableImpl;
 
 public class FoxBPMExpDialog extends Dialog {
 	private DataBindingContext m_bindingContext;
@@ -110,7 +110,7 @@ public class FoxBPMExpDialog extends Dialog {
 	private FormParam formParam;
 	private TransactionalEditingDomain editingDomain;
 	private DataVariableConfig dataVariableConfig;
-	private Map<String, FixFlowDataVariable> typeToDataVariableMap;//维护dataVariableType到FixFlowDataVariable的映射
+	private Map<String, FoxBPMDataVariable> typeToDataVariableMap;//维护dataVariableType到FoxBPMDataVariable的映射
 	private static final Object[] EMPTY_ARRAY=new Object[0];
 	private static final String EMPTY_STRING="";
 
@@ -124,7 +124,7 @@ public class FoxBPMExpDialog extends Dialog {
 		super(parentShell);
 		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
 		loadDataVariableConfig();
-		MapFixFlowDataVariableWithType();
+		MapFoxBPMDataVariableWithType();
 	}
 
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
@@ -216,8 +216,8 @@ public class FoxBPMExpDialog extends Dialog {
 			@Override
 			public String getText(Object element) {
 				org.foxbpm.model.config.variableconfig.Type type=(Type)element;
-				FixFlowDataVariable fixFlowDataVariable=typeToDataVariableMap.get(type.getId());
-				int size=fixFlowDataVariable==null?0:fixFlowDataVariable.getDataVariableDef().size();
+				FoxBPMDataVariable FoxBPMDataVariable=typeToDataVariableMap.get(type.getId());
+				int size=FoxBPMDataVariable==null?0:FoxBPMDataVariable.getDataVariableDef().size();
 				return type.getName() + "(" + size + ")";
 			}
 			
@@ -257,12 +257,12 @@ public class FoxBPMExpDialog extends Dialog {
 					return;
 				}
 				Type selectedType=(Type)((IStructuredSelection)selection).getFirstElement();
-				FixFlowDataVariable fixFlowDataVariable=typeToDataVariableMap.get(selectedType.getId());
-				if (fixFlowDataVariable==null) {
+				FoxBPMDataVariable FoxBPMDataVariable=typeToDataVariableMap.get(selectedType.getId());
+				if (FoxBPMDataVariable==null) {
 					functionTreeViewer.setInput(EMPTY_ARRAY);
 					docText.setText(EMPTY_STRING);
 				}else {
-					functionTreeViewer.setInput(fixFlowDataVariable);
+					functionTreeViewer.setInput(FoxBPMDataVariable);
 				}
 				
 			}
@@ -579,20 +579,20 @@ public class FoxBPMExpDialog extends Dialog {
 	}
 	
 	/**
-	 * 映射dataVariableType到fixFlowDataVariable
+	 * 映射dataVariableType到FoxBPMDataVariable
 	 */
-	private void MapFixFlowDataVariableWithType(){
+	private void MapFoxBPMDataVariableWithType(){
 		if (dataVariableConfig==null) {
 			return;
 		}
-		typeToDataVariableMap=new HashMap<String, FixFlowDataVariable>();
+		typeToDataVariableMap=new HashMap<String, FoxBPMDataVariable>();
 		DataVariableType dataVariableType=dataVariableConfig.getDataVariableType();
-		EList<FixFlowDataVariable> fixFlowDataVariableList=dataVariableConfig.getFixFlowDataVariable();
+		EList<FoxBPMDataVariable> FoxBPMDataVariableList=dataVariableConfig.getFoxBPMDataVariable();
 		for (Type type : dataVariableType.getType()) {
 			String type_id=type.getId();
-			for (FixFlowDataVariable fixFlowDataVariable : fixFlowDataVariableList) {
-				if (type_id.equals(fixFlowDataVariable.getType())) {
-					typeToDataVariableMap.put(type_id, fixFlowDataVariable);
+			for (FoxBPMDataVariable FoxBPMDataVariable : FoxBPMDataVariableList) {
+				if (type_id.equals(FoxBPMDataVariable.getType())) {
+					typeToDataVariableMap.put(type_id, FoxBPMDataVariable);
 					break;
 				}
 			}
@@ -648,9 +648,9 @@ public class FoxBPMExpDialog extends Dialog {
 
 		@Override
 		public Object[] getChildren(Object parentElement) {
-			if (parentElement instanceof FixFlowDataVariableImpl) {
-				FixFlowDataVariableImpl fixFlowDataVariable=(FixFlowDataVariableImpl)parentElement;
-				return fixFlowDataVariable.getDataVariableDef().toArray();
+			if (parentElement instanceof FoxBPMDataVariableImpl) {
+				FoxBPMDataVariableImpl FoxBPMDataVariable=(FoxBPMDataVariableImpl)parentElement;
+				return FoxBPMDataVariable.getDataVariableDef().toArray();
 			}
 			return EMPTY_ARRAY;
 		}
