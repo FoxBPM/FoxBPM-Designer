@@ -278,7 +278,7 @@ public class RuntimeConnectorUtil {
 					public void run() {
 						boolean b = MessageDialog.openConfirm(null, "提示", FoxBPMDesignerUtil.getServicePath() + "\n目录不存在，是否创建该目录？");
 						if (b) {
-							new File(servicePath).mkdir();
+							new File(servicePath).mkdirs();
 						} else {
 							return;
 						}
