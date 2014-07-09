@@ -52,10 +52,10 @@
         <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fixFlowDataVariable" upperBound="-1"
-        eType="#//FixFlowDataVariable" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="foxBPMDataVariable" upperBound="-1"
+        eType="#//FoxBPMDataVariable" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value="fixFlowDataVariable"/>
+        <details key="name" value="foxBPMDataVariable"/>
         <details key="kind" value="element"/>
       </eAnnotations>
     </eStructuralFeatures>
@@ -137,9 +137,9 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FixFlowDataVariable">
+  <eClassifiers xsi:type="ecore:EClass" name="FoxBPMDataVariable">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-      <details key="name" value="fixFlowDataVariable"/>
+      <details key="name" value="foxBPMDataVariable"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataVariableDef" upperBound="-1"
         eType="#//DataVariableDef" containment="true">

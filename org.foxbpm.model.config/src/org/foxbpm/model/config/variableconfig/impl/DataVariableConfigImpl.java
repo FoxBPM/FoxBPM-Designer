@@ -3,26 +3,20 @@
 package org.foxbpm.model.config.variableconfig.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.foxbpm.model.config.variableconfig.DataVariableBizTypeConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableDataType;
 import org.foxbpm.model.config.variableconfig.DataVariableType;
-import org.foxbpm.model.config.variableconfig.FixFlowDataVariable;
+import org.foxbpm.model.config.variableconfig.FoxBPMDataVariable;
 import org.foxbpm.model.config.variableconfig.VariableconfigPackage;
 
 /**
@@ -33,7 +27,7 @@ import org.foxbpm.model.config.variableconfig.VariableconfigPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.foxbpm.model.config.variableconfig.impl.DataVariableConfigImpl#getDataVariableType <em>Data Variable Type</em>}</li>
- *   <li>{@link org.foxbpm.model.config.variableconfig.impl.DataVariableConfigImpl#getFixFlowDataVariable <em>Fix Flow Data Variable</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.variableconfig.impl.DataVariableConfigImpl#getFoxBPMDataVariable <em>Fox BPM Data Variable</em>}</li>
  *   <li>{@link org.foxbpm.model.config.variableconfig.impl.DataVariableConfigImpl#getDataVariableDataType <em>Data Variable Data Type</em>}</li>
  *   <li>{@link org.foxbpm.model.config.variableconfig.impl.DataVariableConfigImpl#getDataVariableBizTypeConfig <em>Data Variable Biz Type Config</em>}</li>
  * </ul>
@@ -53,14 +47,14 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 	protected DataVariableType dataVariableType;
 
 	/**
-	 * The cached value of the '{@link #getFixFlowDataVariable() <em>Fix Flow Data Variable</em>}' containment reference list.
+	 * The cached value of the '{@link #getFoxBPMDataVariable() <em>Fox BPM Data Variable</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFixFlowDataVariable()
+	 * @see #getFoxBPMDataVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<FixFlowDataVariable> fixFlowDataVariable;
+	protected EList<FoxBPMDataVariable> foxBPMDataVariable;
 
 	/**
 	 * The cached value of the '{@link #getDataVariableDataType() <em>Data Variable Data Type</em>}' containment reference.
@@ -149,11 +143,11 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<FixFlowDataVariable> getFixFlowDataVariable() {
-		if (fixFlowDataVariable == null) {
-			fixFlowDataVariable = new EObjectContainmentEList<FixFlowDataVariable>(FixFlowDataVariable.class, this, VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE);
+	public EList<FoxBPMDataVariable> getFoxBPMDataVariable() {
+		if (foxBPMDataVariable == null) {
+			foxBPMDataVariable = new EObjectContainmentEList<FoxBPMDataVariable>(FoxBPMDataVariable.class, this, VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE);
 		}
-		return fixFlowDataVariable;
+		return foxBPMDataVariable;
 	}
 
 	/**
@@ -252,8 +246,8 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE:
 				return basicSetDataVariableType(null, msgs);
-			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE:
-				return ((InternalEList<?>)getFixFlowDataVariable()).basicRemove(otherEnd, msgs);
+			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE:
+				return ((InternalEList<?>)getFoxBPMDataVariable()).basicRemove(otherEnd, msgs);
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE:
 				return basicSetDataVariableDataType(null, msgs);
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_BIZ_TYPE_CONFIG:
@@ -272,8 +266,8 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE:
 				return getDataVariableType();
-			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE:
-				return getFixFlowDataVariable();
+			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE:
+				return getFoxBPMDataVariable();
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE:
 				return getDataVariableDataType();
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_BIZ_TYPE_CONFIG:
@@ -294,9 +288,9 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE:
 				setDataVariableType((DataVariableType)newValue);
 				return;
-			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE:
-				getFixFlowDataVariable().clear();
-				getFixFlowDataVariable().addAll((Collection<? extends FixFlowDataVariable>)newValue);
+			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE:
+				getFoxBPMDataVariable().clear();
+				getFoxBPMDataVariable().addAll((Collection<? extends FoxBPMDataVariable>)newValue);
 				return;
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE:
 				setDataVariableDataType((DataVariableDataType)newValue);
@@ -319,8 +313,8 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE:
 				setDataVariableType((DataVariableType)null);
 				return;
-			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE:
-				getFixFlowDataVariable().clear();
+			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE:
+				getFoxBPMDataVariable().clear();
 				return;
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE:
 				setDataVariableDataType((DataVariableDataType)null);
@@ -342,8 +336,8 @@ public class DataVariableConfigImpl extends MinimalEObjectImpl.Container impleme
 		switch (featureID) {
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE:
 				return dataVariableType != null;
-			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE:
-				return fixFlowDataVariable != null && !fixFlowDataVariable.isEmpty();
+			case VariableconfigPackage.DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE:
+				return foxBPMDataVariable != null && !foxBPMDataVariable.isEmpty();
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE:
 				return dataVariableDataType != null;
 			case VariableconfigPackage.DATA_VARIABLE_CONFIG__DATA_VARIABLE_BIZ_TYPE_CONFIG:

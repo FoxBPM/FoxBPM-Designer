@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
+import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 
 public class FoxBPMDesignerUtil {
 	public static final String PLUGIN_ID = "org.foxbpm.bpmn.designer.ui";
@@ -102,6 +103,14 @@ public class FoxBPMDesignerUtil {
 		return getServicePath() + "coreconfig/datavariableconfig.xml";
 	}
 	
+	/**
+	 * 返回数据变量配置对象
+	 * @return
+	 */
+	public static DataVariableConfig getDataVariableConfig(){
+		DataVariableConfig dataVariableConfig = (DataVariableConfig) EMFUtil.readEMFFile(FoxBPMDesignerUtil.getDataVariableConfigPath()).getContents().get(0);
+		return dataVariableConfig;
+	}
 	
 	/**
 	 * 拿到所有启用为true的TaskCommand对象

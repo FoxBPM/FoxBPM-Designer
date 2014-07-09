@@ -153,6 +153,20 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMConfigPackage.EVENT_LISTENER_CONFIG: {
+				EventListenerConfig eventListenerConfig = (EventListenerConfig)theEObject;
+				T result = caseEventListenerConfig(eventListenerConfig);
+				if (result == null) result = caseBaseConfig(eventListenerConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.EVENT_LISTENER: {
+				EventListener eventListener = (EventListener)theEObject;
+				T result = caseEventListener(eventListener);
+				if (result == null) result = caseBaseConfig(eventListener);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -349,6 +363,36 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScriptLanguage(ScriptLanguage object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event Listener Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event Listener Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventListenerConfig(EventListenerConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Event Listener</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Event Listener</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEventListener(EventListener object) {
 		return null;
 	}
 

@@ -532,6 +532,11 @@
         label="任务分配">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.variable.DataVariablePropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.variable"
+        label="数据变量">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.connector.ConnectorPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">

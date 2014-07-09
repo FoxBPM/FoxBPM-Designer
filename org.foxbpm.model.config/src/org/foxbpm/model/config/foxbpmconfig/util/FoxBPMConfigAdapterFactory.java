@@ -120,6 +120,14 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createScriptLanguageAdapter();
 			}
 			@Override
+			public Adapter caseEventListenerConfig(EventListenerConfig object) {
+				return createEventListenerConfigAdapter();
+			}
+			@Override
+			public Adapter caseEventListener(EventListener object) {
+				return createEventListenerAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -318,6 +326,34 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScriptLanguageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.EventListenerConfig <em>Event Listener Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListenerConfig
+	 * @generated
+	 */
+	public Adapter createEventListenerConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.EventListener <em>Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListener
+	 * @generated
+	 */
+	public Adapter createEventListenerAdapter() {
 		return null;
 	}
 

@@ -62,7 +62,7 @@ public class VariableconfigFactoryImpl extends EFactoryImpl implements Variablec
 			case VariableconfigPackage.TYPE: return createType();
 			case VariableconfigPackage.DATA_VARIABLE_DATA_TYPE: return createDataVariableDataType();
 			case VariableconfigPackage.DATA_TYPE_DEF: return createDataTypeDef();
-			case VariableconfigPackage.FIX_FLOW_DATA_VARIABLE: return createFixFlowDataVariable();
+			case VariableconfigPackage.FOX_BPM_DATA_VARIABLE: return createFoxBPMDataVariable();
 			case VariableconfigPackage.DATA_VARIABLE_DEF: return createDataVariableDef();
 			case VariableconfigPackage.DATA_VARIABLE_BIZ_TYPE_CONFIG: return createDataVariableBizTypeConfig();
 			case VariableconfigPackage.DATA_VARIABLE_BIZ_TYPE: return createDataVariableBizType();
@@ -136,9 +136,9 @@ public class VariableconfigFactoryImpl extends EFactoryImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FixFlowDataVariable createFixFlowDataVariable() {
-		FixFlowDataVariableImpl fixFlowDataVariable = new FixFlowDataVariableImpl();
-		return fixFlowDataVariable;
+	public FoxBPMDataVariable createFoxBPMDataVariable() {
+		FoxBPMDataVariableImpl foxBPMDataVariable = new FoxBPMDataVariableImpl();
+		return foxBPMDataVariable;
 	}
 
 	/**

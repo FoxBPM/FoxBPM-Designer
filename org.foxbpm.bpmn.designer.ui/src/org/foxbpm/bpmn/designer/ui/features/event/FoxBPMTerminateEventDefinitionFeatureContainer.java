@@ -107,13 +107,15 @@ public class FoxBPMTerminateEventDefinitionFeatureContainer extends TerminateEve
 
 		@Override
 		public TerminateEventDefinition getBusinessObject(ICreateContext context) {
-			List<TerminateEventDefinition> terminateEventDefinitions = EMFUtil.getAll(resource, TerminateEventDefinition.class);
-			if(terminateEventDefinitions != null && terminateEventDefinitions.size()>0) {
-				TerminateEventDefinition terminateEventDefinition = EcoreUtil.copy(terminateEventDefinitions.get(0));
-				terminateEventDefinition.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(terminateEventDefinition, resource);
-				return terminateEventDefinition;
+			if(resource!=null) {
+				List<TerminateEventDefinition> terminateEventDefinitions = EMFUtil.getAll(resource, TerminateEventDefinition.class);
+				if(terminateEventDefinitions != null && terminateEventDefinitions.size()>0) {
+					TerminateEventDefinition terminateEventDefinition = EcoreUtil.copy(terminateEventDefinitions.get(0));
+					terminateEventDefinition.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(terminateEventDefinition, resource);
+					return terminateEventDefinition;
+				}
 			}
 			return super.getBusinessObject(context);
 		}

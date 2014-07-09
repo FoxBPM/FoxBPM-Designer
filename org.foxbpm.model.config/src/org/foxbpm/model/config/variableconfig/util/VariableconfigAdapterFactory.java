@@ -92,8 +92,8 @@ public class VariableconfigAdapterFactory extends AdapterFactoryImpl {
 				return createDataTypeDefAdapter();
 			}
 			@Override
-			public Adapter caseFixFlowDataVariable(FixFlowDataVariable object) {
-				return createFixFlowDataVariableAdapter();
+			public Adapter caseFoxBPMDataVariable(FoxBPMDataVariable object) {
+				return createFoxBPMDataVariableAdapter();
 			}
 			@Override
 			public Adapter caseDataVariableDef(DataVariableDef object) {
@@ -212,16 +212,16 @@ public class VariableconfigAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.variableconfig.FixFlowDataVariable <em>Fix Flow Data Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.variableconfig.FoxBPMDataVariable <em>Fox BPM Data Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.config.variableconfig.FixFlowDataVariable
+	 * @see org.foxbpm.model.config.variableconfig.FoxBPMDataVariable
 	 * @generated
 	 */
-	public Adapter createFixFlowDataVariableAdapter() {
+	public Adapter createFoxBPMDataVariableAdapter() {
 		return null;
 	}
 

@@ -139,6 +139,24 @@ public interface FoxBPMConfigFactory extends EFactory {
 	ScriptLanguage createScriptLanguage();
 
 	/**
+	 * Returns a new object of class '<em>Event Listener Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Listener Config</em>'.
+	 * @generated
+	 */
+	EventListenerConfig createEventListenerConfig();
+
+	/**
+	 * Returns a new object of class '<em>Event Listener</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Event Listener</em>'.
+	 * @generated
+	 */
+	EventListener createEventListener();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

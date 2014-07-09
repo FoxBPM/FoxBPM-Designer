@@ -6,11 +6,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-
 import org.foxbpm.model.config.variableconfig.DataTypeDef;
 import org.foxbpm.model.config.variableconfig.DataVariableBizType;
 import org.foxbpm.model.config.variableconfig.DataVariableBizTypeConfig;
@@ -19,7 +16,7 @@ import org.foxbpm.model.config.variableconfig.DataVariableDataType;
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
 import org.foxbpm.model.config.variableconfig.DataVariableType;
 import org.foxbpm.model.config.variableconfig.DocumentRoot;
-import org.foxbpm.model.config.variableconfig.FixFlowDataVariable;
+import org.foxbpm.model.config.variableconfig.FoxBPMDataVariable;
 import org.foxbpm.model.config.variableconfig.Type;
 import org.foxbpm.model.config.variableconfig.VariableconfigFactory;
 import org.foxbpm.model.config.variableconfig.VariableconfigPackage;
@@ -78,7 +75,7 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass fixFlowDataVariableEClass = null;
+	private EClass foxBPMDataVariableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -233,7 +230,7 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDataVariableConfig_FixFlowDataVariable() {
+	public EReference getDataVariableConfig_FoxBPMDataVariable() {
 		return (EReference)dataVariableConfigEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -359,8 +356,8 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFixFlowDataVariable() {
-		return fixFlowDataVariableEClass;
+	public EClass getFoxBPMDataVariable() {
+		return foxBPMDataVariableEClass;
 	}
 
 	/**
@@ -368,8 +365,8 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFixFlowDataVariable_DataVariableDef() {
-		return (EReference)fixFlowDataVariableEClass.getEStructuralFeatures().get(0);
+	public EReference getFoxBPMDataVariable_DataVariableDef() {
+		return (EReference)foxBPMDataVariableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -377,8 +374,8 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFixFlowDataVariable_Type() {
-		return (EAttribute)fixFlowDataVariableEClass.getEStructuralFeatures().get(1);
+	public EAttribute getFoxBPMDataVariable_Type() {
+		return (EAttribute)foxBPMDataVariableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -516,7 +513,7 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 
 		dataVariableConfigEClass = createEClass(DATA_VARIABLE_CONFIG);
 		createEReference(dataVariableConfigEClass, DATA_VARIABLE_CONFIG__DATA_VARIABLE_TYPE);
-		createEReference(dataVariableConfigEClass, DATA_VARIABLE_CONFIG__FIX_FLOW_DATA_VARIABLE);
+		createEReference(dataVariableConfigEClass, DATA_VARIABLE_CONFIG__FOX_BPM_DATA_VARIABLE);
 		createEReference(dataVariableConfigEClass, DATA_VARIABLE_CONFIG__DATA_VARIABLE_DATA_TYPE);
 		createEReference(dataVariableConfigEClass, DATA_VARIABLE_CONFIG__DATA_VARIABLE_BIZ_TYPE_CONFIG);
 
@@ -535,9 +532,9 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 		createEAttribute(dataTypeDefEClass, DATA_TYPE_DEF__TYPE_VALUE);
 		createEAttribute(dataTypeDefEClass, DATA_TYPE_DEF__ID);
 
-		fixFlowDataVariableEClass = createEClass(FIX_FLOW_DATA_VARIABLE);
-		createEReference(fixFlowDataVariableEClass, FIX_FLOW_DATA_VARIABLE__DATA_VARIABLE_DEF);
-		createEAttribute(fixFlowDataVariableEClass, FIX_FLOW_DATA_VARIABLE__TYPE);
+		foxBPMDataVariableEClass = createEClass(FOX_BPM_DATA_VARIABLE);
+		createEReference(foxBPMDataVariableEClass, FOX_BPM_DATA_VARIABLE__DATA_VARIABLE_DEF);
+		createEAttribute(foxBPMDataVariableEClass, FOX_BPM_DATA_VARIABLE__TYPE);
 
 		dataVariableDefEClass = createEClass(DATA_VARIABLE_DEF);
 		createEAttribute(dataVariableDefEClass, DATA_VARIABLE_DEF__NAME);
@@ -595,7 +592,7 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 
 		initEClass(dataVariableConfigEClass, DataVariableConfig.class, "DataVariableConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataVariableConfig_DataVariableType(), this.getDataVariableType(), null, "dataVariableType", null, 1, 1, DataVariableConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDataVariableConfig_FixFlowDataVariable(), this.getFixFlowDataVariable(), null, "fixFlowDataVariable", null, 0, -1, DataVariableConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataVariableConfig_FoxBPMDataVariable(), this.getFoxBPMDataVariable(), null, "foxBPMDataVariable", null, 0, -1, DataVariableConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataVariableConfig_DataVariableDataType(), this.getDataVariableDataType(), null, "dataVariableDataType", null, 1, 1, DataVariableConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataVariableConfig_DataVariableBizTypeConfig(), this.getDataVariableBizTypeConfig(), null, "dataVariableBizTypeConfig", null, 0, 1, DataVariableConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -614,9 +611,9 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 		initEAttribute(getDataTypeDef_TypeValue(), theXMLTypePackage.getString(), "typeValue", null, 1, 1, DataTypeDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataTypeDef_Id(), theXMLTypePackage.getString(), "id", null, 1, 1, DataTypeDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(fixFlowDataVariableEClass, FixFlowDataVariable.class, "FixFlowDataVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFixFlowDataVariable_DataVariableDef(), this.getDataVariableDef(), null, "dataVariableDef", null, 0, -1, FixFlowDataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFixFlowDataVariable_Type(), theXMLTypePackage.getString(), "type", null, 1, 1, FixFlowDataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(foxBPMDataVariableEClass, FoxBPMDataVariable.class, "FoxBPMDataVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFoxBPMDataVariable_DataVariableDef(), this.getDataVariableDef(), null, "dataVariableDef", null, 0, -1, FoxBPMDataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFoxBPMDataVariable_Type(), theXMLTypePackage.getString(), "type", null, 1, 1, FoxBPMDataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataVariableDefEClass, DataVariableDef.class, "DataVariableDef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDataVariableDef_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, DataVariableDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -697,10 +694,10 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 			 "kind", "element"
 		   });		
 		addAnnotation
-		  (getDataVariableConfig_FixFlowDataVariable(), 
+		  (getDataVariableConfig_FoxBPMDataVariable(), 
 		   source, 
 		   new String[] {
-			 "name", "fixFlowDataVariable",
+			 "name", "foxBPMDataVariable",
 			 "kind", "element"
 		   });		
 		addAnnotation
@@ -789,20 +786,20 @@ public class VariableconfigPackageImpl extends EPackageImpl implements Variablec
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (fixFlowDataVariableEClass, 
+		  (foxBPMDataVariableEClass, 
 		   source, 
 		   new String[] {
-			 "name", "fixFlowDataVariable"
+			 "name", "foxBPMDataVariable"
 		   });		
 		addAnnotation
-		  (getFixFlowDataVariable_DataVariableDef(), 
+		  (getFoxBPMDataVariable_DataVariableDef(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
 			 "name", "dataVariableDef"
 		   });		
 		addAnnotation
-		  (getFixFlowDataVariable_Type(), 
+		  (getFoxBPMDataVariable_Type(), 
 		   source, 
 		   new String[] {
 			 "name", "type",

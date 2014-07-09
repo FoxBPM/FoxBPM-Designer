@@ -78,13 +78,15 @@ public class FoxBPMExclusiveGatewayFeatureContainer extends ExclusiveGatewayFeat
 
 		@Override
 		public ExclusiveGateway createBusinessObject(ICreateContext context) {
-			List<ExclusiveGateway> exclusiveGateways = EMFUtil.getAll(resource, ExclusiveGateway.class);
-			if(exclusiveGateways != null && exclusiveGateways.size()>0) {
-				ExclusiveGateway exclusiveGateway = EcoreUtil.copy(exclusiveGateways.get(0));
-				exclusiveGateway.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(exclusiveGateway, resource);
-				return exclusiveGateway;
+			if(resource!=null) {
+				List<ExclusiveGateway> exclusiveGateways = EMFUtil.getAll(resource, ExclusiveGateway.class);
+				if(exclusiveGateways != null && exclusiveGateways.size()>0) {
+					ExclusiveGateway exclusiveGateway = EcoreUtil.copy(exclusiveGateways.get(0));
+					exclusiveGateway.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(exclusiveGateway, resource);
+					return exclusiveGateway;
+				}
 			}
 			return super.createBusinessObject(context);
 		}

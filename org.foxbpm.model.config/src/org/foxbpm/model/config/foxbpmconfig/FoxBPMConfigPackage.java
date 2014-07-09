@@ -170,13 +170,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Event Listener Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG = BASE_CONFIG_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Fox BPM Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 6;
+	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Fox BPM Config</em>' class.
@@ -674,13 +683,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__VALUE = 1;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__PARAMS = 2;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 2;
+	int PARAM_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -894,6 +912,107 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int SCRIPT_LANGUAGE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.EventListenerConfigImpl <em>Event Listener Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.EventListenerConfigImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getEventListenerConfig()
+	 * @generated
+	 */
+	int EVENT_LISTENER_CONFIG = 13;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Event Listener</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_CONFIG__EVENT_LISTENER = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Event Listener Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Event Listener Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.EventListenerImpl <em>Event Listener</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.EventListenerImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getEventListener()
+	 * @generated
+	 */
+	int EVENT_LISTENER = 14;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Event Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__EVENT_TYPE = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Listener Class</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER__LISTENER_CLASS = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Event Listener</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT_LISTENER_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -968,6 +1087,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFoxBPMConfig_ScriptLanguageConfig();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getEventListenerConfig <em>Event Listener Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Event Listener Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getEventListenerConfig()
+	 * @see #getFoxBPMConfig()
+	 * @generated
+	 */
+	EReference getFoxBPMConfig_EventListenerConfig();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.SysMailConfig <em>Sys Mail Config</em>}'.
@@ -1314,6 +1444,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getParam_Value();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.Param#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getParams()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EReference getParam_Params();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1497,6 +1638,59 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getScriptLanguage_ClassImpl();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.EventListenerConfig <em>Event Listener Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Listener Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListenerConfig
+	 * @generated
+	 */
+	EClass getEventListenerConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.EventListenerConfig#getEventListener <em>Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Event Listener</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListenerConfig#getEventListener()
+	 * @see #getEventListenerConfig()
+	 * @generated
+	 */
+	EReference getEventListenerConfig_EventListener();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.EventListener <em>Event Listener</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Event Listener</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListener
+	 * @generated
+	 */
+	EClass getEventListener();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.EventListener#getEventType <em>Event Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Event Type</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListener#getEventType()
+	 * @see #getEventListener()
+	 * @generated
+	 */
+	EAttribute getEventListener_EventType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.EventListener#getListenerClass <em>Listener Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Listener Class</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.EventListener#getListenerClass()
+	 * @see #getEventListener()
+	 * @generated
+	 */
+	EAttribute getEventListener_ListenerClass();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1576,6 +1770,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG = eINSTANCE.getFoxBPMConfig_ScriptLanguageConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Event Listener Config</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG = eINSTANCE.getFoxBPMConfig_EventListenerConfig();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.SysMailConfigImpl <em>Sys Mail Config</em>}' class.
@@ -1850,6 +2052,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EAttribute PARAM__VALUE = eINSTANCE.getParam_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAM__PARAMS = eINSTANCE.getParam_Params();
+
+		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1992,6 +2202,50 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SCRIPT_LANGUAGE__CLASS_IMPL = eINSTANCE.getScriptLanguage_ClassImpl();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.EventListenerConfigImpl <em>Event Listener Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.EventListenerConfigImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getEventListenerConfig()
+		 * @generated
+		 */
+		EClass EVENT_LISTENER_CONFIG = eINSTANCE.getEventListenerConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Event Listener</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EVENT_LISTENER_CONFIG__EVENT_LISTENER = eINSTANCE.getEventListenerConfig_EventListener();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.EventListenerImpl <em>Event Listener</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.EventListenerImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getEventListener()
+		 * @generated
+		 */
+		EClass EVENT_LISTENER = eINSTANCE.getEventListener();
+
+		/**
+		 * The meta object literal for the '<em><b>Event Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_LISTENER__EVENT_TYPE = eINSTANCE.getEventListener_EventType();
+
+		/**
+		 * The meta object literal for the '<em><b>Listener Class</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT_LISTENER__LISTENER_CLASS = eINSTANCE.getEventListener_ListenerClass();
 
 	}
 
