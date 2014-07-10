@@ -201,7 +201,7 @@ public class FoxBPMExpViewer extends ContentViewer {
 			public void modifyText(ModifyEvent e) {
 				if(expression==null)
 					return;
-				if(!((Text)e.getSource()).getText().equals(expression.getName()) || expression.getName().equals(expression.getValue())) {
+				if(!((Text)e.getSource()).getText().equals(expression.getName()) && expression.getName().equals(expression.getValue())) {
 					FormalExpression formalExpression = Bpmn2Factory.eINSTANCE.createFormalExpression();
 					ModelUtil.setID(formalExpression,eObject.eResource());
 					formalExpression.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME, ((Text)e.getSource()).getText());
@@ -234,6 +234,8 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public void setExpression(Expression expression) {
 		this.expression = expression;
+		if(expression!=null && expression.getValue()!=null)
+			textControl.setText(expression.getValue());
 	}
 
 	public void seteObject(EObject eObject) {

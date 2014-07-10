@@ -118,7 +118,7 @@ public class ModifyRenameConnectorWizardPage extends WizardPage {
 		gd_connectDescriptionText.verticalAlignment = SWT.FILL;
 		gd_connectDescriptionText.horizontalAlignment = SWT.FILL;
 		connectDescriptionText.setLayoutData(gd_connectDescriptionText); // 布局
-		connectDescriptionText.setText(connectorInstance.getDocumentation().getValue() == null ? "" : connectorInstance.getDocumentation().getValue());
+		connectDescriptionText.setText(connectorInstance.getDocumentation()==null?"":connectorInstance.getDocumentation().getValue() == null ? "" : connectorInstance.getDocumentation().getValue());
 		connectDescriptionText.addModifyListener(new ModifyListener() {
 
 			public void modifyText(ModifyEvent e) {
