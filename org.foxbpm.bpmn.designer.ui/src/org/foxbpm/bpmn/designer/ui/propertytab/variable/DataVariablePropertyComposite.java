@@ -43,6 +43,7 @@ import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.variableconfig.DataVariableBizType;
+import org.eclipse.swt.widgets.Label;
 
 public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 	private Tree tree;
@@ -88,7 +89,9 @@ public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 		});
 
 		Composite buttonsComposite = new Composite(composite, SWT.NONE);
-		buttonsComposite.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		GridData gd_buttonsComposite = new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1);
+		gd_buttonsComposite.heightHint = 150;
+		buttonsComposite.setLayoutData(gd_buttonsComposite);
 		buttonsComposite.setSize(45, 139);
 		GridLayout gl_buttonsComposite = new GridLayout(1, false);
 		gl_buttonsComposite.verticalSpacing = 1;
@@ -140,34 +143,39 @@ public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 				}
 			}
 		});
+		
+				removeButton = new Button(buttonsComposite, SWT.NONE);
+				removeButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+				removeButton.setText("删除");
+				removeButton.addListener(SWT.Selection, new Listener() {
 
-		removeButton = new Button(buttonsComposite, SWT.NONE);
-		removeButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-		removeButton.setText("删除");
-		removeButton.addListener(SWT.Selection, new Listener() {
+					@SuppressWarnings("unchecked")
+					@Override
+					public void handleEvent(Event event) {
+						ISelection sel = treeViewer.getSelection();
+						if (sel == null)
+							return;
+						Object[] objs = ((IStructuredSelection) sel).toArray();
+						if (objs == null || objs.length == 0)
+							return;
+						boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+						if (!b)
+							return;
 
-			@SuppressWarnings("unchecked")
-			@Override
-			public void handleEvent(Event event) {
-				ISelection sel = treeViewer.getSelection();
-				if (sel == null)
-					return;
-				Object[] objs = ((IStructuredSelection) sel).toArray();
-				if (objs == null || objs.length == 0)
-					return;
-				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
-				if (!b)
-					return;
-
-				for (int i = 0; i < objs.length; i++) {
-					DataVariable col = (DataVariable) objs[i];
-					deleteDataVariable(col);
-					((List<DataVariable>) treeViewer.getInput()).remove(col);
-				}
-				treeViewer.refresh();
-				updateButtons();
-			}
-		});
+						for (int i = 0; i < objs.length; i++) {
+							DataVariable col = (DataVariable) objs[i];
+							deleteDataVariable(col);
+							((List<DataVariable>) treeViewer.getInput()).remove(col);
+						}
+						treeViewer.refresh();
+						updateButtons();
+					}
+				});
+		
+		Button importButton = new Button(buttonsComposite, SWT.NONE);
+		importButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		importButton.setText("导入...");
+		importButton.setVisible(false);
 
 		updateButtons();
 		return parent;
