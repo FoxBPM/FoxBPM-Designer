@@ -172,17 +172,16 @@ public class FoxBPMDesignerUtil {
 	}
 	
 	/**
-	 * 刷新项目
-	 * @param folder
-	 * @param type 类型 IResource.FOLDER,IResource.FILE
+	 * 刷新文件
+	 * @param file
 	 */
-	public static void refresh(String folder) {
+	public static void refresh(String file) {
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IPath location = Path.fromOSString(folder);
+		IPath location = Path.fromOSString(file);
 		
-		IFile file = workspace.getRoot().getFileForLocation(location);
+		IFile iFile = workspace.getRoot().getFileForLocation(location);
 		try {
-			file.refreshLocal(IResource.DEPTH_INFINITE, null);
+			iFile.refreshLocal(IResource.DEPTH_INFINITE, null);
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}

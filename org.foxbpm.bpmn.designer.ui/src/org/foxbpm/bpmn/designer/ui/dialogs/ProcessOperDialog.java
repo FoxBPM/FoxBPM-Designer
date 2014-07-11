@@ -20,10 +20,14 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.property.Properties;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.IInputValidator;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -46,6 +50,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.base.utils.ZipUtils;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
@@ -184,6 +189,57 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		createNewButton.setLayoutData(gd_createNewButton);
 		createNewButton.setBounds(0, 0, 80, 27);
 		createNewButton.setText("创建");
+		createNewButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
+				
+				IInputValidator inputValidator = new IInputValidator() {
+					@Override
+					public String isValid(String newText) {
+						if (newText==null || newText.isEmpty())
+							return "文件名不能为空";
+						if (newText.equals(iFile.getName())) {
+							return "文件名称不能相同";
+						}
+						return null;
+					}
+						
+				};
+				
+				InputDialog inputDialog = new InputDialog(null, "快速创建流程", "请输入流程的文件名", "Copy of " + iFile.getName(), inputValidator);
+				if(inputDialog.open()==inputDialog.OK) {
+					File sourceFile = new File(iFile.getLocationURI().getPath());
+					File targetFile = new File(iFile.getParent().getLocationURI().getPath() + "/" + inputDialog.getValue());
+					
+					File sourcePNGFile = new File(iFile.getLocationURI().getPath().substring(0, iFile.getLocationURI().getPath().lastIndexOf(".")+1) + "png");
+					File targetPNGFile = new File(iFile.getParent().getLocationURI().getPath() + "/" + inputDialog.getValue().substring(0, inputDialog.getValue().lastIndexOf(".")+1) + "png");
+					try {
+						FileUtil.copyFile(sourceFile, targetFile);
+						FileUtil.copyFile(sourcePNGFile, targetPNGFile);
+						
+						//文件置空dbid
+						Resource resource = EMFUtil.readEMFFile(iFile.getParent().getLocationURI().getPath() + "/" + inputDialog.getValue());
+						DocumentRoot documentRoot = (DocumentRoot) resource.getContents().get(0);
+						Definitions definitions = documentRoot.getDefinitions();
+						Process process = (Process) definitions.getRootElements().get(0);
+						process.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID, null);
+						resource.save(null);
+						
+						iFile.getParent().refreshLocal(IResource.DEPTH_INFINITE, null);
+						MessageDialog.openInformation(null, "提示", "创建流程成功");
+					} catch (IOException e) {
+						MessageDialog.openInformation(null, "提示", "创建流程失败，失败原因是:\n" + e.getMessage());
+						e.printStackTrace();
+					} catch (CoreException e) {
+						MessageDialog.openInformation(null, "提示", "创建流程失败，失败原因是:\n" + e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 		
 		publishButton = new Button(composite, SWT.NONE);
 		publishButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -301,11 +357,14 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				e1.printStackTrace();
 			}
 			
-			FoxBPMDesignerUtil.refresh(iFile.getLocationURI().getPath().substring(0, iFile.getLocationURI().getPath().lastIndexOf(File.separator)));
+			iFile.getParent().refreshLocal(IResource.DEPTH_INFINITE, null);
 			if(dbid!=null) {
 				MessageDialog.openInformation(null, "提示", "发布流程定义成功");
 			}
 		} catch (IOException e) {
+			MessageDialog.openInformation(null, "提示", "发布流程定义失败，失败原因是:\n" + e.getMessage());
+			e.printStackTrace();
+		} catch (CoreException e) {
 			MessageDialog.openInformation(null, "提示", "发布流程定义失败，失败原因是:\n" + e.getMessage());
 			e.printStackTrace();
 		}
@@ -375,7 +434,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				publishButton.setEnabled(true);
 			}
 			ClientResource client = null;
-			client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + curProcessId.substring(0, curProcessId.indexOf(".")));
+			client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + process.getId());
 			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
 			Representation result = client.get();
 			try {
@@ -423,9 +482,9 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			}
 		}
 		
-		//如果流程
+		//如果流程列表为空则可以创建
 		if(processTos.size()==0) {
-			
+			createNewButton.setEnabled(true);
 		}
 	}
 	
