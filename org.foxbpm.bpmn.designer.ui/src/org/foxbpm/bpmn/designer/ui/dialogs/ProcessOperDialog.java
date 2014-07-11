@@ -1,7 +1,10 @@
 package org.foxbpm.bpmn.designer.ui.dialogs;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,9 +23,11 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.property.Properties;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -73,6 +78,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private Button updateButton;
 	private Button downloadButton;
 	private Button deleteButton;
+	private IPackageFragmentRoot iPackageFragmentRoot;
 
 	/**
 	 * Create the dialog.
@@ -90,12 +96,13 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public ProcessOperDialog(Shell parentShell) {
+	public ProcessOperDialog(Shell parentShell, IPackageFragmentRoot iPackageFragmentRoot) {
 		super(parentShell);
 		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
 		setHelpAvailable(false);
 		this.iFile = null;
 		this.curProcessId = null;
+		this.iPackageFragmentRoot = iPackageFragmentRoot;
 	}
 	
 	/**
@@ -209,7 +216,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 						
 				};
 				
-				InputDialog inputDialog = new InputDialog(null, "快速创建流程", "请输入流程的文件名", "Copy of " + iFile.getName(), inputValidator);
+				InputDialog inputDialog = new InputDialog(null, "快速创建流程定义", "请输入流程定义的文件名", "Copy of " + iFile.getName(), inputValidator);
 				if(inputDialog.open()==inputDialog.OK) {
 					File sourceFile = new File(iFile.getLocationURI().getPath());
 					File targetFile = new File(iFile.getParent().getLocationURI().getPath() + "/" + inputDialog.getValue());
@@ -279,6 +286,78 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		downloadButton = new Button(composite, SWT.NONE);
 		downloadButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		downloadButton.setText("下载");
+		downloadButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
+				final IFolder iFolder = (IFolder) iPackageFragmentRoot.getResource();
+				
+				IInputValidator inputValidator = new IInputValidator() {
+					@Override
+					public String isValid(String newText) {
+						if (newText==null || newText.isEmpty())
+							return "文件名不能为空";
+						if (!newText.endsWith(".bpmn")) {
+							return "后缀名须为.bpmn";
+						}
+						if (iFolder.getFile(newText).exists()) {
+							return "已存在该名称的流程定义";
+						}
+						return null;
+					}
+						
+				};
+				
+				InputDialog inputDialog = new InputDialog(null, "下载流程定义", "请输入流程定义的文件名", "FileName.bpmn", inputValidator);
+				if(inputDialog.open()==inputDialog.OK) {
+					try {
+						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
+						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+						
+						String fileName = iPackageFragmentRoot.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
+
+						Representation result = client.get();
+						InputStream inputStream = result.getStream();
+						
+						BufferedInputStream inBuff = null;
+						BufferedOutputStream outBuff = null;
+						try {
+							// 新建文件输入流并对它进行缓冲
+							inBuff = new BufferedInputStream(inputStream);
+
+							// 新建文件输出流并对它进行缓冲
+							outBuff = new BufferedOutputStream(new FileOutputStream(new File(fileName)));
+
+							// 缓冲数组
+							byte[] b = new byte[1024 * 5];
+							int len;
+							while ((len = inBuff.read(b)) != -1) {
+								outBuff.write(b, 0, len);
+							}
+							// 刷新此缓冲的输出流
+							outBuff.flush();
+						} finally {
+							// 关闭流
+							if (inBuff != null)
+								inBuff.close();
+							if (outBuff != null)
+								outBuff.close();
+						}
+						
+						iPackageFragmentRoot.getCorrespondingResource().refreshLocal(IResource.DEPTH_INFINITE, null);
+						MessageDialog.openInformation(null, "提示", "下载流程定义成功");
+					} catch (IOException e) {
+						MessageDialog.openInformation(null, "提示", "下载流程定义失败，失败原因是:\n" + e.getMessage());
+						e.printStackTrace();
+					} catch (CoreException e) {
+						MessageDialog.openInformation(null, "提示", "下载流程定义失败，失败原因是:\n" + e.getMessage());
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 		
 		deleteButton = new Button(composite, SWT.NONE);
 		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -288,7 +367,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			@Override
 			public void handleEvent(Event event) {
 				if(tableViewer.getSelection()==null) {
-					MessageDialog.openInformation(null, "提示", "请先选中一条流程");
+					MessageDialog.openInformation(null, "提示", "请先选中一条流程定义");
 					return;
 				}
 				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
@@ -475,6 +554,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
 					processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
 					processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
+					processTo.setResourceName(json.get("resourceName")==null?"":json.get("resourceName").asText());
 					processTos.add(processTo);
 				}
 			} catch (IOException e) {
