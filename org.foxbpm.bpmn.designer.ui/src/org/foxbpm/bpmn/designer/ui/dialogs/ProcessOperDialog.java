@@ -138,11 +138,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					createNewButton.setEnabled(true);
 					updateButton.setEnabled(true);
 					deleteButton.setEnabled(true);
-				}else {
-					createNewButton.setEnabled(true);
-					deleteButton.setEnabled(true);
 				}
-				
 			}
 		});
 		table = tableViewer.getTable();
@@ -425,6 +421,11 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
+		
+		//如果流程
+		if(processTos.size()==0) {
+			
 		}
 	}
 	
