@@ -11,6 +11,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
 import org.eclipse.bpmn2.Definitions;
+import org.eclipse.bpmn2.DocumentRoot;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -19,9 +20,11 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.property.Properties;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -125,9 +128,21 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+				allButtonsDisable();
+				
 				IStructuredSelection iStructuredSelection = (IStructuredSelection) tableViewer.getSelection();
 				Object selected = iStructuredSelection.getFirstElement();
-				downloadButton.setEnabled(selected!=null);
+				if(iFile==null) {
+					downloadButton.setEnabled(selected!=null);
+				}else if(selected!= null && ((ProcessTo)selected).getProcessId().equals(dbid)) {
+					createNewButton.setEnabled(true);
+					updateButton.setEnabled(true);
+					deleteButton.setEnabled(true);
+				}else {
+					createNewButton.setEnabled(true);
+					deleteButton.setEnabled(true);
+				}
+				
 			}
 		});
 		table = tableViewer.getTable();
@@ -192,6 +207,22 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		updateButton.setEnabled(false);
 		updateButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		updateButton.setText("更新");
+		updateButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				if(tableViewer.getSelection()==null) {
+					MessageDialog.openInformation(null, "提示", "请先选中一条流程");
+					return;
+				}
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
+				updateProcess(processTo);
+				initTreeViewer();
+				initDataBindings();
+				tableViewer.refresh();
+			}
+		});
 		
 		downloadButton = new Button(composite, SWT.NONE);
 		downloadButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
@@ -200,6 +231,22 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		deleteButton = new Button(composite, SWT.NONE);
 		deleteButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		deleteButton.setText("删除");
+		deleteButton.addListener(SWT.Selection, new Listener() {
+
+			@Override
+			public void handleEvent(Event event) {
+				if(tableViewer.getSelection()==null) {
+					MessageDialog.openInformation(null, "提示", "请先选中一条流程");
+					return;
+				}
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
+				deleteProcess(processTo);
+				initTreeViewer();
+				initDataBindings();
+				tableViewer.refresh();
+			}
+		});
 
 		initTreeViewer();
 		m_bindingContext = initDataBindings();
@@ -229,6 +276,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	}
 
 	private void publishProcess() {
+		dbid = null;
 		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployments");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		File file = null;
@@ -243,53 +291,118 @@ public class ProcessOperDialog extends TitleAreaDialog {
 
 			Representation deployInput = new InputRepresentation(input);
 			Representation result = client.post(deployInput);
-			dbid = result.toString();
-			result.write(System.out);
+			dbid = result.getText();
+			
+			//往文件里面写入dbid
+			Resource resource = EMFUtil.readEMFFile(iFile.getLocationURI().getPath());
+			DocumentRoot documentRoot = (DocumentRoot) resource.getContents().get(0);
+			Definitions definitions = documentRoot.getDefinitions();
+			Process process = (Process) definitions.getRootElements().get(0);
+			process.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID, dbid);
+			try {
+				resource.save(null);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			FoxBPMDesignerUtil.refresh(iFile.getLocationURI().getPath().substring(0, iFile.getLocationURI().getPath().lastIndexOf(File.separator)));
+			if(dbid!=null) {
+				MessageDialog.openInformation(null, "提示", "发布流程定义成功");
+			}
 		} catch (IOException e) {
+			MessageDialog.openInformation(null, "提示", "发布流程定义失败，失败原因是:\n" + e.getMessage());
 			e.printStackTrace();
 		}
 	}
 	
+	private void updateProcess(ProcessTo processTo) {
+		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId());
+		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+		File file = null;
+		try {
+			String processPath = iFile.getLocationURI().getPath();
+			String pngPath = processPath.substring(0, processPath.lastIndexOf(".")) + ".png";
+			String[] files = new String[]{processPath, pngPath};
+			file = File.createTempFile(System.currentTimeMillis() + "process", ".zip");
+			ZipUtils.zipMultiFile(files, file);
+
+			InputStream input = new FileInputStream(file);
+
+			Representation deployInput = new InputRepresentation(input);
+			Representation result = client.put(deployInput);
+			if(result.getText().equals("SUCCESS")) {
+				MessageDialog.openInformation(null, "提示", "更新流程定义成功");
+			}
+		} catch (IOException e) {
+			MessageDialog.openInformation(null, "提示", "更新流程定义失败，失败原因是:\n" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	private void deleteProcess(ProcessTo processTo) {
+		boolean b = MessageDialog.openConfirm(null, "提示", "即将删除此流程定义及和该流程相关的数据，是否确认该操作?");
+		if(b) {
+			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId());
+			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+			File file = null;
+			try {
+				String processPath = iFile.getLocationURI().getPath();
+				String pngPath = processPath.substring(0, processPath.lastIndexOf(".")) + ".png";
+				String[] files = new String[]{processPath, pngPath};
+				file = File.createTempFile(System.currentTimeMillis() + "process", ".zip");
+				ZipUtils.zipMultiFile(files, file);
+
+				Representation result = client.delete();
+				if(result.getText().equals("SUCCESS")) {
+					MessageDialog.openInformation(null, "提示", "删除流程定义成功");
+				}
+				
+			} catch (IOException e) {
+				MessageDialog.openInformation(null, "提示", "删除流程定义失败，失败原因是:\n" + e.getMessage());
+				e.printStackTrace();
+			}
+		} 
+	}
+	
 	private void initTreeViewer() {
+		allButtonsDisable();
 		processTos = new ArrayList<ProcessTo>();
 		
 		if(iFile!=null) {
 			Definitions definitions = ModelUtil.getDefinitions(EMFUtil.readEMFFile(iFile.getLocationURI().getPath()));
 			Process process = (Process) definitions.getRootElements().get(0);
+			dbid = process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID)==null?null:process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID).toString();
 			if(dbid == null) {
 				Object processDbid = process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID);
 				dbid = processDbid==null?null:processDbid.toString();
+				createNewButton.setEnabled(true);
+				publishButton.setEnabled(true);
 			}
 			ClientResource client = null;
-			if(dbid != null) {
-				client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + dbid);
-				client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
-				Representation result = client.get();
-				try {
-					ObjectMapper objectMapper = new ObjectMapper();
-					String resultString = result.getText();
-					JsonNode object= objectMapper.readTree(resultString);
-					System.out.println(resultString);
-					ArrayNode dataArray = (ArrayNode)object.get("data");
-					
-					for(JsonNode json :dataArray){
-						ProcessTo processTo = new ProcessTo();
-						processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
-						processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
-						processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
-						processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
-						processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
-						processTos.add(processTo);
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
+			client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + curProcessId.substring(0, curProcessId.indexOf(".")));
+			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			Representation result = client.get();
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				String resultString = result.getText();
+				JsonNode object= objectMapper.readTree(resultString);
+				System.out.println(resultString);
+				ArrayNode dataArray = (ArrayNode)object.get("data");
+				
+				for(JsonNode json :dataArray){
+					ProcessTo processTo = new ProcessTo();
+					processTo.setProcessId(json.get("id")==null?"":json.get("id").asText());
+					processTo.setProcessKey(json.get("key")==null?"":json.get("key").asText());
+					processTo.setProcessName(json.get("name")==null?"":json.get("name").asText());
+					processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
+					processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
+					processTos.add(processTo);
 				}
-				publishButton.setEnabled(false);
-			} else{
-				updateButton.setEnabled(false);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			downloadButton.setEnabled(false);
 		}else {
+			allButtonsDisable();
 			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions");
 			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
 			Representation result = client.get();
@@ -312,14 +425,17 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			publishButton.setEnabled(false);
-			updateButton.setEnabled(false);
-			deleteButton.setEnabled(false);
-			createNewButton.setEnabled(false);
-			downloadButton.setEnabled(false);
 		}
 	}
+	
+	private void allButtonsDisable() {
+		createNewButton.setEnabled(false);
+		publishButton.setEnabled(false);
+		updateButton.setEnabled(false);
+		deleteButton.setEnabled(false);
+		downloadButton.setEnabled(false);
+	}
+	
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
