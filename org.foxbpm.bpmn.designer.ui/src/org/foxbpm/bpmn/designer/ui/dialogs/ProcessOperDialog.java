@@ -79,6 +79,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private Button downloadButton;
 	private Button deleteButton;
 	private IPackageFragmentRoot iPackageFragmentRoot;
+	private IFolder iFolder;
 
 	/**
 	 * Create the dialog.
@@ -103,6 +104,15 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		this.iFile = null;
 		this.curProcessId = null;
 		this.iPackageFragmentRoot = iPackageFragmentRoot;
+	}
+	
+	public ProcessOperDialog(Shell parentShell, IFolder iFolder) {
+		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		setHelpAvailable(false);
+		this.iFile = null;
+		this.curProcessId = null;
+		this.iFolder = iFolder;
 	}
 	
 	/**
@@ -292,17 +302,23 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			public void handleEvent(Event event) {
 				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
 				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
-				final IFolder iFolder = (IFolder) iPackageFragmentRoot.getResource();
 				
 				IInputValidator inputValidator = new IInputValidator() {
 					@Override
 					public String isValid(String newText) {
+						IFolder folder = null;
+						if(iPackageFragmentRoot!=null) {
+							folder = (IFolder) iPackageFragmentRoot.getResource();
+						}else if(iFolder!=null) {
+							folder = iFolder;
+						}
+						
 						if (newText==null || newText.isEmpty())
 							return "文件名不能为空";
 						if (!newText.endsWith(".bpmn")) {
 							return "后缀名须为.bpmn";
 						}
-						if (iFolder.getFile(newText).exists()) {
+						if (folder.getFile(newText).exists()) {
 							return "已存在该名称的流程定义";
 						}
 						return null;
@@ -316,8 +332,12 @@ public class ProcessOperDialog extends TitleAreaDialog {
 						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
 						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 						
-						String fileName = iPackageFragmentRoot.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
-
+						String fileName = null;
+						if(iPackageFragmentRoot!=null) {
+							fileName = iPackageFragmentRoot.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
+						}else if(iFolder!=null) {
+							fileName = iFolder.getLocationURI().getPath() + "/" + inputDialog.getValue();;
+						}
 						Representation result = client.get();
 						InputStream inputStream = result.getStream();
 						
@@ -346,7 +366,11 @@ public class ProcessOperDialog extends TitleAreaDialog {
 								outBuff.close();
 						}
 						
-						iPackageFragmentRoot.getCorrespondingResource().refreshLocal(IResource.DEPTH_INFINITE, null);
+						if(iPackageFragmentRoot!=null) {
+							iPackageFragmentRoot.getCorrespondingResource().refreshLocal(IResource.DEPTH_INFINITE, null);
+						}else if(iFolder!=null) {
+							iFolder.refreshLocal(IResource.DEPTH_INFINITE, null);
+						}
 						MessageDialog.openInformation(null, "提示", "下载流程定义成功");
 					} catch (IOException e) {
 						MessageDialog.openInformation(null, "提示", "下载流程定义失败，失败原因是:\n" + e.getMessage());
