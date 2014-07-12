@@ -8,6 +8,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
@@ -523,6 +526,16 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	}
 	
 	private void initTreeViewer() {
+		Comparator<ProcessTo> comparator = new Comparator<ProcessTo>() {
+			@Override
+			public int compare(ProcessTo p1, ProcessTo p2) {
+				if(p1.getVersion()>p2.getVersion()) {
+					return 0;
+				}else {
+					return 1;
+				}
+			}
+		};
 		allButtonsDisable();
 		processTos = new ArrayList<ProcessTo>();
 		
@@ -555,6 +568,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					processTo.setDeploymentId(json.get("deploymentId")==null?"":json.get("deploymentId").asText());
 					processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
 					processTos.add(processTo);
+					Collections.sort(processTos, comparator);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -580,6 +594,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					processTo.setVersion(json.get("version")==null?-1:json.get("version").asInt());
 					processTo.setResourceName(json.get("resourceName")==null?"":json.get("resourceName").asText());
 					processTos.add(processTo);
+					Collections.sort(processTos, comparator);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
