@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -159,10 +158,16 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				Object selected = iStructuredSelection.getFirstElement();
 				if(iFile==null) {
 					downloadButton.setEnabled(selected!=null);
-				}else if(selected!= null && ((ProcessTo)selected).getProcessId().equals(dbid)) {
+				}else if(dbid==null) {
+					publishButton.setEnabled(true);
 					createNewButton.setEnabled(true);
+				}
+				else if(selected!= null && ((ProcessTo)selected).getProcessId().equals(dbid)) {
 					updateButton.setEnabled(true);
 					deleteButton.setEnabled(true);
+					createNewButton.setEnabled(true);
+				}else {
+					createNewButton.setEnabled(true);
 				}
 			}
 		});
@@ -546,7 +551,6 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			if(dbid == null) {
 				Object processDbid = process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__DBID);
 				dbid = processDbid==null?null:processDbid.toString();
-				createNewButton.setEnabled(true);
 				publishButton.setEnabled(true);
 			}
 			ClientResource client = null;
@@ -573,6 +577,8 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
+			createNewButton.setEnabled(true);
 		}else {
 			allButtonsDisable();
 			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions");
@@ -599,11 +605,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}
-		
-		//如果流程列表为空则可以创建
-		if(processTos.size()==0) {
-			createNewButton.setEnabled(true);
+			createNewButton.setEnabled(false);
 		}
 	}
 	
