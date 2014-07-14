@@ -1,8 +1,5 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.timerdefinition;
 
-import org.eclipse.bpmn2.EndEvent;
-import org.eclipse.bpmn2.Event;
-import org.eclipse.bpmn2.StartEvent;
 import org.eclipse.bpmn2.modeler.core.utils.BusinessObjectUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
@@ -29,16 +26,7 @@ public class TimerEventDefinitionPropertySection extends AbstractFoxBPMPropertyS
 
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-		StartEvent startEvent = null;
-		if(eObject instanceof StartEvent) {
-			startEvent = (StartEvent) eObject;
-		}
-		if (startEvent.getEventDefinitions().size()>0) {
-			return true;
-		}else{
-			return false;
-		}
+ 		return false;
 	}
 
 }
