@@ -28,6 +28,11 @@ public class ProcessTo {
 	protected String deploymentId;
 	
 	/**
+	 * 流程文件名
+	 */
+	protected String resourceName;
+	
+	/**
 	 * 流程版本号
 	 */
 	protected int version;
@@ -67,6 +72,12 @@ public class ProcessTo {
 	}
 	public void setDeploymentId(String deploymentId) {
 		this.deploymentId = deploymentId;
+	}
+	public String getResourceName() {
+		return resourceName;
+	}
+	public void setResourceName(String resourceName) {
+		this.resourceName = resourceName;
 	}
 	
 	

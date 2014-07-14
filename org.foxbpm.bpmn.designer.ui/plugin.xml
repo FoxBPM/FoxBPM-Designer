@@ -541,6 +541,11 @@
         id="org.foxbpm.bpmn.designer.ui.propertyTab.connector"
         label="连接器">
   </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.timerdefinition.TimerEventDefinitionPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.timerdefinition"
+        label="时间定义">
+  </propertyTab>
   <featureContainer
         class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMUserTaskFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.usertask"

@@ -50,8 +50,16 @@ public class ProcessOperHandler implements IHandler {
 //	        	IProject project = (IProject)((IAdaptable)firstElement).getAdapter(IProject.class);
 //	            IPath path = project.getFullPath();
 	        }else if(firstElement instanceof IPackageFragmentRoot || firstElement instanceof IFolder) {
-	        	ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell());
-	    		processOperDialog.open();
+	        	IPackageFragmentRoot iPackageFragmentRoot = (IPackageFragmentRoot) ((IAdaptable)firstElement).getAdapter(IPackageFragmentRoot.class);
+	        	IFolder iFolder = (IFolder) ((IAdaptable)firstElement).getAdapter(IFolder.class);
+	        	if(iPackageFragmentRoot!=null) {
+	        		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), iPackageFragmentRoot);
+		    		processOperDialog.open();
+	        	}
+	        	else if(iFolder!=null) {
+	        		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), iFolder);
+		    		processOperDialog.open();
+	        	}
 	        }
 	    }
 	    

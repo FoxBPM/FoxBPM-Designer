@@ -12,7 +12,10 @@ import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -30,6 +33,7 @@ import org.foxbpm.model.bpmn.foxbpm.FormUriView;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
+import org.eclipse.swt.widgets.Button;
 
 public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 	private Process process;
@@ -41,6 +45,7 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 	private FoxBPMExpViewer operformViewer;
 	private FoxBPMExpViewer tasksubjectViewer;
 	private FoxBPMExpViewer viewformViewer;
+	private Button isPersistence;
 
 	public ProcessPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -48,7 +53,9 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public void createUIBindings(EObject eObject) {
+		initCheckBox();
 		process = BpmnModelUtil.getProcessByEobj(eObject);
+		
 		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, process);
 		bindText(Bpmn2Package.Literals.CALLABLE_ELEMENT__NAME, nameText, process);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText, process);
@@ -197,6 +204,41 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 		Composite detailComposite = new Composite(parent, SWT.NONE);
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		detailComposite.setLayout(new GridLayout(4, false));
+		
+		isPersistence = new Button(detailComposite, SWT.CHECK);
+		isPersistence.setSelection(true);
+		isPersistence.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 4, 1));
+		isPersistence.setText("是否持久化");
+		
+		isPersistence.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(isPersistence.getSelection()) {
+					TransactionalEditingDomainImpl editingDomain = (TransactionalEditingDomainImpl) getDiagramEditor().getEditingDomain();
+					editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+						@Override
+						protected void doExecute() {
+							process.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__IS_PERSISTENCE, true);
+						}
+					});
+				}else {
+					TransactionalEditingDomainImpl editingDomain = (TransactionalEditingDomainImpl) getDiagramEditor().getEditingDomain();
+					editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+						@Override
+						protected void doExecute() {
+							process.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__IS_PERSISTENCE, false);
+						}
+					});
+				}
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
+		
 		Label idLabel = new Label(detailComposite, SWT.NONE);
 		idLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		idLabel.setText("编号");
@@ -265,6 +307,18 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 	@Override
 	public String setDescId() {
 		return "script_task_desc";
+	}
+	
+	private void initCheckBox() {
+		Object isP = ((Process)BpmnModelUtil.getProcessByEobj(getBusinessObject())).eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__IS_PERSISTENCE);
+		if(isP!=null) {
+			boolean persistence = (Boolean) isP;
+			if(persistence) {
+				isPersistence.setSelection(true);
+			}else{
+				isPersistence.setSelection(false);
+			}
+		}
 	}
 	
 	private void setTaskSubjectExtensionExpression(BaseElement baseElement, FormalExpression formalExpression) {
