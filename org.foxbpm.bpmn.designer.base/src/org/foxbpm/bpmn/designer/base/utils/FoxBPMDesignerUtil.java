@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
+import org.foxbpm.model.config.variableconfig.DataTypeDef;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 
 public class FoxBPMDesignerUtil {
@@ -187,4 +188,17 @@ public class FoxBPMDesignerUtil {
 		}
 	}
 	
+	/**
+	 * 根据传入数据类型的值拿到该名称
+	 * @param value 数据类型的值
+	 * @return 数据类型的名称
+	 */
+	public static String getDataTypeDefNameByValue(String value) {
+		for (DataTypeDef dataTypeDef : getDataVariableConfig().getDataVariableDataType().getDataTypeDef()) {
+			if(dataTypeDef.getTypeValue().equals(value)) {
+				return dataTypeDef.getName();
+			}
+		}
+		return null;
+	}
 }
