@@ -280,9 +280,10 @@ public class ModifyNewConnectorWizard extends Wizard {
 			Combo comboNext = (Combo) combos.get(i + 1);
 
 			if (combo.getData("type").toString().equals("expression")) {
-				Expression outExpression = FoxBPMFactory.eINSTANCE.createExpression();
-				outExpression.setValue(combo.getText().trim());
-				map.put("expression", outExpression);
+//				Expression outExpression = FoxBPMFactory.eINSTANCE.createExpression();
+//				outExpression.setValue(combo.getText().trim());
+//				map.put("expression", outExpression);
+				map.put("expression", combo.getText().trim());
 			} else if (combo.getData("type").toString().equals("target")) {
 				map.put("target", combo.getText().trim());
 			}
@@ -308,7 +309,8 @@ public class ModifyNewConnectorWizard extends Wizard {
 			// 添加新的output
 			Map<String, Object> map = maps.get(i);
 			ConnectorParameterOutput connectorParameterOutput = FoxBPMFactory.eINSTANCE.createConnectorParameterOutput();
-			connectorParameterOutput.setExpression((Expression) map.get("expression"));
+//			connectorParameterOutput.setExpression((Expression) map.get("expression"));
+			connectorParameterOutput.setOutputId(map.get("expression").toString());
 			connectorParameterOutput.setVariableTarget(String.valueOf(map.get("target")));
 			connectorInstance.getConnectorParameterOutputs().add(connectorParameterOutput);
 		}
