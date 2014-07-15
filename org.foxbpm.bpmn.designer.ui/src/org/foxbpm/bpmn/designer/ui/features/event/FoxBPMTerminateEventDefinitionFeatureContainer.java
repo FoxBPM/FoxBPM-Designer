@@ -88,7 +88,7 @@ public class FoxBPMTerminateEventDefinitionFeatureContainer extends TerminateEve
 		}
 		
 		public CreateTerminateEventDefinition(IFeatureProvider fp, Resource resource, String name, String desc) {
-			super(fp, "终止事件定义", "创建一个终止事件定义");
+			super(fp, name, desc);
 			this.resource = resource;
 		}
 

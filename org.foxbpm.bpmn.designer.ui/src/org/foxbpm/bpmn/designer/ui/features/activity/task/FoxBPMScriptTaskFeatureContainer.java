@@ -69,13 +69,15 @@ public class FoxBPMScriptTaskFeatureContainer extends ScriptTaskFeatureContainer
 
 		@Override
 		public ScriptTask createBusinessObject(ICreateContext context) {
-			List<ScriptTask> scriptTasks = EMFUtil.getAll(resource, ScriptTask.class);
-			if(scriptTasks != null && scriptTasks.size()>0) {
-				ScriptTask scriptTask = EcoreUtil.copy(scriptTasks.get(0));
-				scriptTask.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(scriptTask, resource);
-				return scriptTask;
+			if(resource!=null) {
+				List<ScriptTask> scriptTasks = EMFUtil.getAll(resource, ScriptTask.class);
+				if(scriptTasks != null && scriptTasks.size()>0) {
+					ScriptTask scriptTask = EcoreUtil.copy(scriptTasks.get(0));
+					scriptTask.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(scriptTask, resource);
+					return scriptTask;
+				}
 			}
 			return super.createBusinessObject(context);
 		}

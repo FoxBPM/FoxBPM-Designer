@@ -50,7 +50,7 @@ public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer
 		}
 		
 		public CreateManualTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
-			super(fp, "手工任务", "创建一个手工任务");
+			super(fp, name, desc);
 			this.resource = resource;
 		}
 
@@ -69,13 +69,15 @@ public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer
 
 		@Override
 		public ManualTask getBusinessObject(ICreateContext context) {
-			List<ManualTask> manualTasks = EMFUtil.getAll(resource, ManualTask.class);
-			if(manualTasks != null && manualTasks.size()>0) {
-				ManualTask manualTask = EcoreUtil.copy(manualTasks.get(0));
-				manualTask.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(manualTask, resource);
-				return manualTask;
+			if(resource!=null) {
+				List<ManualTask> manualTasks = EMFUtil.getAll(resource, ManualTask.class);
+				if(manualTasks != null && manualTasks.size()>0) {
+					ManualTask manualTask = EcoreUtil.copy(manualTasks.get(0));
+					manualTask.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(manualTask, resource);
+					return manualTask;
+				}
 			}
 			return super.getBusinessObject(context);
 		}

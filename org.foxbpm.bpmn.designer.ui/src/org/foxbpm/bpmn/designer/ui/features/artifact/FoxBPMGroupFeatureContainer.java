@@ -203,7 +203,7 @@ public class FoxBPMGroupFeatureContainer extends GroupFeatureContainer {
 		}
 		
 		public CreateGroupFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
-			super(fp, "组", "创建一个组");
+			super(fp, name, desc);
 			this.resource = resource;
 		}
 
