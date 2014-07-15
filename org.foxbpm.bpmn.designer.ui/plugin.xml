@@ -464,6 +464,21 @@
           <enable
                 object="CallActivity">
           </enable>
+          <enable
+                object="Task">
+          </enable>
+          <enable
+                object="BusinessTask">
+          </enable>
+          <enable
+                object="ServiceTask">
+          </enable>
+          <enable
+                object="SendTask">
+          </enable>
+          <enable
+                object="ReceiveTask">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -559,6 +574,36 @@
         class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMUserTaskFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.usertask"
         type="org.eclipse.bpmn2.UserTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.task"
+        type="org.eclipse.bpmn2.Task">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMManualTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.manualtask"
+        type="org.eclipse.bpmn2.ManualTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMServiceTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.servicetask"
+        type="org.eclipse.bpmn2.ServiceTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMBusinessRuleTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.businessruletask"
+        type="org.eclipse.bpmn2.BusinessRuleTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMSendTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.sendtask"
+        type="org.eclipse.bpmn2.SendTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMReceiveTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.receivetask"
+        type="org.eclipse.bpmn2.ReceiveTask">
   </featureContainer>
   <featureContainer
         class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMStartEventFeatureContainer"
