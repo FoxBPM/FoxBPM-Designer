@@ -3,13 +3,13 @@ package org.foxbpm.bpmn.designer.ui.features.activity.task;
 import java.util.List;
 
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.bpmn2.ManualTask;
+import org.eclipse.bpmn2.ReceiveTask;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AbstractCreateTaskFeature;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.bpmn2.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
 import org.eclipse.bpmn2.modeler.ui.features.activity.task.AbstractAddDecoratedTaskFeature;
-import org.eclipse.bpmn2.modeler.ui.features.activity.task.ManualTaskFeatureContainer;
+import org.eclipse.bpmn2.modeler.ui.features.activity.task.ReceiveTaskFeatureContainer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,44 +19,44 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 
-public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer {
+public class FoxBPMReceiveTaskFeatureContainer extends ReceiveTaskFeatureContainer {
 	@Override
 	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-		return new CreateManualTaskFeature(fp);
+		return new CreateReceiveTaskFeature(fp);
 	}
 
 	@Override
 	public IAddFeature getAddFeature(IFeatureProvider fp) {
-		return new AddManualTaskFeature(fp);
+		return new AddReceiveTaskFeature(fp);
 	}
 	
-	public static class AddManualTaskFeature extends AbstractAddDecoratedTaskFeature<ManualTask> {
-		
-		public AddManualTaskFeature(IFeatureProvider fp) {
+	public static class AddReceiveTaskFeature extends AbstractAddDecoratedTaskFeature<ReceiveTask> {
+
+		public AddReceiveTaskFeature(IFeatureProvider fp) {
 			super(fp);
 		}
 
 		@Override
 		protected String getStencilImageId() {
-			return ImageProvider.IMG_16_MANUAL_TASK;
+			return ImageProvider.IMG_16_RECEIVE_TASK;
 		}
 	}
 
-	public static class CreateManualTaskFeature extends AbstractCreateTaskFeature<ManualTask> {
+	public static class CreateReceiveTaskFeature extends AbstractCreateTaskFeature<ReceiveTask> {
 		protected Resource resource;
 		
-		public CreateManualTaskFeature(IFeatureProvider fp) {
-			super(fp, "手工任务", "创建一个手工任务");
+		public CreateReceiveTaskFeature(IFeatureProvider fp) {
+			super(fp, "接收任务", "创建一个接收任务");
 		}
 		
-		public CreateManualTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+		public CreateReceiveTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
 			super(fp, name, desc);
 			this.resource = resource;
 		}
 
 		@Override
 		protected String getStencilImageId() {
-			return ImageProvider.IMG_16_MANUAL_TASK;
+			return ImageProvider.IMG_16_RECEIVE_TASK;
 		}
 
 		/* (non-Javadoc)
@@ -64,19 +64,19 @@ public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer
 		 */
 		@Override
 		public EClass getBusinessObjectClass() {
-			return Bpmn2Package.eINSTANCE.getManualTask();
+			return Bpmn2Package.eINSTANCE.getReceiveTask();
 		}
 
 		@Override
-		public ManualTask getBusinessObject(ICreateContext context) {
+		public ReceiveTask getBusinessObject(ICreateContext context) {
 			if(resource!=null) {
-				List<ManualTask> manualTasks = EMFUtil.getAll(resource, ManualTask.class);
-				if(manualTasks != null && manualTasks.size()>0) {
-					ManualTask manualTask = EcoreUtil.copy(manualTasks.get(0));
-					manualTask.setId(null);
+				List<ReceiveTask> receiveTasks = EMFUtil.getAll(resource, ReceiveTask.class);
+				if(receiveTasks != null && receiveTasks.size()>0) {
+					ReceiveTask receiveTask = EcoreUtil.copy(receiveTasks.get(0));
+					receiveTask.setId(null);
 					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-					ModelUtil.setID(manualTask, resource);
-					return manualTask;
+					ModelUtil.setID(receiveTask, resource);
+					return receiveTask;
 				}
 			}
 			return super.getBusinessObject(context);

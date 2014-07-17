@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -23,12 +24,15 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.connector.definition.Constant;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
 import org.foxbpm.bpmn.designer.ui.tree.RuntimeTreeViewerFactory;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorParameterInput;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
 import org.foxbpm.model.config.connector.Page;
@@ -175,6 +179,18 @@ public class ModifyNewCommonConnectorWizardPage extends WizardPage {
 						isRequiredControl.add(expText);
 					}
 
+					foxBPMExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+						
+						@Override
+						public void expressionChanged(ExpressionChangedEvent event) {
+							Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+							FormalExpression formalExpression = event.getFormalExpression();
+							expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							expression.setValue(formalExpression.getBody());
+							foxBPMExpViewer.setExpression(expression);
+						}
+					});
+					
 					expText.addModifyListener(new ModifyListener() {
 
 						@Override
@@ -207,6 +223,18 @@ public class ModifyNewCommonConnectorWizardPage extends WizardPage {
 					gridData.grabExcessHorizontalSpace = true;
 					foxBPMExpViewer.getControl().setLayoutData(gridData);
 
+					foxBPMExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+						
+						@Override
+						public void expressionChanged(ExpressionChangedEvent event) {
+							Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+							FormalExpression formalExpression = event.getFormalExpression();
+							expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							expression.setValue(formalExpression.getBody());
+							foxBPMExpViewer.setExpression(expression);
+						}
+					});
+					
 					if (isRequired) {
 						isRequiredControl.add(expText);
 					}

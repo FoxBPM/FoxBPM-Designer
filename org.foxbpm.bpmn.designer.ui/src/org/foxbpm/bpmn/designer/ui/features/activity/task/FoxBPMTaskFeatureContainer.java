@@ -3,13 +3,13 @@ package org.foxbpm.bpmn.designer.ui.features.activity.task;
 import java.util.List;
 
 import org.eclipse.bpmn2.Bpmn2Package;
-import org.eclipse.bpmn2.ManualTask;
+import org.eclipse.bpmn2.Task;
 import org.eclipse.bpmn2.modeler.core.features.activity.task.AbstractCreateTaskFeature;
+import org.eclipse.bpmn2.modeler.core.features.activity.task.AddTaskFeature;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
 import org.eclipse.bpmn2.modeler.ui.ImageProvider;
 import org.eclipse.bpmn2.modeler.ui.editor.BPMN2Editor;
-import org.eclipse.bpmn2.modeler.ui.features.activity.task.AbstractAddDecoratedTaskFeature;
-import org.eclipse.bpmn2.modeler.ui.features.activity.task.ManualTaskFeatureContainer;
+import org.eclipse.bpmn2.modeler.ui.features.activity.task.TaskFeatureContainer;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -19,44 +19,32 @@ import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.features.context.ICreateContext;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 
-public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer {
+public class FoxBPMTaskFeatureContainer extends TaskFeatureContainer {
 	@Override
 	public ICreateFeature getCreateFeature(IFeatureProvider fp) {
-		return new CreateManualTaskFeature(fp);
+		return new CreateTaskFeature(fp);
 	}
 
 	@Override
 	public IAddFeature getAddFeature(IFeatureProvider fp) {
-		return new AddManualTaskFeature(fp);
-	}
-	
-	public static class AddManualTaskFeature extends AbstractAddDecoratedTaskFeature<ManualTask> {
-		
-		public AddManualTaskFeature(IFeatureProvider fp) {
-			super(fp);
-		}
-
-		@Override
-		protected String getStencilImageId() {
-			return ImageProvider.IMG_16_MANUAL_TASK;
-		}
+		return new AddTaskFeature<Task>(fp);
 	}
 
-	public static class CreateManualTaskFeature extends AbstractCreateTaskFeature<ManualTask> {
+	public static class CreateTaskFeature extends AbstractCreateTaskFeature<Task> {
 		protected Resource resource;
 		
-		public CreateManualTaskFeature(IFeatureProvider fp) {
-			super(fp, "手工任务", "创建一个手工任务");
+		public CreateTaskFeature(IFeatureProvider fp) {
+			super(fp, "通用任务", "创建一个通用任务");
 		}
-		
-		public CreateManualTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
+
+		public CreateTaskFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
 			super(fp, name, desc);
 			this.resource = resource;
 		}
-
+		
 		@Override
 		protected String getStencilImageId() {
-			return ImageProvider.IMG_16_MANUAL_TASK;
+			return ImageProvider.IMG_16_TASK;
 		}
 
 		/* (non-Javadoc)
@@ -64,19 +52,19 @@ public class FoxBPMManualTaskFeatureContainer extends ManualTaskFeatureContainer
 		 */
 		@Override
 		public EClass getBusinessObjectClass() {
-			return Bpmn2Package.eINSTANCE.getManualTask();
+			return Bpmn2Package.eINSTANCE.getTask();
 		}
 
 		@Override
-		public ManualTask getBusinessObject(ICreateContext context) {
+		public Task getBusinessObject(ICreateContext context) {
 			if(resource!=null) {
-				List<ManualTask> manualTasks = EMFUtil.getAll(resource, ManualTask.class);
-				if(manualTasks != null && manualTasks.size()>0) {
-					ManualTask manualTask = EcoreUtil.copy(manualTasks.get(0));
-					manualTask.setId(null);
+				List<Task> tasks = EMFUtil.getAll(resource, Task.class);
+				if(tasks != null && tasks.size()>0) {
+					Task task = EcoreUtil.copy(tasks.get(0));
+					task.setId(null);
 					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-					ModelUtil.setID(manualTask, resource);
-					return manualTask;
+					ModelUtil.setID(task, resource);
+					return task;
 				}
 			}
 			return super.getBusinessObject(context);

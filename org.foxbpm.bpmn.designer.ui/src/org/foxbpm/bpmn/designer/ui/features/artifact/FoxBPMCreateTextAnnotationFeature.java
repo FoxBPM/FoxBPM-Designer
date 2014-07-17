@@ -36,7 +36,7 @@ public class FoxBPMCreateTextAnnotationFeature extends AbstractCreateArtifactFea
 	}
 	
 	public FoxBPMCreateTextAnnotationFeature(IFeatureProvider fp, Resource resource, String name, String desc) {
-		super(fp, "备注", "创建一个备注");
+		super(fp, name, desc);
 		this.resource = resource;
 	}
 

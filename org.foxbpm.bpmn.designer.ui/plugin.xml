@@ -455,6 +455,30 @@
           <enable
                 object="TextAnnotation">
           </enable>
+          <enable
+                object="DataAssociation">
+          </enable>
+          <enable
+                object="SubProcess">
+          </enable>
+          <enable
+                object="CallActivity">
+          </enable>
+          <enable
+                object="Task">
+          </enable>
+          <enable
+                object="BusinessTask">
+          </enable>
+          <enable
+                object="ServiceTask">
+          </enable>
+          <enable
+                object="SendTask">
+          </enable>
+          <enable
+                object="ReceiveTask">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -552,6 +576,36 @@
         type="org.eclipse.bpmn2.UserTask">
   </featureContainer>
   <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.task"
+        type="org.eclipse.bpmn2.Task">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMManualTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.manualtask"
+        type="org.eclipse.bpmn2.ManualTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMServiceTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.servicetask"
+        type="org.eclipse.bpmn2.ServiceTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMBusinessRuleTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.businessruletask"
+        type="org.eclipse.bpmn2.BusinessRuleTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMSendTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.sendtask"
+        type="org.eclipse.bpmn2.SendTask">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMReceiveTaskFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.receivetask"
+        type="org.eclipse.bpmn2.ReceiveTask">
+  </featureContainer>
+  <featureContainer
         class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMStartEventFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.startevent"
         type="org.eclipse.bpmn2.StartEvent">
@@ -585,6 +639,16 @@
         class="org.foxbpm.bpmn.designer.ui.features.lane.FoxBPMLaneFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.lane"
         type="org.eclipse.bpmn2.Lane">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.subprocess.FoxBPMCallActivityFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.callactivity"
+        type="org.eclipse.bpmn2.CallActivity">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.activity.subprocess.FoxBPMSubProcessFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.subprocess"
+        type="org.eclipse.bpmn2.SubProcess">
   </featureContainer>
 
 		<!-- ======================================== -->

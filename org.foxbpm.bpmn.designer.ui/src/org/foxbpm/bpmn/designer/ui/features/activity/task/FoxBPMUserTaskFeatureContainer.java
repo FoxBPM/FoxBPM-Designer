@@ -69,13 +69,15 @@ public class FoxBPMUserTaskFeatureContainer extends UserTaskFeatureContainer {
 
 		@Override
 		public UserTask createBusinessObject(ICreateContext context) {
-			List<UserTask> userTasks = EMFUtil.getAll(resource, UserTask.class);
-			if(userTasks != null && userTasks.size()>0) {
-				UserTask userTask = EcoreUtil.copy(userTasks.get(0));
-				userTask.setId(null);
-				Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
-				ModelUtil.setID(userTask, resource);
-				return userTask;
+			if(resource!=null) {
+				List<UserTask> userTasks = EMFUtil.getAll(resource, UserTask.class);
+				if(userTasks != null && userTasks.size()>0) {
+					UserTask userTask = EcoreUtil.copy(userTasks.get(0));
+					userTask.setId(null);
+					Resource resource = ((BPMN2Editor)getDiagramEditor()).getResource();
+					ModelUtil.setID(userTask, resource);
+					return userTask;
+				}
 			}
 			return super.createBusinessObject(context);
 		}
