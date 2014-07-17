@@ -2,6 +2,7 @@ package org.foxbpm.bpmn.designer.ui.dialogs;
 
 import java.util.List;
 
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -21,9 +22,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
@@ -325,6 +329,29 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			}
 		}
 
+		expressionComboViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				expressionComboViewer.setExpression(expression);
+			}
+		});
+		
+		expressionComboViewerparam.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				expressionComboViewerparam.setExpression(expression);
+			}
+		});
 	}
 
 	/**

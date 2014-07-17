@@ -157,9 +157,10 @@ public class ModifyNewOutputConnectorWizardPage extends WizardPage {
 				/* commonOutputIds[outputs.size()] = "编辑表达式..."; */
 
 				outputCombo.setItems(commonOutputIds);
-				outputCombo.setText(connectorParameterOutput.getExpression() == null ? 
-						"" : connectorParameterOutput.getExpression().getValue() == null ? 
-								"" : connectorParameterOutput.getExpression().getValue());
+//				outputCombo.setText(connectorParameterOutput.getExpression() == null ? 
+//						"" : connectorParameterOutput.getExpression().getValue() == null ? 
+//								"" : connectorParameterOutput.getExpression().getValue());
+				outputCombo.setText(connectorParameterOutput.getOutputId());
 				outputCombo.setData(rowId);
 				outputCombo.setData("type", "expression");
 

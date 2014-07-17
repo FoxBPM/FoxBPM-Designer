@@ -28,6 +28,7 @@ import org.eclipse.swt.widgets.ToolItem;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.ContentAssistText;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 public class FoxBPMExpViewer extends ContentViewer {
@@ -46,11 +47,21 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public FoxBPMExpViewer(Composite composite, int style) {
 		createControl(composite, style);
+		if(expression==null) {
+			expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName("");
+			expression.setValue("");
+		}
 	}
 	
 	public FoxBPMExpViewer(Composite composite, int style, EObject eObject) {
 		createControl(composite, style);
 		this.eObject = eObject;
+		if(expression==null) {
+			expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName("");
+			expression.setValue("");
+		}
 	}
 
 	@Override
@@ -199,7 +210,7 @@ public class FoxBPMExpViewer extends ContentViewer {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if(expression==null)
+				if(expression==null || eObject == null)
 					return;
 				if(!((Text)e.getSource()).getText().equals(expression.getName()) && expression.getName().equals(expression.getValue())) {
 					FormalExpression formalExpression = Bpmn2Factory.eINSTANCE.createFormalExpression();
@@ -224,6 +235,12 @@ public class FoxBPMExpViewer extends ContentViewer {
 		}
 	}
 	
+	public void cleanData() {
+		textControl.setText("");
+		expression = null;
+		fireExpressioChanged(new ExpressionChangedEvent(FoxBPMExpViewer.this, null));
+	}
+	
 	public Expression getExpression() {
 		return expression;
 	}
@@ -236,6 +253,7 @@ public class FoxBPMExpViewer extends ContentViewer {
 		this.expression = expression;
 		if(expression!=null && expression.getValue()!=null && textControl.getText()!=null)
 			textControl.setText(expression.getValue());
+		textControl.setSelection(textControl.getText().length());
 	}
 
 	public void seteObject(EObject eObject) {
