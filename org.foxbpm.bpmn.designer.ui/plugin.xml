@@ -482,6 +482,9 @@
           <enable
                 object="BoundaryEvent">
           </enable>
+          <enable
+                object="IntermediateCatchEvent">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -657,6 +660,11 @@
         class="org.foxbpm.bpmn.designer.ui.features.event.definitions.FoxBPMBoundaryEventFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.boundaryevent"
         type="org.eclipse.bpmn2.BoundaryEvent">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMIntermediateCatchEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.intermediatecatchEvent"
+        type="org.eclipse.bpmn2.IntermediateCatchEvent">
   </featureContainer>
 
 		<!-- ======================================== -->
