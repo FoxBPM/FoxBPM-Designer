@@ -479,6 +479,9 @@
           <enable
                 object="ReceiveTask">
           </enable>
+          <enable
+                object="BoundaryEvent">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
