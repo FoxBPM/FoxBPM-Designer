@@ -1,18 +1,36 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
+import org.eclipse.bpmn2.Bpmn2Factory;
+import org.eclipse.bpmn2.DataInput;
+import org.eclipse.bpmn2.DataOutput;
+import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.FormalExpression;
+import org.eclipse.bpmn2.MultiInstanceLoopCharacteristics;
 import org.eclipse.bpmn2.UserTask;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
+import org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection;
+import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 
 public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	private UserTask userTask;
@@ -21,6 +39,16 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	private FoxBPMExpViewer outputItemViewer;//输入数据集
 	private FoxBPMExpViewer outputDatasetViewer;//输入数据集
 	private FoxBPMExpViewer fulfillConditionViewer;//输入数据集
+	private MultiInstanceLoopCharacteristics multiInstanceLoopCharacteristics;
+	private Expression inputDataExp = FoxBPMFactory.eINSTANCE.createExpression();
+	private Expression outputDataExp = FoxBPMFactory.eINSTANCE.createExpression();
+	private Expression inputDatasExp = FoxBPMFactory.eINSTANCE.createExpression();
+	private Expression outputDatasExp = FoxBPMFactory.eINSTANCE.createExpression();
+	private Expression completeExp = FoxBPMFactory.eINSTANCE.createExpression();
+	private Button nullRadio;
+	private Button multiInstanceRadio;
+	private Composite multiComposite;
+	private Composite detailComposite;
 
 	public UserTaskAdvancedPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -37,23 +65,23 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 		containerComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		containerComposite.setLayout(new GridLayout(1,false));
 		
-		Composite detailComposite=new Composite(containerComposite, SWT.NONE);
+		detailComposite=new Composite(containerComposite, SWT.NONE);
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		detailComposite.setLayout(new GridLayout(2, false));
 		
-		Button nullRadio = new Button(detailComposite, SWT.RADIO);
+		nullRadio = new Button(detailComposite, SWT.RADIO);
 		GridData gd_nullRadio = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_nullRadio.widthHint = 60;
 		nullRadio.setLayoutData(gd_nullRadio);
 		nullRadio.setText("无");
 		nullRadio.setSelection(true);
-		Button multiInstanceRadio = new Button(detailComposite, SWT.RADIO);
+		multiInstanceRadio = new Button(detailComposite, SWT.RADIO);
 		GridData gd_multiInstanceRadio = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_multiInstanceRadio.widthHint = 60;
 		multiInstanceRadio.setLayoutData(gd_multiInstanceRadio);
 		multiInstanceRadio.setText("多实例");
 		
-		final Composite multiComposite=new Composite(containerComposite, SWT.NONE);
+		multiComposite=new Composite(containerComposite, SWT.NONE);
 		multiComposite.setLayout(new GridLayout(4, false));
 		multiComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		multiComposite.setVisible(false);//默认不可见
@@ -109,34 +137,379 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 		Control control_4 = fulfillConditionViewer.getControl();
 		control_4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 		
-		nullRadio.addSelectionListener(new SelectionAdapter() {
-
-			/* (non-Javadoc)
-			 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				multiComposite.setVisible(false);
-			}
-			
-		});
-		multiInstanceRadio.addSelectionListener(new SelectionAdapter() {
-
-			/* (non-Javadoc)
-			 * @see org.eclipse.swt.events.SelectionAdapter#widgetSelected(org.eclipse.swt.events.SelectionEvent)
-			 */
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				multiComposite.setVisible(true);
-			}
-			
-		});
-		
 		return parent;
 	}
 
 	@Override
 	public void createUIBindings(EObject eObject) {
 		userTask=(UserTask)eObject;
+		
+		nullRadio.addListener(SWT.Selection, new Listener() {
+			
+			@Override
+			public void handleEvent(Event event) {
+				multiComposite.setVisible(false);
+				
+				inputDatasetViewer.cleanData();
+				outputItemViewer.cleanData();
+				inputItemViewer.cleanData();
+				outputDatasetViewer.cleanData();
+				fulfillConditionViewer.cleanData();
+				
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						userTask.setLoopCharacteristics(null);
+					}
+				});
+			}
+		});
+		
+		multiInstanceRadio.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				multiComposite.setVisible(true);
+			}
+		});
+		
+		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) userTask.getLoopCharacteristics();
+		
+		if(multiInstanceLoopCharacteristics!=null) {
+			nullRadio.setSelection(false);
+			multiInstanceRadio.setSelection(true);
+			multiComposite.setVisible(true);
+			
+			
+			//输入数据项
+			DataInput dataInput = multiInstanceLoopCharacteristics.getInputDataItem();
+			if(dataInput!=null) {
+				for (ExtensionAttributeValue extensionAttributeValue : dataInput.getExtensionValues()) {
+					FeatureMap extensionElements = extensionAttributeValue.getValue();
+					for (Entry entry : extensionElements) {
+						if (entry.getValue() instanceof Expression) {
+							Expression expression = (Expression) entry.getValue();
+							inputDataExp = expression;
+							inputItemViewer.setExpression(inputDataExp);
+							break;
+						}
+					}
+					
+				}
+			}
+			
+			//输出数据项
+			DataOutput dataOutput = multiInstanceLoopCharacteristics.getOutputDataItem();
+			if(dataOutput!=null) {
+				for (ExtensionAttributeValue extensionAttributeValue : dataOutput.getExtensionValues()) {
+					FeatureMap extensionElements = extensionAttributeValue.getValue();
+					for (Entry entry : extensionElements) {
+						if (entry.getValue() instanceof Expression) {
+							Expression expression = (Expression) entry.getValue();
+							outputDataExp = expression;
+							outputItemViewer.setExpression(outputDataExp);
+							break;
+						}
+					}
+					
+				}
+			}
+			
+			if (multiInstanceLoopCharacteristics.getExtensionValues().size() > 0) {
+				//输入数据集、输出数据集
+				for (ExtensionAttributeValue extensionAttributeValue : multiInstanceLoopCharacteristics.getExtensionValues()) {
+
+					FeatureMap extensionElements = extensionAttributeValue.getValue();
+					for (Entry entry : extensionElements) {
+						if (entry.getValue() instanceof LoopDataInputCollection) {
+							LoopDataInputCollection loopDataInputCollection = (LoopDataInputCollection) entry.getValue();
+							if(loopDataInputCollection.getExpression()!=null) {
+								inputDatasExp = loopDataInputCollection.getExpression();
+							}else {
+								inputDatasExp.setName("");
+								inputDatasExp.setValue("");
+							}
+							inputDatasetViewer.setExpression(inputDatasExp);
+						}
+						else if (entry.getValue() instanceof LoopDataOutputCollection) {
+							LoopDataOutputCollection loopDataOutputCollection = (LoopDataOutputCollection) entry.getValue();
+							if(loopDataOutputCollection.getExpression()!=null) {
+								outputDatasExp = loopDataOutputCollection.getExpression();
+							}else {
+								outputDatasExp.setName("");
+								outputDatasExp.setValue("");
+							}
+							outputDatasetViewer.setExpression(outputDatasExp);
+						}
+					}
+
+				}
+			}
+			
+			//完成表达式
+ 			FormalExpression expression = (FormalExpression) multiInstanceLoopCharacteristics.getCompletionCondition();
+			if(expression!=null) {
+				String name = expression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString();
+				completeExp.setName(name);
+				completeExp.setValue(expression.getBody());
+				fulfillConditionViewer.setExpression(completeExp);
+			}
+		}
+		
+		inputItemViewer.seteObject(userTask);
+		inputItemViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if(multiInstanceLoopCharacteristics==null) {
+							multiInstanceLoopCharacteristics = Bpmn2Factory.eINSTANCE.createMultiInstanceLoopCharacteristics();
+						}
+						
+						if (event.getFormalExpression() != null) {
+							inputDataExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							inputDataExp.setValue(event.getFormalExpression().getBody());
+							DataInput dataInput = Bpmn2Factory.eINSTANCE.createDataInput();
+							ExtensionAttributeValue extensionAttributeValue = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.RESOURCE_FILTER__EXPRESSION, inputDataExp);
+							extensionAttributeValue.getValue().add(extensionElementEntry);
+							dataInput.getExtensionValues().add(extensionAttributeValue);
+							multiInstanceLoopCharacteristics.setInputDataItem(dataInput);
+						} else {
+							inputDataExp.setName("");
+							inputDataExp.setValue("");
+							DataInput dataInput = Bpmn2Factory.eINSTANCE.createDataInput();
+							ExtensionAttributeValue extensionAttributeValue = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.RESOURCE_FILTER__EXPRESSION, inputDataExp);
+							extensionAttributeValue.getValue().add(extensionElementEntry);
+							dataInput.getExtensionValues().add(extensionAttributeValue);
+							multiInstanceLoopCharacteristics.setInputDataItem(dataInput);
+						}
+						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						//传递表达式对象
+						inputItemViewer.setExpression(inputDataExp);
+					}
+				});
+			}
+		});
+		
+		outputItemViewer.seteObject(userTask);
+		outputItemViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if(multiInstanceLoopCharacteristics==null) {
+							multiInstanceLoopCharacteristics = Bpmn2Factory.eINSTANCE.createMultiInstanceLoopCharacteristics();
+						}
+						
+						if (event.getFormalExpression() != null) {
+							outputDataExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							outputDataExp.setValue(event.getFormalExpression().getBody());
+							DataOutput dataOutput = Bpmn2Factory.eINSTANCE.createDataOutput();
+							ExtensionAttributeValue extensionAttributeValue = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.RESOURCE_FILTER__EXPRESSION, outputDataExp);
+							extensionAttributeValue.getValue().add(extensionElementEntry);
+							dataOutput.getExtensionValues().add(extensionAttributeValue);
+							multiInstanceLoopCharacteristics.setOutputDataItem(dataOutput);
+						} else {
+							outputDataExp.setName("");
+							outputDataExp.setValue("");
+							DataOutput dataOutput = Bpmn2Factory.eINSTANCE.createDataOutput();
+							ExtensionAttributeValue extensionAttributeValue = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.RESOURCE_FILTER__EXPRESSION, outputDataExp);
+							extensionAttributeValue.getValue().add(extensionElementEntry);
+							dataOutput.getExtensionValues().add(extensionAttributeValue);
+							multiInstanceLoopCharacteristics.setOutputDataItem(dataOutput);
+						}
+						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						//传递表达式对象
+						outputItemViewer.setExpression(outputDataExp);
+					}
+				});
+			}
+		});
+		
+		inputDatasetViewer.seteObject(userTask);
+		inputDatasetViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if(multiInstanceLoopCharacteristics==null) {
+							multiInstanceLoopCharacteristics = Bpmn2Factory.eINSTANCE.createMultiInstanceLoopCharacteristics();
+						}
+						
+						if(event.getFormalExpression()==null)
+						{
+							multiInstanceLoopCharacteristics.getExtensionValues().clear();
+							inputDatasetViewer.setExpression(inputDatasExp);
+							inputDatasExp.setName("");
+							inputDatasExp.setValue("");
+							return;
+						}
+
+						if (multiInstanceLoopCharacteristics.getExtensionValues().size() > 0) {
+
+							for (ExtensionAttributeValue extensionAttributeValue : multiInstanceLoopCharacteristics.getExtensionValues()) {
+
+								FeatureMap extensionElements = extensionAttributeValue.getValue();
+								for (Entry entry : extensionElements) {
+									if (entry.getValue() instanceof LoopDataInputCollection) {
+										LoopDataInputCollection loopDataInputCollection = (LoopDataInputCollection) entry.getValue();
+										loopDataInputCollection.setExpression(inputDatasExp);
+										loopDataInputCollection.getExpression().setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+										loopDataInputCollection.getExpression().setValue(event.getFormalExpression().getBody());
+										
+										FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+												(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_INPUT_COLLECTION, loopDataInputCollection);
+										multiInstanceLoopCharacteristics.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+									}else {
+										inputDatasExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+										inputDatasExp.setValue(event.getFormalExpression().getBody());
+
+										LoopDataInputCollection authors = FoxBPMFactory.eINSTANCE.createLoopDataInputCollection();
+										authors.setExpression(inputDatasExp);
+										FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+												(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_INPUT_COLLECTION, authors);
+										multiInstanceLoopCharacteristics.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+									}
+								}
+
+							}
+						} else {
+							inputDatasExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							inputDatasExp.setValue(event.getFormalExpression().getBody());
+
+							LoopDataInputCollection authors = FoxBPMFactory.eINSTANCE.createLoopDataInputCollection();
+							authors.setExpression(inputDatasExp);
+							ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_INPUT_COLLECTION, authors);
+							extensionElement.getValue().add(extensionElementEntry);
+							multiInstanceLoopCharacteristics.getExtensionValues().add(extensionElement);
+						}
+						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						//传递表达式对象
+						inputDatasetViewer.setExpression(inputDatasExp);
+					}
+				});
+			}
+		});
+		
+		outputDatasetViewer.seteObject(userTask);
+		outputDatasetViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if(multiInstanceLoopCharacteristics==null) {
+							multiInstanceLoopCharacteristics = Bpmn2Factory.eINSTANCE.createMultiInstanceLoopCharacteristics();
+						}
+						
+						if(event.getFormalExpression()==null)
+						{
+							multiInstanceLoopCharacteristics.getExtensionValues().clear();
+							outputDatasExp.setName("");
+							outputDatasExp.setValue("");
+							outputDatasetViewer.setExpression(outputDatasExp);
+							return;
+						}
+
+						if (multiInstanceLoopCharacteristics.getExtensionValues().size() > 0) {
+
+							for (ExtensionAttributeValue extensionAttributeValue : multiInstanceLoopCharacteristics.getExtensionValues()) {
+
+								FeatureMap extensionElements = extensionAttributeValue.getValue();
+								for (Entry entry : extensionElements) {
+									if (entry.getValue() instanceof LoopDataOutputCollection) {
+										LoopDataOutputCollection loopDataOutputCollection = (LoopDataOutputCollection) entry.getValue();
+										loopDataOutputCollection.setExpression(outputDatasExp);
+										loopDataOutputCollection.getExpression().setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+										loopDataOutputCollection.getExpression().setValue(event.getFormalExpression().getBody());
+									
+										FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+												(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_OUTPUT_COLLECTION, loopDataOutputCollection);
+										multiInstanceLoopCharacteristics.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+									}else {
+										outputDatasExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+										outputDatasExp.setValue(event.getFormalExpression().getBody());
+
+										LoopDataOutputCollection authors = FoxBPMFactory.eINSTANCE.createLoopDataOutputCollection();
+										authors.setExpression(outputDatasExp);
+										FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+												(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_OUTPUT_COLLECTION, authors);
+										multiInstanceLoopCharacteristics.getExtensionValues().get(0).getValue().add(extensionElementEntry);
+									}
+								}
+
+							}
+						} else {
+							outputDatasExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							outputDatasExp.setValue(event.getFormalExpression().getBody());
+
+							LoopDataOutputCollection authors = FoxBPMFactory.eINSTANCE.createLoopDataOutputCollection();
+							authors.setExpression(outputDatasExp);
+							ExtensionAttributeValue extensionElement = Bpmn2Factory.eINSTANCE.createExtensionAttributeValue();
+							FeatureMap.Entry extensionElementEntry = new SimpleFeatureMapEntry(
+									(org.eclipse.emf.ecore.EStructuralFeature.Internal) FoxBPMPackage.Literals.DOCUMENT_ROOT__LOOP_DATA_OUTPUT_COLLECTION, authors);
+							extensionElement.getValue().add(extensionElementEntry);
+							multiInstanceLoopCharacteristics.getExtensionValues().add(extensionElement);
+						}
+						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						//传递表达式对象
+						outputDatasetViewer.setExpression(outputDatasExp);
+					}
+				});
+			}
+		});
+		
+		fulfillConditionViewer.seteObject(userTask);
+		fulfillConditionViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						if(multiInstanceLoopCharacteristics==null) {
+							multiInstanceLoopCharacteristics = Bpmn2Factory.eINSTANCE.createMultiInstanceLoopCharacteristics();
+							completeExp.setName("");
+							completeExp.setValue("");
+							fulfillConditionViewer.setExpression(completeExp);
+						}
+						
+						multiInstanceLoopCharacteristics.setCompletionCondition(event.getFormalExpression());
+						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						//传递表达式对象
+						if(event.getFormalExpression()!=null) {
+							completeExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							completeExp.setValue(event.getFormalExpression().getBody());
+						}else {
+							completeExp.setName("");
+							completeExp.setValue("");
+							fulfillConditionViewer.setExpression(completeExp);
+						}
+					}
+				});
+			}
+		});
 	}
 }

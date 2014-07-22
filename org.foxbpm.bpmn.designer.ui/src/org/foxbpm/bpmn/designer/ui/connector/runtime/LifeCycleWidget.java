@@ -105,7 +105,8 @@ public class LifeCycleWidget extends FigureCanvas {
 	private IFigure createUserTaskLifecycleFigure() {
 		IFigure figure = new ImageFigure(imageLifeCycle);
 		addEvent(figure, "node-enter", new org.eclipse.draw2d.geometry.Point(58, 37), 11);
-		addEvent(figure, "task-assign", new org.eclipse.draw2d.geometry.Point(129, 37), 11);
+		addEvent(figure, "node-execute", new org.eclipse.draw2d.geometry.Point(117, 37), 11);
+		addEvent(figure, "task-assign", new org.eclipse.draw2d.geometry.Point(176, 37), 11);
 		EventCircle defaultEvent = addEvent(figure, "node-leave", new org.eclipse.draw2d.geometry.Point(258, 37), 11);
 		if (event == null) {
 			defaultEvent.select();
@@ -119,6 +120,7 @@ public class LifeCycleWidget extends FigureCanvas {
 	private IFigure createOtherLifecycleFigure() {
 		IFigure figure = new ImageFigure(imageLifeCycle);
 		addEvent(figure, "node-enter", new org.eclipse.draw2d.geometry.Point(45, 40), 10);
+		addEvent(figure, "node-execute", new org.eclipse.draw2d.geometry.Point(123, 40), 11);
 		EventCircle defaultEvent = addEvent(figure, "node-leave", new org.eclipse.draw2d.geometry.Point(226, 40), 10);
 		if (event == null) {
 			defaultEvent.select();

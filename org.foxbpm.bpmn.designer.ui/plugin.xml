@@ -479,6 +479,12 @@
           <enable
                 object="ReceiveTask">
           </enable>
+          <enable
+                object="BoundaryEvent">
+          </enable>
+          <enable
+                object="IntermediateCatchEvent">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -523,6 +529,16 @@
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.exclusivegateway.ExclusiveGatewayPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.exclusivegateway"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.intermediatecatchevent.IntermediateCatchEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.intermediatecatchevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.boundaryevent.BoundaryEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.boundaryevent"
         label="通用">
   </propertyTab>
   <propertyTab
@@ -649,6 +665,16 @@
         class="org.foxbpm.bpmn.designer.ui.features.activity.subprocess.FoxBPMSubProcessFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.subprocess"
         type="org.eclipse.bpmn2.SubProcess">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.definitions.FoxBPMBoundaryEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.boundaryevent"
+        type="org.eclipse.bpmn2.BoundaryEvent">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMIntermediateCatchEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.intermediatecatchEvent"
+        type="org.eclipse.bpmn2.IntermediateCatchEvent">
   </featureContainer>
 
 		<!-- ======================================== -->
