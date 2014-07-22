@@ -1,12 +1,12 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
+import org.eclipse.bpmn2.Activity;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.DataInput;
 import org.eclipse.bpmn2.DataOutput;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.MultiInstanceLoopCharacteristics;
-import org.eclipse.bpmn2.UserTask;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -32,8 +32,8 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 
-public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
-	private UserTask userTask;
+public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
+	private Activity activity;
 	private FoxBPMExpViewer inputDatasetViewer;//输入数据集
 	private FoxBPMExpViewer inputItemViewer;//输入数据集
 	private FoxBPMExpViewer outputItemViewer;//输入数据集
@@ -50,7 +50,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	private Composite multiComposite;
 	private Composite detailComposite;
 
-	public UserTaskAdvancedPropertyComposite(Composite parent, int style) {
+	public ActivityAdvancedPropertyComposite(Composite parent, int style) {
 		super(parent, style);
 	}
 
@@ -142,7 +142,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		userTask=(UserTask)eObject;
+		activity=(Activity)eObject;
 		
 		nullRadio.addListener(SWT.Selection, new Listener() {
 			
@@ -160,7 +160,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 					@Override
 					protected void doExecute() {
-						userTask.setLoopCharacteristics(null);
+						activity.setLoopCharacteristics(null);
 					}
 				});
 			}
@@ -173,7 +173,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) userTask.getLoopCharacteristics();
+		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) activity.getLoopCharacteristics();
 		
 		if(multiInstanceLoopCharacteristics!=null) {
 			nullRadio.setSelection(false);
@@ -256,7 +256,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		}
 		
-		inputItemViewer.seteObject(userTask);
+		inputItemViewer.seteObject(activity);
 		inputItemViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
 			
 			@Override
@@ -290,7 +290,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 							dataInput.getExtensionValues().add(extensionAttributeValue);
 							multiInstanceLoopCharacteristics.setInputDataItem(dataInput);
 						}
-						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						activity.setLoopCharacteristics(multiInstanceLoopCharacteristics);
 						//传递表达式对象
 						inputItemViewer.setExpression(inputDataExp);
 					}
@@ -298,7 +298,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		outputItemViewer.seteObject(userTask);
+		outputItemViewer.seteObject(activity);
 		outputItemViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
 			
 			@Override
@@ -332,7 +332,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 							dataOutput.getExtensionValues().add(extensionAttributeValue);
 							multiInstanceLoopCharacteristics.setOutputDataItem(dataOutput);
 						}
-						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						activity.setLoopCharacteristics(multiInstanceLoopCharacteristics);
 						//传递表达式对象
 						outputItemViewer.setExpression(outputDataExp);
 					}
@@ -340,7 +340,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		inputDatasetViewer.seteObject(userTask);
+		inputDatasetViewer.seteObject(activity);
 		inputDatasetViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
 			
 			@Override
@@ -402,7 +402,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 							extensionElement.getValue().add(extensionElementEntry);
 							multiInstanceLoopCharacteristics.getExtensionValues().add(extensionElement);
 						}
-						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						activity.setLoopCharacteristics(multiInstanceLoopCharacteristics);
 						//传递表达式对象
 						inputDatasetViewer.setExpression(inputDatasExp);
 					}
@@ -410,7 +410,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		outputDatasetViewer.seteObject(userTask);
+		outputDatasetViewer.seteObject(activity);
 		outputDatasetViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
 			
 			@Override
@@ -472,7 +472,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 							extensionElement.getValue().add(extensionElementEntry);
 							multiInstanceLoopCharacteristics.getExtensionValues().add(extensionElement);
 						}
-						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						activity.setLoopCharacteristics(multiInstanceLoopCharacteristics);
 						//传递表达式对象
 						outputDatasetViewer.setExpression(outputDatasExp);
 					}
@@ -480,7 +480,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		fulfillConditionViewer.seteObject(userTask);
+		fulfillConditionViewer.seteObject(activity);
 		fulfillConditionViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
 			
 			@Override
@@ -497,7 +497,7 @@ public class UserTaskAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 						}
 						
 						multiInstanceLoopCharacteristics.setCompletionCondition(event.getFormalExpression());
-						userTask.setLoopCharacteristics(multiInstanceLoopCharacteristics);
+						activity.setLoopCharacteristics(multiInstanceLoopCharacteristics);
 						//传递表达式对象
 						if(event.getFormalExpression()!=null) {
 							completeExp.setName(event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
