@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getKey <em>Key</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getParams <em>Params</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -92,5 +93,31 @@ public interface Param extends EObject {
 	 * @generated
 	 */
 	EList<Param> getParams();
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getParam_Name()
+	 * @model extendedMetaData="kind='attribute'"
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.Param#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 } // Param

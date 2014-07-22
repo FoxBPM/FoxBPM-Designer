@@ -692,13 +692,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__PARAMS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__NAME = 3;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 3;
+	int PARAM_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -1455,6 +1464,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EReference getParam_Params();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.Param#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getName()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Name();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2058,6 +2078,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAM__PARAMS = eINSTANCE.getParam_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.

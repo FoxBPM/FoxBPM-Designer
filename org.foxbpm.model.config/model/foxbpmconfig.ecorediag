@@ -211,6 +211,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//Param/key"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_7orvQeF2EeOIZ4N5DWtYjw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_XgFNoBF_EeSTYLEZIIUT4g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//Param/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XgFNoRF_EeSTYLEZIIUT4g"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_8qH-IOF2EeOIZ4N5DWtYjw" type="2001">
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//Param/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_8qH-IeF2EeOIZ4N5DWtYjw"/>
