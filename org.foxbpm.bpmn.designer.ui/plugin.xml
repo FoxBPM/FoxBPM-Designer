@@ -532,6 +532,16 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.intermediatecatchevent.IntermediateCatchEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.intermediatecatchevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.boundaryevent.BoundaryEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.boundaryevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         label="高级属性">

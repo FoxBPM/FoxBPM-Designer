@@ -1,5 +1,8 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.timerdefinition;
 
+import org.eclipse.bpmn2.BoundaryEvent;
+import org.eclipse.bpmn2.FormalExpression;
+import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.StartEvent;
 import org.eclipse.bpmn2.TimerEventDefinition;
 import org.eclipse.emf.ecore.EObject;
@@ -18,6 +21,9 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposite{
 	private StartEvent startEvent;
+	private BoundaryEvent boundaryEvent;
+	private IntermediateCatchEvent intermediateCatchEvent;
+	private TimerEventDefinition timerEventDefinition;
 
 	public TimerEventDefinitionPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -25,24 +31,39 @@ public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposi
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		startEvent = (StartEvent) eObject;
-		TimerEventDefinition timerEventDefinition = (TimerEventDefinition) startEvent.getEventDefinitions().get(0);
-		org.eclipse.bpmn2.Expression exp1 = timerEventDefinition.getTimeDate();
-		org.eclipse.bpmn2.Expression exp2 = timerEventDefinition.getTimeDuration();
-		org.eclipse.bpmn2.Expression exp3 = timerEventDefinition.getTimeCycle();
+		if(eObject instanceof StartEvent) {
+			startEvent = (StartEvent) eObject;
+			timerEventDefinition = (TimerEventDefinition) startEvent.getEventDefinitions().get(0);
+		}else if(eObject instanceof BoundaryEvent) {
+			boundaryEvent = (BoundaryEvent) eObject;
+			timerEventDefinition = (TimerEventDefinition) boundaryEvent.getEventDefinitions().get(0);
+		}else if(eObject instanceof IntermediateCatchEvent) {
+			intermediateCatchEvent = (IntermediateCatchEvent) eObject;
+			timerEventDefinition = (TimerEventDefinition) intermediateCatchEvent.getEventDefinitions().get(0);
+		}
+		
+		FormalExpression exp1 = (FormalExpression) timerEventDefinition.getTimeDate();
+		FormalExpression exp2 = (FormalExpression) timerEventDefinition.getTimeDuration();
+		FormalExpression exp3 = (FormalExpression) timerEventDefinition.getTimeCycle();
 		
 		Expression timerdateexp = FoxBPMFactory.eINSTANCE.createExpression();
 		Expression timerdurationexp = FoxBPMFactory.eINSTANCE.createExpression();
 		Expression timercycleexp = FoxBPMFactory.eINSTANCE.createExpression();
 		
-		timerdateexp.setName(exp1.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
-		timerdateexp.setValue(((Documentation)exp1.getDocumentation().get(0)).getName());
+		if(exp1!=null) {
+			timerdateexp.setName(exp1.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			timerdateexp.setValue(exp1.getBody());
+		}
 		
-		timerdurationexp.setName(((Documentation)exp2.getDocumentation().get(0)).getName());
-		timerdurationexp.setValue(((Documentation)exp2.getDocumentation().get(0)).getName());
+		if(exp2!=null) {
+			timerdurationexp.setName(exp2.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			timerdurationexp.setValue(exp2.getBody());
+		}
 		
-		timercycleexp.setName(((Documentation)exp3.getDocumentation().get(0)).getName());
-		timercycleexp.setValue(((Documentation)exp3.getDocumentation().get(0)).getName());
+		if(exp3!=null) {
+			timercycleexp.setName(exp3.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+			timercycleexp.setValue(exp3.getBody());
+		}
 	}
 
 	@Override
