@@ -9,14 +9,14 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMPropertySection;
 
-public class UserTaskAdvancedPropertySection extends AbstractFoxBPMPropertySection {
+public class ActivityAdvancedPropertySection extends AbstractFoxBPMPropertySection {
 
-	public UserTaskAdvancedPropertySection() {
+	public ActivityAdvancedPropertySection() {
 	}
 
 	@Override
 	protected AbstractFoxBPMComposite createSectionRoot() {
-		return new UserTaskAdvancedPropertyComposite(parent, SWT.NULL);
+		return new ActivityAdvancedPropertyComposite(parent, SWT.NULL);
 	}
 
 	@Override

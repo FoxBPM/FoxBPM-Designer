@@ -542,7 +542,7 @@
         label="通用">
   </propertyTab>
   <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.ActivityAdvancedPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         label="高级属性">
   </propertyTab>
