@@ -6,6 +6,8 @@ import org.eclipse.bpmn2.IntermediateCatchEvent;
 import org.eclipse.bpmn2.StartEvent;
 import org.eclipse.bpmn2.TimerEventDefinition;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.RecordingCommand;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -13,8 +15,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
-import org.foxbpm.model.bpmn.foxbpm.Documentation;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
@@ -24,6 +27,9 @@ public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposi
 	private BoundaryEvent boundaryEvent;
 	private IntermediateCatchEvent intermediateCatchEvent;
 	private TimerEventDefinition timerEventDefinition;
+	private FoxBPMExpViewer foxBPMExpViewer;
+	private FoxBPMExpViewer foxBPMExpViewer_1;
+	private FoxBPMExpViewer foxBPMExpViewer_2;
 
 	public TimerEventDefinitionPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -53,17 +59,96 @@ public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposi
 		if(exp1!=null) {
 			timerdateexp.setName(exp1.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
 			timerdateexp.setValue(exp1.getBody());
+			foxBPMExpViewer.setExpression(timerdateexp);
 		}
 		
 		if(exp2!=null) {
 			timerdurationexp.setName(exp2.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
 			timerdurationexp.setValue(exp2.getBody());
+			foxBPMExpViewer_1.setExpression(timerdurationexp);
 		}
 		
 		if(exp3!=null) {
 			timercycleexp.setName(exp3.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
 			timercycleexp.setValue(exp3.getBody());
+			foxBPMExpViewer_2.setExpression(timercycleexp);
 		}
+		
+		foxBPMExpViewer.seteObject(eObject);
+		foxBPMExpViewer_1.seteObject(eObject);
+		foxBPMExpViewer_2.seteObject(eObject);
+		
+		foxBPMExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						if(formalExpression!=null) {
+							expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							expression.setValue(formalExpression.getBody());
+						}else {
+							expression.setName("");
+							expression.setValue("");
+						}
+						timerEventDefinition.setTimeDate(formalExpression);
+						foxBPMExpViewer.setExpression(expression);
+					}
+				});
+			}
+		});
+		
+		foxBPMExpViewer_1.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						if(formalExpression!=null) {
+							expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							expression.setValue(formalExpression.getBody());
+						}else {
+							expression.setName("");
+							expression.setValue("");
+						}
+						timerEventDefinition.setTimeDuration(formalExpression);
+						foxBPMExpViewer_1.setExpression(expression);
+					}
+				});
+			}
+		});
+		
+		foxBPMExpViewer_2.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(final ExpressionChangedEvent event) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						FormalExpression formalExpression = event.getFormalExpression();
+						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+						if(formalExpression!=null) {
+							expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+							expression.setValue(formalExpression.getBody());
+						}else {
+							expression.setName("");
+							expression.setValue("");
+						}
+						timerEventDefinition.setTimeCycle(formalExpression);
+						foxBPMExpViewer_2.setExpression(expression);
+					}
+				});
+			}
+		});
 	}
 
 	@Override
@@ -75,21 +160,21 @@ public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposi
 		Label timedateLabel = new Label(detailComposite, SWT.NONE);
 		timedateLabel.setText("TimeDate");
 		
-		FoxBPMExpViewer foxBPMExpViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		foxBPMExpViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = foxBPMExpViewer.getControl();
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label timedurationLabel = new Label(detailComposite, SWT.NONE);
 		timedurationLabel.setText("TimeDuration");
 		
-		FoxBPMExpViewer foxBPMExpViewer_1 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		foxBPMExpViewer_1 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_1 = foxBPMExpViewer_1.getControl();
 		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label timercycleLabel = new Label(detailComposite, SWT.NONE);
 		timercycleLabel.setText("TimerCycle");
 		
-		FoxBPMExpViewer foxBPMExpViewer_2 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		foxBPMExpViewer_2 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_2 = foxBPMExpViewer_2.getControl();
 		control_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
