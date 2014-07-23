@@ -66,7 +66,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConnectorInstanceElements <em>Connector Instance Elements</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsCreateRecord <em>Is Create Record</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType <em>Claim Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}</li>
@@ -1316,31 +1316,31 @@ public interface DocumentRoot extends EObject {
 	void setIsCreateRecord(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * Returns the value of the '<em><b>Claim Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Auto Claim</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Claim Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Auto Claim</em>' attribute.
-	 * @see #setIsAutoClaim(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_IsAutoClaim()
+	 * @return the value of the '<em>Claim Type</em>' attribute.
+	 * @see #setClaimType(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_ClaimType()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute'"
 	 * @generated
 	 */
-	String getIsAutoClaim();
+	String getClaimType();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType <em>Claim Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Auto Claim</em>' attribute.
-	 * @see #getIsAutoClaim()
+	 * @param value the new value of the '<em>Claim Type</em>' attribute.
+	 * @see #getClaimType()
 	 * @generated
 	 */
-	void setIsAutoClaim(String value);
+	void setClaimType(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Task Description</b></em>' containment reference.

@@ -513,13 +513,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__IS_CREATE_RECORD = 48;
 
 	/**
-	 * The feature id for the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * The feature id for the '<em><b>Claim Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__IS_AUTO_CLAIM = 49;
+	int DOCUMENT_ROOT__CLAIM_TYPE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Task Description</b></em>' containment reference.
@@ -3271,15 +3271,15 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDocumentRoot_IsCreateRecord();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType <em>Claim Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Auto Claim</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim()
+	 * @return the meta object for the attribute '<em>Claim Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EAttribute getDocumentRoot_IsAutoClaim();
+	EAttribute getDocumentRoot_ClaimType();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}'.
@@ -5362,12 +5362,12 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute DOCUMENT_ROOT__IS_CREATE_RECORD = eINSTANCE.getDocumentRoot_IsCreateRecord();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Auto Claim</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Claim Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOCUMENT_ROOT__IS_AUTO_CLAIM = eINSTANCE.getDocumentRoot_IsAutoClaim();
+		EAttribute DOCUMENT_ROOT__CLAIM_TYPE = eINSTANCE.getDocumentRoot_ClaimType();
 
 		/**
 		 * The meta object literal for the '<em><b>Task Description</b></em>' containment reference feature.

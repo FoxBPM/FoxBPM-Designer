@@ -858,7 +858,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDocumentRoot_IsAutoClaim() {
+	public EAttribute getDocumentRoot_ClaimType() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(49);
 	}
 
@@ -2326,7 +2326,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(documentRootEClass, DOCUMENT_ROOT__CONNECTOR_INSTANCE_ELEMENTS);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__NAME);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__IS_CREATE_RECORD);
-		createEAttribute(documentRootEClass, DOCUMENT_ROOT__IS_AUTO_CLAIM);
+		createEAttribute(documentRootEClass, DOCUMENT_ROOT__CLAIM_TYPE);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__TASK_DESCRIPTION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
@@ -2608,7 +2608,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getDocumentRoot_ConnectorInstanceElements(), this.getConnectorInstanceElements(), null, "connectorInstanceElements", null, 0, -1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_IsCreateRecord(), theXMLTypePackage.getString(), "isCreateRecord", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDocumentRoot_IsAutoClaim(), theXMLTypePackage.getString(), "isAutoClaim", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDocumentRoot_ClaimType(), theXMLTypePackage.getString(), "claimType", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_TaskDescription(), this.getTaskDescription(), null, "taskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_CompleteTaskDescription(), this.getCompleteTaskDescription(), null, "completeTaskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FormParamContainer(), this.getFormParamContainer(), null, "formParamContainer", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3196,7 +3196,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
-		  (getDocumentRoot_IsAutoClaim(), 
+		  (getDocumentRoot_ClaimType(), 
 		   source, 
 		   new String[] {
 			 "namespace", "##targetNamespace",
