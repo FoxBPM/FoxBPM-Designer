@@ -337,7 +337,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				InputDialog inputDialog = new InputDialog(null, "下载流程定义", "请输入流程定义的文件名", "FileName.bpmn", inputValidator);
 				if(inputDialog.open()==inputDialog.OK) {
 					try {
-						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
+						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/resource/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
 						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 						
 						String fileName = null;
