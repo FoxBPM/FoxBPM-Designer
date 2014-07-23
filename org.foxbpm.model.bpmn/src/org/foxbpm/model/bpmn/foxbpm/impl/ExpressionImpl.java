@@ -148,13 +148,11 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.EXPRESSION__VALUE, oldValue, value));
+		getMixed().clear();
+        getMixed().add(XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_CDATA(), newValue);
 	}
 
 	/**

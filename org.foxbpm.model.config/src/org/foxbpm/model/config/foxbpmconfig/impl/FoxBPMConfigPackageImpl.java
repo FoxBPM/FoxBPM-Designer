@@ -590,6 +590,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getParam_Mixed() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBaseConfig() {
 		return baseConfigEClass;
 	}
@@ -862,6 +871,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(paramEClass, PARAM__VALUE);
 		createEReference(paramEClass, PARAM__PARAMS);
 		createEAttribute(paramEClass, PARAM__NAME);
+		createEAttribute(paramEClass, PARAM__MIXED);
 
 		baseConfigEClass = createEClass(BASE_CONFIG);
 		createEReference(baseConfigEClass, BASE_CONFIG__PARAMS);
@@ -984,6 +994,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getParam_Value(), ecorePackage.getEString(), "value", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParam_Params(), this.getParam(), null, "params", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParam_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseConfigEClass, BaseConfig.class, "BaseConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBaseConfig_Params(), this.getParam(), null, "params", null, 0, -1, BaseConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1215,6 +1226,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "kind", "attribute"
 		   });		
 		addAnnotation
+		  (paramEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Param",
+			 "kind", "mixed"
+		   });		
+		addAnnotation
 		  (getParam_Key(), 
 		   source, 
 		   new String[] {
@@ -1224,19 +1242,26 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		  (getParam_Value(), 
 		   source, 
 		   new String[] {
-			 "kind", "attribute"
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getParam_Params(), 
 		   source, 
 		   new String[] {
-			 "kind", "element"
+			 "kind", "mixed"
 		   });		
 		addAnnotation
 		  (getParam_Name(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getParam_Mixed(), 
+		   source, 
+		   new String[] {
+			 "name", ":mixed",
+			 "kind", "elementWildcard"
 		   });		
 		addAnnotation
 		  (getBaseConfig_Params(), 

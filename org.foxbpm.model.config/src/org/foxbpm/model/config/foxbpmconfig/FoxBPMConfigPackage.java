@@ -710,13 +710,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__NAME = 3;
 
 	/**
+	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__MIXED = 4;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 4;
+	int PARAM_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -1495,6 +1504,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getParam_Name();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.foxbpm.model.config.foxbpmconfig.Param#getMixed <em>Mixed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Mixed</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getMixed()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Mixed();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2114,6 +2134,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__MIXED = eINSTANCE.getParam_Mixed();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
