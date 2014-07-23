@@ -172,7 +172,7 @@ public class CallActivityCommonComposite extends AbstractFoxBPMComposite{
 		nameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label processLabel = new Label(detailComposite, SWT.NONE);
-		processLabel.setText("流程");
+		processLabel.setText("子流程编号");
 		
 		foxBPMExpViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = foxBPMExpViewer.getControl();

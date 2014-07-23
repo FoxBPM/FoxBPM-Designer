@@ -1,9 +1,14 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.callactivity;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.node.ArrayNode;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.CallActivity;
@@ -25,6 +30,8 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -42,6 +49,7 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
+import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.utils.BpmnModelUtil;
 import org.foxbpm.model.bpmn.foxbpm.DataSourceToSubProcessMapping;
@@ -50,6 +58,9 @@ import org.foxbpm.model.bpmn.foxbpm.DataVariableMapping;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.SubProcessToDataSourceMapping;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.representation.Representation;
+import org.restlet.resource.ClientResource;
 
 public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 	private CallActivity callActivity;
@@ -80,25 +91,78 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public Composite createUI(Composite parent) {
-		if(formToolkit==null)//为了WB展现
+		if (formToolkit == null)// 为了WB展现
 			formToolkit = new FormToolkit(Display.getDefault());
 		Composite detailComposite = new Composite(parent, SWT.NONE);
-		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_detailComposite = new GridData(SWT.FILL, SWT.CENTER, true, true, 1, 1);
+		gd_detailComposite.heightHint = 200;
+		detailComposite.setLayoutData(gd_detailComposite);
 		detailComposite.setLayout(new GridLayout(2, false));
 
 		Composite composite = new Composite(detailComposite, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		composite.setLayout(new GridLayout(2, false));
 
 		Button autoMapButton = new Button(composite, SWT.NONE);
 		autoMapButton.setSize(60, 27);
 		autoMapButton.setText("自动映射");
+		autoMapButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						//删除列表数据
+						if(list1 != null && list1.size() > 0) {
+							for (int i = 0; i < list1.size();) {
+								list1.remove(i);
+							}
+						}
+						if(list2 != null && list2.size() > 0) {
+							for (int i = 0; i < list2.size();) {
+								list2.remove(i);
+							}
+						}
+						
+						for (int i = 0; i < process.keySet().size(); i++) {
+							String data = process.get(i + "");
+							for (int j = 0; j < subProcess.keySet().size(); j++) {
+								String subData = subProcess.get(j + "");
+								if(data.equals(subData) || ("sub_" + data).equals(subData) ) {
+									DataVariableMapping dataVariable = FoxBPMFactory.eINSTANCE.createDataVariableMapping();
+									dataVariable.setDataSourceId(data);
+									dataVariable.setSubProcesId(subData);
+									list1.add(dataVariable);
+									
+									dataVariable = FoxBPMFactory.eINSTANCE.createDataVariableMapping();
+									dataVariable.setDataSourceId(data);
+									dataVariable.setSubProcesId(subData);
+									list2.add(dataVariable);
+									break;
+								}
+							}
+						}
+						
+						tableViewer.setInput(list1);
+						tableViewer2.setInput(list2);
+						tableViewer.refresh();
+						tableViewer2.refresh();
+					}
+				});
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setSize(194, 17);
 		lblNewLabel.setText("名字相同或前缀都为‘sub_’的变量");
 
 		Section section = formToolkit.createSection(detailComposite, Section.TITLE_BAR);
+		// Section section = new Section(detailComposite, Section.TITLE_BAR);
+		section.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		section.setText("主流程映射子流程");
 		ToolBar toolBar = new ToolBar(section, SWT.FLAT | SWT.RIGHT);
 		section.setTextClient(toolBar);
@@ -159,24 +223,23 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 		tableViewer = new TableViewer(section, SWT.BORDER | SWT.FULL_SELECTION);
 		tableViewer.setContentProvider(new ArrayContentProvider());
 		final Table table = tableViewer.getTable();
-		table.addListener(SWT.MeasureItem, new Listener() { //修改行高度
-			public void handleEvent(Event event) {
-				event.width = table.getGridLineWidth();
-				// 设置宽度
-				event.height = (int) Math.floor(event.gc
-						.getFontMetrics().getHeight() * 1.5);
-			}
-		});
+		table.addListener(SWT.MeasureItem, new Listener() { // 修改行高度
+					public void handleEvent(Event event) {
+						event.width = table.getGridLineWidth();
+						// 设置宽度
+						event.height = (int) Math.floor(event.gc.getFontMetrics().getHeight() * 1.5);
+					}
+				});
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
+
 		section.setClient(table);
 
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tblclmnNewColumn = tableViewerColumn.getColumn();
 		tblclmnNewColumn.setWidth(100);
 		tblclmnNewColumn.setText("源数据");
-		
+
 		tableViewerColumn.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -184,12 +247,12 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 				return p.getDataSourceId();
 			}
 		});
-		
+
 		TableViewerColumn tableViewerColumn_1 = new TableViewerColumn(tableViewer, SWT.NONE);
 		TableColumn tableColumn = tableViewerColumn_1.getColumn();
 		tableColumn.setWidth(100);
 		tableColumn.setText("子流程数据");
-		
+
 		tableViewerColumn_1.setLabelProvider(new ColumnLabelProvider() {
 			@Override
 			public String getText(Object element) {
@@ -197,8 +260,10 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 				return p.getSubProcesId();
 			}
 		});
-		
+
 		Section section_1 = formToolkit.createSection(detailComposite, Section.TITLE_BAR);
+		// Section section_1 = new Section(detailComposite, Section.TITLE_BAR);
+		section_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		section_1.setText("子流程映射主流程");
 
 		ToolBar toolBar_1 = new ToolBar(section_1, SWT.FLAT | SWT.RIGHT);
@@ -256,7 +321,7 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 				});
 			}
 		});
-		
+
 		cellEditors = new CellEditor[tableViewer.getTable().getColumnCount()];
 		cellEditors[0] = new ComboBoxCellEditor(table, processArray == null ? new String[0] : processArray, SWT.READ_ONLY);
 		cellEditors[1] = new ComboBoxCellEditor(table, subProcessArray == null ? new String[0] : subProcessArray, SWT.READ_ONLY);
@@ -303,14 +368,13 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 		tableViewer2 = new TableViewer(section_1, SWT.BORDER | SWT.FULL_SELECTION);
 		tableViewer2.setContentProvider(new ArrayContentProvider());
 		final Table table2 = tableViewer2.getTable();
-		table2.addListener(SWT.MeasureItem, new Listener() { //修改行高度
-			public void handleEvent(Event event) {
-				event.width = table.getGridLineWidth();
-				// 设置宽度
-				event.height = (int) Math.floor(event.gc
-						.getFontMetrics().getHeight() * 1.5);
-			}
-		});
+		table2.addListener(SWT.MeasureItem, new Listener() { // 修改行高度
+					public void handleEvent(Event event) {
+						event.width = table.getGridLineWidth();
+						// 设置宽度
+						event.height = (int) Math.floor(event.gc.getFontMetrics().getHeight() * 1.5);
+					}
+				});
 		table2.setLinesVisible(true);
 		table2.setHeaderVisible(true);
 		section_1.setClient(table2);
@@ -326,7 +390,7 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 				return p.getSubProcesId();
 			}
 		});
-		
+
 		TableViewerColumn tableViewerColumn_3 = new TableViewerColumn(tableViewer2, SWT.NONE);
 		TableColumn tableColumn_2 = tableViewerColumn_3.getColumn();
 		tableColumn_2.setWidth(100);
@@ -381,7 +445,7 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 				refreshContent(tableViewer2, list2, ele);
 			}
 		});
-		
+
 		return parent;
 	}
 
@@ -414,6 +478,13 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 	 * @throws
 	 */
 	private void initData(final EObject be) {
+		list1 = new ArrayList<DataVariableMapping>();
+		list2 = new ArrayList<DataVariableMapping>();
+		process = new HashMap<String, String>();
+		subProcess = new HashMap<String, String>();
+		processFan = new HashMap<String, String>();
+		subProcessFan = new HashMap<String, String>();
+		
 		// 获取主流程数据
 		List<DataVariable> process = getProcessDataVariable((Process) BpmnModelUtil.getProcessByEobj(be));
 		if (process != null && process.size() > 0) {
@@ -451,14 +522,8 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 
 		// 获取emf数据
 
-		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
-		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-			@Override
-			protected void doExecute() {
-				dataSourceToSubProcessMapping = getDataSourceToSubProcessMapping((CallActivity) be);
-				subProcessToDataSourceMapping = getSubProcessToDataSourceMapping((CallActivity) be);
-			}
-		});
+		dataSourceToSubProcessMapping = getDataSourceToSubProcessMapping((CallActivity) be);
+		subProcessToDataSourceMapping = getSubProcessToDataSourceMapping((CallActivity) be);
 
 		// 填充list
 		list1 = dataSourceToSubProcessMapping.getDataVariableMapping();
@@ -507,42 +572,43 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 
 		List<DataVariable> dataVariables = new ArrayList<DataVariable>();
 
-		// Object processKey =
-		// callActivity.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CALLABLE_ELEMENT_ID);
-		// Object processVersion =
-		// callActivity.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CALLABLE_ELEMENT_VERSION);
-		//
-		// if (processKey != null && !processKey.equals("")) {
-		//
-		// Connection connection =
-		// FixFlowConfigUtil.createConnectionWithCommit();
-		// SqlCommand sqlCommand = new SqlCommand(connection);
-		//
-		// String processKeyNow=null;
-		// int processVersionNow=0;
-		// if(processKey.toString().indexOf("\"")>=0){
-		// processKeyNow=processKey.toString().replace("\"", "");
-		// }
-		// else{
-		// processKeyNow=processKey.toString();
-		// }
-		//
-		// if(processVersion.toString().indexOf("\"")>=0){
-		// processVersionNow=StringUtil.getInt(processVersion.toString().replace("\"",
-		// ""));
-		// }else{
-		// processVersionNow=StringUtil.getInt(processVersion.toString());
-		// }
-		//
-		//
-		// Process process =
-		// selectProcessDefinitionById(processKeyNow,processVersionNow,
-		// sqlCommand);
-		//
-		// List<DataVariable> dataVariablesTemp =
-		// getProcessDataVariable(process);
-		// dataVariables.addAll(dataVariablesTemp);
-		// }
+		Object processKey = callActivity.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CALLABLE_ELEMENT_ID);
+		Object processVersion = callActivity.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CALLABLE_ELEMENT_VERSION);
+
+		if (processKey != null && !processKey.equals("")) {
+
+			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "variable-definition/"+processKey+"/"+processVersion+"/variables");
+			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			Representation result = client.get();
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				String resultString = result.getText();
+				if(resultString==null) {
+					MessageDialog.openInformation(null, "提示", "未找到流程编号为"+ processKey + "版本为" + processVersion + "流程定义");
+					return dataVariables;
+				}
+				JsonNode object= objectMapper.readTree(resultString);
+				System.out.println(resultString);
+				ArrayNode dataArray = (ArrayNode)object.get("data");
+				
+				for(JsonNode json :dataArray){
+					DataVariable dataVariable = FoxBPMFactory.eINSTANCE.createDataVariable();
+					dataVariable.setId(json.get("id")==null?"":json.get("id").asText());
+					dataVariable.setBizType(json.get("bizType")==null?"":json.get("bizType").asText());
+					dataVariable.setDataType(json.get("dataType")==null?"":json.get("dataType").asText());
+//					dataVariable.setExpression(json.get("expressionText")==null?"":json.get("expressionText").asText());
+//					dataVariable.setFileName(json.get("id")==null?"":json.get("id").asText());
+					dataVariable.setIsList(json.get("isList")==null?false:json.get("isList").asBoolean());
+					dataVariable.setIsPersistence(json.get("isPersistence")==null?false:json.get("isPersistence").asBoolean());
+					dataVariables.add(dataVariable);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else {
+			MessageDialog.openInformation(null, "提示", "请先设置公有子流程的流程编号和版本");
+			return dataVariables;
+		}
 
 		return dataVariables;
 
