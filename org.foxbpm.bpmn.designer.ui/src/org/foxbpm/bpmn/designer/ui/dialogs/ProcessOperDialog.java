@@ -167,6 +167,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					deleteButton.setEnabled(true);
 					createNewButton.setEnabled(true);
 				}else {
+					deleteButton.setEnabled(true);
 					createNewButton.setEnabled(true);
 				}
 			}
@@ -398,12 +399,12 @@ public class ProcessOperDialog extends TitleAreaDialog {
 
 			@Override
 			public void handleEvent(Event event) {
-				if(tableViewer.getSelection()==null) {
+				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
+				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
+				if(processTo==null) {
 					MessageDialog.openInformation(null, "提示", "请先选中一条流程定义");
 					return;
 				}
-				IStructuredSelection selection = (IStructuredSelection) tableViewer.getSelection();
-				ProcessTo processTo = (ProcessTo) selection.getFirstElement();
 				deleteProcess(processTo);
 				initTreeViewer();
 				initDataBindings();
@@ -581,6 +582,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			createNewButton.setEnabled(true);
 		}else {
 			allButtonsDisable();
+			deleteButton.setEnabled(true);
 			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions");
 			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
 			Representation result = client.get();

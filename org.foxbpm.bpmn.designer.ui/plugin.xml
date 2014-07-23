@@ -479,6 +479,12 @@
           <enable
                 object="ReceiveTask">
           </enable>
+          <enable
+                object="BoundaryEvent">
+          </enable>
+          <enable
+                object="IntermediateCatchEvent">
+          </enable>
   </modelEnablement>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.startevent.StartEventPropertySection"
@@ -526,7 +532,27 @@
         label="通用">
   </propertyTab>
   <propertyTab
-        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
+        class="org.foxbpm.bpmn.designer.ui.propertytab.intermediatecatchevent.IntermediateCatchEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.intermediatecatchevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.boundaryevent.BoundaryEventPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.boundaryevent"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitycommon"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityDataMappingPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitydatamapping"
+        label="数据映射">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.ActivityAdvancedPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         label="高级属性">
   </propertyTab>
@@ -649,6 +675,16 @@
         class="org.foxbpm.bpmn.designer.ui.features.activity.subprocess.FoxBPMSubProcessFeatureContainer"
         runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.subprocess"
         type="org.eclipse.bpmn2.SubProcess">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.definitions.FoxBPMBoundaryEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.boundaryevent"
+        type="org.eclipse.bpmn2.BoundaryEvent">
+  </featureContainer>
+  <featureContainer
+        class="org.foxbpm.bpmn.designer.ui.features.event.FoxBPMIntermediateCatchEventFeatureContainer"
+        runtimeId="org.foxbpm.bpmn.designer.ui.featureContainer.intermediatecatchEvent"
+        type="org.eclipse.bpmn2.IntermediateCatchEvent">
   </featureContainer>
 
 		<!-- ======================================== -->

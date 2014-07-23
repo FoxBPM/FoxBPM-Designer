@@ -28,6 +28,7 @@ import org.foxbpm.model.config.foxbpmconfig.Param;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getKey <em>Key</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +84,26 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * @ordered
 	 */
 	protected EList<Param> params;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +183,27 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.PARAM__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -185,6 +227,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return getValue();
 			case FoxBPMConfigPackage.PARAM__PARAMS:
 				return getParams();
+			case FoxBPMConfigPackage.PARAM__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,6 +252,9 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				getParams().clear();
 				getParams().addAll((Collection<? extends Param>)newValue);
 				return;
+			case FoxBPMConfigPackage.PARAM__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -229,6 +276,9 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 			case FoxBPMConfigPackage.PARAM__PARAMS:
 				getParams().clear();
 				return;
+			case FoxBPMConfigPackage.PARAM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -247,6 +297,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case FoxBPMConfigPackage.PARAM__PARAMS:
 				return params != null && !params.isEmpty();
+			case FoxBPMConfigPackage.PARAM__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -265,6 +317,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 		result.append(key);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

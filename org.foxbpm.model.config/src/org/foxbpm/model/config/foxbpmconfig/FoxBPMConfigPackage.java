@@ -637,13 +637,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_CONFIG__IS_AUTO_CLAIM = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Task Command Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 1;
+	int TASK_COMMAND_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Task Command Config</em>' class.
@@ -692,13 +701,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__PARAMS = 2;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__NAME = 3;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 3;
+	int PARAM_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -1412,6 +1430,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EReference getTaskCommandConfig_TaskCommandDefinition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getIsAutoClaim <em>Is Auto Claim</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Auto Claim</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getIsAutoClaim()
+	 * @see #getTaskCommandConfig()
+	 * @generated
+	 */
+	EAttribute getTaskCommandConfig_IsAutoClaim();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.Param <em>Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1453,6 +1482,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getParam_Params();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.Param#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getName()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Name();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
@@ -2026,6 +2066,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EReference TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION = eINSTANCE.getTaskCommandConfig_TaskCommandDefinition();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Auto Claim</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TASK_COMMAND_CONFIG__IS_AUTO_CLAIM = eINSTANCE.getTaskCommandConfig_IsAutoClaim();
+
+		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl <em>Param</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2058,6 +2106,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAM__PARAMS = eINSTANCE.getParam_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.

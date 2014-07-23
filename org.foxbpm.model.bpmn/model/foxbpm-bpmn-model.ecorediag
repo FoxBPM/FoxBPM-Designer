@@ -120,7 +120,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_udp9gcm-EeO0sOxvRirFBQ"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_bFyvsOVDEeOrscCvrZFKNw" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/isAutoClaim"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DocumentRoot/claimType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_bFyvseVDEeOrscCvrZFKNw"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVCMgcXMEeOb9caI1cUYMA"/>

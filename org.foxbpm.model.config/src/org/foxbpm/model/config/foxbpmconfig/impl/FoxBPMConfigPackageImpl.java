@@ -536,6 +536,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTaskCommandConfig_IsAutoClaim() {
+		return (EAttribute)taskCommandConfigEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParam() {
 		return paramEClass;
 	}
@@ -565,6 +574,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EReference getParam_Params() {
 		return (EReference)paramEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParam_Name() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -837,11 +855,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		taskCommandConfigEClass = createEClass(TASK_COMMAND_CONFIG);
 		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION);
+		createEAttribute(taskCommandConfigEClass, TASK_COMMAND_CONFIG__IS_AUTO_CLAIM);
 
 		paramEClass = createEClass(PARAM);
 		createEAttribute(paramEClass, PARAM__KEY);
 		createEAttribute(paramEClass, PARAM__VALUE);
 		createEReference(paramEClass, PARAM__PARAMS);
+		createEAttribute(paramEClass, PARAM__NAME);
 
 		baseConfigEClass = createEClass(BASE_CONFIG);
 		createEReference(baseConfigEClass, BASE_CONFIG__PARAMS);
@@ -957,11 +977,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		initEClass(taskCommandConfigEClass, TaskCommandConfig.class, "TaskCommandConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskCommandConfig_TaskCommandDefinition(), this.getTaskCommandDefinition(), null, "taskCommandDefinition", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandConfig_IsAutoClaim(), ecorePackage.getEString(), "isAutoClaim", null, 0, 1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParam_Key(), ecorePackage.getEString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParam_Value(), ecorePackage.getEString(), "value", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParam_Params(), this.getParam(), null, "params", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseConfigEClass, BaseConfig.class, "BaseConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBaseConfig_Params(), this.getParam(), null, "params", null, 0, -1, BaseConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1187,6 +1209,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "name", "taskCommandDefinition"
 		   });		
 		addAnnotation
+		  (getTaskCommandConfig_IsAutoClaim(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
 		  (getParam_Key(), 
 		   source, 
 		   new String[] {
@@ -1203,6 +1231,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   source, 
 		   new String[] {
 			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getParam_Name(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
 		   });		
 		addAnnotation
 		  (getBaseConfig_Params(), 
