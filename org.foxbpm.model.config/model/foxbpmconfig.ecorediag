@@ -191,6 +191,10 @@
   <children xmi:type="notation:Node" xmi:id="_i-DokOF2EeOIZ4N5DWtYjw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_i-E2sOF2EeOIZ4N5DWtYjw" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_i-FdwOF2EeOIZ4N5DWtYjw" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_4SBJgBIKEeSeW-g9vyLsqw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandConfig/isAutoClaim"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4SBJgRIKEeSeW-g9vyLsqw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_i-FdweF2EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_i-FdwuF2EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_i-Fdw-F2EeOIZ4N5DWtYjw"/>
