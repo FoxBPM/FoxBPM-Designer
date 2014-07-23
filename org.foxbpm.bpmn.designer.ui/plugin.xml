@@ -547,6 +547,41 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.subprocess.SubProcessCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.subprocesscommon"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.task.TaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.task"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.manualtask.ManualTaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.manualtask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.recevietask.ReceiveTaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.recevietask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.sendtask.SendTaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.sendtask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.servicetask.ServiceTaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.servicetask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.businessruletask.BusinessRuleTaskCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.businessruletask"
+        label="通用">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityDataMappingPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitydatamapping"
         label="数据映射">
