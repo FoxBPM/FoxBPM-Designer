@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
+import org.foxbpm.model.bpmn.foxbpm.BaseConfig;
 import org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
@@ -35,6 +36,7 @@ import org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopMaximum;
 import org.foxbpm.model.bpmn.foxbpm.MessageObj;
+import org.foxbpm.model.bpmn.foxbpm.Param;
 import org.foxbpm.model.bpmn.foxbpm.ProcessInstanceVariable;
 import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.ReceiveMessage;
@@ -331,6 +333,20 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	private EClass formParamEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass baseConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass paramEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2244,6 +2260,60 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBaseConfig() {
+		return baseConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBaseConfig_Params() {
+		return (EReference)baseConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParam() {
+		return paramEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParam_Key() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParam_Name() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParam_Expression() {
+		return (EReference)paramEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getProcessValidationLevel() {
 		return processValidationLevelEEnum;
 	}
@@ -2519,6 +2589,14 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(formParamEClass, FORM_PARAM__PARAM_TYPE);
 		createEReference(formParamEClass, FORM_PARAM__EXPRESSION);
 
+		baseConfigEClass = createEClass(BASE_CONFIG);
+		createEReference(baseConfigEClass, BASE_CONFIG__PARAMS);
+
+		paramEClass = createEClass(PARAM);
+		createEAttribute(paramEClass, PARAM__KEY);
+		createEAttribute(paramEClass, PARAM__NAME);
+		createEReference(paramEClass, PARAM__EXPRESSION);
+
 		// Create enums
 		processValidationLevelEEnum = createEEnum(PROCESS_VALIDATION_LEVEL);
 	}
@@ -2554,6 +2632,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		taskCommandEClass.getESuperTypes().add(this.getBaseConfig());
 		tableExpressionEClass.getESuperTypes().add(this.getExpression());
 		listExpressionEClass.getESuperTypes().add(this.getExpression());
 
@@ -2800,6 +2879,14 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getFormParam_ParamKey(), theXMLTypePackage.getString(), "paramKey", null, 1, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormParam_ParamType(), theXMLTypePackage.getString(), "paramType", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFormParam_Expression(), this.getExpression(), null, "expression", null, 0, 1, FormParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(baseConfigEClass, BaseConfig.class, "BaseConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBaseConfig_Params(), this.getParam(), null, "params", null, 0, -1, BaseConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getParam_Key(), theXMLTypePackage.getString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParam_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParam_Expression(), this.getExpression(), null, "expression", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processValidationLevelEEnum, ProcessValidationLevel.class, "ProcessValidationLevel");
@@ -4088,6 +4175,34 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "name", "expression",
 			 "namespace", "##targetNamespace",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getBaseConfig_Params(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getParam_Key(), 
+		   source, 
+		   new String[] {
+			 "name", "key",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getParam_Name(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getParam_Expression(), 
+		   source, 
+		   new String[] {
+			 "namespace", "##targetNamespace",
+			 "name", "expression",
 			 "kind", "element"
 		   });
 	}

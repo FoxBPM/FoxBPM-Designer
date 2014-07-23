@@ -4,13 +4,9 @@ package org.foxbpm.model.bpmn.foxbpm.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
@@ -36,7 +32,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
  *
  * @generated
  */
-public class TaskCommandImpl extends MinimalEObjectImpl.Container implements TaskCommand {
+public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

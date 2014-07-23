@@ -96,6 +96,8 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 			case FoxBPMPackage.COMPLETE_TASK_DESCRIPTION: return createCompleteTaskDescription();
 			case FoxBPMPackage.FORM_PARAM_CONTAINER: return createFormParamContainer();
 			case FoxBPMPackage.FORM_PARAM: return createFormParam();
+			case FoxBPMPackage.BASE_CONFIG: return createBaseConfig();
+			case FoxBPMPackage.PARAM: return createParam();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -519,6 +521,26 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	public FormParam createFormParam() {
 		FormParamImpl formParam = new FormParamImpl();
 		return formParam;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BaseConfig createBaseConfig() {
+		BaseConfigImpl baseConfig = new BaseConfigImpl();
+		return baseConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Param createParam() {
+		ParamImpl param = new ParamImpl();
+		return param;
 	}
 
 	/**

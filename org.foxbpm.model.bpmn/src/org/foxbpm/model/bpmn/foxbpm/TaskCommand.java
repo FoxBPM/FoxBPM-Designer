@@ -2,7 +2,6 @@
  */
 package org.foxbpm.model.bpmn.foxbpm;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +33,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model extendedMetaData="name='TaskCommand'"
  * @generated
  */
-public interface TaskCommand extends EObject {
+public interface TaskCommand extends BaseConfig {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
