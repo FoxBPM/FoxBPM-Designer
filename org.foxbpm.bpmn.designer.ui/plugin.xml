@@ -542,6 +542,16 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityCommonPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitycommon"
+        label="通用">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityDataMappingPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitydatamapping"
+        label="数据映射">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.ActivityAdvancedPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAdvancedPropertySection"
         label="高级属性">
