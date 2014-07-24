@@ -128,6 +128,14 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createEventListenerAdapter();
 			}
 			@Override
+			public Adapter caseBizDataObjectConfig(BizDataObjectConfig object) {
+				return createBizDataObjectConfigAdapter();
+			}
+			@Override
+			public Adapter caseDataObjectBehavior(DataObjectBehavior object) {
+				return createDataObjectBehaviorAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -354,6 +362,34 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEventListenerAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig <em>Biz Data Object Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig
+	 * @generated
+	 */
+	public Adapter createBizDataObjectConfigAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior <em>Data Object Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior
+	 * @generated
+	 */
+	public Adapter createDataObjectBehaviorAdapter() {
 		return null;
 	}
 

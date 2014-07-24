@@ -179,13 +179,22 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Biz Data Object Config</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG = BASE_CONFIG_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Fox BPM Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 7;
+	int FOX_BPM_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Fox BPM Config</em>' class.
@@ -1040,6 +1049,116 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int EVENT_LISTENER_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BizDataObjectConfigImpl <em>Biz Data Object Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.BizDataObjectConfigImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getBizDataObjectConfig()
+	 * @generated
+	 */
+	int BIZ_DATA_OBJECT_CONFIG = 15;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIZ_DATA_OBJECT_CONFIG__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Data Object Behavior</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIZ_DATA_OBJECT_CONFIG__DATA_OBJECT_BEHAVIOR = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Biz Data Object Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIZ_DATA_OBJECT_CONFIG_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Biz Data Object Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BIZ_DATA_OBJECT_CONFIG_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.DataObjectBehaviorImpl <em>Data Object Behavior</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.DataObjectBehaviorImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getDataObjectBehavior()
+	 * @generated
+	 */
+	int DATA_OBJECT_BEHAVIOR = 16;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR__ID = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Behavior</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR__BEHAVIOR = BASE_CONFIG_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Data Object Behavior</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Data Object Behavior</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_OBJECT_BEHAVIOR_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1125,6 +1244,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFoxBPMConfig_EventListenerConfig();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getBizDataObjectConfig <em>Biz Data Object Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Biz Data Object Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig#getBizDataObjectConfig()
+	 * @see #getFoxBPMConfig()
+	 * @generated
+	 */
+	EReference getFoxBPMConfig_BizDataObjectConfig();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.SysMailConfig <em>Sys Mail Config</em>}'.
@@ -1751,6 +1881,70 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getEventListener_ListenerClass();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig <em>Biz Data Object Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Biz Data Object Config</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig
+	 * @generated
+	 */
+	EClass getBizDataObjectConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig#getDataObjectBehavior <em>Data Object Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Object Behavior</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig#getDataObjectBehavior()
+	 * @see #getBizDataObjectConfig()
+	 * @generated
+	 */
+	EReference getBizDataObjectConfig_DataObjectBehavior();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior <em>Data Object Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Object Behavior</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior
+	 * @generated
+	 */
+	EClass getDataObjectBehavior();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getId()
+	 * @see #getDataObjectBehavior()
+	 * @generated
+	 */
+	EAttribute getDataObjectBehavior_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getName()
+	 * @see #getDataObjectBehavior()
+	 * @generated
+	 */
+	EAttribute getDataObjectBehavior_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getBehavior <em>Behavior</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Behavior</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior#getBehavior()
+	 * @see #getDataObjectBehavior()
+	 * @generated
+	 */
+	EAttribute getDataObjectBehavior_Behavior();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1838,6 +2032,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG = eINSTANCE.getFoxBPMConfig_EventListenerConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Biz Data Object Config</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG = eINSTANCE.getFoxBPMConfig_BizDataObjectConfig();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.SysMailConfigImpl <em>Sys Mail Config</em>}' class.
@@ -2330,6 +2532,58 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EVENT_LISTENER__LISTENER_CLASS = eINSTANCE.getEventListener_ListenerClass();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BizDataObjectConfigImpl <em>Biz Data Object Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.BizDataObjectConfigImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getBizDataObjectConfig()
+		 * @generated
+		 */
+		EClass BIZ_DATA_OBJECT_CONFIG = eINSTANCE.getBizDataObjectConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Object Behavior</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BIZ_DATA_OBJECT_CONFIG__DATA_OBJECT_BEHAVIOR = eINSTANCE.getBizDataObjectConfig_DataObjectBehavior();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.DataObjectBehaviorImpl <em>Data Object Behavior</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.DataObjectBehaviorImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getDataObjectBehavior()
+		 * @generated
+		 */
+		EClass DATA_OBJECT_BEHAVIOR = eINSTANCE.getDataObjectBehavior();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_OBJECT_BEHAVIOR__ID = eINSTANCE.getDataObjectBehavior_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_OBJECT_BEHAVIOR__NAME = eINSTANCE.getDataObjectBehavior_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Behavior</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DATA_OBJECT_BEHAVIOR__BEHAVIOR = eINSTANCE.getDataObjectBehavior_Behavior();
 
 	}
 
