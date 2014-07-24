@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -49,6 +51,8 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	private Button multiInstanceRadio;
 	private Composite multiComposite;
 	private Composite detailComposite;
+	private Button sequenceRadio;
+	private Button conrurrentRadio;
 
 	public ActivityAdvancedPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -86,18 +90,17 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 		multiComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		multiComposite.setVisible(false);//默认不可见
 		
-		Button conrurrentRadio = new Button(multiComposite, SWT.RADIO);
+		conrurrentRadio = new Button(multiComposite, SWT.RADIO);
 		GridData gd_conrurrentRadio = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
 		gd_conrurrentRadio.widthHint = 60;
 		conrurrentRadio.setLayoutData(gd_conrurrentRadio);
 		conrurrentRadio.setText("并行");
-		Button sequenceRadio = new Button(multiComposite, SWT.RADIO);
-		GridData gd_sequenceRadio = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		
+		sequenceRadio = new Button(multiComposite, SWT.RADIO);
+		GridData gd_sequenceRadio = new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1);
 		gd_sequenceRadio.widthHint = 60;
 		sequenceRadio.setLayoutData(gd_sequenceRadio);
 		sequenceRadio.setText("顺序");
-		new Label(multiComposite, SWT.NONE);
-		new Label(multiComposite, SWT.NONE);
 		
 		Label inputDataSetLabel = new Label(multiComposite, SWT.NONE);
 		inputDataSetLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -144,6 +147,54 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	public void createUIBindings(EObject eObject) {
 		activity=(Activity)eObject;
 		
+		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) activity.getLoopCharacteristics();
+		
+		if(multiInstanceLoopCharacteristics.isIsSequential()) {
+			sequenceRadio.setSelection(true);
+			conrurrentRadio.setSelection(false);
+		}else{
+			conrurrentRadio.setSelection(true);
+			sequenceRadio.setSelection(false);
+		}
+		
+		sequenceRadio.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						multiInstanceLoopCharacteristics.setIsSequential(true);
+					}
+				});
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
+		
+		conrurrentRadio.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						multiInstanceLoopCharacteristics.setIsSequential(false);
+					}
+				});
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
+		
 		nullRadio.addListener(SWT.Selection, new Listener() {
 			
 			@Override
@@ -173,7 +224,6 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 			}
 		});
 		
-		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) activity.getLoopCharacteristics();
 		
 		if(multiInstanceLoopCharacteristics!=null) {
 			nullRadio.setSelection(false);
