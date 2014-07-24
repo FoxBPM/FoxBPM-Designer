@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
 import org.foxbpm.model.config.foxbpmconfig.EventListenerConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
@@ -30,6 +31,7 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getTaskCommandConfig <em>Task Command Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getScriptLanguageConfig <em>Script Language Config</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getEventListenerConfig <em>Event Listener Config</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigImpl#getBizDataObjectConfig <em>Biz Data Object Config</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +117,16 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 	 * @ordered
 	 */
 	protected EventListenerConfig eventListenerConfig;
+
+	/**
+	 * The cached value of the '{@link #getBizDataObjectConfig() <em>Biz Data Object Config</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBizDataObjectConfig()
+	 * @generated
+	 * @ordered
+	 */
+	protected BizDataObjectConfig bizDataObjectConfig;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -419,6 +431,49 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BizDataObjectConfig getBizDataObjectConfig() {
+		return bizDataObjectConfig;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBizDataObjectConfig(BizDataObjectConfig newBizDataObjectConfig, NotificationChain msgs) {
+		BizDataObjectConfig oldBizDataObjectConfig = bizDataObjectConfig;
+		bizDataObjectConfig = newBizDataObjectConfig;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG, oldBizDataObjectConfig, newBizDataObjectConfig);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBizDataObjectConfig(BizDataObjectConfig newBizDataObjectConfig) {
+		if (newBizDataObjectConfig != bizDataObjectConfig) {
+			NotificationChain msgs = null;
+			if (bizDataObjectConfig != null)
+				msgs = ((InternalEObject)bizDataObjectConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG, null, msgs);
+			if (newBizDataObjectConfig != null)
+				msgs = ((InternalEObject)newBizDataObjectConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG, null, msgs);
+			msgs = basicSetBizDataObjectConfig(newBizDataObjectConfig, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG, newBizDataObjectConfig, newBizDataObjectConfig));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -434,6 +489,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return basicSetScriptLanguageConfig(null, msgs);
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG:
 				return basicSetEventListenerConfig(null, msgs);
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG:
+				return basicSetBizDataObjectConfig(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -460,6 +517,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return getScriptLanguageConfig();
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG:
 				return getEventListenerConfig();
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG:
+				return getBizDataObjectConfig();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -492,6 +551,9 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG:
 				setEventListenerConfig((EventListenerConfig)newValue);
+				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG:
+				setBizDataObjectConfig((BizDataObjectConfig)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -526,6 +588,9 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG:
 				setEventListenerConfig((EventListenerConfig)null);
 				return;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG:
+				setBizDataObjectConfig((BizDataObjectConfig)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -552,6 +617,8 @@ public class FoxBPMConfigImpl extends BaseConfigImpl implements FoxBPMConfig {
 				return scriptLanguageConfig != null;
 			case FoxBPMConfigPackage.FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG:
 				return eventListenerConfig != null;
+			case FoxBPMConfigPackage.FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG:
+				return bizDataObjectConfig != null;
 		}
 		return super.eIsSet(featureID);
 	}

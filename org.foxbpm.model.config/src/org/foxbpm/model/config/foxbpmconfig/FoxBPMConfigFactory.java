@@ -157,6 +157,24 @@ public interface FoxBPMConfigFactory extends EFactory {
 	EventListener createEventListener();
 
 	/**
+	 * Returns a new object of class '<em>Biz Data Object Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Biz Data Object Config</em>'.
+	 * @generated
+	 */
+	BizDataObjectConfig createBizDataObjectConfig();
+
+	/**
+	 * Returns a new object of class '<em>Data Object Behavior</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Object Behavior</em>'.
+	 * @generated
+	 */
+	DataObjectBehavior createDataObjectBehavior();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
