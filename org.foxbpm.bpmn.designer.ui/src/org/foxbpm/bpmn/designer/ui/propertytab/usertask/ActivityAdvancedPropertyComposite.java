@@ -149,7 +149,7 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 		
 		multiInstanceLoopCharacteristics = (MultiInstanceLoopCharacteristics) activity.getLoopCharacteristics();
 		
-		if(multiInstanceLoopCharacteristics.isIsSequential()) {
+		if(multiInstanceLoopCharacteristics!=null && multiInstanceLoopCharacteristics.isIsSequential()) {
 			sequenceRadio.setSelection(true);
 			conrurrentRadio.setSelection(false);
 		}else{
