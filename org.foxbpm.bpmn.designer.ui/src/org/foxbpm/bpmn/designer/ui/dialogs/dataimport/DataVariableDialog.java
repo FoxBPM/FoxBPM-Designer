@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.dialogs;
+package org.foxbpm.bpmn.designer.ui.dialogs.dataimport;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.dialogs.DataVarTo;
 import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
@@ -335,8 +336,8 @@ public class DataVariableDialog extends TitleAreaDialog {
 
 			if (dataVariable.getExpression() != null) {
 				Expression expressionTo = FoxBPMFactory.eINSTANCE.createExpression();
-				expressionTo.setName(dataVariable.getExpression().getName());
-				expressionTo.setValue(dataVariable.getExpression().getValue());
+				expressionTo.setName(dataVariable.getExpression().getName()==null?"":dataVariable.getExpression().getName());
+				expressionTo.setValue(dataVariable.getExpression().getValue()==null?"":dataVariable.getExpression().getValue());
 				expressionComboViewer.setExpression(expressionTo);
 			}
 

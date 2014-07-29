@@ -82,6 +82,14 @@ public class FoxBPMDesignerUtil {
 	}
 	
 	/**
+	 * 返回临时目录中的缓存文件路径
+	 * @return
+	 */
+	public static String getCachePath() {
+		return getServicePath() + "cache/bizvars.xml";
+	}
+	
+	/**
 	 * 返回临时目录中的流程节点模板路径
 	 * @return
 	 */

@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
+import org.eclipse.bpmn2.Process;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -36,20 +37,24 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
-import org.foxbpm.bpmn.designer.ui.dialogs.DataVariableDialog;
+import org.foxbpm.bpmn.designer.ui.dialogs.dataimport.DataVariableDialog;
+import org.foxbpm.bpmn.designer.ui.dialogs.dataimport.DataVariableImportDialog;
+import org.foxbpm.bpmn.designer.ui.utils.BpmnModelUtil;
 import org.foxbpm.bpmn.designer.ui.utils.DataVarUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
+import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.variableconfig.DataVariableBizType;
-import org.eclipse.swt.widgets.Label;
 
 public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 	private Tree tree;
 	private TreeViewer treeViewer;
 	private Button editButton;
 	private Button removeButton;
+	private Button importButton;
 
 	public DataVariablePropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -58,6 +63,43 @@ public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 	@Override
 	public void createUIBindings(EObject eObject) {
 		treeViewer.setInput(getDataVariable());
+		
+		if (eObject instanceof Process) {
+			importButton.setVisible(true);
+			importButton.addListener(SWT.Selection, new Listener() {
+				
+				@Override
+				public void handleEvent(Event event) {
+					final DataVariableImportDialog dvid = new DataVariableImportDialog(getShell(), ((Process)getBusinessObject()));
+					dvid.setBlockOnOpen(true);
+					if (dvid != null && dvid.open() == InputDialog.OK) {
+						deleteDataVariables(BpmnModelUtil.getDataVariable(((Process)getBusinessObject())));
+						((List<DataVariable>) treeViewer.getInput()).clear();
+						
+						for (DataVariable dataVariable : dvid.getDataVariables()) {
+							if(dataVariable.getBizType()!=null && dataVariable.getBizType().equals("relatedFieldVariable")){
+								
+								if(dvid.getKeyDataVariable()==null) {
+									break;
+								}
+								
+								DataVariable dataVariableObj=dvid.getKeyDataVariable();
+								
+								Expression expression=FoxBPMFactory.eINSTANCE.createExpression();
+								expression.setName(dataVariableObj.getId());
+								expression.setValue("\""+dataVariableObj.getFileName()+"\"");
+								dataVariable.setExpression(expression);
+							}
+						}
+						
+						addDataVariables(dvid.getDataVariables());
+						((List<DataVariable>) treeViewer.getInput()).addAll(dvid.getDataVariables());
+						treeViewer.refresh();
+					}
+				}
+			});
+		};
+		
 	}
 
 	@Override
@@ -172,11 +214,11 @@ public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 					}
 				});
 		
-		Button importButton = new Button(buttonsComposite, SWT.NONE);
+		importButton = new Button(buttonsComposite, SWT.NONE);
 		importButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		importButton.setText("导入...");
 		importButton.setVisible(false);
-
+		
 		updateButtons();
 		return parent;
 	}

@@ -8,6 +8,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
@@ -166,4 +169,66 @@ public class FileUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+
+     *将对象序列化到磁盘文件中
+
+     *@paramo
+
+     *@throwsException
+
+     */
+
+    public static void writeObject(Object o, String path) throws Exception{
+
+	       File f=new File(path);
+	
+	       if(f.exists()){
+	
+	           f.delete();
+	
+	       }
+	
+	       FileOutputStream os=new FileOutputStream(f);
+	
+	       //ObjectOutputStream 核心类
+	
+	       ObjectOutputStream oos=new ObjectOutputStream(os);
+	
+	       oos.writeObject(o);
+	
+	       oos.close();
+	
+	       os.close();
+
+    }
+    
+    /**
+
+     *反序列化,将磁盘文件转化为对象
+
+     *@paramf
+
+     *@return
+
+     *@throwsException
+
+     */
+
+    public static Object readObject(File f) throws Exception{
+
+    	Object obj = new Object();
+        InputStream is=new FileInputStream(f);
+
+        //ObjectOutputStream 核心类
+
+        ObjectInputStream ois=new ObjectInputStream(is);
+        obj = ois.readObject();
+        
+        ois.close();
+        
+        return obj;
+
+    }
 }
