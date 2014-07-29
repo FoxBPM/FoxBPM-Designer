@@ -37,6 +37,7 @@ import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopMaximum;
 import org.foxbpm.model.bpmn.foxbpm.MessageObj;
 import org.foxbpm.model.bpmn.foxbpm.Param;
+import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
 import org.foxbpm.model.bpmn.foxbpm.ProcessInstanceVariable;
 import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.ReceiveMessage;
@@ -347,6 +348,13 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	private EClass paramEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass potentialStarterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -912,6 +920,15 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 */
 	public EAttribute getDocumentRoot_ConvergType() {
 		return (EAttribute)documentRootEClass.getEStructuralFeatures().get(53);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDocumentRoot_PotentialStarter() {
+		return (EReference)documentRootEClass.getEStructuralFeatures().get(54);
 	}
 
 	/**
@@ -2314,6 +2331,33 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPotentialStarter() {
+		return potentialStarterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPotentialStarter_Expression() {
+		return (EReference)potentialStarterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPotentialStarter_ResourceType() {
+		return (EAttribute)potentialStarterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getProcessValidationLevel() {
 		return processValidationLevelEEnum;
 	}
@@ -2401,6 +2445,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(documentRootEClass, DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION);
 		createEReference(documentRootEClass, DOCUMENT_ROOT__FORM_PARAM_CONTAINER);
 		createEAttribute(documentRootEClass, DOCUMENT_ROOT__CONVERG_TYPE);
+		createEReference(documentRootEClass, DOCUMENT_ROOT__POTENTIAL_STARTER);
 
 		expressionEClass = createEClass(EXPRESSION);
 		createEAttribute(expressionEClass, EXPRESSION__VALUE);
@@ -2597,6 +2642,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(paramEClass, PARAM__NAME);
 		createEReference(paramEClass, PARAM__EXPRESSION);
 
+		potentialStarterEClass = createEClass(POTENTIAL_STARTER);
+		createEReference(potentialStarterEClass, POTENTIAL_STARTER__EXPRESSION);
+		createEAttribute(potentialStarterEClass, POTENTIAL_STARTER__RESOURCE_TYPE);
+
 		// Create enums
 		processValidationLevelEEnum = createEEnum(PROCESS_VALIDATION_LEVEL);
 	}
@@ -2692,6 +2741,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getDocumentRoot_CompleteTaskDescription(), this.getCompleteTaskDescription(), null, "completeTaskDescription", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDocumentRoot_FormParamContainer(), this.getFormParamContainer(), null, "formParamContainer", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDocumentRoot_ConvergType(), theXMLTypePackage.getString(), "convergType", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDocumentRoot_PotentialStarter(), this.getPotentialStarter(), null, "potentialStarter", null, 0, 1, null, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExpression_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2887,6 +2937,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getParam_Key(), theXMLTypePackage.getString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParam_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParam_Expression(), this.getExpression(), null, "expression", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(potentialStarterEClass, PotentialStarter.class, "PotentialStarter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPotentialStarter_Expression(), this.getExpression(), null, "expression", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPotentialStarter_ResourceType(), theXMLTypePackage.getString(), "resourceType", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processValidationLevelEEnum, ProcessValidationLevel.class, "ProcessValidationLevel");
@@ -3319,6 +3373,13 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "kind", "attribute",
 			 "namespace", "##targetNamespace",
 			 "name", "convergType"
+		   });		
+		addAnnotation
+		  (getDocumentRoot_PotentialStarter(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
 		  (expressionEClass, 
@@ -4204,6 +4265,20 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "namespace", "##targetNamespace",
 			 "name", "expression",
 			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getPotentialStarter_Expression(), 
+		   source, 
+		   new String[] {
+			 "name", "expression",
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (getPotentialStarter_ResourceType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
 		   });
 	}
 

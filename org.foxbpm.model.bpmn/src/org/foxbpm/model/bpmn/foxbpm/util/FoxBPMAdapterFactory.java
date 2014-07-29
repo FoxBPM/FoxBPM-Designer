@@ -232,6 +232,10 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 				return createParamAdapter();
 			}
 			@Override
+			public Adapter casePotentialStarter(PotentialStarter object) {
+				return createPotentialStarterAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -822,6 +826,20 @@ public class FoxBPMAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParamAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter <em>Potential Starter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter
+	 * @generated
+	 */
+	public Adapter createPotentialStarterAdapter() {
 		return null;
 	}
 

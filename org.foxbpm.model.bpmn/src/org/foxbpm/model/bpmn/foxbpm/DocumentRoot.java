@@ -71,6 +71,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}</li>
  * </ul>
  * </p>
  *
@@ -1449,5 +1450,32 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setConvergType(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Potential Starter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Potential Starter</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Potential Starter</em>' containment reference.
+	 * @see #setPotentialStarter(PotentialStarter)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_PotentialStarter()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element' namespace='##targetNamespace'"
+	 * @generated
+	 */
+	PotentialStarter getPotentialStarter();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Potential Starter</em>' containment reference.
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	void setPotentialStarter(PotentialStarter value);
 
 } // DocumentRoot

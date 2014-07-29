@@ -391,6 +391,15 @@ public interface FoxBPMFactory extends EFactory {
 	Param createParam();
 
 	/**
+	 * Returns a new object of class '<em>Potential Starter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Potential Starter</em>'.
+	 * @generated
+	 */
+	PotentialStarter createPotentialStarter();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

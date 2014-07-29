@@ -558,13 +558,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__CONVERG_TYPE = 53;
 
 	/**
+	 * The feature id for the '<em><b>Potential Starter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__POTENTIAL_STARTER = 54;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 54;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 55;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -2812,6 +2821,52 @@ public interface FoxBPMPackage extends EPackage {
 	int PARAM_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl <em>Potential Starter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialStarter()
+	 * @generated
+	 */
+	int POTENTIAL_STARTER = 41;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__EXPRESSION = 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__RESOURCE_TYPE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Potential Starter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Potential Starter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2819,7 +2874,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getProcessValidationLevel()
 	 * @generated
 	 */
-	int PROCESS_VALIDATION_LEVEL = 41;
+	int PROCESS_VALIDATION_LEVEL = 42;
 
 
 	/**
@@ -3425,6 +3480,17 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDocumentRoot_ConvergType();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Potential Starter</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_PotentialStarter();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
@@ -5092,6 +5158,38 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getParam_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter <em>Potential Starter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Potential Starter</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter
+	 * @generated
+	 */
+	EClass getPotentialStarter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getExpression()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EReference getPotentialStarter_Expression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getResourceType <em>Resource Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getResourceType()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EAttribute getPotentialStarter_ResourceType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5565,6 +5663,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__CONVERG_TYPE = eINSTANCE.getDocumentRoot_ConvergType();
+
+		/**
+		 * The meta object literal for the '<em><b>Potential Starter</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__POTENTIAL_STARTER = eINSTANCE.getDocumentRoot_PotentialStarter();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -6885,6 +6991,32 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAM__EXPRESSION = eINSTANCE.getParam_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl <em>Potential Starter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialStarter()
+		 * @generated
+		 */
+		EClass POTENTIAL_STARTER = eINSTANCE.getPotentialStarter();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_STARTER__EXPRESSION = eINSTANCE.getPotentialStarter_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POTENTIAL_STARTER__RESOURCE_TYPE = eINSTANCE.getPotentialStarter_ResourceType();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
