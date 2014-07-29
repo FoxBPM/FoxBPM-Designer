@@ -37,7 +37,7 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DataVariableImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DataVariableImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DataVariableImpl#getBizType <em>Biz Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DataVariableImpl#getFileName <em>File Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DataVariableImpl#getFieldName <em>Field Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -165,24 +165,24 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 	protected String bizType = BIZ_TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+	 * The default value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFileName()
+	 * @see #getFieldName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FILE_NAME_EDEFAULT = null;
+	protected static final String FIELD_NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getFileName() <em>File Name</em>}' attribute.
+	 * The cached value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getFileName()
+	 * @see #getFieldName()
 	 * @generated
 	 * @ordered
 	 */
-	protected String fileName = FILE_NAME_EDEFAULT;
+	protected String fieldName = FIELD_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -368,8 +368,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFileName() {
-		return fileName;
+	public String getFieldName() {
+		return fieldName;
 	}
 
 	/**
@@ -377,11 +377,11 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFileName(String newFileName) {
-		String oldFileName = fileName;
-		fileName = newFileName;
+	public void setFieldName(String newFieldName) {
+		String oldFieldName = fieldName;
+		fieldName = newFieldName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DATA_VARIABLE__FILE_NAME, oldFileName, fileName));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DATA_VARIABLE__FIELD_NAME, oldFieldName, fieldName));
 	}
 
 	/**
@@ -422,8 +422,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 				return getDocumentation();
 			case FoxBPMPackage.DATA_VARIABLE__BIZ_TYPE:
 				return getBizType();
-			case FoxBPMPackage.DATA_VARIABLE__FILE_NAME:
-				return getFileName();
+			case FoxBPMPackage.DATA_VARIABLE__FIELD_NAME:
+				return getFieldName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -459,8 +459,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 			case FoxBPMPackage.DATA_VARIABLE__BIZ_TYPE:
 				setBizType((String)newValue);
 				return;
-			case FoxBPMPackage.DATA_VARIABLE__FILE_NAME:
-				setFileName((String)newValue);
+			case FoxBPMPackage.DATA_VARIABLE__FIELD_NAME:
+				setFieldName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -495,8 +495,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 			case FoxBPMPackage.DATA_VARIABLE__BIZ_TYPE:
 				setBizType(BIZ_TYPE_EDEFAULT);
 				return;
-			case FoxBPMPackage.DATA_VARIABLE__FILE_NAME:
-				setFileName(FILE_NAME_EDEFAULT);
+			case FoxBPMPackage.DATA_VARIABLE__FIELD_NAME:
+				setFieldName(FIELD_NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -524,8 +524,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 				return documentation != null && !documentation.isEmpty();
 			case FoxBPMPackage.DATA_VARIABLE__BIZ_TYPE:
 				return BIZ_TYPE_EDEFAULT == null ? bizType != null : !BIZ_TYPE_EDEFAULT.equals(bizType);
-			case FoxBPMPackage.DATA_VARIABLE__FILE_NAME:
-				return FILE_NAME_EDEFAULT == null ? fileName != null : !FILE_NAME_EDEFAULT.equals(fileName);
+			case FoxBPMPackage.DATA_VARIABLE__FIELD_NAME:
+				return FIELD_NAME_EDEFAULT == null ? fieldName != null : !FIELD_NAME_EDEFAULT.equals(fieldName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -550,8 +550,8 @@ public class DataVariableImpl extends MinimalEObjectImpl.Container implements Da
 		result.append(isPersistence);
 		result.append(", bizType: ");
 		result.append(bizType);
-		result.append(", fileName: ");
-		result.append(fileName);
+		result.append(", fieldName: ");
+		result.append(fieldName);
 		result.append(')');
 		return result.toString();
 	}

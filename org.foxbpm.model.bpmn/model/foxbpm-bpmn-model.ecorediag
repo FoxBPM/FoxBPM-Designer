@@ -280,7 +280,7 @@
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVe4d8XMEeOb9caI1cUYMA"/>
       </children>
       <children xmi:type="notation:Node" xmi:id="_mVe4eMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DataVariable/fileName"/>
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//DataVariable/fieldName"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVe4ecXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVeRZcXMEeOb9caI1cUYMA"/>

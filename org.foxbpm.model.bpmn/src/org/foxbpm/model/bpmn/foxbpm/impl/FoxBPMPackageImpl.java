@@ -1207,7 +1207,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDataVariable_FileName() {
+	public EAttribute getDataVariable_FieldName() {
 		return (EAttribute)dataVariableEClass.getEStructuralFeatures().get(7);
 	}
 
@@ -2438,7 +2438,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(dataVariableEClass, DATA_VARIABLE__EXPRESSION);
 		createEReference(dataVariableEClass, DATA_VARIABLE__DOCUMENTATION);
 		createEAttribute(dataVariableEClass, DATA_VARIABLE__BIZ_TYPE);
-		createEAttribute(dataVariableEClass, DATA_VARIABLE__FILE_NAME);
+		createEAttribute(dataVariableEClass, DATA_VARIABLE__FIELD_NAME);
 
 		documentationEClass = createEClass(DOCUMENTATION);
 		createEAttribute(documentationEClass, DOCUMENTATION__VALUE);
@@ -2729,7 +2729,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getDataVariable_Expression(), this.getExpression(), null, "expression", null, 0, 1, DataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataVariable_Documentation(), this.getDocumentation(), null, "documentation", null, 0, -1, DataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataVariable_BizType(), theXMLTypePackage.getString(), "bizType", null, 0, 1, DataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDataVariable_FileName(), theXMLTypePackage.getString(), "fileName", null, 0, 1, DataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataVariable_FieldName(), theXMLTypePackage.getString(), "fieldName", null, 0, 1, DataVariable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(documentationEClass, Documentation.class, "Documentation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDocumentation_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Documentation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3469,7 +3469,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getDataVariable_FileName(), 
+		  (getDataVariable_FieldName(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"

@@ -987,13 +987,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DATA_VARIABLE__BIZ_TYPE = 6;
 
 	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Field Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VARIABLE__FILE_NAME = 7;
+	int DATA_VARIABLE__FIELD_NAME = 7;
 
 	/**
 	 * The number of structural features of the '<em>Data Variable</em>' class.
@@ -3774,15 +3774,15 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDataVariable_BizType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName <em>File Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName <em>Field Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>File Name</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName()
+	 * @return the meta object for the attribute '<em>Field Name</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName()
 	 * @see #getDataVariable()
 	 * @generated
 	 */
-	EAttribute getDataVariable_FileName();
+	EAttribute getDataVariable_FieldName();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Documentation <em>Documentation</em>}'.
@@ -5833,12 +5833,12 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute DATA_VARIABLE__BIZ_TYPE = eINSTANCE.getDataVariable_BizType();
 
 		/**
-		 * The meta object literal for the '<em><b>File Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Field Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DATA_VARIABLE__FILE_NAME = eINSTANCE.getDataVariable_FileName();
+		EAttribute DATA_VARIABLE__FIELD_NAME = eINSTANCE.getDataVariable_FieldName();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentationImpl <em>Documentation</em>}' class.
