@@ -318,6 +318,7 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 			case FoxBPMPackage.POTENTIAL_STARTER: {
 				PotentialStarter potentialStarter = (PotentialStarter)theEObject;
 				T result = casePotentialStarter(potentialStarter);
+				if (result == null) result = caseBaseConfig(potentialStarter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

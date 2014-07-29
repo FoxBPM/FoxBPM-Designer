@@ -723,13 +723,22 @@ public interface FoxBPMPackage extends EPackage {
 	int BASE_CONFIG__PARAMS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG__DOCUMENTATION = 1;
+
+	/**
 	 * The number of structural features of the '<em>Base Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASE_CONFIG_FEATURE_COUNT = 1;
+	int BASE_CONFIG_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Base Config</em>' class.
@@ -758,6 +767,15 @@ public interface FoxBPMPackage extends EPackage {
 	 * @ordered
 	 */
 	int TASK_COMMAND__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND__DOCUMENTATION = BASE_CONFIG__DOCUMENTATION;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -2831,13 +2849,31 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_STARTER = 41;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__DOCUMENTATION = BASE_CONFIG__DOCUMENTATION;
+
+	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER__EXPRESSION = 0;
+	int POTENTIAL_STARTER__EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
@@ -2846,7 +2882,16 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER__RESOURCE_TYPE = 1;
+	int POTENTIAL_STARTER__RESOURCE_TYPE = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>EReference0</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__EREFERENCE0 = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Potential Starter</em>' class.
@@ -2855,7 +2900,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER_FEATURE_COUNT = 2;
+	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Potential Starter</em>' class.
@@ -2864,7 +2909,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER_OPERATION_COUNT = 0;
+	int POTENTIAL_STARTER_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
@@ -5115,6 +5160,17 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getBaseConfig_Params();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.BaseConfig#getDocumentation <em>Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Documentation</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.BaseConfig#getDocumentation()
+	 * @see #getBaseConfig()
+	 * @generated
+	 */
+	EReference getBaseConfig_Documentation();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Param <em>Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5188,6 +5244,17 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getPotentialStarter_ResourceType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0 <em>EReference0</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EReference0</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EReference getPotentialStarter_EReference0();
 
 	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
@@ -6959,6 +7026,14 @@ public interface FoxBPMPackage extends EPackage {
 		EReference BASE_CONFIG__PARAMS = eINSTANCE.getBaseConfig_Params();
 
 		/**
+		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASE_CONFIG__DOCUMENTATION = eINSTANCE.getBaseConfig_Documentation();
+
+		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ParamImpl <em>Param</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7017,6 +7092,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POTENTIAL_STARTER__RESOURCE_TYPE = eINSTANCE.getPotentialStarter_ResourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_STARTER__EREFERENCE0 = eINSTANCE.getPotentialStarter_EReference0();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.

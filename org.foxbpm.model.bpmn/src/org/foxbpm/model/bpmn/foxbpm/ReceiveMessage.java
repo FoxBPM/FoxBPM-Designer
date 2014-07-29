@@ -117,7 +117,7 @@ public interface ReceiveMessage extends EObject {
 	 * @see #setTokenVariable(TokenVariable)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getReceiveMessage_TokenVariable()
 	 * @model containment="true"
-	 *        extendedMetaData="name='' kind='element' namespace='##targetNamespace' wildcards=''"
+	 *        extendedMetaData="name='tokenVariable' kind='element' namespace='##targetNamespace' wildcards=''"
 	 * @generated
 	 */
 	TokenVariable getTokenVariable();

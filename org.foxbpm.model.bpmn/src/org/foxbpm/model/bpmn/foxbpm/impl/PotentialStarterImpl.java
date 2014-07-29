@@ -4,13 +4,10 @@ package org.foxbpm.model.bpmn.foxbpm.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
+import org.foxbpm.model.bpmn.foxbpm.Documentation;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
@@ -24,12 +21,13 @@ import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
  * <ul>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl#getResourceType <em>Resource Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl#getEReference0 <em>EReference0</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PotentialStarterImpl extends MinimalEObjectImpl.Container implements PotentialStarter {
+public class PotentialStarterImpl extends BaseConfigImpl implements PotentialStarter {
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -58,6 +56,16 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected String resourceType = RESOURCE_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getEReference0() <em>EReference0</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEReference0()
+	 * @generated
+	 * @ordered
+	 */
+	protected Documentation eReference0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -147,6 +155,44 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Documentation getEReference0() {
+		if (eReference0 != null && eReference0.eIsProxy()) {
+			InternalEObject oldEReference0 = (InternalEObject)eReference0;
+			eReference0 = (Documentation)eResolveProxy(oldEReference0);
+			if (eReference0 != oldEReference0) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0, oldEReference0, eReference0));
+			}
+		}
+		return eReference0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Documentation basicGetEReference0() {
+		return eReference0;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEReference0(Documentation newEReference0) {
+		Documentation oldEReference0 = eReference0;
+		eReference0 = newEReference0;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0, oldEReference0, eReference0));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -168,6 +214,9 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 				return getExpression();
 			case FoxBPMPackage.POTENTIAL_STARTER__RESOURCE_TYPE:
 				return getResourceType();
+			case FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0:
+				if (resolve) return getEReference0();
+				return basicGetEReference0();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -185,6 +234,9 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 				return;
 			case FoxBPMPackage.POTENTIAL_STARTER__RESOURCE_TYPE:
 				setResourceType((String)newValue);
+				return;
+			case FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0:
+				setEReference0((Documentation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -204,6 +256,9 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 			case FoxBPMPackage.POTENTIAL_STARTER__RESOURCE_TYPE:
 				setResourceType(RESOURCE_TYPE_EDEFAULT);
 				return;
+			case FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0:
+				setEReference0((Documentation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -220,6 +275,8 @@ public class PotentialStarterImpl extends MinimalEObjectImpl.Container implement
 				return expression != null;
 			case FoxBPMPackage.POTENTIAL_STARTER__RESOURCE_TYPE:
 				return RESOURCE_TYPE_EDEFAULT == null ? resourceType != null : !RESOURCE_TYPE_EDEFAULT.equals(resourceType);
+			case FoxBPMPackage.POTENTIAL_STARTER__EREFERENCE0:
+				return eReference0 != null;
 		}
 		return super.eIsSet(featureID);
 	}
