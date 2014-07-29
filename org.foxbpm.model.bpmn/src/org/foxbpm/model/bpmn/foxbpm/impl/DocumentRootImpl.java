@@ -35,6 +35,7 @@ import org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopMaximum;
 import org.foxbpm.model.bpmn.foxbpm.MessageObj;
+import org.foxbpm.model.bpmn.foxbpm.PotentialOwner;
 import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
 import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.ReceiveMessage;
@@ -108,6 +109,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getFormParamContainer <em>Form Param Container</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConvergType <em>Converg Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialStarter <em>Potential Starter</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialOwner <em>Potential Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -903,6 +905,16 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected PotentialStarter potentialStarter;
+
+	/**
+	 * The cached value of the '{@link #getPotentialOwner() <em>Potential Owner</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPotentialOwner()
+	 * @generated
+	 * @ordered
+	 */
+	protected PotentialOwner potentialOwner;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2348,6 +2360,49 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PotentialOwner getPotentialOwner() {
+		return potentialOwner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPotentialOwner(PotentialOwner newPotentialOwner, NotificationChain msgs) {
+		PotentialOwner oldPotentialOwner = potentialOwner;
+		potentialOwner = newPotentialOwner;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, oldPotentialOwner, newPotentialOwner);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPotentialOwner(PotentialOwner newPotentialOwner) {
+		if (newPotentialOwner != potentialOwner) {
+			NotificationChain msgs = null;
+			if (potentialOwner != null)
+				msgs = ((InternalEObject)potentialOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, null, msgs);
+			if (newPotentialOwner != null)
+				msgs = ((InternalEObject)newPotentialOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, null, msgs);
+			msgs = basicSetPotentialOwner(newPotentialOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, newPotentialOwner, newPotentialOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2403,6 +2458,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return basicSetFormParamContainer(null, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
 				return basicSetPotentialStarter(null, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return basicSetPotentialOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -2528,6 +2585,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getConvergType();
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
 				return getPotentialStarter();
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return getPotentialOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2712,6 +2771,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
 				setPotentialStarter((PotentialStarter)newValue);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				setPotentialOwner((PotentialOwner)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2889,6 +2951,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
 				setPotentialStarter((PotentialStarter)null);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				setPotentialOwner((PotentialOwner)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3011,6 +3076,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return CONVERG_TYPE_EDEFAULT == null ? convergType != null : !CONVERG_TYPE_EDEFAULT.equals(convergType);
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
 				return potentialStarter != null;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return potentialOwner != null;
 		}
 		return super.eIsSet(featureID);
 	}

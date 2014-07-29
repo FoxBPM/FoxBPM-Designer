@@ -72,6 +72,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getFormParamContainer <em>Form Param Container</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner <em>Potential Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -1477,5 +1478,32 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setPotentialStarter(PotentialStarter value);
+
+	/**
+	 * Returns the value of the '<em><b>Potential Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Potential Owner</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Potential Owner</em>' containment reference.
+	 * @see #setPotentialOwner(PotentialOwner)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_PotentialOwner()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element' namespace='##targetNamespace' name='potentialOwner'"
+	 * @generated
+	 */
+	PotentialOwner getPotentialOwner();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner <em>Potential Owner</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Potential Owner</em>' containment reference.
+	 * @see #getPotentialOwner()
+	 * @generated
+	 */
+	void setPotentialOwner(PotentialOwner value);
 
 } // DocumentRoot

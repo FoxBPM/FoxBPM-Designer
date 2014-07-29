@@ -322,6 +322,12 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMPackage.POTENTIAL_OWNER: {
+				PotentialOwner potentialOwner = (PotentialOwner)theEObject;
+				T result = casePotentialOwner(potentialOwner);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -953,6 +959,21 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePotentialStarter(PotentialStarter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Potential Owner</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Potential Owner</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePotentialOwner(PotentialOwner object) {
 		return null;
 	}
 

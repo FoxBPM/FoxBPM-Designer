@@ -400,6 +400,15 @@ public interface FoxBPMFactory extends EFactory {
 	PotentialStarter createPotentialStarter();
 
 	/**
+	 * Returns a new object of class '<em>Potential Owner</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Potential Owner</em>'.
+	 * @generated
+	 */
+	PotentialOwner createPotentialOwner();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

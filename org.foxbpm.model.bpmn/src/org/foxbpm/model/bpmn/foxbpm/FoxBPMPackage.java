@@ -567,13 +567,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__POTENTIAL_STARTER = 54;
 
 	/**
+	 * The feature id for the '<em><b>Potential Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__POTENTIAL_OWNER = 55;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 55;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 56;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -2885,13 +2894,22 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_STARTER__RESOURCE_TYPE = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>EReference0</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__EREFERENCE0 = BASE_CONFIG_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Potential Starter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
+	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Potential Starter</em>' class.
@@ -2903,6 +2921,43 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_STARTER_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl <em>Potential Owner</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialOwner()
+	 * @generated
+	 */
+	int POTENTIAL_OWNER = 42;
+
+	/**
+	 * The feature id for the '<em><b>Connector Instance Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Potential Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Potential Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2910,7 +2965,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getProcessValidationLevel()
 	 * @generated
 	 */
-	int PROCESS_VALIDATION_LEVEL = 42;
+	int PROCESS_VALIDATION_LEVEL = 43;
 
 
 	/**
@@ -3527,6 +3582,17 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDocumentRoot_PotentialStarter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner <em>Potential Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Potential Owner</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_PotentialOwner();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
@@ -5237,6 +5303,38 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getPotentialStarter_ResourceType();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0 <em>EReference0</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EReference0</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EReference getPotentialStarter_EReference0();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialOwner <em>Potential Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Potential Owner</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialOwner
+	 * @generated
+	 */
+	EClass getPotentialOwner();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.PotentialOwner#getConnectorInstanceElements <em>Connector Instance Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Connector Instance Elements</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialOwner#getConnectorInstanceElements()
+	 * @see #getPotentialOwner()
+	 * @generated
+	 */
+	EReference getPotentialOwner_ConnectorInstanceElements();
+
+	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5718,6 +5816,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOCUMENT_ROOT__POTENTIAL_STARTER = eINSTANCE.getDocumentRoot_PotentialStarter();
+
+		/**
+		 * The meta object literal for the '<em><b>Potential Owner</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__POTENTIAL_OWNER = eINSTANCE.getDocumentRoot_PotentialOwner();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -7072,6 +7178,32 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POTENTIAL_STARTER__RESOURCE_TYPE = eINSTANCE.getPotentialStarter_ResourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_STARTER__EREFERENCE0 = eINSTANCE.getPotentialStarter_EReference0();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl <em>Potential Owner</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialOwner()
+		 * @generated
+		 */
+		EClass POTENTIAL_OWNER = eINSTANCE.getPotentialOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Connector Instance Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS = eINSTANCE.getPotentialOwner_ConnectorInstanceElements();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
