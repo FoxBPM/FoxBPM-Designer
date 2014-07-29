@@ -2367,15 +2367,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPotentialStarter_EReference0() {
-		return (EReference)potentialStarterEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getProcessValidationLevel() {
 		return processValidationLevelEEnum;
 	}
@@ -2664,7 +2655,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		potentialStarterEClass = createEClass(POTENTIAL_STARTER);
 		createEReference(potentialStarterEClass, POTENTIAL_STARTER__EXPRESSION);
 		createEAttribute(potentialStarterEClass, POTENTIAL_STARTER__RESOURCE_TYPE);
-		createEReference(potentialStarterEClass, POTENTIAL_STARTER__EREFERENCE0);
 
 		// Create enums
 		processValidationLevelEEnum = createEEnum(PROCESS_VALIDATION_LEVEL);
@@ -2963,7 +2953,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEClass(potentialStarterEClass, PotentialStarter.class, "PotentialStarter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPotentialStarter_Expression(), this.getExpression(), null, "expression", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPotentialStarter_ResourceType(), theXMLTypePackage.getString(), "resourceType", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPotentialStarter_EReference0(), this.getDocumentation(), null, "EReference0", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processValidationLevelEEnum, ProcessValidationLevel.class, "ProcessValidationLevel");

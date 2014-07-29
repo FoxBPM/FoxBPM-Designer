@@ -2885,22 +2885,13 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_STARTER__RESOURCE_TYPE = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>EReference0</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int POTENTIAL_STARTER__EREFERENCE0 = BASE_CONFIG_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Potential Starter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
+	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Potential Starter</em>' class.
@@ -5246,17 +5237,6 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getPotentialStarter_ResourceType();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0 <em>EReference0</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>EReference0</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0()
-	 * @see #getPotentialStarter()
-	 * @generated
-	 */
-	EReference getPotentialStarter_EReference0();
-
-	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7092,14 +7072,6 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute POTENTIAL_STARTER__RESOURCE_TYPE = eINSTANCE.getPotentialStarter_ResourceType();
-
-		/**
-		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference POTENTIAL_STARTER__EREFERENCE0 = eINSTANCE.getPotentialStarter_EReference0();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
