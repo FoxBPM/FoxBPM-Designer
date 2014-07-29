@@ -103,13 +103,13 @@ public class DataObjCache {
 					dataVariable.setIsPersistence(columnJson.get("persistence")==null?false:columnJson.get("persistence").asBoolean());
 					
 					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-					expression.setName(columnJson.get("expressionText").asText());
-					expression.setValue(columnJson.get("expressionText").asText());
+					expression.setName(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
+					expression.setValue(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
 //					System.out.println(expression.getName());
 					dataVariable.setExpression(expression);
+					dataObjImport.getDataVariables().add(dataVariable);
 				}
 			}
-			dataObjImport.getDataVariables().add(dataVariable);
 			dataObjImports.add(dataObjImport);
 			cacheDataObjImports.add(dataObjImport);
 		}
