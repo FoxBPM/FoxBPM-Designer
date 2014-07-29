@@ -87,7 +87,7 @@ public class DataVariablePropertyComposite extends AbstractFoxBPMComposite {
 								
 								Expression expression=FoxBPMFactory.eINSTANCE.createExpression();
 								expression.setName(dataVariableObj.getId());
-								expression.setValue("\""+dataVariableObj.getFileName()+"\"");
+								expression.setValue("\""+dataVariableObj.getFieldName()+"\"");
 								dataVariable.setExpression(expression);
 							}
 						}

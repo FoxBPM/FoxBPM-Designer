@@ -91,7 +91,7 @@ public class DataObjCache {
 		for(JsonNode json :dataArray){
 			dataObjImport = new DataObjImportImpl();
 			dataObjImport.setId(json.get("id")==null?"":json.get("id").asText());
-			dataObjImport.setName(json.get("documentation")==null?"":json.get("documentation").asText());
+			dataObjImport.setName(json.get("name")==null?"":json.get("name").asText());
 			DataVariable dataVariable = FoxBPMFactory.eINSTANCE.createDataVariable();
 			ArrayNode columnArray = (ArrayNode)json.get("dataVariableDefinitions");
 			if(columnArray!=null) {
@@ -103,7 +103,7 @@ public class DataObjCache {
 					dataVariable.setIsPersistence(columnJson.get("persistence")==null?false:columnJson.get("persistence").asBoolean());
 					
 					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-					expression.setName(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
+					expression.setName(columnJson.get("id")==null?"":columnJson.get("id").asText());
 					expression.setValue(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
 //					System.out.println(expression.getName());
 					dataVariable.setExpression(expression);
