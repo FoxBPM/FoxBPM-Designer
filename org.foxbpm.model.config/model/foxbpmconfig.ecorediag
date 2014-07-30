@@ -283,6 +283,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/type"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_2Y3JgeF4EeOIZ4N5DWtYjw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_gapcwBeREeSYVNQOCMGcRw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//TaskCommandDefinition/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gapcwReREeSYVNQOCMGcRw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_PwPd8OF4EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_PwPd8eF4EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_PwPd8uF4EeOIZ4N5DWtYjw"/>
