@@ -406,8 +406,8 @@
         <details key="name" value="convergType"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="potentialStarter" eType="#//PotentialStarter"
-        containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="potentialStarter" upperBound="-1"
+        eType="#//PotentialStarter" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
         <details key="namespace" value="##targetNamespace"/>

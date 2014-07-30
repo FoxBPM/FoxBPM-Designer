@@ -897,14 +897,14 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	protected String convergType = CONVERG_TYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPotentialStarter() <em>Potential Starter</em>}' containment reference.
+	 * The cached value of the '{@link #getPotentialStarter() <em>Potential Starter</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPotentialStarter()
 	 * @generated
 	 * @ordered
 	 */
-	protected PotentialStarter potentialStarter;
+	protected EList<PotentialStarter> potentialStarter;
 
 	/**
 	 * The cached value of the '{@link #getPotentialOwner() <em>Potential Owner</em>}' containment reference.
@@ -2317,42 +2317,11 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PotentialStarter getPotentialStarter() {
+	public EList<PotentialStarter> getPotentialStarter() {
+		if (potentialStarter == null) {
+			potentialStarter = new EObjectContainmentEList<PotentialStarter>(PotentialStarter.class, this, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER);
+		}
 		return potentialStarter;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetPotentialStarter(PotentialStarter newPotentialStarter, NotificationChain msgs) {
-		PotentialStarter oldPotentialStarter = potentialStarter;
-		potentialStarter = newPotentialStarter;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER, oldPotentialStarter, newPotentialStarter);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPotentialStarter(PotentialStarter newPotentialStarter) {
-		if (newPotentialStarter != potentialStarter) {
-			NotificationChain msgs = null;
-			if (potentialStarter != null)
-				msgs = ((InternalEObject)potentialStarter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER, null, msgs);
-			if (newPotentialStarter != null)
-				msgs = ((InternalEObject)newPotentialStarter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER, null, msgs);
-			msgs = basicSetPotentialStarter(newPotentialStarter, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER, newPotentialStarter, newPotentialStarter));
 	}
 
 	/**
@@ -2457,7 +2426,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				return basicSetFormParamContainer(null, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
-				return basicSetPotentialStarter(null, msgs);
+				return ((InternalEList<?>)getPotentialStarter()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				return basicSetPotentialOwner(null, msgs);
 		}
@@ -2769,7 +2738,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				setConvergType((String)newValue);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
-				setPotentialStarter((PotentialStarter)newValue);
+				getPotentialStarter().clear();
+				getPotentialStarter().addAll((Collection<? extends PotentialStarter>)newValue);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				setPotentialOwner((PotentialOwner)newValue);
@@ -2949,7 +2919,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				setConvergType(CONVERG_TYPE_EDEFAULT);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
-				setPotentialStarter((PotentialStarter)null);
+				getPotentialStarter().clear();
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				setPotentialOwner((PotentialOwner)null);
@@ -3075,7 +3045,7 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
 				return CONVERG_TYPE_EDEFAULT == null ? convergType != null : !CONVERG_TYPE_EDEFAULT.equals(convergType);
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
-				return potentialStarter != null;
+				return potentialStarter != null && !potentialStarter.isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				return potentialOwner != null;
 		}
