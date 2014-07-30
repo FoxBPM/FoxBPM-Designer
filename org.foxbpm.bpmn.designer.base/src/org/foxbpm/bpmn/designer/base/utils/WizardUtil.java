@@ -41,7 +41,7 @@ public class WizardUtil {
 		Map<String, Object> map = new HashMap<String, Object>();
 		String[] str = new String[]{};
 		List<String> strs = new ArrayList<String>();
-		String root = FoxBPMConfigUtil.getFlowTemplate();
+		String root = FoxBPMDesignerUtil.getFlowTempletePath();
 		File file = new File(root);
 		if (file.exists()) {
 			fileList(file, strs, root, map, combo);
@@ -86,7 +86,7 @@ public class WizardUtil {
 	 * @return
 	 */
 	public static String getModelPath() {
-		String root = FoxBPMConfigUtil.getFlowTemplate();
+		String root = FoxBPMDesignerUtil.getFlowTempletePath();
 		return root;
 	}
 }
