@@ -24,7 +24,7 @@ import org.restlet.resource.ClientResource;
 
 public class FoxBPMDesignerUtil {
 	public static final String PLUGIN_ID = "org.foxbpm.bpmn.designer.ui";
-	public static String FOXBPM_REPOSITORY_FLOW_TEMPLATE = "template/flowtemplate";
+	public static String FOXBPM_REPOSITORY_FLOW_TEMPLATE = "template/flowtemplate/";
 	/**
 	 * 取临时读取的properties文件路径
 	 * 
