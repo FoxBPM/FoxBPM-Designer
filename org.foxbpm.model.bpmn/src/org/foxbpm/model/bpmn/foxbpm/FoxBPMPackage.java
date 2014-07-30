@@ -558,7 +558,7 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__CONVERG_TYPE = 53;
 
 	/**
-	 * The feature id for the '<em><b>Potential Starter</b></em>' containment reference.
+	 * The feature id for the '<em><b>Potential Starter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -3582,10 +3582,10 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDocumentRoot_ConvergType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Potential Starter</em>'.
+	 * @return the meta object for the containment reference list '<em>Potential Starter</em>'.
 	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter()
 	 * @see #getDocumentRoot()
 	 * @generated
@@ -5830,7 +5830,7 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute DOCUMENT_ROOT__CONVERG_TYPE = eINSTANCE.getDocumentRoot_ConvergType();
 
 		/**
-		 * The meta object literal for the '<em><b>Potential Starter</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Potential Starter</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
