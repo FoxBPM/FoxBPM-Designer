@@ -14,10 +14,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 import org.foxbpm.model.config.variableconfig.DataTypeDef;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
+import org.restlet.data.ChallengeScheme;
+import org.restlet.resource.ClientResource;
 
 public class FoxBPMDesignerUtil {
 	public static final String PLUGIN_ID = "org.foxbpm.bpmn.designer.ui";
@@ -86,7 +89,7 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getCachePath() {
-		return getServicePath() + "cache/bizvars.xml";
+		return getServicePath() + "cache/";
 	}
 	
 	/**
@@ -208,5 +211,26 @@ public class FoxBPMDesignerUtil {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * 根据传入的url返回对应的clientresource对象
+	 * @param url
+	 * @return
+	 */
+	public static ClientResource getClientByUrl(String url) {
+		ClientResource client= new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + url);
+		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+		client.setRetryAttempts(0);
+		try {
+			ClientResource testclient= new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "/testConnection");
+			testclient.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			testclient.setRetryAttempts(0);
+			testclient.get();
+		} catch (Exception e) {
+			MessageDialog.openInformation(null, "提示", "暂时无法连接流程服务，请检查网络或服务配置并稍后重试，导致此错误的原因是：\n" + e.getMessage());
+			return null;
+		}
+		return client;
 	}
 }
