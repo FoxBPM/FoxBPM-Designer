@@ -2903,13 +2903,22 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_STARTER__EREFERENCE0 = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__DESCRIPTION = BASE_CONFIG_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Potential Starter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 3;
+	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Potential Starter</em>' class.
@@ -5314,6 +5323,17 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getPotentialStarter_EReference0();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EAttribute getPotentialStarter_Description();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialOwner <em>Potential Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7186,6 +7206,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference POTENTIAL_STARTER__EREFERENCE0 = eINSTANCE.getPotentialStarter_EReference0();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POTENTIAL_STARTER__DESCRIPTION = eINSTANCE.getPotentialStarter_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl <em>Potential Owner</em>}' class.

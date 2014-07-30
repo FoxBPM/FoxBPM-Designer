@@ -14,6 +14,7 @@ package org.foxbpm.model.bpmn.foxbpm;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getResourceType <em>Resource Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0 <em>EReference0</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,5 +102,32 @@ public interface PotentialStarter extends BaseConfig {
 	 * @generated
 	 */
 	void setEReference0(Documentation value);
+
+	/**
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getPotentialStarter_Description()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="kind='attribute'"
+	 * @generated
+	 */
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
 
 } // PotentialStarter

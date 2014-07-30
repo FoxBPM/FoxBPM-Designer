@@ -1077,6 +1077,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//PotentialStarter/resourceType"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_v-nzIRbwEeShq_j86WI4Wg"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_u3wjYBeNEeSYVNQOCMGcRw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//PotentialStarter/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_u3wjYReNEeSYVNQOCMGcRw"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_DfJB4RbwEeShq_j86WI4Wg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_DfJB4hbwEeShq_j86WI4Wg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_DfJB4xbwEeShq_j86WI4Wg"/>

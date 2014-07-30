@@ -2393,6 +2393,15 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getPotentialStarter_Description() {
+		return (EAttribute)potentialStarterEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPotentialOwner() {
 		return potentialOwnerEClass;
 	}
@@ -2701,6 +2710,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(potentialStarterEClass, POTENTIAL_STARTER__EXPRESSION);
 		createEAttribute(potentialStarterEClass, POTENTIAL_STARTER__RESOURCE_TYPE);
 		createEReference(potentialStarterEClass, POTENTIAL_STARTER__EREFERENCE0);
+		createEAttribute(potentialStarterEClass, POTENTIAL_STARTER__DESCRIPTION);
 
 		potentialOwnerEClass = createEClass(POTENTIAL_OWNER);
 		createEReference(potentialOwnerEClass, POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS);
@@ -3004,6 +3014,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getPotentialStarter_Expression(), this.getExpression(), null, "expression", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPotentialStarter_ResourceType(), theXMLTypePackage.getString(), "resourceType", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPotentialStarter_EReference0(), this.getDocumentation(), null, "EReference0", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getPotentialStarter_Description(), theXMLTypePackage.getString(), "description", null, 0, 1, PotentialStarter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(potentialOwnerEClass, PotentialOwner.class, "PotentialOwner", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPotentialOwner_ConnectorInstanceElements(), this.getConnectorInstanceElements(), null, "connectorInstanceElements", null, 0, -1, PotentialOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4364,6 +4375,12 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   });		
 		addAnnotation
 		  (getPotentialStarter_ResourceType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getPotentialStarter_Description(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
