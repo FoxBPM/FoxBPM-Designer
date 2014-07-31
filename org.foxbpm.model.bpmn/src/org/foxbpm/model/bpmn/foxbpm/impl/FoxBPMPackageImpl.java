@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.foxbpm.model.bpmn.foxbpm.AssignPolicyType;
 import org.foxbpm.model.bpmn.foxbpm.BaseConfig;
+import org.foxbpm.model.bpmn.foxbpm.CommandParam;
 import org.foxbpm.model.bpmn.foxbpm.CompleteTaskDescription;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstanceElements;
@@ -363,6 +364,13 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	private EClass potentialOwnerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass commandParamEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -989,8 +997,17 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExpression_Mixed() {
+	public EAttribute getExpression_IsRun() {
 		return (EAttribute)expressionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExpression_Mixed() {
+		return (EAttribute)expressionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -1088,35 +1105,8 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTaskCommand_IsVerification() {
-		return (EAttribute)taskCommandEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTaskCommand_IsSaveData() {
-		return (EAttribute)taskCommandEClass.getEStructuralFeatures().get(6);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getTaskCommand_IsSimulationRun() {
-		return (EAttribute)taskCommandEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getTaskCommand_ParameterExpression() {
-		return (EReference)taskCommandEClass.getEStructuralFeatures().get(8);
+		return (EReference)taskCommandEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2420,6 +2410,33 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getCommandParam() {
+		return commandParamEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCommandParam_BizType() {
+		return (EAttribute)commandParamEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getCommandParam_DataType() {
+		return (EAttribute)commandParamEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getProcessValidationLevel() {
 		return processValidationLevelEEnum;
 	}
@@ -2514,6 +2531,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(expressionEClass, EXPRESSION__VALUE);
 		createEAttribute(expressionEClass, EXPRESSION__ID);
 		createEAttribute(expressionEClass, EXPRESSION__NAME);
+		createEAttribute(expressionEClass, EXPRESSION__IS_RUN);
 		createEAttribute(expressionEClass, EXPRESSION__MIXED);
 
 		taskSubjectEClass = createEClass(TASK_SUBJECT);
@@ -2527,9 +2545,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(taskCommandEClass, TASK_COMMAND__COMMAND_TYPE);
 		createEReference(taskCommandEClass, TASK_COMMAND__EXPRESSION);
 		createEAttribute(taskCommandEClass, TASK_COMMAND__ORDER_ID);
-		createEAttribute(taskCommandEClass, TASK_COMMAND__IS_VERIFICATION);
-		createEAttribute(taskCommandEClass, TASK_COMMAND__IS_SAVE_DATA);
-		createEAttribute(taskCommandEClass, TASK_COMMAND__IS_SIMULATION_RUN);
 		createEReference(taskCommandEClass, TASK_COMMAND__PARAMETER_EXPRESSION);
 
 		resourceFilterEClass = createEClass(RESOURCE_FILTER);
@@ -2715,6 +2730,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		potentialOwnerEClass = createEClass(POTENTIAL_OWNER);
 		createEReference(potentialOwnerEClass, POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS);
 
+		commandParamEClass = createEClass(COMMAND_PARAM);
+		createEAttribute(commandParamEClass, COMMAND_PARAM__BIZ_TYPE);
+		createEAttribute(commandParamEClass, COMMAND_PARAM__DATA_TYPE);
+
 		// Create enums
 		processValidationLevelEEnum = createEEnum(PROCESS_VALIDATION_LEVEL);
 	}
@@ -2754,6 +2773,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		tableExpressionEClass.getESuperTypes().add(this.getExpression());
 		listExpressionEClass.getESuperTypes().add(this.getExpression());
 		potentialStarterEClass.getESuperTypes().add(this.getBaseConfig());
+		commandParamEClass.getESuperTypes().add(this.getParam());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(documentRootEClass, DocumentRoot.class, "DocumentRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2818,6 +2838,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getExpression_Value(), theXMLTypePackage.getString(), "value", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExpression_Id(), theXMLTypePackage.getString(), "id", null, 1, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExpression_Name(), theXMLTypePackage.getString(), "name", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExpression_IsRun(), theXMLTypePackage.getBoolean(), "isRun", "true", 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExpression_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(taskSubjectEClass, TaskSubject.class, "TaskSubject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2831,9 +2852,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getTaskCommand_CommandType(), theXMLTypePackage.getString(), "commandType", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTaskCommand_Expression(), this.getExpression(), null, "expression", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommand_OrderId(), theXMLTypePackage.getInt(), "orderId", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommand_IsVerification(), theXMLTypePackage.getString(), "isVerification", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommand_IsSaveData(), theXMLTypePackage.getString(), "isSaveData", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTaskCommand_IsSimulationRun(), theXMLTypePackage.getString(), "isSimulationRun", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTaskCommand_ParameterExpression(), this.getExpression(), null, "parameterExpression", null, 0, 1, TaskCommand.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(resourceFilterEClass, ResourceFilter.class, "ResourceFilter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3018,6 +3036,10 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 
 		initEClass(potentialOwnerEClass, PotentialOwner.class, "PotentialOwner", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPotentialOwner_ConnectorInstanceElements(), this.getConnectorInstanceElements(), null, "connectorInstanceElements", null, 0, -1, PotentialOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(commandParamEClass, CommandParam.class, "CommandParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getCommandParam_BizType(), theXMLTypePackage.getString(), "bizType", null, 0, 1, CommandParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCommandParam_DataType(), theXMLTypePackage.getString(), "dataType", null, 0, 1, CommandParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(processValidationLevelEEnum, ProcessValidationLevel.class, "ProcessValidationLevel");
@@ -3495,6 +3517,12 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "name", "name"
 		   });		
 		addAnnotation
+		  (getExpression_IsRun(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
 		  (getExpression_Mixed(), 
 		   source, 
 		   new String[] {
@@ -3549,24 +3577,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "namespace", "",
 			 "kind", "attribute"
 		   });		
-		addAnnotation
-		  (getTaskCommand_IsVerification(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute"
-		   });			
-		addAnnotation
-		  (getTaskCommand_IsSaveData(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute"
-		   });			
-		addAnnotation
-		  (getTaskCommand_IsSimulationRun(), 
-		   source, 
-		   new String[] {
-			 "kind", "attribute"
-		   });			
 		addAnnotation
 		  (getTaskCommand_ParameterExpression(), 
 		   source, 
@@ -4397,6 +4407,25 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "kind", "element",
 			 "namespace", "##targetNamespace"
+		   });		
+		addAnnotation
+		  (commandParamEClass, 
+		   source, 
+		   new String[] {
+			 "name", "CommandParam"
+		   });		
+		addAnnotation
+		  (getCommandParam_BizType(), 
+		   source, 
+		   new String[] {
+			 "name", "bizType",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getCommandParam_DataType(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
 		   });
 	}
 

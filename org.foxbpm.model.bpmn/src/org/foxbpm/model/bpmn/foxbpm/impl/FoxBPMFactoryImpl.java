@@ -100,6 +100,7 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 			case FoxBPMPackage.PARAM: return createParam();
 			case FoxBPMPackage.POTENTIAL_STARTER: return createPotentialStarter();
 			case FoxBPMPackage.POTENTIAL_OWNER: return createPotentialOwner();
+			case FoxBPMPackage.COMMAND_PARAM: return createCommandParam();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -563,6 +564,16 @@ public class FoxBPMFactoryImpl extends EFactoryImpl implements FoxBPMFactory {
 	public PotentialOwner createPotentialOwner() {
 		PotentialOwnerImpl potentialOwner = new PotentialOwnerImpl();
 		return potentialOwner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CommandParam createCommandParam() {
+		CommandParamImpl commandParam = new CommandParamImpl();
+		return commandParam;
 	}
 
 	/**

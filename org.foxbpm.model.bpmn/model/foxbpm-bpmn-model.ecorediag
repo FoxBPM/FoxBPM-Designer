@@ -151,6 +151,14 @@
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//Expression/name"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVbOHcXMEeOb9caI1cUYMA"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_thwb4BhgEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//Expression/isRun"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_thwb4RhgEeSjbMvobVYXIg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V6P0gBhfEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//Expression/mixed"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V6P0gRhfEeSjbMvobVYXIg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVbOEcXMEeOb9caI1cUYMA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_mVbOEsXMEeOb9caI1cUYMA"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_mVbOE8XMEeOb9caI1cUYMA"/>
@@ -206,18 +214,6 @@
       <children xmi:type="notation:Node" xmi:id="_mVdDQsXMEeOb9caI1cUYMA" type="2001">
         <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/orderId"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDQ8XMEeOb9caI1cUYMA"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_mVdDRMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isVerification"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDRcXMEeOb9caI1cUYMA"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_mVdDRsXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isSaveData"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDR8XMEeOb9caI1cUYMA"/>
-      </children>
-      <children xmi:type="notation:Node" xmi:id="_mVdDSMXMEeOb9caI1cUYMA" type="2001">
-        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//TaskCommand/isSimulationRun"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_mVdDScXMEeOb9caI1cUYMA"/>
       </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_mVccNcXMEeOb9caI1cUYMA"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_mVccNsXMEeOb9caI1cUYMA"/>
@@ -1110,6 +1106,30 @@
     <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//PotentialOwner"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hZ-vEhceEeShq_j86WI4Wg" x="1868" y="864"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_VxuqUBhiEeSjbMvobVYXIg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_VxvRYBhiEeSjbMvobVYXIg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_VxvRYRhiEeSjbMvobVYXIg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_f-OTgBhiEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//CommandParam/bizType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f-OTgRhiEeSjbMvobVYXIg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ij6jYBhiEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpm-bpmn-model.ecore#//CommandParam/dataType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ij6jYRhiEeSjbMvobVYXIg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VxvRYhhiEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VxvRYxhiEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VxvRZBhiEeSjbMvobVYXIg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_VxvRZRhiEeSjbMvobVYXIg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_VxvRZhhiEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_VxvRZxhiEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_VxvRaBhiEeSjbMvobVYXIg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_VxuqURhiEeSjbMvobVYXIg" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="foxbpm-bpmn-model.ecore#//CommandParam"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_VxuqUhhiEeSjbMvobVYXIg" x="2848" y="-32"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_mRhlgcXMEeOb9caI1cUYMA"/>
   <element xmi:type="ecore:EPackage" href="foxbpm-bpmn-model.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_mV6WQMXMEeOb9caI1cUYMA" type="3002" source="_mUrAIMXMEeOb9caI1cUYMA" target="_mVbOHsXMEeOb9caI1cUYMA">
@@ -1405,20 +1425,6 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWF8e8XMEeOb9caI1cUYMA" points="[0, 0, -1715, 76]$[1715, -76, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQMXMEeOb9caI1cUYMA" id="(0.3333333333333333,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQcXMEeOb9caI1cUYMA" id="(0.06862745098039216,1.0)"/>
-  </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_mWF8gMXMEeOb9caI1cUYMA" type="3002" source="_mVccMMXMEeOb9caI1cUYMA" target="_mVanAsXMEeOb9caI1cUYMA">
-    <children xmi:type="notation:Node" xmi:id="_mWF8hMXMEeOb9caI1cUYMA" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mWF8hcXMEeOb9caI1cUYMA" x="-10" y="-10"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_mWF8hsXMEeOb9caI1cUYMA" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mWF8h8XMEeOb9caI1cUYMA" x="10" y="10"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWF8gcXMEeOb9caI1cUYMA" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_mWF8gsXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//TaskCommand/parameterExpression"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWF8g8XMEeOb9caI1cUYMA" points="[0, 0, -1670, 76]$[1670, -76, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQsXMEeOb9caI1cUYMA" id="(0.6666666666666666,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhNAQ8XMEeOb9caI1cUYMA" id="(0.10784313725490197,1.0)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_mWGjgMXMEeOb9caI1cUYMA" type="3002" source="_mVdqUMXMEeOb9caI1cUYMA" target="_mVanAsXMEeOb9caI1cUYMA">
     <children xmi:type="notation:Node" xmi:id="_mWGjhMXMEeOb9caI1cUYMA" type="4011">

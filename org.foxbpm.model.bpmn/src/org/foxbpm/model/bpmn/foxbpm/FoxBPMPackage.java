@@ -631,13 +631,22 @@ public interface FoxBPMPackage extends EPackage {
 	int EXPRESSION__NAME = 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Run</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION__IS_RUN = 3;
+
+	/**
 	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION__MIXED = 3;
+	int EXPRESSION__MIXED = 4;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -646,7 +655,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_FEATURE_COUNT = 4;
+	int EXPRESSION_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Expression</em>' class.
@@ -832,40 +841,13 @@ public interface FoxBPMPackage extends EPackage {
 	int TASK_COMMAND__ORDER_ID = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Is Verification</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_COMMAND__IS_VERIFICATION = BASE_CONFIG_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Is Save Data</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_COMMAND__IS_SAVE_DATA = BASE_CONFIG_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Is Simulation Run</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_COMMAND__IS_SIMULATION_RUN = BASE_CONFIG_FEATURE_COUNT + 7;
-
-	/**
 	 * The feature id for the '<em><b>Parameter Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__PARAMETER_EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 8;
+	int TASK_COMMAND__PARAMETER_EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Task Command</em>' class.
@@ -874,7 +856,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 9;
+	int TASK_COMMAND_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Task Command</em>' class.
@@ -2518,6 +2500,15 @@ public interface FoxBPMPackage extends EPackage {
 	int TABLE_EXPRESSION__NAME = EXPRESSION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Run</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TABLE_EXPRESSION__IS_RUN = EXPRESSION__IS_RUN;
+
+	/**
 	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2589,6 +2580,15 @@ public interface FoxBPMPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIST_EXPRESSION__NAME = EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Run</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_EXPRESSION__IS_RUN = EXPRESSION__IS_RUN;
 
 	/**
 	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
@@ -2967,6 +2967,79 @@ public interface FoxBPMPackage extends EPackage {
 	int POTENTIAL_OWNER_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.CommandParamImpl <em>Command Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.CommandParamImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getCommandParam()
+	 * @generated
+	 */
+	int COMMAND_PARAM = 43;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__KEY = PARAM__KEY;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__NAME = PARAM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__EXPRESSION = PARAM__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Biz Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__BIZ_TYPE = PARAM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__DATA_TYPE = PARAM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Command Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM_FEATURE_COUNT = PARAM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Command Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM_OPERATION_COUNT = PARAM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2974,7 +3047,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getProcessValidationLevel()
 	 * @generated
 	 */
-	int PROCESS_VALIDATION_LEVEL = 43;
+	int PROCESS_VALIDATION_LEVEL = 44;
 
 
 	/**
@@ -3647,6 +3720,17 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getExpression_Name();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.Expression#isIsRun <em>Is Run</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Run</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Expression#isIsRun()
+	 * @see #getExpression()
+	 * @generated
+	 */
+	EAttribute getExpression_IsRun();
+
+	/**
 	 * Returns the meta object for the attribute list '{@link org.foxbpm.model.bpmn.foxbpm.Expression#getMixed <em>Mixed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3764,39 +3848,6 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTaskCommand_OrderId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification <em>Is Verification</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Verification</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsVerification()
-	 * @see #getTaskCommand()
-	 * @generated
-	 */
-	EAttribute getTaskCommand_IsVerification();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData <em>Is Save Data</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Save Data</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSaveData()
-	 * @see #getTaskCommand()
-	 * @generated
-	 */
-	EAttribute getTaskCommand_IsSaveData();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun <em>Is Simulation Run</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Simulation Run</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.TaskCommand#getIsSimulationRun()
-	 * @see #getTaskCommand()
-	 * @generated
-	 */
-	EAttribute getTaskCommand_IsSimulationRun();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.TaskCommand#getParameterExpression <em>Parameter Expression</em>}'.
@@ -5355,6 +5406,38 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getPotentialOwner_ConnectorInstanceElements();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.CommandParam <em>Command Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Command Param</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CommandParam
+	 * @generated
+	 */
+	EClass getCommandParam();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.CommandParam#getBizType <em>Biz Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Biz Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CommandParam#getBizType()
+	 * @see #getCommandParam()
+	 * @generated
+	 */
+	EAttribute getCommandParam_BizType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.CommandParam#getDataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.CommandParam#getDataType()
+	 * @see #getCommandParam()
+	 * @generated
+	 */
+	EAttribute getCommandParam_DataType();
+
+	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5880,6 +5963,14 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute EXPRESSION__NAME = eINSTANCE.getExpression_Name();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Run</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXPRESSION__IS_RUN = eINSTANCE.getExpression_IsRun();
+
+		/**
 		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5970,30 +6061,6 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TASK_COMMAND__ORDER_ID = eINSTANCE.getTaskCommand_OrderId();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Verification</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TASK_COMMAND__IS_VERIFICATION = eINSTANCE.getTaskCommand_IsVerification();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Save Data</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TASK_COMMAND__IS_SAVE_DATA = eINSTANCE.getTaskCommand_IsSaveData();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Simulation Run</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TASK_COMMAND__IS_SIMULATION_RUN = eINSTANCE.getTaskCommand_IsSimulationRun();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Expression</b></em>' containment reference feature.
@@ -7232,6 +7299,32 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS = eINSTANCE.getPotentialOwner_ConnectorInstanceElements();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.CommandParamImpl <em>Command Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.CommandParamImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getCommandParam()
+		 * @generated
+		 */
+		EClass COMMAND_PARAM = eINSTANCE.getCommandParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Biz Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMAND_PARAM__BIZ_TYPE = eINSTANCE.getCommandParam_BizType();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMAND_PARAM__DATA_TYPE = eINSTANCE.getCommandParam_DataType();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.

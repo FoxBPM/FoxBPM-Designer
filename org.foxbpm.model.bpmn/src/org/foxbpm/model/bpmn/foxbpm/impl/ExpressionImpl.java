@@ -25,6 +25,7 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl#isIsRun <em>Is Run</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl#getMixed <em>Mixed</em>}</li>
  * </ul>
  * </p>
@@ -91,6 +92,26 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsRun() <em>Is Run</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsRun()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_RUN_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isIsRun() <em>Is Run</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsRun()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isRun = IS_RUN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
@@ -202,6 +223,27 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsRun() {
+		return isRun;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsRun(boolean newIsRun) {
+		boolean oldIsRun = isRun;
+		isRun = newIsRun;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.EXPRESSION__IS_RUN, oldIsRun, isRun));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FeatureMap getMixed() {
 		if (mixed == null) {
 			mixed = new BasicFeatureMap(this, FoxBPMPackage.EXPRESSION__MIXED);
@@ -237,6 +279,8 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 				return getId();
 			case FoxBPMPackage.EXPRESSION__NAME:
 				return getName();
+			case FoxBPMPackage.EXPRESSION__IS_RUN:
+				return isIsRun();
 			case FoxBPMPackage.EXPRESSION__MIXED:
 				if (coreType) return getMixed();
 				return ((FeatureMap.Internal)getMixed()).getWrapper();
@@ -260,6 +304,9 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 				return;
 			case FoxBPMPackage.EXPRESSION__NAME:
 				setName((String)newValue);
+				return;
+			case FoxBPMPackage.EXPRESSION__IS_RUN:
+				setIsRun((Boolean)newValue);
 				return;
 			case FoxBPMPackage.EXPRESSION__MIXED:
 				((FeatureMap.Internal)getMixed()).set(newValue);
@@ -285,6 +332,9 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 			case FoxBPMPackage.EXPRESSION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case FoxBPMPackage.EXPRESSION__IS_RUN:
+				setIsRun(IS_RUN_EDEFAULT);
+				return;
 			case FoxBPMPackage.EXPRESSION__MIXED:
 				getMixed().clear();
 				return;
@@ -306,6 +356,8 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
 			case FoxBPMPackage.EXPRESSION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case FoxBPMPackage.EXPRESSION__IS_RUN:
+				return isRun != IS_RUN_EDEFAULT;
 			case FoxBPMPackage.EXPRESSION__MIXED:
 				return mixed != null && !mixed.isEmpty();
 		}
@@ -328,6 +380,8 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 		result.append(id);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", isRun: ");
+		result.append(isRun);
 		result.append(", mixed: ");
 		result.append(mixed);
 		result.append(')');
