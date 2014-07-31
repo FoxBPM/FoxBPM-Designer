@@ -1340,7 +1340,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_Documentation() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(6);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(17);
 	}
 
 	/**
@@ -1349,7 +1349,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EAttribute getConnectorInstance_ErrorHandling() {
-		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(7);
+		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -1358,7 +1358,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EAttribute getConnectorInstance_ErrorCode() {
-		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(8);
+		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1367,7 +1367,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_ConnectorParameterInputs() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(9);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1376,7 +1376,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_ConnectorParameterOutputs() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(10);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(9);
 	}
 
 	/**
@@ -1385,7 +1385,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_ConnectorParameterOutputsDef() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(11);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1394,7 +1394,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_SkipComment() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(12);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1403,7 +1403,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_TimeExpression() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(13);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1412,7 +1412,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EAttribute getConnectorInstance_IsTimeExecute() {
-		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1421,7 +1421,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EReference getConnectorInstance_TimeSkipExpression() {
-		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(15);
+		return (EReference)connectorInstanceEClass.getEStructuralFeatures().get(14);
 	}
 
 	/**
@@ -1430,7 +1430,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EAttribute getConnectorInstance_Version() {
-		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(16);
+		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -1439,7 +1439,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 	 * @generated
 	 */
 	public EAttribute getConnectorInstance_Type() {
-		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(17);
+		return (EAttribute)connectorInstanceEClass.getEStructuralFeatures().get(16);
 	}
 
 	/**
@@ -2575,7 +2575,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__CONNECTOR_INSTANCE_ID);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__CONNECTOR_INSTANCE_NAME);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__EVENT_TYPE);
-		createEReference(connectorInstanceEClass, CONNECTOR_INSTANCE__DOCUMENTATION);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__ERROR_HANDLING);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__ERROR_CODE);
 		createEReference(connectorInstanceEClass, CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS);
@@ -2587,6 +2586,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		createEReference(connectorInstanceEClass, CONNECTOR_INSTANCE__TIME_SKIP_EXPRESSION);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__VERSION);
 		createEAttribute(connectorInstanceEClass, CONNECTOR_INSTANCE__TYPE);
+		createEReference(connectorInstanceEClass, CONNECTOR_INSTANCE__DOCUMENTATION);
 
 		connectorParameterInputEClass = createEClass(CONNECTOR_PARAMETER_INPUT);
 		createEAttribute(connectorParameterInputEClass, CONNECTOR_PARAMETER_INPUT__ID);
@@ -2882,7 +2882,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEAttribute(getConnectorInstance_ConnectorInstanceId(), theXMLTypePackage.getString(), "connectorInstanceId", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_ConnectorInstanceName(), theXMLTypePackage.getString(), "connectorInstanceName", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_EventType(), theXMLTypePackage.getString(), "eventType", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getConnectorInstance_Documentation(), this.getDocumentation(), null, "documentation", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_ErrorHandling(), theXMLTypePackage.getString(), "errorHandling", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_ErrorCode(), theXMLTypePackage.getString(), "errorCode", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnectorInstance_ConnectorParameterInputs(), this.getConnectorParameterInput(), null, "connectorParameterInputs", null, 0, -1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2894,6 +2893,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		initEReference(getConnectorInstance_TimeSkipExpression(), this.getTimeSkipExpression(), null, "TimeSkipExpression", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_Version(), theXMLTypePackage.getString(), "version", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getConnectorInstance_Type(), theXMLTypePackage.getString(), "type", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnectorInstance_Documentation(), this.getDocumentation(), null, "documentation", null, 0, 1, ConnectorInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectorParameterInputEClass, ConnectorParameterInput.class, "ConnectorParameterInput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getConnectorParameterInput_Id(), theXMLTypePackage.getString(), "id", null, 1, 1, ConnectorParameterInput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3692,13 +3692,6 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getConnectorInstance_Documentation(), 
-		   source, 
-		   new String[] {
-			 "namespace", "##targetNamespace",
-			 "kind", "element"
-		   });		
-		addAnnotation
 		  (getConnectorInstance_ErrorHandling(), 
 		   source, 
 		   new String[] {
@@ -3775,6 +3768,13 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   new String[] {
 			 "kind", "attribute"
 		   });			
+		addAnnotation
+		  (getConnectorInstance_Documentation(), 
+		   source, 
+		   new String[] {
+			 "name", "documentation",
+			 "kind", "element"
+		   });		
 		addAnnotation
 		  (connectorParameterInputEClass, 
 		   source, 
