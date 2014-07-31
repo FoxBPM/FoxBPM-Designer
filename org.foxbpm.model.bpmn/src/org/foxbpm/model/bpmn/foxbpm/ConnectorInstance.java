@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getConnectorInstanceId <em>Connector Instance Id</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getConnectorInstanceName <em>Connector Instance Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getEventType <em>Event Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getErrorHandling <em>Error Handling</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getConnectorParameterInputs <em>Connector Parameter Inputs</em>}</li>
@@ -32,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getTimeSkipExpression <em>Time Skip Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getVersion <em>Version</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.ConnectorInstance#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -214,7 +214,7 @@ public interface ConnectorInstance extends EObject {
 	 * @see #setDocumentation(Documentation)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorInstance_Documentation()
 	 * @model containment="true"
-	 *        extendedMetaData="namespace='##targetNamespace' kind='element'"
+	 *        extendedMetaData="name='documentation' kind='element'"
 	 * @generated
 	 */
 	Documentation getDocumentation();

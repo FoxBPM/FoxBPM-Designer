@@ -1482,20 +1482,6 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhKkAsXMEeOb9caI1cUYMA" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhKkA8XMEeOb9caI1cUYMA" id="(0.5,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_mWIYtMXMEeOb9caI1cUYMA" type="3002" source="_mVgGmsXMEeOb9caI1cUYMA" target="_mVe4esXMEeOb9caI1cUYMA">
-    <children xmi:type="notation:Node" xmi:id="_mWIYuMXMEeOb9caI1cUYMA" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mWIYucXMEeOb9caI1cUYMA" x="-10" y="-10"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_mWIYusXMEeOb9caI1cUYMA" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_mWIYu8XMEeOb9caI1cUYMA" x="10" y="10"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_mWIYtcXMEeOb9caI1cUYMA" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_mWIYtsXMEeOb9caI1cUYMA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorInstance/documentation"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mWIYt8XMEeOb9caI1cUYMA" points="[0, 0, -1413, 281]$[488, -61, -925, 220]$[490, -205, -923, 76]$[1413, -281, 0, 0]"/>
-    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhWKMsXMEeOb9caI1cUYMA" id="(0.7043010752688172,0.0)"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mhWKM8XMEeOb9caI1cUYMA" id="(0.24509803921568626,1.0)"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_mWIYvMXMEeOb9caI1cUYMA" type="3002" source="_mVgGmsXMEeOb9caI1cUYMA" target="_mVh7xsXMEeOb9caI1cUYMA">
     <children xmi:type="notation:Node" xmi:id="_mWIYwMXMEeOb9caI1cUYMA" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_mWIYwcXMEeOb9caI1cUYMA" x="-10" y="-10"/>
@@ -2216,5 +2202,18 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_7Clg8xceEeShq_j86WI4Wg" points="[16, -7, -454, 197]$[471, -196, 1, 8]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7CnWIBceEeShq_j86WI4Wg" id="(0.8431372549019608,0.2619047619047619)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_7CnWIRceEeShq_j86WI4Wg" id="(0.08974358974358974,0.8367346938775511)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_I6fhQBimEeSjbMvobVYXIg" type="3002" source="_mVgGmsXMEeOb9caI1cUYMA" target="_mVe4esXMEeOb9caI1cUYMA">
+    <children xmi:type="notation:Node" xmi:id="_I6fhRBimEeSjbMvobVYXIg" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_I6fhRRimEeSjbMvobVYXIg" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_I6fhRhimEeSjbMvobVYXIg" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_I6fhRximEeSjbMvobVYXIg" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_I6fhQRimEeSjbMvobVYXIg" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_I6fhQhimEeSjbMvobVYXIg" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="foxbpm-bpmn-model.ecore#//ConnectorInstance/documentation"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_I6fhQximEeSjbMvobVYXIg" points="[23, -4, -1410, 323]$[1434, -287, 1, 40]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_I6gvYBimEeSjbMvobVYXIg" id="(0.7419354838709677,0.023923444976076555)"/>
   </edges>
 </notation:Diagram>

@@ -1151,22 +1151,13 @@ public interface FoxBPMPackage extends EPackage {
 	int CONNECTOR_INSTANCE__EVENT_TYPE = 5;
 
 	/**
-	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTOR_INSTANCE__DOCUMENTATION = 6;
-
-	/**
 	 * The feature id for the '<em><b>Error Handling</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__ERROR_HANDLING = 7;
+	int CONNECTOR_INSTANCE__ERROR_HANDLING = 6;
 
 	/**
 	 * The feature id for the '<em><b>Error Code</b></em>' attribute.
@@ -1175,7 +1166,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__ERROR_CODE = 8;
+	int CONNECTOR_INSTANCE__ERROR_CODE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Connector Parameter Inputs</b></em>' containment reference list.
@@ -1184,7 +1175,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS = 9;
+	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Connector Parameter Outputs</b></em>' containment reference list.
@@ -1193,7 +1184,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS = 10;
+	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Connector Parameter Outputs Def</b></em>' containment reference list.
@@ -1202,7 +1193,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS_DEF = 11;
+	int CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS_DEF = 10;
 
 	/**
 	 * The feature id for the '<em><b>Skip Comment</b></em>' containment reference.
@@ -1211,7 +1202,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__SKIP_COMMENT = 12;
+	int CONNECTOR_INSTANCE__SKIP_COMMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Time Expression</b></em>' containment reference.
@@ -1220,7 +1211,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__TIME_EXPRESSION = 13;
+	int CONNECTOR_INSTANCE__TIME_EXPRESSION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Is Time Execute</b></em>' attribute.
@@ -1229,7 +1220,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__IS_TIME_EXECUTE = 14;
+	int CONNECTOR_INSTANCE__IS_TIME_EXECUTE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Time Skip Expression</b></em>' containment reference.
@@ -1238,7 +1229,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__TIME_SKIP_EXPRESSION = 15;
+	int CONNECTOR_INSTANCE__TIME_SKIP_EXPRESSION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -1247,7 +1238,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__VERSION = 16;
+	int CONNECTOR_INSTANCE__VERSION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1256,7 +1247,16 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTOR_INSTANCE__TYPE = 17;
+	int CONNECTOR_INSTANCE__TYPE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTOR_INSTANCE__DOCUMENTATION = 17;
 
 	/**
 	 * The number of structural features of the '<em>Connector Instance</em>' class.

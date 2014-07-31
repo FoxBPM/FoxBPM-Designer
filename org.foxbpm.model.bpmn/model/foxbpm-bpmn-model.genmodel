@@ -69,11 +69,13 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//DocumentRoot/formParamContainer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//DocumentRoot/convergType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//DocumentRoot/potentialStarter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//DocumentRoot/potentialOwner"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/isRun"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/mixed"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//TaskSubject">
@@ -87,9 +89,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//TaskCommand/commandType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//TaskCommand/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//TaskCommand/orderId"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//TaskCommand/isVerification"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//TaskCommand/isSaveData"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//TaskCommand/isSimulationRun"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//TaskCommand/parameterExpression"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//ResourceFilter">
@@ -120,7 +119,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/connectorInstanceId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/connectorInstanceName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/eventType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//ConnectorInstance/documentation"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/errorHandling"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/errorCode"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//ConnectorInstance/connectorParameterInputs"/>
@@ -269,6 +267,15 @@
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//PotentialStarter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//PotentialStarter/expression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//PotentialStarter/resourceType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//PotentialStarter/EReference0"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//PotentialStarter/description"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//PotentialOwner">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//PotentialOwner/connectorInstanceElements"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//CommandParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//CommandParam/bizType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//CommandParam/dataType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
