@@ -214,7 +214,7 @@ public interface ConnectorInstance extends EObject {
 	 * @see #setDocumentation(Documentation)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getConnectorInstance_Documentation()
 	 * @model containment="true"
-	 *        extendedMetaData="name='documentation' kind='element'"
+	 *        extendedMetaData="name='documentation' kind='element' namespace='##targetNamespace'"
 	 * @generated
 	 */
 	Documentation getDocumentation();

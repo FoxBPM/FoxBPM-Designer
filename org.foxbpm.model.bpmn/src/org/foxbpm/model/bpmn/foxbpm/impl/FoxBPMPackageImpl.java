@@ -3773,7 +3773,8 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		   source, 
 		   new String[] {
 			 "name", "documentation",
-			 "kind", "element"
+			 "kind", "element",
+			 "namespace", "##targetNamespace"
 		   });		
 		addAnnotation
 		  (connectorParameterInputEClass, 
