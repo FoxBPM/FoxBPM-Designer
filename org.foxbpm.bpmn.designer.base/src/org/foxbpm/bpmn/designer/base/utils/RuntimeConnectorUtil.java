@@ -324,6 +324,10 @@ public class RuntimeConnectorUtil {
 							ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
 							client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 							Representation result = client.get();
+							File file = new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+							if (!file.exists()) {
+								file.mkdirs();
+							}
 							FileUtil.writeObject(result.getText(), FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
 						} catch (Exception e) {
 							e.printStackTrace();
