@@ -294,11 +294,10 @@ public class RuntimeConnectorUtil {
 			Display.getDefault().syncExec(new Runnable() {
 				@Override
 				public void run() {
-					//SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
 					try {
 						// 组织数据
-						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "identity/allGroupDefinitions");
-						//ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroups");
+						SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
+						ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
 						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 						Representation result = client.get();
 						FileUtil.writeObject(result.getText(), FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
@@ -307,7 +306,7 @@ public class RuntimeConnectorUtil {
 					}
 				}
 			});
-			/*if (new File(servicePath).exists()) {
+			if (new File(servicePath).exists()) {
 				Display.getDefault().syncExec(new Runnable() {
 
 					@Override
@@ -330,7 +329,7 @@ public class RuntimeConnectorUtil {
 						}
 					}
 				});
-			}*/
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
