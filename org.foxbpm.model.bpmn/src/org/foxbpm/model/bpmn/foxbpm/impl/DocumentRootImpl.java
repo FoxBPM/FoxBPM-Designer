@@ -35,6 +35,8 @@ import org.foxbpm.model.bpmn.foxbpm.LoopDataInputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopDataOutputCollection;
 import org.foxbpm.model.bpmn.foxbpm.LoopMaximum;
 import org.foxbpm.model.bpmn.foxbpm.MessageObj;
+import org.foxbpm.model.bpmn.foxbpm.PotentialOwner;
+import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
 import org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel;
 import org.foxbpm.model.bpmn.foxbpm.ReceiveMessage;
 import org.foxbpm.model.bpmn.foxbpm.ResourceFilter;
@@ -101,11 +103,13 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConnectorInstanceElements <em>Connector Instance Elements</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsCreateRecord <em>Is Create Record</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getIsAutoClaim <em>Is Auto Claim</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getClaimType <em>Claim Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTaskDescription <em>Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getCompleteTaskDescription <em>Complete Task Description</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getFormParamContainer <em>Form Param Container</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConvergType <em>Converg Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialStarter <em>Potential Starter</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialOwner <em>Potential Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -823,24 +827,24 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	protected String isCreateRecord = IS_CREATE_RECORD_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getIsAutoClaim() <em>Is Auto Claim</em>}' attribute.
+	 * The default value of the '{@link #getClaimType() <em>Claim Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsAutoClaim()
+	 * @see #getClaimType()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String IS_AUTO_CLAIM_EDEFAULT = null;
+	protected static final String CLAIM_TYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getIsAutoClaim() <em>Is Auto Claim</em>}' attribute.
+	 * The cached value of the '{@link #getClaimType() <em>Claim Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIsAutoClaim()
+	 * @see #getClaimType()
 	 * @generated
 	 * @ordered
 	 */
-	protected String isAutoClaim = IS_AUTO_CLAIM_EDEFAULT;
+	protected String claimType = CLAIM_TYPE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTaskDescription() <em>Task Description</em>}' containment reference.
@@ -891,6 +895,26 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected String convergType = CONVERG_TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getPotentialStarter() <em>Potential Starter</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPotentialStarter()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PotentialStarter> potentialStarter;
+
+	/**
+	 * The cached value of the '{@link #getPotentialOwner() <em>Potential Owner</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPotentialOwner()
+	 * @generated
+	 * @ordered
+	 */
+	protected PotentialOwner potentialOwner;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2122,8 +2146,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIsAutoClaim() {
-		return isAutoClaim;
+	public String getClaimType() {
+		return claimType;
 	}
 
 	/**
@@ -2131,11 +2155,11 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsAutoClaim(String newIsAutoClaim) {
-		String oldIsAutoClaim = isAutoClaim;
-		isAutoClaim = newIsAutoClaim;
+	public void setClaimType(String newClaimType) {
+		String oldClaimType = claimType;
+		claimType = newClaimType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM, oldIsAutoClaim, isAutoClaim));
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__CLAIM_TYPE, oldClaimType, claimType));
 	}
 
 	/**
@@ -2293,6 +2317,61 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PotentialStarter> getPotentialStarter() {
+		if (potentialStarter == null) {
+			potentialStarter = new EObjectContainmentEList<PotentialStarter>(PotentialStarter.class, this, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER);
+		}
+		return potentialStarter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PotentialOwner getPotentialOwner() {
+		return potentialOwner;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetPotentialOwner(PotentialOwner newPotentialOwner, NotificationChain msgs) {
+		PotentialOwner oldPotentialOwner = potentialOwner;
+		potentialOwner = newPotentialOwner;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, oldPotentialOwner, newPotentialOwner);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPotentialOwner(PotentialOwner newPotentialOwner) {
+		if (newPotentialOwner != potentialOwner) {
+			NotificationChain msgs = null;
+			if (potentialOwner != null)
+				msgs = ((InternalEObject)potentialOwner).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, null, msgs);
+			if (newPotentialOwner != null)
+				msgs = ((InternalEObject)newPotentialOwner).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, null, msgs);
+			msgs = basicSetPotentialOwner(newPotentialOwner, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER, newPotentialOwner, newPotentialOwner));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2346,6 +2425,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return basicSetCompleteTaskDescription(null, msgs);
 			case FoxBPMPackage.DOCUMENT_ROOT__FORM_PARAM_CONTAINER:
 				return basicSetFormParamContainer(null, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
+				return ((InternalEList<?>)getPotentialStarter()).basicRemove(otherEnd, msgs);
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return basicSetPotentialOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -2459,8 +2542,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getName();
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				return getIsCreateRecord();
-			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
-				return getIsAutoClaim();
+			case FoxBPMPackage.DOCUMENT_ROOT__CLAIM_TYPE:
+				return getClaimType();
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
 				return getTaskDescription();
 			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
@@ -2469,6 +2552,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getFormParamContainer();
 			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
 				return getConvergType();
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
+				return getPotentialStarter();
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return getPotentialOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2635,8 +2722,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				setIsCreateRecord((String)newValue);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
-				setIsAutoClaim((String)newValue);
+			case FoxBPMPackage.DOCUMENT_ROOT__CLAIM_TYPE:
+				setClaimType((String)newValue);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
 				setTaskDescription((TaskDescription)newValue);
@@ -2649,6 +2736,13 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
 				setConvergType((String)newValue);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
+				getPotentialStarter().clear();
+				getPotentialStarter().addAll((Collection<? extends PotentialStarter>)newValue);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				setPotentialOwner((PotentialOwner)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -2809,8 +2903,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				setIsCreateRecord(IS_CREATE_RECORD_EDEFAULT);
 				return;
-			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
-				setIsAutoClaim(IS_AUTO_CLAIM_EDEFAULT);
+			case FoxBPMPackage.DOCUMENT_ROOT__CLAIM_TYPE:
+				setClaimType(CLAIM_TYPE_EDEFAULT);
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
 				setTaskDescription((TaskDescription)null);
@@ -2823,6 +2917,12 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return;
 			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
 				setConvergType(CONVERG_TYPE_EDEFAULT);
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
+				getPotentialStarter().clear();
+				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				setPotentialOwner((PotentialOwner)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -2934,8 +3034,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case FoxBPMPackage.DOCUMENT_ROOT__IS_CREATE_RECORD:
 				return IS_CREATE_RECORD_EDEFAULT == null ? isCreateRecord != null : !IS_CREATE_RECORD_EDEFAULT.equals(isCreateRecord);
-			case FoxBPMPackage.DOCUMENT_ROOT__IS_AUTO_CLAIM:
-				return IS_AUTO_CLAIM_EDEFAULT == null ? isAutoClaim != null : !IS_AUTO_CLAIM_EDEFAULT.equals(isAutoClaim);
+			case FoxBPMPackage.DOCUMENT_ROOT__CLAIM_TYPE:
+				return CLAIM_TYPE_EDEFAULT == null ? claimType != null : !CLAIM_TYPE_EDEFAULT.equals(claimType);
 			case FoxBPMPackage.DOCUMENT_ROOT__TASK_DESCRIPTION:
 				return taskDescription != null;
 			case FoxBPMPackage.DOCUMENT_ROOT__COMPLETE_TASK_DESCRIPTION:
@@ -2944,6 +3044,10 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return formParamContainer != null;
 			case FoxBPMPackage.DOCUMENT_ROOT__CONVERG_TYPE:
 				return CONVERG_TYPE_EDEFAULT == null ? convergType != null : !CONVERG_TYPE_EDEFAULT.equals(convergType);
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_STARTER:
+				return potentialStarter != null && !potentialStarter.isEmpty();
+			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
+				return potentialOwner != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -3014,8 +3118,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 		result.append(name);
 		result.append(", isCreateRecord: ");
 		result.append(isCreateRecord);
-		result.append(", isAutoClaim: ");
-		result.append(isAutoClaim);
+		result.append(", claimType: ");
+		result.append(claimType);
 		result.append(", convergType: ");
 		result.append(convergType);
 		result.append(')');

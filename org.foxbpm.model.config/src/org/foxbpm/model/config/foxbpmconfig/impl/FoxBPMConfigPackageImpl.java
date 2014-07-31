@@ -8,8 +8,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.foxbpm.model.config.foxbpmconfig.BaseConfig;
+import org.foxbpm.model.config.foxbpmconfig.BizDataObjectConfig;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagement;
 import org.foxbpm.model.config.foxbpmconfig.ConnectionManagementConfig;
+import org.foxbpm.model.config.foxbpmconfig.DataObjectBehavior;
 import org.foxbpm.model.config.foxbpmconfig.EventListener;
 import org.foxbpm.model.config.foxbpmconfig.EventListenerConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
@@ -136,6 +138,20 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * @generated
 	 */
 	private EClass eventListenerEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bizDataObjectConfigEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataObjectBehaviorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -268,6 +284,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EReference getFoxBPMConfig_EventListenerConfig() {
 		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFoxBPMConfig_BizDataObjectConfig() {
+		return (EReference)foxBPMConfigEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -536,6 +561,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTaskCommandConfig_IsAutoClaim() {
+		return (EAttribute)taskCommandConfigEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getParam() {
 		return paramEClass;
 	}
@@ -565,6 +599,24 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EReference getParam_Params() {
 		return (EReference)paramEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParam_Name() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getParam_Mixed() {
+		return (EAttribute)paramEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -655,6 +707,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 */
 	public EAttribute getTaskCommandDefinition_Type() {
 		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getTaskCommandDefinition_Description() {
+		return (EAttribute)taskCommandDefinitionEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -770,6 +831,60 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBizDataObjectConfig() {
+		return bizDataObjectConfigEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBizDataObjectConfig_DataObjectBehavior() {
+		return (EReference)bizDataObjectConfigEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDataObjectBehavior() {
+		return dataObjectBehaviorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataObjectBehavior_Id() {
+		return (EAttribute)dataObjectBehaviorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataObjectBehavior_Name() {
+		return (EAttribute)dataObjectBehaviorEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDataObjectBehavior_Behavior() {
+		return (EAttribute)dataObjectBehaviorEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public FoxBPMConfigFactory getFoxBPMConfigFactory() {
 		return (FoxBPMConfigFactory)getEFactoryInstance();
 	}
@@ -801,6 +916,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__TASK_COMMAND_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__SCRIPT_LANGUAGE_CONFIG);
 		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__EVENT_LISTENER_CONFIG);
+		createEReference(foxBPMConfigEClass, FOX_BPM_CONFIG__BIZ_DATA_OBJECT_CONFIG);
 
 		sysMailConfigEClass = createEClass(SYS_MAIL_CONFIG);
 		createEReference(sysMailConfigEClass, SYS_MAIL_CONFIG__MAIL_INFO);
@@ -837,11 +953,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		taskCommandConfigEClass = createEClass(TASK_COMMAND_CONFIG);
 		createEReference(taskCommandConfigEClass, TASK_COMMAND_CONFIG__TASK_COMMAND_DEFINITION);
+		createEAttribute(taskCommandConfigEClass, TASK_COMMAND_CONFIG__IS_AUTO_CLAIM);
 
 		paramEClass = createEClass(PARAM);
 		createEAttribute(paramEClass, PARAM__KEY);
 		createEAttribute(paramEClass, PARAM__VALUE);
 		createEReference(paramEClass, PARAM__PARAMS);
+		createEAttribute(paramEClass, PARAM__NAME);
+		createEAttribute(paramEClass, PARAM__MIXED);
 
 		baseConfigEClass = createEClass(BASE_CONFIG);
 		createEReference(baseConfigEClass, BASE_CONFIG__PARAMS);
@@ -854,6 +973,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__FILTER);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__IS_ENABLED);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__TYPE);
+		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__DESCRIPTION);
 
 		scriptLanguageConfigEClass = createEClass(SCRIPT_LANGUAGE_CONFIG);
 		createEReference(scriptLanguageConfigEClass, SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE);
@@ -870,6 +990,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		eventListenerEClass = createEClass(EVENT_LISTENER);
 		createEAttribute(eventListenerEClass, EVENT_LISTENER__EVENT_TYPE);
 		createEAttribute(eventListenerEClass, EVENT_LISTENER__LISTENER_CLASS);
+
+		bizDataObjectConfigEClass = createEClass(BIZ_DATA_OBJECT_CONFIG);
+		createEReference(bizDataObjectConfigEClass, BIZ_DATA_OBJECT_CONFIG__DATA_OBJECT_BEHAVIOR);
+
+		dataObjectBehaviorEClass = createEClass(DATA_OBJECT_BEHAVIOR);
+		createEAttribute(dataObjectBehaviorEClass, DATA_OBJECT_BEHAVIOR__ID);
+		createEAttribute(dataObjectBehaviorEClass, DATA_OBJECT_BEHAVIOR__NAME);
+		createEAttribute(dataObjectBehaviorEClass, DATA_OBJECT_BEHAVIOR__BEHAVIOR);
 	}
 
 	/**
@@ -911,6 +1039,8 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		taskCommandDefinitionEClass.getESuperTypes().add(this.getBaseConfig());
 		eventListenerConfigEClass.getESuperTypes().add(this.getBaseConfig());
 		eventListenerEClass.getESuperTypes().add(this.getBaseConfig());
+		bizDataObjectConfigEClass.getESuperTypes().add(this.getBaseConfig());
+		dataObjectBehaviorEClass.getESuperTypes().add(this.getBaseConfig());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(foxBPMConfigEClass, FoxBPMConfig.class, "FoxBPMConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -921,6 +1051,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEReference(getFoxBPMConfig_TaskCommandConfig(), this.getTaskCommandConfig(), null, "taskCommandConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_ScriptLanguageConfig(), this.getScriptLanguageConfig(), null, "scriptLanguageConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFoxBPMConfig_EventListenerConfig(), this.getEventListenerConfig(), null, "eventListenerConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFoxBPMConfig_BizDataObjectConfig(), this.getBizDataObjectConfig(), null, "bizDataObjectConfig", null, 0, 1, FoxBPMConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sysMailConfigEClass, SysMailConfig.class, "SysMailConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSysMailConfig_MailInfo(), this.getMailInfo(), null, "mailInfo", null, 0, -1, SysMailConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -957,11 +1088,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 
 		initEClass(taskCommandConfigEClass, TaskCommandConfig.class, "TaskCommandConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTaskCommandConfig_TaskCommandDefinition(), this.getTaskCommandDefinition(), null, "taskCommandDefinition", null, 0, -1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandConfig_IsAutoClaim(), ecorePackage.getEString(), "isAutoClaim", null, 0, 1, TaskCommandConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getParam_Key(), ecorePackage.getEString(), "key", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getParam_Value(), ecorePackage.getEString(), "value", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getParam_Params(), this.getParam(), null, "params", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParam_Name(), ecorePackage.getEString(), "name", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getParam_Mixed(), ecorePackage.getEFeatureMapEntry(), "mixed", null, 0, -1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseConfigEClass, BaseConfig.class, "BaseConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBaseConfig_Params(), this.getParam(), null, "params", null, 0, -1, BaseConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -974,6 +1108,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getTaskCommandDefinition_Filter(), ecorePackage.getEString(), "filter", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommandDefinition_IsEnabled(), ecorePackage.getEString(), "isEnabled", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommandDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTaskCommandDefinition_Description(), ecorePackage.getEString(), "description", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scriptLanguageConfigEClass, ScriptLanguageConfig.class, "ScriptLanguageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScriptLanguageConfig_ScriptLanguage(), this.getScriptLanguage(), null, "scriptLanguage", null, 0, -1, ScriptLanguageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -990,6 +1125,14 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEClass(eventListenerEClass, EventListener.class, "EventListener", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEventListener_EventType(), ecorePackage.getEString(), "eventType", null, 0, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEventListener_ListenerClass(), ecorePackage.getEString(), "listenerClass", null, 0, 1, EventListener.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bizDataObjectConfigEClass, BizDataObjectConfig.class, "BizDataObjectConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBizDataObjectConfig_DataObjectBehavior(), this.getDataObjectBehavior(), null, "dataObjectBehavior", null, 0, -1, BizDataObjectConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataObjectBehaviorEClass, DataObjectBehavior.class, "DataObjectBehavior", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDataObjectBehavior_Id(), ecorePackage.getEString(), "id", null, 0, 1, DataObjectBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataObjectBehavior_Name(), ecorePackage.getEString(), "name", null, 0, 1, DataObjectBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataObjectBehavior_Behavior(), ecorePackage.getEString(), "behavior", null, 0, 1, DataObjectBehavior.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1050,6 +1193,13 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		  (getFoxBPMConfig_EventListenerConfig(), 
 		   source, 
 		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getFoxBPMConfig_BizDataObjectConfig(), 
+		   source, 
+		   new String[] {
+			 "name", "bizDataObjectConfig",
 			 "kind", "element"
 		   });		
 		addAnnotation
@@ -1187,6 +1337,19 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 			 "name", "taskCommandDefinition"
 		   });		
 		addAnnotation
+		  (getTaskCommandConfig_IsAutoClaim(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (paramEClass, 
+		   source, 
+		   new String[] {
+			 "name", "Param",
+			 "kind", "mixed"
+		   });		
+		addAnnotation
 		  (getParam_Key(), 
 		   source, 
 		   new String[] {
@@ -1196,13 +1359,26 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		  (getParam_Value(), 
 		   source, 
 		   new String[] {
-			 "kind", "attribute"
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getParam_Params(), 
 		   source, 
 		   new String[] {
-			 "kind", "element"
+			 "kind", "mixed"
+		   });		
+		addAnnotation
+		  (getParam_Name(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getParam_Mixed(), 
+		   source, 
+		   new String[] {
+			 "name", ":mixed",
+			 "kind", "elementWildcard"
 		   });		
 		addAnnotation
 		  (getBaseConfig_Params(), 
@@ -1255,6 +1431,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   });		
 		addAnnotation
 		  (getTaskCommandDefinition_Type(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getTaskCommandDefinition_Description(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
@@ -1325,7 +1507,32 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   new String[] {
 			 "kind", "attribute",
 			 "name", "listenerClass"
-		   });	
+		   });			
+		addAnnotation
+		  (getBizDataObjectConfig_DataObjectBehavior(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getDataObjectBehavior_Id(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getDataObjectBehavior_Name(), 
+		   source, 
+		   new String[] {
+			 "name", "name",
+			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getDataObjectBehavior_Behavior(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute"
+		   });
 	}
 
 } //FoxBPMConfigPackageImpl

@@ -87,6 +87,7 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 			case FoxBPMPackage.TASK_COMMAND: {
 				TaskCommand taskCommand = (TaskCommand)theEObject;
 				T result = caseTaskCommand(taskCommand);
+				if (result == null) result = caseBaseConfig(taskCommand);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -299,6 +300,31 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 			case FoxBPMPackage.FORM_PARAM: {
 				FormParam formParam = (FormParam)theEObject;
 				T result = caseFormParam(formParam);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.BASE_CONFIG: {
+				BaseConfig baseConfig = (BaseConfig)theEObject;
+				T result = caseBaseConfig(baseConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.PARAM: {
+				Param param = (Param)theEObject;
+				T result = caseParam(param);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.POTENTIAL_STARTER: {
+				PotentialStarter potentialStarter = (PotentialStarter)theEObject;
+				T result = casePotentialStarter(potentialStarter);
+				if (result == null) result = caseBaseConfig(potentialStarter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMPackage.POTENTIAL_OWNER: {
+				PotentialOwner potentialOwner = (PotentialOwner)theEObject;
+				T result = casePotentialOwner(potentialOwner);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -888,6 +914,66 @@ public class FoxBPMSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFormParam(FormParam object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Base Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Base Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBaseConfig(BaseConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Param</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParam(Param object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Potential Starter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Potential Starter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePotentialStarter(PotentialStarter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Potential Owner</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Potential Owner</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePotentialOwner(PotentialOwner object) {
 		return null;
 	}
 

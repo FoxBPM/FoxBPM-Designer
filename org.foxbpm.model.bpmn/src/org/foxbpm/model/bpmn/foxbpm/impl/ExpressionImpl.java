@@ -148,11 +148,11 @@ public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expr
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public void setValue(String newValue) {
-		 getMixed().clear();
-	     getMixed().add(XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_CDATA(), newValue);
+		getMixed().clear();
+        getMixed().add(XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_CDATA(), newValue);
 	}
 
 	/**

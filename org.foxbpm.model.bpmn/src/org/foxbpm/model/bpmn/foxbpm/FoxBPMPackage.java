@@ -513,13 +513,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__IS_CREATE_RECORD = 48;
 
 	/**
-	 * The feature id for the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * The feature id for the '<em><b>Claim Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT__IS_AUTO_CLAIM = 49;
+	int DOCUMENT_ROOT__CLAIM_TYPE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Task Description</b></em>' containment reference.
@@ -558,13 +558,31 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__CONVERG_TYPE = 53;
 
 	/**
+	 * The feature id for the '<em><b>Potential Starter</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__POTENTIAL_STARTER = 54;
+
+	/**
+	 * The feature id for the '<em><b>Potential Owner</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__POTENTIAL_OWNER = 55;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 54;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 56;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -695,6 +713,52 @@ public interface FoxBPMPackage extends EPackage {
 	int TASK_SUBJECT_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.BaseConfigImpl <em>Base Config</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.BaseConfigImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getBaseConfig()
+	 * @generated
+	 */
+	int BASE_CONFIG = 39;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG__PARAMS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG__DOCUMENTATION = 1;
+
+	/**
+	 * The number of structural features of the '<em>Base Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Base Config</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_CONFIG_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl <em>Task Command</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -705,13 +769,31 @@ public interface FoxBPMPackage extends EPackage {
 	int TASK_COMMAND = 3;
 
 	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND__DOCUMENTATION = BASE_CONFIG__DOCUMENTATION;
+
+	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__ID = 0;
+	int TASK_COMMAND__ID = BASE_CONFIG_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -720,7 +802,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__NAME = 1;
+	int TASK_COMMAND__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Command Type</b></em>' attribute.
@@ -729,7 +811,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__COMMAND_TYPE = 2;
+	int TASK_COMMAND__COMMAND_TYPE = BASE_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -738,7 +820,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__EXPRESSION = 3;
+	int TASK_COMMAND__EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Order Id</b></em>' attribute.
@@ -747,7 +829,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__ORDER_ID = 4;
+	int TASK_COMMAND__ORDER_ID = BASE_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Verification</b></em>' attribute.
@@ -756,7 +838,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__IS_VERIFICATION = 5;
+	int TASK_COMMAND__IS_VERIFICATION = BASE_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Is Save Data</b></em>' attribute.
@@ -765,7 +847,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__IS_SAVE_DATA = 6;
+	int TASK_COMMAND__IS_SAVE_DATA = BASE_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Is Simulation Run</b></em>' attribute.
@@ -774,7 +856,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__IS_SIMULATION_RUN = 7;
+	int TASK_COMMAND__IS_SIMULATION_RUN = BASE_CONFIG_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Expression</b></em>' containment reference.
@@ -783,7 +865,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND__PARAMETER_EXPRESSION = 8;
+	int TASK_COMMAND__PARAMETER_EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Task Command</em>' class.
@@ -792,7 +874,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_FEATURE_COUNT = 9;
+	int TASK_COMMAND_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Task Command</em>' class.
@@ -801,7 +883,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_OPERATION_COUNT = 0;
+	int TASK_COMMAND_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ResourceFilterImpl <em>Resource Filter</em>}' class.
@@ -941,13 +1023,13 @@ public interface FoxBPMPackage extends EPackage {
 	int DATA_VARIABLE__BIZ_TYPE = 6;
 
 	/**
-	 * The feature id for the '<em><b>File Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Field Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_VARIABLE__FILE_NAME = 7;
+	int DATA_VARIABLE__FIELD_NAME = 7;
 
 	/**
 	 * The number of structural features of the '<em>Data Variable</em>' class.
@@ -2711,6 +2793,180 @@ public interface FoxBPMPackage extends EPackage {
 	int FORM_PARAM_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ParamImpl <em>Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.ParamImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getParam()
+	 * @generated
+	 */
+	int PARAM = 40;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__EXPRESSION = 2;
+
+	/**
+	 * The number of structural features of the '<em>Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl <em>Potential Starter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialStarter()
+	 * @generated
+	 */
+	int POTENTIAL_STARTER = 41;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__PARAMS = BASE_CONFIG__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__DOCUMENTATION = BASE_CONFIG__DOCUMENTATION;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__EXPRESSION = BASE_CONFIG_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Resource Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__RESOURCE_TYPE = BASE_CONFIG_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>EReference0</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__EREFERENCE0 = BASE_CONFIG_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER__DESCRIPTION = BASE_CONFIG_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Potential Starter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Potential Starter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_STARTER_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl <em>Potential Owner</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl
+	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialOwner()
+	 * @generated
+	 */
+	int POTENTIAL_OWNER = 42;
+
+	/**
+	 * The feature id for the '<em><b>Connector Instance Elements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS = 0;
+
+	/**
+	 * The number of structural features of the '<em>Potential Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Potential Owner</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int POTENTIAL_OWNER_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2718,7 +2974,7 @@ public interface FoxBPMPackage extends EPackage {
 	 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getProcessValidationLevel()
 	 * @generated
 	 */
-	int PROCESS_VALIDATION_LEVEL = 39;
+	int PROCESS_VALIDATION_LEVEL = 43;
 
 
 	/**
@@ -3271,15 +3527,15 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDocumentRoot_IsCreateRecord();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim <em>Is Auto Claim</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType <em>Claim Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Auto Claim</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getIsAutoClaim()
+	 * @return the meta object for the attribute '<em>Claim Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getClaimType()
 	 * @see #getDocumentRoot()
 	 * @generated
 	 */
-	EAttribute getDocumentRoot_IsAutoClaim();
+	EAttribute getDocumentRoot_ClaimType();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTaskDescription <em>Task Description</em>}'.
@@ -3324,6 +3580,28 @@ public interface FoxBPMPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDocumentRoot_ConvergType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Potential Starter</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_PotentialStarter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner <em>Potential Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Potential Owner</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EReference getDocumentRoot_PotentialOwner();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
@@ -3673,15 +3951,15 @@ public interface FoxBPMPackage extends EPackage {
 	EAttribute getDataVariable_BizType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName <em>File Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName <em>Field Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>File Name</em>'.
-	 * @see org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName()
+	 * @return the meta object for the attribute '<em>Field Name</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName()
 	 * @see #getDataVariable()
 	 * @generated
 	 */
-	EAttribute getDataVariable_FileName();
+	EAttribute getDataVariable_FieldName();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Documentation <em>Documentation</em>}'.
@@ -4927,6 +5205,156 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getFormParam_Expression();
 
 	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.BaseConfig <em>Base Config</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Base Config</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.BaseConfig
+	 * @generated
+	 */
+	EClass getBaseConfig();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.BaseConfig#getParams <em>Params</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Params</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.BaseConfig#getParams()
+	 * @see #getBaseConfig()
+	 * @generated
+	 */
+	EReference getBaseConfig_Params();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.BaseConfig#getDocumentation <em>Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Documentation</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.BaseConfig#getDocumentation()
+	 * @see #getBaseConfig()
+	 * @generated
+	 */
+	EReference getBaseConfig_Documentation();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Param <em>Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Param</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Param
+	 * @generated
+	 */
+	EClass getParam();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.Param#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Param#getKey()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.Param#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Param#getName()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.Param#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Param#getExpression()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EReference getParam_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter <em>Potential Starter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Potential Starter</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter
+	 * @generated
+	 */
+	EClass getPotentialStarter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getExpression()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EReference getPotentialStarter_Expression();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getResourceType <em>Resource Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Resource Type</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getResourceType()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EAttribute getPotentialStarter_ResourceType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0 <em>EReference0</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>EReference0</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getEReference0()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EReference getPotentialStarter_EReference0();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialStarter#getDescription()
+	 * @see #getPotentialStarter()
+	 * @generated
+	 */
+	EAttribute getPotentialStarter_Description();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialOwner <em>Potential Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Potential Owner</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialOwner
+	 * @generated
+	 */
+	EClass getPotentialOwner();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.bpmn.foxbpm.PotentialOwner#getConnectorInstanceElements <em>Connector Instance Elements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Connector Instance Elements</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.PotentialOwner#getConnectorInstanceElements()
+	 * @see #getPotentialOwner()
+	 * @generated
+	 */
+	EReference getPotentialOwner_ConnectorInstanceElements();
+
+	/**
 	 * Returns the meta object for enum '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5362,12 +5790,12 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute DOCUMENT_ROOT__IS_CREATE_RECORD = eINSTANCE.getDocumentRoot_IsCreateRecord();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Auto Claim</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Claim Type</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOCUMENT_ROOT__IS_AUTO_CLAIM = eINSTANCE.getDocumentRoot_IsAutoClaim();
+		EAttribute DOCUMENT_ROOT__CLAIM_TYPE = eINSTANCE.getDocumentRoot_ClaimType();
 
 		/**
 		 * The meta object literal for the '<em><b>Task Description</b></em>' containment reference feature.
@@ -5400,6 +5828,22 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOCUMENT_ROOT__CONVERG_TYPE = eINSTANCE.getDocumentRoot_ConvergType();
+
+		/**
+		 * The meta object literal for the '<em><b>Potential Starter</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__POTENTIAL_STARTER = eINSTANCE.getDocumentRoot_PotentialStarter();
+
+		/**
+		 * The meta object literal for the '<em><b>Potential Owner</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DOCUMENT_ROOT__POTENTIAL_OWNER = eINSTANCE.getDocumentRoot_PotentialOwner();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.
@@ -5668,12 +6112,12 @@ public interface FoxBPMPackage extends EPackage {
 		EAttribute DATA_VARIABLE__BIZ_TYPE = eINSTANCE.getDataVariable_BizType();
 
 		/**
-		 * The meta object literal for the '<em><b>File Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Field Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DATA_VARIABLE__FILE_NAME = eINSTANCE.getDataVariable_FileName();
+		EAttribute DATA_VARIABLE__FIELD_NAME = eINSTANCE.getDataVariable_FieldName();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentationImpl <em>Documentation</em>}' class.
@@ -6668,6 +7112,126 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FORM_PARAM__EXPRESSION = eINSTANCE.getFormParam_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.BaseConfigImpl <em>Base Config</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.BaseConfigImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getBaseConfig()
+		 * @generated
+		 */
+		EClass BASE_CONFIG = eINSTANCE.getBaseConfig();
+
+		/**
+		 * The meta object literal for the '<em><b>Params</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASE_CONFIG__PARAMS = eINSTANCE.getBaseConfig_Params();
+
+		/**
+		 * The meta object literal for the '<em><b>Documentation</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASE_CONFIG__DOCUMENTATION = eINSTANCE.getBaseConfig_Documentation();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ParamImpl <em>Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.ParamImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getParam()
+		 * @generated
+		 */
+		EClass PARAM = eINSTANCE.getParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__KEY = eINSTANCE.getParam_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAM__EXPRESSION = eINSTANCE.getParam_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl <em>Potential Starter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialStarter()
+		 * @generated
+		 */
+		EClass POTENTIAL_STARTER = eINSTANCE.getPotentialStarter();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_STARTER__EXPRESSION = eINSTANCE.getPotentialStarter_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Resource Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POTENTIAL_STARTER__RESOURCE_TYPE = eINSTANCE.getPotentialStarter_ResourceType();
+
+		/**
+		 * The meta object literal for the '<em><b>EReference0</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_STARTER__EREFERENCE0 = eINSTANCE.getPotentialStarter_EReference0();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute POTENTIAL_STARTER__DESCRIPTION = eINSTANCE.getPotentialStarter_Description();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl <em>Potential Owner</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.PotentialOwnerImpl
+		 * @see org.foxbpm.model.bpmn.foxbpm.impl.FoxBPMPackageImpl#getPotentialOwner()
+		 * @generated
+		 */
+		EClass POTENTIAL_OWNER = eINSTANCE.getPotentialOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Connector Instance Elements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference POTENTIAL_OWNER__CONNECTOR_INSTANCE_ELEMENTS = eINSTANCE.getPotentialOwner_ConnectorInstanceElements();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.ProcessValidationLevel <em>Process Validation Level</em>}' enum.

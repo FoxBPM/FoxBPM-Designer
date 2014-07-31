@@ -25,6 +25,7 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getFilter <em>Filter</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getIsEnabled <em>Is Enabled</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -170,6 +171,26 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -342,6 +363,27 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION, oldDescription, description));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -359,6 +401,8 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return getIsEnabled();
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
 				return getType();
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -391,6 +435,9 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return;
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
 				setType((String)newValue);
+				return;
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -425,6 +472,9 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -451,6 +501,8 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return IS_ENABLED_EDEFAULT == null ? isEnabled != null : !IS_ENABLED_EDEFAULT.equals(isEnabled);
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -479,6 +531,8 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 		result.append(isEnabled);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

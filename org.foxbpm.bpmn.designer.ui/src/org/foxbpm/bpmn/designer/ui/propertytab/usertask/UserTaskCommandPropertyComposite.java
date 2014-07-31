@@ -23,12 +23,16 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.dialogs.FilteredTree;
@@ -50,6 +54,10 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 	private Button removeButton;
 	private Button upButton;
 	private Button downButton;
+	private Composite composite_1;
+	private Combo combo;
+	private UserTask userTask;
+	private String[] items;
 
 	public UserTaskCommandPropertyComposite(Composite parent, int style) {
 		super(parent, style);
@@ -57,7 +65,36 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		 treeViewer.setInput(getAdvanceTaskCommands());
+		userTask = (UserTask) eObject;
+		treeViewer.setInput(getAdvanceTaskCommands());
+		
+		if(userTask.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CLAIM_TYPE)!=null) {
+			String value = userTask.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CLAIM_TYPE).toString();
+			for (int i = 0; i < items.length; i++) {
+				if (value.equals(combo.getData(items[i]))) {
+					combo.select(i);
+					break;
+				}
+			}
+		}
+		
+		combo.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+					@Override
+					protected void doExecute() {
+						userTask.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__CLAIM_TYPE, combo.getData(combo.getText()));
+					}
+				});
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				
+			}
+		});
 	}
 
 	@Override
@@ -73,6 +110,30 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 		Composite composite = new Composite(detailComposite, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		
+		composite_1 = new Composite(composite, SWT.NONE);
+		GridLayout gl_composite_1 = new GridLayout(2, false);
+		gl_composite_1.verticalSpacing = 0;
+		gl_composite_1.marginWidth = 0;
+		gl_composite_1.marginHeight = 0;
+		composite_1.setLayout(gl_composite_1);
+		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		
+		Label label = new Label(composite_1, SWT.NONE);
+		label.setText("领取方式");
+		label.setLocation(0, 0);
+		
+		combo = new Combo(composite_1, SWT.READ_ONLY);
+		items = new String[] {"默认领取", "自动领取", "手动领取"};
+		combo.setItems(items);
+		combo.setData("默认领取", "defaultClaim");
+		combo.setData("自动领取", "autoClaim");
+		combo.setData("手动领取", "manualClaim");
+		
+		GridData gd_combo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_combo.widthHint = 100;
+		combo.setLayoutData(gd_combo);
+		combo.setSize(150, 25);
 		FilteredTree filteredTree = new FilteredTree(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
 		treeViewer = filteredTree.getViewer();
 		tree = treeViewer.getTree();

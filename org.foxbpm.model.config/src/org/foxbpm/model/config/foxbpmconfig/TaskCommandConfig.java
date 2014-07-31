@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getTaskCommandDefinition <em>Task Command Definition</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getIsAutoClaim <em>Is Auto Claim</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,4 +44,30 @@ public interface TaskCommandConfig extends BaseConfig {
 	 * @generated
 	 */
 	EList<TaskCommandDefinition> getTaskCommandDefinition();
+
+	/**
+	 * Returns the value of the '<em><b>Is Auto Claim</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Auto Claim</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Auto Claim</em>' attribute.
+	 * @see #setIsAutoClaim(String)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandConfig_IsAutoClaim()
+	 * @model extendedMetaData="kind='attribute'"
+	 * @generated
+	 */
+	String getIsAutoClaim();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandConfig#getIsAutoClaim <em>Is Auto Claim</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Auto Claim</em>' attribute.
+	 * @see #getIsAutoClaim()
+	 * @generated
+	 */
+	void setIsAutoClaim(String value);
 } // TaskCommandConfig

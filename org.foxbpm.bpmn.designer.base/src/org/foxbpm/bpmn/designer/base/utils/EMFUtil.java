@@ -13,11 +13,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connectormenu.Menu;
+import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.style.FoxBPMStyleConfig;
 
 public class EMFUtil {
-
+	
 	/**
 	 * 根据需要加载出所有的对象
 	 * 
@@ -39,7 +40,7 @@ public class EMFUtil {
 		}
 		return l;
 	}
-
+	
 	/**
 	 * 读EMF文件
 	 * 
@@ -49,7 +50,7 @@ public class EMFUtil {
 	public static Resource readEMFFile(String path) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-
+		
 		Resource resource = resourceSet.getResource(URI.createFileURI(path), true);
 		try {
 			resource.load(null);
@@ -58,7 +59,7 @@ public class EMFUtil {
 		}
 		return resource;
 	}
-
+	
 	/**
 	 * 加载所有的数据变量
 	 * 
@@ -99,61 +100,49 @@ public class EMFUtil {
 	//
 	// return dataVariableConfig;
 	// }
-
+	
 	/**
-	 * 加载所有的fixflowconfig配置信息
+	 * 加载所有的FoxBPMConfig配置信息
 	 * 
 	 * @return
 	 */
-	// public static FixFlowConfig getFixFlowConfig(String filePath) {
-	//
-	// FixFlowConfig fixFlowConfig=null;
-	//
-	// ResourceSet resourceSet = new ResourceSetImpl();
-	//
-	// resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-	// .put("xml", new XMIResourceFactoryImpl());
-	//
-	//
-	//
-	// Resource resource = resourceSet.getResource(URI.createFileURI(filePath),
-	// true);
-	//
-	// // register package in local resource registry
-	// resourceSet.getPackageRegistry().put(
-	// CoreconfigPackage.eINSTANCE.getNsURI(),
-	// CoreconfigPackage.eINSTANCE);
-	// // load resource
-	// try {
-	// resource.load(null);
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	//
-	// fixFlowConfig = (FixFlowConfig) resource.getContents().get(0);
-	//
-	// return fixFlowConfig;
-	//
-	// }
-
+	public static FoxBPMConfig getFoxBPMConfig(String filePath) {
+		
+		FoxBPMConfig foxBPMConfig = null;
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
+		Resource resource = resourceSet.getResource(URI.createFileURI(filePath), true);
+		// register package in local resource registry
+		resourceSet.getPackageRegistry().put(FoxBPMConfigPackage.eINSTANCE.getNsURI(), FoxBPMConfigPackage.eINSTANCE);
+		// load resource
+		try {
+			resource.load(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		foxBPMConfig = (FoxBPMConfig) resource.getContents().get(0);
+		return foxBPMConfig;
+	}
+	
 	/**
 	 * 加载所有的FoxBPMStyleConfig配置信息
 	 * 
 	 * @return
 	 */
 	public static FoxBPMStyleConfig getStyleConfig(String filePath) {
-
+		
 		FoxBPMStyleConfig fixFlowStyleConfig = null;
-
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
-
+		
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-
+		
 		Resource resource = resourceSet.getResource(URI.createFileURI(filePath), true);
-
+		
 		// register package in local resource registry
 		resourceSet.getPackageRegistry().put(FoxBPMConfigPackage.eINSTANCE.getNsURI(), FoxBPMConfigPackage.eINSTANCE);
-
+		
 		// load resource
 		try {
 			resource.load(null);
@@ -161,28 +150,28 @@ public class EMFUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		fixFlowStyleConfig = (FoxBPMStyleConfig) resource.getContents().get(0);
-
+		
 		return fixFlowStyleConfig;
-
+		
 	}
-
+	
 	/**
 	 * 加载所有的fixflowconfig配置信息
 	 * 
 	 * @return
 	 */
 	public static Menu getConnectorMenuConfig(String filePath) {
-
+		
 		Menu root = null;
-
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
-
+		
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-
+		
 		Resource resource = resourceSet.getResource(URI.createFileURI(filePath), true);
-
+		
 		// register package in local resource registry
 		resourceSet.getPackageRegistry().put(FoxBPMConfigPackage.eINSTANCE.getNsURI(), FoxBPMConfigPackage.eINSTANCE);
 		// load resource
@@ -191,12 +180,12 @@ public class EMFUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		root = (Menu) resource.getContents().get(0);
 		return root;
-
+		
 	}
-
+	
 	/**
 	 * 加载所有的fixflowconfig配置信息
 	 * 
@@ -231,22 +220,22 @@ public class EMFUtil {
 	// return connector;
 	//
 	// }
-
+	
 	/**
 	 * 加载所有的FlowConnector信息
 	 * 
 	 * @return
 	 */
 	public static ConnectorDefinition getFlowConnectorConfig(String filePath) {
-
+		
 		ConnectorDefinition connector = null;
-
+		
 		ResourceSet resourceSet = new ResourceSetImpl();
-
+		
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
-
+		
 		Resource resource = resourceSet.getResource(URI.createFileURI(filePath), true);
-
+		
 		// register package in local resource registry
 		resourceSet.getPackageRegistry().put(FoxBPMConfigPackage.eINSTANCE.getNsURI(), FoxBPMConfigPackage.eINSTANCE);
 		// load resource
@@ -255,12 +244,12 @@ public class EMFUtil {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 		connector = (ConnectorDefinition) resource.getContents().get(0);
 		return connector;
-
+		
 	}
-
+	
 	// public static SqlMappingConfig getSqlMappingConfig(String
 	// sqlMappingConfigXMLPath) {
 	//
@@ -290,5 +279,5 @@ public class EMFUtil {
 	// return sqlMappingConfig;
 	//
 	// }
-
+	
 }

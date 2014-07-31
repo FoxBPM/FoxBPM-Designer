@@ -167,6 +167,20 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMConfigPackage.BIZ_DATA_OBJECT_CONFIG: {
+				BizDataObjectConfig bizDataObjectConfig = (BizDataObjectConfig)theEObject;
+				T result = caseBizDataObjectConfig(bizDataObjectConfig);
+				if (result == null) result = caseBaseConfig(bizDataObjectConfig);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case FoxBPMConfigPackage.DATA_OBJECT_BEHAVIOR: {
+				DataObjectBehavior dataObjectBehavior = (DataObjectBehavior)theEObject;
+				T result = caseDataObjectBehavior(dataObjectBehavior);
+				if (result == null) result = caseBaseConfig(dataObjectBehavior);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -393,6 +407,36 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEventListener(EventListener object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Biz Data Object Config</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Biz Data Object Config</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBizDataObjectConfig(BizDataObjectConfig object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Object Behavior</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Object Behavior</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataObjectBehavior(DataObjectBehavior object) {
 		return null;
 	}
 

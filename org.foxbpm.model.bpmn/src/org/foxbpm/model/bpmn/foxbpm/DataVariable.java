@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getBizType <em>Biz Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName <em>File Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName <em>Field Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -211,30 +211,30 @@ public interface DataVariable extends EObject {
 	void setBizType(String value);
 
 	/**
-	 * Returns the value of the '<em><b>File Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Field Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>File Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Field Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>File Name</em>' attribute.
-	 * @see #setFileName(String)
-	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDataVariable_FileName()
+	 * @return the value of the '<em>Field Name</em>' attribute.
+	 * @see #setFieldName(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDataVariable_FieldName()
 	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
 	 *        extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
-	String getFileName();
+	String getFieldName();
 
 	/**
-	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFileName <em>File Name</em>}' attribute.
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DataVariable#getFieldName <em>Field Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>File Name</em>' attribute.
-	 * @see #getFileName()
+	 * @param value the new value of the '<em>Field Name</em>' attribute.
+	 * @see #getFieldName()
 	 * @generated
 	 */
-	void setFileName(String value);
+	void setFieldName(String value);
 
 } // DataVariable
