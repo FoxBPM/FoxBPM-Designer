@@ -9,14 +9,11 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
-import org.codehaus.jackson.node.TextNode;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -28,7 +25,7 @@ public class DataObjCache {
 		List<DataObjImport> cacheDataObjImports = new ArrayList<DataObjImport>();
 		dataObjImports.clear();
 		
-		String path = FoxBPMDesignerUtil.getCachePath();
+		String path = FoxBPMDesignerUtil.getCachePath() + "bizvars.xml";
 		File cacheFile = new File(path);
 		if(cacheFile.exists()) {
 			try {
@@ -39,9 +36,10 @@ public class DataObjCache {
 			}
 		}else {
 			try {
-				ClientResource client = null;
-				client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "bizDataObjects/dataBaseMode/foxbpmDataSource");
-				client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+				ClientResource client = FoxBPMDesignerUtil.getClientByUrl("bizDataObjects/dataBaseMode/foxbpmDataSource");
+				if(client==null) {
+					return dataObjImports;
+				}
 				Representation result = client.get();
 				
 				String resultString = result.getText();

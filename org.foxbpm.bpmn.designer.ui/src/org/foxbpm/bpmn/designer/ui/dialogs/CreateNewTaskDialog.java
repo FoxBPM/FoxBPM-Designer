@@ -278,9 +278,9 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			}
 		}
 
-		taskCommand.setIsVerification(isVerify.getSelection() ? "true" : "false");
-		taskCommand.setIsSaveData(isSaveData.getSelection() ? "true" : "false");
-		taskCommand.setIsSimulationRun(isSimulation.getSelection() ? "true" : "false");
+//		taskCommand.setIsVerification(isVerify.getSelection() ? "true" : "false");
+//		taskCommand.setIsSaveData(isSaveData.getSelection() ? "true" : "false");
+//		taskCommand.setIsSimulationRun(isSimulation.getSelection() ? "true" : "false");
 
 		setTaskCommand(taskCommand);
 
@@ -318,15 +318,15 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 				expressionComboViewerparam.getTextControl().setText(taskCommand.getParameterExpression().getName());
 			}
 
-			if (taskCommand.getIsVerification() != null || taskCommand.getIsSaveData() != null || taskCommand.getIsSimulationRun() != null) {
-				isVerify.setSelection(taskCommand.getIsVerification().equals("true") ? true : false);
-				isSaveData.setSelection(taskCommand.getIsSaveData().equals("true") ? true : false);
-				isSimulation.setSelection(taskCommand.getIsSimulationRun().equals("true") ? true : false);
-			} else {
-				isVerify.setSelection(true);
-				isSaveData.setSelection(true);
-				isSimulation.setSelection(false);
-			}
+//			if (taskCommand.getIsVerification() != null || taskCommand.getIsSaveData() != null || taskCommand.getIsSimulationRun() != null) {
+//				isVerify.setSelection(taskCommand.getIsVerification().equals("true") ? true : false);
+//				isSaveData.setSelection(taskCommand.getIsSaveData().equals("true") ? true : false);
+//				isSimulation.setSelection(taskCommand.getIsSimulationRun().equals("true") ? true : false);
+//			} else {
+//				isVerify.setSelection(true);
+//				isSaveData.setSelection(true);
+//				isSimulation.setSelection(false);
+//			}
 		}
 
 		expressionComboViewer.addExpressionChangedListeners(new IExpressionChangedListener() {

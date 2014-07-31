@@ -86,6 +86,7 @@ import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
@@ -113,6 +114,7 @@ public class FoxBPMExpDialog extends Dialog {
 	private Map<String, FoxBPMDataVariable> typeToDataVariableMap;//维护dataVariableType到FoxBPMDataVariable的映射
 	private static final Object[] EMPTY_ARRAY=new Object[0];
 	private static final String EMPTY_STRING="";
+	private PotentialStarter potentialStarter;
 
 	/**
 	 * Create the dialog.
@@ -141,6 +143,12 @@ public class FoxBPMExpDialog extends Dialog {
 	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression, Text text) {
 		this(parentShell, expression, text);
 		this.formParam = formParam;
+		this.editingDomain = editingDomain;
+	}
+	
+	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, PotentialStarter potentialStarter, Shell parentShell, Expression expression, Text text) {
+		this(parentShell, expression, text);
+		this.potentialStarter = potentialStarter;
 		this.editingDomain = editingDomain;
 	}
 
@@ -507,7 +515,10 @@ public class FoxBPMExpDialog extends Dialog {
 			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 				@Override
 				protected void doExecute() {
-					formParam.setExpression(expression);
+					if(formParam!=null)
+						formParam.setExpression(expression);
+					if(potentialStarter!=null)
+						potentialStarter.setExpression(expression);
 				}
 			});
 		}

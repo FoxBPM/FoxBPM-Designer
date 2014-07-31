@@ -58,7 +58,6 @@ import org.foxbpm.model.bpmn.foxbpm.DataVariableMapping;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.SubProcessToDataSourceMapping;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
@@ -577,8 +576,10 @@ public class CallActivityDataMappingComposite extends AbstractFoxBPMComposite {
 
 		if (processKey != null && !processKey.equals("")) {
 
-			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "variable-definition/"+processKey+"/"+processVersion+"/variables");
-			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("variable-definition/"+processKey+"/"+processVersion+"/variables");
+			if(client==null) {
+				return dataVariables;
+			}
 			Representation result = client.get();
 			try {
 				ObjectMapper objectMapper = new ObjectMapper();

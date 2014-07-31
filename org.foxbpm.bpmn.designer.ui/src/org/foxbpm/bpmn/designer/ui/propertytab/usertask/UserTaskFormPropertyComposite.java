@@ -96,7 +96,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		Control control_1 = browseFormViewer.getControl();
 		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 
-		tableViewer = new TableViewer(detailComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewer = new TableViewer(detailComposite, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table = tableViewer.getTable();
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
@@ -151,7 +151,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 			public void handleEvent(Event event) {
 				FormParam formParam = FoxBPMFactory.eINSTANCE.createFormParam();
 				formParam.setParamKey("参数键" + ((List<FormParam>) tableViewer.getInput()).size());
-				formParam.setParamType("参数类型" + ((List<FormParam>) tableViewer.getInput()).size());
+				formParam.setParamType("java.lang.String");
 				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
 				expression.setName("表达式");
 				expression.setValue("");
@@ -401,13 +401,11 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 							formParam.setParamKey((String) value);
 						}
 						if (property.equals("PARAMTYPE")) {
-							DataTypeDef dataTypeDef = null;
-							if(value instanceof DataTypeDef) {
-								dataTypeDef = (DataTypeDef) value;
-								formParam.setParamType(dataTypeDef.getTypeValue());
-								return;
+							if(value==null) {
+								formParam.setParamType(FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getTypeValue());
+							}else {
+								formParam.setParamType(((DataTypeDef)value).getTypeValue());
 							}
-							formParam.setParamType((String) value);
 						}
 						if (property.equals("PARAMEMP")) {
 //							formParam.setExpression(((ExpDialogCellEditor) cellEditor[2]).getExpression());
@@ -424,7 +422,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 					return formParam.getParamKey();
 				}
 				if (property.equals("PARAMTYPE")) {
-					return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType());
+					return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getName();
 				}
 				if (property.equals("PARAMEMP")) {
 					((ExpDialogCellEditor) cellEditor[2]).setExpression(formParam.getExpression());
@@ -465,7 +463,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 			case 0:
 				return formParam.getParamKey();
 			case 1:
-				return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType());
+				return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getName();
 			case 2:
 				return formParam.getExpression().getName();
 			}
@@ -473,14 +471,6 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		}
 	}
 	
-	private class ComboViewerLabelProvider extends LabelProvider implements IViewerLabelProvider {
-
-		@Override
-		public void updateLabel(ViewerLabel label, Object element) {
-			
-		}
-	}
-
 	private void addFormParam(final FormParam formParam) {
 		TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
 		editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
