@@ -136,6 +136,10 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 				return createDataObjectBehaviorAdapter();
 			}
 			@Override
+			public Adapter caseCommandParam(CommandParam object) {
+				return createCommandParamAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -390,6 +394,20 @@ public class FoxBPMConfigAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDataObjectBehaviorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.foxbpmconfig.CommandParam <em>Command Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.foxbpmconfig.CommandParam
+	 * @generated
+	 */
+	public Adapter createCommandParamAdapter() {
 		return null;
 	}
 

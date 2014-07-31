@@ -181,6 +181,13 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case FoxBPMConfigPackage.COMMAND_PARAM: {
+				CommandParam commandParam = (CommandParam)theEObject;
+				T result = caseCommandParam(commandParam);
+				if (result == null) result = caseParam(commandParam);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -437,6 +444,21 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDataObjectBehavior(DataObjectBehavior object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Command Param</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Command Param</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCommandParam(CommandParam object) {
 		return null;
 	}
 

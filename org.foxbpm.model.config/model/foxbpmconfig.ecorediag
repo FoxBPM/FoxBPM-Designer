@@ -223,6 +223,10 @@
         <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//Param/value"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_8qH-IeF2EeOIZ4N5DWtYjw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_pyU9wBhVEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//Param/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_pyU9wRhVEeSjbMvobVYXIg"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_z8eRguF2EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_z8eRg-F2EeOIZ4N5DWtYjw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_z8eRhOF2EeOIZ4N5DWtYjw"/>
@@ -234,7 +238,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_z8dqceF2EeOIZ4N5DWtYjw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//Param"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z8dqcuF2EeOIZ4N5DWtYjw" x="12" y="96"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z8dqcuF2EeOIZ4N5DWtYjw" x="-128" y="80"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_BiCIQOF3EeOIZ4N5DWtYjw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_BiCIQ-F3EeOIZ4N5DWtYjw" type="4001"/>
@@ -250,7 +254,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_BiCIQeF3EeOIZ4N5DWtYjw" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//BaseConfig"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiCIQuF3EeOIZ4N5DWtYjw" x="40" y="-32"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BiCIQuF3EeOIZ4N5DWtYjw" x="-144" y="-24"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_PwO24OF4EeOIZ4N5DWtYjw" type="1001">
     <children xmi:type="notation:Node" xmi:id="_PwO24-F4EeOIZ4N5DWtYjw" type="4001"/>
@@ -431,6 +435,30 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_NAZQoRMJEeS-8pH5UQ_7ag" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//DataObjectBehavior"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NAZQohMJEeS-8pH5UQ_7ag" x="728" y="152"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_8YLwgBhTEeSjbMvobVYXIg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_8YM-oBhTEeSjbMvobVYXIg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_8YM-oRhTEeSjbMvobVYXIg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_AEv9UBheEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//CommandParam/dataType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AEv9URheEeSjbMvobVYXIg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6tpVwBhdEeSjbMvobVYXIg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="foxbpmconfig.ecore#//CommandParam/bizType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6tpVwRhdEeSjbMvobVYXIg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_8YM-ohhTEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_8YM-oxhTEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_8YM-pBhTEeSjbMvobVYXIg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_8YNlsBhTEeSjbMvobVYXIg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_8YNlsRhTEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_8YNlshhTEeSjbMvobVYXIg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_8YNlsxhTEeSjbMvobVYXIg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_8YLwgRhTEeSjbMvobVYXIg" fontColor="4210752" fontName=".Helvetica Neue DeskInterface" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="foxbpmconfig.ecore#//CommandParam"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8YLwghhTEeSjbMvobVYXIg" x="32" y="88"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_Jh8sAcCEEeOH6bgf6xYTrA"/>
   <element xmi:type="ecore:EPackage" href="foxbpmconfig.ecore#/"/>
