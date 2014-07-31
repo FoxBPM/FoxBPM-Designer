@@ -137,7 +137,6 @@ public class FoxBPMConfigSwitch<T> extends Switch<T> {
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION: {
 				TaskCommandDefinition taskCommandDefinition = (TaskCommandDefinition)theEObject;
 				T result = caseTaskCommandDefinition(taskCommandDefinition);
-				if (result == null) result = caseBaseConfig(taskCommandDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

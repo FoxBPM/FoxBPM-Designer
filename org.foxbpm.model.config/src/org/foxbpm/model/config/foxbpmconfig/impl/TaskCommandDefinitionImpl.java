@@ -4,10 +4,14 @@ package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.foxbpm.model.config.foxbpmconfig.CommandParam;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
@@ -26,12 +30,13 @@ import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getIsEnabled <em>Is Enabled</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.TaskCommandDefinitionImpl#getCommandParam <em>Command Param</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCommandDefinition {
+public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container implements TaskCommandDefinition {
 	/**
 	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -191,6 +196,16 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 * @ordered
 	 */
 	protected String description = DESCRIPTION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getCommandParam() <em>Command Param</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCommandParam()
+	 * @generated
+	 * @ordered
+	 */
+	protected CommandParam commandParam;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -384,6 +399,63 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CommandParam getCommandParam() {
+		return commandParam;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCommandParam(CommandParam newCommandParam, NotificationChain msgs) {
+		CommandParam oldCommandParam = commandParam;
+		commandParam = newCommandParam;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, oldCommandParam, newCommandParam);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCommandParam(CommandParam newCommandParam) {
+		if (newCommandParam != commandParam) {
+			NotificationChain msgs = null;
+			if (commandParam != null)
+				msgs = ((InternalEObject)commandParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, null, msgs);
+			if (newCommandParam != null)
+				msgs = ((InternalEObject)newCommandParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, null, msgs);
+			msgs = basicSetCommandParam(newCommandParam, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, newCommandParam, newCommandParam));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
+				return basicSetCommandParam(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -403,6 +475,8 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return getType();
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
 				return getDescription();
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
+				return getCommandParam();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -438,6 +512,9 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return;
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
 				setDescription((String)newValue);
+				return;
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
+				setCommandParam((CommandParam)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -475,6 +552,9 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
+				setCommandParam((CommandParam)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -503,6 +583,8 @@ public class TaskCommandDefinitionImpl extends BaseConfigImpl implements TaskCom
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
+			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
+				return commandParam != null;
 		}
 		return super.eIsSet(featureID);
 	}

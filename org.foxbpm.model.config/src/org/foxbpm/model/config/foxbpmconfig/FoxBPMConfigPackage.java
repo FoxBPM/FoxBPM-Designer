@@ -757,22 +757,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_DEFINITION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_COMMAND_DEFINITION__PARAMS = BASE_CONFIG__PARAMS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__ID = BASE_CONFIG_FEATURE_COUNT + 0;
+	int TASK_COMMAND_DEFINITION__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -781,7 +772,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
+	int TASK_COMMAND_DEFINITION__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Command</b></em>' attribute.
@@ -790,7 +781,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__COMMAND = BASE_CONFIG_FEATURE_COUNT + 2;
+	int TASK_COMMAND_DEFINITION__COMMAND = 2;
 
 	/**
 	 * The feature id for the '<em><b>Cmd</b></em>' attribute.
@@ -799,7 +790,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__CMD = BASE_CONFIG_FEATURE_COUNT + 3;
+	int TASK_COMMAND_DEFINITION__CMD = 3;
 
 	/**
 	 * The feature id for the '<em><b>Filter</b></em>' attribute.
@@ -808,7 +799,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__FILTER = BASE_CONFIG_FEATURE_COUNT + 4;
+	int TASK_COMMAND_DEFINITION__FILTER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Enabled</b></em>' attribute.
@@ -817,7 +808,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__IS_ENABLED = BASE_CONFIG_FEATURE_COUNT + 5;
+	int TASK_COMMAND_DEFINITION__IS_ENABLED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -826,7 +817,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
+	int TASK_COMMAND_DEFINITION__TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -835,7 +826,16 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__DESCRIPTION = BASE_CONFIG_FEATURE_COUNT + 7;
+	int TASK_COMMAND_DEFINITION__DESCRIPTION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Command Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__COMMAND_PARAM = 8;
 
 	/**
 	 * The number of structural features of the '<em>Task Command Definition</em>' class.
@@ -844,7 +844,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 8;
+	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Task Command Definition</em>' class.
@@ -853,7 +853,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
@@ -1864,6 +1864,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getTaskCommandDefinition_Description();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Command Param</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EReference getTaskCommandDefinition_CommandParam();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig <em>Script Language Config</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2579,6 +2590,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TASK_COMMAND_DEFINITION__DESCRIPTION = eINSTANCE.getTaskCommandDefinition_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Command Param</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_COMMAND_DEFINITION__COMMAND_PARAM = eINSTANCE.getTaskCommandDefinition_CommandParam();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
