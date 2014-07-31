@@ -290,22 +290,7 @@ public class RuntimeConnectorUtil {
 					}
 				});
 			}
-			// 同步数据
-			Display.getDefault().syncExec(new Runnable() {
-				@Override
-				public void run() {
-					try {
-						// 组织数据
-						SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
-						ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
-						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
-						Representation result = client.get();
-						FileUtil.writeObject(result.getText(), FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+
 			if (new File(servicePath).exists()) {
 				Display.getDefault().syncExec(new Runnable() {
 
@@ -326,6 +311,22 @@ public class RuntimeConnectorUtil {
 							isOk = true;
 						} else {
 							return;
+						}
+					}
+				});
+				// 同步数据
+				Display.getDefault().syncExec(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							// 组织数据
+							SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
+							ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
+							client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+							Representation result = client.get();
+							FileUtil.writeObject(result.getText(), FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					}
 				});
