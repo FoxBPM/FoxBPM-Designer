@@ -31,7 +31,7 @@ public class RuntimeConnectorUtil {
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
 
 	public static HashMap<String, Object> allFlowConnectors = null;
-	
+
 	private static boolean isOk = false;
 
 	/**
@@ -114,7 +114,8 @@ public class RuntimeConnectorUtil {
 			for (MenuConnector connector : node.getMenuConnector()) {
 				connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
 				// connector的具体路径
-				String connectorPath = xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().lastIndexOf(File.separator)) + File.separator + connector.getId() + File.separator;
+				String connectorPath = xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().lastIndexOf(File.separator))
+						+ File.separator + connector.getId() + File.separator;
 				HashMap<String, Object> map = new HashMap<String, Object>();
 				// 对象
 				map.put("object", connector);
@@ -136,7 +137,8 @@ public class RuntimeConnectorUtil {
 	 */
 	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId)).get("path") + FLOWCONNECTOR);
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId))
+					.get("path") + FLOWCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -154,7 +156,8 @@ public class RuntimeConnectorUtil {
 	 */
 	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId)).get("path") + ACTORCONNECTOR);
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId))
+					.get("path") + ACTORCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
@@ -189,7 +192,8 @@ public class RuntimeConnectorUtil {
 					for (Node node : menu.getNode()) {
 						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
 						for (MenuConnector connector : node.getMenuConnector()) {
-							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
+							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
+									+ connector.getIco());
 						}
 						nodes.add(node);
 					}
@@ -204,7 +208,8 @@ public class RuntimeConnectorUtil {
 					for (Node node : menu.getNode()) {
 						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
 						for (MenuConnector connector : node.getMenuConnector()) {
-							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
+							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
+									+ connector.getIco());
 						}
 						nodes.add(node);
 					}
@@ -260,9 +265,9 @@ public class RuntimeConnectorUtil {
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
 		FileOutputStream fileOutputStream = null;
-		
+
 		isOk = false;
-		
+
 		try {
 			final File file = File.createTempFile(System.currentTimeMillis() + "flowres", ".zip");
 			if (file.exists()) {
@@ -291,7 +296,8 @@ public class RuntimeConnectorUtil {
 
 					@Override
 					public void run() {
-						boolean b = MessageDialog.openConfirm(null, "提示", "即将清空\n" + FoxBPMDesignerUtil.getServicePath() + "\n目录下的所有文件，是否确定该操作？");
+						boolean b = MessageDialog.openConfirm(null, "提示", "即将清空\n" + FoxBPMDesignerUtil.getServicePath()
+								+ "\n目录下的所有文件，是否确定该操作？");
 						if (b) {
 							// 强制删除服务目录下文件
 							for (File tempFile : new File(FoxBPMDesignerUtil.getServicePath()).listFiles()) {
@@ -305,6 +311,26 @@ public class RuntimeConnectorUtil {
 							isOk = true;
 						} else {
 							return;
+						}
+					}
+				});
+				// 同步数据
+				Display.getDefault().syncExec(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							// 组织数据
+							SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
+							ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
+							client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+							Representation result = client.get();
+							File file = new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+							if (!file.exists()) {
+								file.mkdirs();
+							}
+							FileUtil.writeObject(result.getText(), FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+						} catch (Exception e) {
+							e.printStackTrace();
 						}
 					}
 				});

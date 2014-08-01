@@ -731,6 +731,15 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getTaskCommandDefinition_CommandParam() {
+		return (EReference)taskCommandDefinitionEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getScriptLanguageConfig() {
 		return scriptLanguageConfigEClass;
 	}
@@ -1009,6 +1018,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__IS_ENABLED);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__TYPE);
 		createEAttribute(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__DESCRIPTION);
+		createEReference(taskCommandDefinitionEClass, TASK_COMMAND_DEFINITION__COMMAND_PARAM);
 
 		scriptLanguageConfigEClass = createEClass(SCRIPT_LANGUAGE_CONFIG);
 		createEReference(scriptLanguageConfigEClass, SCRIPT_LANGUAGE_CONFIG__SCRIPT_LANGUAGE);
@@ -1075,7 +1085,6 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		resourcePathEClass.getESuperTypes().add(this.getBaseConfig());
 		mailInfoEClass.getESuperTypes().add(this.getBaseConfig());
 		taskCommandConfigEClass.getESuperTypes().add(this.getBaseConfig());
-		taskCommandDefinitionEClass.getESuperTypes().add(this.getBaseConfig());
 		eventListenerConfigEClass.getESuperTypes().add(this.getBaseConfig());
 		eventListenerEClass.getESuperTypes().add(this.getBaseConfig());
 		bizDataObjectConfigEClass.getESuperTypes().add(this.getBaseConfig());
@@ -1149,6 +1158,7 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		initEAttribute(getTaskCommandDefinition_IsEnabled(), ecorePackage.getEString(), "isEnabled", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommandDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTaskCommandDefinition_Description(), ecorePackage.getEString(), "description", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTaskCommandDefinition_CommandParam(), this.getCommandParam(), null, "commandParam", null, 0, 1, TaskCommandDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scriptLanguageConfigEClass, ScriptLanguageConfig.class, "ScriptLanguageConfig", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScriptLanguageConfig_ScriptLanguage(), this.getScriptLanguage(), null, "scriptLanguage", null, 0, -1, ScriptLanguageConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1484,6 +1494,12 @@ public class FoxBPMConfigPackageImpl extends EPackageImpl implements FoxBPMConfi
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getTaskCommandDefinition_CommandParam(), 
+		   source, 
+		   new String[] {
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (scriptLanguageConfigEClass, 
