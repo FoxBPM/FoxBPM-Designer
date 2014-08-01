@@ -21,15 +21,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
-import org.eclipse.bpmn2.modeler.core.utils.ModelUtil.Bpmn2DiagramType;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
@@ -46,8 +43,6 @@ import org.foxbpm.bpmn.designer.base.utils.WizardUtil;
  * 
  */
 public class SelectProcessTemplateWizardPage extends WizardPage {
-	private Bpmn2DiagramType diagramType = Bpmn2DiagramType.NONE;
-	private final ISelection selection;
 	private String fixDiagramType;
 	private Map<String, Object> map;
 	private Text descText;
@@ -58,11 +53,10 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 	/**
 	 * Create the wizard.
 	 */
-	public SelectProcessTemplateWizardPage(ISelection selection) {
+	public SelectProcessTemplateWizardPage() {
 		super("wizardPage");
 		setTitle("创建向导");
 		setDescription("请选择一个需要创建的流程定义模板");
-		this.selection = selection;
 	}
 	
 	@Override
@@ -70,10 +64,6 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		Composite container = new Composite(parent, SWT.NULL);
 		GridLayout layout = new GridLayout(2, false);
 		container.setLayout(layout);
-		
-		Point sz = parent.getSize();
-		int labelWidth = (int) (0.5 * sz.x);
-		GridData data;
 		
 		setControl(container);
 		
@@ -99,7 +89,6 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		descText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		
 		chooseModelCombo.addSelectionListener(new SelectionListener() {
-			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				changeSelection();
@@ -132,6 +121,7 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		this.fixDiagramType = fixDiagramType;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void changeSelection() {
 		setFixDiagramType(chooseModelCombo.getText());
 		String modelId = (String) chooseModelCombo.getData(chooseModelCombo.getText());
@@ -155,7 +145,7 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		
 		descText.setText(modelDesc);
 		
-		modelPath = WizardUtil.getModelPath() + modelId + "/" + modelFile;
+		modelPath = new StringBuffer(200).append(WizardUtil.getModelPath()).append(modelId).append("/").append(modelFile).toString();
 		setModelPath(modelPath);
 	}
 	
