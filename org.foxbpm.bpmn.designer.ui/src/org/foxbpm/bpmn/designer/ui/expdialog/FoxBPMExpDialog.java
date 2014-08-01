@@ -236,10 +236,45 @@ public class FoxBPMExpDialog extends Dialog {
 		orgTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				
+
 			}
 		});
-		
+
+		tableViewer.addDoubleClickListener(new IDoubleClickListener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				ISelection selection = event.getSelection();
+				if (selection.isEmpty()) {
+					return;
+				}
+				HashMap<String, String> data = (HashMap<String, String>) ((IStructuredSelection) selection).getFirstElement();
+				@SuppressWarnings("restriction")
+				final SourceViewer srcViewer = (SourceViewer) editor.getViewer();
+				IDocument document = srcViewer.getDocument();
+				int offset = srcViewer.getTextWidget().getCaretOffset();
+				String before = "";
+				try {
+					before = document.get(0, offset);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+				// 获取编号,并插入
+				String Id = new StringBuffer("\"").append(StringUtil.getString(data.get("1"))).append("\"").toString();
+				if (offset == document.get().length()) {
+					document.set(before + Id);
+				} else {
+					String after = document.get().substring(offset, document.get().length());
+					document.set(before + Id + after);
+				}
+				// 更新文档数据长度
+				srcViewer.getTextWidget().setCaretOffset(offset + Id.length());
+				// 更新焦点
+				srcViewer.getTextWidget().setFocus();
+			}
+		});
+
 		tableViewer.setContentProvider(new IStructuredContentProvider() {
 			@SuppressWarnings("rawtypes")
 			public Object[] getElements(Object inputElement) {
@@ -294,7 +329,7 @@ public class FoxBPMExpDialog extends Dialog {
 		});
 
 		searchButton.addSelectionListener(new SearchButtonAction(searchText, radioGroup, tableViewer));
-		
+
 		Label lblNewLabel = new Label(orgComposite, SWT.NONE);
 		lblNewLabel.setText("流程变量");
 
@@ -655,32 +690,37 @@ public class FoxBPMExpDialog extends Dialog {
 
 	@SuppressWarnings("unchecked")
 	private Group crateGroupDefine(Composite orgComposite) {
-		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
+		ArrayList<GroupDefine> groupDefines = null;
 		try {
-			String jsonString = (String) FileUtil.readObject(new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data"));
-			JsonDataUtil instance = JsonDataUtil.getInstance();
-			ArrayList<GroupDefine> groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
-			// 在当前窗口中创建分组
-			GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1);
-			radioGroup.setLayoutData(gridData);
-			radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
-			Button checkBox = null;
-			if (null == groupDefines) {
-				groupDefines = new ArrayList<GroupDefine>();
-			} else {
-				GroupDefine userDefine = new GroupDefine();
-				userDefine.setName("用户");
-				userDefine.setType("user");
-				groupDefines.add(0, userDefine);
-			}
-
-			for (GroupDefine groupDefine : groupDefines) {
-				checkBox = new Button(radioGroup, SWT.RADIO);
-				checkBox.setText(groupDefine.getName());
-				checkBox.setData("type", groupDefine.getType());
+			File file = new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+			if (file.exists()) {
+				String jsonString = (String) FileUtil.readObject(file);
+				JsonDataUtil instance = JsonDataUtil.getInstance();
+				groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		if (null == groupDefines) {
+			groupDefines = new ArrayList<GroupDefine>();
+		}
+
+		// 默认放入用户
+		GroupDefine userDefine = new GroupDefine();
+		userDefine.setName("用户");
+		userDefine.setType("user");
+		groupDefines.add(0, userDefine);
+
+		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
+		// 在当前窗口中创建分组
+		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1);
+		radioGroup.setLayoutData(gridData);
+		radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
+		Button checkBox = null;
+		for (GroupDefine groupDefine : groupDefines) {
+			checkBox = new Button(radioGroup, SWT.RADIO);
+			checkBox.setText(groupDefine.getName());
+			checkBox.setData("type", groupDefine.getType());
 		}
 		return radioGroup;
 	}
