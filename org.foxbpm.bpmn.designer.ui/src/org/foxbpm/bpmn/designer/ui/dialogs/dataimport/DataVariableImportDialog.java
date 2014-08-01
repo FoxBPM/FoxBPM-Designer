@@ -53,9 +53,9 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 	private BizObjFilter filter;
 	private StringFilter stringFilter;
 	private String importType;
-	Button btnRadioButtonForm;
-	Button btnRadioButtonDB;
-	private Button btnRadioButtonDBnoFix;
+//	Button btnRadioButtonForm;
+//	Button btnRadioButtonDB;
+//	private Button btnRadioButtonDBnoFix;
 	private Composite fixVarComposite;
 	private Composite varComposite;
 	private Label lblNewLabel_1;
@@ -73,6 +73,7 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 	private Button isShowCommentsButton;
 	private List<DataVariable> dataVariables;
 	private DataVariable keyDataVariable;
+	private Button button;
 
 	/**
 	 * Create the dialog.
@@ -113,47 +114,61 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 
 		Composite composite = new Composite(container, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
-		composite.setLayout(new GridLayout(4, false));
+		composite.setLayout(new GridLayout(DataObjCache.dataVarTypes.size() + 1, false));
 
-		btnRadioButtonForm = new Button(composite, SWT.RADIO);
-		btnRadioButtonForm.setText("表单变量(EMAP)");
-		btnRadioButtonForm.addListener(SWT.Selection, new Listener() {
-			
-			@Override
-			public void handleEvent(Event event) {
-				stackLayout.topControl = fixVarComposite;
-				stackComposite.layout();
-			}
-		});
-
-
-		btnRadioButtonDB = new Button(composite, SWT.RADIO);
-		btnRadioButtonDB.setSelection(true);
-		btnRadioButtonDB.setText("数据库变量(EMAP)");
-		btnRadioButtonDB.addListener(SWT.Selection, new Listener() {
-			
-			@Override
-			public void handleEvent(Event event) {
-				stackLayout.topControl = fixVarComposite;
-				stackComposite.layout();
-			}
-		});
-
-		btnRadioButtonDBnoFix = new Button(composite, SWT.RADIO);
-		btnRadioButtonDBnoFix.setText("数据库变量");
+		for (String type : DataObjCache.dataVarTypes) {
+			button = new Button(composite, SWT.RADIO);
+			//设置名称
+			button.setText(type);
+			//存ID
+			button.setData("");
+			button.addListener(SWT.Selection, new Listener() {
+				@Override
+				public void handleEvent(Event event) {
+					importType = button.getData().toString();
+				}
+			});
+		}
+		
+//		btnRadioButtonForm = new Button(composite, SWT.RADIO);
+//		btnRadioButtonForm.setText("表单变量(EMAP)");
+//		btnRadioButtonForm.addListener(SWT.Selection, new Listener() {
+//			
+//			@Override
+//			public void handleEvent(Event event) {
+//				stackLayout.topControl = fixVarComposite;
+//				stackComposite.layout();
+//			}
+//		});
+//
+//
+//		btnRadioButtonDB = new Button(composite, SWT.RADIO);
+//		btnRadioButtonDB.setSelection(true);
+//		btnRadioButtonDB.setText("数据库变量(EMAP)");
+//		btnRadioButtonDB.addListener(SWT.Selection, new Listener() {
+//			
+//			@Override
+//			public void handleEvent(Event event) {
+//				stackLayout.topControl = fixVarComposite;
+//				stackComposite.layout();
+//			}
+//		});
+//
+//		btnRadioButtonDBnoFix = new Button(composite, SWT.RADIO);
+//		btnRadioButtonDBnoFix.setText("数据库变量");
 		
 		isShowCommentsButton = new Button(composite, SWT.CHECK);
 		isShowCommentsButton.setSelection(true);
 		isShowCommentsButton.setText("是否显示备注");
-		btnRadioButtonDBnoFix.addListener(SWT.Selection, new Listener() {
-			
-			@Override
-			public void handleEvent(Event event) {
-				stackLayout.topControl = varComposite;
-				stackComposite.layout();
-				dataObjImport = null;
-			}
-		});
+//		btnRadioButtonDBnoFix.addListener(SWT.Selection, new Listener() {
+//			
+//			@Override
+//			public void handleEvent(Event event) {
+//				stackLayout.topControl = varComposite;
+//				stackComposite.layout();
+//				dataObjImport = null;
+//			}
+//		});
 
 		filter = new BizObjFilter();
 		stringFilter = new StringFilter();
@@ -326,11 +341,6 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 	@Override
 	protected void okPressed() {
 		setDataObjImport(dataObjImport);
-		if (btnRadioButtonDB.getSelection()) {
-			importType = "db";
-		} else {
-			importType = "form";
-		}
 		
 		DataVariableCrossDialog dataVariableCrossDialog = new DataVariableCrossDialog(getShell(), dataObjImport, tableName, process, dataSourceCombo.getText(), isShowCommentsButton.getSelection(), importType);
 		if (dataVariableCrossDialog != null && dataVariableCrossDialog.open() == InputDialog.OK) {

@@ -72,6 +72,16 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 		this.importType = importType;
 		unImportDataVars = getUnImportDataVar();
 		importedDataVars = getImportedDataVar();
+		
+		List<DataVariable> filterDataVariables = new ArrayList<DataVariable>();
+		
+		for (DataVariable dataVariable : importedDataVars) {
+			if(unImportDataVars.size()>0 && unImportDataVars.get(0).getBizType().equals(dataVariable.getBizType())) {
+				filterDataVariables.add(dataVariable);
+			}
+		}
+		
+		importedDataVars = filterDataVariables;
 	}
 
 	/**
