@@ -692,12 +692,9 @@ public class FoxBPMExpDialog extends Dialog {
 	private Group crateGroupDefine(Composite orgComposite) {
 		ArrayList<GroupDefine> groupDefines = null;
 		try {
-			File file = new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
-			if (file.exists()) {
-				String jsonString = (String) FileUtil.readObject(file);
-				JsonDataUtil instance = JsonDataUtil.getInstance();
-				groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
-			}
+			String jsonString = FileUtil.readFile2StringUTF8(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+			JsonDataUtil instance = JsonDataUtil.getInstance();
+			groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
