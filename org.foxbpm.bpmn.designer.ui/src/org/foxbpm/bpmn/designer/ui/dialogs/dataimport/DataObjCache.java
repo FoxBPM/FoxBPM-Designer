@@ -21,7 +21,7 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 public class DataObjCache {
 	
 	public static List<DataObjImport> dataObjImports=new ArrayList<DataObjImport>();
-	public static List<String> dataVarTypes = new ArrayList<String>();
+	public static Map<String, Object> dataVarTypes = new HashMap<String, Object>();
 	public static Map<String, Object> cachemap = new HashMap<String, Object>();
 	
 	public static List<DataObjImport> getDataObjImports() {
@@ -146,7 +146,7 @@ public class DataObjCache {
 			map.put("name", name);
 			map.put("dataobjs", cacheDataObjImports);
 			cachemap.put(id, map);
-			dataVarTypes.add(id);
+			dataVarTypes.put(id, name);
 		}
 	}
 }

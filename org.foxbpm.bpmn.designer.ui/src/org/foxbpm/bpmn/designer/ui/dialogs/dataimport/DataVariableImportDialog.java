@@ -1,6 +1,7 @@
 package org.foxbpm.bpmn.designer.ui.dialogs.dataimport;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.bpmn2.Process;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -24,6 +25,8 @@ import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
@@ -73,7 +76,6 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 	private Button isShowCommentsButton;
 	private List<DataVariable> dataVariables;
 	private DataVariable keyDataVariable;
-	private Button button;
 
 	/**
 	 * Create the dialog.
@@ -116,16 +118,33 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 		composite.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		composite.setLayout(new GridLayout(DataObjCache.dataVarTypes.size() + 1, false));
 
-		for (String type : DataObjCache.dataVarTypes) {
-			button = new Button(composite, SWT.RADIO);
+		for (Object type : DataObjCache.cachemap.values()) {
+			Map<String, Object> map = (Map<String, Object>) type;
+			final Button button = new Button(composite, SWT.RADIO);
 			//设置名称
-			button.setText(type);
+			button.setText(map.get("name").toString());
 			//存ID
-			button.setData("");
-			button.addListener(SWT.Selection, new Listener() {
+			button.setData(map.get("id").toString());
+			button.addSelectionListener(new SelectionListener() {
+				
 				@Override
-				public void handleEvent(Event event) {
+				public void widgetSelected(SelectionEvent e) {
+					Button button = (Button) e.getSource();
 					importType = button.getData().toString();
+					System.out.println(button.getText());
+					for (Object cachemap : DataObjCache.cachemap.values()) {
+						Map<String, Object> map = (Map<String, Object>) cachemap;
+						if(importType.equals(map.get("id"))) {
+							dataObjImports = (List<DataObjImport>) map.get("dataobjs");
+							initDataBindings();
+							tableViewer.refresh();
+						}
+					}
+				}
+				
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+					
 				}
 			});
 		}
