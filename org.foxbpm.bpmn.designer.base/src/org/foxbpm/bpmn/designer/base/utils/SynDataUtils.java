@@ -66,8 +66,8 @@ public class SynDataUtils {
 			// 创建组织表
 			sql.append("CREATE TABLE `au_orginfo` (");
 			sql.append("`ORGID` varchar(64) NOT NULL,");
-			sql.append("`SUPORGID` varchar(512),");
 			sql.append("`ORGNAME` varchar(512),");
+			sql.append("`SUPORGID` varchar(512),");
 			sql.append("`GROUPTYPE` varchar(512),");
 			sql.append("PRIMARY KEY  (`ORGID`,`GROUPTYPE`)");
 			sql.append(");");
@@ -102,7 +102,7 @@ public class SynDataUtils {
 				sql.append("'").append(user.getEmail()).append("'").append(");");
 				sql.append("\n");
 			}
-			System.out.println("synData sql is " + sql.toString());
+			System.out.println("synData sql is:\r\n" + sql.toString());
 			// 批量提交sql
 			statement.executeUpdate(sql.toString());
 			// 提交
