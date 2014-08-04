@@ -1,5 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.dialogs.dataimport;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.model.bpmn.foxbpm.DataVariable;
+import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 
 public class DataVariableImportDialog extends TitleAreaDialog {
 	private DataBindingContext m_bindingContext;
@@ -362,8 +365,43 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 		
 		DataVariableCrossDialog dataVariableCrossDialog = new DataVariableCrossDialog(getShell(), dataObjImport, tableName, process, dataSourceCombo.getText(), isShowCommentsButton.getSelection(), importType);
 		if (dataVariableCrossDialog != null && dataVariableCrossDialog.open() == InputDialog.OK) {
-			dataVariables = dataVariableCrossDialog.getDataVariables();
 			setKeyDataVariable(dataVariableCrossDialog.getKeyDataVariable());
+			
+			dataVariables = new ArrayList<DataVariable>();
+			
+			for (DataVariable dataVariable : dataVariableCrossDialog.getDataVariables()) {
+				if(dataVariable.getId().equals("_BizName") || dataVariable.getId().equals("_BizKeyField")) {
+					continue;
+				}else {
+					dataVariables.add(dataVariable);
+				}
+			}
+			
+			//加入两个固定的数据变量
+			DataVariable dataVariable2 = FoxBPMFactory.eINSTANCE.createDataVariable();
+			dataVariable2.setId("_BizName");
+			dataVariable2.setBizType("customVariable");
+			dataVariable2.setDataType("String");
+			dataVariable2.setIsPersistence(false);
+			//值为选中的业务对象ID，也就是表名
+			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+			expression.setName(this.dataObjImport.getId());
+			expression.setValue(this.dataObjImport.getId());
+			dataVariable2.setExpression(expression);
+			DataVariable dataVariable3 = FoxBPMFactory.eINSTANCE.createDataVariable();
+			dataVariable3.setId("_BizKeyField");
+			dataVariable3.setBizType("customVariable");
+			dataVariable3.setDataType("String");
+			dataVariable3.setIsPersistence(false);
+			//值为关联键
+			Expression expression1 = FoxBPMFactory.eINSTANCE.createExpression();
+			expression1.setName(getKeyDataVariable().getExpression().getName());
+			expression1.setValue(getKeyDataVariable().getExpression().getValue());
+			dataVariable3.setExpression(expression1);
+			
+			dataVariables.add(dataVariable2);
+			dataVariables.add(dataVariable3);
+			
 			super.okPressed();
 		}
 	}
