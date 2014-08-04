@@ -101,6 +101,22 @@ public class DataObjCache {
 				DataObjImportImpl dataObjImport = new DataObjImportImpl();
 				dataObjImport.setId(json.get("id")==null?"":json.get("id").asText());
 				dataObjImport.setName(json.get("name")==null?"":json.get("name").asText());
+				
+				//加入两个固定的数据变量
+				DataVariable dataVariable2 = FoxBPMFactory.eINSTANCE.createDataVariable();
+				dataVariable2.setId("_BizName");
+				dataVariable2.setBizType("customVariable");
+				dataVariable2.setDataType("String");
+				dataVariable2.setIsPersistence(false);
+				DataVariable dataVariable3 = FoxBPMFactory.eINSTANCE.createDataVariable();
+				dataVariable3.setId("_BizKeyField");
+				dataVariable3.setBizType("customVariable");
+				dataVariable3.setDataType("String");
+				dataVariable3.setIsPersistence(false);
+				dataObjImport.getDataVariables().add(dataVariable3);
+				dataObjImport.getDataVariables().add(dataVariable2);
+				
+				//循环添加变量
 				DataVariable dataVariable = FoxBPMFactory.eINSTANCE.createDataVariable();
 				ArrayNode columnArray = (ArrayNode)json.get("dataVariableDefinitions");
 				if(columnArray!=null) {
@@ -120,6 +136,7 @@ public class DataObjCache {
 						dataObjImport.getDataVariables().add(dataVariable);
 					}
 				}
+				
 				dataObjImports.add(dataObjImport);
 				cacheDataObjImports.add(dataObjImport);
 			}
