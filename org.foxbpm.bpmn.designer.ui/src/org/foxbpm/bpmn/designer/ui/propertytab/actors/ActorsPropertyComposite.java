@@ -1,14 +1,9 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.actors;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.node.ArrayNode;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.Process;
@@ -41,8 +36,10 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
+import org.foxbpm.bpmn.designer.base.model.GroupDefine;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.base.utils.JsonDataUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.custom.PotentialStarterDialogCellEditor;
 import org.foxbpm.bpmn.designer.ui.dialogs.DataVarTo;
@@ -54,9 +51,6 @@ import org.foxbpm.model.bpmn.foxbpm.FormUriView;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
-import org.restlet.representation.Representation;
-import org.restlet.resource.ClientResource;
-import org.restlet.resource.ResourceException;
 
 public class ActorsPropertyComposite extends AbstractFoxBPMComposite {
 	private Process process;
@@ -232,55 +226,35 @@ public class ActorsPropertyComposite extends AbstractFoxBPMComposite {
 			  }
 			});
 		
-		
-		String path = FoxBPMDesignerUtil.getCachePath() + "biztypes.xml";
-		File cacheFile = new File(path);
-		if(cacheFile.exists()) {
-			String resultString = null;
-			try {
-				resultString = FileUtil.readObject(cacheFile).toString();
-				analysisJson(resultString);
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else {
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroupDefinitions");
-			if(client==null) {
-				((ComboBoxViewerCellEditor)cellEditor[1]).setInput(new ArrayList<PotentialStarter>());
+		ArrayList<GroupDefine> groupDefines = null;
+		try {
+			File file = new File(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+			if(file.exists()) {
+				String jsonString = FileUtil.readFile2StringUTF8(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+				JsonDataUtil instance = JsonDataUtil.getInstance();
+				groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
+				
+				for (GroupDefine groupDefine : groupDefines) {
+					DataVarTo dataVarTo = new DataVarTo();
+					dataVarTo.setName(groupDefine.getName());
+					dataVarTo.setType(groupDefine.getType());
+					bizTypes.add(dataVarTo);
+				}
+				DataVarTo dataVarTo = new DataVarTo();
+				dataVarTo.setName("用户");
+				dataVarTo.setType("user");
+				bizTypes.add(dataVarTo);
+				
 			}else {
-				String resultString = null;
-				Representation result = null;
-				try {
-					result = client.get();
-				} catch (ResourceException e1) {
-					if(e1.getStatus().getCode()==500) {
-						MessageDialog.openInformation(null, "提示", "服务器内部错误，错误原因：\n" + e1.getMessage());
-					}else if(e1.getStatus().getCode()==404) {
-						MessageDialog.openInformation(null, "提示", "找不到该URL，错误原因：\n" + e1.getMessage());
-					}
-//					e1.printStackTrace();
-				} catch (Exception e) {
-					MessageDialog.openInformation(null, "提示", "未知错误，错误原因：\n" + e.getMessage());
-//					e.printStackTrace();
-				}
-				try {
-					resultString = result.getText();
-					analysisJson(resultString);
-					
-					cacheFile.mkdirs();
-					cacheFile.createNewFile();
-					FileUtil.writeObject(resultString, path);
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				MessageDialog.openInformation(null, "提示", "未找到缓存文件，请同步流程资源");
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		if (null == groupDefines) {
+			groupDefines = new ArrayList<GroupDefine>();
+		}
+
 		
 		((ComboBoxViewerCellEditor)cellEditor[1]).setInput(bizTypes);
 		
@@ -416,30 +390,4 @@ public class ActorsPropertyComposite extends AbstractFoxBPMComposite {
 		});
 	}
 	
-	/**
-	 * 解析json串
-	 * @param result
-	 * @param cacheDataObjImports
-	 * @throws JsonProcessingException
-	 * @throws IOException
-	 */
-	private void analysisJson(String result) throws JsonProcessingException, IOException {
-		ObjectMapper objectMapper = new ObjectMapper();
-		String resultString = result;
-		JsonNode object= objectMapper.readTree(resultString);
-		System.out.println(resultString);
-		ArrayNode dataArray = (ArrayNode)object.get("data");
-		
-		for(JsonNode json :dataArray){
-			DataVarTo dataVarTo = new DataVarTo();
-			dataVarTo.setName(json.get("name")==null?"":json.get("name").asText());
-			dataVarTo.setType(json.get("type")==null?"":json.get("type").asText());
-			bizTypes.add(dataVarTo);
-		}
-		
-		DataVarTo dataVarTo = new DataVarTo();
-		dataVarTo.setName("用户");
-		dataVarTo.setType("user");
-		bizTypes.add(dataVarTo);
-	}
 }
