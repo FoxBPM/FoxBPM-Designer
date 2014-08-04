@@ -131,7 +131,6 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 				public void widgetSelected(SelectionEvent e) {
 					Button button = (Button) e.getSource();
 					importType = button.getData().toString();
-					System.out.println(button.getText());
 					for (Object cachemap : DataObjCache.cachemap.values()) {
 						Map<String, Object> map = (Map<String, Object>) cachemap;
 						if(importType.equals(map.get("id"))) {
