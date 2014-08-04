@@ -4,7 +4,6 @@ package org.foxbpm.model.config.foxbpmconfig;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.FeatureMap;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,7 +17,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getParams <em>Params</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.Param#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,7 +63,7 @@ public interface Param extends EObject {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getParam_Value()
-	 * @model extendedMetaData="kind='element'"
+	 * @model extendedMetaData="kind='attribute'"
 	 * @generated
 	 */
 	String getValue();
@@ -123,20 +122,29 @@ public interface Param extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Mixed</b></em>' attribute list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.util.FeatureMap.Entry}.
+	 * Returns the value of the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mixed</em>' attribute list isn't clear,
+	 * If the meaning of the '<em>Description</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mixed</em>' attribute list.
-	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getParam_Mixed()
-	 * @model dataType="org.eclipse.emf.ecore.EFeatureMapEntry" many="true"
-	 *        extendedMetaData="name=':mixed' kind='elementWildcard'"
+	 * @return the value of the '<em>Description</em>' attribute.
+	 * @see #setDescription(String)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getParam_Description()
+	 * @model extendedMetaData="kind='attribute' name='description'"
 	 * @generated
 	 */
-	FeatureMap getMixed();
+	String getDescription();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.Param#getDescription <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Description</em>' attribute.
+	 * @see #getDescription()
+	 * @generated
+	 */
+	void setDescription(String value);
 
 } // Param

@@ -719,13 +719,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int PARAM__NAME = 3;
 
 	/**
-	 * The feature id for the '<em><b>Mixed</b></em>' attribute list.
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM__MIXED = 4;
+	int PARAM__DESCRIPTION = 4;
 
 	/**
 	 * The number of structural features of the '<em>Param</em>' class.
@@ -757,22 +757,13 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_DEFINITION = 10;
 
 	/**
-	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TASK_COMMAND_DEFINITION__PARAMS = BASE_CONFIG__PARAMS;
-
-	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__ID = BASE_CONFIG_FEATURE_COUNT + 0;
+	int TASK_COMMAND_DEFINITION__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -781,7 +772,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__NAME = BASE_CONFIG_FEATURE_COUNT + 1;
+	int TASK_COMMAND_DEFINITION__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Command</b></em>' attribute.
@@ -790,7 +781,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__COMMAND = BASE_CONFIG_FEATURE_COUNT + 2;
+	int TASK_COMMAND_DEFINITION__COMMAND = 2;
 
 	/**
 	 * The feature id for the '<em><b>Cmd</b></em>' attribute.
@@ -799,7 +790,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__CMD = BASE_CONFIG_FEATURE_COUNT + 3;
+	int TASK_COMMAND_DEFINITION__CMD = 3;
 
 	/**
 	 * The feature id for the '<em><b>Filter</b></em>' attribute.
@@ -808,7 +799,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__FILTER = BASE_CONFIG_FEATURE_COUNT + 4;
+	int TASK_COMMAND_DEFINITION__FILTER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Is Enabled</b></em>' attribute.
@@ -817,7 +808,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__IS_ENABLED = BASE_CONFIG_FEATURE_COUNT + 5;
+	int TASK_COMMAND_DEFINITION__IS_ENABLED = 5;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -826,7 +817,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__TYPE = BASE_CONFIG_FEATURE_COUNT + 6;
+	int TASK_COMMAND_DEFINITION__TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -835,7 +826,16 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION__DESCRIPTION = BASE_CONFIG_FEATURE_COUNT + 7;
+	int TASK_COMMAND_DEFINITION__DESCRIPTION = 7;
+
+	/**
+	 * The feature id for the '<em><b>Command Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TASK_COMMAND_DEFINITION__COMMAND_PARAM = 8;
 
 	/**
 	 * The number of structural features of the '<em>Task Command Definition</em>' class.
@@ -844,7 +844,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = BASE_CONFIG_FEATURE_COUNT + 8;
+	int TASK_COMMAND_DEFINITION_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Task Command Definition</em>' class.
@@ -853,7 +853,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+	int TASK_COMMAND_DEFINITION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
@@ -1166,6 +1166,97 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_OBJECT_BEHAVIOR_OPERATION_COUNT = BASE_CONFIG_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.CommandParamImpl <em>Command Param</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.CommandParamImpl
+	 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getCommandParam()
+	 * @generated
+	 */
+	int COMMAND_PARAM = 17;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__KEY = PARAM__KEY;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__VALUE = PARAM__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Params</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__PARAMS = PARAM__PARAMS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__NAME = PARAM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__DESCRIPTION = PARAM__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Biz Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__BIZ_TYPE = PARAM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Data Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__DATA_TYPE = PARAM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Command Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM_FEATURE_COUNT = PARAM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Command Param</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM_OPERATION_COUNT = PARAM_OPERATION_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig <em>Fox BPM Config</em>}'.
@@ -1643,15 +1734,15 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getParam_Name();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.foxbpm.model.config.foxbpmconfig.Param#getMixed <em>Mixed</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.Param#getDescription <em>Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Mixed</em>'.
-	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getMixed()
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.Param#getDescription()
 	 * @see #getParam()
 	 * @generated
 	 */
-	EAttribute getParam_Mixed();
+	EAttribute getParam_Description();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.BaseConfig <em>Base Config</em>}'.
@@ -1771,6 +1862,17 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getTaskCommandDefinition_Description();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Command Param</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam()
+	 * @see #getTaskCommandDefinition()
+	 * @generated
+	 */
+	EReference getTaskCommandDefinition_CommandParam();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.ScriptLanguageConfig <em>Script Language Config</em>}'.
@@ -1963,6 +2065,38 @@ public interface FoxBPMConfigPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDataObjectBehavior_Behavior();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.foxbpmconfig.CommandParam <em>Command Param</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Command Param</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.CommandParam
+	 * @generated
+	 */
+	EClass getCommandParam();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.CommandParam#getBizType <em>Biz Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Biz Type</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.CommandParam#getBizType()
+	 * @see #getCommandParam()
+	 * @generated
+	 */
+	EAttribute getCommandParam_BizType();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.foxbpmconfig.CommandParam#getDataType <em>Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Data Type</em>'.
+	 * @see org.foxbpm.model.config.foxbpmconfig.CommandParam#getDataType()
+	 * @see #getCommandParam()
+	 * @generated
+	 */
+	EAttribute getCommandParam_DataType();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -2358,12 +2492,12 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EAttribute PARAM__NAME = eINSTANCE.getParam_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Mixed</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PARAM__MIXED = eINSTANCE.getParam_Mixed();
+		EAttribute PARAM__DESCRIPTION = eINSTANCE.getParam_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.BaseConfigImpl <em>Base Config</em>}' class.
@@ -2456,6 +2590,14 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TASK_COMMAND_DEFINITION__DESCRIPTION = eINSTANCE.getTaskCommandDefinition_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Command Param</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TASK_COMMAND_DEFINITION__COMMAND_PARAM = eINSTANCE.getTaskCommandDefinition_CommandParam();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.ScriptLanguageConfigImpl <em>Script Language Config</em>}' class.
@@ -2612,6 +2754,32 @@ public interface FoxBPMConfigPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DATA_OBJECT_BEHAVIOR__BEHAVIOR = eINSTANCE.getDataObjectBehavior_Behavior();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.foxbpmconfig.impl.CommandParamImpl <em>Command Param</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.CommandParamImpl
+		 * @see org.foxbpm.model.config.foxbpmconfig.impl.FoxBPMConfigPackageImpl#getCommandParam()
+		 * @generated
+		 */
+		EClass COMMAND_PARAM = eINSTANCE.getCommandParam();
+
+		/**
+		 * The meta object literal for the '<em><b>Biz Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMAND_PARAM__BIZ_TYPE = eINSTANCE.getCommandParam_BizType();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute COMMAND_PARAM__DATA_TYPE = eINSTANCE.getCommandParam_DataType();
 
 	}
 

@@ -15,6 +15,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//FoxBPMConfig/taskCommandConfig"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//FoxBPMConfig/scriptLanguageConfig"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//FoxBPMConfig/eventListenerConfig"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//FoxBPMConfig/bizDataObjectConfig"/>
     </genClasses>
     <genClasses ecoreClass="foxbpmconfig.ecore#//SysMailConfig">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//SysMailConfig/mailInfo"/>
@@ -58,7 +59,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//Param/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//Param/params"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//Param/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//Param/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//Param/description"/>
     </genClasses>
     <genClasses ecoreClass="foxbpmconfig.ecore#//BaseConfig">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//BaseConfig/params"/>
@@ -71,6 +72,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//TaskCommandDefinition/filter"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//TaskCommandDefinition/isEnabled"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//TaskCommandDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//TaskCommandDefinition/description"/>
     </genClasses>
     <genClasses ecoreClass="foxbpmconfig.ecore#//ScriptLanguageConfig">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//ScriptLanguageConfig/scriptLanguage"/>
@@ -87,6 +89,18 @@
     <genClasses ecoreClass="foxbpmconfig.ecore#//EventListener">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//EventListener/eventType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//EventListener/listenerClass"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconfig.ecore#//BizDataObjectConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconfig.ecore#//BizDataObjectConfig/dataObjectBehavior"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconfig.ecore#//DataObjectBehavior">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//DataObjectBehavior/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//DataObjectBehavior/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//DataObjectBehavior/behavior"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconfig.ecore#//CommandParam">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//CommandParam/bizType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconfig.ecore#//CommandParam/dataType"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

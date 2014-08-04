@@ -23,9 +23,6 @@ import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getCommandType <em>Command Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getOrderId <em>Order Id</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsVerification <em>Is Verification</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsSaveData <em>Is Save Data</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getIsSimulationRun <em>Is Simulation Run</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.TaskCommandImpl#getParameterExpression <em>Parameter Expression</em>}</li>
  * </ul>
  * </p>
@@ -122,66 +119,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 	 * @ordered
 	 */
 	protected int orderId = ORDER_ID_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIsVerification() <em>Is Verification</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsVerification()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String IS_VERIFICATION_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIsVerification() <em>Is Verification</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsVerification()
-	 * @generated
-	 * @ordered
-	 */
-	protected String isVerification = IS_VERIFICATION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIsSaveData() <em>Is Save Data</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSaveData()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String IS_SAVE_DATA_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIsSaveData() <em>Is Save Data</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSaveData()
-	 * @generated
-	 * @ordered
-	 */
-	protected String isSaveData = IS_SAVE_DATA_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIsSimulationRun() <em>Is Simulation Run</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSimulationRun()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String IS_SIMULATION_RUN_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIsSimulationRun() <em>Is Simulation Run</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIsSimulationRun()
-	 * @generated
-	 * @ordered
-	 */
-	protected String isSimulationRun = IS_SIMULATION_RUN_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getParameterExpression() <em>Parameter Expression</em>}' containment reference.
@@ -344,69 +281,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIsVerification() {
-		return isVerification;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsVerification(String newIsVerification) {
-		String oldIsVerification = isVerification;
-		isVerification = newIsVerification;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION, oldIsVerification, isVerification));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getIsSaveData() {
-		return isSaveData;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsSaveData(String newIsSaveData) {
-		String oldIsSaveData = isSaveData;
-		isSaveData = newIsSaveData;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA, oldIsSaveData, isSaveData));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getIsSimulationRun() {
-		return isSimulationRun;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsSimulationRun(String newIsSimulationRun) {
-		String oldIsSimulationRun = isSimulationRun;
-		isSimulationRun = newIsSimulationRun;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN, oldIsSimulationRun, isSimulationRun));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Expression getParameterExpression() {
 		return parameterExpression;
 	}
@@ -479,12 +353,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 				return getExpression();
 			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
 				return getOrderId();
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
-				return getIsVerification();
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
-				return getIsSaveData();
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
-				return getIsSimulationRun();
 			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
 				return getParameterExpression();
 		}
@@ -513,15 +381,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 				return;
 			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
 				setOrderId((Integer)newValue);
-				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
-				setIsVerification((String)newValue);
-				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
-				setIsSaveData((String)newValue);
-				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
-				setIsSimulationRun((String)newValue);
 				return;
 			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
 				setParameterExpression((Expression)newValue);
@@ -553,15 +412,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
 				setOrderId(ORDER_ID_EDEFAULT);
 				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
-				setIsVerification(IS_VERIFICATION_EDEFAULT);
-				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
-				setIsSaveData(IS_SAVE_DATA_EDEFAULT);
-				return;
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
-				setIsSimulationRun(IS_SIMULATION_RUN_EDEFAULT);
-				return;
 			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
 				setParameterExpression((Expression)null);
 				return;
@@ -587,12 +437,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 				return expression != null;
 			case FoxBPMPackage.TASK_COMMAND__ORDER_ID:
 				return orderId != ORDER_ID_EDEFAULT;
-			case FoxBPMPackage.TASK_COMMAND__IS_VERIFICATION:
-				return IS_VERIFICATION_EDEFAULT == null ? isVerification != null : !IS_VERIFICATION_EDEFAULT.equals(isVerification);
-			case FoxBPMPackage.TASK_COMMAND__IS_SAVE_DATA:
-				return IS_SAVE_DATA_EDEFAULT == null ? isSaveData != null : !IS_SAVE_DATA_EDEFAULT.equals(isSaveData);
-			case FoxBPMPackage.TASK_COMMAND__IS_SIMULATION_RUN:
-				return IS_SIMULATION_RUN_EDEFAULT == null ? isSimulationRun != null : !IS_SIMULATION_RUN_EDEFAULT.equals(isSimulationRun);
 			case FoxBPMPackage.TASK_COMMAND__PARAMETER_EXPRESSION:
 				return parameterExpression != null;
 		}
@@ -617,12 +461,6 @@ public class TaskCommandImpl extends BaseConfigImpl implements TaskCommand {
 		result.append(commandType);
 		result.append(", orderId: ");
 		result.append(orderId);
-		result.append(", isVerification: ");
-		result.append(isVerification);
-		result.append(", isSaveData: ");
-		result.append(isSaveData);
-		result.append(", isSimulationRun: ");
-		result.append(isSimulationRun);
 		result.append(')');
 		return result.toString();
 	}

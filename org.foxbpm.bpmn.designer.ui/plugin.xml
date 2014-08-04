@@ -582,6 +582,11 @@
         label="通用">
   </propertyTab>
   <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.lane.LanePropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.lane"
+        label="通用">
+  </propertyTab>
+  <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.callactivity.CallActivityDataMappingPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.callactivitydatamapping"
         label="数据映射">
@@ -613,8 +618,13 @@
    </propertyTab>
    <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.usertask.UserTaskAssignmentPropertySection"
-        id="org.foxbpm.bpmn.designer.ui.propertyTab1"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.usertaskassignment"
         label="任务分配">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.actors.ActorsPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.actors"
+        label="启动人">
   </propertyTab>
   <propertyTab
         class="org.foxbpm.bpmn.designer.ui.propertytab.variable.DataVariablePropertySection"
@@ -630,6 +640,11 @@
         class="org.foxbpm.bpmn.designer.ui.propertytab.timerdefinition.TimerEventDefinitionPropertySection"
         id="org.foxbpm.bpmn.designer.ui.propertyTab.timerdefinition"
         label="时间定义">
+  </propertyTab>
+  <propertyTab
+        class="org.foxbpm.bpmn.designer.ui.propertytab.lane.LaneAssignmentPropertySection"
+        id="org.foxbpm.bpmn.designer.ui.propertyTab.laneassignment"
+        label="任务分配">
   </propertyTab>
   <featureContainer
         class="org.foxbpm.bpmn.designer.ui.features.activity.task.FoxBPMUserTaskFeatureContainer"

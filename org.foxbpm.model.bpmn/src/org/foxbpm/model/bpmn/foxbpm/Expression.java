@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getId <em>Id</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getName <em>Name</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#isIsRun <em>Is Run</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.Expression#getMixed <em>Mixed</em>}</li>
  * </ul>
  * </p>
@@ -110,6 +111,34 @@ public interface Expression extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Run</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Run</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Run</em>' attribute.
+	 * @see #setIsRun(boolean)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getExpression_IsRun()
+	 * @model default="true" dataType="org.eclipse.emf.ecore.xml.type.Boolean"
+	 *        extendedMetaData="kind='attribute'"
+	 * @generated
+	 */
+	boolean isIsRun();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.Expression#isIsRun <em>Is Run</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Run</em>' attribute.
+	 * @see #isIsRun()
+	 * @generated
+	 */
+	void setIsRun(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Mixed</b></em>' attribute list.

@@ -3,7 +3,6 @@
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -11,11 +10,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.BasicFeatureMap;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.Param;
 
@@ -30,7 +26,7 @@ import org.foxbpm.model.config.foxbpmconfig.Param;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getParams <em>Params</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getMixed <em>Mixed</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.impl.ParamImpl#getDescription <em>Description</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,14 +104,24 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMixed() <em>Mixed</em>}' attribute list.
+	 * The default value of the '{@link #getDescription() <em>Description</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMixed()
+	 * @see #getDescription()
 	 * @generated
 	 * @ordered
 	 */
-	protected FeatureMap mixed;
+	protected static final String DESCRIPTION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDescription()
+	 * @generated
+	 * @ordered
+	 */
+	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,35 +166,22 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public String getValue() {
-		 if (mixed != null && !mixed.isEmpty()) {
-	            StringBuilder result = new StringBuilder();
-	            for (FeatureMap.Entry cur : mixed) {
-	                switch (cur.getEStructuralFeature().getFeatureID()) {
-	                case XMLTypePackage.XML_TYPE_DOCUMENT_ROOT__CDATA:
-	                case XMLTypePackage.XML_TYPE_DOCUMENT_ROOT__TEXT:
-	                    result.append(cur.getValue());
-	                    break;
-
-	                default:
-	                    break;
-	                }
-	            }
-	            return result.toString();
-	        }
 		return value;
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated
 	 */
 	public void setValue(String newValue) {
-		getMixed().clear();
-        getMixed().add(XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot_CDATA(), newValue);
+		String oldValue = value;
+		value = newValue;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.PARAM__VALUE, oldValue, value));
 	}
 
 	/**
@@ -229,11 +222,20 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureMap getMixed() {
-		if (mixed == null) {
-			mixed = new BasicFeatureMap(this, FoxBPMConfigPackage.PARAM__MIXED);
-		}
-		return mixed;
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDescription(String newDescription) {
+		String oldDescription = description;
+		description = newDescription;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.PARAM__DESCRIPTION, oldDescription, description));
 	}
 
 	/**
@@ -246,8 +248,6 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 		switch (featureID) {
 			case FoxBPMConfigPackage.PARAM__PARAMS:
 				return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
-			case FoxBPMConfigPackage.PARAM__MIXED:
-				return ((InternalEList<?>)getMixed()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -268,9 +268,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return getParams();
 			case FoxBPMConfigPackage.PARAM__NAME:
 				return getName();
-			case FoxBPMConfigPackage.PARAM__MIXED:
-				if (coreType) return getMixed();
-				return ((FeatureMap.Internal)getMixed()).getWrapper();
+			case FoxBPMConfigPackage.PARAM__DESCRIPTION:
+				return getDescription();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,8 +296,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 			case FoxBPMConfigPackage.PARAM__NAME:
 				setName((String)newValue);
 				return;
-			case FoxBPMConfigPackage.PARAM__MIXED:
-				((FeatureMap.Internal)getMixed()).set(newValue);
+			case FoxBPMConfigPackage.PARAM__DESCRIPTION:
+				setDescription((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -324,8 +323,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 			case FoxBPMConfigPackage.PARAM__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case FoxBPMConfigPackage.PARAM__MIXED:
-				getMixed().clear();
+			case FoxBPMConfigPackage.PARAM__DESCRIPTION:
+				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -347,8 +346,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 				return params != null && !params.isEmpty();
 			case FoxBPMConfigPackage.PARAM__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case FoxBPMConfigPackage.PARAM__MIXED:
-				return mixed != null && !mixed.isEmpty();
+			case FoxBPMConfigPackage.PARAM__DESCRIPTION:
+				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -369,8 +368,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param {
 		result.append(value);
 		result.append(", name: ");
 		result.append(name);
-		result.append(", mixed: ");
-		result.append(mixed);
+		result.append(", description: ");
+		result.append(description);
 		result.append(')');
 		return result.toString();
 	}

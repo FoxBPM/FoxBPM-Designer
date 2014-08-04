@@ -2,6 +2,8 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
+import org.eclipse.emf.ecore.EObject;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -19,6 +21,7 @@ package org.foxbpm.model.config.foxbpmconfig;
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getIsEnabled <em>Is Enabled</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getType <em>Type</em>}</li>
  *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,7 +29,7 @@ package org.foxbpm.model.config.foxbpmconfig;
  * @model extendedMetaData="name='TaskCommandDefinition'"
  * @generated
  */
-public interface TaskCommandDefinition extends BaseConfig {
+public interface TaskCommandDefinition extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -235,5 +238,32 @@ public interface TaskCommandDefinition extends BaseConfig {
 	 * @generated
 	 */
 	void setDescription(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Command Param</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Command Param</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Command Param</em>' containment reference.
+	 * @see #setCommandParam(CommandParam)
+	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_CommandParam()
+	 * @model containment="true"
+	 *        extendedMetaData="kind='element'"
+	 * @generated
+	 */
+	CommandParam getCommandParam();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Command Param</em>' containment reference.
+	 * @see #getCommandParam()
+	 * @generated
+	 */
+	void setCommandParam(CommandParam value);
 
 } // TaskCommandDefinition

@@ -1,5 +1,7 @@
 package org.foxbpm.bpmn.designer.ui.expdialog;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,24 +33,32 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.TableLayout;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
@@ -60,10 +70,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
@@ -81,12 +94,18 @@ import org.eclipse.ui.handlers.IHandlerService;
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
+import org.foxbpm.bpmn.designer.base.model.GroupDefine;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
+import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.base.utils.JsonDataUtil;
+import org.foxbpm.bpmn.designer.base.utils.StringUtil;
+import org.foxbpm.bpmn.designer.ui.expdialog.widget.event.SearchButtonAction;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
+import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
 import org.foxbpm.model.config.variableconfig.DataVariableType;
@@ -110,9 +129,10 @@ public class FoxBPMExpDialog extends Dialog {
 	private FormParam formParam;
 	private TransactionalEditingDomain editingDomain;
 	private DataVariableConfig dataVariableConfig;
-	private Map<String, FoxBPMDataVariable> typeToDataVariableMap;//维护dataVariableType到FoxBPMDataVariable的映射
-	private static final Object[] EMPTY_ARRAY=new Object[0];
-	private static final String EMPTY_STRING="";
+	private Map<String, FoxBPMDataVariable> typeToDataVariableMap;// 维护dataVariableType到FoxBPMDataVariable的映射
+	private static final Object[] EMPTY_ARRAY = new Object[0];
+	private static final String EMPTY_STRING = "";
+	private PotentialStarter potentialStarter;
 
 	/**
 	 * Create the dialog.
@@ -130,17 +150,25 @@ public class FoxBPMExpDialog extends Dialog {
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
 		this(parentShell);
 		this.expression = expression;
-		if(this.expression == null) {
+		if (this.expression == null) {
 			this.expression = FoxBPMFactory.eINSTANCE.createExpression();
 			this.expression.setName("");
 			this.expression.setValue("");
 		}
 		this.textcontrol = text;
 	}
-	
-	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression, Text text) {
+
+	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression,
+			Text text) {
 		this(parentShell, expression, text);
 		this.formParam = formParam;
+		this.editingDomain = editingDomain;
+	}
+
+	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, PotentialStarter potentialStarter, Shell parentShell,
+			Expression expression, Text text) {
+		this(parentShell, expression, text);
+		this.potentialStarter = potentialStarter;
 		this.editingDomain = editingDomain;
 	}
 
@@ -161,9 +189,146 @@ public class FoxBPMExpDialog extends Dialog {
 		Label label = new Label(orgComposite, SWT.NONE);
 		label.setText("组织结构");
 
-		TreeViewer treeViewer = new TreeViewer(orgComposite, SWT.BORDER);
-		Tree tree = treeViewer.getTree();
-		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		// 在当前窗口中创建分组
+		Group radioGroup = crateGroupDefine(orgComposite);
+		// 搜索区域
+		Composite searchGroup = new Composite(orgComposite, SWT.SHADOW_ETCHED_OUT);
+		searchGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		GridLayout gridLayout = new GridLayout(2, false);
+		gridLayout.marginLeft = -5;
+		searchGroup.setLayout(gridLayout);
+
+		GridData searchGridData = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		// 搜索
+		Text searchText = new Text(searchGroup, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
+		searchGridData.widthHint = 100;
+		searchText.setLayoutData(searchGridData);
+		Button searchButton = new Button(searchGroup, SWT.NONE);
+		searchGridData = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		searchButton.setLayoutData(searchGridData);
+		searchButton.setText("搜索");
+		// 表格视图
+		TableViewer tableViewer = new TableViewer(orgComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		// 表格
+		Table orgTable = tableViewer.getTable();
+		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, false, true, 3, 1);
+		// 设置表格布局所占用的高度
+		orgGridData.heightHint = 50;
+		orgTable.setLayoutData(orgGridData);
+		// 显示表头
+		orgTable.setHeaderVisible(true);
+		// 显示表格线
+		orgTable.setLinesVisible(true);
+		// 专用于表格的布局
+		TableLayout orgTablelayout = new TableLayout();
+		orgTable.setLayout(orgTablelayout);
+		orgTablelayout.addColumnData(new ColumnWeightData(20));
+		// 定义列
+		TableColumn tableColumn = new TableColumn(orgTable, SWT.NONE);
+		tableColumn.setText("编号");
+		tableColumn.setMoveable(true);
+
+		orgTablelayout.addColumnData(new ColumnWeightData(40));
+		tableColumn = new TableColumn(orgTable, SWT.NONE);
+		tableColumn.setText("名称");
+		tableColumn.setMoveable(true);
+		// 注册鼠标事件
+		orgTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+
+			}
+		});
+
+		tableViewer.addDoubleClickListener(new IDoubleClickListener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				ISelection selection = event.getSelection();
+				if (selection.isEmpty()) {
+					return;
+				}
+				HashMap<String, String> data = (HashMap<String, String>) ((IStructuredSelection) selection).getFirstElement();
+				@SuppressWarnings("restriction")
+				final SourceViewer srcViewer = (SourceViewer) editor.getViewer();
+				IDocument document = srcViewer.getDocument();
+				int offset = srcViewer.getTextWidget().getCaretOffset();
+				String before = "";
+				try {
+					before = document.get(0, offset);
+				} catch (BadLocationException e) {
+					e.printStackTrace();
+				}
+				// 获取编号,并插入
+				String Id = new StringBuffer("\"").append(StringUtil.getString(data.get("1"))).append("\"").toString();
+				if (offset == document.get().length()) {
+					document.set(before + Id);
+				} else {
+					String after = document.get().substring(offset, document.get().length());
+					document.set(before + Id + after);
+				}
+				// 更新文档数据长度
+				srcViewer.getTextWidget().setCaretOffset(offset + Id.length());
+				// 更新焦点
+				srcViewer.getTextWidget().setFocus();
+			}
+		});
+
+		tableViewer.setContentProvider(new IStructuredContentProvider() {
+			@SuppressWarnings("rawtypes")
+			public Object[] getElements(Object inputElement) {
+				if (inputElement instanceof ArrayList) {
+					return ((ArrayList) inputElement).toArray();
+				} else {
+					return new Object[0];
+				}
+			}
+
+			public void dispose() {
+			}
+
+			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			}
+		});
+		// 设置标签器
+		tableViewer.setLabelProvider(new ITableLabelProvider() {
+			@SuppressWarnings({ "rawtypes" })
+			public String getColumnText(Object element, int columnIndex) {
+				if (element instanceof Map) {
+					Map map = (Map) element;
+					return StringUtil.getString(map.get(String.valueOf(columnIndex + 1)));
+				}
+				return null;
+			}
+
+			@Override
+			public void addListener(ILabelProviderListener listener) {
+
+			}
+
+			@Override
+			public void dispose() {
+
+			}
+
+			@Override
+			public boolean isLabelProperty(Object element, String property) {
+				return false;
+			}
+
+			@Override
+			public void removeListener(ILabelProviderListener listener) {
+
+			}
+
+			@Override
+			public Image getColumnImage(Object element, int columnIndex) {
+				return null;
+			}
+		});
+
+		searchButton.addSelectionListener(new SearchButtonAction(searchText, radioGroup, tableViewer));
 
 		Label lblNewLabel = new Label(orgComposite, SWT.NONE);
 		lblNewLabel.setText("流程变量");
@@ -211,25 +376,25 @@ public class FoxBPMExpDialog extends Dialog {
 		gd_classifyList.heightHint = 120;
 		classifyList.setLayoutData(gd_classifyList);
 		classifyListViewer.setContentProvider(ArrayContentProvider.getInstance());
-		classifyListViewer.setLabelProvider(new LabelProvider(){
+		classifyListViewer.setLabelProvider(new LabelProvider() {
 
 			@Override
 			public String getText(Object element) {
-				org.foxbpm.model.config.variableconfig.Type type=(Type)element;
-				FoxBPMDataVariable FoxBPMDataVariable=typeToDataVariableMap.get(type.getId());
-				int size=FoxBPMDataVariable==null?0:FoxBPMDataVariable.getDataVariableDef().size();
+				org.foxbpm.model.config.variableconfig.Type type = (Type) element;
+				FoxBPMDataVariable FoxBPMDataVariable = typeToDataVariableMap.get(type.getId());
+				int size = FoxBPMDataVariable == null ? 0 : FoxBPMDataVariable.getDataVariableDef().size();
 				return type.getName() + "(" + size + ")";
 			}
-			
+
 		});
 		classifyListViewer.setInput(dataVariableConfig.getDataVariableType().getType());
-		
+
 		Label functionLabel = new Label(docComposite, SWT.NONE);
 		functionLabel.setText("函数");
-		
+
 		PatternFilter filter = new PatternFilter();
 		FilteredTree filteredTree = new FilteredTree(docComposite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
-		final TreeViewer functionTreeViewer=filteredTree.getViewer();
+		final TreeViewer functionTreeViewer = filteredTree.getViewer();
 		Tree FunctionTree = functionTreeViewer.getTree();
 		GridData gd_FunctionTree = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
 		gd_FunctionTree.heightHint = 220;
@@ -239,83 +404,83 @@ public class FoxBPMExpDialog extends Dialog {
 
 		Label documentLabel = new Label(docComposite, SWT.NONE);
 		documentLabel.setText("文档");
-		
-		final Text docText=new Text(docComposite, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+
+		final Text docText = new Text(docComposite, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		GridData gd_docText = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
 		gd_docText.heightHint = 100;
 		docText.setLayoutData(gd_docText);
-		
-		//绑定事件处理
+
+		// 绑定事件处理
 		classifyListViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			
+
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				ISelection selection=event.getSelection();
+				ISelection selection = event.getSelection();
 				if (selection.isEmpty()) {
 					functionTreeViewer.setInput(EMPTY_ARRAY);
 					docText.setText(EMPTY_STRING);
 					return;
 				}
-				Type selectedType=(Type)((IStructuredSelection)selection).getFirstElement();
-				FoxBPMDataVariable FoxBPMDataVariable=typeToDataVariableMap.get(selectedType.getId());
-				if (FoxBPMDataVariable==null) {
+				Type selectedType = (Type) ((IStructuredSelection) selection).getFirstElement();
+				FoxBPMDataVariable FoxBPMDataVariable = typeToDataVariableMap.get(selectedType.getId());
+				if (FoxBPMDataVariable == null) {
 					functionTreeViewer.setInput(EMPTY_ARRAY);
 					docText.setText(EMPTY_STRING);
-				}else {
+				} else {
 					functionTreeViewer.setInput(FoxBPMDataVariable);
 				}
-				
+
 			}
 		});
-		
+
 		functionTreeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
-			
+
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				ISelection selection=event.getSelection();
+				ISelection selection = event.getSelection();
 				if (selection.isEmpty()) {
 					docText.setText(EMPTY_STRING);
 					return;
 				}
-				DataVariableDef selectedDataVariableDef=(DataVariableDef)((IStructuredSelection)selection).getFirstElement();
+				DataVariableDef selectedDataVariableDef = (DataVariableDef) ((IStructuredSelection) selection).getFirstElement();
 				docText.setText(selectedDataVariableDef.getDoc());
 			}
 		});
 
 		functionTreeViewer.addDoubleClickListener(new IDoubleClickListener() {
-			
+
 			@Override
 			public void doubleClick(DoubleClickEvent event) {
-				ISelection selection=event.getSelection();
+				ISelection selection = event.getSelection();
 				if (selection.isEmpty()) {
 					return;
 				}
-				DataVariableDef dataVariableDef=(DataVariableDef)((IStructuredSelection)selection).getFirstElement();
+				DataVariableDef dataVariableDef = (DataVariableDef) ((IStructuredSelection) selection).getFirstElement();
 				@SuppressWarnings("restriction")
 				final SourceViewer srcViewer = (SourceViewer) editor.getViewer();
-                IDocument document = srcViewer.getDocument();
-                int offset = srcViewer.getTextWidget().getCaretOffset();
-                String before="";
-                try {
+				IDocument document = srcViewer.getDocument();
+				int offset = srcViewer.getTextWidget().getCaretOffset();
+				String before = "";
+				try {
 					before = document.get(0, offset);
 				} catch (BadLocationException e) {
 					e.printStackTrace();
 				}
-                String toInsert=dataVariableDef.getValue();
-                if(offset == document.get().length()){
-                    document.set(before + toInsert);
-                } else {
-                    String after = document.get().substring(offset, document.get().length());
-                    document.set(before + toInsert + after);
-                }
+				String toInsert = dataVariableDef.getValue();
+				if (offset == document.get().length()) {
+					document.set(before + toInsert);
+				} else {
+					String after = document.get().substring(offset, document.get().length());
+					document.set(before + toInsert + after);
+				}
 
-                srcViewer.getTextWidget().setCaretOffset(offset + toInsert.length());
-                srcViewer.getTextWidget().setFocus();
+				srcViewer.getTextWidget().setCaretOffset(offset + toInsert.length());
+				srcViewer.getTextWidget().setFocus();
 			}
 		});
 		m_bindingContext = initDataBindings();
 		init();
-		
+
 		return container;
 	}
 
@@ -428,9 +593,11 @@ public class FoxBPMExpDialog extends Dialog {
 			}
 		});
 
-//		ToolItem tltmNewItem_Name = new ToolItem(toolBar, SWT.NONE);
-//		tltmNewItem_Name.setText("ExpressionName");
-//		tltmNewItem_Name.addSelectionListener(new GroovyOperatorSelectionAdapter("//FixFlow_ExpressionName:", document, control));
+		// ToolItem tltmNewItem_Name = new ToolItem(toolBar, SWT.NONE);
+		// tltmNewItem_Name.setText("ExpressionName");
+		// tltmNewItem_Name.addSelectionListener(new
+		// GroovyOperatorSelectionAdapter("//FixFlow_ExpressionName:", document,
+		// control));
 	}
 
 	private void createEditor(Composite composite) {
@@ -441,14 +608,16 @@ public class FoxBPMExpDialog extends Dialog {
 
 		workbench = PlatformUI.getWorkbench();
 
-		IPreferenceStore store = new ChainedPreferenceStore(new IPreferenceStore[] { PreferenceConstants.getPreferenceStore(), EditorsUI.getPreferenceStore() });
+		IPreferenceStore store = new ChainedPreferenceStore(new IPreferenceStore[] { PreferenceConstants.getPreferenceStore(),
+				EditorsUI.getPreferenceStore() });
 
 		site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor().getEditorSite();
 
 		diagramEditorSelectionProvider = site.getSelectionProvider();
 
-//		IPath path = Path.fromOSString(FoxBPMDesignerUtil.getFakeGroovyFilePath());
-//		IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+		// IPath path =
+		// Path.fromOSString(FoxBPMDesignerUtil.getFakeGroovyFilePath());
+		// IFile ifile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 
 		editor = new FoxBPMGroovyEditor(store);
 		try {
@@ -457,7 +626,7 @@ public class FoxBPMExpDialog extends Dialog {
 			if (!fileStore.fetchInfo().isDirectory() && fileStore.fetchInfo().exists()) {
 				input = new FileStoreEditorInput(fileStore);
 			}
-			
+
 			editor.getDocumentProvider().connect(input);
 			document = editor.getDocumentProvider().getDocument(input);
 			editor.init(site, input);
@@ -496,24 +665,61 @@ public class FoxBPMExpDialog extends Dialog {
 
 	@Override
 	protected void okPressed() {
-		if(expression!=null) {
+		if (expression != null) {
 			expression = FoxBPMFactory.eINSTANCE.createExpression();
 		}
 		ModelUtil.setID(expression);
 		expression.setName(displaytext.getText());
 		expression.setValue(document.get());
 		setExpression(expression);
-		if(editingDomain!=null) {
+		if (editingDomain != null) {
 			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 				@Override
 				protected void doExecute() {
-					formParam.setExpression(expression);
+					if (formParam != null)
+						formParam.setExpression(expression);
+					if (potentialStarter != null)
+						potentialStarter.setExpression(expression);
 				}
 			});
 		}
 		super.okPressed();
-		
+
 		close();
+	}
+
+	@SuppressWarnings("unchecked")
+	private Group crateGroupDefine(Composite orgComposite) {
+		ArrayList<GroupDefine> groupDefines = null;
+		try {
+			String jsonString = FileUtil.readFile2StringUTF8(FoxBPMDesignerUtil.getCachePath() + "/allGroupDefinitions.data");
+			JsonDataUtil instance = JsonDataUtil.getInstance();
+			groupDefines = (ArrayList<GroupDefine>) instance.analysisJsonToObj(jsonString, GroupDefine.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (null == groupDefines) {
+			groupDefines = new ArrayList<GroupDefine>();
+		}
+
+		// 默认放入用户
+		GroupDefine userDefine = new GroupDefine();
+		userDefine.setName("用户");
+		userDefine.setType("user");
+		groupDefines.add(0, userDefine);
+
+		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
+		// 在当前窗口中创建分组
+		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1);
+		radioGroup.setLayoutData(gridData);
+		radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
+		Button checkBox = null;
+		for (GroupDefine groupDefine : groupDefines) {
+			checkBox = new Button(radioGroup, SWT.RADIO);
+			checkBox.setText(groupDefine.getName());
+			checkBox.setData("type", groupDefine.getType());
+		}
+		return radioGroup;
 	}
 
 	@Override
@@ -548,15 +754,15 @@ public class FoxBPMExpDialog extends Dialog {
 	public void setExpression(Expression expression) {
 		this.expression = expression;
 	}
-	
+
 	private void init() {
-		if(expression!=null) {
+		if (expression != null) {
 			document.set(expression.getValue());
 		} else {
 			document.set(textcontrol.getText());
 		}
 	}
-	
+
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
@@ -566,30 +772,30 @@ public class FoxBPMExpDialog extends Dialog {
 		//
 		return bindingContext;
 	}
-	
+
 	/**
 	 * 加载dataVariableConfig对象
 	 */
-	private void loadDataVariableConfig(){
-		Resource resource=EMFUtil.readEMFFile(FoxBPMDesignerUtil.getDataVariableConfigPath());
-		if (resource!=null) {
-			dataVariableConfig=(DataVariableConfig)resource.getContents().get(0);
+	private void loadDataVariableConfig() {
+		Resource resource = EMFUtil.readEMFFile(FoxBPMDesignerUtil.getDataVariableConfigPath());
+		if (resource != null) {
+			dataVariableConfig = (DataVariableConfig) resource.getContents().get(0);
 		}
-		
+
 	}
-	
+
 	/**
 	 * 映射dataVariableType到FoxBPMDataVariable
 	 */
-	private void MapFoxBPMDataVariableWithType(){
-		if (dataVariableConfig==null) {
+	private void MapFoxBPMDataVariableWithType() {
+		if (dataVariableConfig == null) {
 			return;
 		}
-		typeToDataVariableMap=new HashMap<String, FoxBPMDataVariable>();
-		DataVariableType dataVariableType=dataVariableConfig.getDataVariableType();
-		EList<FoxBPMDataVariable> FoxBPMDataVariableList=dataVariableConfig.getFoxBPMDataVariable();
+		typeToDataVariableMap = new HashMap<String, FoxBPMDataVariable>();
+		DataVariableType dataVariableType = dataVariableConfig.getDataVariableType();
+		EList<FoxBPMDataVariable> FoxBPMDataVariableList = dataVariableConfig.getFoxBPMDataVariable();
 		for (Type type : dataVariableType.getType()) {
-			String type_id=type.getId();
+			String type_id = type.getId();
 			for (FoxBPMDataVariable FoxBPMDataVariable : FoxBPMDataVariableList) {
 				if (type_id.equals(FoxBPMDataVariable.getType())) {
 					typeToDataVariableMap.put(type_id, FoxBPMDataVariable);
@@ -598,8 +804,8 @@ public class FoxBPMExpDialog extends Dialog {
 			}
 		}
 	}
-	
-	private class StyledFunctionTreeLabelProvider extends StyledCellLabelProvider implements ILabelProvider{
+
+	private class StyledFunctionTreeLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
 
 		@Override
 		public Image getImage(Object element) {
@@ -608,37 +814,37 @@ public class FoxBPMExpDialog extends Dialog {
 
 		@Override
 		public String getText(Object element) {
-			DataVariableDef dataVariableDef=(DataVariableDef)element;
-			return dataVariableDef.getName()+" "+dataVariableDef.getDataType()+" "+dataVariableDef.getValue();
+			DataVariableDef dataVariableDef = (DataVariableDef) element;
+			return dataVariableDef.getName() + " " + dataVariableDef.getDataType() + " " + dataVariableDef.getValue();
 		}
 
 		@Override
 		public void update(ViewerCell cell) {
 			if (cell.getElement() instanceof DataVariableDef) {
-				DataVariableDef dataVariableDef=(DataVariableDef)cell.getElement();
-				StyledString styledString=new StyledString();
-				//正常样式
-				styledString.append(dataVariableDef.getName()+" "+dataVariableDef.getDataType()+" ");
-				//特殊样式
-				styledString.append(dataVariableDef.getValue(),StyledString.DECORATIONS_STYLER);
+				DataVariableDef dataVariableDef = (DataVariableDef) cell.getElement();
+				StyledString styledString = new StyledString();
+				// 正常样式
+				styledString.append(dataVariableDef.getName() + " " + dataVariableDef.getDataType() + " ");
+				// 特殊样式
+				styledString.append(dataVariableDef.getValue(), StyledString.DECORATIONS_STYLER);
 				cell.setText(styledString.getString());
 				cell.setStyleRanges(styledString.getStyleRanges());
 			}
 		}
-		
+
 	}
-	
-	private class FuncitonTreeContentProvider implements ITreeContentProvider{
+
+	private class FuncitonTreeContentProvider implements ITreeContentProvider {
 
 		@Override
 		public void dispose() {
-			
+
 		}
 
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -649,7 +855,7 @@ public class FoxBPMExpDialog extends Dialog {
 		@Override
 		public Object[] getChildren(Object parentElement) {
 			if (parentElement instanceof FoxBPMDataVariableImpl) {
-				FoxBPMDataVariableImpl FoxBPMDataVariable=(FoxBPMDataVariableImpl)parentElement;
+				FoxBPMDataVariableImpl FoxBPMDataVariable = (FoxBPMDataVariableImpl) parentElement;
 				return FoxBPMDataVariable.getDataVariableDef().toArray();
 			}
 			return EMPTY_ARRAY;
@@ -662,8 +868,8 @@ public class FoxBPMExpDialog extends Dialog {
 
 		@Override
 		public boolean hasChildren(Object element) {
-			return getChildren(element).length>0;
+			return getChildren(element).length > 0;
 		}
-		
+
 	}
 }

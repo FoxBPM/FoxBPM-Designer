@@ -35,7 +35,6 @@ import org.foxbpm.model.bpmn.foxbpm.TimeSkipExpression;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getConnectorInstanceId <em>Connector Instance Id</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getConnectorInstanceName <em>Connector Instance Name</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getEventType <em>Event Type</em>}</li>
- *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getErrorHandling <em>Error Handling</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getErrorCode <em>Error Code</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getConnectorParameterInputs <em>Connector Parameter Inputs</em>}</li>
@@ -47,6 +46,7 @@ import org.foxbpm.model.bpmn.foxbpm.TimeSkipExpression;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getTimeSkipExpression <em>Time Skip Expression</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.ConnectorInstanceImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -172,16 +172,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected String eventType = EVENT_TYPE_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDocumentation()
-	 * @generated
-	 * @ordered
-	 */
-	protected Documentation documentation;
 
 	/**
 	 * The default value of the '{@link #getErrorHandling() <em>Error Handling</em>}' attribute.
@@ -342,6 +332,16 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected Documentation documentation;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -809,8 +809,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
-				return basicSetDocumentation(null, msgs);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_INPUTS:
 				return ((InternalEList<?>)getConnectorParameterInputs()).basicRemove(otherEnd, msgs);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__CONNECTOR_PARAMETER_OUTPUTS:
@@ -823,6 +821,8 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return basicSetTimeExpression(null, msgs);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__TIME_SKIP_EXPRESSION:
 				return basicSetTimeSkipExpression(null, msgs);
+			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
+				return basicSetDocumentation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -847,8 +847,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return getConnectorInstanceName();
 			case FoxBPMPackage.CONNECTOR_INSTANCE__EVENT_TYPE:
 				return getEventType();
-			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
-				return getDocumentation();
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_HANDLING:
 				return getErrorHandling();
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_CODE:
@@ -871,6 +869,8 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return getVersion();
 			case FoxBPMPackage.CONNECTOR_INSTANCE__TYPE:
 				return getType();
+			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
+				return getDocumentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -901,9 +901,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__EVENT_TYPE:
 				setEventType((String)newValue);
-				return;
-			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
-				setDocumentation((Documentation)newValue);
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_HANDLING:
 				setErrorHandling((String)newValue);
@@ -941,6 +938,9 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case FoxBPMPackage.CONNECTOR_INSTANCE__TYPE:
 				setType((String)newValue);
 				return;
+			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
+				setDocumentation((Documentation)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -970,9 +970,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__EVENT_TYPE:
 				setEventType(EVENT_TYPE_EDEFAULT);
-				return;
-			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
-				setDocumentation((Documentation)null);
 				return;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_HANDLING:
 				setErrorHandling(ERROR_HANDLING_EDEFAULT);
@@ -1007,6 +1004,9 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 			case FoxBPMPackage.CONNECTOR_INSTANCE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
+				setDocumentation((Documentation)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1031,8 +1031,6 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return CONNECTOR_INSTANCE_NAME_EDEFAULT == null ? connectorInstanceName != null : !CONNECTOR_INSTANCE_NAME_EDEFAULT.equals(connectorInstanceName);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__EVENT_TYPE:
 				return EVENT_TYPE_EDEFAULT == null ? eventType != null : !EVENT_TYPE_EDEFAULT.equals(eventType);
-			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
-				return documentation != null;
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_HANDLING:
 				return ERROR_HANDLING_EDEFAULT == null ? errorHandling != null : !ERROR_HANDLING_EDEFAULT.equals(errorHandling);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__ERROR_CODE:
@@ -1055,6 +1053,8 @@ public class ConnectorInstanceImpl extends MinimalEObjectImpl.Container implemen
 				return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
 			case FoxBPMPackage.CONNECTOR_INSTANCE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case FoxBPMPackage.CONNECTOR_INSTANCE__DOCUMENTATION:
+				return documentation != null;
 		}
 		return super.eIsSet(featureID);
 	}

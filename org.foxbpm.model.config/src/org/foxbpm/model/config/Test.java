@@ -44,9 +44,9 @@ public class Test {
 		param1.setName("是否验证");
 		param1.setValue("false");
 		
-		taskCommandDefinition.getParams().add(param);
-		taskCommandDefinition.getParams().add(param1);
-				
+//		taskCommandDefinition.getParams().add(param);
+//		taskCommandDefinition.getParams().add(param1);
+//				
 		taskCommandConfig.getTaskCommandDefinition().add(taskCommandDefinition);
 				
 		foxBPMConfig.setTaskCommandConfig(taskCommandConfig);

@@ -61,7 +61,6 @@ import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.base.utils.ZipUtils;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
-import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.InputRepresentation;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
@@ -338,9 +337,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				InputDialog inputDialog = new InputDialog(null, "下载流程定义", "请输入流程定义的文件名", "FileName.bpmn", inputValidator);
 				if(inputDialog.open()==inputDialog.OK) {
 					try {
-						ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/resource/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
-						client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
-						
+						ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/resource/" + processTo.getDeploymentId() + "/" + processTo.getResourceName());
+						if( client== null) {
+							return;
+						}
 						String fileName = null;
 						if(iPackageFragmentRoot!=null) {
 							fileName = iPackageFragmentRoot.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
@@ -441,8 +441,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 
 	private void publishProcess() {
 		dbid = null;
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployments");
-		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+		ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployments");
+		if(client==null) {
+			return;
+		}
 		File file = null;
 		try {
 			String processPath = iFile.getLocationURI().getPath();
@@ -483,8 +485,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	}
 	
 	private void updateProcess(ProcessTo processTo) {
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId());
-		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+		ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployment/" + processTo.getDeploymentId());
+		if(client==null) {
+			return;
+		}
 		File file = null;
 		try {
 			String processPath = iFile.getLocationURI().getPath();
@@ -509,8 +513,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private void deleteProcess(ProcessTo processTo) {
 		boolean b = MessageDialog.openConfirm(null, "提示", "即将删除此流程定义及和该流程相关的数据，是否确认该操作?");
 		if(b) {
-			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "model/deployment/" + processTo.getDeploymentId());
-			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployment/" + processTo.getDeploymentId());
+			if(client==null) {
+				return;
+			}
 			File file = null;
 			try {
 				String processPath = iFile.getLocationURI().getPath();
@@ -554,9 +560,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				dbid = processDbid==null?null:processDbid.toString();
 				publishButton.setEnabled(true);
 			}
-			ClientResource client = null;
-			client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions?key=" + process.getId());
-			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions?key=" + process.getId());
+			if(client==null) {
+				return;
+			}
 			Representation result = client.get();
 			try {
 				ObjectMapper objectMapper = new ObjectMapper();
@@ -583,8 +590,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		}else {
 			allButtonsDisable();
 			deleteButton.setEnabled(true);
-			ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "process-definitions");
-			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC,"111", "111");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions");
+			if(client==null) {
+				return;
+			}
 			Representation result = client.get();
 			try {
 				ObjectMapper objectMapper = new ObjectMapper();

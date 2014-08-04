@@ -73,6 +73,7 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 			case FoxBPMConfigPackage.EVENT_LISTENER: return createEventListener();
 			case FoxBPMConfigPackage.BIZ_DATA_OBJECT_CONFIG: return createBizDataObjectConfig();
 			case FoxBPMConfigPackage.DATA_OBJECT_BEHAVIOR: return createDataObjectBehavior();
+			case FoxBPMConfigPackage.COMMAND_PARAM: return createCommandParam();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -246,6 +247,16 @@ public class FoxBPMConfigFactoryImpl extends EFactoryImpl implements FoxBPMConfi
 	public DataObjectBehavior createDataObjectBehavior() {
 		DataObjectBehaviorImpl dataObjectBehavior = new DataObjectBehaviorImpl();
 		return dataObjectBehavior;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CommandParam createCommandParam() {
+		CommandParamImpl commandParam = new CommandParamImpl();
+		return commandParam;
 	}
 
 	/**

@@ -3,7 +3,6 @@ package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.HumanPerformer;
