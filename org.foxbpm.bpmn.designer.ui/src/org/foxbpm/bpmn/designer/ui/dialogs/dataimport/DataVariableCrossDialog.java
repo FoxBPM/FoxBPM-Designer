@@ -78,6 +78,10 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 		for (DataVariable dataVariable : importedDataVars) {
 			if(unImportDataVars.size()>0 && unImportDataVars.get(unImportDataVars.size()-1).getBizType().equals(dataVariable.getBizType())) {
 				filterDataVariables.add(dataVariable);
+			}else if(dataVariable.getId().equals("_BizName") || dataVariable.getId().equals("_BizKeyField")) {
+				continue;
+			}else if(unImportDataVars.size()==0) {
+				filterDataVariables.add(dataVariable);
 			}
 		}
 		
@@ -495,9 +499,10 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 	}
 
 	public void getBizKey(){
-		for (DataVariable dataVariable : ((List<DataVariable>)importedTableViewer.getInput())) {
-			if(dataVariable.getId().equals("Fix_BizKeyFile")){
+		for (DataVariable dataVariable : BpmnModelUtil.getDataVariable(process)) {
+			if(dataVariable.getId().equals("_BizKeyField")){
 				keyText.setText(dataVariable.getExpression().getName());
+				keyText.setData(dataVariable);
 			}
 		}
 	}

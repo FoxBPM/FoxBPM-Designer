@@ -71,14 +71,15 @@ public class SearchButtonAction extends SelectionAdapter {
 
 				if ("user".equals(type)) {
 					sql.append("au_userinfo ");
-					sql.append("where USERID like ?");
+					sql.append("where USERID like ? or USERNAME like ?");
 				} else {
 					sql.append("au_orginfo where GROUPType='" + type + "' ");
-					sql.append(" and ORGID like ?");
+					sql.append(" and (ORGID like ? or ORGNAME like ?)");
 				}
 				connection = SQLiteUtil.getInstance().createConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(sql.toString());
 				preparedStatement.setString(1, '%' + text.getText() + '%');
+				preparedStatement.setString(2, '%' + text.getText() + '%');
 				ResultSet resultSet = preparedStatement.executeQuery();
 
 				ArrayList<Map<String, String>> dataList = new ArrayList<Map<String, String>>();

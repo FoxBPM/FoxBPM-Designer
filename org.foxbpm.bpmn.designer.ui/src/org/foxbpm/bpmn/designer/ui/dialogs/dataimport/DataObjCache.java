@@ -21,7 +21,7 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 public class DataObjCache {
 	
 	public static List<DataObjImport> dataObjImports=new ArrayList<DataObjImport>();
-	public static List<String> dataVarTypes = new ArrayList<String>();
+	public static Map<String, Object> dataVarTypes = new HashMap<String, Object>();
 	public static Map<String, Object> cachemap = new HashMap<String, Object>();
 	
 	public static List<DataObjImport> getDataObjImports() {
@@ -40,26 +40,6 @@ public class DataObjCache {
 			}
 		}else {
 			MessageDialog.openInformation(null, "提示", "未找到缓存的数据变量文件，请同步流程设计器资源");
-//			try {
-//				ClientResource client = FoxBPMDesignerUtil.getClientByUrl("bizDataObjects/dataBaseMode/foxbpmDataSource");
-//				if(client==null) {
-//					return dataObjImports;
-//				}
-//				Representation result = client.get();
-//				
-//				String resultString = result.getText();
-//				analysisJson(resultString);
-//				
-//				try {
-//					cacheFile.mkdirs();
-//					cacheFile.createNewFile();
-//					FileUtil.writeObject(resultString, path);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
 		}
 		
 		return dataObjImports;
@@ -101,21 +81,6 @@ public class DataObjCache {
 				DataObjImportImpl dataObjImport = new DataObjImportImpl();
 				dataObjImport.setId(json.get("id")==null?"":json.get("id").asText());
 				dataObjImport.setName(json.get("name")==null?"":json.get("name").asText());
-				
-				//加入两个固定的数据变量
-				DataVariable dataVariable2 = FoxBPMFactory.eINSTANCE.createDataVariable();
-				dataVariable2.setId("_BizName");
-				dataVariable2.setBizType("customVariable");
-				dataVariable2.setDataType("String");
-				dataVariable2.setIsPersistence(false);
-				DataVariable dataVariable3 = FoxBPMFactory.eINSTANCE.createDataVariable();
-				dataVariable3.setId("_BizKeyField");
-				dataVariable3.setBizType("customVariable");
-				dataVariable3.setDataType("String");
-				dataVariable3.setIsPersistence(false);
-				dataObjImport.getDataVariables().add(dataVariable3);
-				dataObjImport.getDataVariables().add(dataVariable2);
-				
 				//循环添加变量
 				DataVariable dataVariable = FoxBPMFactory.eINSTANCE.createDataVariable();
 				ArrayNode columnArray = (ArrayNode)json.get("dataVariableDefinitions");
@@ -131,7 +96,6 @@ public class DataObjCache {
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
 						expression.setName(columnJson.get("id")==null?"":columnJson.get("id").asText());
 						expression.setValue(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
-//						System.out.println(expression.getName());
 						dataVariable.setExpression(expression);
 						dataObjImport.getDataVariables().add(dataVariable);
 					}
@@ -146,7 +110,7 @@ public class DataObjCache {
 			map.put("name", name);
 			map.put("dataobjs", cacheDataObjImports);
 			cachemap.put(id, map);
-			dataVarTypes.add(id);
+			dataVarTypes.put(id, name);
 		}
 	}
 }
