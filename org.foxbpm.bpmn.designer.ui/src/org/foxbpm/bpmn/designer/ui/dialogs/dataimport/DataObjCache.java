@@ -92,7 +92,7 @@ public class DataObjCache {
 						dataVariable.setIsList(columnJson.get("list")==null?false:columnJson.get("list").asBoolean());
 						dataVariable.setIsPersistence(columnJson.get("persistence")==null?false:columnJson.get("persistence").asBoolean());
 						dataVariable.setDataType(columnJson.get("dataType")==null?"":columnJson.get("dataType").asText());
-						
+						dataVariable.setFieldName(columnJson.get("fieldName")==null?"":columnJson.get("fieldName").asText());
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
 						expression.setName(columnJson.get("id")==null?"":columnJson.get("id").asText());
 						expression.setValue(columnJson.get("expressionText")==null?"":columnJson.get("expressionText").asText());
