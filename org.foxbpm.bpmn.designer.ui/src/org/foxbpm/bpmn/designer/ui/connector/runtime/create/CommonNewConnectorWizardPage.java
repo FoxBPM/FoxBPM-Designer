@@ -49,8 +49,6 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 
 	private boolean commonIsRequired;
 
-	private FoxBPMExpViewer foxBPMExpViewer;
-
 	private EObject be;
 
 	/**
@@ -138,7 +136,7 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 
 				if (type.equals(types[0])) {
 					// 创建文本框
-					foxBPMExpViewer = new FoxBPMExpViewer(proGroup, SWT.NONE, be);
+					final FoxBPMExpViewer foxBPMExpViewer = new FoxBPMExpViewer(proGroup, SWT.NONE, be);
 
 					Text expText = foxBPMExpViewer.getTextControl();
 
@@ -185,7 +183,7 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 				// 暂时还是跟text一样，保留
 				else if (type.equals(types[1])) {
 					// 创建文本框
-					foxBPMExpViewer = new FoxBPMExpViewer(proGroup, SWT.NONE, be);
+					final FoxBPMExpViewer foxBPMExpViewer = new FoxBPMExpViewer(proGroup, SWT.NONE, be);
 
 					Text expText = foxBPMExpViewer.getTextControl();
 
