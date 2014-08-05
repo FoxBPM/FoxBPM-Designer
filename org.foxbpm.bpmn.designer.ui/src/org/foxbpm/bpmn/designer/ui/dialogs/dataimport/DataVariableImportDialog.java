@@ -386,8 +386,9 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 			//值为选中的业务对象ID，也就是表名
 			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
 			expression.setName(this.dataObjImport.getId());
-			expression.setValue(this.dataObjImport.getId());
+			expression.setValue("\"" + this.dataObjImport.getId() + "\"");
 			dataVariable2.setExpression(expression);
+			dataVariable2.setFieldName("\"" + this.dataObjImport.getId() + "\"");
 			DataVariable dataVariable3 = FoxBPMFactory.eINSTANCE.createDataVariable();
 			dataVariable3.setId("_BizKeyField");
 			dataVariable3.setBizType("customVariable");
@@ -396,8 +397,9 @@ public class DataVariableImportDialog extends TitleAreaDialog {
 			//值为关联键
 			Expression expression1 = FoxBPMFactory.eINSTANCE.createExpression();
 			expression1.setName(getKeyDataVariable().getExpression().getName());
-			expression1.setValue(getKeyDataVariable().getExpression().getValue());
+			expression1.setValue("\"" + getKeyDataVariable().getFieldName() + "\"");
 			dataVariable3.setExpression(expression1);
+			dataVariable3.setFieldName("\"" + getKeyDataVariable().getFieldName() + "\"");
 			
 			dataVariables.add(dataVariable2);
 			dataVariables.add(dataVariable3);

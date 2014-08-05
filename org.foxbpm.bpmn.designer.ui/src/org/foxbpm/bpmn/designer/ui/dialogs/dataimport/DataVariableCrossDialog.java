@@ -78,6 +78,8 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 		for (DataVariable dataVariable : importedDataVars) {
 			if(unImportDataVars.size()>0 && unImportDataVars.get(unImportDataVars.size()-1).getBizType().equals(dataVariable.getBizType())) {
 				filterDataVariables.add(dataVariable);
+			}else if(dataVariable.getId().equals("_BizName") || dataVariable.getId().equals("_BizKeyField")) {
+				continue;
 			}else if(unImportDataVars.size()==0) {
 				filterDataVariables.add(dataVariable);
 			}

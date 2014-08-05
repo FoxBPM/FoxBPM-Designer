@@ -829,7 +829,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 	int TASK_COMMAND_DEFINITION__DESCRIPTION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Command Param</b></em>' containment reference.
+	 * The feature id for the '<em><b>Command Param</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1864,10 +1864,10 @@ public interface FoxBPMConfigPackage extends EPackage {
 	EAttribute getTaskCommandDefinition_Description();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Command Param</em>'.
+	 * @return the meta object for the containment reference list '<em>Command Param</em>'.
 	 * @see org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam()
 	 * @see #getTaskCommandDefinition()
 	 * @generated
@@ -2592,7 +2592,7 @@ public interface FoxBPMConfigPackage extends EPackage {
 		EAttribute TASK_COMMAND_DEFINITION__DESCRIPTION = eINSTANCE.getTaskCommandDefinition_Description();
 
 		/**
-		 * The meta object literal for the '<em><b>Command Param</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Command Param</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
