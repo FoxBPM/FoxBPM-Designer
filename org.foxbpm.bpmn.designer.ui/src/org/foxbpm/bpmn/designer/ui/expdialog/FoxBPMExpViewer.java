@@ -178,7 +178,10 @@ public class FoxBPMExpViewer extends ContentViewer {
 			public void handleEvent(Event event) {
 				textControl.setText("");
 				expression = null;
-				fireExpressioChanged(new ExpressionChangedEvent(FoxBPMExpViewer.this, null));
+				FormalExpression formalExpression = Bpmn2Factory.eINSTANCE.createFormalExpression();
+				formalExpression.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME, "");
+				formalExpression.setBody("");
+				fireExpressioChanged(new ExpressionChangedEvent(FoxBPMExpViewer.this, formalExpression));
 				refresh();
 			}
 		});
