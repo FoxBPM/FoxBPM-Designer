@@ -2,15 +2,19 @@
  */
 package org.foxbpm.model.config.foxbpmconfig.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.foxbpm.model.config.foxbpmconfig.CommandParam;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
@@ -198,14 +202,14 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 	protected String description = DESCRIPTION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getCommandParam() <em>Command Param</em>}' containment reference.
+	 * The cached value of the '{@link #getCommandParam() <em>Command Param</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getCommandParam()
 	 * @generated
 	 * @ordered
 	 */
-	protected CommandParam commandParam;
+	protected EList<CommandParam> commandParam;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -399,42 +403,11 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CommandParam getCommandParam() {
+	public EList<CommandParam> getCommandParam() {
+		if (commandParam == null) {
+			commandParam = new EObjectContainmentEList<CommandParam>(CommandParam.class, this, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM);
+		}
 		return commandParam;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCommandParam(CommandParam newCommandParam, NotificationChain msgs) {
-		CommandParam oldCommandParam = commandParam;
-		commandParam = newCommandParam;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, oldCommandParam, newCommandParam);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCommandParam(CommandParam newCommandParam) {
-		if (newCommandParam != commandParam) {
-			NotificationChain msgs = null;
-			if (commandParam != null)
-				msgs = ((InternalEObject)commandParam).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, null, msgs);
-			if (newCommandParam != null)
-				msgs = ((InternalEObject)newCommandParam).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, null, msgs);
-			msgs = basicSetCommandParam(newCommandParam, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM, newCommandParam, newCommandParam));
 	}
 
 	/**
@@ -446,7 +419,7 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
-				return basicSetCommandParam(null, msgs);
+				return ((InternalEList<?>)getCommandParam()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -486,6 +459,7 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -514,7 +488,8 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 				setDescription((String)newValue);
 				return;
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
-				setCommandParam((CommandParam)newValue);
+				getCommandParam().clear();
+				getCommandParam().addAll((Collection<? extends CommandParam>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -553,7 +528,7 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 				setDescription(DESCRIPTION_EDEFAULT);
 				return;
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
-				setCommandParam((CommandParam)null);
+				getCommandParam().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -584,7 +559,7 @@ public class TaskCommandDefinitionImpl extends MinimalEObjectImpl.Container impl
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__DESCRIPTION:
 				return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
 			case FoxBPMConfigPackage.TASK_COMMAND_DEFINITION__COMMAND_PARAM:
-				return commandParam != null;
+				return commandParam != null && !commandParam.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,6 +2,7 @@
  */
 package org.foxbpm.model.config.foxbpmconfig;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 
@@ -240,30 +241,20 @@ public interface TaskCommandDefinition extends EObject {
 	void setDescription(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Command Param</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Command Param</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.config.foxbpmconfig.CommandParam}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Command Param</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Command Param</em>' containment reference.
-	 * @see #setCommandParam(CommandParam)
+	 * @return the value of the '<em>Command Param</em>' containment reference list.
 	 * @see org.foxbpm.model.config.foxbpmconfig.FoxBPMConfigPackage#getTaskCommandDefinition_CommandParam()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element'"
 	 * @generated
 	 */
-	CommandParam getCommandParam();
-
-	/**
-	 * Sets the value of the '{@link org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition#getCommandParam <em>Command Param</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Command Param</em>' containment reference.
-	 * @see #getCommandParam()
-	 * @generated
-	 */
-	void setCommandParam(CommandParam value);
+	EList<CommandParam> getCommandParam();
 
 } // TaskCommandDefinition

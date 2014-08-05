@@ -371,8 +371,8 @@
         <details key="kind" value="attribute"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="commandParam" eType="#//CommandParam"
-        containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="commandParam" upperBound="-1"
+        eType="#//CommandParam" containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
         <details key="kind" value="element"/>
       </eAnnotations>
