@@ -251,8 +251,11 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public void setExpression(Expression expression) {
 		this.expression = expression;
-		if(expression!=null && expression.getValue()!=null && textControl.getText()!=null)
+		if(expression!=null && expression.getValue()!=null && expression.getName()!=null && textControl.getText()!=null && expression.getName()!=expression.getValue()) {
+			textControl.setText(expression.getName());
+		}else if(expression!=null && expression.getValue()!=null && textControl.getText()!=null && expression.getName()==expression.getValue()) {
 			textControl.setText(expression.getValue());
+		}
 		textControl.setSelection(textControl.getText().length());
 	}
 
