@@ -76,7 +76,11 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 		List<DataVariable> filterDataVariables = new ArrayList<DataVariable>();
 		
 		for (DataVariable dataVariable : importedDataVars) {
-			if(unImportDataVars.size()>0 && unImportDataVars.get(0).getBizType().equals(dataVariable.getBizType())) {
+			if(unImportDataVars.size()>0 && unImportDataVars.get(unImportDataVars.size()-1).getBizType().equals(dataVariable.getBizType())) {
+				filterDataVariables.add(dataVariable);
+			}else if(dataVariable.getId().equals("_BizName") || dataVariable.getId().equals("_BizKeyField")) {
+				continue;
+			}else if(unImportDataVars.size()==0) {
 				filterDataVariables.add(dataVariable);
 			}
 		}
@@ -203,12 +207,12 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 			public void handleEvent(Event event) {
 				IStructuredSelection iStructuredSelection = (IStructuredSelection) importedTableViewer.getSelection();
 				DataVariable dataVariable = (DataVariable) iStructuredSelection.getFirstElement();
-//				if(dataVariable!=null && (dataVariable.getBizType().equals("formVariable") || dataVariable.getBizType().equals("dataBaseVariable"))) {
+				if(dataVariable!=null && (dataVariable.getBizType().equals("formVariable") || dataVariable.getBizType().equals("dataBaseVariable"))) {
 					keyText.setText(dataVariable.getId());
 					keyText.setData(dataVariable);
-//				}else {
-//					MessageDialog.openInformation(getShell(), "提示", "请从已导入的数据变量列表中选择一个业务类型为表单变量或数据库变量的数据变量设置关联键");
-//				}
+				}else {
+					MessageDialog.openInformation(getShell(), "提示", "请从已导入的数据变量列表中选择一个业务类型为表单变量或数据库变量的数据变量设置关联键");
+				}
 			}
 		});
 
@@ -495,9 +499,10 @@ public class DataVariableCrossDialog extends TitleAreaDialog {
 	}
 
 	public void getBizKey(){
-		for (DataVariable dataVariable : ((List<DataVariable>)importedTableViewer.getInput())) {
-			if(dataVariable.getId().equals("Fix_BizKeyFile")){
+		for (DataVariable dataVariable : BpmnModelUtil.getDataVariable(process)) {
+			if(dataVariable.getId().equals("_BizKeyField")){
 				keyText.setText(dataVariable.getExpression().getName());
+				keyText.setData(dataVariable);
 			}
 		}
 	}

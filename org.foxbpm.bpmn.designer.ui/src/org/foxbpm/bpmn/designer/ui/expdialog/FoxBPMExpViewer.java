@@ -178,7 +178,10 @@ public class FoxBPMExpViewer extends ContentViewer {
 			public void handleEvent(Event event) {
 				textControl.setText("");
 				expression = null;
-				fireExpressioChanged(new ExpressionChangedEvent(FoxBPMExpViewer.this, null));
+				FormalExpression formalExpression = Bpmn2Factory.eINSTANCE.createFormalExpression();
+				formalExpression.eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME, "");
+				formalExpression.setBody("");
+				fireExpressioChanged(new ExpressionChangedEvent(FoxBPMExpViewer.this, formalExpression));
 				refresh();
 			}
 		});
@@ -251,8 +254,11 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public void setExpression(Expression expression) {
 		this.expression = expression;
-		if(expression!=null && expression.getValue()!=null && textControl.getText()!=null)
+		if(expression!=null && expression.getValue()!=null && expression.getName()!=null && textControl.getText()!=null && expression.getName()!=expression.getValue()) {
+			textControl.setText(expression.getName());
+		}else if(expression!=null && expression.getValue()!=null && textControl.getText()!=null && expression.getName()==expression.getValue()) {
 			textControl.setText(expression.getValue());
+		}
 		textControl.setSelection(textControl.getText().length());
 	}
 

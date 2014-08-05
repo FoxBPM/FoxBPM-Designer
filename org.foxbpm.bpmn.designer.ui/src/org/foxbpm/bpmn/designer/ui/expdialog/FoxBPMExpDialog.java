@@ -232,14 +232,6 @@ public class FoxBPMExpDialog extends Dialog {
 		tableColumn = new TableColumn(orgTable, SWT.NONE);
 		tableColumn.setText("名称");
 		tableColumn.setMoveable(true);
-		// 注册鼠标事件
-		orgTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-
-			}
-		});
-
 		tableViewer.addDoubleClickListener(new IDoubleClickListener() {
 
 			@SuppressWarnings("unchecked")

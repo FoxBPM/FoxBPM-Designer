@@ -6,16 +6,11 @@ package org.foxbpm.bpmn.designer.base.utils;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.ArrayNode;
-import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
-import org.foxbpm.bpmn.designer.base.model.*;
-import org.foxbpm.bpmn.designer.base.utils.SQLiteUtil;
-import org.restlet.resource.ClientResource;
 
 /**
  * @author Administrator
@@ -80,11 +75,5 @@ public class JsonDataUtil {
 			}
 		}
 		return datas;
-	}
-
-	public List<GroupDefine> getGroupDefine() {
-		List<GroupDefine> groupDefine = new ArrayList<GroupDefine>();
-		FoxBPMDesignerUtil.getClientByUrl("");
-		return null;
 	}
 }
