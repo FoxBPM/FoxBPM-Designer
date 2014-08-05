@@ -66,8 +66,8 @@ public class SynDataUtils {
 			// 创建组织表
 			sql.append("CREATE TABLE `au_orginfo` (");
 			sql.append("`ORGID` varchar(64) NOT NULL,");
-			sql.append("`SUPORGID` varchar(512),");
 			sql.append("`ORGNAME` varchar(512),");
+			sql.append("`SUPORGID` varchar(512),");
 			sql.append("`GROUPTYPE` varchar(512),");
 			sql.append("PRIMARY KEY  (`ORGID`)");
 			sql.append(");");
@@ -86,7 +86,7 @@ public class SynDataUtils {
 			sql.delete(0, sql.length());
 			// 插入表数据
 			for (Group group : groups) {
-				sql.append("insert into au_orginfo values(");
+				sql.append("insert into au_orginfo(ORGID,ORGNAME,SUPORGID,GROUPTYPE) values(");
 				sql.append("'").append(group.getGroupId()).append("'").append(",");
 				sql.append("'").append(group.getGroupName()).append("'").append(",");
 				sql.append("'").append(group.getSupGroupId()).append("'").append(",");
@@ -95,7 +95,7 @@ public class SynDataUtils {
 			}
 
 			for (User user : users) {
-				sql.append("insert into au_userinfo values(");
+				sql.append("insert into au_userinfo(USERID,USERNAME,PASSWORD,EMAIL) values(");
 				sql.append("'").append(user.getUserId()).append("'").append(",");
 				sql.append("'").append(user.getUserName()).append("'").append(",");
 				sql.append("'").append(user.getPassword()).append("'").append(",");
