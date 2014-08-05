@@ -21,6 +21,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.sqlite.JDBC;
+
 /**
  * sqlite数据库操作工具类
  * 
@@ -37,10 +39,8 @@ public class SQLiteUtil {
 
 	private void init() {
 		try {
-			// 自动在java.library.path下加载sqlite_jni.dll
-			System.loadLibrary("sqlite_jni");
 			// 连接SQLite的JDBC
-			Class.forName("SQLite.JDBCDriver");
+			Class.forName("org.sqlite.JDBC");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
