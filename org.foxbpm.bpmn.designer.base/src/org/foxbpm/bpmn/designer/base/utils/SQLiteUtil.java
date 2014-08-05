@@ -64,7 +64,7 @@ public class SQLiteUtil {
 	public Connection createConnection() throws SQLException {
 		StringBuffer url = new StringBuffer("jdbc:sqlite:/");
 		url.append(FoxBPMDesignerUtil.getServicePath());
-		url.append("databasea.db");
+		url.append("foxbpmLocalDB.db");
 		return DriverManager.getConnection(url.toString());
 	}
 }
