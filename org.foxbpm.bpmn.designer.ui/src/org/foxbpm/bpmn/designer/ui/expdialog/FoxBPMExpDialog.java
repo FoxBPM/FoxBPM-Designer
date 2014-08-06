@@ -208,11 +208,11 @@ public class FoxBPMExpDialog extends Dialog {
 
 		Composite orgComposite = new Composite(container, SWT.NONE);
 		orgComposite.setLayout(new GridLayout(1, false));
-		orgComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		orgComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 
 		Label label = new Label(orgComposite, SWT.NONE);
-		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
-		gd_label.widthHint = 200;
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_label.widthHint = 180;
 		label.setLayoutData(gd_label);
 		label.setText("组织结构");
 
@@ -220,7 +220,7 @@ public class FoxBPMExpDialog extends Dialog {
 		Group radioGroup = crateGroupDefine(orgComposite);
 		// 搜索区域
 		Composite searchGroup = new Composite(orgComposite, SWT.SHADOW_ETCHED_OUT);
-		searchGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+		searchGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = -5;
 		searchGroup.setLayout(gridLayout);
@@ -238,7 +238,7 @@ public class FoxBPMExpDialog extends Dialog {
 		TableViewer tableViewer = new TableViewer(orgComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		// 表格
 		Table orgTable = tableViewer.getTable();
-		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
+		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, false, true, 3, 1);
 		// 设置表格布局所占用的高度
 		orgGridData.heightHint = 50;
 		orgTable.setLayoutData(orgGridData);
@@ -350,12 +350,11 @@ public class FoxBPMExpDialog extends Dialog {
 		searchButton.addSelectionListener(new SearchButtonAction(searchText, radioGroup, tableViewer));
 
 		Label lblNewLabel = new Label(orgComposite, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		lblNewLabel.setText("流程变量");
 		
 		datavartreeViewer = new TreeViewer(orgComposite, SWT.BORDER);
 		Tree tree = datavartreeViewer.getTree();
-		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		datavartreeViewer.setContentProvider(new TreeContentProvider());
 		datavartreeViewer.setLabelProvider(new ViewerLabelProvider());
 		datavartreeViewer.setInput(dataVarTos);
@@ -425,7 +424,7 @@ public class FoxBPMExpDialog extends Dialog {
 
 		Composite docComposite = new Composite(container, SWT.NONE);
 		docComposite.setLayout(new GridLayout(1, false));
-		docComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		docComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 
 		Label classifyLabel = new Label(docComposite, SWT.NONE);
 		classifyLabel.setText("分类");
@@ -433,7 +432,7 @@ public class FoxBPMExpDialog extends Dialog {
 		ListViewer classifyListViewer = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
 		List classifyList = classifyListViewer.getList();
 		GridData gd_classifyList = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-		gd_classifyList.widthHint = 200;
+		gd_classifyList.widthHint = 180;
 		gd_classifyList.heightHint = 120;
 		classifyList.setLayoutData(gd_classifyList);
 		classifyListViewer.setContentProvider(ArrayContentProvider.getInstance());
@@ -563,7 +562,7 @@ public class FoxBPMExpDialog extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(852, 634);
+		return new Point(916, 634);
 	}
 
 	public void createToolBar(Composite operatorcomposite) {
@@ -772,7 +771,7 @@ public class FoxBPMExpDialog extends Dialog {
 		groupDefines.add(0, userDefine);
 
 		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
-		radioGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
+		radioGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
 		radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
 		Button checkBox = null;
 		for (GroupDefine groupDefine : groupDefines) {

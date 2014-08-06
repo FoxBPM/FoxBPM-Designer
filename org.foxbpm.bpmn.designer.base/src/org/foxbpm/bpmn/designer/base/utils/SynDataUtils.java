@@ -55,6 +55,7 @@ public class SynDataUtils {
 			List<User> users = (ArrayList<User>) JsonDataUtil.getInstance().analysisJsonToObj(result.getText(), User.class);
 
 			connection = SQLiteUtil.getInstance().createConnection();
+			connection.setAutoCommit(false);
 			Statement statement = connection.createStatement();
 			StringBuffer sql = new StringBuffer();
 			// 清空表数据
