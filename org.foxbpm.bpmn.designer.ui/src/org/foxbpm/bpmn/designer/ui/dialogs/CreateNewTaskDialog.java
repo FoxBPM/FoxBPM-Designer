@@ -1,9 +1,12 @@
 package org.foxbpm.bpmn.designer.ui.dialogs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -50,6 +53,7 @@ import org.foxbpm.model.bpmn.foxbpm.CommandParam;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
+import org.foxbpm.model.bpmn.foxbpm.Param;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 
@@ -377,7 +381,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			@Override
 			public void handleEvent(Event event) {
 				CommandParamTo commandParamTo = new CommandParamTo();
-				commandParamTo.setBizType("ControlParam");
+				commandParamTo.setBizType("ExecuteParam");
 				commandParamTo.setDataType("String");
 				commandParamTo.setDescription("");
 				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -456,14 +460,20 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			MessageDialog.openWarning(null, "警告", "名称不能为空");
 			return;
 		}
-		TaskCommand taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommand();
+		final TaskCommand taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommand();
 		taskCommand.setId(idtext.getText() == null ? "" : idtext.getText());
 		taskCommand.setName(nametext.getText() == null ? "" : nametext.getText());
 		taskCommand.setCommandType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId());
 
-		Expression expression = expressionComboViewer.getExpression();
+		final Expression expression = expressionComboViewer.getExpression();
 		if (expression != null) {
-			taskCommand.setExpression(expression);
+			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+				@Override
+				protected void doExecute() {
+					taskCommand.setExpression(expression);
+				}
+				
+			});
 		}
 
 		if (treeViewer != null && this.taskCommand != null) {
@@ -832,9 +842,59 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		uicollectTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "InputParam"));
 		uicontrolTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ControlParam"));
 		engineexeTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam"));
+		
+		if(taskCommand!=null) {
+//			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+//				@Override
+//				protected void doExecute() {
+//					
+//				}
+//				
+//			});
+			
+			List<CommandParamTo> uicollectCommandParamTos = new ArrayList<CommandParamTo>();
+			List<CommandParamTo> uicontrolCommandParamTos = new ArrayList<CommandParamTo>();
+			List<CommandParamTo> engineexeCommandParamTos = new ArrayList<CommandParamTo>();
+			for (Param param : taskCommand.getParams()) {
+				CommandParam commandParam = (CommandParam) param;
+				CommandParamTo commandParamTo = new CommandParamTo();
+				if(commandParam.getBizType().equals("InputParam")) {
+					convertCommandParam2To(commandParam, commandParamTo, uicollectCommandParamTos);
+				}
+				if(commandParam.getBizType().equals("ControlParam")) {
+					convertCommandParam2To(commandParam, commandParamTo, uicontrolCommandParamTos);
+				}
+				if(commandParam.getBizType().equals("ExecuteParam")) {
+					convertCommandParam2To(commandParam, commandParamTo, engineexeCommandParamTos);
+				}
+			}
+			
+			((List<CommandParamTo>)uicollectTableViewer.getInput()).addAll(uicollectCommandParamTos);
+			((List<CommandParamTo>)uicontrolTableViewer.getInput()).addAll(uicontrolCommandParamTos);
+			((List<CommandParamTo>)engineexeTableViewer.getInput()).addAll(engineexeCommandParamTos);
+		}
+		
 		uicollectTableViewer.refresh();
 		uicontrolTableViewer.refresh();
 		engineexeTableViewer.refresh();
+	}
+	
+	/**
+	 * commandparam转to类
+	 * @param commandParam
+	 * @param commandParamTo
+	 * @param commandParamTos
+	 */
+	private void convertCommandParam2To(CommandParam commandParam, CommandParamTo commandParamTo, List<CommandParamTo> commandParamTos) {
+		commandParamTo.setBizType(commandParam.getBizType());
+		commandParamTo.setDataType(commandParam.getDataType());
+		commandParamTo.setDescription(commandParam.getDescription());
+		Expression expression = EcoreUtil.copy(commandParam.getExpression())==null?FoxBPMFactory.eINSTANCE.createExpression():EcoreUtil.copy(commandParam.getExpression());
+		commandParamTo.setExpression(expression);
+		commandParamTo.setName(commandParam.getName());
+		commandParamTo.setKey(commandParam.getKey());
+		
+		commandParamTos.add(commandParamTo);
 	}
 	
 	/**
