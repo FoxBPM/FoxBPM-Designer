@@ -4,13 +4,25 @@ import java.util.List;
 
 import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -18,33 +30,36 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.custom.CommandParamDialogCellEditor;
+import org.foxbpm.bpmn.designer.ui.custom.CommandParamTo;
 import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.bpmn.designer.ui.utils.TaskCommandUtil;
+import org.foxbpm.model.bpmn.foxbpm.CommandParam;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.jface.viewers.TableViewerColumn;
 
 public class CreateNewTaskDialog extends TitleAreaDialog {
-
 	private Text idtext;
 	private Text nametext;
 	private Combo typecombo;
 	private TaskCommand taskCommand;
 	private TreeViewer treeViewer;
 	private FoxBPMExpViewer expressionComboViewer;
-//	private FoxBPMExpViewer expressionComboViewerparam;
 	private String title = "";
 	private Button isVerify;
 	private Button isSaveData;
@@ -56,6 +71,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	private TableViewer uicollectTableViewer;
 	private TableViewer uicontrolTableViewer;
 	private TableViewer engineexeTableViewer;
+	private TransactionalEditingDomain editingDomain;
 
 	/**
 	 * Create the dialog.
@@ -63,24 +79,21 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	 * @param parentShell
 	 * @wbp.parser.constructor
 	 */
-	public CreateNewTaskDialog(EObject be, Shell parentShell) {
+	public CreateNewTaskDialog(Shell parentShell) {
 		super(parentShell);
-		setHelpAvailable(false);
-		setShellStyle(SWT.CLOSE | SWT.RESIZE | SWT.TITLE | SWT.PRIMARY_MODAL);
-		title = "创建处理命令";
-		this.be = be;
 	}
-
-	public CreateNewTaskDialog(EObject be, Shell parentShell, TreeViewer treeViewer) {
+			
+	public CreateNewTaskDialog(EObject be, Shell parentShell, TreeViewer treeViewer, TransactionalEditingDomain editingDomain) {
 		super(parentShell);
 		setHelpAvailable(false);
 		this.treeViewer = treeViewer;
 		setShellStyle(SWT.RESIZE | SWT.TITLE | SWT.PRIMARY_MODAL);
 		title = "创建处理命令";
 		this.be = be;
+		this.editingDomain = editingDomain;
 	}
 
-	public CreateNewTaskDialog(EObject be, Shell parentShell, TaskCommand taskCommand, TreeViewer treeViewer) {
+	public CreateNewTaskDialog(EObject be, Shell parentShell, TaskCommand taskCommand, TreeViewer treeViewer, TransactionalEditingDomain editingDomain) {
 		super(parentShell);
 		setHelpAvailable(false);
 		this.taskCommand = taskCommand;
@@ -88,6 +101,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		setShellStyle(SWT.RESIZE | SWT.TITLE | SWT.PRIMARY_MODAL);
 		title = "编辑处理命令";
 		this.be = be;
+		this.editingDomain = editingDomain;
 	}
 
 	/**
@@ -111,8 +125,8 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		gd_composite.widthHint = 160;
 		composite.setLayoutData(gd_composite);
 		GridLayout gl_composite = new GridLayout(2, false);
-		gl_composite.marginTop = 10;
 		gl_composite.marginRight = 10;
+		gl_composite.marginTop = 10;
 		gl_composite.marginLeft = 10;
 		composite.setLayout(gl_composite);
 
@@ -142,8 +156,9 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				nametext.setText(getType(typecombo.getData(typecombo.getSelectionIndex() + "").toString()));
-//				getCheckBox();
+				nametext.setText(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : getType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId()));
+				//清空各个tableviewer并重新设值
+				initTableViewers();
 			}
 
 			@Override
@@ -183,7 +198,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		
 		Group group = new Group(composite, SWT.NONE);
 		group.setLayout(new GridLayout(1, false));
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
 		group.setText("界面收集参数");
 		
 		uicollectTableViewer = new TableViewer(group, SWT.BORDER | SWT.FULL_SELECTION);
@@ -213,18 +228,20 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		TableColumn tableColumn_2 = tableViewerColumn_3.getColumn();
 		tableColumn_2.setWidth(100);
 		tableColumn_2.setText("描述");
+		uicollectTableViewer.setContentProvider(new ArrayContentProvider());
+		uicollectTableViewer.setLabelProvider(new UiCollectTableLabelProvider());
 		
 		Group group_1 = new Group(composite, SWT.NONE);
 		group_1.setText("界面控制参数");
-		group_1.setLayout(new GridLayout(1, false));
-		group_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		group_1.setLayout(new GridLayout(2, false));
+		group_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
 		
-		uicontrolTableViewer = new TableViewer(group_1, SWT.BORDER | SWT.FULL_SELECTION);
+		uicontrolTableViewer = new TableViewer(group_1, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table_1 = uicontrolTableViewer.getTable();
 		table_1.setLinesVisible(true);
 		table_1.setHeaderVisible(true);
 		GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_table_1.heightHint = 50;
+		gd_table_1.heightHint = 70;
 		table_1.setLayoutData(gd_table_1);
 		
 		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(uicontrolTableViewer, SWT.NONE);
@@ -252,17 +269,72 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		tableColumn_6.setWidth(100);
 		tableColumn_6.setText("描述");
 		
+		Composite composite_1 = new Composite(group_1, SWT.NONE);
+		GridLayout gl_composite_1 = new GridLayout(1, false);
+		gl_composite_1.marginWidth = 0;
+		gl_composite_1.horizontalSpacing = 0;
+		gl_composite_1.marginHeight = 0;
+		gl_composite_1.verticalSpacing = 1;
+		composite_1.setLayout(gl_composite_1);
+		
+		Button addControlParamButton = new Button(composite_1, SWT.NONE);
+		addControlParamButton.setText("添加");
+		addControlParamButton.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				CommandParamTo commandParamTo = new CommandParamTo();
+				commandParamTo.setBizType("ControlParam");
+				commandParamTo.setDataType("String");
+				commandParamTo.setDescription("");
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				expression.setName("");
+				expression.setValue("");
+				commandParamTo.setExpression(expression);
+				commandParamTo.setKey("param");
+				commandParamTo.setName("参数");
+				
+				((List<CommandParamTo>)uicontrolTableViewer.getInput()).add(commandParamTo);
+				uicontrolTableViewer.refresh();
+			}
+		});
+		
+		Button deleteControlParamButton = new Button(composite_1, SWT.NONE);
+		deleteControlParamButton.setText("删除");
+		deleteControlParamButton.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				ISelection sel = uicontrolTableViewer.getSelection();
+				if (sel == null)
+					return;
+				Object[] objs = ((IStructuredSelection) sel).toArray();
+				if (objs == null || objs.length == 0)
+					return;
+				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+				if (!b)
+					return;
+
+				for (int i = 0; i < objs.length; i++) {
+					CommandParamTo col = (CommandParamTo) objs[i];
+					((List<CommandParamTo>)uicontrolTableViewer.getInput()).remove(col);
+				}
+				uicontrolTableViewer.refresh();				
+			}
+		});
+		
+		uicontrolTableViewer.setContentProvider(new ArrayContentProvider());
+		uicontrolTableViewer.setLabelProvider(new UiControlTableLabelProvider());
+		
 		Group group_2 = new Group(composite, SWT.NONE);
 		group_2.setText("引擎执行参数");
-		group_2.setLayout(new GridLayout(1, false));
-		group_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		group_2.setLayout(new GridLayout(2, false));
+		group_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
 		
-		engineexeTableViewer = new TableViewer(group_2, SWT.BORDER | SWT.FULL_SELECTION);
+		engineexeTableViewer = new TableViewer(group_2, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table_2 = engineexeTableViewer.getTable();
 		table_2.setLinesVisible(true);
 		table_2.setHeaderVisible(true);
 		GridData gd_table_2 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_table_2.heightHint = 50;
+		gd_table_2.heightHint = 70;
 		table_2.setLayoutData(gd_table_2);
 		
 		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
@@ -289,38 +361,68 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		TableColumn tableColumn_11 = tableViewerColumn_13.getColumn();
 		tableColumn_11.setWidth(100);
 		tableColumn_11.setText("描述");
-
-//		Composite composite_1 = new Composite(composite, SWT.NONE);
-//		GridLayout gl_composite_1 = new GridLayout(3, false);
-//		gl_composite_1.horizontalSpacing = 15;
-//		composite_1.setLayout(gl_composite_1);
-//		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
-//
-//		isVerify = new Button(composite_1, SWT.CHECK);
-//		isVerify.setText("是否验证");
-//
-//		isSaveData = new Button(composite_1, SWT.CHECK);
-//		isSaveData.setText("是否保存");
-//
-//		isSimulation = new Button(composite_1, SWT.CHECK);
-//		isSimulation.setText("是否虚拟运行");
-
-		//先隐藏
-//		composite_1.setVisible(false);
 		
-		// ControlDecorateUtil.addDecorate(typecombo,
-		// "createNewTaskDialog_commandType");
-		// ControlDecorateUtil.addDecorate(expressionComboViewer.getCombo(),
-		// "createNewTaskDialog_taskCommand");
-		// ControlDecorateUtil.addDecorate(isVerify,
-		// "createNewTaskDialog_isVerification");
-		// ControlDecorateUtil.addDecorate(isSaveData,
-		// "createNewTaskDialog_isSaveData");
-		// ControlDecorateUtil.addDecorate(isSimulation,
-		// "createNewTaskDialog_isSimulationRun");
+		Composite composite_2 = new Composite(group_2, SWT.NONE);
+		GridLayout gl_composite_2 = new GridLayout(1, false);
+		gl_composite_2.verticalSpacing = 1;
+		gl_composite_2.marginWidth = 0;
+		gl_composite_2.marginHeight = 0;
+		gl_composite_2.horizontalSpacing = 0;
+		composite_2.setLayout(gl_composite_2);
+		
+		Button addEngineParamButton = new Button(composite_2, SWT.NONE);
+		addEngineParamButton.setSize(80, 27);
+		addEngineParamButton.setText("添加");
+		addEngineParamButton.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				CommandParamTo commandParamTo = new CommandParamTo();
+				commandParamTo.setBizType("ControlParam");
+				commandParamTo.setDataType("String");
+				commandParamTo.setDescription("");
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				expression.setName("");
+				expression.setValue("");
+				commandParamTo.setExpression(expression);
+				commandParamTo.setKey("param");
+				commandParamTo.setName("参数");
+				
+				((List<CommandParamTo>)engineexeTableViewer.getInput()).add(commandParamTo);
+				engineexeTableViewer.refresh();
+			}
+		});
+		
+		Button deleteEngineParamButton = new Button(composite_2, SWT.NONE);
+		deleteEngineParamButton.setText("删除");
+		deleteEngineParamButton.addListener(SWT.Selection, new Listener() {
+			@Override
+			public void handleEvent(Event event) {
+				ISelection sel = uicontrolTableViewer.getSelection();
+				if (sel == null)
+					return;
+				Object[] objs = ((IStructuredSelection) sel).toArray();
+				if (objs == null || objs.length == 0)
+					return;
+				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+				if (!b)
+					return;
 
+				for (int i = 0; i < objs.length; i++) {
+					CommandParamTo col = (CommandParamTo) objs[i];
+					((List<CommandParamTo>)engineexeTableViewer.getInput()).remove(col);
+				}
+				engineexeTableViewer.refresh();				
+			}
+		});
+		
+		engineexeTableViewer.setContentProvider(new ArrayContentProvider());
+		engineexeTableViewer.setLabelProvider(new EngineExeTableLabelProvider());
+
+		createUiCollectCellModifier();
+		createUiControlCellModifier();
+		createEngineExeCellModifier();
+		
 		initCombo();
-//		getCheckBox();
 		init();
 		return container;
 	}
@@ -343,7 +445,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(600, 640);
+		return new Point(632, 665);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -357,27 +459,12 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		TaskCommand taskCommand = FoxBPMFactory.eINSTANCE.createTaskCommand();
 		taskCommand.setId(idtext.getText() == null ? "" : idtext.getText());
 		taskCommand.setName(nametext.getText() == null ? "" : nametext.getText());
-		taskCommand.setCommandType(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : typecombo.getData(typecombo.getSelectionIndex() + "").toString());
-
-		/*
-		 * Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-		 * expression
-		 * .setValue((DataVarTo)comboViewer.getElementAt(comboViewer.getCombo
-		 * ().getSelectionIndex()) == null ? "" :
-		 * ((DataVarTo)comboViewer.getElementAt
-		 * (comboViewer.getCombo().getSelectionIndex())).getValue());
-		 * taskCommand.setExpression(expression);
-		 */
+		taskCommand.setCommandType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId());
 
 		Expression expression = expressionComboViewer.getExpression();
 		if (expression != null) {
 			taskCommand.setExpression(expression);
 		}
-
-//		Expression expressionParam = expressionComboViewerparam.getExpression();
-//		if (expressionParam != null) {
-//			taskCommand.setParameterExpression(expressionParam);
-//		}
 
 		if (treeViewer != null && this.taskCommand != null) {
 			for (TaskCommand taskCommand2 : ((List<TaskCommand>) treeViewer.getInput())) {
@@ -395,10 +482,11 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			}
 		}
 
-//		taskCommand.setIsVerification(isVerify.getSelection() ? "true" : "false");
-//		taskCommand.setIsSaveData(isSaveData.getSelection() ? "true" : "false");
-//		taskCommand.setIsSimulationRun(isSimulation.getSelection() ? "true" : "false");
-
+		//循环加入命令参数
+		addParamsToTaskCommand(taskCommand, uicollectTableViewer);
+		addParamsToTaskCommand(taskCommand, uicontrolTableViewer);
+		addParamsToTaskCommand(taskCommand, engineexeTableViewer);
+		
 		setTaskCommand(taskCommand);
 
 		super.okPressed();
@@ -421,8 +509,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			idtext.setText(taskCommand.getId() == null ? "" : taskCommand.getId());
 			nametext.setText(taskCommand.getName() == null ? "" : taskCommand.getName());
 			typecombo.setText(taskCommand.getCommandType() == null ? "" : getType(taskCommand.getCommandType()));
-			// comboViewer.getCombo().setText(taskCommand.getExpression() ==
-			// null ? "" : taskCommand.getExpression().getValue());
 
 			// 初始化
 			if (taskCommand.getExpression() != null) {
@@ -430,20 +516,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 				expressionComboViewer.getTextControl().setText(taskCommand.getExpression().getName());
 			}
 
-//			if (taskCommand.getParameterExpression() != null) {
-//				expressionComboViewerparam.setExpression(taskCommand.getParameterExpression());
-//				expressionComboViewerparam.getTextControl().setText(taskCommand.getParameterExpression().getName());
-//			}
-
-//			if (taskCommand.getIsVerification() != null || taskCommand.getIsSaveData() != null || taskCommand.getIsSimulationRun() != null) {
-//				isVerify.setSelection(taskCommand.getIsVerification().equals("true") ? true : false);
-//				isSaveData.setSelection(taskCommand.getIsSaveData().equals("true") ? true : false);
-//				isSimulation.setSelection(taskCommand.getIsSimulationRun().equals("true") ? true : false);
-//			} else {
-//				isVerify.setSelection(true);
-//				isSaveData.setSelection(true);
-//				isSimulation.setSelection(false);
-//			}
 		}
 
 		expressionComboViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
@@ -458,17 +530,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			}
 		});
 		
-//		expressionComboViewerparam.addExpressionChangedListeners(new IExpressionChangedListener() {
-//			
-//			@Override
-//			public void expressionChanged(ExpressionChangedEvent event) {
-//				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-//				FormalExpression formalExpression = event.getFormalExpression();
-//				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
-//				expression.setValue(formalExpression.getBody());
-//				expressionComboViewerparam.setExpression(expression);
-//			}
-//		});
 	}
 
 	/**
@@ -502,26 +563,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	}
 
 	/**
-	 * 勾默认值
-	 */
-//	private void getCheckBox() {
-//		List<TaskCommandDefinition> nameList = FoxBPMDesignerUtil.getTaskCommandNames(FoxBPMDesignerUtil.getFoxBPMConfig());
-//		for (TaskCommandDefinition taskCommand : nameList) {
-//			if (typecombo.getData(typecombo.getSelectionIndex() + "").equals(taskCommand.getId()) && taskCommand.getIsVerification() != null && taskCommand.getIsSaveData() != null
-//					&& taskCommand.getIsSimulationRun() != null) {
-//				isVerify.setSelection(taskCommand.getIsVerification().equals("true") ? true : false);
-//				isSaveData.setSelection(taskCommand.isSaveData().equals("true") ? true : false);
-//				isSimulation.setSelection(taskCommand.getIsSimulationRun().equals("true") ? true : false);
-//				break;
-//			} else {
-//				isVerify.setSelection(true);
-//				isSaveData.setSelection(true);
-//				isSimulation.setSelection(false);
-//			}
-//		}
-//	}
-
-	/**
 	 * 初始化Combo，加入items
 	 */
 	private void initCombo() {
@@ -531,7 +572,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		int i = 0;
 		for (TaskCommandDefinition taskCommand : nameList) {
 			typecombo.add(taskCommand.getName());
-			typecombo.setData(i + "", taskCommand.getId());
+			typecombo.setData(i + "", taskCommand);
 			i = i + 1;
 
 		}
@@ -539,6 +580,279 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		typecombo.select(0);
 
 		// 默认名称为选中的类型
-		nametext.setText(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : getType(typecombo.getData(typecombo.getSelectionIndex() + "").toString()));
+		nametext.setText(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : getType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId()));
+	
+		initTableViewers();
+	}
+	
+	private void createUiCollectCellModifier() {
+		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
+		cellEditor[0] = new TextCellEditor(table, SWT.READ_ONLY);
+		cellEditor[1] = new TextCellEditor(table, SWT.READ_ONLY);
+		cellEditor[2] = new TextCellEditor(table, SWT.READ_ONLY);
+		cellEditor[3] = new TextCellEditor(table, SWT.READ_ONLY);
+		
+		uicollectTableViewer.setColumnProperties(new String[] { "UICOLLECTPARAM", "UICOLLECTNAME", "UICOLLECTTYPE", "UICOLLECTDESC" });
+		uicollectTableViewer.setCellEditors(cellEditor);
+		uicollectTableViewer.setCellModifier(new ICellModifier() {
+			
+			@Override
+			public void modify(Object element, String property, Object value) {
+				
+			}
+			
+			@Override
+			public Object getValue(Object element, String property) {
+				return null;
+			}
+			
+			@Override
+			public boolean canModify(Object element, String property) {
+				return false;
+			}
+		});
+	}
+	
+	private void createUiControlCellModifier() {
+		final CellEditor[] cellEditor = new CellEditor[table_1.getColumnCount()];
+		cellEditor[0] = new TextCellEditor(table_1, SWT.NONE);
+		cellEditor[1] = new TextCellEditor(table_1, SWT.NONE);
+		cellEditor[2] = new TextCellEditor(table_1, SWT.NONE);
+		cellEditor[3] = new CommandParamDialogCellEditor(table_1, getParentShell(), editingDomain, uicontrolTableViewer);
+		cellEditor[4] = new FoxBPMInputCellEditor(table_1, getShell());
+		
+		uicontrolTableViewer.setColumnProperties(new String[] { "UICONTROLPARAM", "UICONTROLNAME", "UICONTROLTYPE", "UICONTROLVALUE", "UICONTROLDESC" });
+		uicontrolTableViewer.setCellEditors(cellEditor);
+		uicontrolTableViewer.setCellModifier(new ICellModifier() {
+			
+			@Override
+			public void modify(Object element, String property, Object value) {
+				TableItem tableitem = (TableItem) element;
+				CommandParamTo commandParamTo = (CommandParamTo) tableitem.getData();
+				if (property.equals("UICONTROLPARAM")) {
+					commandParamTo.setKey(((String)value));
+				}
+				if (property.equals("UICONTROLNAME")) {
+					commandParamTo.setName(((String)value));
+				}
+				if (property.equals("UICONTROLTYPE")) {
+					commandParamTo.setDataType(((String)value));
+				}
+				if(property.equals("UICONTROLVALUE")) {
+					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+					expression.setName(((String)value));
+					expression.setValue(((String)value));
+					commandParamTo.setExpression(expression);
+				}
+				if(property.equals("UICONTROLDESC")) {
+					commandParamTo.setDescription(((String)value));
+				}
+				
+				uicontrolTableViewer.refresh();
+			}
+			
+			@Override
+			public Object getValue(Object element, String property) {
+				CommandParamTo commandParamTo = (CommandParamTo) element;
+				if (property.equals("UICONTROLPARAM")) {
+					return commandParamTo.getKey();
+				}
+				if (property.equals("UICONTROLNAME")) {
+					return commandParamTo.getName();
+				}
+				if (property.equals("UICONTROLTYPE")) {
+					return commandParamTo.getDataType();
+				}
+				if(property.equals("UICONTROLVALUE")) {
+					return commandParamTo.getExpression().getName();
+				}
+				if(property.equals("UICONTROLDESC")) {
+					return commandParamTo.getDescription();
+				}
+				return null;
+			}
+			
+			@Override
+			public boolean canModify(Object element, String property) {
+				if(element instanceof CommandParam) {
+					CommandParamTo commandParamTo = (CommandParamTo) element;
+					if(commandParamTo.getType()!=null && commandParamTo.getType().equals("config")) {
+						return false;
+					}else{
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+	}
+	
+	private void createEngineExeCellModifier() {
+		final CellEditor[] cellEditor = new CellEditor[table_2.getColumnCount()];
+		cellEditor[0] = new TextCellEditor(table_2, SWT.NONE);
+		cellEditor[1] = new TextCellEditor(table_2, SWT.NONE);
+		cellEditor[2] = new TextCellEditor(table_2, SWT.NONE);
+		cellEditor[3] = new CommandParamDialogCellEditor(table_2, getParentShell(), editingDomain, engineexeTableViewer);
+		cellEditor[4] = new FoxBPMInputCellEditor(table_2, getShell());
+		
+		engineexeTableViewer.setColumnProperties(new String[] { "ENGINEEXEPARAM", "ENGINEEXENAME", "ENGINEEXETYPE", "ENGINEEXEVALUE", "ENGINEEXEDESC" });
+		engineexeTableViewer.setCellEditors(cellEditor);
+		engineexeTableViewer.setCellModifier(new ICellModifier() {
+			
+			@Override
+			public void modify(Object element, String property, Object value) {
+				TableItem tableitem = (TableItem) element;
+				CommandParamTo commandParamTo = (CommandParamTo) tableitem.getData();
+				if (property.equals("ENGINEEXEPARAM")) {
+					commandParamTo.setKey(((String)value));
+				}
+				if (property.equals("ENGINEEXENAME")) {
+					commandParamTo.setName(((String)value));
+				}
+				if (property.equals("ENGINEEXETYPE")) {
+					commandParamTo.setDataType(((String)value));
+				}
+				if(property.equals("ENGINEEXEVALUE")) {
+					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+					expression.setName(((String)value));
+					expression.setValue(((String)value));
+					commandParamTo.setExpression(expression);
+				}
+				if(property.equals("ENGINEEXEDESC")) {
+					commandParamTo.setDescription(((String)value));
+				}
+				
+				engineexeTableViewer.refresh();
+			}
+			
+			@Override
+			public Object getValue(Object element, String property) {
+				CommandParamTo commandParamTo = (CommandParamTo) element;
+				if (property.equals("ENGINEEXEPARAM")) {
+					return commandParamTo.getKey();
+				}
+				if (property.equals("ENGINEEXENAME")) {
+					return commandParamTo.getName();
+				}
+				if (property.equals("ENGINEEXETYPE")) {
+					return commandParamTo.getDataType();
+				}
+				if(property.equals("ENGINEEXEVALUE")) {
+					return commandParamTo.getExpression().getName();
+				}
+				if(property.equals("ENGINEEXEDESC")) {
+					return commandParamTo.getDescription();
+				}
+				return null;
+			}
+			
+			@Override
+			public boolean canModify(Object element, String property) {
+				if(element instanceof CommandParam) {
+					CommandParamTo commandParamTo = (CommandParamTo) element;
+					if(commandParamTo.getType()!=null && commandParamTo.getType().equals("config")) {
+						return false;
+					}else{
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+	}
+	
+	private class UiCollectTableLabelProvider extends LabelProvider implements ITableLabelProvider {
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+		public String getColumnText(Object element, int columnIndex) {
+			CommandParam commandParam = (CommandParam) element;
+			switch (columnIndex) {
+			case 0:
+				return commandParam.getKey();
+			case 1:
+				return commandParam.getName();
+			case 2:
+				return commandParam.getDataType();
+			case 3:
+				return commandParam.getDescription();
+			}
+			return null;
+		}
+	}
+	
+	private class UiControlTableLabelProvider extends LabelProvider implements ITableLabelProvider {
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+		public String getColumnText(Object element, int columnIndex) {
+			CommandParamTo commandParamTo = (CommandParamTo) element;
+			switch (columnIndex) {
+			case 0:
+				return commandParamTo.getKey();
+			case 1:
+				return commandParamTo.getName();
+			case 2:
+				return commandParamTo.getDataType();
+			case 3:
+				return commandParamTo.getExpression().getName();
+			case 4:
+				return commandParamTo.getDescription();
+			}
+			return null;
+		}
+	}
+	
+	private class EngineExeTableLabelProvider extends LabelProvider implements ITableLabelProvider {
+		public Image getColumnImage(Object element, int columnIndex) {
+			return null;
+		}
+		public String getColumnText(Object element, int columnIndex) {
+			CommandParamTo commandParamTo = (CommandParamTo) element;
+			switch (columnIndex) {
+			case 0:
+				return commandParamTo.getKey();
+			case 1:
+				return commandParamTo.getName();
+			case 2:
+				return commandParamTo.getDataType();
+			case 3:
+				return commandParamTo.getExpression().getName();
+			case 4:
+				return commandParamTo.getDescription();
+			}
+			return null;
+		}
+	}
+	
+	/**
+	 * 初始化各个tableviewer的值
+	 */
+	private void initTableViewers(){
+		uicollectTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "InputParam"));
+		uicontrolTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ControlParam"));
+		engineexeTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam"));
+		uicollectTableViewer.refresh();
+		uicontrolTableViewer.refresh();
+		engineexeTableViewer.refresh();
+	}
+	
+	/**
+	 * 从tableviewer中拿到参数值放入taskcommand中
+	 * @param taskCommand
+	 * @param tableViewer
+	 */
+	private void addParamsToTaskCommand(TaskCommand taskCommand, TableViewer tableViewer) {
+		for (CommandParamTo commandParamTo : ((List<CommandParamTo>)tableViewer.getInput())) {
+			CommandParam commandParam = FoxBPMFactory.eINSTANCE.createCommandParam();
+			commandParam.setBizType(commandParamTo.getBizType());
+			commandParam.setDataType(commandParamTo.getDataType());
+			commandParam.setDescription(commandParamTo.getDescription());
+			commandParam.setExpression(commandParamTo.getExpression());
+			commandParam.setKey(commandParamTo.getKey());
+			commandParam.setName(commandParamTo.getName());
+			taskCommand.getParams().add(commandParam);
+		}
 	}
 }
+

@@ -167,7 +167,8 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 
 			@Override
 			public void handleEvent(Event event) {
-				CreateNewTaskDialog cnd = new CreateNewTaskDialog(getBusinessObject(), getShell(), treeViewer);
+				TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+				CreateNewTaskDialog cnd = new CreateNewTaskDialog(getBusinessObject(), getShell(), treeViewer, editingDomain);
 				cnd.setBlockOnOpen(true);
 				if (cnd != null && cnd.open() == InputDialog.OK) {
 					((List<TaskCommand>) treeViewer.getInput()).add(cnd.getTaskCommand());
@@ -187,7 +188,9 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 				if (!treeViewer.getSelection().isEmpty()) {
 					IStructuredSelection selection = (IStructuredSelection) treeViewer.getSelection();
 					TaskCommand taskCommand = (TaskCommand) selection.getFirstElement();
-					CreateNewTaskDialog cnd = new CreateNewTaskDialog(getBusinessObject(), getShell(), taskCommand, treeViewer);
+					
+					TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+					CreateNewTaskDialog cnd = new CreateNewTaskDialog(getBusinessObject(), getShell(), taskCommand, treeViewer, editingDomain);
 					cnd.setBlockOnOpen(true);
 					if (cnd != null && cnd.open() == InputDialog.OK) {
 						TaskCommand newTaskCommand = cnd.getTaskCommand();
