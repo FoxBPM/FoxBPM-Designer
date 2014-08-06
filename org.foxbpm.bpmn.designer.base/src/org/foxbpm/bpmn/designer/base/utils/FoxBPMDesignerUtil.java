@@ -157,7 +157,7 @@ public class FoxBPMDesignerUtil {
 		}
 		return taskCommandNames;
 	}
-
+	
 	/**
 	 * 返回foxBPMConfig对象
 	 * 

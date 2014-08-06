@@ -1,11 +1,13 @@
 package org.foxbpm.bpmn.designer.ui.expdialog;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.bpmn2.modeler.core.ModelHandlerLocator;
 import org.eclipse.bpmn2.modeler.core.utils.ModelUtil;
+import org.eclipse.bpmn2.modeler.ui.editor.BPMN2MultiPageEditor;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -57,8 +59,6 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
@@ -82,6 +82,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
@@ -100,12 +101,20 @@ import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.base.utils.JsonDataUtil;
 import org.foxbpm.bpmn.designer.base.utils.StringUtil;
+import org.foxbpm.bpmn.designer.ui.custom.CommandParamTo;
+import org.foxbpm.bpmn.designer.ui.dialogs.DataVarTo;
 import org.foxbpm.bpmn.designer.ui.expdialog.widget.event.SearchButtonAction;
+import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
+import org.foxbpm.bpmn.designer.ui.utils.BpmnModelUtil;
+import org.foxbpm.bpmn.designer.ui.utils.DataVarUtil;
+import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
+import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage.Literals;
 import org.foxbpm.model.bpmn.foxbpm.PotentialStarter;
+import org.foxbpm.model.config.variableconfig.DataVariableBizType;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableDef;
 import org.foxbpm.model.config.variableconfig.DataVariableType;
@@ -133,6 +142,9 @@ public class FoxBPMExpDialog extends Dialog {
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 	private static final String EMPTY_STRING = "";
 	private PotentialStarter potentialStarter;
+	private CommandParamTo commandParamTo;
+	private TreeViewer datavartreeViewer;
+	private java.util.List<DataVarTo> dataVarTos;
 
 	/**
 	 * Create the dialog.
@@ -145,6 +157,7 @@ public class FoxBPMExpDialog extends Dialog {
 		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
 		loadDataVariableConfig();
 		MapFoxBPMDataVariableWithType();
+		initDataVar();
 	}
 
 	public FoxBPMExpDialog(Shell parentShell, Expression expression, Text text) {
@@ -156,6 +169,7 @@ public class FoxBPMExpDialog extends Dialog {
 			this.expression.setValue("");
 		}
 		this.textcontrol = text;
+		initDataVar();
 	}
 
 	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, FormParam formParam, Shell parentShell, Expression expression,
@@ -163,6 +177,7 @@ public class FoxBPMExpDialog extends Dialog {
 		this(parentShell, expression, text);
 		this.formParam = formParam;
 		this.editingDomain = editingDomain;
+		initDataVar();
 	}
 
 	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, PotentialStarter potentialStarter, Shell parentShell,
@@ -170,6 +185,15 @@ public class FoxBPMExpDialog extends Dialog {
 		this(parentShell, expression, text);
 		this.potentialStarter = potentialStarter;
 		this.editingDomain = editingDomain;
+		initDataVar();
+	}
+	
+	public FoxBPMExpDialog(TransactionalEditingDomain editingDomain, CommandParamTo commandParamTo, Shell parentShell,
+			Expression expression, Text text) {
+		this(parentShell, expression, text);
+		this.commandParamTo = commandParamTo;
+		this.editingDomain = editingDomain;
+		initDataVar();
 	}
 
 	/**
@@ -184,9 +208,12 @@ public class FoxBPMExpDialog extends Dialog {
 
 		Composite orgComposite = new Composite(container, SWT.NONE);
 		orgComposite.setLayout(new GridLayout(1, false));
-		orgComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		orgComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		Label label = new Label(orgComposite, SWT.NONE);
+		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1);
+		gd_label.widthHint = 200;
+		label.setLayoutData(gd_label);
 		label.setText("组织结构");
 
 		// 在当前窗口中创建分组
@@ -211,7 +238,7 @@ public class FoxBPMExpDialog extends Dialog {
 		TableViewer tableViewer = new TableViewer(orgComposite, SWT.BORDER | SWT.FULL_SELECTION);
 		// 表格
 		Table orgTable = tableViewer.getTable();
-		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, false, true, 3, 1);
+		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
 		// 设置表格布局所占用的高度
 		orgGridData.heightHint = 50;
 		orgTable.setLayoutData(orgGridData);
@@ -323,14 +350,53 @@ public class FoxBPMExpDialog extends Dialog {
 		searchButton.addSelectionListener(new SearchButtonAction(searchText, radioGroup, tableViewer));
 
 		Label lblNewLabel = new Label(orgComposite, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 1, 1));
 		lblNewLabel.setText("流程变量");
+		
+		datavartreeViewer = new TreeViewer(orgComposite, SWT.BORDER);
+		Tree tree = datavartreeViewer.getTree();
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		datavartreeViewer.setContentProvider(new TreeContentProvider());
+		datavartreeViewer.setLabelProvider(new ViewerLabelProvider());
+		datavartreeViewer.setInput(dataVarTos);
+		
+		datavartreeViewer.addDoubleClickListener(new IDoubleClickListener() {
 
-		ListViewer listViewer = new ListViewer(orgComposite, SWT.BORDER | SWT.V_SCROLL);
-		List list = listViewer.getList();
-		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+			@Override
+			public void doubleClick(DoubleClickEvent event) {
+				IStructuredSelection selection = (IStructuredSelection) datavartreeViewer.getSelection();
+				ITreeElement selectElement = (ITreeElement) selection.getFirstElement();
+
+				// 这个地方如果数据变量就叫 "数据变量" 的话 会出现选不中的问题!
+				// 如果表达式就是为null的话 他会出问题 这个地方要改
+
+				if (((DataVarTo) selectElement).getCantbechoose() == null) {
+					StyledText control = viewer.getTextWidget();
+					try {
+						if (document.get().length() == 0)
+							document.set("");
+						int offset = control.getCaretOffset();
+						String before = document.get(0, offset);
+
+						if (offset == document.get().length()) {
+							document.set(before + ((DataVarTo) selectElement).getValue());
+						} else {
+							String after = document.get().substring(offset, document.get().length());
+							document.set(before + ((DataVarTo) selectElement).getValue() + after);
+						}
+
+						control.setCaretOffset(offset + ((DataVarTo) selectElement).getValue().length());
+						control.setFocus();
+
+					} catch (BadLocationException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
 
 		Composite editorComposite = new Composite(container, SWT.NONE);
-		editorComposite.setLayout(new GridLayout(4, false));
+		editorComposite.setLayout(new GridLayout(2, false));
 		editorComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		Label label_2 = new Label(editorComposite, SWT.NONE);
@@ -338,17 +404,19 @@ public class FoxBPMExpDialog extends Dialog {
 		label_2.setText("显示名称");
 
 		displaytext = new Text(editorComposite, SWT.BORDER);
-		displaytext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label label_3 = new Label(editorComposite, SWT.NONE);
-		label_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		label_3.setText("脚本引擎");
-
-		Combo combo = new Combo(editorComposite, SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_displaytext = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_displaytext.widthHint = 470;
+		displaytext.setLayoutData(gd_displaytext);
+		
+				Label label_3 = new Label(editorComposite, SWT.NONE);
+				label_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+				label_3.setText("脚本引擎");
+		
+				Combo combo = new Combo(editorComposite, SWT.READ_ONLY);
+				combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		Composite toolbarComposite = new Composite(editorComposite, SWT.NONE);
-		toolbarComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 4, 1));
+		toolbarComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
 		toolbarComposite.setLayout(new GridLayout(2, false));
 
 		createEditor(editorComposite);
@@ -365,6 +433,7 @@ public class FoxBPMExpDialog extends Dialog {
 		ListViewer classifyListViewer = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
 		List classifyList = classifyListViewer.getList();
 		GridData gd_classifyList = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_classifyList.widthHint = 200;
 		gd_classifyList.heightHint = 120;
 		classifyList.setLayoutData(gd_classifyList);
 		classifyListViewer.setContentProvider(ArrayContentProvider.getInstance());
@@ -388,8 +457,8 @@ public class FoxBPMExpDialog extends Dialog {
 		FilteredTree filteredTree = new FilteredTree(docComposite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
 		final TreeViewer functionTreeViewer = filteredTree.getViewer();
 		Tree FunctionTree = functionTreeViewer.getTree();
-		GridData gd_FunctionTree = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-		gd_FunctionTree.heightHint = 220;
+		GridData gd_FunctionTree = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd_FunctionTree.heightHint = 200;
 		FunctionTree.setLayoutData(gd_FunctionTree);
 		functionTreeViewer.setContentProvider(new FuncitonTreeContentProvider());
 		functionTreeViewer.setLabelProvider(new StyledFunctionTreeLabelProvider());
@@ -494,7 +563,7 @@ public class FoxBPMExpDialog extends Dialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(800, 626);
+		return new Point(852, 634);
 	}
 
 	public void createToolBar(Composite operatorcomposite) {
@@ -596,7 +665,7 @@ public class FoxBPMExpDialog extends Dialog {
 		Composite editorcomposite = new Composite(composite, SWT.NONE);
 		FillLayout fl_editorcomposite = new FillLayout(SWT.HORIZONTAL);
 		editorcomposite.setLayout(fl_editorcomposite);
-		editorcomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 4, 1));
+		editorcomposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
 
 		workbench = PlatformUI.getWorkbench();
 
@@ -672,6 +741,8 @@ public class FoxBPMExpDialog extends Dialog {
 						formParam.setExpression(expression);
 					if (potentialStarter != null)
 						potentialStarter.setExpression(expression);
+					if (commandParamTo != null)
+						commandParamTo.setExpression(expression);
 				}
 			});
 		}
@@ -701,9 +772,7 @@ public class FoxBPMExpDialog extends Dialog {
 		groupDefines.add(0, userDefine);
 
 		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
-		// 在当前窗口中创建分组
-		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1);
-		radioGroup.setLayoutData(gridData);
+		radioGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 3, 1));
 		radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
 		Button checkBox = null;
 		for (GroupDefine groupDefine : groupDefines) {
@@ -835,7 +904,6 @@ public class FoxBPMExpDialog extends Dialog {
 
 		@Override
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			// TODO Auto-generated method stub
 
 		}
 
@@ -863,5 +931,145 @@ public class FoxBPMExpDialog extends Dialog {
 			return getChildren(element).length > 0;
 		}
 
+	}
+	
+	private static class TreeContentProvider implements ITreeContentProvider {
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+		}
+
+		public void dispose() {
+		}
+
+		public Object[] getElements(Object inputElement) {
+			if (inputElement instanceof java.util.List) {
+				@SuppressWarnings("rawtypes")
+				java.util.List list = (java.util.List) inputElement;
+				return list.toArray();
+			} else {
+				return new Object[0];
+			}
+		}
+
+		public Object[] getChildren(Object parentElement) {
+			ITreeElement treeElement = (ITreeElement) parentElement;
+			java.util.List<ITreeElement> list = treeElement.getChildren();
+			if (list == null || list.isEmpty()) {
+				return new Object[0];
+			} else {
+				return list.toArray();
+			}
+		}
+
+		public Object getParent(Object element) {
+			return null;
+		}
+
+		public boolean hasChildren(Object element) {
+			DataVarTo dataVarTo = (DataVarTo) element;
+			return getChildren(dataVarTo).length > 0;
+		}
+	}
+	
+	private static class ViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
+		public Image getImage(Object element) {
+			// String image1 = ISharedImages.IMG_OBJS_TASK_TSK;
+			Image image = ImageUtil.getImageFromName("/expdialog/user_16_hot.png");
+			Image image2 = ImageUtil.getImageFromName("/expdialog/bookprev_16.png");
+			Image image3 = ImageUtil.getImageFromName("/expdialog/group_16.png");
+
+			if (element instanceof DataVarTo) {
+				DataVarTo dataVarTo = (DataVarTo) element;
+				if (dataVarTo.getType().equals("分类")) {
+					return image2;
+				}
+				if (dataVarTo.getType().equals("用户")) {
+					return image;
+				}
+				
+				if(dataVarTo.getBizType()!=null && !dataVarTo.getBizType().equals("")) {
+					return ImageUtil.getImageFromName("/datavar/" + DataVarUtil.getDataVariableBizType(dataVarTo.getBizType()).getImg());
+				}
+				
+				return image3;
+			}
+			return null;
+		}
+
+		public String getText(Object element) {
+			DataVarTo treeElement = (DataVarTo) element;
+			return treeElement.getId() + " -- " + treeElement.getType();
+		}
+
+		@Override
+		public void update(ViewerCell cell) {
+			if (cell.getElement() instanceof DataVarTo) {
+				DataVarTo d = (DataVarTo) cell.getElement();
+				StyledString styledString = new StyledString();
+				String decoration = " -- " + DataVarUtil.getDataTypeDefByDataVariableDataType(d.getType()).getName();
+				styledString.append(d.getId() == null ? "" : d.getId());
+				styledString.append(decoration, StyledString.DECORATIONS_STYLER);
+				cell.setText(styledString.getString());
+				cell.setImage(getImage(d));
+				cell.setStyleRanges(styledString.getStyleRanges());
+			}
+		}
+	}
+	
+	private void initDataVar(){
+		dataVarTos = new ArrayList<DataVarTo>();
+		
+		DataVarTo dataVarTo2 = new DataVarTo();
+		dataVarTo2.setId("私有数据变量");
+		dataVarTo2.setType("分类");
+		dataVarTo2.setCantbechoose("siyou");
+		
+		IEditorPart iEditorPart = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		if(iEditorPart instanceof BPMN2MultiPageEditor) {
+			BPMN2MultiPageEditor bpmn2MultiPageEditor = (BPMN2MultiPageEditor) iEditorPart;
+			Resource resource = null;
+			try {
+				resource = ModelHandlerLocator.getModelHandler(bpmn2MultiPageEditor.getDesignEditor().getModelUri()).getResource();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			java.util.List<DataVariable> dataVariables = BpmnModelUtil.getDataVariable(BpmnModelUtil.getProcess(resource));
+			
+			for (DataVariable dataVariable : dataVariables) {
+				DataVarTo dataVarTo = new DataVarTo();
+				dataVarTo.setId(dataVariable.getId());
+				if (dataVariable.getExpression() != null) {
+					dataVarTo.setValue(dataVariable.getExpression().getValue());
+				}
+
+				dataVarTo.setType(DataVarUtil.getDataTypeDefByDataVariableDataType(dataVariable.getDataType()).getName());
+//				dataVarTo.setDoc(dataVariable.getDocumentation().get(0).getValue());
+				dataVarTo2.addChild(dataVarTo);
+			}
+			
+			
+			//循环添加分类
+			for (DataVariableBizType dataVariableBizType : DataVarUtil.getDataVariableBizTypes()) {
+				DataVarTo dataVarTo = new DataVarTo();
+				dataVarTo.setId(dataVariableBizType.getTypeName());
+				dataVarTo.setCantbechoose("bizType");
+				dataVarTo.setType("全局变量");
+				dataVarTo.setBizType(dataVariableBizType.getTypeId());
+				
+				for (DataVariable dataVariable : BpmnModelUtil.getDataVariablesByBizType(BpmnModelUtil.getProcess(resource), dataVariableBizType.getTypeId())) {
+					DataVarTo datavarTo = new DataVarTo();
+					datavarTo.setId(dataVariable.getId());
+					datavarTo.setValue("${" + dataVariable.getId() + "}");
+					datavarTo.setType(DataVarUtil.getDataTypeDefByDataVariableDataType(dataVariable.getDataType()).getName());
+					if (dataVariable.getDocumentation() != null && dataVariable.getDocumentation().size() > 0) {
+						datavarTo.setDoc(dataVariable.getDocumentation().get(0).getValue());
+					}
+					datavarTo.setBizType(dataVariableBizType.getTypeId());
+					dataVarTo.addChild(datavarTo);
+				}
+				
+				dataVarTos.add(dataVarTo);
+			}
+		}
 	}
 }
