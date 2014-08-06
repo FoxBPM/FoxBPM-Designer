@@ -145,6 +145,7 @@ public class FoxBPMExpDialog extends Dialog {
 	private CommandParamTo commandParamTo;
 	private TreeViewer datavartreeViewer;
 	private java.util.List<DataVarTo> dataVarTos;
+	private Composite orgComposite_1;
 
 	/**
 	 * Create the dialog.
@@ -206,42 +207,39 @@ public class FoxBPMExpDialog extends Dialog {
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(new GridLayout(3, false));
 
-		Composite orgComposite = new Composite(container, SWT.NONE);
-		orgComposite.setLayout(new GridLayout(1, false));
-		orgComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		orgComposite_1 = new Composite(container, SWT.NONE);
+		orgComposite_1.setLayout(new GridLayout(1, false));
+		orgComposite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 
-		Label label = new Label(orgComposite, SWT.NONE);
-		GridData gd_label = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_label.widthHint = 180;
+		Label label = new Label(orgComposite_1, SWT.NONE);
+		GridData gd_label = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
+		gd_label.widthHint = 130;
 		label.setLayoutData(gd_label);
 		label.setText("组织结构");
 
 		// 在当前窗口中创建分组
-		Group radioGroup = crateGroupDefine(orgComposite);
+		Group radioGroup = crateGroupDefine(orgComposite_1);
 		// 搜索区域
-		Composite searchGroup = new Composite(orgComposite, SWT.SHADOW_ETCHED_OUT);
+		Composite searchGroup = new Composite(orgComposite_1, SWT.SHADOW_ETCHED_OUT);
 		searchGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		GridLayout gridLayout = new GridLayout(2, false);
 		gridLayout.marginLeft = -5;
 		searchGroup.setLayout(gridLayout);
 
 		GridData searchGridData = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
+		searchGridData.widthHint = 90;
 		// 搜索
 		Text searchText = new Text(searchGroup, SWT.SINGLE | SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
-		searchGridData.widthHint = 100;
 		searchText.setLayoutData(searchGridData);
 		Button searchButton = new Button(searchGroup, SWT.NONE);
 		searchGridData = new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1);
 		searchButton.setLayoutData(searchGridData);
 		searchButton.setText("搜索");
 		// 表格视图
-		TableViewer tableViewer = new TableViewer(orgComposite, SWT.BORDER | SWT.FULL_SELECTION);
+		TableViewer tableViewer = new TableViewer(orgComposite_1, SWT.BORDER | SWT.FULL_SELECTION);
 		// 表格
 		Table orgTable = tableViewer.getTable();
-		GridData orgGridData = new GridData(SWT.FILL, SWT.FILL, false, true, 3, 1);
-		// 设置表格布局所占用的高度
-		orgGridData.heightHint = 50;
-		orgTable.setLayoutData(orgGridData);
+		orgTable.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		// 显示表头
 		orgTable.setHeaderVisible(true);
 		// 显示表格线
@@ -349,12 +347,15 @@ public class FoxBPMExpDialog extends Dialog {
 
 		searchButton.addSelectionListener(new SearchButtonAction(searchText, radioGroup, tableViewer));
 
-		Label lblNewLabel = new Label(orgComposite, SWT.NONE);
+		Label lblNewLabel = new Label(orgComposite_1, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		lblNewLabel.setText("流程变量");
 		
-		datavartreeViewer = new TreeViewer(orgComposite, SWT.BORDER);
+		datavartreeViewer = new TreeViewer(orgComposite_1, SWT.BORDER);
 		Tree tree = datavartreeViewer.getTree();
-		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
+		GridData gd_tree = new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1);
+		gd_tree.widthHint = 150;
+		tree.setLayoutData(gd_tree);
 		datavartreeViewer.setContentProvider(new TreeContentProvider());
 		datavartreeViewer.setLabelProvider(new ViewerLabelProvider());
 		datavartreeViewer.setInput(dataVarTos);
@@ -432,7 +433,7 @@ public class FoxBPMExpDialog extends Dialog {
 		ListViewer classifyListViewer = new ListViewer(docComposite, SWT.BORDER | SWT.V_SCROLL);
 		List classifyList = classifyListViewer.getList();
 		GridData gd_classifyList = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-		gd_classifyList.widthHint = 180;
+		gd_classifyList.widthHint = 160;
 		gd_classifyList.heightHint = 120;
 		classifyList.setLayoutData(gd_classifyList);
 		classifyListViewer.setContentProvider(ArrayContentProvider.getInstance());
@@ -771,8 +772,8 @@ public class FoxBPMExpDialog extends Dialog {
 		groupDefines.add(0, userDefine);
 
 		Group radioGroup = new Group(orgComposite, SWT.SHADOW_ETCHED_OUT);
-		radioGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 3, 1));
-		radioGroup.setLayout(new FillLayout(SWT.HORIZONTAL));
+		radioGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		radioGroup.setLayout(new GridLayout(groupDefines.size(), false));
 		Button checkBox = null;
 		for (GroupDefine groupDefine : groupDefines) {
 			checkBox = new Button(radioGroup, SWT.RADIO);
