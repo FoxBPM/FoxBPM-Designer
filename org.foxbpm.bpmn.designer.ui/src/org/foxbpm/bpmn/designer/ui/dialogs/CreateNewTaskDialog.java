@@ -33,6 +33,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -42,6 +43,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.Section;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.custom.CommandParamDialogCellEditor;
 import org.foxbpm.bpmn.designer.ui.custom.CommandParamTo;
@@ -65,9 +68,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	private TreeViewer treeViewer;
 	private FoxBPMExpViewer expressionComboViewer;
 	private String title = "";
-	private Button isVerify;
-	private Button isSaveData;
-	private Button isSimulation;
 	private EObject be;
 	private Table table;
 	private Table table_1;
@@ -76,6 +76,10 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	private TableViewer uicontrolTableViewer;
 	private TableViewer engineexeTableViewer;
 	private TransactionalEditingDomain editingDomain;
+	private Composite composite;
+	private Group group_2;
+	private Composite advanceparamcomposite;
+	private Section section;
 
 	/**
 	 * Create the dialog.
@@ -85,6 +89,8 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	 */
 	public CreateNewTaskDialog(Shell parentShell) {
 		super(parentShell);
+		setShellStyle(SWT.BORDER | SWT.CLOSE | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		setHelpAvailable(false);
 	}
 			
 	public CreateNewTaskDialog(EObject be, Shell parentShell, TreeViewer treeViewer, TransactionalEditingDomain editingDomain) {
@@ -124,10 +130,8 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		gl_container.marginHeight = 0;
 		container.setLayout(gl_container);
 
-		Composite composite = new Composite(container, SWT.NONE);
-		GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_composite.widthHint = 160;
-		composite.setLayoutData(gd_composite);
+		composite = new Composite(container, SWT.NONE);
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		GridLayout gl_composite = new GridLayout(2, false);
 		gl_composite.marginRight = 10;
 		gl_composite.marginTop = 10;
@@ -135,34 +139,58 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		composite.setLayout(gl_composite);
 
 		Label idLabel = new Label(composite, SWT.NONE);
-		GridData gd_idLabel = new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1);
-		gd_idLabel.widthHint = 28;
-		idLabel.setLayoutData(gd_idLabel);
+		idLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		idLabel.setText("编号");
 
 		idtext = new Text(composite, SWT.BORDER);
-		idtext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_idtext = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_idtext.widthHint = 407;
+		idtext.setLayoutData(gd_idtext);
 
 		Label nameLabel = new Label(composite, SWT.NONE);
 		nameLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		nameLabel.setText("名称");
 
 		nametext = new Text(composite, SWT.BORDER);
-		nametext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_nametext = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_nametext.widthHint = 366;
+		nametext.setLayoutData(gd_nametext);
 
 		Label typeLabel = new Label(composite, SWT.NONE);
 		typeLabel.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		typeLabel.setText("类型");
 
 		typecombo = new Combo(composite, SWT.READ_ONLY);
-		typecombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		GridData gd_typecombo = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_typecombo.widthHint = 358;
+		typecombo.setLayoutData(gd_typecombo);
 		typecombo.addSelectionListener(new SelectionListener() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e) {
+			public void widgetSelected(SelectionEvent e) {//TODO
 				nametext.setText(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : getType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId()));
 				//清空各个tableviewer并重新设值
-				initTableViewers();
+				
+//				if(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam").size()==0) {
+//					getShell().setSize(655, 646);
+//					
+//					GridData data = (GridData) group_2.getLayoutData();
+//		            data.exclude = TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam").size()==0;
+//		            data.heightHint = 100;
+//		            group_2.setVisible(!data.exclude);
+//		                
+//		            GridData data2 = (GridData) advanceparamcomposite.getLayoutData();
+//		            data2.exclude = true;
+//				}else {
+//					getShell().setSize(655, 450);
+//					
+//		            group_2.setVisible(true);
+//		            GridData data2 = (GridData) advanceparamcomposite.getLayoutData();
+//		            data2.exclude = true;
+//				}
+				
+				initTableViewers("select");
+				getShell().layout();
 			}
 
 			@Override
@@ -177,17 +205,12 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 
 		expressionComboViewer = new FoxBPMExpViewer(composite, SWT.BORDER, be);
 		Control viewControl = expressionComboViewer.getControl();
-		viewControl.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
-
-//		Label lblNewLabel = new Label(composite, SWT.NONE);
-//		lblNewLabel.setText("参数表达式");
-//
-//		expressionComboViewerparam = new FoxBPMExpViewer(composite, SWT.BORDER, be);
-//		Control viewControlParam = expressionComboViewerparam.getControl();
-//		viewControlParam.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		GridData gd_viewControl = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		gd_viewControl.widthHint = 423;
+		viewControl.setLayoutData(gd_viewControl);
 
 		Label label = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
-		label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		if (treeViewer != null) {
 			String str = "HandleCommand_";
@@ -200,9 +223,157 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			idtext.setText(str + count);
 		}
 		
-		Group group = new Group(composite, SWT.NONE);
+		initCombo();
+		
+		group_2 = new Group(composite, SWT.NONE);
+		group_2.setText("引擎执行参数");
+		group_2.setLayout(new GridLayout(1, false));
+		group_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
+		
+		engineexeTableViewer = new TableViewer(group_2, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
+		table_2 = engineexeTableViewer.getTable();
+		table_2.setLinesVisible(true);
+		table_2.setHeaderVisible(true);
+		GridData gd_table_2 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		gd_table_2.heightHint = 50;
+		table_2.setLayoutData(gd_table_2);
+		
+		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
+		TableColumn tableColumn_7 = tableViewerColumn_9.getColumn();
+		tableColumn_7.setWidth(100);
+		tableColumn_7.setText("参数");
+		
+		TableViewerColumn tableViewerColumn_10 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
+		TableColumn tableColumn_8 = tableViewerColumn_10.getColumn();
+		tableColumn_8.setWidth(100);
+		tableColumn_8.setText("名称");
+		
+		TableViewerColumn tableViewerColumn_11 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
+		TableColumn tableColumn_9 = tableViewerColumn_11.getColumn();
+		tableColumn_9.setWidth(100);
+		tableColumn_9.setText("类型");
+		
+		TableViewerColumn tableViewerColumn_12 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
+		TableColumn tableColumn_10 = tableViewerColumn_12.getColumn();
+		tableColumn_10.setWidth(100);
+		tableColumn_10.setText("值");
+		
+		TableViewerColumn tableViewerColumn_13 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
+		TableColumn tableColumn_11 = tableViewerColumn_13.getColumn();
+		tableColumn_11.setWidth(100);
+		tableColumn_11.setText("描述");
+		
+//			Composite composite_2 = new Composite(group_2, SWT.NONE);
+//			GridLayout gl_composite_2 = new GridLayout(1, false);
+//			gl_composite_2.verticalSpacing = 1;
+//			gl_composite_2.marginWidth = 0;
+//			gl_composite_2.marginHeight = 0;
+//			gl_composite_2.horizontalSpacing = 0;
+//			composite_2.setLayout(gl_composite_2);
+		
+//			Button addEngineParamButton = new Button(composite_2, SWT.NONE);
+//			addEngineParamButton.setSize(80, 27);
+//			addEngineParamButton.setText("添加");
+//			addEngineParamButton.addListener(SWT.Selection, new Listener() {
+//				@Override
+//				public void handleEvent(Event event) {
+//					CommandParamTo commandParamTo = new CommandParamTo();
+//					commandParamTo.setBizType("ExecuteParam");
+//					commandParamTo.setDataType("String");
+//					commandParamTo.setDescription("");
+//					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+//					expression.setName("");
+//					expression.setValue("");
+//					commandParamTo.setExpression(expression);
+//					commandParamTo.setKey("param");
+//					commandParamTo.setName("参数");
+//					
+//					((List<CommandParamTo>)engineexeTableViewer.getInput()).add(commandParamTo);
+//					engineexeTableViewer.refresh();
+//				}
+//			});
+//			
+//			Button deleteEngineParamButton = new Button(composite_2, SWT.NONE);
+//			deleteEngineParamButton.setText("删除");
+//			deleteEngineParamButton.addListener(SWT.Selection, new Listener() {
+//				@Override
+//				public void handleEvent(Event event) {
+//					ISelection sel = uicontrolTableViewer.getSelection();
+//					if (sel == null)
+//						return;
+//					Object[] objs = ((IStructuredSelection) sel).toArray();
+//					if (objs == null || objs.length == 0)
+//						return;
+//					boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
+//					if (!b)
+//						return;
+//
+//					for (int i = 0; i < objs.length; i++) {
+//						CommandParamTo col = (CommandParamTo) objs[i];
+//						((List<CommandParamTo>)engineexeTableViewer.getInput()).remove(col);
+//					}
+//					engineexeTableViewer.refresh();				
+//				}
+//			});
+		
+		engineexeTableViewer.setContentProvider(new ArrayContentProvider());
+		engineexeTableViewer.setLabelProvider(new EngineExeTableLabelProvider());
+		
+		FormToolkit formToolkit = new FormToolkit(Display.getCurrent());
+		section = formToolkit.createSection(composite, Section.TWISTIE | Section.TITLE_BAR);
+		GridData gd_section = new GridData(SWT.FILL, SWT.TOP, false, true, 2, 1);
+		gd_section.widthHint = 371;
+		section.setLayoutData(gd_section);
+		section.setText("高级参数");
+		section.setExpanded(true);
+//		section.addExpansionListener(new IExpansionListener() {
+//			
+//			@Override
+//			public void expansionStateChanging(ExpansionEvent e) {//TODO
+// 				if(e.getState()) {
+//					getShell().setSize(655, 646);
+//					Point point = getShell().getLocation();
+//					point.y -= 100; 
+//					getShell().setLocation(point);
+//					
+//					
+//					GridData data = (GridData) group_2.getLayoutData();
+//		            data.exclude = TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam").size()==0;
+//		            data.heightHint = 100;
+//		            group_2.setVisible(!data.exclude);
+//		                
+//		            getShell().layout();
+//					
+//				}else {
+//					getShell().setSize(655, 450);
+//					Point point = getShell().getLocation();
+//					point.y += 100; 
+//					getShell().setLocation(point);
+//					
+////					GridData data = (GridData) group_2.getLayoutData();
+////		            data.exclude = TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam").size()==0;
+//		            group_2.setVisible(true);
+//		            
+//		            getShell().layout();
+//				}
+//				
+//			}
+//			
+//			@Override
+//			public void expansionStateChanged(ExpansionEvent e) {
+//				e.getState();
+//			}
+//		});
+		
+		advanceparamcomposite = formToolkit.createComposite(section);
+		GridLayout gl_advanceparamcomposite = new GridLayout(1, false);
+		advanceparamcomposite.setLayout(gl_advanceparamcomposite);
+		advanceparamcomposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		section.setClient(advanceparamcomposite);
+		
+		Group group = new Group(advanceparamcomposite, SWT.NONE);
 		group.setLayout(new GridLayout(1, false));
-		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
+		group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		group.setText("界面收集参数");
 		
 		uicollectTableViewer = new TableViewer(group, SWT.BORDER | SWT.FULL_SELECTION);
@@ -210,7 +381,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		GridData gd_table = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_table.heightHint = 50;
+		gd_table.heightHint = 70;
 		table.setLayoutData(gd_table);
 		
 		TableViewerColumn tableViewerColumn = new TableViewerColumn(uicollectTableViewer, SWT.NONE);
@@ -235,17 +406,17 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		uicollectTableViewer.setContentProvider(new ArrayContentProvider());
 		uicollectTableViewer.setLabelProvider(new UiCollectTableLabelProvider());
 		
-		Group group_1 = new Group(composite, SWT.NONE);
+		Group group_1 = new Group(advanceparamcomposite, SWT.NONE);
 		group_1.setText("界面控制参数");
 		group_1.setLayout(new GridLayout(2, false));
-		group_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
+		group_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		
 		uicontrolTableViewer = new TableViewer(group_1, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
 		table_1 = uicontrolTableViewer.getTable();
 		table_1.setLinesVisible(true);
 		table_1.setHeaderVisible(true);
 		GridData gd_table_1 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_table_1.heightHint = 70;
+		gd_table_1.heightHint = 100;
 		table_1.setLayoutData(gd_table_1);
 		
 		TableViewerColumn tableViewerColumn_4 = new TableViewerColumn(uicontrolTableViewer, SWT.NONE);
@@ -327,106 +498,12 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		
 		uicontrolTableViewer.setContentProvider(new ArrayContentProvider());
 		uicontrolTableViewer.setLabelProvider(new UiControlTableLabelProvider());
-		
-		Group group_2 = new Group(composite, SWT.NONE);
-		group_2.setText("引擎执行参数");
-		group_2.setLayout(new GridLayout(2, false));
-		group_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 2, 1));
-		
-		engineexeTableViewer = new TableViewer(group_2, SWT.BORDER | SWT.FULL_SELECTION | SWT.MULTI);
-		table_2 = engineexeTableViewer.getTable();
-		table_2.setLinesVisible(true);
-		table_2.setHeaderVisible(true);
-		GridData gd_table_2 = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
-		gd_table_2.heightHint = 70;
-		table_2.setLayoutData(gd_table_2);
-		
-		TableViewerColumn tableViewerColumn_9 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
-		TableColumn tableColumn_7 = tableViewerColumn_9.getColumn();
-		tableColumn_7.setWidth(100);
-		tableColumn_7.setText("参数");
-		
-		TableViewerColumn tableViewerColumn_10 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
-		TableColumn tableColumn_8 = tableViewerColumn_10.getColumn();
-		tableColumn_8.setWidth(100);
-		tableColumn_8.setText("名称");
-		
-		TableViewerColumn tableViewerColumn_11 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
-		TableColumn tableColumn_9 = tableViewerColumn_11.getColumn();
-		tableColumn_9.setWidth(100);
-		tableColumn_9.setText("类型");
-		
-		TableViewerColumn tableViewerColumn_12 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
-		TableColumn tableColumn_10 = tableViewerColumn_12.getColumn();
-		tableColumn_10.setWidth(100);
-		tableColumn_10.setText("值");
-		
-		TableViewerColumn tableViewerColumn_13 = new TableViewerColumn(engineexeTableViewer, SWT.NONE);
-		TableColumn tableColumn_11 = tableViewerColumn_13.getColumn();
-		tableColumn_11.setWidth(100);
-		tableColumn_11.setText("描述");
-		
-		Composite composite_2 = new Composite(group_2, SWT.NONE);
-		GridLayout gl_composite_2 = new GridLayout(1, false);
-		gl_composite_2.verticalSpacing = 1;
-		gl_composite_2.marginWidth = 0;
-		gl_composite_2.marginHeight = 0;
-		gl_composite_2.horizontalSpacing = 0;
-		composite_2.setLayout(gl_composite_2);
-		
-		Button addEngineParamButton = new Button(composite_2, SWT.NONE);
-		addEngineParamButton.setSize(80, 27);
-		addEngineParamButton.setText("添加");
-		addEngineParamButton.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				CommandParamTo commandParamTo = new CommandParamTo();
-				commandParamTo.setBizType("ExecuteParam");
-				commandParamTo.setDataType("String");
-				commandParamTo.setDescription("");
-				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-				expression.setName("");
-				expression.setValue("");
-				commandParamTo.setExpression(expression);
-				commandParamTo.setKey("param");
-				commandParamTo.setName("参数");
-				
-				((List<CommandParamTo>)engineexeTableViewer.getInput()).add(commandParamTo);
-				engineexeTableViewer.refresh();
-			}
-		});
-		
-		Button deleteEngineParamButton = new Button(composite_2, SWT.NONE);
-		deleteEngineParamButton.setText("删除");
-		deleteEngineParamButton.addListener(SWT.Selection, new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				ISelection sel = uicontrolTableViewer.getSelection();
-				if (sel == null)
-					return;
-				Object[] objs = ((IStructuredSelection) sel).toArray();
-				if (objs == null || objs.length == 0)
-					return;
-				boolean b = MessageDialog.openConfirm(null, "警告", "你确认要删除吗？");
-				if (!b)
-					return;
-
-				for (int i = 0; i < objs.length; i++) {
-					CommandParamTo col = (CommandParamTo) objs[i];
-					((List<CommandParamTo>)engineexeTableViewer.getInput()).remove(col);
-				}
-				engineexeTableViewer.refresh();				
-			}
-		});
-		
-		engineexeTableViewer.setContentProvider(new ArrayContentProvider());
-		engineexeTableViewer.setLabelProvider(new EngineExeTableLabelProvider());
 
 		createUiCollectCellModifier();
 		createUiControlCellModifier();
-		createEngineExeCellModifier();
+//		createEngineExeCellModifier();
 		
-		initCombo();
+		initTableViewers("init");
 		init();
 		return container;
 	}
@@ -449,7 +526,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(632, 665);
+		return new Point(655, 670);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -591,8 +668,6 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 
 		// 默认名称为选中的类型
 		nametext.setText(typecombo.getData(typecombo.getSelectionIndex() + "") == null ? "" : getType(((TaskCommandDefinition)typecombo.getData(typecombo.getSelectionIndex() + "")).getId()));
-	
-		initTableViewers();
 	}
 	
 	private void createUiCollectCellModifier() {
@@ -838,12 +913,12 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	/**
 	 * 初始化各个tableviewer的值
 	 */
-	private void initTableViewers(){
+	private void initTableViewers(String type){
+		engineexeTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam"));
 		uicollectTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "InputParam"));
 		uicontrolTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ControlParam"));
-		engineexeTableViewer.setInput(TaskCommandUtil.getTaskCommandParamByType((TaskCommandDefinition) typecombo.getData(typecombo.getSelectionIndex()+""), "ExecuteParam"));
 		
-		if(taskCommand!=null) {
+		if(taskCommand!=null && type.equals("init")) {
 //			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 //				@Override
 //				protected void doExecute() {
@@ -869,9 +944,9 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 				}
 			}
 			
-			((List<CommandParamTo>)uicollectTableViewer.getInput()).addAll(uicollectCommandParamTos);
-			((List<CommandParamTo>)uicontrolTableViewer.getInput()).addAll(uicontrolCommandParamTos);
-			((List<CommandParamTo>)engineexeTableViewer.getInput()).addAll(engineexeCommandParamTos);
+			uicollectTableViewer.setInput(uicollectCommandParamTos);
+			uicontrolTableViewer.setInput(uicontrolCommandParamTos);
+			engineexeTableViewer.setInput(engineexeCommandParamTos);
 		}
 		
 		uicollectTableViewer.refresh();
