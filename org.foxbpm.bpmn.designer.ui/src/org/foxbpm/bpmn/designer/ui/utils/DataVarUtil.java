@@ -210,6 +210,21 @@ public class DataVarUtil {
 		}
 		return dataTypeDef;
 	}
+	
+	/**
+	 * 根据传入数据类型的值拿到该名称
+	 * @param value 数据类型的值
+	 * @return 数据类型的名称
+	 */
+	public static DataTypeDef getDataTypeDefNameByValue(String value) {
+		DataTypeDef newdataTypeDef = null;
+		for (DataTypeDef dataTypeDef :  FoxBPMDesignerUtil.getDataVariableConfig().getDataVariableDataType().getDataTypeDef()) {
+			if(dataTypeDef.getTypeValue().equals(value)) {
+				newdataTypeDef = dataTypeDef;
+			}
+		}
+		return newdataTypeDef;
+	}
 //
 //	/**
 //	 * 得到所有用户的DataVarTO

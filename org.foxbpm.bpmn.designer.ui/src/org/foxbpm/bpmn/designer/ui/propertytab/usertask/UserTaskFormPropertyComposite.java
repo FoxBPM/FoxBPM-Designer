@@ -22,13 +22,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITableLabelProvider;
-import org.eclipse.jface.viewers.IViewerLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
@@ -48,6 +46,7 @@ import org.foxbpm.bpmn.designer.ui.custom.ExpDialogCellEditor;
 import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
 import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.bpmn.designer.ui.utils.DataVarUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormParam;
 import org.foxbpm.model.bpmn.foxbpm.FormParamContainer;
@@ -56,6 +55,7 @@ import org.foxbpm.model.bpmn.foxbpm.FormUriView;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.variableconfig.DataTypeDef;
+import org.foxbpm.model.config.variableconfig.DataVariableDef;
 
 public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 	private UserTask userTask;
@@ -151,7 +151,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 			public void handleEvent(Event event) {
 				FormParam formParam = FoxBPMFactory.eINSTANCE.createFormParam();
 				formParam.setParamKey("参数键" + ((List<FormParam>) tableViewer.getInput()).size());
-				formParam.setParamType("java.lang.String");
+				formParam.setParamType("String");
 				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
 				expression.setName("表达式");
 				expression.setValue("");
@@ -401,10 +401,10 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 							formParam.setParamKey((String) value);
 						}
 						if (property.equals("PARAMTYPE")) {
-							if(value==null) {
-								formParam.setParamType(FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getTypeValue());
+							if(value == null) {
+								formParam.setParamType(DataVarUtil.getDataTypeDefByDataVariableDataType(formParam.getParamType()).getId());
 							}else {
-								formParam.setParamType(((DataTypeDef)value).getTypeValue());
+								formParam.setParamType(((DataTypeDef)value).getId());
 							}
 						}
 						if (property.equals("PARAMEMP")) {
@@ -422,7 +422,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 					return formParam.getParamKey();
 				}
 				if (property.equals("PARAMTYPE")) {
-					return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getName();
+					return DataVarUtil.getDataTypeDefByDataVariableDataType(formParam.getParamType());
 				}
 				if (property.equals("PARAMEMP")) {
 					((ExpDialogCellEditor) cellEditor[2]).setExpression(formParam.getExpression());
@@ -463,7 +463,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 			case 0:
 				return formParam.getParamKey();
 			case 1:
-				return FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType())==null?"未找到该数据类型":FoxBPMDesignerUtil.getDataTypeDefNameByValue(formParam.getParamType()).getName();
+				return DataVarUtil.getDataTypeDefByDataVariableDataType(formParam.getParamType()).getName();
 			case 2:
 				return formParam.getExpression().getName();
 			}
