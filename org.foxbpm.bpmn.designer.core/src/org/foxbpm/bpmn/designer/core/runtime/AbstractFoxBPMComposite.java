@@ -2,6 +2,8 @@ package org.foxbpm.bpmn.designer.core.runtime;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.bpmn2.BaseElement;
@@ -27,12 +29,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.impl.TransactionalEditingDomainImpl;
 import org.eclipse.emf.validation.model.EvaluationMode;
 import org.eclipse.emf.validation.service.IValidator;
 import org.eclipse.emf.validation.service.ModelValidationService;
+import org.eclipse.graphiti.features.IFeatureProvider;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.SWTObservables;
@@ -429,5 +433,25 @@ public abstract class AbstractFoxBPMComposite extends Composite {
 				});
 			}
 		});
+	}
+	
+	/**
+	 * 增加灯泡
+	 * 
+	 * @param control
+	 * @param id
+	 */
+	protected void addDecorate(Control control, String id) {
+		Bundle bundle = Platform.getBundle("org.foxbpm.bpmn.designer.ui");
+		Class<?> theClass = null;
+		Object[] params = {control, id};  
+		try {
+			theClass = bundle.loadClass("org.foxbpm.bpmn.designer.ui.utils.ControlDecorateUtil");
+			Method method = theClass.getMethod("addDecorate", Control.class, String.class);
+			method.invoke(theClass, params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }
