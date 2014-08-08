@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
-import org.foxbpm.model.config.variableconfig.DataTypeDef;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
@@ -157,7 +156,7 @@ public class FoxBPMDesignerUtil {
 		}
 		return taskCommandNames;
 	}
-
+	
 	/**
 	 * 返回foxBPMConfig对象
 	 * 
@@ -222,21 +221,6 @@ public class FoxBPMDesignerUtil {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/**
-	 * 根据传入数据类型的值拿到该名称
-	 * @param value 数据类型的值
-	 * @return 数据类型的名称
-	 */
-	public static DataTypeDef getDataTypeDefNameByValue(String value) {
-		DataTypeDef newdataTypeDef = null;
-		for (DataTypeDef dataTypeDef : getDataVariableConfig().getDataVariableDataType().getDataTypeDef()) {
-			if(dataTypeDef.getTypeValue().equals(value)) {
-				newdataTypeDef = dataTypeDef;
-			}
-		}
-		return newdataTypeDef;
 	}
 
 	/**

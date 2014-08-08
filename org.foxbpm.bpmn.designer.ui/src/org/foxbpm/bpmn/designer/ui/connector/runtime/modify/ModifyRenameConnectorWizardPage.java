@@ -254,16 +254,16 @@ public class ModifyRenameConnectorWizardPage extends WizardPage {
 		if(connectorInstance.isIsTimeExecute()){
 			checkButton.setSelection(true);
 			Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-			expression.setName(connectorInstance.getTimeExpression() == null ? "" : connectorInstance.getTimeExpression().getExpression().getName());
-			expression.setValue(connectorInstance.getTimeExpression() == null ? "" : connectorInstance.getTimeExpression().getExpression().getValue());
+			expression.setName(connectorInstance.getTimeExpression() == null || connectorInstance.getTimeExpression().getExpression()==null ? "" : connectorInstance.getTimeExpression().getExpression().getName());
+			expression.setValue(connectorInstance.getTimeExpression() == null || connectorInstance.getTimeExpression().getExpression()==null ? "" : connectorInstance.getTimeExpression().getExpression().getValue());
 			timeBpmExpViewer.setExpression(expression);
 			timeBpmExpViewer.getTextControl().setText(expression.getName());
 			timeBpmExpViewer.setEnabled(true);
 			skipBpmExpViewer.setEnabled(true);
 			
 			Expression expressionToSkip = FoxBPMFactory.eINSTANCE.createExpression();
-			expressionToSkip.setName(connectorInstance.getTimeSkipExpression() == null ? "" : connectorInstance.getTimeSkipExpression().getExpression().getName());
-			expressionToSkip.setValue(connectorInstance.getTimeSkipExpression() == null ? "" : connectorInstance.getTimeSkipExpression().getExpression().getValue());
+			expressionToSkip.setName(connectorInstance.getTimeSkipExpression() == null || connectorInstance.getTimeSkipExpression().getExpression()==null ? "" : connectorInstance.getTimeSkipExpression().getExpression().getName());
+			expressionToSkip.setValue(connectorInstance.getTimeSkipExpression() == null || connectorInstance.getTimeSkipExpression().getExpression()==null ? "" : connectorInstance.getTimeSkipExpression().getExpression().getValue());
 			skipBpmExpViewer.setExpression(expressionToSkip);
 			skipBpmExpViewer.getTextControl().setText(expressionToSkip.getName());
 		}

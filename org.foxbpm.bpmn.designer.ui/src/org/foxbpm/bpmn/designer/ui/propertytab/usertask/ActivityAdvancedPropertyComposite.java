@@ -67,7 +67,8 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 	public Composite createUI(Composite parent) {
 		Composite containerComposite=new Composite(parent, SWT.NONE);
 		containerComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		containerComposite.setLayout(new GridLayout(1,false));
+		GridLayout gl_containerComposite = new GridLayout(1,false);
+		containerComposite.setLayout(gl_containerComposite);
 		
 		detailComposite=new Composite(containerComposite, SWT.NONE);
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
@@ -86,7 +87,9 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 		multiInstanceRadio.setText("多实例");
 		
 		multiComposite=new Composite(containerComposite, SWT.NONE);
-		multiComposite.setLayout(new GridLayout(4, false));
+		GridLayout gl_multiComposite = new GridLayout(4, false);
+		gl_multiComposite.horizontalSpacing = 10;
+		multiComposite.setLayout(gl_multiComposite);
 		multiComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		multiComposite.setVisible(false);//默认不可见
 		
@@ -561,5 +564,11 @@ public class ActivityAdvancedPropertyComposite extends AbstractFoxBPMComposite {
 				});
 			}
 		});
+		
+		addDecorate(inputDatasetViewer.getTextControl(), "activityAdvance_loopDataInputCollection");
+		addDecorate(inputItemViewer.getTextControl(), "activityAdvance_inputDataItem");
+		addDecorate(outputDatasetViewer.getTextControl(), "activityAdvance_loopDataOutputCollection");
+		addDecorate(outputItemViewer.getTextControl(), "activityAdvance_outputDataItem");
+		addDecorate(fulfillConditionViewer.getTextControl(), "activityAdvance_completionCondition");
 	}
 }

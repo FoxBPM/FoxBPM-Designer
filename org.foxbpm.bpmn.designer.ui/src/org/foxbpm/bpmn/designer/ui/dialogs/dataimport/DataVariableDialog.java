@@ -250,7 +250,7 @@ public class DataVariableDialog extends TitleAreaDialog {
 		dataVariable.setIsList(ismutiCheckButton.getSelection());
 		dataVariable.setIsPersistence(istransientCheckButton.getSelection());
 		dataVariable.setDataType(((DataTypeDef) ((IStructuredSelection) typecomboViewer.getSelection()).getFirstElement()) == null ? "" : ((DataTypeDef) ((IStructuredSelection) typecomboViewer
-				.getSelection()).getFirstElement()).getTypeValue());
+				.getSelection()).getFirstElement()).getId());
 
 		Expression expressionTo = expressionComboViewer.getExpression();
 		if (expressionTo != null) {
@@ -259,9 +259,6 @@ public class DataVariableDialog extends TitleAreaDialog {
 			expression.setValue(expressionTo.getValue());
 			dataVariable.setExpression(expression);
 		}
-
-		dataVariable.setDataType(((DataTypeDef) ((IStructuredSelection) typecomboViewer.getSelection()).getFirstElement()) == null ? "" : ((DataTypeDef) ((IStructuredSelection) typecomboViewer
-				.getSelection()).getFirstElement()).getTypeValue());
 
 		Documentation documentation = FoxBPMFactory.eINSTANCE.createDocumentation();
 		documentation.setValue(desctext.getText() == null ? "" : desctext.getText());
@@ -331,7 +328,12 @@ public class DataVariableDialog extends TitleAreaDialog {
 			ismutiCheckButton.setSelection(dataVariable.isIsList());
 
 			DataTypeDef dataTypeDef = DataVarUtil.getDataTypeDefByDataVariableDataType(dataVariable.getDataType());
-
+			for (int i=0; i< ((List<DataTypeDef>)typecomboViewer.getInput()).size(); i++) {
+				if(((List<DataTypeDef>)typecomboViewer.getInput()).get(i).getId().equals(dataTypeDef.getId())) {
+					typecomboViewer.getCombo().select(i);
+					break;
+				}
+			}
 			typecomboViewer.setSelection(new StructuredSelection(dataTypeDef));
 
 			if (dataVariable.getExpression() != null) {

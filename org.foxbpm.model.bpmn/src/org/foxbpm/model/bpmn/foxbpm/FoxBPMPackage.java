@@ -2830,13 +2830,22 @@ public interface FoxBPMPackage extends EPackage {
 	int PARAM__EXPRESSION = 2;
 
 	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAM__DESCRIPTION = 3;
+
+	/**
 	 * The number of structural features of the '<em>Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAM_FEATURE_COUNT = 3;
+	int PARAM_FEATURE_COUNT = 4;
 
 	/**
 	 * The number of operations of the '<em>Param</em>' class.
@@ -3002,6 +3011,15 @@ public interface FoxBPMPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMAND_PARAM__EXPRESSION = PARAM__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMMAND_PARAM__DESCRIPTION = PARAM__DESCRIPTION;
 
 	/**
 	 * The feature id for the '<em><b>Biz Type</b></em>' attribute.
@@ -5331,6 +5349,17 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getParam_Expression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.Param#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.Param#getDescription()
+	 * @see #getParam()
+	 * @generated
+	 */
+	EAttribute getParam_Description();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.PotentialStarter <em>Potential Starter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7239,6 +7268,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAM__EXPRESSION = eINSTANCE.getParam_Expression();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARAM__DESCRIPTION = eINSTANCE.getParam_Description();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.PotentialStarterImpl <em>Potential Starter</em>}' class.

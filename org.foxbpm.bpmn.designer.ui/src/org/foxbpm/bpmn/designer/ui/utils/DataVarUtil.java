@@ -16,6 +16,7 @@ import org.foxbpm.model.bpmn.foxbpm.DataVariable;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.variableconfig.DataTypeDef;
 import org.foxbpm.model.config.variableconfig.DataVariableBizType;
+import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.foxbpm.model.config.variableconfig.VariableconfigFactory;
 
 
@@ -25,6 +26,12 @@ import org.foxbpm.model.config.variableconfig.VariableconfigFactory;
  * 
  */
 public class DataVarUtil {
+	
+	public static List<DataVariableBizType> getDataVariableBizTypes(){
+		DataVariableConfig dataVariableConfig = FoxBPMDesignerUtil.getDataVariableConfig();
+		return dataVariableConfig.getDataVariableBizTypeConfig().getDataVariableBizType();
+	}
+	
 	public static DataVariableBizType getDataVariableBizType(String typeId){
 		for (DataVariableBizType dataVariableBizType : FoxBPMDesignerUtil.getDataVariableConfig().getDataVariableBizTypeConfig().getDataVariableBizType()) {
 			if(dataVariableBizType.getTypeId().equals(typeId)){
@@ -197,11 +204,26 @@ public class DataVarUtil {
 		DataTypeDef dataTypeDef = VariableconfigFactory.eINSTANCE.createDataTypeDef();
 		dataTypeDef.setName(dataType);
 		for (DataTypeDef dataTypeDef1 : FoxBPMDesignerUtil.getDataVariableConfig().getDataVariableDataType().getDataTypeDef()) {
-			if (dataTypeDef1.getTypeValue().equals(dataType)) {
+			if (dataTypeDef1.getId().equals(dataType)) {
 				return dataTypeDef1;
 			}
 		}
 		return dataTypeDef;
+	}
+	
+	/**
+	 * 根据传入数据类型的值拿到该名称
+	 * @param value 数据类型的值
+	 * @return 数据类型的名称
+	 */
+	public static DataTypeDef getDataTypeDefNameByValue(String value) {
+		DataTypeDef newdataTypeDef = null;
+		for (DataTypeDef dataTypeDef :  FoxBPMDesignerUtil.getDataVariableConfig().getDataVariableDataType().getDataTypeDef()) {
+			if(dataTypeDef.getTypeValue().equals(value)) {
+				newdataTypeDef = dataTypeDef;
+			}
+		}
+		return newdataTypeDef;
 	}
 //
 //	/**
