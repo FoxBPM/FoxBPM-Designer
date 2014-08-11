@@ -31,7 +31,7 @@ public class RuntimeConnectorUtil {
 	public static String ACTORCONNECTOR = "ActorConnector.xml";
 
 	public static HashMap<String, Object> allFlowConnectors = null;
-
+	
 	private static boolean isOk = false;
 
 	/**
@@ -123,6 +123,8 @@ public class RuntimeConnectorUtil {
 				map.put("node", node);
 				// 目录
 				map.put("path", connectorPath);
+				//图标
+				map.put("ico", node.getIco());
 				// 放到map里
 				allFlowConnectors.put(connector.getId(), map);
 			}

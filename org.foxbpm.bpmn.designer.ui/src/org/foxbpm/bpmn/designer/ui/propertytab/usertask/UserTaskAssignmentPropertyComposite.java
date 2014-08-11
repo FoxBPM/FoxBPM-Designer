@@ -2,6 +2,7 @@ package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
@@ -28,6 +29,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTResourceManager;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -38,6 +40,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
+import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.create.AddNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.modify.ModifyNewActorConnectorWizard;
@@ -360,7 +363,10 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				return image2;
 			}
 			if (element instanceof ConnectorInstance) {
-				return PlatformUI.getWorkbench().getSharedImages().getImage(image3);
+				ConnectorInstance connectorInstance = (ConnectorInstance) element;
+				String imagePath = ((Map<String, Object>)RuntimeConnectorUtil.allFlowConnectors.get(connectorInstance.getConnectorId())).get("ico").toString();
+				Image image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
+				return image;
 			}
 			return null;
 		}
