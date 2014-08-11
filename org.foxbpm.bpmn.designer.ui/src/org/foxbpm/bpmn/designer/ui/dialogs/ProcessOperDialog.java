@@ -29,6 +29,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
@@ -81,6 +82,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private Button deleteButton;
 	private IPackageFragmentRoot iPackageFragmentRoot;
 	private IFolder iFolder;
+	private IPackageFragment iPackageFragment;
 
 	/**
 	 * Create the dialog.
@@ -114,6 +116,15 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		this.iFile = null;
 		this.curProcessId = null;
 		this.iFolder = iFolder;
+	}
+	
+	public ProcessOperDialog(Shell parentShell, IPackageFragment iPackageFragment) {
+		super(parentShell);
+		setShellStyle(SWT.DIALOG_TRIM | SWT.RESIZE | SWT.PRIMARY_MODAL);
+		setHelpAvailable(false);
+		this.iFile = null;
+		this.curProcessId = null;
+		this.iPackageFragment = iPackageFragment;
 	}
 	
 	/**
@@ -157,6 +168,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				Object selected = iStructuredSelection.getFirstElement();
 				if(iFile==null) {
 					downloadButton.setEnabled(selected!=null);
+					deleteButton.setEnabled(true);
 				}else if(dbid==null) {
 					publishButton.setEnabled(true);
 					createNewButton.setEnabled(true);
@@ -319,6 +331,8 @@ public class ProcessOperDialog extends TitleAreaDialog {
 							folder = (IFolder) iPackageFragmentRoot.getResource();
 						}else if(iFolder!=null) {
 							folder = iFolder;
+						}else if(iPackageFragment!=null) {
+							folder = (IFolder) iPackageFragment;
 						}
 						
 						if (newText==null || newText.isEmpty())
@@ -346,7 +360,10 @@ public class ProcessOperDialog extends TitleAreaDialog {
 							fileName = iPackageFragmentRoot.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
 						}else if(iFolder!=null) {
 							fileName = iFolder.getLocationURI().getPath() + "/" + inputDialog.getValue();;
+						}else if(iPackageFragment!=null) {
+							fileName = iPackageFragment.getResource().getLocationURI().getPath() + "/" + inputDialog.getValue();
 						}
+						
 						Representation result = client.get();
 						InputStream inputStream = result.getStream();
 						
@@ -379,6 +396,8 @@ public class ProcessOperDialog extends TitleAreaDialog {
 							iPackageFragmentRoot.getCorrespondingResource().refreshLocal(IResource.DEPTH_INFINITE, null);
 						}else if(iFolder!=null) {
 							iFolder.refreshLocal(IResource.DEPTH_INFINITE, null);
+						}else if(iPackageFragment!=null) {
+							iPackageFragment.getCorrespondingResource().refreshLocal(IResource.DEPTH_INFINITE, null);
 						}
 						MessageDialog.openInformation(null, "提示", "下载流程定义成功");
 					} catch (IOException e) {
@@ -562,6 +581,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			}
 			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions?key=" + process.getId());
 			if(client==null) {
+				noClientAllButtonsState();
 				return;
 			}
 			Representation result = client.get();
@@ -620,8 +640,22 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		}
 	}
 	
+	/**
+	 * 设置全部按钮为不可用
+	 */
 	private void allButtonsDisable() {
 		createNewButton.setEnabled(false);
+		publishButton.setEnabled(false);
+		updateButton.setEnabled(false);
+		deleteButton.setEnabled(false);
+		downloadButton.setEnabled(false);
+	}
+	
+	/**
+	 * 没有网络下按钮状态
+	 */
+	private void noClientAllButtonsState() {
+		createNewButton.setEnabled(true);
 		publishButton.setEnabled(false);
 		updateButton.setEnabled(false);
 		deleteButton.setEnabled(false);

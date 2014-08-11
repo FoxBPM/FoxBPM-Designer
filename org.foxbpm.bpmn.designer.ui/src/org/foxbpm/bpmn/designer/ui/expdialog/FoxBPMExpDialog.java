@@ -1071,5 +1071,21 @@ public class FoxBPMExpDialog extends Dialog {
 				dataVarTos.add(dataVarTo);
 			}
 		}
+		
+		DataVarTo dataVarTo3 = new DataVarTo();
+		dataVarTo3.setId("常用变量");
+		dataVarTo3.setType("分类");
+		dataVarTo3.setCantbechoose("changyong");
+		
+		for (DataVariableDef dataVariableDef : ((FoxBPMDataVariable)typeToDataVariableMap.get("类型ID5")).getDataVariableDef()) {
+			DataVarTo dataVarTo = new DataVarTo();
+			dataVarTo.setId(dataVariableDef.getName());
+			dataVarTo.setName(dataVariableDef.getName());
+			dataVarTo.setValue(dataVariableDef.getValue());
+			dataVarTo.setType("分类");
+			dataVarTo3.addChild(dataVarTo);
+		}
+		
+		dataVarTos.add(dataVarTo3);
 	}
 }
