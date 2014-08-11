@@ -168,6 +168,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				Object selected = iStructuredSelection.getFirstElement();
 				if(iFile==null) {
 					downloadButton.setEnabled(selected!=null);
+					deleteButton.setEnabled(true);
 				}else if(dbid==null) {
 					publishButton.setEnabled(true);
 					createNewButton.setEnabled(true);
@@ -580,6 +581,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			}
 			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions?key=" + process.getId());
 			if(client==null) {
+				noClientAllButtonsState();
 				return;
 			}
 			Representation result = client.get();
@@ -638,8 +640,22 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		}
 	}
 	
+	/**
+	 * 设置全部按钮为不可用
+	 */
 	private void allButtonsDisable() {
 		createNewButton.setEnabled(false);
+		publishButton.setEnabled(false);
+		updateButton.setEnabled(false);
+		deleteButton.setEnabled(false);
+		downloadButton.setEnabled(false);
+	}
+	
+	/**
+	 * 没有网络下按钮状态
+	 */
+	private void noClientAllButtonsState() {
+		createNewButton.setEnabled(true);
 		publishButton.setEnabled(false);
 		updateButton.setEnabled(false);
 		deleteButton.setEnabled(false);
