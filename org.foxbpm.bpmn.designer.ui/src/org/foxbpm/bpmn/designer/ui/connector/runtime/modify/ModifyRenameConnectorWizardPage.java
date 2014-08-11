@@ -284,6 +284,30 @@ public class ModifyRenameConnectorWizardPage extends WizardPage {
 			skipBpmExpViewer.getTextControl().setText(expressionToSkip.getName());
 		}
 		
+		timeBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				timeBpmExpViewer.setExpression(expression);
+			}
+		});
+		
+		skipBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				skipBpmExpViewer.setExpression(expression);
+			}
+		});
+		
 		checkButton.addListener(SWT.Selection, new Listener() {
 			
 			@Override

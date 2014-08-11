@@ -241,6 +241,18 @@ public class RenameConnectorWizardPage extends WizardPage {
 		timeText = timeBpmExpViewer.getTextControl();
 		timeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		timeBpmExpViewer.setEnabled(false);
+		
+		timeBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				timeBpmExpViewer.setExpression(expression);
+			}
+		});
 
 		label = new Label(group, SWT.NONE);
 		label.setText("定时器跳过策略");
@@ -251,6 +263,18 @@ public class RenameConnectorWizardPage extends WizardPage {
 		skipText = skipBpmExpViewer.getTextControl();
 		skipText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		skipBpmExpViewer.setEnabled(false);
+		
+		skipBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				skipBpmExpViewer.setExpression(expression);
+			}
+		});
 
 		checkButton.addListener(SWT.Selection, new Listener() {
 
