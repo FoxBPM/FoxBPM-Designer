@@ -7,6 +7,7 @@ import org.eclipse.core.commands.IHandlerListener;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -49,15 +50,20 @@ public class ProcessOperHandler implements IHandler {
 	        	
 //	        	IProject project = (IProject)((IAdaptable)firstElement).getAdapter(IProject.class);
 //	            IPath path = project.getFullPath();
-	        }else if(firstElement instanceof IPackageFragmentRoot || firstElement instanceof IFolder) {
+	        }else if(firstElement instanceof IPackageFragmentRoot || firstElement instanceof IFolder || firstElement instanceof IPackageFragment) {
 	        	IPackageFragmentRoot iPackageFragmentRoot = (IPackageFragmentRoot) ((IAdaptable)firstElement).getAdapter(IPackageFragmentRoot.class);
 	        	IFolder iFolder = (IFolder) ((IAdaptable)firstElement).getAdapter(IFolder.class);
+	        	IPackageFragment iPackageFragment = (IPackageFragment) ((IAdaptable)firstElement).getAdapter(IPackageFragment.class);
 	        	if(iPackageFragmentRoot!=null) {
 	        		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), iPackageFragmentRoot);
 		    		processOperDialog.open();
 	        	}
 	        	else if(iFolder!=null) {
 	        		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), iFolder);
+		    		processOperDialog.open();
+	        	}
+	        	else if(iPackageFragment!=null) {
+	        		ProcessOperDialog processOperDialog = new ProcessOperDialog(Display.getDefault().getActiveShell(), iPackageFragment);
 		    		processOperDialog.open();
 	        	}
 	        }
