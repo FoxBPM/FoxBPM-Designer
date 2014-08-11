@@ -1,5 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.connector.runtime.modify;
 
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.UserTask;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -22,10 +23,13 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.LifeCycleWidget;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.SkipComment;
 
 public class ModifyRenameConnectorWizardPage extends WizardPage {
@@ -211,6 +215,18 @@ public class ModifyRenameConnectorWizardPage extends WizardPage {
 			foxBPMExpViewer.setExpression(expression);
 			foxBPMExpViewer.getTextControl().setText(expression.getName());
 		}
+		
+		foxBPMExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				foxBPMExpViewer.setExpression(expression);
+			}
+		});
 		
 		new Label(proGroup, SWT.NONE);
 		
