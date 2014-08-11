@@ -38,8 +38,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.FilteredTree;
-import org.eclipse.ui.dialogs.PatternFilter;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.create.AddNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.modify.ModifyNewActorConnectorWizard;
@@ -76,14 +74,17 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		detailComposite.setLayout(new GridLayout(1, false));
 
-		PatternFilter filter = new PatternFilter();
+//		PatternFilter filter = new PatternFilter();
 
 		Composite composite = new Composite(detailComposite, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		FilteredTree filteredTree = new FilteredTree(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
-		treeViewer = filteredTree.getViewer();
+//		FilteredTree filteredTree = new FilteredTree(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
+		treeViewer = new TreeViewer(composite);
 		tree = treeViewer.getTree();
+		GridData gd_tree = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_tree.widthHint = 300;
+		tree.setLayoutData(gd_tree);
 		treeViewer.setLabelProvider(new ViewerLabelProvider());
 		treeViewer.setContentProvider(new TreeContentProvider());
 
@@ -96,7 +97,7 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		});
 
 		Composite buttonsComposite = new Composite(composite, SWT.NONE);
-		buttonsComposite.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		buttonsComposite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, false, 1, 1));
 		buttonsComposite.setSize(45, 139);
 		GridLayout gl_buttonsComposite = new GridLayout(1, false);
 		gl_buttonsComposite.verticalSpacing = 1;
