@@ -31,6 +31,7 @@ import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
+import org.foxbpm.bpmn.designer.ui.connector.definition.ConfigureNewConnectorWizardPage;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateFlowConnectorJava;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
@@ -168,21 +169,25 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			int byteread = 0;// 读取的位数
 			byte[] buffer = new byte[1024];
 			// 写入图标文件
-			if (null != ((ConfigureActorConnectorWizardPage) ccwd).getIconPath()) {
+			FileInputStream fis = null;
+			if (((ConfigureActorConnectorWizardPage) ccwd).getIconPath()==null || ((ConfigureActorConnectorWizardPage) ccwd).getIconPath().equals("connector.png")) {
 				// 打开原文件（connector图标）
-				FileInputStream fis = new FileInputStream(DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath()));
-				// 打开连接到目标文件的输出流
-				File outfile = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
-						((ConfigureActorConnectorWizardPage) ccwd).getNode().getId()) + "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
-				FileOutputStream outStream = new FileOutputStream(outfile);
-
-				while ((byteread = fis.read(buffer)) != -1) {
-					// 将读取的字节写入输出流
-					outStream.write(buffer, 0, byteread);
-				}
-				outStream.close();
+				fis = new FileInputStream(DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath()));
+			}else {
+				// 打开原文件（connector图标）
+				fis = new FileInputStream(((ConfigureActorConnectorWizardPage) ccwd).getIconPath());
 			}
+			// 打开连接到目标文件的输出流
+			File outfile = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
+					((ConfigureActorConnectorWizardPage) ccwd).getNode().getId()) + "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
+			FileOutputStream outStream = new FileOutputStream(outfile);
 
+			while ((byteread = fis.read(buffer)) != -1) {
+				// 将读取的字节写入输出流
+				outStream.write(buffer, 0, byteread);
+			}
+			fis.close();
+			outStream.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

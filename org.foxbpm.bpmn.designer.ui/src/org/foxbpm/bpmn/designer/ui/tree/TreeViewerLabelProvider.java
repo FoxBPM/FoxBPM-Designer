@@ -1,12 +1,14 @@
 package org.foxbpm.bpmn.designer.ui.tree;
 
+import java.util.Map;
+
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.swt.SWTResourceManager;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.ui.PlatformUI;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
@@ -55,9 +57,10 @@ public class TreeViewerLabelProvider extends StyledCellLabelProvider implements 
 		Image image = null;
 		ITreeElement tElement = (ITreeElement) element;
 		try {
-			String imagePath = resourcePath==null?tElement.getIcon():DefinitionConnectorUtil.getFlowConnectorIconPath(resourcePath) + "/" + tElement.getIcon(); // 要读取的图片文件的路径
-			return new Image(PlatformUI.getWorkbench().getDisplay(),
-					new ImageData(imagePath).scaledTo(16, 16));
+			DefinitionConnectorUtil.getAllFlowConnectorNodes();
+			String imagePath = ((Map<String, Object>)DefinitionConnectorUtil.allFlowConnectors.get(tElement.getId()+tElement.getRealName())).get("ico").toString();
+			image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
+			return image;
 		} catch (Exception e) {
 //			e.printStackTrace();
 			image = ImageUtil.getImageFromName("/connector/category.png");
