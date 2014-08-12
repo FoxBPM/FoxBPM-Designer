@@ -346,7 +346,7 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 			String image1 = ISharedImages.IMG_OBJS_TASK_TSK;
 			if (element instanceof ConnectorInstance) {
 				ConnectorInstance connectorInstance = (ConnectorInstance) element;
-				String imagePath = ((Map<String, Object>)RuntimeConnectorUtil.allFlowConnectors.get(connectorInstance.getConnectorId())).get("ico").toString();
+				String imagePath = ((Map<String, Object>)RuntimeConnectorUtil.getAllConnectors().get(connectorInstance.getConnectorId())).get("ico").toString();
 				Image image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
 				return image;
 			}
