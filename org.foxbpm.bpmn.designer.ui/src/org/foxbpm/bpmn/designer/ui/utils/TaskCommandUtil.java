@@ -25,11 +25,13 @@ public class TaskCommandUtil {
 				commandParamTo.setDescription(commandParam.getDescription());
 				commandParamTo.setType("config");
 				
-				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-				expression.setName(commandParam.getValue());
-				expression.setValue(commandParam.getValue());
+				if(commandParam.getValue()!=null) {
+					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+					expression.setName(commandParam.getValue());
+					expression.setValue(commandParam.getValue());
+					commandParamTo.setExpression(expression);
+				}
 				
-				commandParamTo.setExpression(expression);
 				commandParamTo.setName(commandParam.getName());
 				commandParamTo.setKey(commandParam.getKey());
 				
