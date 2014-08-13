@@ -1,5 +1,7 @@
 package org.foxbpm.bpmn.designer.base.utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -173,7 +175,15 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getFakeGroovyFilePath() {
-		return Platform.getInstallLocation().getURL().getPath() + "fake.groovy";
+		File file = new File(Platform.getInstallLocation().getURL().getPath() + "fake.groovy");
+		if(!file.exists()) {
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return file.getAbsolutePath();
 	}
 
 	/**
