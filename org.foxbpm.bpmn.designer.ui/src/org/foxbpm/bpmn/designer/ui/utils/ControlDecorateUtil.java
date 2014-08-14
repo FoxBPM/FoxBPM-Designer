@@ -10,7 +10,9 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.base.utils.PropertiesUtil;
 import org.foxbpm.bpmn.designer.base.utils.StringUtil;
@@ -29,7 +31,7 @@ public class ControlDecorateUtil {
 	 * @param id
 	 */
 	public static void addDecorate(Control control, String id) {
-		final ControlDecoration deco = new ControlDecoration(control, SWT.CENTER | SWT.LEFT);
+		final ControlDecoration deco = new ControlDecoration(control, SWT.RIGHT | SWT.CENTER);
 		// Set description and image
 		
 		Bundle bundle = Platform.getBundle("org.foxbpm.bpmn.designer.base");
@@ -49,14 +51,14 @@ public class ControlDecorateUtil {
 		
 		try {
 			deco.setDescriptionText(map.get(id)==null ? "" : new String(StringUtil.getString(map.get(id).toString()).getBytes(ISO88591), UTF8));
+			control.setToolTipText(map.get(id)==null ? "" : new String(StringUtil.getString(map.get(id).toString()).getBytes(ISO88591), UTF8));
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		}
-		
-		deco.setImage(ImageUtil.getImageFromName("/decoration/smartmode_co.gif"));
+		deco.setImage(new Image(Display.getCurrent(), ImageUtil.getImageDataFromName("/decoration/smartmode_co.gif").scaledTo(13, 13)));
 
 		// Always show decoration
-		deco.setShowOnlyOnFocus(false);
+		deco.setShowOnlyOnFocus(true);
 
 		// Also if the text UI componet is not empty hide the decoration
 		if (control instanceof Text) {

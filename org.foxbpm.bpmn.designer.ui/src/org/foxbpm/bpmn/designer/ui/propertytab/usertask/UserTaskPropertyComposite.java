@@ -29,6 +29,8 @@ public class UserTaskPropertyComposite extends AbstractFoxBPMComposite{
 		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, userTask);
 		bindText(Bpmn2Package.Literals.FLOW_ELEMENT__NAME, nameText, userTask);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText);
+	
+		addDecorate(nameText, "activityAdvance_loopDataInputCollection");
 	}
 
 	@Override
