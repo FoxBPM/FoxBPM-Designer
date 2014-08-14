@@ -249,13 +249,30 @@ public class FoxBPMExpViewer extends ContentViewer {
 	}
 
 	public void setExpression(Expression expression) {
+		//获取光标位置
+		int offset = textControl.getCaretPosition();
+		
 		this.expression = expression;
 		if(expression!=null && expression.getValue()!=null && expression.getName()!=null && textControl.getText()!=null && expression.getName()!=expression.getValue()) {
 			textControl.setText(expression.getName());
 		}else if(expression!=null && expression.getValue()!=null && textControl.getText()!=null && expression.getName()==expression.getValue()) {
 			textControl.setText(expression.getValue());
 		}
-		textControl.setSelection(textControl.getText().length());
+		
+		//文本
+		String document = textControl.getText();
+		//光标前字符串
+		String before = document.substring(0, offset);
+		//光标后字符串
+		String after = document.substring(offset);
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append(before);
+		sb.append(after);
+		//设置值
+		textControl.setText(sb.toString());
+		//设置光标位置为当前输入的位置
+		textControl.setSelection(before.length());
 	}
 
 	public void seteObject(EObject eObject) {
