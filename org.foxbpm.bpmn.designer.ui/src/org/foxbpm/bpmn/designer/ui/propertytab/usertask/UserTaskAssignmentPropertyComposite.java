@@ -2,6 +2,7 @@ package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
@@ -28,6 +29,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTResourceManager;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -38,8 +40,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.dialogs.FilteredTree;
-import org.eclipse.ui.dialogs.PatternFilter;
+import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.create.AddNewActorConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.actor.runtime.modify.ModifyNewActorConnectorWizard;
@@ -76,14 +77,17 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		detailComposite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		detailComposite.setLayout(new GridLayout(1, false));
 
-		PatternFilter filter = new PatternFilter();
+//		PatternFilter filter = new PatternFilter();
 
 		Composite composite = new Composite(detailComposite, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		FilteredTree filteredTree = new FilteredTree(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
-		treeViewer = filteredTree.getViewer();
+//		FilteredTree filteredTree = new FilteredTree(composite, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER, filter, true);
+		treeViewer = new TreeViewer(composite);
 		tree = treeViewer.getTree();
+		GridData gd_tree = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+		gd_tree.widthHint = 300;
+		tree.setLayoutData(gd_tree);
 		treeViewer.setLabelProvider(new ViewerLabelProvider());
 		treeViewer.setContentProvider(new TreeContentProvider());
 
@@ -96,7 +100,7 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 		});
 
 		Composite buttonsComposite = new Composite(composite, SWT.NONE);
-		buttonsComposite.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 1, 1));
+		buttonsComposite.setLayoutData(new GridData(SWT.CENTER, SWT.FILL, false, false, 1, 1));
 		buttonsComposite.setSize(45, 139);
 		GridLayout gl_buttonsComposite = new GridLayout(1, false);
 		gl_buttonsComposite.verticalSpacing = 1;
@@ -280,8 +284,8 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				PotentialOwner potentialOwner = null;
 				
 				if(userTask.getResources().size()==0) {
-					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
-					userTask.getResources().add(potentialOwner);
+//					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
+//					userTask.getResources().add(potentialOwner);
 				} else {
 					potentialOwner = (PotentialOwner) userTask.getResources().get(0);
 				}
@@ -293,6 +297,9 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) extensionElements.getValue(0);
 						connectorInstanceElements.getConnectorInstance().remove(connectorInstance);
 
+						if(connectorInstanceElements.getConnectorInstance().size()==0) {
+							userTask.getResources().clear();
+						}
 					}
 				}
 			}
@@ -359,7 +366,10 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				return image2;
 			}
 			if (element instanceof ConnectorInstance) {
-				return PlatformUI.getWorkbench().getSharedImages().getImage(image3);
+				ConnectorInstance connectorInstance = (ConnectorInstance) element;
+				String imagePath = ((Map<String, Object>)RuntimeConnectorUtil.allFlowConnectors.get(connectorInstance.getConnectorId())).get("ico").toString();
+				Image image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
+				return image;
 			}
 			return null;
 		}

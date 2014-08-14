@@ -47,21 +47,11 @@ public class FoxBPMExpViewer extends ContentViewer {
 
 	public FoxBPMExpViewer(Composite composite, int style) {
 		createControl(composite, style);
-		if(expression==null) {
-			expression = FoxBPMFactory.eINSTANCE.createExpression();
-			expression.setName("");
-			expression.setValue("");
-		}
 	}
 	
 	public FoxBPMExpViewer(Composite composite, int style, EObject eObject) {
 		createControl(composite, style);
 		this.eObject = eObject;
-		if(expression==null) {
-			expression = FoxBPMFactory.eINSTANCE.createExpression();
-			expression.setName("");
-			expression.setValue("");
-		}
 	}
 
 	@Override
@@ -213,8 +203,14 @@ public class FoxBPMExpViewer extends ContentViewer {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
-				if(expression==null || eObject == null)
+				if(eObject == null) {
 					return;
+				}
+				if(expression==null) {
+					expression = FoxBPMFactory.eINSTANCE.createExpression();
+					expression.setName("");
+					expression.setValue("");
+				}
 				if(!((Text)e.getSource()).getText().equals(expression.getName()) && expression.getName().equals(expression.getValue())) {
 					FormalExpression formalExpression = Bpmn2Factory.eINSTANCE.createFormalExpression();
 					ModelUtil.setID(formalExpression,eObject.eResource());

@@ -24,6 +24,7 @@ import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -43,7 +44,6 @@ import org.foxbpm.bpmn.designer.base.utils.JsonDataUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.custom.PotentialStarterDialogCellEditor;
 import org.foxbpm.bpmn.designer.ui.dialogs.DataVarTo;
-import org.foxbpm.bpmn.designer.ui.dialogs.FoxBPMInputCellEditor;
 import org.foxbpm.bpmn.designer.ui.utils.BpmnModelUtil;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FormUri;
@@ -213,7 +213,7 @@ public class ActorsPropertyComposite extends AbstractFoxBPMComposite {
 		final CellEditor[] cellEditor = new CellEditor[table.getColumnCount()];
 		cellEditor[0] = new PotentialStarterDialogCellEditor(table, getShell(), editingDomain, tableViewer);
 		cellEditor[1] = new ComboBoxViewerCellEditor(table, SWT.READ_ONLY);
-		cellEditor[2] = new FoxBPMInputCellEditor(table, getShell());
+		cellEditor[2] = new TextCellEditor(table);
 		((ComboBoxViewerCellEditor)cellEditor[1]).setContenProvider(ArrayContentProvider.getInstance());
 		((ComboBoxViewerCellEditor)cellEditor[1]).setLabelProvider(new LabelProvider() {
 			  @Override
@@ -280,7 +280,6 @@ public class ActorsPropertyComposite extends AbstractFoxBPMComposite {
 							}
 						}
 						if (property.equals("STARTORDESC")) {
-							((FoxBPMInputCellEditor)cellEditor[2]).setText((String) value);
 							potentialStarter.setDescription((String) value);
 						}
 					}

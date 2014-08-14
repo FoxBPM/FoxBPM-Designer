@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.internal.resources.Project;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -97,6 +96,7 @@ public class DefinitionConnectorUtil {
 	 */
 	public static List<Node> getAllFlowConnectorNodes() {
 		List<Node> nodes = new ArrayList<Node>();
+		List<Node> childnodes = new ArrayList<Node>();
 		Menu menu = null;
 		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
 			if(resourcePath.getType().equals("flowConnector")) {
@@ -104,11 +104,11 @@ public class DefinitionConnectorUtil {
 			}else{
 				continue;
 			}
-			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
 			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
+				String xmlFilePath = menu.eResource().getURI().devicePath();
+				String path = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/ico/";
 				for (MenuConnector connector : node.getMenuConnector()) {
 					// connector的具体路径
-					String xmlFilePath = menu.eResource().getURI().devicePath();
 					String connectorPath = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/" + connector.getId() + "/";
 					HashMap<String, Object> map = new HashMap<String, Object>();
 					// 连接器对象
@@ -121,13 +121,25 @@ public class DefinitionConnectorUtil {
 					map.put("path", connectorPath);
 					// 图标
 					map.put("ico", connectorPath + connectorDefinition.getIcon());
+					
 					// 对象
 					map.put("object", connectorDefinition);
 					// 放到map里
 					allFlowConnectors.put(connector.getId() + node.getId(), map);
 				}
+				
+				//根节点图标
+				node.setIco(path  +  node.getIco());
+				
+				nodes.add(node);
+				
+				if(node.getNode().size()>0) {
+					childnodes.addAll(node.getNode());
+				}
 			}
 		}
+		
+		nodes.removeAll(childnodes);
 		return nodes;
 	}
 
@@ -138,6 +150,7 @@ public class DefinitionConnectorUtil {
 	 */
 	public static List<Node> getAllActorConnectorNodes() {
 		List<Node> nodes = new ArrayList<Node>();
+		List<Node> childnodes = new ArrayList<Node>();
 		Menu menu = null;
 		for (ResourcePath resourcePath : getOpenProjectResourcePath()) {
 			if(resourcePath.getType().equals("actorConnector")) {
@@ -145,11 +158,11 @@ public class DefinitionConnectorUtil {
 			}else{
 				continue;
 			}
-			nodes.addAll(EMFUtil.getAll(menu.eResource(), Node.class));
 			for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
+				String xmlFilePath = menu.eResource().getURI().devicePath();
+				String path = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/ico/";
 				for (MenuConnector connector : node.getMenuConnector()) {
 					// connector的具体路径
-					String xmlFilePath = menu.eResource().getURI().devicePath();
 					String connectorPath = xmlFilePath.substring(0, xmlFilePath.lastIndexOf("/")) + "/" + connector.getId() + "/";
 					HashMap<String, Object> map = new HashMap<String, Object>();
 					// 连接器对象
@@ -167,8 +180,18 @@ public class DefinitionConnectorUtil {
 					// 放到map里
 					allActorConnectors.put(connector.getId() + node.getId(), map);
 				}
+				
+				//根节点图标
+				node.setIco(path  +  node.getIco());
+				
+				nodes.add(node);
+				
+				if(node.getNode().size()>0) {
+					childnodes.addAll(node.getNode());
+				}
 			}
 		}
+		nodes.removeAll(childnodes);
 		return nodes;
 	}
 

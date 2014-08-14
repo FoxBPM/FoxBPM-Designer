@@ -1,5 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.connector.runtime.create;
 
+import org.eclipse.bpmn2.FormalExpression;
 import org.eclipse.bpmn2.Process;
 import org.eclipse.bpmn2.UserTask;
 import org.eclipse.emf.ecore.EObject;
@@ -24,7 +25,12 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.LifeCycleWidget;
+import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
+import org.foxbpm.bpmn.designer.ui.expdialog.IExpressionChangedListener;
+import org.foxbpm.model.bpmn.foxbpm.Expression;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
+import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 
 public class RenameConnectorWizardPage extends WizardPage {
 
@@ -196,6 +202,19 @@ public class RenameConnectorWizardPage extends WizardPage {
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		text = foxBPMExpViewer.getTextControl();
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		foxBPMExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				foxBPMExpViewer.setExpression(expression);
+			}
+		});
+		
 		new Label(proGroup, SWT.NONE);
 
 		Group group = new Group(proGroup, SWT.NONE);
@@ -222,6 +241,18 @@ public class RenameConnectorWizardPage extends WizardPage {
 		timeText = timeBpmExpViewer.getTextControl();
 		timeText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		timeBpmExpViewer.setEnabled(false);
+		
+		timeBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				timeBpmExpViewer.setExpression(expression);
+			}
+		});
 
 		label = new Label(group, SWT.NONE);
 		label.setText("定时器跳过策略");
@@ -232,6 +263,18 @@ public class RenameConnectorWizardPage extends WizardPage {
 		skipText = skipBpmExpViewer.getTextControl();
 		skipText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		skipBpmExpViewer.setEnabled(false);
+		
+		skipBpmExpViewer.addExpressionChangedListeners(new IExpressionChangedListener() {
+			
+			@Override
+			public void expressionChanged(ExpressionChangedEvent event) {
+				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+				FormalExpression formalExpression = event.getFormalExpression();
+				expression.setName(formalExpression.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
+				expression.setValue(formalExpression.getBody());
+				skipBpmExpViewer.setExpression(expression);
+			}
+		});
 
 		checkButton.addListener(SWT.Selection, new Listener() {
 
