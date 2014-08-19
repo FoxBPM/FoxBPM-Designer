@@ -158,21 +158,21 @@ public class TimerEventDefinitionPropertyComposite extends AbstractFoxBPMComposi
 		detailComposite.setLayout(new GridLayout(2, false));
 		
 		Label timedateLabel = new Label(detailComposite, SWT.NONE);
-		timedateLabel.setText("TimeDate");
+		timedateLabel.setText("时间点");
 		
 		foxBPMExpViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = foxBPMExpViewer.getControl();
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label timedurationLabel = new Label(detailComposite, SWT.NONE);
-		timedurationLabel.setText("TimeDuration");
+		timedurationLabel.setText("执行时间");
 		
 		foxBPMExpViewer_1 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_1 = foxBPMExpViewer_1.getControl();
 		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		Label timercycleLabel = new Label(detailComposite, SWT.NONE);
-		timercycleLabel.setText("TimerCycle");
+		timercycleLabel.setText("周期时间");
 		
 		foxBPMExpViewer_2 = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_2 = foxBPMExpViewer_2.getControl();
