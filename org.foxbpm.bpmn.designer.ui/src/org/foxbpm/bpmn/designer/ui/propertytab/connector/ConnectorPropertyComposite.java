@@ -385,6 +385,10 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 				cntype = "离开";
 				return cntype;
 			}
+			if (type.equals("node-execute")) {
+				cntype = "执行";
+				return cntype;
+			}
 			return cntype;
 		}
 
