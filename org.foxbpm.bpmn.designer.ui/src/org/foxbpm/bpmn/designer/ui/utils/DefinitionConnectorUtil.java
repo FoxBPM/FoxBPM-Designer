@@ -51,7 +51,7 @@ import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class DefinitionConnectorUtil {
 
-	public static String DOWNLOADURL = FoxBPMDesignerUtil.getServicePathPath() + "flowconfig";
+	public static String DOWNLOADURL = FoxBPMDesignerUtil.getServicePathPath() + "designer/flowconfig";
 
 	public static String FLOWCONNECTORMENU = "FlowConnectorMenu.xml";
 

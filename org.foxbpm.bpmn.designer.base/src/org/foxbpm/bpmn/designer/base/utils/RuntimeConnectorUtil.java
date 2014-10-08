@@ -263,7 +263,7 @@ public class RuntimeConnectorUtil {
 		if (servicePath.equals("/")) {
 			throw new Exception("请先在首选项中配置解压路径");
 		}
-		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "flowconfig");
+		ClientResource client = new ClientResource(FoxBPMDesignerUtil.getServicePathPath() + "designer/flowconfig");
 		client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 		Representation result = client.get();
 		FileOutputStream fileOutputStream = null;

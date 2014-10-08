@@ -44,12 +44,12 @@ public class SynDataUtils {
 
 		try {
 			// 组织数据
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("identity/allGroups");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("designer/identity/allGroups");
 			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 			Representation result = client.get();
 			List<Group> groups = (ArrayList<Group>) JsonDataUtil.getInstance().analysisJsonToObj(result.getText(), Group.class);
 			// 用户数据
-			client = FoxBPMDesignerUtil.getClientByUrl("identity/allUsers");
+			client = FoxBPMDesignerUtil.getClientByUrl("designer/identity/allUsers");
 			client.setChallengeResponse(ChallengeScheme.HTTP_BASIC, "111", "111");
 			result = client.get();
 			List<User> users = (ArrayList<User>) JsonDataUtil.getInstance().analysisJsonToObj(result.getText(), User.class);

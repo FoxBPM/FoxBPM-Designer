@@ -504,7 +504,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	}
 	
 	private void updateProcess(ProcessTo processTo) {
-		ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployment/" + processTo.getDeploymentId());
+		ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployments/" + processTo.getDeploymentId());
 		if(client==null) {
 			return;
 		}
@@ -532,7 +532,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 	private void deleteProcess(ProcessTo processTo) {
 		boolean b = MessageDialog.openConfirm(null, "提示", "即将删除此流程定义及和该流程相关的数据，是否确认该操作?");
 		if(b) {
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployment/" + processTo.getDeploymentId());
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/deployments/" + processTo.getDeploymentId());
 			if(client==null) {
 				return;
 			}
@@ -549,7 +549,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 					MessageDialog.openInformation(null, "提示", "删除流程定义成功");
 				}
 				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				MessageDialog.openInformation(null, "提示", "删除流程定义失败，失败原因是:\n" + e.getMessage());
 				e.printStackTrace();
 			}
@@ -579,7 +579,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				dbid = processDbid==null?null:processDbid.toString();
 				publishButton.setEnabled(true);
 			}
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions?key=" + process.getId());
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/process-definitions?key=" + process.getId());
 			if(client==null) {
 				noClientAllButtonsState();
 				return;
