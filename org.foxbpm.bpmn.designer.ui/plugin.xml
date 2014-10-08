@@ -223,6 +223,11 @@
           id="org.foxbpm.bpmn.designer.ui.foxbpmperspective"
           name="%persperctive.name">
     </perspective>
+    <perspective
+          class="test.TestPerspective"
+          id="test.TestPerspective"
+          name="测试透视图">
+    </perspective>
  </extension>
  <extension
        point="org.eclipse.ui.views">

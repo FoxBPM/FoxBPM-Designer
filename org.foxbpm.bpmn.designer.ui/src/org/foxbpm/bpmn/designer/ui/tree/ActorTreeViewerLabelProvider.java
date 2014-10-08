@@ -58,7 +58,8 @@ public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implem
 		ITreeElement tElement = (ITreeElement) element;
 		try {
 			DefinitionConnectorUtil.getAllActorConnectorNodes();
-			String imagePath = ((Map<String, Object>)DefinitionConnectorUtil.allActorConnectors.get(tElement.getId()+tElement.getRealName())).get("ico").toString();
+			Map<String, Object> actorconnector = ((Map<String, Object>)DefinitionConnectorUtil.allActorConnectors.get(tElement.getId()+tElement.getRealName()));
+			String imagePath = actorconnector==null?tElement.getIcon():actorconnector.get("ico").toString();
 			image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
 			return image;
 		} catch (Exception e) {

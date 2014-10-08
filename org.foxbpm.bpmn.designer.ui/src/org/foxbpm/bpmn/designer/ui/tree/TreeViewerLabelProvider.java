@@ -58,8 +58,10 @@ public class TreeViewerLabelProvider extends StyledCellLabelProvider implements 
 		ITreeElement tElement = (ITreeElement) element;
 		try {
 			DefinitionConnectorUtil.getAllFlowConnectorNodes();
-			String imagePath = ((Map<String, Object>)DefinitionConnectorUtil.allFlowConnectors.get(tElement.getId()+tElement.getRealName())).get("ico").toString();
+			Map<String, Object> connector = ((Map<String, Object>)DefinitionConnectorUtil.allFlowConnectors.get(tElement.getId() + (tElement.getParent()==null?"":tElement.getParent().getId())));
+			String imagePath = connector==null?tElement.getIcon():connector.get("ico").toString();
 			image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
+			//category.png
 			return image;
 		} catch (Exception e) {
 //			e.printStackTrace();

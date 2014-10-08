@@ -191,14 +191,7 @@ public class RuntimeConnectorUtil {
 				File xmlFile = new File(file.getAbsolutePath() + "/" + type);
 				if (xmlFile.exists()) {
 					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					for (Node node : menu.getNode()) {
-						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
-						for (MenuConnector connector : node.getMenuConnector()) {
-							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
-									+ connector.getIco());
-						}
-						nodes.add(node);
-					}
+					reloadNodes(menu, null, xmlFile, nodes);
 				} else {
 					getFileChild(file.getAbsolutePath(), nodes, type);
 				}
@@ -222,6 +215,45 @@ public class RuntimeConnectorUtil {
 		}
 	}
 
+	/**
+	 * 目录节点下还可能有目录节点
+	 * @param menu
+	 * @param file
+	 * @param nodes
+	 */
+	private static void reloadNodes(Menu menu, Node rootNode, File file, List<Node> nodes) {
+		if(rootNode == null) {
+			for (Node node : menu.getNode()) {
+				String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
+				node.setIco(nodeico);
+				for (MenuConnector connector : node.getMenuConnector()) {
+					String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
+							+ connector.getIco();
+					connector.setIco(ico);
+				}
+				nodes.add(node);
+				if(node.getNode().size()>0) {
+					reloadNodes(null, node, file, nodes);
+				}
+			}
+		}else {
+			for (Node node : rootNode.getNode()) {
+				String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
+				node.setIco(nodeico);
+				for (MenuConnector connector : node.getMenuConnector()) {
+					String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
+							+ connector.getIco();
+					connector.setIco(ico);
+				}
+				rootNode.getNode().add(node);
+				if(node.getNode().size()>0) {
+					reloadNodes(null, node, file, nodes);
+				}
+			}
+		}
+	}
+	
+	
 	/**
 	 * 下载运行时连接器
 	 * 

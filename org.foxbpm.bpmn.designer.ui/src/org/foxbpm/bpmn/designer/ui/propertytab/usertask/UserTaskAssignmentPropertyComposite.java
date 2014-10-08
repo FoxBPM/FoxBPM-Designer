@@ -284,8 +284,8 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 				PotentialOwner potentialOwner = null;
 				
 				if(userTask.getResources().size()==0) {
-					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
-					userTask.getResources().add(potentialOwner);
+//					potentialOwner = Bpmn2Factory.eINSTANCE.createPotentialOwner();
+//					userTask.getResources().add(potentialOwner);
 				} else {
 					potentialOwner = (PotentialOwner) userTask.getResources().get(0);
 				}
@@ -297,6 +297,9 @@ public class UserTaskAssignmentPropertyComposite extends AbstractFoxBPMComposite
 						ConnectorInstanceElements connectorInstanceElements = (ConnectorInstanceElements) extensionElements.getValue(0);
 						connectorInstanceElements.getConnectorInstance().remove(connectorInstance);
 
+						if(connectorInstanceElements.getConnectorInstance().size()==0) {
+							userTask.getResources().clear();
+						}
 					}
 				}
 			}
