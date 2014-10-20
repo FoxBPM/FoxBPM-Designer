@@ -501,7 +501,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 
 		createUiCollectCellModifier();
 		createUiControlCellModifier();
-//		createEngineExeCellModifier();
+		createEngineExeCellModifier();
 		
 		initTableViewers("init");
 		init();
@@ -730,6 +730,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					commandParamTo.setExpression(expression);
 				}
 				if(property.equals("UICONTROLDESC")) {
+					((FoxBPMInputCellEditor)cellEditor[4]).setText(((String)value));
 					commandParamTo.setDescription(((String)value));
 				}
 				
@@ -749,7 +750,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					return commandParamTo.getDataType();
 				}
 				if(property.equals("UICONTROLVALUE")) {
-					return commandParamTo.getExpression().getName();
+					return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 				}
 				if(property.equals("UICONTROLDESC")) {
 					return commandParamTo.getDescription();
@@ -774,9 +775,9 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	
 	private void createEngineExeCellModifier() {
 		final CellEditor[] cellEditor = new CellEditor[table_2.getColumnCount()];
-		cellEditor[0] = new TextCellEditor(table_2, SWT.NONE);
-		cellEditor[1] = new TextCellEditor(table_2, SWT.NONE);
-		cellEditor[2] = new TextCellEditor(table_2, SWT.NONE);
+//		cellEditor[0] = new TextCellEditor(table_2, SWT.READ_ONLY);
+//		cellEditor[1] = new TextCellEditor(table_2, SWT.READ_ONLY);
+//		cellEditor[2] = new TextCellEditor(table_2, SWT.READ_ONLY);
 		cellEditor[3] = new CommandParamDialogCellEditor(table_2, getParentShell(), editingDomain, engineexeTableViewer);
 		cellEditor[4] = new FoxBPMInputCellEditor(table_2, getShell());
 		
@@ -804,6 +805,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					commandParamTo.setExpression(expression);
 				}
 				if(property.equals("ENGINEEXEDESC")) {
+					((FoxBPMInputCellEditor)cellEditor[4]).setText(((String)value));
 					commandParamTo.setDescription(((String)value));
 				}
 				
@@ -823,7 +825,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					return commandParamTo.getDataType();
 				}
 				if(property.equals("ENGINEEXEVALUE")) {
-					return commandParamTo.getExpression().getName();
+					return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 				}
 				if(property.equals("ENGINEEXEDESC")) {
 					return commandParamTo.getDescription();
@@ -833,13 +835,14 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			
 			@Override
 			public boolean canModify(Object element, String property) {
-				if(element instanceof CommandParam) {
-					CommandParamTo commandParamTo = (CommandParamTo) element;
-					if(commandParamTo.getType()!=null && commandParamTo.getType().equals("config")) {
-						return false;
-					}else{
-						return true;
-					}
+				if(element instanceof CommandParamTo) {
+//					CommandParamTo commandParamTo = (CommandParamTo) element;
+//					if(commandParamTo.getType()!=null && commandParamTo.getType().equals("config")) {
+//						return false;
+//					}else{
+//						return true;
+//					}
+					return true;
 				}
 				return false;
 			}
@@ -880,7 +883,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			case 2:
 				return commandParamTo.getDataType();
 			case 3:
-				return commandParamTo.getExpression().getName();
+				return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 			case 4:
 				return commandParamTo.getDescription();
 			}
@@ -902,7 +905,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 			case 2:
 				return commandParamTo.getDataType();
 			case 3:
-				return commandParamTo.getExpression().getName();
+				return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 			case 4:
 				return commandParamTo.getDescription();
 			}
