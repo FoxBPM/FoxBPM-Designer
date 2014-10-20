@@ -12,7 +12,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpDialog;
 import org.foxbpm.model.bpmn.foxbpm.Expression;
-import org.foxbpm.model.config.foxbpmconfig.CommandParam;
 
 public class CommandParamDialogCellEditor extends DialogCellEditor {
 	private Shell shell;
@@ -34,7 +33,7 @@ public class CommandParamDialogCellEditor extends DialogCellEditor {
 	@Override
 	protected Object openDialogBox(Control cellEditorWindow) {
 		CommandParamTo commandParamTo = (CommandParamTo) table.getSelection()[0].getData();
-		FoxBPMExpDialog foxBPMExpDialog = new FoxBPMExpDialog(editingDomain, commandParamTo, shell, expression, text);
+		FoxBPMExpDialog foxBPMExpDialog = new FoxBPMExpDialog(editingDomain, commandParamTo, shell, commandParamTo.getExpression(), text);
 		if(InputDialog.OK == foxBPMExpDialog.open()) {
 			expression = foxBPMExpDialog.getExpression();
 		}

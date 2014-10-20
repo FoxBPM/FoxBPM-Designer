@@ -17,7 +17,6 @@ public class FoxBPMInputCellEditor extends DialogCellEditor {
 
 	@Override
 	protected Object openDialogBox(Control cellEditorWindow) {
-		// TODO Auto-generated method stub
 		FoxBPMInputCellDialog ffid = new FoxBPMInputCellDialog(shell, text);
 		ffid.setBlockOnOpen(true);
 		if(ffid != null && ffid.open() == InputDialog.OK) {

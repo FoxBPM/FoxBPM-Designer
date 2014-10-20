@@ -753,6 +753,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 				}
 				if(property.equals("UICONTROLDESC")) {
+					((FoxBPMInputCellEditor)cellEditor[4]).setText(commandParamTo.getDescription());
 					return commandParamTo.getDescription();
 				}
 				return null;
@@ -828,6 +829,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 					return commandParamTo.getExpression()==null?"":commandParamTo.getExpression().getName();
 				}
 				if(property.equals("ENGINEEXEDESC")) {
+					((FoxBPMInputCellEditor)cellEditor[4]).setText(commandParamTo.getDescription());
 					return commandParamTo.getDescription();
 				}
 				return null;
