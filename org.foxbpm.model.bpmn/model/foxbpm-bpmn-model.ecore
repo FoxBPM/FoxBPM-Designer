@@ -206,7 +206,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="skipStrategy" eType="#//SkipStrategy"
         containment="true">
       <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
-        <details key="name" value=""/>
+        <details key="name" value="skipStrategy"/>
         <details key="namespace" value="##targetNamespace"/>
         <details key="kind" value="element"/>
         <details key="wildcards" value=""/>

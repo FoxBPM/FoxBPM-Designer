@@ -3283,7 +3283,7 @@ public class FoxBPMPackageImpl extends EPackageImpl implements FoxBPMPackage {
 		  (getDocumentRoot_SkipStrategy(), 
 		   source, 
 		   new String[] {
-			 "name", "",
+			 "name", "skipStrategy",
 			 "namespace", "##targetNamespace",
 			 "kind", "element",
 			 "wildcards", ""

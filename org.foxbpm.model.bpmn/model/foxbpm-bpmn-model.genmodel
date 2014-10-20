@@ -130,6 +130,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//ConnectorInstance/TimeSkipExpression"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorInstance/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//ConnectorInstance/documentation"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//ConnectorParameterInput">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//ConnectorParameterInput/id"/>
@@ -263,6 +264,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Param/key"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Param/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//Param/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Param/description"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//PotentialStarter">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//PotentialStarter/expression"/>

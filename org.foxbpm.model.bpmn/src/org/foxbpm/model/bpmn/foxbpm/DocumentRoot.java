@@ -755,7 +755,7 @@ public interface DocumentRoot extends EObject {
 	 * @see #setSkipStrategy(SkipStrategy)
 	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_SkipStrategy()
 	 * @model containment="true"
-	 *        extendedMetaData="name='' namespace='##targetNamespace' kind='element' wildcards=''"
+	 *        extendedMetaData="name='skipStrategy' namespace='##targetNamespace' kind='element' wildcards=''"
 	 * @generated
 	 */
 	SkipStrategy getSkipStrategy();
