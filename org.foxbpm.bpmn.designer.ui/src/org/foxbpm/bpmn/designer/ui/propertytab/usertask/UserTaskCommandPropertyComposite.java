@@ -195,7 +195,7 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 					if (cnd != null && cnd.open() == InputDialog.OK) {
 						TaskCommand newTaskCommand = cnd.getTaskCommand();
 						int index = ((List<TaskCommand>) treeViewer.getInput()).indexOf(taskCommand);
-						editTaskCommand(taskCommand, newTaskCommand, index + 1);
+						editTaskCommand(taskCommand, newTaskCommand, index);
 						((List<TaskCommand>) treeViewer.getInput()).remove(taskCommand);
 						((List<TaskCommand>) treeViewer.getInput()).add(index, newTaskCommand);
 						treeViewer.refresh();
