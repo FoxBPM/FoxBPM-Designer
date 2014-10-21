@@ -610,7 +610,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 		}else {
 			allButtonsDisable();
 			deleteButton.setEnabled(true);
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("process-definitions");
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/process-definitions");
 			if(client==null) {
 				return;
 			}
