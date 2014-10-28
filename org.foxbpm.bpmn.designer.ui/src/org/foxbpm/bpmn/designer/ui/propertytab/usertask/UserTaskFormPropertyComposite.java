@@ -280,7 +280,7 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 						}
 						
 						//传递表达式对象
-						optFormViewer.setExpression(expression);
+						browseFormViewer.setExpression(expression);
 					}
 				});
 
