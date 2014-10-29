@@ -70,7 +70,7 @@ public class SynDataUtils {
 			sql.append("`ORGNAME` varchar(512),");
 			sql.append("`SUPORGID` varchar(512),");
 			sql.append("`GROUPTYPE` varchar(512),");
-			sql.append("PRIMARY KEY  (`ORGID`)");
+			sql.append("PRIMARY KEY  (`ORGID`,`GROUPTYPE`)");
 			sql.append(");");
 
 			// 创建用户
