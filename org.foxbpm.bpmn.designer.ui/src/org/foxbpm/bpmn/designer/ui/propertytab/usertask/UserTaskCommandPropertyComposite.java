@@ -37,10 +37,10 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.dialogs.FilteredTree;
 import org.eclipse.ui.dialogs.PatternFilter;
-import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.dialogs.CreateNewTaskDialog;
 import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
+import org.foxbpm.bpmn.designer.ui.utils.TaskCommandUtil;
 import org.foxbpm.model.bpmn.foxbpm.ConnectorInstance;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.bpmn.foxbpm.TaskCommand;
@@ -291,7 +291,7 @@ public class UserTaskCommandPropertyComposite extends AbstractFoxBPMComposite {
 
 		public String getType(String type) {
 			String cntype = "";
-			List<TaskCommandDefinition> nameList = FoxBPMDesignerUtil.getTaskCommandNames(FoxBPMDesignerUtil.getFoxBPMConfig());
+			List<TaskCommandDefinition> nameList = TaskCommandUtil.getTaskCommandNames();
 			for (int i = 0; i < nameList.size(); i++) {
 				if (type.equals(nameList.get(i).getId())) {
 					cntype = nameList.get(i).getName();

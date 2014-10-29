@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
-import org.foxbpm.model.config.foxbpmconfig.TaskCommandDefinition;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.resource.ClientResource;
@@ -149,15 +148,15 @@ public class FoxBPMDesignerUtil {
 	 * 
 	 * @return
 	 */
-	public static List<TaskCommandDefinition> getTaskCommandNames(FoxBPMConfig foxBPMConfig) {
-		List<TaskCommandDefinition> taskCommandNames = new ArrayList<TaskCommandDefinition>();
-		for (TaskCommandDefinition taskCommand : foxBPMConfig.getTaskCommandConfig().getTaskCommandDefinition()) {
-			if (taskCommand.getIsEnabled().equals("true") && !taskCommand.getType().equals("system")) {
-				taskCommandNames.add(taskCommand);
-			}
-		}
-		return taskCommandNames;
-	}
+//	public static List<TaskCommandDefinition> getTaskCommandNames(FoxBPMConfig foxBPMConfig) {
+//		List<TaskCommandDefinition> taskCommandNames = new ArrayList<TaskCommandDefinition>();
+//		for (TaskCommandDefinition taskCommand : foxBPMConfig.getTaskCommandConfig().getTaskCommandDefinition()) {
+//			if (taskCommand.getIsEnabled().equals("true") && !taskCommand.getType().equals("system")) {
+//				taskCommandNames.add(taskCommand);
+//			}
+//		}
+//		return taskCommandNames;
+//	}
 	
 	/**
 	 * 返回foxBPMConfig对象

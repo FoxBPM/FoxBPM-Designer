@@ -45,7 +45,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
-import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.custom.CommandParamDialogCellEditor;
 import org.foxbpm.bpmn.designer.ui.custom.CommandParamTo;
 import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
@@ -637,7 +636,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 		 * if(type.equals("submit")){ cntype = "提交"; return cntype; }
 		 */
 		else {
-			List<TaskCommandDefinition> nameList = FoxBPMDesignerUtil.getTaskCommandNames(FoxBPMDesignerUtil.getFoxBPMConfig());
+			List<TaskCommandDefinition> nameList = TaskCommandUtil.getTaskCommandNames();
 			for (int i = 0; i < nameList.size(); i++) {
 				if (type.equals(nameList.get(i).getId())) {
 					cntype = nameList.get(i).getName();
@@ -654,7 +653,7 @@ public class CreateNewTaskDialog extends TitleAreaDialog {
 	 */
 	private void initCombo() {
 		// 添加扩展
-		List<TaskCommandDefinition> nameList = FoxBPMDesignerUtil.getTaskCommandNames(FoxBPMDesignerUtil.getFoxBPMConfig());
+		List<TaskCommandDefinition> nameList = TaskCommandUtil.getTaskCommandNames();
 
 		int i = 0;
 		for (TaskCommandDefinition taskCommand : nameList) {

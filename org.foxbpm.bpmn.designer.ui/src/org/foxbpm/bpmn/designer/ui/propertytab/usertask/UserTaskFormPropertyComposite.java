@@ -133,6 +133,9 @@ public class UserTaskFormPropertyComposite extends AbstractFoxBPMComposite {
 		removeButton = new Button(composite, SWT.NONE);
 		removeButton.setSize(80, 27);
 		removeButton.setText("删除");
+		
+		table.setVisible(false);
+		composite.setVisible(false);
 
 		createCellModifier();
 		return parent;

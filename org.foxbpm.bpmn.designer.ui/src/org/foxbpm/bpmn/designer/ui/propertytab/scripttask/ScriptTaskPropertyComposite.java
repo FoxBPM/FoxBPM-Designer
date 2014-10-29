@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.core.runtime.AbstractFoxBPMComposite;
 import org.foxbpm.bpmn.designer.ui.expdialog.ExpressionChangedEvent;
 import org.foxbpm.bpmn.designer.ui.expdialog.FoxBPMExpViewer;
@@ -75,7 +74,7 @@ public class ScriptTaskPropertyComposite extends AbstractFoxBPMComposite{
 
 						if (event.getFormalExpression() != null) {
 							getBusinessObject().eSet(FoxBPMPackage.Literals.DOCUMENT_ROOT__SCRIPT_NAME, event.getFormalExpression().eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__NAME).toString());
-							scriptTask.setScriptFormat(FoxBPMDesignerUtil.getFoxBPMConfig().getScriptLanguageConfig().getSelected()==null?"groovy" : FoxBPMDesignerUtil.getFoxBPMConfig().getScriptLanguageConfig().getSelected());
+							scriptTask.setScriptFormat("groovy");//--先写死groovy wy 2014-10-29
 							scriptTask.setScript(event.getFormalExpression().getBody());
 						} else {
 							scriptTask.setScriptFormat(null);
