@@ -123,7 +123,7 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getTempleteConfigFilePath() {
-		return getServicePath() + "coreconfig/foxbpm.cfg.xml";
+		return getServicePath() + "coreconfig/connector.xml";
 	}
 
 	/**

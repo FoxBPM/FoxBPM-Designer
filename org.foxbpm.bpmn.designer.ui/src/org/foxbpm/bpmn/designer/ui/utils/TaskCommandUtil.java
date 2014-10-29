@@ -94,33 +94,35 @@ public class TaskCommandUtil {
 			taskCommandDefinitonTo.setDescription(description);
 			taskCommandDefinitonTo.setType(type);
 			
-			ArrayNode dataArray = (ArrayNode)js.get("commandParam");
-			
-			for(JsonNode json :dataArray){
-				//循环添加变量
-				CommandParamTo commandParamTo = new CommandParamTo();
+			if(!js.get("commandParam").isNull()) {
+				ArrayNode dataArray = (ArrayNode)js.get("commandParam");
 				
-				String key = json.get("id")==null?"":json.get("id").asText();
-				String paramName = json.get("name")==null?"":json.get("name").asText();
-				String paramDescription = json.get("description")==null?"":json.get("description").asText();
-				String bizType = json.get("bizType")==null?"":json.get("bizType").asText();
-				String dataType = json.get("dataType")==null?"":json.get("dataType").asText();
-				String expressionId = json.get("expression")==null?"":json.get("expression").asText();
-				String expressionText = json.get("expression")==null?"":json.get("expression").asText();
-				
-				commandParamTo.setKey(key);
-				commandParamTo.setName(paramName);
-				commandParamTo.setDescription(paramDescription);
-				commandParamTo.setBizType(bizType);
-				commandParamTo.setDataType(dataType);
-				Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-				expression.setId(expressionId);
-				expression.setValue(expressionText);
-				commandParamTo.setExpression(expression);
-				
-				taskCommandDefinitonTo.getCommandParamTos().add(commandParamTo);
-				
+				for(JsonNode json :dataArray){
+					//循环添加变量
+					CommandParamTo commandParamTo = new CommandParamTo();
+					
+					String key = json.get("id")==null?"":json.get("id").asText();
+					String paramName = json.get("name")==null?"":json.get("name").asText();
+					String paramDescription = json.get("description")==null?"":json.get("description").asText();
+					String bizType = json.get("bizType")==null?"":json.get("bizType").asText();
+					String dataType = json.get("dataType")==null?"":json.get("dataType").asText();
+					String expressionId = json.get("expression")==null?"":json.get("expression").asText();
+					String expressionText = json.get("expression")==null?"":json.get("expression").asText();
+					
+					commandParamTo.setKey(key);
+					commandParamTo.setName(paramName);
+					commandParamTo.setDescription(paramDescription);
+					commandParamTo.setBizType(bizType);
+					commandParamTo.setDataType(dataType);
+					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+					expression.setId(expressionId);
+					expression.setValue(expressionText);
+					commandParamTo.setExpression(expression);
+					
+					taskCommandDefinitonTo.getCommandParamTos().add(commandParamTo);
+				}
 			}
+
 			taskCommandDefinitions.add(taskCommandDefinitonTo);
 		}
 	}
