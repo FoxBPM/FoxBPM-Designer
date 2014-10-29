@@ -29,23 +29,23 @@ public class TaskCommandUtil {
 	 */
 	public static List<CommandParamTo> getTaskCommandParamByType(TaskCommandDefinition taskCommandDefinition, String type) {
 		List<CommandParamTo> commandParams = new ArrayList<CommandParamTo>();
-		for (CommandParam commandParam : taskCommandDefinition.getCommandParam()) {
-			if (commandParam.getBizType().equals(type)) {
-				CommandParamTo commandParamTo = new CommandParamTo();
-				commandParamTo.setBizType(commandParam.getBizType());
-				commandParamTo.setDataType(commandParam.getDataType());
-				commandParamTo.setDescription(commandParam.getDescription());
+		for (CommandParamTo commandParamTo : ((TaskCommandDefinitonTo)taskCommandDefinition).getCommandParamTos()) {
+			if (commandParamTo.getBizType().equals(type)) {
+//				CommandParamTo commandParamTo = new CommandParamTo();
+//				commandParamTo.setBizType(commandParam.getBizType());
+//				commandParamTo.setDataType(commandParam.getDataType());
+//				commandParamTo.setDescription(commandParam.getDescription());
 				commandParamTo.setType("config");
 				
-				if(commandParam.getValue()!=null) {
-					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
-					expression.setName(commandParam.getValue());
-					expression.setValue(commandParam.getValue());
-					commandParamTo.setExpression(expression);
-				}
-				
-				commandParamTo.setName(commandParam.getName());
-				commandParamTo.setKey(commandParam.getKey());
+//				if(commandParam.getValue()!=null) {
+//					Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
+//					expression.setName(commandParam.getValue());
+//					expression.setValue(commandParam.getValue());
+//					commandParamTo.setExpression(expression);
+//				}
+//				
+//				commandParamTo.setName(commandParam.getName());
+//				commandParamTo.setKey(commandParam.getKey());
 				
 				commandParams.add(commandParamTo);
 			}
@@ -101,7 +101,7 @@ public class TaskCommandUtil {
 					//循环添加变量
 					CommandParamTo commandParamTo = new CommandParamTo();
 					
-					String key = json.get("id")==null?"":json.get("id").asText();
+					String key = json.get("key")==null?"":json.get("key").asText();
 					String paramName = json.get("name")==null?"":json.get("name").asText();
 					String paramDescription = json.get("description")==null?"":json.get("description").asText();
 					String bizType = json.get("bizType")==null?"":json.get("bizType").asText();
