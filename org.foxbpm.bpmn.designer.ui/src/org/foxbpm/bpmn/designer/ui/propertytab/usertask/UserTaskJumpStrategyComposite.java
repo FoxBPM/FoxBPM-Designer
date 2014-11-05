@@ -56,7 +56,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 		detailComposite.setLayout(new GridLayout(2, false));
 
 		enableJumpStrategyCheckbox = new Button(detailComposite, SWT.CHECK);
-		enableJumpStrategyCheckbox.setText("启动跳过策略");
+		enableJumpStrategyCheckbox.setText("启用跳过策略");
 
 		new Label(detailComposite, SWT.NONE);
 

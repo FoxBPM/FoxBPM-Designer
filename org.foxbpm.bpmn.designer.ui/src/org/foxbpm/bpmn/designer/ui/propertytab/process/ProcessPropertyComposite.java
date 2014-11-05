@@ -270,7 +270,7 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 
 		Label tasksubjectLabel = new Label(detailComposite, SWT.NONE);
 		tasksubjectLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		tasksubjectLabel.setText("任务主题");
+		tasksubjectLabel.setText("默认主题");
 
 		tasksubjectViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control_1 = tasksubjectViewer.getControl();
