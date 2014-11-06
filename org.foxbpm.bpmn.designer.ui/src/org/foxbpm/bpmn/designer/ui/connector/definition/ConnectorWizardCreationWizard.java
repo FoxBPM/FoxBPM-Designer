@@ -140,7 +140,7 @@ public class ConnectorWizardCreationWizard extends Wizard implements INewWizard{
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
 		menuConnector.setIco(connector.getIcon());
-		menuConnector.setPackage(packagePath);
+		menuConnector.setPackage(connector.getDefinitionImpl().getPackageName().replace(".", "/"));
 		// node根据id可以获取到对应的menu里面的哪个Node,然后再在对应的Node下面加上menuConnector就可以保存了
 		Menu menu = ((ConfigureNewConnectorWizardPage) ccwd).getMenu();
 		Node node = ((ConfigureNewConnectorWizardPage) ccwd).getNode();
