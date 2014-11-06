@@ -55,7 +55,7 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 	private Text textPareCategory;
 	private boolean isCreateRoot;
 	private String type;
-	private ResourcePath resourcePath;
+	private String connectorMenuPath;
 	
 	public ITreeElement getSelTreeElement() {
 		return selTreeElement;
@@ -105,13 +105,13 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 		setHelpAvailable(false);
 	}
 	
-	public CategoryCreateDialog(Shell parentShell,ITreeElement selElement,List<ITreeElement> lists, String type, ResourcePath resourcePath) {
+	public CategoryCreateDialog(Shell parentShell,ITreeElement selElement,List<ITreeElement> lists, String type, String connectorMenuPath) {
 		super(parentShell);
 		setHelpAvailable(false);
 		this.pareElement = selElement;
 		this.treeElements = lists;
 		this.type = type;
-		this.resourcePath = resourcePath;
+		this.connectorMenuPath = connectorMenuPath;
 	}
 
 	/**
@@ -193,10 +193,10 @@ public class CategoryCreateDialog extends TitleAreaDialog {
 		btnIsCreateRoot.setText("是否作为根节点创建分类");
 		
 		if(type!=null && type.equals("connector")) {
-			iconpath = DefinitionConnectorUtil.getDefaultFlowConnectorIcoPath(resourcePath);
+			iconpath = DefinitionConnectorUtil.getDefaultFlowConnectorIcoPath(connectorMenuPath);
 		}
 		else if(type!=null && type.equals("actor")) {
-			iconpath = DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(resourcePath);
+			iconpath = DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(connectorMenuPath);
 		}
 		if (new File(iconpath).exists()) {
 			try {

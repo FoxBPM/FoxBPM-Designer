@@ -6,13 +6,13 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import org.foxbpm.model.config.connectormenu.ActorConnector;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.ConnectormenuPackage;
+import org.foxbpm.model.config.connectormenu.FlowConnector;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 
 /**
@@ -41,7 +41,21 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass menuConnectorEClass = null;
+	private EClass connectorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass flowConnectorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass actorConnectorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -118,8 +132,17 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMenu_Node() {
+	public EReference getMenu_FlowConnector() {
 		return (EReference)menuEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMenu_ActorConnector() {
+		return (EReference)menuEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -163,7 +186,7 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getNode_MenuConnector() {
+	public EReference getNode_Connector() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -181,8 +204,8 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMenuConnector() {
-		return menuConnectorEClass;
+	public EClass getConnector() {
+		return connectorEClass;
 	}
 
 	/**
@@ -190,8 +213,8 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMenuConnector_Id() {
-		return (EAttribute)menuConnectorEClass.getEStructuralFeatures().get(0);
+	public EAttribute getConnector_Id() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -199,8 +222,8 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMenuConnector_Name() {
-		return (EAttribute)menuConnectorEClass.getEStructuralFeatures().get(1);
+	public EAttribute getConnector_Name() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -208,8 +231,8 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMenuConnector_Note() {
-		return (EAttribute)menuConnectorEClass.getEStructuralFeatures().get(2);
+	public EAttribute getConnector_Note() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -217,8 +240,8 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMenuConnector_Ico() {
-		return (EAttribute)menuConnectorEClass.getEStructuralFeatures().get(3);
+	public EAttribute getConnector_Ico() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -226,8 +249,53 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMenuConnector_Version() {
-		return (EAttribute)menuConnectorEClass.getEStructuralFeatures().get(4);
+	public EAttribute getConnector_Version() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getConnector_Package() {
+		return (EAttribute)connectorEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFlowConnector() {
+		return flowConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getFlowConnector_Node() {
+		return (EReference)flowConnectorEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getActorConnector() {
+		return actorConnectorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getActorConnector_Node() {
+		return (EReference)actorConnectorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -259,21 +327,29 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 
 		// Create classes and their features
 		menuEClass = createEClass(MENU);
-		createEReference(menuEClass, MENU__NODE);
+		createEReference(menuEClass, MENU__FLOW_CONNECTOR);
+		createEReference(menuEClass, MENU__ACTOR_CONNECTOR);
 
 		nodeEClass = createEClass(NODE);
 		createEAttribute(nodeEClass, NODE__ID);
 		createEAttribute(nodeEClass, NODE__NAME);
 		createEAttribute(nodeEClass, NODE__ICO);
-		createEReference(nodeEClass, NODE__MENU_CONNECTOR);
+		createEReference(nodeEClass, NODE__CONNECTOR);
 		createEReference(nodeEClass, NODE__NODE);
 
-		menuConnectorEClass = createEClass(MENU_CONNECTOR);
-		createEAttribute(menuConnectorEClass, MENU_CONNECTOR__ID);
-		createEAttribute(menuConnectorEClass, MENU_CONNECTOR__NAME);
-		createEAttribute(menuConnectorEClass, MENU_CONNECTOR__NOTE);
-		createEAttribute(menuConnectorEClass, MENU_CONNECTOR__ICO);
-		createEAttribute(menuConnectorEClass, MENU_CONNECTOR__VERSION);
+		connectorEClass = createEClass(CONNECTOR);
+		createEAttribute(connectorEClass, CONNECTOR__ID);
+		createEAttribute(connectorEClass, CONNECTOR__NAME);
+		createEAttribute(connectorEClass, CONNECTOR__NOTE);
+		createEAttribute(connectorEClass, CONNECTOR__ICO);
+		createEAttribute(connectorEClass, CONNECTOR__VERSION);
+		createEAttribute(connectorEClass, CONNECTOR__PACKAGE);
+
+		flowConnectorEClass = createEClass(FLOW_CONNECTOR);
+		createEReference(flowConnectorEClass, FLOW_CONNECTOR__NODE);
+
+		actorConnectorEClass = createEClass(ACTOR_CONNECTOR);
+		createEReference(actorConnectorEClass, ACTOR_CONNECTOR__NODE);
 	}
 
 	/**
@@ -307,21 +383,29 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(menuEClass, Menu.class, "Menu", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMenu_Node(), this.getNode(), null, "node", null, 0, -1, Menu.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMenu_FlowConnector(), this.getFlowConnector(), null, "flowConnector", null, 1, 1, Menu.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMenu_ActorConnector(), this.getActorConnector(), null, "actorConnector", null, 1, 1, Menu.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(nodeEClass, Node.class, "Node", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNode_Id(), ecorePackage.getEString(), "id", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Name(), ecorePackage.getEString(), "name", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getNode_Ico(), ecorePackage.getEString(), "ico", null, 0, 1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getNode_MenuConnector(), this.getMenuConnector(), null, "menuConnector", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNode_Connector(), this.getConnector(), null, "connector", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNode_Node(), this.getNode(), null, "node", null, 0, -1, Node.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(menuConnectorEClass, MenuConnector.class, "MenuConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMenuConnector_Id(), ecorePackage.getEString(), "id", null, 0, 1, MenuConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMenuConnector_Name(), ecorePackage.getEString(), "name", null, 0, 1, MenuConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMenuConnector_Note(), ecorePackage.getEString(), "note", null, 0, 1, MenuConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMenuConnector_Ico(), ecorePackage.getEString(), "ico", null, 0, 1, MenuConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMenuConnector_Version(), ecorePackage.getEString(), "version", null, 0, 1, MenuConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(connectorEClass, Connector.class, "Connector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getConnector_Id(), ecorePackage.getEString(), "id", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnector_Name(), ecorePackage.getEString(), "name", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnector_Note(), ecorePackage.getEString(), "note", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnector_Ico(), ecorePackage.getEString(), "ico", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnector_Version(), ecorePackage.getEString(), "version", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnector_Package(), ecorePackage.getEString(), "package", null, 0, 1, Connector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(flowConnectorEClass, FlowConnector.class, "FlowConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFlowConnector_Node(), this.getNode(), null, "node", null, 0, -1, FlowConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(actorConnectorEClass, ActorConnector.class, "ActorConnector", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getActorConnector_Node(), this.getNode(), null, "node", null, 0, -1, ActorConnector.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -346,11 +430,19 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 			 "name", "menu"
 		   });		
 		addAnnotation
-		  (getMenu_Node(), 
+		  (getMenu_FlowConnector(), 
 		   source, 
 		   new String[] {
-			 "kind", "element",
-			 "name", "Node"
+			 "name", "FlowConnector",
+			 "namespace", "",
+			 "kind", "element"
+		   });		
+		addAnnotation
+		  (getMenu_ActorConnector(), 
+		   source, 
+		   new String[] {
+			 "name", "ActorConnector",
+			 "kind", "element"
 		   });		
 		addAnnotation
 		  (getNode_Id(), 
@@ -371,7 +463,7 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getNode_MenuConnector(), 
+		  (getNode_Connector(), 
 		   source, 
 		   new String[] {
 			 "kind", "element",
@@ -385,35 +477,57 @@ public class ConnectormenuPackageImpl extends EPackageImpl implements Connectorm
 			 "kind", "element"
 		   });		
 		addAnnotation
-		  (getMenuConnector_Id(), 
+		  (getConnector_Id(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getMenuConnector_Name(), 
+		  (getConnector_Name(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getMenuConnector_Note(), 
+		  (getConnector_Note(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
 		   });		
 		addAnnotation
-		  (getMenuConnector_Ico(), 
+		  (getConnector_Ico(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute",
 			 "namespace", ""
 		   });		
 		addAnnotation
-		  (getMenuConnector_Version(), 
+		  (getConnector_Version(), 
 		   source, 
 		   new String[] {
 			 "kind", "attribute"
+		   });		
+		addAnnotation
+		  (getConnector_Package(), 
+		   source, 
+		   new String[] {
+			 "kind", "attribute",
+			 "namespace", ""
+		   });		
+		addAnnotation
+		  (getFlowConnector_Node(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "Node",
+			 "namespace", ""
+		   });		
+		addAnnotation
+		  (getActorConnector_Node(), 
+		   source, 
+		   new String[] {
+			 "kind", "element",
+			 "name", "Node"
 		   });
 	}
 

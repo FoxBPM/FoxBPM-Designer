@@ -14,6 +14,18 @@
             id="org.foxbpm.bpmn.designer.ui.category"
             name="FoxBPM">
       </category>
+      <wizard
+            category="org.foxbpm.bpmn.designer.ui.category"
+            class="org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard"
+            id="org.foxbpm.bpmn.designer.ui.wizard.createconnector"
+            name="创建连接器">
+      </wizard>
+      <wizard
+            category="org.foxbpm.bpmn.designer.ui.category"
+            class="org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard"
+            id="org.foxbpm.bpmn.designer.ui.wizard1"
+            name="创建选择器">
+      </wizard>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -203,6 +215,10 @@
                 tooltip="同步设计器资源">
           </command>
        </toolbar>
+    </menuContribution>
+    <menuContribution
+          allPopups="false"
+          locationURI="menu:org.eclipse.ui.main.menu?after=additions">
     </menuContribution>
  </extension>
  <extension

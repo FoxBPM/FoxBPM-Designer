@@ -8,21 +8,29 @@
   <genPackages prefix="Connectormenu" basePackage="org.foxbpm.model.config" resource="XML"
       disposableProviderFactory="true" ecorePackage="foxbpmconnectormenu.ecore#/">
     <genClasses ecoreClass="foxbpmconnectormenu.ecore#//Menu">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Menu/node"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Menu/flowConnector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Menu/actorConnector"/>
     </genClasses>
     <genClasses ecoreClass="foxbpmconnectormenu.ecore#//Node">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Node/id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Node/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Node/ico"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Node/menuConnector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Node/connector"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//Node/node"/>
     </genClasses>
-    <genClasses ecoreClass="foxbpmconnectormenu.ecore#//MenuConnector">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//MenuConnector/id"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//MenuConnector/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//MenuConnector/note"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//MenuConnector/ico"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//MenuConnector/version"/>
+    <genClasses ecoreClass="foxbpmconnectormenu.ecore#//Connector">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/note"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/ico"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/version"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpmconnectormenu.ecore#//Connector/package"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnectormenu.ecore#//FlowConnector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//FlowConnector/node"/>
+    </genClasses>
+    <genClasses ecoreClass="foxbpmconnectormenu.ecore#//ActorConnector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpmconnectormenu.ecore#//ActorConnector/node"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

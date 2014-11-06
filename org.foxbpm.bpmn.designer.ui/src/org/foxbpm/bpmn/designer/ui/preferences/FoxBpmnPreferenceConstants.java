@@ -9,4 +9,6 @@ public class FoxBpmnPreferenceConstants {
 	public final static String P_PASSWORD = "password";
 	//解压路径
 	public final static String P_ZIP_PATH = "zipPath";
+	//拓展连接器Menu路径
+	public final static String P_CONNECTOR_PATH = "connectorPath";
 }

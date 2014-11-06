@@ -67,13 +67,22 @@ public interface ConnectormenuPackage extends EPackage {
 	int MENU = 0;
 
 	/**
-	 * The feature id for the '<em><b>Node</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Flow Connector</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MENU__NODE = 0;
+	int MENU__FLOW_CONNECTOR = 0;
+
+	/**
+	 * The feature id for the '<em><b>Actor Connector</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MENU__ACTOR_CONNECTOR = 1;
 
 	/**
 	 * The number of structural features of the '<em>Menu</em>' class.
@@ -82,7 +91,7 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_FEATURE_COUNT = 1;
+	int MENU_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Menu</em>' class.
@@ -131,13 +140,13 @@ public interface ConnectormenuPackage extends EPackage {
 	int NODE__ICO = 2;
 
 	/**
-	 * The feature id for the '<em><b>Menu Connector</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Connector</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__MENU_CONNECTOR = 3;
+	int NODE__CONNECTOR = 3;
 
 	/**
 	 * The feature id for the '<em><b>Node</b></em>' containment reference list.
@@ -167,14 +176,14 @@ public interface ConnectormenuPackage extends EPackage {
 	int NODE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.foxbpm.model.config.connectormenu.impl.MenuConnectorImpl <em>Menu Connector</em>}' class.
+	 * The meta object id for the '{@link org.foxbpm.model.config.connectormenu.impl.ConnectorImpl <em>Connector</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.foxbpm.model.config.connectormenu.impl.MenuConnectorImpl
-	 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.impl.ConnectorImpl
+	 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getConnector()
 	 * @generated
 	 */
-	int MENU_CONNECTOR = 2;
+	int CONNECTOR = 2;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -183,7 +192,7 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR__ID = 0;
+	int CONNECTOR__ID = 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -192,7 +201,7 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR__NAME = 1;
+	int CONNECTOR__NAME = 1;
 
 	/**
 	 * The feature id for the '<em><b>Note</b></em>' attribute.
@@ -201,7 +210,7 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR__NOTE = 2;
+	int CONNECTOR__NOTE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Ico</b></em>' attribute.
@@ -210,7 +219,7 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR__ICO = 3;
+	int CONNECTOR__ICO = 3;
 
 	/**
 	 * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -219,26 +228,108 @@ public interface ConnectormenuPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR__VERSION = 4;
+	int CONNECTOR__VERSION = 4;
 
 	/**
-	 * The number of structural features of the '<em>Menu Connector</em>' class.
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR_FEATURE_COUNT = 5;
+	int CONNECTOR__PACKAGE = 5;
 
 	/**
-	 * The number of operations of the '<em>Menu Connector</em>' class.
+	 * The number of structural features of the '<em>Connector</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MENU_CONNECTOR_OPERATION_COUNT = 0;
+	int CONNECTOR_FEATURE_COUNT = 6;
 
+	/**
+	 * The number of operations of the '<em>Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTOR_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.connectormenu.impl.FlowConnectorImpl <em>Flow Connector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.connectormenu.impl.FlowConnectorImpl
+	 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getFlowConnector()
+	 * @generated
+	 */
+	int FLOW_CONNECTOR = 3;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOW_CONNECTOR__NODE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Flow Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOW_CONNECTOR_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Flow Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOW_CONNECTOR_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.foxbpm.model.config.connectormenu.impl.ActorConnectorImpl <em>Actor Connector</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.foxbpm.model.config.connectormenu.impl.ActorConnectorImpl
+	 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getActorConnector()
+	 * @generated
+	 */
+	int ACTOR_CONNECTOR = 4;
+
+	/**
+	 * The feature id for the '<em><b>Node</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_CONNECTOR__NODE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Actor Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_CONNECTOR_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Actor Connector</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ACTOR_CONNECTOR_OPERATION_COUNT = 0;
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.Menu <em>Menu</em>}'.
@@ -251,15 +342,26 @@ public interface ConnectormenuPackage extends EPackage {
 	EClass getMenu();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.Menu#getNode <em>Node</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.connectormenu.Menu#getFlowConnector <em>Flow Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Node</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.Menu#getNode()
+	 * @return the meta object for the containment reference '<em>Flow Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.Menu#getFlowConnector()
 	 * @see #getMenu()
 	 * @generated
 	 */
-	EReference getMenu_Node();
+	EReference getMenu_FlowConnector();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.foxbpm.model.config.connectormenu.Menu#getActorConnector <em>Actor Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Actor Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.Menu#getActorConnector()
+	 * @see #getMenu()
+	 * @generated
+	 */
+	EReference getMenu_ActorConnector();
 
 	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.Node <em>Node</em>}'.
@@ -305,15 +407,15 @@ public interface ConnectormenuPackage extends EPackage {
 	EAttribute getNode_Ico();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.Node#getMenuConnector <em>Menu Connector</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.Node#getConnector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Menu Connector</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.Node#getMenuConnector()
+	 * @return the meta object for the containment reference list '<em>Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.Node#getConnector()
 	 * @see #getNode()
 	 * @generated
 	 */
-	EReference getNode_MenuConnector();
+	EReference getNode_Connector();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.Node#getNode <em>Node</em>}'.
@@ -327,69 +429,122 @@ public interface ConnectormenuPackage extends EPackage {
 	EReference getNode_Node();
 
 	/**
-	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.MenuConnector <em>Menu Connector</em>}'.
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.Connector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Menu Connector</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector
+	 * @return the meta object for class '<em>Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.Connector
 	 * @generated
 	 */
-	EClass getMenuConnector();
+	EClass getConnector();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.MenuConnector#getId <em>Id</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getId <em>Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector#getId()
-	 * @see #getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getId()
+	 * @see #getConnector()
 	 * @generated
 	 */
-	EAttribute getMenuConnector_Id();
+	EAttribute getConnector_Id();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.MenuConnector#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector#getName()
-	 * @see #getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getName()
+	 * @see #getConnector()
 	 * @generated
 	 */
-	EAttribute getMenuConnector_Name();
+	EAttribute getConnector_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.MenuConnector#getNote <em>Note</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getNote <em>Note</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Note</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector#getNote()
-	 * @see #getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getNote()
+	 * @see #getConnector()
 	 * @generated
 	 */
-	EAttribute getMenuConnector_Note();
+	EAttribute getConnector_Note();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.MenuConnector#getIco <em>Ico</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getIco <em>Ico</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Ico</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector#getIco()
-	 * @see #getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getIco()
+	 * @see #getConnector()
 	 * @generated
 	 */
-	EAttribute getMenuConnector_Ico();
+	EAttribute getConnector_Ico();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.MenuConnector#getVersion <em>Version</em>}'.
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getVersion <em>Version</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Version</em>'.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector#getVersion()
-	 * @see #getMenuConnector()
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getVersion()
+	 * @see #getConnector()
 	 * @generated
 	 */
-	EAttribute getMenuConnector_Version();
+	EAttribute getConnector_Version();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.config.connectormenu.Connector#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.Connector#getPackage()
+	 * @see #getConnector()
+	 * @generated
+	 */
+	EAttribute getConnector_Package();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.FlowConnector <em>Flow Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Flow Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.FlowConnector
+	 * @generated
+	 */
+	EClass getFlowConnector();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.FlowConnector#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Node</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.FlowConnector#getNode()
+	 * @see #getFlowConnector()
+	 * @generated
+	 */
+	EReference getFlowConnector_Node();
+
+	/**
+	 * Returns the meta object for class '{@link org.foxbpm.model.config.connectormenu.ActorConnector <em>Actor Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Actor Connector</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.ActorConnector
+	 * @generated
+	 */
+	EClass getActorConnector();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.foxbpm.model.config.connectormenu.ActorConnector#getNode <em>Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Node</em>'.
+	 * @see org.foxbpm.model.config.connectormenu.ActorConnector#getNode()
+	 * @see #getActorConnector()
+	 * @generated
+	 */
+	EReference getActorConnector_Node();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -425,12 +580,20 @@ public interface ConnectormenuPackage extends EPackage {
 		EClass MENU = eINSTANCE.getMenu();
 
 		/**
-		 * The meta object literal for the '<em><b>Node</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Flow Connector</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MENU__NODE = eINSTANCE.getMenu_Node();
+		EReference MENU__FLOW_CONNECTOR = eINSTANCE.getMenu_FlowConnector();
+
+		/**
+		 * The meta object literal for the '<em><b>Actor Connector</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MENU__ACTOR_CONNECTOR = eINSTANCE.getMenu_ActorConnector();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl <em>Node</em>}' class.
@@ -467,12 +630,12 @@ public interface ConnectormenuPackage extends EPackage {
 		EAttribute NODE__ICO = eINSTANCE.getNode_Ico();
 
 		/**
-		 * The meta object literal for the '<em><b>Menu Connector</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Connector</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference NODE__MENU_CONNECTOR = eINSTANCE.getNode_MenuConnector();
+		EReference NODE__CONNECTOR = eINSTANCE.getNode_Connector();
 
 		/**
 		 * The meta object literal for the '<em><b>Node</b></em>' containment reference list feature.
@@ -483,14 +646,14 @@ public interface ConnectormenuPackage extends EPackage {
 		EReference NODE__NODE = eINSTANCE.getNode_Node();
 
 		/**
-		 * The meta object literal for the '{@link org.foxbpm.model.config.connectormenu.impl.MenuConnectorImpl <em>Menu Connector</em>}' class.
+		 * The meta object literal for the '{@link org.foxbpm.model.config.connectormenu.impl.ConnectorImpl <em>Connector</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.foxbpm.model.config.connectormenu.impl.MenuConnectorImpl
-		 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getMenuConnector()
+		 * @see org.foxbpm.model.config.connectormenu.impl.ConnectorImpl
+		 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getConnector()
 		 * @generated
 		 */
-		EClass MENU_CONNECTOR = eINSTANCE.getMenuConnector();
+		EClass CONNECTOR = eINSTANCE.getConnector();
 
 		/**
 		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
@@ -498,7 +661,7 @@ public interface ConnectormenuPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MENU_CONNECTOR__ID = eINSTANCE.getMenuConnector_Id();
+		EAttribute CONNECTOR__ID = eINSTANCE.getConnector_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -506,7 +669,7 @@ public interface ConnectormenuPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MENU_CONNECTOR__NAME = eINSTANCE.getMenuConnector_Name();
+		EAttribute CONNECTOR__NAME = eINSTANCE.getConnector_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Note</b></em>' attribute feature.
@@ -514,7 +677,7 @@ public interface ConnectormenuPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MENU_CONNECTOR__NOTE = eINSTANCE.getMenuConnector_Note();
+		EAttribute CONNECTOR__NOTE = eINSTANCE.getConnector_Note();
 
 		/**
 		 * The meta object literal for the '<em><b>Ico</b></em>' attribute feature.
@@ -522,7 +685,7 @@ public interface ConnectormenuPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MENU_CONNECTOR__ICO = eINSTANCE.getMenuConnector_Ico();
+		EAttribute CONNECTOR__ICO = eINSTANCE.getConnector_Ico();
 
 		/**
 		 * The meta object literal for the '<em><b>Version</b></em>' attribute feature.
@@ -530,7 +693,51 @@ public interface ConnectormenuPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MENU_CONNECTOR__VERSION = eINSTANCE.getMenuConnector_Version();
+		EAttribute CONNECTOR__VERSION = eINSTANCE.getConnector_Version();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CONNECTOR__PACKAGE = eINSTANCE.getConnector_Package();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.connectormenu.impl.FlowConnectorImpl <em>Flow Connector</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.connectormenu.impl.FlowConnectorImpl
+		 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getFlowConnector()
+		 * @generated
+		 */
+		EClass FLOW_CONNECTOR = eINSTANCE.getFlowConnector();
+
+		/**
+		 * The meta object literal for the '<em><b>Node</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference FLOW_CONNECTOR__NODE = eINSTANCE.getFlowConnector_Node();
+
+		/**
+		 * The meta object literal for the '{@link org.foxbpm.model.config.connectormenu.impl.ActorConnectorImpl <em>Actor Connector</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.foxbpm.model.config.connectormenu.impl.ActorConnectorImpl
+		 * @see org.foxbpm.model.config.connectormenu.impl.ConnectormenuPackageImpl#getActorConnector()
+		 * @generated
+		 */
+		EClass ACTOR_CONNECTOR = eINSTANCE.getActorConnector();
+
+		/**
+		 * The meta object literal for the '<em><b>Node</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ACTOR_CONNECTOR__NODE = eINSTANCE.getActorConnector_Node();
 
 	}
 

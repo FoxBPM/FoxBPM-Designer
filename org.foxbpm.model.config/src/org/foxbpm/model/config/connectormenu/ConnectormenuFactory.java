@@ -40,13 +40,31 @@ public interface ConnectormenuFactory extends EFactory {
 	Node createNode();
 
 	/**
-	 * Returns a new object of class '<em>Menu Connector</em>'.
+	 * Returns a new object of class '<em>Connector</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Menu Connector</em>'.
+	 * @return a new object of class '<em>Connector</em>'.
 	 * @generated
 	 */
-	MenuConnector createMenuConnector();
+	Connector createConnector();
+
+	/**
+	 * Returns a new object of class '<em>Flow Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Flow Connector</em>'.
+	 * @generated
+	 */
+	FlowConnector createFlowConnector();
+
+	/**
+	 * Returns a new object of class '<em>Actor Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Actor Connector</em>'.
+	 * @generated
+	 */
+	ActorConnector createActorConnector();
 
 	/**
 	 * Returns the package supported by this factory.

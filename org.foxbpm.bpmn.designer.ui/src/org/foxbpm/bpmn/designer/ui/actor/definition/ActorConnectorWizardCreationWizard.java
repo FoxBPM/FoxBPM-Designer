@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -22,8 +23,13 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.internal.core.PackageFragment;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -31,19 +37,23 @@ import org.eclipse.ui.ide.IDE;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
-import org.foxbpm.bpmn.designer.ui.connector.definition.ConfigureNewConnectorWizardPage;
 import org.foxbpm.bpmn.designer.ui.connector.definition.CreateFlowConnectorJava;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 
-public class ActorConnectorWizardCreationWizard extends Wizard {
+public class ActorConnectorWizardCreationWizard extends Wizard implements INewWizard {
 	private ConfigureActorConnectorWizardPage ccwd;
 	private ConnectorDefinition newConnector;
-
+	private IStructuredSelection selection;
+	private IWorkspaceRoot fWorkspaceRoot;
+	private String projectName;
+	private String packagePath;
+	private String packageAbsolutePath;
+	
 	/**
 	 * 添加时构造函数
 	 */
@@ -57,14 +67,35 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 	 */
 	public ActorConnectorWizardCreationWizard(ConnectorDefinition newConnector) {
 		this.newConnector = newConnector;
+		this.fWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 	}
 
 	@Override
 	public void addPages() {
+		StringBuffer packageName = new StringBuffer();
+		boolean isDefault = false;
+		TreeSelection treeSelection = (TreeSelection) this.selection;
+		if(treeSelection!=null) {
+			if(treeSelection.getFirstElement() instanceof PackageFragment) {
+				PackageFragment packageFragment = (PackageFragment) treeSelection.getFirstElement();
+				projectName = packageFragment.getResource().getProject().getName();
+				if(projectName.equals("foxbpm-connector")) {
+					isDefault = true;
+				}
+				for (int i=0;i<packageFragment.names.length;i++) {
+					packageName.append(packageFragment.names[i]+".");
+				}
+				this.packagePath = packageFragment.getPath().toString().substring(1).substring(packageFragment.getPath().toString().substring(1).indexOf("/")+1);
+				this.packageAbsolutePath = packageFragment.getResource().getLocation().toFile().getAbsolutePath();
+			}else{
+				MessageDialog.openInformation(null, "提示", "暂不支持在包外的目录创建连接器或选择器");
+				return;
+			}
+		}
 		if (newConnector == null)
-			ccwd = new ConfigureActorConnectorWizardPage(true, "创建选择器");
+			ccwd = new ConfigureActorConnectorWizardPage(true, "创建选择器", packageName.toString(), isDefault);
 		else
-			ccwd = new ConfigureActorConnectorWizardPage(true, "编辑选择器", newConnector);
+			ccwd = new ConfigureActorConnectorWizardPage(true, "编辑选择器", newConnector, packageName.toString(), isDefault);
 		addPage(ccwd);
 	}
 
@@ -83,7 +114,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		ConnectorDefinition connector = ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector();
 		// 取得连接器之后立马改掉Icon
 		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(FileUtil.getFileName(connector.getIcon())));
-		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
+		Connector menuConnector = ConnectormenuFactory.eINSTANCE.createConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
@@ -104,10 +135,10 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			/**
 			 * 验证连接器ID唯一
 			 */
-			Iterator<Node> iter = menu.getNode().iterator();
+			Iterator<Node> iter = menu.getActorConnector().getNode().iterator();
 			while (iter.hasNext()) {
 				Node nd = iter.next();
-				for (MenuConnector mc : nd.getMenuConnector()) {
+				for (Connector mc : nd.getConnector()) {
 					if (mc.getId() != null) {
 						if (mc.getId().equals(connector.getId())) {
 							MessageDialog.openWarning(null, "提示", "已存在此ID的连接器，请更换ID!");
@@ -117,7 +148,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 				}
 			}
 
-			node.getMenuConnector().add(menuConnector);
+			node.getConnector().add(menuConnector);
 		}
 
 		// 如果是编辑连接器
@@ -128,21 +159,21 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			 * ().getConnectorId())); deleteFile(file);
 			 */
 			int idx = 0;
-			List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
-			for (MenuConnector menuConnector2 : node.getMenuConnector()) {
+			List<Connector> menuConnectors = new ArrayList<Connector>();
+			for (Connector menuConnector2 : node.getConnector()) {
 				if (menuConnector2.getId().equals(menuConnector.getId())) {
 					menuConnectors.add(menuConnector2);
-					idx = node.getMenuConnector().indexOf(menuConnector2);
+					idx = node.getConnector().indexOf(menuConnector2);
 				}
 			}
-			node.getMenuConnector().removeAll(menuConnectors);
-			node.getMenuConnector().add(idx, menuConnector);
+			node.getConnector().removeAll(menuConnectors);
+			node.getConnector().add(idx, menuConnector);
 		}
 
 		// 传入getNewCreateCategoryID()是为了保存哪些是新建的分类。供保存方法识别并更新保存到xml
 		if (menu != null) {
 			DefinitionConnectorUtil.saveActorConnectorMenu(menu, ((ConfigureActorConnectorWizardPage) ccwd).getNewCreateCategoryID(),
-					((ConfigureActorConnectorWizardPage) ccwd).getResourcePath());
+					((ConfigureActorConnectorWizardPage) ccwd).getConnectorMenuPath());
 		}
 
 		// Register the XMI resource factory for the .website extension
@@ -155,8 +186,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		String path = DefinitionConnectorUtil.getActorConnectorXmlPath(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
-				((ConfigureActorConnectorWizardPage) ccwd).getResourcePath());
+		String path = DefinitionConnectorUtil.getActorConnectorXmlPath(packageAbsolutePath, connector);
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
 		resource.setEncoding("UTF-8");
 
@@ -172,14 +202,13 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			FileInputStream fis = null;
 			if (((ConfigureActorConnectorWizardPage) ccwd).getIconPath()==null || ((ConfigureActorConnectorWizardPage) ccwd).getIconPath().equals("connector.png")) {
 				// 打开原文件（connector图标）
-				fis = new FileInputStream(DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath()));
+				fis = new FileInputStream(DefinitionConnectorUtil.getDefaultActorConnectorIcoPath(((ConfigureActorConnectorWizardPage) ccwd).getConnectorMenuPath()));
 			}else {
 				// 打开原文件（connector图标）
 				fis = new FileInputStream(((ConfigureActorConnectorWizardPage) ccwd).getIconPath());
 			}
 			// 打开连接到目标文件的输出流
-			File outfile = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(),
-					((ConfigureActorConnectorWizardPage) ccwd).getNode().getId()) + "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getIcon());
+			File outfile = new File(packageAbsolutePath + "/" + connector.getId() + "/" + connector.getIcon());
 			FileOutputStream outStream = new FileOutputStream(outfile);
 
 			while ((byteread = fis.read(buffer)) != -1) {
@@ -198,9 +227,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "处理者选择器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateActorConnectorJavaClassReturnInputStream(connector);
-		File file = new File(DefinitionConnectorUtil.getActorConnectorPathById(((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId(), ((ConfigureActorConnectorWizardPage) ccwd)
-				.getNode().getId())
-				+ "/" + ((ConfigureActorConnectorWizardPage) ccwd).getNewConnector().getId() + ".java");
+		File file = new File(packageAbsolutePath + "/" + connector.getId() + "/" + connector.getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {
 			javafileOutputStream = new FileOutputStream(file);
@@ -228,7 +255,7 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 
 		// 刷新连接器目录
 		FoxBPMDesignerUtil
-						.refresh(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getProjectName(), ((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getVirtualPath(), org.eclipse.core.internal.resources.Resource.FOLDER);
+						.refresh(projectName, packagePath, org.eclipse.core.internal.resources.Resource.FOLDER);
 		
 //		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 //		try {
@@ -240,8 +267,8 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getProjectName());
-		IFile ifile = (IFile) project.getFile(Path.fromOSString(((ConfigureActorConnectorWizardPage) ccwd).getResourcePath().getVirtualPath() + connector.getId() + "/" + file.getName()));
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		IFile ifile = (IFile) project.getFile(Path.fromOSString(packagePath + "/" + connector.getId() + "/" + file.getName()));
 
 		try {
 			// 打开编辑器
@@ -249,5 +276,14 @@ public class ActorConnectorWizardCreationWizard extends Wizard {
 		} catch (PartInitException e) {
 		}
 		return true;
+	}
+
+	@Override
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.selection = selection;		
+	}
+
+	public IWorkspaceRoot getfWorkspaceRoot() {
+		return fWorkspaceRoot;
 	}
 }

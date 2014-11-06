@@ -14,17 +14,15 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.restlet.data.ChallengeScheme;
 import org.restlet.representation.Representation;
 import org.restlet.resource.ClientResource;
 
 public class RuntimeConnectorUtil {
-	public static String FLOWCONNECTORMENU = "FlowConnectorMenu.xml";
-
-	public static String ACTORCONNECTORMENU = "ActorConnectorMenu.xml";
+	public static String CONNECTORMENU = "ConnectorMenu.xml";
 
 	public static String FLOWCONNECTOR = "FlowConnector.xml";
 
@@ -83,24 +81,18 @@ public class RuntimeConnectorUtil {
 		for (File file : filePath.listFiles()) {
 			if (file.isDirectory()) {
 				// FlowMenuXML文件
-				File xmlFile = new File(file.getAbsolutePath() + "/" + FLOWCONNECTORMENU);
-				File actorXmlFile = new File(file.getAbsolutePath() + "/" + ACTORCONNECTORMENU);
+				File xmlFile = new File(file.getAbsolutePath() + "/" + CONNECTORMENU);
 				if (xmlFile.exists()) {
 					reload(file, xmlFile);
-				} else if (actorXmlFile.exists()) {
-					reload(file, actorXmlFile);
-				} else {
+				}else {
 					reloadAllConnectors(file.getAbsolutePath());
 				}
 			} else {
 				// FlowMenuXML文件
 				File xmlFile = new File(file.getAbsolutePath());
-				File actorXmlFile = new File(file.getAbsolutePath() + "/" + ACTORCONNECTORMENU);
-				if (file.getAbsolutePath().indexOf(FLOWCONNECTORMENU) != -1 && xmlFile.exists()) {
+				if (file.getAbsolutePath().indexOf(CONNECTORMENU) != -1 && xmlFile.exists()) {
 					reload(file, xmlFile);
-				} else if (file.getAbsolutePath().indexOf(FLOWCONNECTORMENU) != -1 && actorXmlFile.exists()) {
-					reload(file, actorXmlFile);
-				} else {
+				}else {
 					// do nothing
 				}
 			}
@@ -111,7 +103,7 @@ public class RuntimeConnectorUtil {
 		Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
 		for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
 			node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
-			for (MenuConnector connector : node.getMenuConnector()) {
+			for (Connector connector : node.getConnector()) {
 				connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
 				// connector的具体路径
 				String connectorPath = xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().lastIndexOf(File.separator))
@@ -173,7 +165,7 @@ public class RuntimeConnectorUtil {
 	 * 递归找到对应类型的所有menu上的连接器节点
 	 * 
 	 * @param type
-	 *            FLOWCONNECTORMENU或ACTORCONNECTORMENU
+	 *            flowconnector或actorconnector
 	 * @return
 	 */
 	public static List<Node> getNodesFromConnectorPath(String type) {
@@ -188,26 +180,38 @@ public class RuntimeConnectorUtil {
 		for (File file : filePath.listFiles()) {
 			if (file.isDirectory()) {
 				// XML文件
-				File xmlFile = new File(file.getAbsolutePath() + "/" + type);
+				File xmlFile = new File(file.getAbsolutePath() + "/" + CONNECTORMENU);
 				if (xmlFile.exists()) {
 					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					reloadNodes(menu, null, xmlFile, nodes);
+					reloadNodes(menu, null, xmlFile, nodes, type);
 				} else {
-					getFileChild(file.getAbsolutePath(), nodes, type);
+					getFileChild(file.getAbsolutePath(), nodes, CONNECTORMENU);
 				}
 			} else {
 				// XML文件
 				File xmlFile = new File(file.getAbsolutePath());
-				if (file.getAbsolutePath().indexOf(type) != -1 && xmlFile.exists()) {
+				if (file.getAbsolutePath().indexOf(CONNECTORMENU) != -1 && xmlFile.exists()) {
 					Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-					for (Node node : menu.getNode()) {
-						node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
-						for (MenuConnector connector : node.getMenuConnector()) {
-							connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
-									+ connector.getIco());
+					if(type.equals("flowconnector")) {
+						for (Node node : menu.getFlowConnector().getNode()) {
+							node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
+							for (Connector connector : node.getConnector()) {
+								connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
+										+ connector.getIco());
+							}
+							nodes.add(node);
 						}
-						nodes.add(node);
+					}else if(type.equals("actorconnector")) {
+						for (Node node : menu.getActorConnector().getNode()) {
+							node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
+							for (Connector connector : node.getConnector()) {
+								connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/"
+										+ connector.getIco());
+							}
+							nodes.add(node);
+						}
 					}
+				
 				} else {
 					// do nothing
 				}
@@ -221,33 +225,50 @@ public class RuntimeConnectorUtil {
 	 * @param file
 	 * @param nodes
 	 */
-	private static void reloadNodes(Menu menu, Node rootNode, File file, List<Node> nodes) {
+	private static void reloadNodes(Menu menu, Node rootNode, File file, List<Node> nodes, String type) {
 		if(rootNode == null) {
-			for (Node node : menu.getNode()) {
-				String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
-				node.setIco(nodeico);
-				for (MenuConnector connector : node.getMenuConnector()) {
-					String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
-							+ connector.getIco();
-					connector.setIco(ico);
+			if(type.equals("flowconnector")) {
+				for (Node node : menu.getFlowConnector().getNode()) {
+					String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
+					node.setIco(nodeico);
+					for (Connector connector : node.getConnector()) {
+						String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
+								+ connector.getIco();
+						connector.setIco(ico);
+					}
+					nodes.add(node);
+					if(node.getNode().size()>0) {
+						reloadNodes(null, node, file, nodes, type);
+					}
 				}
-				nodes.add(node);
-				if(node.getNode().size()>0) {
-					reloadNodes(null, node, file, nodes);
+			}else if(type.equals("actorconnector")) {
+				for (Node node : menu.getActorConnector().getNode()) {
+					String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
+					node.setIco(nodeico);
+					for (Connector connector : node.getConnector()) {
+						String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
+								+ connector.getIco();
+						connector.setIco(ico);
+					}
+					nodes.add(node);
+					if(node.getNode().size()>0) {
+						reloadNodes(null, node, file, nodes, type);
+					}
 				}
 			}
+			
 		}else {
 			for (Node node : rootNode.getNode()) {
 				String nodeico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/ico/" + node.getIco();
 				node.setIco(nodeico);
-				for (MenuConnector connector : node.getMenuConnector()) {
+				for (Connector connector : node.getConnector()) {
 					String ico = file.getAbsolutePath().replace(File.separator, "/").substring(0, file.getAbsolutePath().replace(File.separator, "/").lastIndexOf("/")) + "/" + connector.getId() + "/"
 							+ connector.getIco();
 					connector.setIco(ico);
 				}
 				rootNode.getNode().add(node);
 				if(node.getNode().size()>0) {
-					reloadNodes(null, node, file, nodes);
+					reloadNodes(null, node, file, nodes, type);
 				}
 			}
 		}

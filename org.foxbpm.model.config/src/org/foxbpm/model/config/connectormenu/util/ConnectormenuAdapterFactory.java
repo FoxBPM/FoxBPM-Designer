@@ -76,8 +76,16 @@ public class ConnectormenuAdapterFactory extends AdapterFactoryImpl {
 				return createNodeAdapter();
 			}
 			@Override
-			public Adapter caseMenuConnector(MenuConnector object) {
-				return createMenuConnectorAdapter();
+			public Adapter caseConnector(Connector object) {
+				return createConnectorAdapter();
+			}
+			@Override
+			public Adapter caseFlowConnector(FlowConnector object) {
+				return createFlowConnectorAdapter();
+			}
+			@Override
+			public Adapter caseActorConnector(ActorConnector object) {
+				return createActorConnectorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -128,16 +136,44 @@ public class ConnectormenuAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.connectormenu.MenuConnector <em>Menu Connector</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.connectormenu.Connector <em>Connector</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.foxbpm.model.config.connectormenu.MenuConnector
+	 * @see org.foxbpm.model.config.connectormenu.Connector
 	 * @generated
 	 */
-	public Adapter createMenuConnectorAdapter() {
+	public Adapter createConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.connectormenu.FlowConnector <em>Flow Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.connectormenu.FlowConnector
+	 * @generated
+	 */
+	public Adapter createFlowConnectorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.foxbpm.model.config.connectormenu.ActorConnector <em>Actor Connector</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.foxbpm.model.config.connectormenu.ActorConnector
+	 * @generated
+	 */
+	public Adapter createActorConnectorAdapter() {
 		return null;
 	}
 

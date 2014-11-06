@@ -62,6 +62,15 @@ public class FoxBPMDesignerUtil {
 		String defaultPath = Platform.getInstallLocation().getURL().getPath() + "flowresource";
 		return Platform.getPreferencesService().getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/serviceFiles/";
 	}
+	
+	/**
+	 * 返回连接器菜单路径
+	 * 
+	 * @return
+	 */
+	public static String getConnectorMenuPath() {
+		return Platform.getPreferencesService().getString(PLUGIN_ID, "connectorPath", null, null);
+	}
 
 	public static String getServicePathPath() {
 		String servicePath = Platform.getPreferencesService().getString(PLUGIN_ID, "serverAddress", "http://127.0.0.1:8080/foxbpm-webapps-rest/service/", null);

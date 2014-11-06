@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getId <em>Id</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getIco <em>Ico</em>}</li>
- *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getMenuConnector <em>Menu Connector</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getConnector <em>Connector</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.Node#getNode <em>Node</em>}</li>
  * </ul>
  * </p>
@@ -106,21 +106,21 @@ public interface Node extends EObject {
 	void setIco(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Menu Connector</b></em>' containment reference list.
-	 * The list contents are of type {@link org.foxbpm.model.config.connectormenu.MenuConnector}.
+	 * Returns the value of the '<em><b>Connector</b></em>' containment reference list.
+	 * The list contents are of type {@link org.foxbpm.model.config.connectormenu.Connector}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Menu Connector</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Connector</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Menu Connector</em>' containment reference list.
-	 * @see org.foxbpm.model.config.connectormenu.ConnectormenuPackage#getNode_MenuConnector()
+	 * @return the value of the '<em>Connector</em>' containment reference list.
+	 * @see org.foxbpm.model.config.connectormenu.ConnectormenuPackage#getNode_Connector()
 	 * @model containment="true"
 	 *        extendedMetaData="kind='element' name='Connector'"
 	 * @generated
 	 */
-	EList<MenuConnector> getMenuConnector();
+	EList<Connector> getConnector();
 
 	/**
 	 * Returns the value of the '<em><b>Node</b></em>' containment reference list.

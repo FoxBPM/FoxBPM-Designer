@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,8 +41,8 @@ import org.foxbpm.bpmn.designer.ui.tree.TreeViewerLabelProvider;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
@@ -144,13 +143,13 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
 					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenuPath(resourcePath)), true);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getConnectorMenuPath(resourcePath)), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
-					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
+					List<Connector> connectors = new ArrayList<Connector>();
 					// 由于已经涉及多层嵌套的node，所以不仅仅是只要根就可以而是需要递归的，不然得不到子节点下的对应node
 					nodesel = null;// 先初始化下下
-					for (Node node : root.getNode()) {
+					for (Node node : root.getFlowConnector().getNode()) {
 						if (node.getId().equals(connector.getCategoryId())) {
 							nodesel = node;
 						} else {
@@ -159,12 +158,12 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					}
 					if (nodesel != null) {
 						parentIdString = nodesel.getId();
-						for (MenuConnector menuConnector : nodesel.getMenuConnector()) {
-							if (menuConnector.getId().equals(connector.getId())) {
-								menuConnectors.add(menuConnector);
+						for (Connector connector : nodesel.getConnector()) {
+							if (connector.getId().equals(connector.getId())) {
+								connectors.add(connector);
 							}
 						}
-						nodesel.getMenuConnector().removeAll(menuConnectors);
+						nodesel.getConnector().removeAll(connectors);
 					}
 
 					// 保存XML
@@ -223,7 +222,7 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 					Menu root = (Menu) resource.getContents().get(0);
 
 					nodesel = null;// 先初始化下下
-					for (Node node : root.getNode()) {
+					for (Node node : root.getFlowConnector().getNode()) {
 						if (node.getId().equals(MenuNodeId)) {
 							nodesel = node;
 						} else {
@@ -242,13 +241,13 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 						}
 					}
 					// 删除nodesel之前需要先取到nodesel的父节点的对应的id，到时候根据这个id取得刷新时候的树对应的节点对象供展开
-					for (Node node : root.getNode()) {
+					for (Node node : root.getFlowConnector().getNode()) {
 						if (!node.getId().equals(nodesel.getId())) {
 							getparentIdString(node, nodesel);
 						}
 					}
 					// 接着需要删除node本身
-					deleteNodeFromRoot(root.getNode(), nodesel);
+					deleteNodeFromRoot(root.getFlowConnector().getNode(), nodesel);
 					// 保存XML
 					try {
 						resource.save(Collections.EMPTY_MAP);
@@ -405,9 +404,9 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 
 	private void getAllMenuConnector(Node nodedel) {
 		// 1:先找出该目录下所有的连接器供删除文件夹用
-		if (nodedel.getMenuConnector() != null && nodedel.getMenuConnector().size() > 0) {
-			for (MenuConnector menuConnector : nodedel.getMenuConnector()) {
-				menuConnectorIdStringList.add(menuConnector.getId());
+		if (nodedel.getConnector() != null && nodedel.getConnector().size() > 0) {
+			for (Connector connector : nodedel.getConnector()) {
+				menuConnectorIdStringList.add(connector.getId());
 			}
 		}
 		if (nodedel.getNode().size() > 0 && nodedel.getNode() != null) {

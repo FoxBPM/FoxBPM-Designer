@@ -78,9 +78,21 @@ public class ConnectormenuSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ConnectormenuPackage.MENU_CONNECTOR: {
-				MenuConnector menuConnector = (MenuConnector)theEObject;
-				T result = caseMenuConnector(menuConnector);
+			case ConnectormenuPackage.CONNECTOR: {
+				Connector connector = (Connector)theEObject;
+				T result = caseConnector(connector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ConnectormenuPackage.FLOW_CONNECTOR: {
+				FlowConnector flowConnector = (FlowConnector)theEObject;
+				T result = caseFlowConnector(flowConnector);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ConnectormenuPackage.ACTOR_CONNECTOR: {
+				ActorConnector actorConnector = (ActorConnector)theEObject;
+				T result = caseActorConnector(actorConnector);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -119,17 +131,47 @@ public class ConnectormenuSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Menu Connector</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Connector</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Menu Connector</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Connector</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMenuConnector(MenuConnector object) {
+	public T caseConnector(Connector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Flow Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Flow Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFlowConnector(FlowConnector object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Actor Connector</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Actor Connector</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseActorConnector(ActorConnector object) {
 		return null;
 	}
 

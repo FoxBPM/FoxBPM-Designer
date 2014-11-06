@@ -14,7 +14,10 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,25 +25,44 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.PackageFragment;
+import org.eclipse.jdt.internal.ui.JavaPlugin;
+import org.eclipse.jdt.internal.ui.viewsupport.IViewPartInputProvider;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.INewWizard;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 
-public class ConnectorWizardCreationWizard extends Wizard {
+public class ConnectorWizardCreationWizard extends Wizard implements INewWizard{
 	private ConfigureNewConnectorWizardPage ccwd;
 	private ConnectorDefinition newConnector;
+	private IStructuredSelection selection;
+	private IWorkspaceRoot fWorkspaceRoot;
+	private String projectName;
+	private String packagePath;
+	private String packageAbsolutePath;
 
 	/**
 	 * 添加时构造函数
@@ -56,14 +78,44 @@ public class ConnectorWizardCreationWizard extends Wizard {
 	 */
 	public ConnectorWizardCreationWizard(ConnectorDefinition newConnector) {
 		this.newConnector = newConnector;
+		this.fWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 	}
 
 	@Override
 	public void addPages() {
+//		IJavaElement jelem= getInitialJavaElement(selection);
+		StringBuffer packageName = new StringBuffer();
+		boolean isDefault = false;
+		TreeSelection treeSelection = (TreeSelection) this.selection;
+		if(treeSelection!=null) {
+/*			if(treeSelection.getFirstElement() instanceof PackageFragmentRoot) {
+				PackageFragmentRoot packageFragmentRoot = (PackageFragmentRoot) treeSelection.getFirstElement();
+				projectName = packageFragmentRoot.getResource().getProject().getName();
+				if(projectName.equals("foxbpm-connector")) {
+					isDefault = true;
+				}
+				this.packagePath = packageFragmentRoot.getPath().toString().substring(packageFragmentRoot.getPath().toString().indexOf("/"));
+				this.packageAbsolutePath = packageFragmentRoot.getResource().getLocation().toFile().getAbsolutePath();
+			}else */if(treeSelection.getFirstElement() instanceof PackageFragment) {
+				PackageFragment packageFragment = (PackageFragment) treeSelection.getFirstElement();
+				projectName = packageFragment.getResource().getProject().getName();
+				if(projectName.equals("foxbpm-connector")) {
+					isDefault = true;
+				}
+				for (int i=0;i<packageFragment.names.length;i++) {
+					packageName.append(packageFragment.names[i]+".");
+				}
+				this.packagePath = packageFragment.getPath().toString().substring(1).substring(packageFragment.getPath().toString().substring(1).indexOf("/")+1);
+				this.packageAbsolutePath = packageFragment.getResource().getLocation().toFile().getAbsolutePath();
+			}else{
+				MessageDialog.openInformation(null, "提示", "暂不支持在包外的目录创建连接器或选择器");
+				return;
+			}
+		}
 		if (newConnector == null)
-			ccwd = new ConfigureNewConnectorWizardPage(true, "创建连接器");
+			ccwd = new ConfigureNewConnectorWizardPage(true, "创建连接器", packageName.toString(), isDefault);
 		else
-			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector);
+			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector, packageName.toString(), isDefault);
 
 		addPage(ccwd);
 	}
@@ -83,11 +135,12 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		ConnectorDefinition connector = ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition();
 		// 取得连接器之后立马改掉Icon
 		connector.setIcon(connector.getId() + "." + FileUtil.getExtensionName(FileUtil.getFileName(connector.getIcon())));
-		MenuConnector menuConnector = ConnectormenuFactory.eINSTANCE.createMenuConnector();
+		Connector menuConnector = ConnectormenuFactory.eINSTANCE.createConnector();
 		menuConnector.setId(connector.getId());
 		menuConnector.setName(connector.getName());
 		menuConnector.setNote(connector.getNote());
 		menuConnector.setIco(connector.getIcon());
+		menuConnector.setPackage(packagePath);
 		// node根据id可以获取到对应的menu里面的哪个Node,然后再在对应的Node下面加上menuConnector就可以保存了
 		Menu menu = ((ConfigureNewConnectorWizardPage) ccwd).getMenu();
 		Node node = ((ConfigureNewConnectorWizardPage) ccwd).getNode();
@@ -104,10 +157,10 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			/**
 			 * 验证连接器ID唯一
 			 */
-			Iterator<Node> iter = menu.getNode().iterator();
+			Iterator<Node> iter = menu.getFlowConnector().getNode().iterator();
 			while (iter.hasNext()) {
 				Node nd = iter.next();
-				for (MenuConnector mc : nd.getMenuConnector()) {
+				for (Connector mc : nd.getConnector()) {
 					if (mc.getId() != null) {
 						if (mc.getId().equals(connector.getId())) {
 							MessageDialog.openWarning(null, "提示", "已存在此ID的连接器，请更换ID!");
@@ -117,28 +170,28 @@ public class ConnectorWizardCreationWizard extends Wizard {
 				}
 			}
 
-			node.getMenuConnector().add(menuConnector);
+			node.getConnector().add(menuConnector);
 		}
 
 		// 如果是编辑连接器
 		if (((ConfigureNewConnectorWizardPage) ccwd).getOpenType().equals("edit")) {
 			int idx = 0;
-			List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
-			for (MenuConnector menuConnector2 : node.getMenuConnector()) {
+			List<Connector> menuConnectors = new ArrayList<Connector>();
+			for (Connector menuConnector2 : node.getConnector()) {
 				if (menuConnector2.getId().equals(menuConnector.getId())) {
 					menuConnectors.add(menuConnector2);
-					idx = node.getMenuConnector().indexOf(menuConnector2);
+					idx = node.getConnector().indexOf(menuConnector2);
 				}
 			}
-			node.getMenuConnector().removeAll(menuConnectors);
-			node.getMenuConnector().add(idx, menuConnector);
+			node.getConnector().removeAll(menuConnectors);
+			node.getConnector().add(idx, menuConnector);
 
 		}
 
 		// 传入getNewCreateCategoryID()是为了保存哪些是新建的分类。供保存方法识别并更新保存到xml
 		if (menu != null) {
 			DefinitionConnectorUtil.saveFlowConnectorMenu(menu, ((ConfigureNewConnectorWizardPage) ccwd).getNewCreateCategoryID(),
-					((ConfigureNewConnectorWizardPage) ccwd).getResourcePath());
+					((ConfigureNewConnectorWizardPage) ccwd).getConnectorMenuPath());
 		}
 
 		// Register the XMI resource factory for the .website extension
@@ -150,8 +203,11 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		// Obtain a new resource set
 		ResourceSet resSet = new ResourceSetImpl();
 
-		String path = DefinitionConnectorUtil.getFlowConnectorXmlPath(((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId(),
-				((ConfigureNewConnectorWizardPage) ccwd).getResourcePath());
+		String path = DefinitionConnectorUtil.getFlowConnectorXmlPath(packageAbsolutePath, connector);
+		File pathFile = new File(path);
+		if(!pathFile.exists()) {
+			pathFile.getParentFile().mkdirs();
+		}
 
 		// Create a resource
 		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(path));
@@ -169,14 +225,13 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			FileInputStream fis = null;
 			if (((ConfigureNewConnectorWizardPage) ccwd).getIconPath()==null || ((ConfigureNewConnectorWizardPage) ccwd).getIconPath().equals("category.png")) {
 				// 打开原文件（connector图标）
-				fis = new FileInputStream(DefinitionConnectorUtil.getDefaultFlowConnectorIcoPath(((ConfigureNewConnectorWizardPage) ccwd).getResourcePath()));
+				fis = new FileInputStream(DefinitionConnectorUtil.getDefaultFlowConnectorIcoPath(((ConfigureNewConnectorWizardPage) ccwd).getConnectorMenuPath()));
 			}else {
 				// 打开原文件（connector图标）
 				fis = new FileInputStream(((ConfigureNewConnectorWizardPage) ccwd).getIconPath());
 			}
 			// 打开连接到目标文件的输出流
-			File outfile = new File(DefinitionConnectorUtil.getFlowConnectorPathById(((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId(),
-					((ConfigureNewConnectorWizardPage) ccwd).getNode().getId()) + "/" + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getIcon());
+			File outfile = new File(packageAbsolutePath + "/" + connector.getId() + "/" + connector.getIcon());
 			FileOutputStream outStream = new FileOutputStream(outfile);
 
 			while ((byteread = fis.read(buffer)) != -1) {
@@ -196,9 +251,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 			MessageDialog.openInformation(null, "提示", "连接器修改成功");
 		// 生成java代码
 		InputStream is = CreateFlowConnectorJava.CreateConnectorJavaClassReturnInputStream(connector);
-		File file = new File(DefinitionConnectorUtil.getFlowConnectorPathById(((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId(), ((ConfigureNewConnectorWizardPage) ccwd)
-				.getNode().getId())
-				+ "/" + ((ConfigureNewConnectorWizardPage) ccwd).getConnectorDefinition().getId() + ".java");
+		File file = new File(packageAbsolutePath + "/" + connector.getId() + "/" + connector.getId() + ".java");
 		FileOutputStream javafileOutputStream = null;
 		try {
 			javafileOutputStream = new FileOutputStream(file);
@@ -226,7 +279,7 @@ public class ConnectorWizardCreationWizard extends Wizard {
 
 		// 刷新连接器目录
 		FoxBPMDesignerUtil
-				.refresh(((ConfigureNewConnectorWizardPage) ccwd).getResourcePath().getProjectName(), ((ConfigureNewConnectorWizardPage) ccwd).getResourcePath().getVirtualPath(), org.eclipse.core.internal.resources.Resource.FOLDER);
+				.refresh(projectName, packagePath, org.eclipse.core.internal.resources.Resource.FOLDER);
 
 		// IWorkbenchPage page =
 		// PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
@@ -240,8 +293,8 @@ public class ConnectorWizardCreationWizard extends Wizard {
 
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 
-		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(((ConfigureNewConnectorWizardPage) ccwd).getResourcePath().getProjectName());
-		IFile ifile = (IFile) project.getFile(Path.fromOSString(((ConfigureNewConnectorWizardPage) ccwd).getResourcePath().getVirtualPath() + connector.getId() + "/" + file.getName()));
+		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		IFile ifile = (IFile) project.getFile(Path.fromOSString(packagePath + "/" + connector.getId() + "/" + file.getName()));
 
 		try {
 			// 打开编辑器
@@ -250,5 +303,82 @@ public class ConnectorWizardCreationWizard extends Wizard {
 		}
 
 		return true;
+	}
+
+	@Override
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		this.selection = selection;		
+	}
+	
+	/**
+	 * Utility method to inspect a selection to find a Java element.
+	 *
+	 * @param selection the selection to be inspected
+	 * @return a Java element to be used as the initial selection, or <code>null</code>,
+	 * if no Java element exists in the given selection
+	 */
+	protected IJavaElement getInitialJavaElement(IStructuredSelection selection) {
+		IJavaElement jelem= null;
+		if (selection != null && !selection.isEmpty()) {
+			Object selectedElement= selection.getFirstElement();
+			if (selectedElement instanceof IAdaptable) {
+				IAdaptable adaptable= (IAdaptable) selectedElement;
+
+				jelem= (IJavaElement) adaptable.getAdapter(IJavaElement.class);
+				if (jelem == null || !jelem.exists()) {
+					jelem= null;
+					IResource resource= (IResource) adaptable.getAdapter(IResource.class);
+					if (resource != null && resource.getType() != IResource.ROOT) {
+						while (jelem == null && resource.getType() != IResource.PROJECT) {
+							resource= resource.getParent();
+							jelem= (IJavaElement) resource.getAdapter(IJavaElement.class);
+						}
+						if (jelem == null) {
+							jelem= JavaCore.create(resource); // java project
+						}
+					}
+				}
+			}
+		}
+		if (jelem == null) {
+			IWorkbenchPart part= JavaPlugin.getActivePage().getActivePart();
+			if (part instanceof ContentOutline) {
+				part= JavaPlugin.getActivePage().getActiveEditor();
+			}
+
+			if (part instanceof IViewPartInputProvider) {
+				Object elem= ((IViewPartInputProvider)part).getViewPartInput();
+				if (elem instanceof IJavaElement) {
+					jelem= (IJavaElement) elem;
+				}
+			}
+		}
+
+		if (jelem == null || jelem.getElementType() == IJavaElement.JAVA_MODEL) {
+			try {
+				IJavaProject[] projects= JavaCore.create(getWorkspaceRoot()).getJavaProjects();
+				if (projects.length == 1) {
+					IClasspathEntry[] rawClasspath= projects[0].getRawClasspath();
+					for (int i= 0; i < rawClasspath.length; i++) {
+						if (rawClasspath[i].getEntryKind() == IClasspathEntry.CPE_SOURCE) {// add only if the project contains a source folder
+							jelem= projects[0];
+							break;
+						}
+					}
+				}
+			} catch (JavaModelException e) {
+				JavaPlugin.log(e);
+			}
+		}
+		return jelem;
+	}
+	
+	/**
+	 * Returns the workspace root.
+	 *
+	 * @return the workspace root
+	 */
+	protected IWorkspaceRoot getWorkspaceRoot() {
+		return fWorkspaceRoot;
 	}
 }

@@ -7,7 +7,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.foxbpm.bpmn.designer.base.utils.RuntimeConnectorUtil;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
+import org.foxbpm.model.config.connectormenu.Connector;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.Node;
 
 public class RuntimeTreeViewerFactory {
@@ -26,7 +27,7 @@ public class RuntimeTreeViewerFactory {
 	public static List<ITreeElement> reloadTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 
-		List<Node> nodes = RuntimeConnectorUtil.getNodesFromConnectorPath(RuntimeConnectorUtil.FLOWCONNECTORMENU);
+		List<Node> nodes = RuntimeConnectorUtil.getNodesFromConnectorPath("flowconnector");
 		// 递归查找node节点
 		getConnectorTreeElements(nodes, null, elements);
 		
@@ -41,7 +42,7 @@ public class RuntimeTreeViewerFactory {
 	public static List<ITreeElement> reloadActorTree() {
 		List<ITreeElement> elements = new ArrayList<ITreeElement>();
 		
-		List<Node> nodes = RuntimeConnectorUtil.getNodesFromConnectorPath(RuntimeConnectorUtil.ACTORCONNECTORMENU);
+		List<Node> nodes = RuntimeConnectorUtil.getNodesFromConnectorPath("actorconnector");
 		// 递归查找node节点
 		getActorTreeElements(nodes, null, elements);
 
@@ -61,10 +62,10 @@ public class RuntimeTreeViewerFactory {
 
 				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
 
-				EList<MenuConnector> connectors = node.getMenuConnector();
+				EList<Connector> connectors = node.getConnector();
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
-						MenuConnector menuConnector = (MenuConnector) iterator2.next();
+						Connector menuConnector = (Connector) iterator2.next();
 						if(RuntimeConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),
@@ -99,10 +100,10 @@ public class RuntimeTreeViewerFactory {
 
 				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
 
-				EList<MenuConnector> connectors = node.getMenuConnector();
+				EList<Connector> connectors = node.getConnector();
 				if (connectors != null && connectors.size() > 0) {
 					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
-						MenuConnector menuConnector = (MenuConnector) iterator2.next();
+						Connector menuConnector = (Connector) iterator2.next();
 						if(RuntimeConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId()) == null)
 							continue;
 						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), menuConnector.getName(),

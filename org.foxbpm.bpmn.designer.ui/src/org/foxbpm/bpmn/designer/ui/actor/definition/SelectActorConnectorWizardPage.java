@@ -41,8 +41,8 @@ import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
 import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
@@ -144,13 +144,13 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					ResourceSet resourceSet = new ResourceSetImpl();
 					resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("xml", new XMIResourceFactoryImpl());
 					ResourcePath resourcePath = DefinitionConnectorUtil.getResourcePathByConnectorPackageName(connector);
-					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getActorConnectorMenuPath(resourcePath)), true);
+					XMIResource menuresource = (XMIResource) resourceSet.getResource(URI.createFileURI(DefinitionConnectorUtil.getFlowConnectorMenu(resourcePath)), true);
 					menuresource.setEncoding("UTF-8");
 					Menu root = (Menu) menuresource.getContents().get(0);
-					List<MenuConnector> menuConnectors = new ArrayList<MenuConnector>();
+					List<Connector> menuConnectors = new ArrayList<Connector>();
 					// 由于已经涉及多层嵌套的node，所以不仅仅是只要根就可以而是需要递归的，不然得不到子节点下的对应node
 					nodesel = null;// 先初始化下下
-					for (Node node : root.getNode()) {
+					for (Node node : root.getActorConnector().getNode()) {
 						if (node.getId().equals(connector.getCategoryId())) {
 							nodesel = node;
 						} else {
@@ -159,12 +159,12 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					}
 					if (nodesel != null) {
 						parentIdString = nodesel.getId();
-						for (MenuConnector menuConnector : nodesel.getMenuConnector()) {
+						for (Connector menuConnector : nodesel.getConnector()) {
 							if (menuConnector.getId().equals(connector.getId())) {
 								menuConnectors.add(menuConnector);
 							}
 						}
-						nodesel.getMenuConnector().removeAll(menuConnectors);
+						nodesel.getConnector().removeAll(menuConnectors);
 					}
 
 					// 保存XML
@@ -221,7 +221,7 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 					Menu root = (Menu) resource.getContents().get(0);
 
 					nodesel = null;// 先初始化下下
-					for (Node node : root.getNode()) {
+					for (Node node : root.getActorConnector().getNode()) {
 						if (node.getId().equals(MenuNodeId)) {
 							nodesel = node;
 						} else {
@@ -240,13 +240,13 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 						}
 					}
 					// 删除nodesel之前需要先取到nodesel的父节点的对应的id，到时候根据这个id取得刷新时候的树对应的节点对象供展开
-					for (Node node : root.getNode()) {
+					for (Node node : root.getActorConnector().getNode()) {
 						if (!node.getId().equals(nodesel.getId())) {
 							getparentIdString(node, nodesel);
 						}
 					}
 					// 接着需要删除node本身
-					deleteNodeFromRoot(root.getNode(), nodesel);
+					deleteNodeFromRoot(root.getActorConnector().getNode(), nodesel);
 					// 保存XML
 					try {
 						resource.save(Collections.EMPTY_MAP);
@@ -403,8 +403,8 @@ public class SelectActorConnectorWizardPage extends WizardPage {
 
 	private void getAllMenuConnector(Node nodedel) {
 		// 1:先找出该目录下所有的连接器供删除文件夹用
-		if (nodedel.getMenuConnector() != null && nodedel.getMenuConnector().size() > 0) {
-			for (MenuConnector menuConnector : nodedel.getMenuConnector()) {
+		if (nodedel.getConnector() != null && nodedel.getConnector().size() > 0) {
+			for (Connector menuConnector : nodedel.getConnector()) {
 				menuConnectorIdStringList.add(menuConnector.getId());
 			}
 		}

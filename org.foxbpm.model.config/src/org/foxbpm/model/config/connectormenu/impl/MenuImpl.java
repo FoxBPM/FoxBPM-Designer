@@ -2,23 +2,16 @@
  */
 package org.foxbpm.model.config.connectormenu.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.foxbpm.model.config.connectormenu.ActorConnector;
 import org.foxbpm.model.config.connectormenu.ConnectormenuPackage;
+import org.foxbpm.model.config.connectormenu.FlowConnector;
 import org.foxbpm.model.config.connectormenu.Menu;
-import org.foxbpm.model.config.connectormenu.Node;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +20,8 @@ import org.foxbpm.model.config.connectormenu.Node;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.foxbpm.model.config.connectormenu.impl.MenuImpl#getNode <em>Node</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.connectormenu.impl.MenuImpl#getFlowConnector <em>Flow Connector</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.connectormenu.impl.MenuImpl#getActorConnector <em>Actor Connector</em>}</li>
  * </ul>
  * </p>
  *
@@ -35,15 +29,23 @@ import org.foxbpm.model.config.connectormenu.Node;
  */
 public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	/**
-	 * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference list.
+	 * The cached value of the '{@link #getFlowConnector() <em>Flow Connector</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getNode()
+	 * @see #getFlowConnector()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Node> node;
-
+	protected FlowConnector flowConnector;
+	/**
+	 * The cached value of the '{@link #getActorConnector() <em>Actor Connector</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActorConnector()
+	 * @generated
+	 * @ordered
+	 */
+	protected ActorConnector actorConnector;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,11 +70,85 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Node> getNode() {
-		if (node == null) {
-			node = new EObjectContainmentEList<Node>(Node.class, this, ConnectormenuPackage.MENU__NODE);
+	public FlowConnector getFlowConnector() {
+		return flowConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetFlowConnector(FlowConnector newFlowConnector, NotificationChain msgs) {
+		FlowConnector oldFlowConnector = flowConnector;
+		flowConnector = newFlowConnector;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ConnectormenuPackage.MENU__FLOW_CONNECTOR, oldFlowConnector, newFlowConnector);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return node;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFlowConnector(FlowConnector newFlowConnector) {
+		if (newFlowConnector != flowConnector) {
+			NotificationChain msgs = null;
+			if (flowConnector != null)
+				msgs = ((InternalEObject)flowConnector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ConnectormenuPackage.MENU__FLOW_CONNECTOR, null, msgs);
+			if (newFlowConnector != null)
+				msgs = ((InternalEObject)newFlowConnector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ConnectormenuPackage.MENU__FLOW_CONNECTOR, null, msgs);
+			msgs = basicSetFlowConnector(newFlowConnector, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectormenuPackage.MENU__FLOW_CONNECTOR, newFlowConnector, newFlowConnector));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ActorConnector getActorConnector() {
+		return actorConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetActorConnector(ActorConnector newActorConnector, NotificationChain msgs) {
+		ActorConnector oldActorConnector = actorConnector;
+		actorConnector = newActorConnector;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ConnectormenuPackage.MENU__ACTOR_CONNECTOR, oldActorConnector, newActorConnector);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActorConnector(ActorConnector newActorConnector) {
+		if (newActorConnector != actorConnector) {
+			NotificationChain msgs = null;
+			if (actorConnector != null)
+				msgs = ((InternalEObject)actorConnector).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ConnectormenuPackage.MENU__ACTOR_CONNECTOR, null, msgs);
+			if (newActorConnector != null)
+				msgs = ((InternalEObject)newActorConnector).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ConnectormenuPackage.MENU__ACTOR_CONNECTOR, null, msgs);
+			msgs = basicSetActorConnector(newActorConnector, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectormenuPackage.MENU__ACTOR_CONNECTOR, newActorConnector, newActorConnector));
 	}
 
 	/**
@@ -83,8 +159,10 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ConnectormenuPackage.MENU__NODE:
-				return ((InternalEList<?>)getNode()).basicRemove(otherEnd, msgs);
+			case ConnectormenuPackage.MENU__FLOW_CONNECTOR:
+				return basicSetFlowConnector(null, msgs);
+			case ConnectormenuPackage.MENU__ACTOR_CONNECTOR:
+				return basicSetActorConnector(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,8 +175,10 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ConnectormenuPackage.MENU__NODE:
-				return getNode();
+			case ConnectormenuPackage.MENU__FLOW_CONNECTOR:
+				return getFlowConnector();
+			case ConnectormenuPackage.MENU__ACTOR_CONNECTOR:
+				return getActorConnector();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,9 +192,11 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ConnectormenuPackage.MENU__NODE:
-				getNode().clear();
-				getNode().addAll((Collection<? extends Node>)newValue);
+			case ConnectormenuPackage.MENU__FLOW_CONNECTOR:
+				setFlowConnector((FlowConnector)newValue);
+				return;
+			case ConnectormenuPackage.MENU__ACTOR_CONNECTOR:
+				setActorConnector((ActorConnector)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -128,8 +210,11 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ConnectormenuPackage.MENU__NODE:
-				getNode().clear();
+			case ConnectormenuPackage.MENU__FLOW_CONNECTOR:
+				setFlowConnector((FlowConnector)null);
+				return;
+			case ConnectormenuPackage.MENU__ACTOR_CONNECTOR:
+				setActorConnector((ActorConnector)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -143,8 +228,10 @@ public class MenuImpl extends MinimalEObjectImpl.Container implements Menu {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ConnectormenuPackage.MENU__NODE:
-				return node != null && !node.isEmpty();
+			case ConnectormenuPackage.MENU__FLOW_CONNECTOR:
+				return flowConnector != null;
+			case ConnectormenuPackage.MENU__ACTOR_CONNECTOR:
+				return actorConnector != null;
 		}
 		return super.eIsSet(featureID);
 	}

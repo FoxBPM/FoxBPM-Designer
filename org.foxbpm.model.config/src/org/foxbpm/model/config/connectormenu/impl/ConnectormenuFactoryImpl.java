@@ -58,7 +58,9 @@ public class ConnectormenuFactoryImpl extends EFactoryImpl implements Connectorm
 		switch (eClass.getClassifierID()) {
 			case ConnectormenuPackage.MENU: return createMenu();
 			case ConnectormenuPackage.NODE: return createNode();
-			case ConnectormenuPackage.MENU_CONNECTOR: return createMenuConnector();
+			case ConnectormenuPackage.CONNECTOR: return createConnector();
+			case ConnectormenuPackage.FLOW_CONNECTOR: return createFlowConnector();
+			case ConnectormenuPackage.ACTOR_CONNECTOR: return createActorConnector();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -89,9 +91,29 @@ public class ConnectormenuFactoryImpl extends EFactoryImpl implements Connectorm
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MenuConnector createMenuConnector() {
-		MenuConnectorImpl menuConnector = new MenuConnectorImpl();
-		return menuConnector;
+	public Connector createConnector() {
+		ConnectorImpl connector = new ConnectorImpl();
+		return connector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FlowConnector createFlowConnector() {
+		FlowConnectorImpl flowConnector = new FlowConnectorImpl();
+		return flowConnector;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ActorConnector createActorConnector() {
+		ActorConnectorImpl actorConnector = new ActorConnectorImpl();
+		return actorConnector;
 	}
 
 	/**

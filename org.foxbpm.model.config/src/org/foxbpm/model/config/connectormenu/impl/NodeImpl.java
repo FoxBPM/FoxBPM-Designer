@@ -3,23 +3,17 @@
 package org.foxbpm.model.config.connectormenu.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.ConnectormenuPackage;
-import org.foxbpm.model.config.connectormenu.MenuConnector;
 import org.foxbpm.model.config.connectormenu.Node;
 
 /**
@@ -32,7 +26,7 @@ import org.foxbpm.model.config.connectormenu.Node;
  *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getId <em>Id</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getIco <em>Ico</em>}</li>
- *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getMenuConnector <em>Menu Connector</em>}</li>
+ *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getConnector <em>Connector</em>}</li>
  *   <li>{@link org.foxbpm.model.config.connectormenu.impl.NodeImpl#getNode <em>Node</em>}</li>
  * </ul>
  * </p>
@@ -101,14 +95,14 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	protected String ico = ICO_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getMenuConnector() <em>Menu Connector</em>}' containment reference list.
+	 * The cached value of the '{@link #getConnector() <em>Connector</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMenuConnector()
+	 * @see #getConnector()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MenuConnector> menuConnector;
+	protected EList<Connector> connector;
 
 	/**
 	 * The cached value of the '{@link #getNode() <em>Node</em>}' containment reference list.
@@ -207,11 +201,11 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MenuConnector> getMenuConnector() {
-		if (menuConnector == null) {
-			menuConnector = new EObjectContainmentEList<MenuConnector>(MenuConnector.class, this, ConnectormenuPackage.NODE__MENU_CONNECTOR);
+	public EList<Connector> getConnector() {
+		if (connector == null) {
+			connector = new EObjectContainmentEList<Connector>(Connector.class, this, ConnectormenuPackage.NODE__CONNECTOR);
 		}
-		return menuConnector;
+		return connector;
 	}
 
 	/**
@@ -234,8 +228,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ConnectormenuPackage.NODE__MENU_CONNECTOR:
-				return ((InternalEList<?>)getMenuConnector()).basicRemove(otherEnd, msgs);
+			case ConnectormenuPackage.NODE__CONNECTOR:
+				return ((InternalEList<?>)getConnector()).basicRemove(otherEnd, msgs);
 			case ConnectormenuPackage.NODE__NODE:
 				return ((InternalEList<?>)getNode()).basicRemove(otherEnd, msgs);
 		}
@@ -256,8 +250,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 				return getName();
 			case ConnectormenuPackage.NODE__ICO:
 				return getIco();
-			case ConnectormenuPackage.NODE__MENU_CONNECTOR:
-				return getMenuConnector();
+			case ConnectormenuPackage.NODE__CONNECTOR:
+				return getConnector();
 			case ConnectormenuPackage.NODE__NODE:
 				return getNode();
 		}
@@ -282,9 +276,9 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case ConnectormenuPackage.NODE__ICO:
 				setIco((String)newValue);
 				return;
-			case ConnectormenuPackage.NODE__MENU_CONNECTOR:
-				getMenuConnector().clear();
-				getMenuConnector().addAll((Collection<? extends MenuConnector>)newValue);
+			case ConnectormenuPackage.NODE__CONNECTOR:
+				getConnector().clear();
+				getConnector().addAll((Collection<? extends Connector>)newValue);
 				return;
 			case ConnectormenuPackage.NODE__NODE:
 				getNode().clear();
@@ -311,8 +305,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 			case ConnectormenuPackage.NODE__ICO:
 				setIco(ICO_EDEFAULT);
 				return;
-			case ConnectormenuPackage.NODE__MENU_CONNECTOR:
-				getMenuConnector().clear();
+			case ConnectormenuPackage.NODE__CONNECTOR:
+				getConnector().clear();
 				return;
 			case ConnectormenuPackage.NODE__NODE:
 				getNode().clear();
@@ -335,8 +329,8 @@ public class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case ConnectormenuPackage.NODE__ICO:
 				return ICO_EDEFAULT == null ? ico != null : !ICO_EDEFAULT.equals(ico);
-			case ConnectormenuPackage.NODE__MENU_CONNECTOR:
-				return menuConnector != null && !menuConnector.isEmpty();
+			case ConnectormenuPackage.NODE__CONNECTOR:
+				return connector != null && !connector.isEmpty();
 			case ConnectormenuPackage.NODE__NODE:
 				return node != null && !node.isEmpty();
 		}

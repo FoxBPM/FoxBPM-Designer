@@ -15,7 +15,7 @@ import org.foxbpm.bpmn.designer.ui.utils.ImageUtil;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
-	private ResourcePath resourcePath;
+	private String connectorMenuPath;
 	/**
 	 * 
 	 */
@@ -57,7 +57,7 @@ public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implem
 		Image image = null;
 		ITreeElement tElement = (ITreeElement) element;
 		try {
-			DefinitionConnectorUtil.getAllActorConnectorNodes();
+			DefinitionConnectorUtil.getAllActorConnectorNodes(connectorMenuPath);
 			Map<String, Object> actorconnector = ((Map<String, Object>)DefinitionConnectorUtil.allActorConnectors.get(tElement.getId()+tElement.getRealName()));
 			String imagePath = actorconnector==null?tElement.getIcon():actorconnector.get("ico").toString();
 			image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
@@ -93,12 +93,12 @@ public class ActorTreeViewerLabelProvider extends StyledCellLabelProvider implem
 		}
 	}
 
-	public ResourcePath getResourcePath() {
-		return resourcePath;
+	public String getConnectorMenuPath() {
+		return connectorMenuPath;
 	}
 
-	public void setResourcePath(ResourcePath resourcePath) {
-		this.resourcePath = resourcePath;
+	public void setConnectorMenuPath(String connectorMenuPath) {
+		this.connectorMenuPath = connectorMenuPath;
 	}
 
 }

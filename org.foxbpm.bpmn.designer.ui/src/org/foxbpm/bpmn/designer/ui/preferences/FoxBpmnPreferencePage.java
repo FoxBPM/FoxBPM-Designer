@@ -2,6 +2,7 @@ package org.foxbpm.bpmn.designer.ui.preferences;
 
 import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
@@ -28,8 +29,11 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		
 		StringFieldEditor serverAddressEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "服务器地址:", parent);
 		DirectoryFieldEditor zipPathEditor=new DirectoryFieldEditor(FoxBpmnPreferenceConstants.P_ZIP_PATH, "解压路径：", parent);
+		FileFieldEditor connectorPathEditor=new FileFieldEditor(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "连接器Menu路径：", parent);
+		
 		StringFieldEditor usernameEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_USERNAME, "用户名：", parent);
 		StringFieldEditor passwordEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_PASSWORD, "密码：", parent);
+		
 		//屏蔽用户名和密码
 		usernameEditor.getLabelControl(parent).setVisible(false);
 		usernameEditor.getTextControl(parent).setVisible(false);
@@ -40,6 +44,7 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		addField(usernameEditor);
 		addField(passwordEditor);
 		addField(zipPathEditor);
+		addField(connectorPathEditor);
 	}
 
 	@Override
