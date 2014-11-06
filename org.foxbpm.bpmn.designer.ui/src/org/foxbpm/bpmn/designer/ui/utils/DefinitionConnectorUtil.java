@@ -554,7 +554,7 @@ public class DefinitionConnectorUtil {
 			}else{
 				try {
 					file.createNewFile();
-					PropertiesUtil.writeProperties(defaulPath, "connectorMenuPath", "src\\main\\resource\\ConnectorMenu.xml");
+					PropertiesUtil.writeProperties(defaulPath, "connectorMenuPath", "src\\main\\java\\org\\foxbpm\\connector\\ConnectorMenu.xml");
 					try {
 						IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject("foxbpm-connector");
 						IFile ifile = null;
