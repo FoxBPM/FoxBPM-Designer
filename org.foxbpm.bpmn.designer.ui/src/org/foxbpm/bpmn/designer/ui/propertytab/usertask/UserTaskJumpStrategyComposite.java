@@ -1,10 +1,10 @@
 package org.foxbpm.bpmn.designer.ui.propertytab.usertask;
 
+import org.eclipse.bpmn2.Activity;
 import org.eclipse.bpmn2.BaseElement;
 import org.eclipse.bpmn2.Bpmn2Factory;
 import org.eclipse.bpmn2.ExtensionAttributeValue;
 import org.eclipse.bpmn2.FormalExpression;
-import org.eclipse.bpmn2.UserTask;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EStructuralFeatureImpl.SimpleFeatureMapEntry;
 import org.eclipse.emf.ecore.util.FeatureMap;
@@ -32,7 +32,7 @@ import org.foxbpm.model.bpmn.foxbpm.SkipComment;
 import org.foxbpm.model.bpmn.foxbpm.SkipStrategy;
 
 public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
-	private UserTask userTask;
+	private Activity activity;
 	private FoxBPMExpViewer jumpStrategyViewer;// 跳过策略
 	private FoxBPMExpViewer handlerViewer;// 处理者
 	private FoxBPMExpViewer jumpAdviceViewer;// 跳过意见
@@ -95,13 +95,13 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 
 	@Override
 	public void createUIBindings(EObject eObject) {
-		userTask = (UserTask) eObject;
-		jumpStrategyViewer.seteObject(userTask);
-		handlerViewer.seteObject(userTask);
-		jumpAdviceViewer.seteObject(userTask);
+		activity = (Activity) eObject;
+		jumpStrategyViewer.seteObject(activity);
+		handlerViewer.seteObject(activity);
+		jumpAdviceViewer.seteObject(activity);
 
-		if (userTask.getExtensionValues().size() > 0) {
-			for (ExtensionAttributeValue extensionAttributeValue : userTask.getExtensionValues()) {
+		if (activity.getExtensionValues().size() > 0) {
+			for (ExtensionAttributeValue extensionAttributeValue : activity.getExtensionValues()) {
 				skipStrategy = (SkipStrategy) extensionAttributeValue.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__SKIP_STRATEGY);
 			}
 			if (skipStrategy == null) {
@@ -110,7 +110,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 					@Override
 					protected void doExecute() {
-						userTask.getExtensionValues().get(0).getValue().add(FoxBPMPackage.Literals.DOCUMENT_ROOT__SKIP_STRATEGY, skipStrategy);
+						activity.getExtensionValues().get(0).getValue().add(FoxBPMPackage.Literals.DOCUMENT_ROOT__SKIP_STRATEGY, skipStrategy);
 					}
 				});
 			}
@@ -186,7 +186,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 					@Override
 					protected void doExecute() {
-						setSkipStrategyExpression(userTask, event.getFormalExpression());
+						setSkipStrategyExpression(activity, event.getFormalExpression());
 
 						FormalExpression formalExpression = event.getFormalExpression();
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -212,7 +212,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 					@Override
 					protected void doExecute() {
-						setSkipAssigneeExpression(userTask, event.getFormalExpression());
+						setSkipAssigneeExpression(activity, event.getFormalExpression());
 
 						FormalExpression formalExpression = event.getFormalExpression();
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -238,7 +238,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 				editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
 					@Override
 					protected void doExecute() {
-						setSkipCommentExpression(userTask, event.getFormalExpression());
+						setSkipCommentExpression(activity, event.getFormalExpression());
 
 						FormalExpression formalExpression = event.getFormalExpression();
 						Expression expression = FoxBPMFactory.eINSTANCE.createExpression();
@@ -283,7 +283,7 @@ public class UserTaskJumpStrategyComposite extends AbstractFoxBPMComposite {
 						protected void doExecute() {
 
 							skipStrategy.setIsEnable(false);
-							userTask.getExtensionValues().remove(skipStrategy);
+							activity.getExtensionValues().remove(skipStrategy);
 							jumpStrategyViewer.cleanData();
 
 						}
