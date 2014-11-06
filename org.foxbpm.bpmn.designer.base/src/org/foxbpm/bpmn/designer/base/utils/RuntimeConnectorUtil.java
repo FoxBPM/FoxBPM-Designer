@@ -15,7 +15,9 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Display;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
+import org.foxbpm.model.config.connectormenu.ActorConnector;
 import org.foxbpm.model.config.connectormenu.Connector;
+import org.foxbpm.model.config.connectormenu.FlowConnector;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.restlet.data.ChallengeScheme;
@@ -105,15 +107,19 @@ public class RuntimeConnectorUtil {
 
 	private static void reload(File file, File xmlFile) {
 		Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-		for (Node node : menu.getFlowConnector().getNode()) {
-			readNode(node,xmlFile.getAbsolutePath(),"flowConnector");
+		FlowConnector flowConnector = menu.getFlowConnector();
+		if (flowConnector != null) {
+			for (Node node : flowConnector.getNode()) {
+				readNode(node, xmlFile.getAbsolutePath(), "flowConnector");
+			}
 		}
-		
-		for (Node node : menu.getActorConnector().getNode()) {
-			readNode(node,xmlFile.getAbsolutePath(),"actorConnector");
+		ActorConnector actorConnector = menu.getActorConnector();
+		if (actorConnector != null) {
+			for (Node node : actorConnector.getNode()) {
+				readNode(node, xmlFile.getAbsolutePath(), "actorConnector");
+			}
 		}
 	}
-	
 	
 	private static void readNode(Node node,String absolutePath,String type){
 		node.setIco(absolutePath.replace(File.separator, "/") + "/ico/" + node.getIco());
