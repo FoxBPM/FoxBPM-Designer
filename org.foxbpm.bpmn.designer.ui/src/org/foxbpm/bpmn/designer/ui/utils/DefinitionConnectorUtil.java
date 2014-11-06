@@ -470,7 +470,7 @@ public class DefinitionConnectorUtil {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		// Create a resource
-		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(getConnectorMenuPath(true)));
+		XMIResource resource = (XMIResource) resSet.createResource(URI.createFileURI(connectorMenuPath));
 		resource.setEncoding("UTF-8");
 
 		resource.getContents().add(menu);
