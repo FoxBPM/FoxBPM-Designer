@@ -341,12 +341,19 @@ public class ConnectorPropertyComposite extends AbstractFoxBPMComposite {
 	}
 
 	private static class ViewerLabelProvider extends StyledCellLabelProvider implements ILabelProvider {
+		@SuppressWarnings("unchecked")
 		public Image getImage(Object element) {
 			@SuppressWarnings("deprecation")
 			String image1 = ISharedImages.IMG_OBJS_TASK_TSK;
 			if (element instanceof ConnectorInstance) {
 				ConnectorInstance connectorInstance = (ConnectorInstance) element;
-				String imagePath = ((Map<String, Object>)RuntimeConnectorUtil.getAllConnectors().get(connectorInstance.getConnectorId())).get("ico").toString();
+				Map<String,Object> connectorMap = (Map<String, Object>) RuntimeConnectorUtil.getAllConnectors().get(connectorInstance.getConnectorId());
+				String imagePath = null;
+				if(connectorMap != null){
+					imagePath = connectorMap.get("ico").toString();
+				}else{
+					imagePath = image1;
+				}
 				Image image = new Image(PlatformUI.getWorkbench().getDisplay(), SWTResourceManager.getImage(imagePath).getImageData().scaledTo(16, 16));
 				return image;
 			}

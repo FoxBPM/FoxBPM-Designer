@@ -536,14 +536,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 			if(client==null) {
 				return;
 			}
-			File file = null;
 			try {
-				String processPath = iFile.getLocationURI().getPath();
-				String pngPath = processPath.substring(0, processPath.lastIndexOf(".")) + ".png";
-				String[] files = new String[]{processPath, pngPath};
-				file = File.createTempFile(System.currentTimeMillis() + "process", ".zip");
-				ZipUtils.zipMultiFile(files, file);
-
 				Representation result = client.delete();
 				if(result.getText().equals("SUCCESS")) {
 					MessageDialog.openInformation(null, "提示", "删除流程定义成功");

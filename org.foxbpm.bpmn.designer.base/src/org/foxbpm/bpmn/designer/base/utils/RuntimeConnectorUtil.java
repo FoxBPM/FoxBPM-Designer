@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.emf.common.util.EList;
@@ -55,8 +56,8 @@ public class RuntimeConnectorUtil {
 	public static Input getInputFromId(ConnectorDefinition connector, String inputId) {
 		EList<Input> inputs = connector.getInput();
 		if (inputs != null && inputs.size() > 0) {
-			for (Iterator iterator = inputs.iterator(); iterator.hasNext();) {
-				Input input = (Input) iterator.next();
+			for (Iterator<Input> iterator = inputs.iterator(); iterator.hasNext();) {
+				Input input = iterator.next();
 				if (input.getId().equals(inputId))
 					return input;
 			}
@@ -69,7 +70,10 @@ public class RuntimeConnectorUtil {
 	 * 
 	 * @return
 	 */
-	public static HashMap<String, Object> getAllConnectors() {
+	public static Map<String, Object> getAllConnectors() {
+//		if(allFlowConnectors != null){
+//			return allFlowConnectors;
+//		}
 		allFlowConnectors = new HashMap<String, Object>();
 		File connectorPath = new File(getAllConnectorPath());
 		reloadAllConnectors(connectorPath.getAbsolutePath());
@@ -101,25 +105,38 @@ public class RuntimeConnectorUtil {
 
 	private static void reload(File file, File xmlFile) {
 		Menu menu = EMFUtil.getConnectorMenuConfig(xmlFile.getAbsolutePath());
-		for (Node node : EMFUtil.getAll(menu.eResource(), Node.class)) {
-			node.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/ico/" + node.getIco());
-			for (Connector connector : node.getConnector()) {
-				connector.setIco(file.getAbsolutePath().replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
-				// connector的具体路径
-				String connectorPath = xmlFile.getAbsolutePath().substring(0, xmlFile.getAbsolutePath().lastIndexOf(File.separator))
-						+ File.separator + connector.getId() + File.separator;
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				// 对象
-				map.put("object", connector);
-				// 所在节点
-				map.put("node", node);
-				// 目录
-				map.put("path", connectorPath);
-				//图标
-				map.put("ico", node.getIco());
-				// 放到map里
-				allFlowConnectors.put(connector.getId(), map);
-			}
+		for (Node node : menu.getFlowConnector().getNode()) {
+			readNode(node,xmlFile.getAbsolutePath(),"flowConnector");
+		}
+		
+		for (Node node : menu.getActorConnector().getNode()) {
+			readNode(node,xmlFile.getAbsolutePath(),"actorConnector");
+		}
+	}
+	
+	
+	private static void readNode(Node node,String absolutePath,String type){
+		node.setIco(absolutePath.replace(File.separator, "/") + "/ico/" + node.getIco());
+		
+		for(Node tmpNode : node.getNode()){
+			readNode(tmpNode,absolutePath,type);
+		}
+		for (Connector connector : node.getConnector()) {
+			connector.setIco(absolutePath.replace(File.separator, "/") + "/" + connector.getId() + "/" + connector.getIco());
+			// connector的具体路径
+			String connectorPath = absolutePath.substring(0, absolutePath.lastIndexOf(File.separator))
+					+ File.separator  + type +File.separator+ connector.getId() + File.separator;
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			// 对象
+			map.put("object", connector);
+			// 所在节点
+			map.put("node", node);
+			// 目录
+			map.put("path", connectorPath);
+			//图标
+			map.put("ico", node.getIco());
+			// 放到map里
+			allFlowConnectors.put(connector.getId(), map);
 		}
 	}
 
@@ -129,14 +146,19 @@ public class RuntimeConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId))
-					.get("path") + FLOWCONNECTOR);
+			Map<String,Object> connectorMap = (Map<String, Object>) getAllConnectors().get(connectorId);
+			if(connectorMap == null){
+				return null;
+			}
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(connectorMap.get("path") + FLOWCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
 		} catch (Exception e) {
+			System.out.println("连接器"+connectorId+"加载失败！");
 			e.printStackTrace();
 		}
 		return null;
@@ -148,14 +170,20 @@ public class RuntimeConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId) {
 		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(((HashMap<String, Object>) getAllConnectors().get(connectorId))
-					.get("path") + ACTORCONNECTOR);
+			
+			Map<String,Object> connectorMap = (Map<String, Object>) getAllConnectors().get(connectorId);
+			if(connectorMap == null){
+				return null;
+			}
+			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(connectorMap.get("path") + ACTORCONNECTOR);
 			if (connector.getId().equals(connectorId)) {
 				return connector;
 			}
 		} catch (Exception e) {
+			System.out.println("连接器"+connectorId+"加载失败！");
 			e.printStackTrace();
 		}
 		return null;
@@ -283,7 +311,7 @@ public class RuntimeConnectorUtil {
 	 * @throws IOException
 	 */
 	public static boolean downLoadConnector(String type) throws Exception {
-		String connectorPath = getAllConnectorPath();
+//		String connectorPath = getAllConnectorPath();
 		// Authenticator.setDefault(new Authenticator() {
 		// protected PasswordAuthentication getPasswordAuthentication() {
 		// return new PasswordAuthentication("111", "111".toCharArray());

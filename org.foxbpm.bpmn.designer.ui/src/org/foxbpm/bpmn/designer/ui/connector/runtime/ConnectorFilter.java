@@ -36,8 +36,8 @@ public class ConnectorFilter extends ViewerFilter {
 		List<ITreeElement> children = parent.getChildren();
 		
 		if(children != null && children.size() > 0) {
-			for (Iterator iterator = children.iterator(); iterator.hasNext();) {
-				ITreeElement iTreeElement = (ITreeElement) iterator.next();
+			for (Iterator<ITreeElement> iterator = children.iterator(); iterator.hasNext();) {
+				ITreeElement iTreeElement = iterator.next();
 				//递归去找子节点
 				if(select(viewer, parent, iTreeElement)) {
 					return true;
