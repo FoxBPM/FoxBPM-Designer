@@ -1439,6 +1439,12 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 				sb.append(",");
 			sb.append("连接器描述为空");
 		}
+		
+		if(connectorDefinition.getCategoryId()==null) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器分类为空");
+		}
 		// if(customCategoryComposite.getVisible() &&
 		// (categoryNameText.getText() == null ||
 		// categoryNameText.getText().equals(""))){

@@ -459,7 +459,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		gd_categorycreateButton.heightHint = 20;
 		categorycreateButton.setLayoutData(gd_categorycreateButton);
 		categorycreateButton.setText("创建");
-		categorycreateButton.setEnabled(false);
+//		categorycreateButton.setEnabled(false);
 		
 		//根如果是编辑的话就需要再设置一些东西
 		if(newConnector.getCategoryId() == null) {
@@ -1220,6 +1220,12 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 				sb.append(",");
 			sb.append("选择器描述为空");
 		}
+		if(newConnector.getCategoryId()==null) {
+			if (sb.length() > 0)
+				sb.append(",");
+			sb.append("连接器分类为空");
+		}
+		
 		//上面两个先弃用，但是控件还保留在界面上，后期需要全部删除的
 //		if (null == ((IStructuredSelection)categorytreeViewer.getSelection()).getFirstElement()) {
 //			if(sb.length()>0)
