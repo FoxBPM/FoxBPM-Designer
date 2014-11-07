@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Display;
 import org.foxbpm.model.config.foxbpmconfig.FoxBPMConfig;
 import org.foxbpm.model.config.variableconfig.DataVariableConfig;
 import org.restlet.data.ChallengeScheme;
@@ -62,7 +63,13 @@ public class FoxBPMDesignerUtil {
 		if(new File(servicePath).exists()) {
 			return servicePath;
 		}else {
-			MessageDialog.openInformation(null, "提示", "暂未配置解压路径，请在首选项中配置");
+			Display.getDefault().asyncExec(new Runnable() {
+				
+				@Override
+				public void run() {
+					MessageDialog.openInformation(null, "提示", "暂未配置解压路径，请在首选项中配置");					
+				}
+			});
 			return servicePath;
 		}
 	}
@@ -127,14 +134,7 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getFlowTempletePath() {
-		String templatePath = getServicePath() + FOXBPM_REPOSITORY_FLOW_TEMPLATE;
-		if(new File(templatePath).exists()) {
-			return templatePath;
-		}else {
-			MessageDialog.openInformation(null, "提示", "暂未配置解压路径，请在首选项中配置");
-			return "";
-		}
-		
+		return getServicePath() + FOXBPM_REPOSITORY_FLOW_TEMPLATE;
 	}
 
 	/**

@@ -73,9 +73,11 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		
 		chooseModelCombo = new Combo(container, SWT.READ_ONLY);
 		map = WizardUtil.getModelInfoForWizard(chooseModelCombo);
-		if(map!=null || map.size()>0) {
+		if(map!=null && map.size()>0) {
 			chooseModelCombo.setItems((String[]) map.get("comboStrs"));
 			chooseModelCombo.select(0);
+		}else{
+			return;
 		}
 		setFixDiagramType(chooseModelCombo.getText());
 		chooseModelCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
