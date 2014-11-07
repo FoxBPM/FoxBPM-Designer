@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +17,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.EList;
@@ -53,6 +55,7 @@ import org.foxbpm.model.config.connectormenu.Connector;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
 import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
+import org.osgi.framework.Bundle;
 
 public class DefinitionConnectorUtil {
 	public static String CONNECTORMENU = "ConnectorMenu.xml";
@@ -324,7 +327,32 @@ public class DefinitionConnectorUtil {
 	 * @return
 	 */
 	public static String getDefaultFlowConnectorIcoPath(String connectorMenuPath) {
-		return new File(connectorMenuPath).getParent() + "/ico/" + CONNECTORCATEGORYDEFAULTICON;
+		String icoPath = new File(connectorMenuPath).getParent() + "/ico/" + CONNECTORCATEGORYDEFAULTICON;
+		
+		if(!new File(icoPath).exists()) {
+			Bundle bundle = Platform.getBundle( "org.foxbpm.bpmn.designer.ui" );
+			InputStream stream;
+			try {
+				int byteread = 0;// 读取的位数
+				byte[] buffer = new byte[1024];
+				stream = FileLocator.openStream(bundle, Path.fromOSString("icons/connector/category.png"), false);
+				File outfile = new File(icoPath);
+				outfile.getParentFile().mkdirs();
+				FileOutputStream outStream = new FileOutputStream(outfile);
+
+				while ((byteread = stream.read(buffer)) != -1) {
+					// 将读取的字节写入输出流
+					outStream.write(buffer, 0, byteread);
+				}
+				stream.close();
+				outStream.close();
+			} catch (IOException e) {
+				MessageDialog.openWarning(null, "提示", "创建图标文件出错，原因是\n" + e.getMessage());
+//				e.printStackTrace();
+			}
+		}
+		
+		return icoPath;
 	}
 
 	/**
@@ -333,7 +361,32 @@ public class DefinitionConnectorUtil {
 	 * @return
 	 */
 	public static String getDefaultActorConnectorIcoPath(String connectorMenuPath) {
-		return new File(connectorMenuPath).getParent() + "/ico/" + ACTORCATEGORYDEFAULTICON;
+		String icoPath = new File(connectorMenuPath).getParent() + "/ico/" + ACTORCATEGORYDEFAULTICON;
+		
+		if(!new File(icoPath).exists()) {
+			Bundle bundle = Platform.getBundle( "org.foxbpm.bpmn.designer.ui" );
+			InputStream stream;
+			try {
+				int byteread = 0;// 读取的位数
+				byte[] buffer = new byte[1024];
+				stream = FileLocator.openStream(bundle, Path.fromOSString("icons/connector/category.png"), false);
+				File outfile = new File(icoPath);
+				outfile.getParentFile().mkdirs();
+				FileOutputStream outStream = new FileOutputStream(outfile);
+
+				while ((byteread = stream.read(buffer)) != -1) {
+					// 将读取的字节写入输出流
+					outStream.write(buffer, 0, byteread);
+				}
+				stream.close();
+				outStream.close();
+			} catch (IOException e) {
+				MessageDialog.openWarning(null, "提示", "创建图标文件出错，原因是\n" + e.getMessage());
+//				e.printStackTrace();
+			}
+		}
+		
+		return icoPath;
 	}
 
 	/**

@@ -5,6 +5,20 @@
          point="org.eclipse.ui.newWizards">
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
+            class="org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard"
+            icon="icons/fox_16.ico"
+            id="org.foxbpm.bpmn.designer.ui.wizard1"
+            name="创建选择器">
+      </wizard>
+      <wizard
+            category="org.foxbpm.bpmn.designer.ui.category"
+            class="org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard"
+            icon="icons/fox_16.ico"
+            id="org.foxbpm.bpmn.designer.ui.wizard.createconnector"
+            name="创建连接器">
+      </wizard>
+      <wizard
+            category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
             icon="icons/fox_16.ico"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
@@ -14,18 +28,6 @@
             id="org.foxbpm.bpmn.designer.ui.category"
             name="FoxBPM">
       </category>
-      <wizard
-            category="org.foxbpm.bpmn.designer.ui.category"
-            class="org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard"
-            id="org.foxbpm.bpmn.designer.ui.wizard.createconnector"
-            name="创建连接器">
-      </wizard>
-      <wizard
-            category="org.foxbpm.bpmn.designer.ui.category"
-            class="org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard"
-            id="org.foxbpm.bpmn.designer.ui.wizard1"
-            name="创建选择器">
-      </wizard>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -61,7 +63,7 @@
     <command
           categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
           id="org.foxbpm.bpmn.designer.ui.command.editconnector"
-          name="编辑连接器">
+          name="编辑连接器或选择器">
     </command>
     <command
           categoryId="org.foxbpm.bpmn.designer.ui.category.connector"
@@ -206,10 +208,6 @@
              commandId="org.foxbpm.bpmn.designer.ui.command.editconnector"
              style="push">
        </command>
-       <command
-             commandId="org.foxbpm.bpmn.designer.ui.command.editactor"
-             style="push">
-       </command>
     </menuContribution>
     <menuContribution
           allPopups="false"
@@ -239,7 +237,7 @@
           type="java.lang.Object">
     </propertyTester>
  </extension>
- <extension
+ <!--<extension
        point="org.eclipse.ui.perspectives">
     <perspective
           class="org.foxbpm.bpmn.designer.ui.perspectives.FoxBPMPerspective"
@@ -247,7 +245,7 @@
           id="org.foxbpm.bpmn.designer.ui.foxbpmperspective"
           name="%persperctive.name">
     </perspective>
- </extension>
+ </extension>-->
  <extension
        point="org.eclipse.ui.views">
     <view
