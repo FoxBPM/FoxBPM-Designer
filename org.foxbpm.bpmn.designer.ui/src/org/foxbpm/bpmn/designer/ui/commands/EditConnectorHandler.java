@@ -1,12 +1,19 @@
 package org.foxbpm.bpmn.designer.ui.commands;
 
+import java.io.File;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IHandler;
 import org.eclipse.core.commands.IHandlerListener;
+import org.eclipse.jdt.internal.core.PackageFragment;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.foxbpm.bpmn.designer.ui.connector.definition.modify.EditConnectorWizard;
 import org.foxbpm.bpmn.designer.ui.connector.runtime.OverrideNewWizard;
+import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
 
 public class EditConnectorHandler implements IHandler {
 
@@ -22,9 +29,26 @@ public class EditConnectorHandler implements IHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		OverrideNewWizard dialog = new OverrideNewWizard(Display.getDefault().getActiveShell(), new EditConnectorWizard());
-		dialog.setPageSize(-1, 400); // -1代表宽度自适应, 240为高度
-		dialog.open();
+		IStructuredSelection iSelection = (IStructuredSelection) HandlerUtil.getCurrentSelection(event);
+		if(iSelection.getFirstElement() instanceof PackageFragment) {
+			boolean isConnector = false;
+			PackageFragment packageFragment = (PackageFragment) iSelection.getFirstElement();
+			for (File file : packageFragment.getResource().getLocation().toFile().listFiles()) {
+				if(file.getName().equals("FlowConnector.xml")) {
+					isConnector = true; 
+				}
+			}
+			if(isConnector) {
+				OverrideNewWizard dialog = new OverrideNewWizard(Display.getDefault().getActiveShell(), new EditConnectorWizard(packageFragment));
+				dialog.setPageSize(-1, 400); // -1代表宽度自适应, 240为高度
+				dialog.open();
+			}else {
+				MessageDialog.openInformation(null, "提示", "该目录不符合连接器结构");
+			}
+			
+		}else {
+			MessageDialog.openInformation(null, "提示", "该目录下没有连接器");
+		}
 		return null;
 	}
 

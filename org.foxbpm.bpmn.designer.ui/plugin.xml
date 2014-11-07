@@ -130,7 +130,7 @@
  </extension>
  <extension
        point="org.eclipse.ui.menus">
-    <menuContribution
+    <!--<menuContribution
           allPopups="false"
           locationURI="menu:org.eclipse.ui.main.menu?after=additions">
        <menu
@@ -194,12 +194,20 @@
              </command>
           </menu>
        </menu>
-    </menuContribution>
+    </menuContribution>-->
     <menuContribution
           allPopups="false"
           locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
        <command
              commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
+             style="push">
+       </command>
+       <command
+             commandId="org.foxbpm.bpmn.designer.ui.command.editconnector"
+             style="push">
+       </command>
+       <command
+             commandId="org.foxbpm.bpmn.designer.ui.command.editactor"
              style="push">
        </command>
     </menuContribution>
@@ -238,11 +246,6 @@
           icon="icons/fox_16.ico"
           id="org.foxbpm.bpmn.designer.ui.foxbpmperspective"
           name="%persperctive.name">
-    </perspective>
-    <perspective
-          class="test.TestPerspective"
-          id="test.TestPerspective"
-          name="测试透视图">
     </perspective>
  </extension>
  <extension

@@ -25,30 +25,30 @@ public class DefinitionTreeViewerFactory {
 	 * 
 	 * @return
 	 */
-	public static List<ITreeElement> reloadTree() {
-		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-
-		List<Node> nodes = DefinitionConnectorUtil.getAllFlowConnectorNodes(connectorMenuPath);
-
-		getTreeElements(nodes, null, elements);
-		
-		return elements;
-	}
+//	public static List<ITreeElement> reloadTree() {
+//		List<ITreeElement> elements = new ArrayList<ITreeElement>();
+//
+//		List<Node> nodes = DefinitionConnectorUtil.getAllFlowConnectorNodes(connectorMenuPath);
+//
+//		getTreeElements(nodes, null, elements);
+//		
+//		return elements;
+//	}
 	
 	/**
 	 * 加载树数据
 	 * 
 	 * @return
 	 */
-	public static List<ITreeElement> reloadActorTree() {
-		List<ITreeElement> elements = new ArrayList<ITreeElement>();
-
-		List<Node> nodes = DefinitionConnectorUtil.getAllActorConnectorNodes(connectorMenuPath);
-		
-		getActorTreeElements(nodes, null, elements);
-
-		return elements;
-	}
+//	public static List<ITreeElement> reloadActorTree() {
+//		List<ITreeElement> elements = new ArrayList<ITreeElement>();
+//
+//		List<Node> nodes = DefinitionConnectorUtil.getAllActorConnectorNodes(connectorMenuPath);
+//		
+//		getActorTreeElements(nodes, null, elements);
+//
+//		return elements;
+//	}
 
 	/**
 	 * 根据连接器菜单加载分类树
@@ -141,38 +141,38 @@ public class DefinitionTreeViewerFactory {
 	 * @param element
 	 * @param elements
 	 */
-	private static void getTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
-		if (nodes != null && nodes.size() > 0) {
-			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
-				Node node = (Node) iterator.next();
-
-				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
-
-				EList<Connector> connectors = node.getConnector();
-				if (connectors != null && connectors.size() > 0) {
-					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
-						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
-							continue;
-						String icon = DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
-						String note = DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
-						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
-								icon, note);
-						parentElement.addChild(childElement);
-					}
-				}
-
-				if (element != null)
-					element.addChild(parentElement);
-				else
-					elements.add(parentElement);
-
-				if (node.getNode() != null && node.getNode().size() > 0) {
-					getTreeElements(node.getNode(), parentElement, elements);
-				}
-			}
-		}
-	}
+//	private static void getTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
+//		if (nodes != null && nodes.size() > 0) {
+//			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
+//				Node node = (Node) iterator.next();
+//
+//				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
+//
+//				EList<Connector> connectors = node.getConnector();
+//				if (connectors != null && connectors.size() > 0) {
+//					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
+//						MenuConnector menuConnector = (MenuConnector) iterator2.next();
+//						if(DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
+//							continue;
+//						String icon = DefinitionConnectorUtil.getFlowConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
+//						String note = DefinitionConnectorUtil.getFlowConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
+//						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
+//								icon, note);
+//						parentElement.addChild(childElement);
+//					}
+//				}
+//
+//				if (element != null)
+//					element.addChild(parentElement);
+//				else
+//					elements.add(parentElement);
+//
+//				if (node.getNode() != null && node.getNode().size() > 0) {
+//					getTreeElements(node.getNode(), parentElement, elements);
+//				}
+//			}
+//		}
+//	}
 	
 	/**
 	 * 递归查找处理者连接器node节点
@@ -181,39 +181,39 @@ public class DefinitionTreeViewerFactory {
 	 * @param element
 	 * @param elements
 	 */
-	private static void getActorTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
-		if (nodes != null && nodes.size() > 0) {
-			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
-				Node node = (Node) iterator.next();
-
-				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
-
-				EList<Connector> connectors = node.getConnector();
-				if (connectors != null && connectors.size() > 0) {
-					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
-						MenuConnector menuConnector = (MenuConnector) iterator2.next();
-						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
-							continue;
-						
-						String icon = DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
-						String note = DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
-						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
-								icon, note);
-						parentElement.addChild(childElement);
-					}
-				}
-
-				if (element != null)
-					element.addChild(parentElement);
-				else
-					elements.add(parentElement);
-
-				if (node.getNode() != null && node.getNode().size() > 0) {
-					getActorTreeElements(node.getNode(), parentElement, elements);
-				}
-			}
-		}
-	}
+//	private static void getActorTreeElements(List<Node> nodes, ITreeElement element, List<ITreeElement> elements) {
+//		if (nodes != null && nodes.size() > 0) {
+//			for (Iterator iterator = nodes.iterator(); iterator.hasNext();) {
+//				Node node = (Node) iterator.next();
+//
+//				ITreeElement parentElement = new EntityElement(element, node.getId(), node.getName(), node.getName(), node.getIco(), "");
+//
+//				EList<Connector> connectors = node.getConnector();
+//				if (connectors != null && connectors.size() > 0) {
+//					for (Iterator iterator2 = connectors.iterator(); iterator2.hasNext();) {
+//						MenuConnector menuConnector = (MenuConnector) iterator2.next();
+//						if(DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()) == null)
+//							continue;
+//						
+//						String icon = DefinitionConnectorUtil.getActorConnectorIconPathByIconName(menuConnector.getId(), node.getId(), DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getIcon());
+//						String note = DefinitionConnectorUtil.getActorConnectorByMenuConnectorId(menuConnector.getId(), node.getId()).getNote();
+//						ITreeElement childElement = new EntityElement(parentElement, menuConnector.getId(), menuConnector.getName(), node.getId(),//放入nodeId
+//								icon, note);
+//						parentElement.addChild(childElement);
+//					}
+//				}
+//
+//				if (element != null)
+//					element.addChild(parentElement);
+//				else
+//					elements.add(parentElement);
+//
+//				if (node.getNode() != null && node.getNode().size() > 0) {
+//					getActorTreeElements(node.getNode(), parentElement, elements);
+//				}
+//			}
+//		}
+//	}
 
 	/**
 	 * 获取连接器

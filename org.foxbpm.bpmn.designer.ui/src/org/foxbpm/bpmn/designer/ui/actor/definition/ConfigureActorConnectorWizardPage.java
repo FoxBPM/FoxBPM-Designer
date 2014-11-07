@@ -170,7 +170,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 	 * @param pageName
 	 * @param connector
 	 */
-	public ConfigureActorConnectorWizardPage(boolean isClass, String pageName, ConnectorDefinition connector, String packageName, boolean isDefault) {
+	public ConfigureActorConnectorWizardPage(boolean isClass, String pageName, ConnectorDefinition connector, String actorMenuPath) {
 		super(isClass, pageName);
 		setDescription("设置处理者选择器的描述信息");
 		setTitle("编辑处理者选择器");
@@ -182,7 +182,7 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		this.newFactory = newFactory;
 		this.newCreateCategoryID = new ArrayList<String>();
 
-		connectorMenuPath = DefinitionConnectorUtil.getConnectorMenuPath(isDefault);
+		this.connectorMenuPath = actorMenuPath;
 		menu = DefinitionConnectorUtil.getConnectorMenu(connectorMenuPath);
 		
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
@@ -459,16 +459,18 @@ public class ConfigureActorConnectorWizardPage extends NewTypeWizardPage {
 		gd_categorycreateButton.heightHint = 20;
 		categorycreateButton.setLayoutData(gd_categorycreateButton);
 		categorycreateButton.setText("创建");
-//		categorycreateButton.setEnabled(false);
+		if(openType.equals("edit")) {
+			categorycreateButton.setEnabled(false);
+		}
+		
+		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 		
 		//根如果是编辑的话就需要再设置一些东西
 		if(newConnector.getCategoryId() == null) {
 			//默认选择分类树上第一个节点
 			for (ITreeElement treeElement : categorytreeElements) {
-				if (nodelist.size()>0 && treeElement.getId().equals(nodelist.get(0).getId())) {
-					categorytreeViewer.setSelection(new StructuredSelection(treeElement));
-					break;
-				}
+				categorytreeViewer.setSelection(new StructuredSelection(treeElement));
+				break;
 			}
 		}else{
 			//这个里面没有办法得到对应的子节点下面多层的有问题需要递归得到

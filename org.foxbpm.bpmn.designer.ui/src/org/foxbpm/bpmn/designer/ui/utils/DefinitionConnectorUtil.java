@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
 import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
@@ -305,17 +306,17 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId, String nodeId) {
-		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getFlowConnectorXmlPath(connectorId, nodeId));
-			if (connector.getId().equals(connectorId)) {
-				return connector;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public static ConnectorDefinition getFlowConnectorByMenuConnectorId(String connectorId, String nodeId) {
+//		try {
+//			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getFlowConnectorXmlPath(connectorId, nodeId));
+//			if (connector.getId().equals(connectorId)) {
+//				return connector;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	/**
 	 * 返回连接器默认图标
@@ -341,17 +342,17 @@ public class DefinitionConnectorUtil {
 	 * @param connectorId
 	 * @return
 	 */
-	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId, String nodeId) {
-		try {
-			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getActorConnectorXmlPath(connectorId, nodeId));
-			if (connector.getId().equals(connectorId)) {
-				return connector;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+//	public static ConnectorDefinition getActorConnectorByMenuConnectorId(String connectorId, String nodeId) {
+//		try {
+//			ConnectorDefinition connector = EMFUtil.getFlowConnectorConfig(getActorConnectorXmlPath(connectorId, nodeId));
+//			if (connector.getId().equals(connectorId)) {
+//				return connector;
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
 
 	/**
 	 * 保存处理者选择器菜单
@@ -374,11 +375,11 @@ public class DefinitionConnectorUtil {
 
 							if (null != node.getIco()) {
 								// 只有node对应的inon不是原有菜单下的就进行拷贝,不然选用的是MenuIcon再重写到MenuIcon的话会成空白的图
-								if (!node.getIco().contains(connectorMenuPath)) {
+								if (!node.getIco().contains(DefinitionConnectorUtil.getConnectorIconPath(connectorMenuPath))) {
 									// 打开原文件（Menu图标）
 									FileInputStream menufis = new FileInputStream(node.getIco());
 									// 打开连接到目标文件的输出流
-									File menuoutfile = new File(menu.eResource().getURI().devicePath() + FileUtil.getFileName(node.getIco()));
+									File menuoutfile = new File(DefinitionConnectorUtil.getConnectorIconPath(connectorMenuPath) + "/" + FileUtil.getFileName(node.getIco()));
 									FileOutputStream menuoutStream = new FileOutputStream(menuoutfile);
 
 									while ((byteread = menufis.read(buffer)) != -1) {
@@ -530,8 +531,9 @@ public class DefinitionConnectorUtil {
 	 * @return
 	 */
 	public static String getConnectorMenuPath(boolean isDefault) {
+		String connectorMenuPath = "";
 		if(!isDefault) {
-			return FoxBPMDesignerUtil.getConnectorMenuPath();
+			connectorMenuPath = FoxBPMDesignerUtil.getConnectorMenuPath();
 		}else {
 			String defaulPath = Platform.getInstallLocation().getURL().getPath() + "connectorPath.properties";
 			File file = new File(defaulPath);
@@ -543,9 +545,9 @@ public class DefinitionConnectorUtil {
 						ifile = (IFile) project.getFile(Path.fromOSString(new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8")));
 					}
 					if(ifile!=null) {
-						return ifile.getLocation().toFile().getAbsolutePath();
+						connectorMenuPath = ifile.getLocation().toFile().getAbsolutePath();
 					}else {
-						return new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8");
+						connectorMenuPath = new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8");
 					}
 					
 				} catch (UnsupportedEncodingException e) {
@@ -562,9 +564,9 @@ public class DefinitionConnectorUtil {
 							ifile = (IFile) project.getFile(Path.fromOSString(new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8")));
 						}
 						if(ifile!=null) {
-							return ifile.getLocation().toFile().getAbsolutePath();
+							connectorMenuPath = ifile.getLocation().toFile().getAbsolutePath();
 						}else {
-							return new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8");
+							connectorMenuPath = new String(PropertiesUtil.readValue(defaulPath, "connectorMenuPath").toString().getBytes("ISO8859-1"), "UTF-8");
 						}
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
@@ -573,8 +575,12 @@ public class DefinitionConnectorUtil {
 					e.printStackTrace();
 				}
 			}
-			return FoxBPMDesignerUtil.getConnectorMenuPath();
 		}
+		
+		if(connectorMenuPath.equals("") || !new File(connectorMenuPath).exists()) {
+			MessageDialog.openWarning(null, "提示", "连接器Menu文件路径有误，请检查");
+		}
+		return connectorMenuPath;
 	}
 	
 	/**

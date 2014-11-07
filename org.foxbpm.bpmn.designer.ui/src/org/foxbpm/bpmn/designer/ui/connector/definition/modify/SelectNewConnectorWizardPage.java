@@ -1,4 +1,4 @@
-package org.foxbpm.bpmn.designer.ui.connector.definition.modify;
+/*package org.foxbpm.bpmn.designer.ui.connector.definition.modify;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,9 +62,9 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 	private Node nodesel; // 记录删除节点的时候所选的连接器是属于哪个节点。
 	private int intLevel;
 
-	/**
+	*//**
 	 * Create the wizard.
-	 */
+	 *//*
 	public SelectNewConnectorWizardPage(EditConnectorWizard editConnectorWizard) {
 		super("wizardPage");
 		setTitle("选择连接器");
@@ -73,11 +73,11 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 		this.editConnectorWizard = editConnectorWizard;
 	}
 
-	/**
+	*//**
 	 * Create contents of the wizard.
 	 * 
 	 * @param parent
-	 */
+	 *//*
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 
@@ -195,14 +195,14 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 
 					List<Node> nodes = new ArrayList<Node>();
 					// 读取Menu的XML
-					/*
+					
 					 * XMIResource menuresource = (XMIResource) new
 					 * ResourceSetImpl
 					 * ().getResource(URI.createFileURI(ConnectorUtil
 					 * .getMenuConnectorPath()), true);
 					 * menuresource.setEncoding("UTF-8"); Menu root = (Menu)
 					 * menuresource.getContents().get(0);
-					 */
+					 
 					// Menu root =
 					// EMFUtil.getConnectorMenuConfig(ConnectorUtil.getMenuConnectorPath());
 
@@ -355,11 +355,11 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 		setControl(container);
 	}
 
-	/**
+	*//**
 	 * 删除文件夹
 	 * 
 	 * @param file
-	 */
+	 *//*
 	private void deleteFile(File file) {
 		if (file.exists()) { // 判断文件是否存在
 			if (file.isFile()) { // 判断是否是文件
@@ -384,12 +384,12 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 		this.connector = connector;
 	}
 
-	/**
+	*//**
 	 * 用于获取所有节点下的子节点递归
 	 * 
 	 * @param listNodes
 	 * @param node
-	 */
+	 *//*
 	private void getBelongNodeById(List<Node> listNodes, String idString) {
 		for (Node ndtemp : listNodes) {
 			if (ndtemp.getId().equals(idString)) {
@@ -460,3 +460,4 @@ public class SelectNewConnectorWizardPage extends WizardPage {
 		}
 	}
 }
+*/

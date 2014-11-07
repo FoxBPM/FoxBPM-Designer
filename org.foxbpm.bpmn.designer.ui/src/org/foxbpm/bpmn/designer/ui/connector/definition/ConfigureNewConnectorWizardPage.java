@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.internal.resources.Project;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFObservables;
 import org.eclipse.emf.databinding.EMFProperties;
@@ -62,12 +60,8 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.foxbpm.bpmn.designer.base.utils.EMFUtil;
 import org.foxbpm.bpmn.designer.base.utils.FileUtil;
-import org.foxbpm.bpmn.designer.base.utils.FoxBPMDesignerUtil;
-import org.foxbpm.bpmn.designer.ui.dialogs.ProjectContentProvider;
-import org.foxbpm.bpmn.designer.ui.dialogs.TreeSelectionDialog;
 import org.foxbpm.bpmn.designer.ui.tree.DefinitionTreeViewerFactory;
 import org.foxbpm.bpmn.designer.ui.tree.ITreeElement;
 import org.foxbpm.bpmn.designer.ui.tree.TreeViewerContentProvider;
@@ -83,7 +77,6 @@ import org.foxbpm.model.config.connector.Page;
 import org.foxbpm.model.config.connectormenu.ConnectormenuFactory;
 import org.foxbpm.model.config.connectormenu.Menu;
 import org.foxbpm.model.config.connectormenu.Node;
-import org.foxbpm.model.config.foxbpmconfig.ResourcePath;
 
 public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	private DataBindingContext m_bindingContext;
@@ -176,7 +169,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 	 * @param connector
 	 */
 
-	public ConfigureNewConnectorWizardPage(boolean isClass, String pageName, ConnectorDefinition connector, String packageName, boolean isDefault) {
+	public ConfigureNewConnectorWizardPage(boolean isClass, String pageName, ConnectorDefinition connector, String connectorMenuPath) {
 		super(isClass, pageName);
 		setDescription("设置连接器的描述信息");
 		setTitle("编辑连接器");
@@ -184,7 +177,7 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		// 初始化model
 		this.connectorDefinition = connector;
 		this.newCreateCategoryID = new ArrayList<String>();
-		connectorMenuPath = DefinitionConnectorUtil.getConnectorMenuPath(isDefault);
+		this.connectorMenuPath = connectorMenuPath;
 		menu = DefinitionConnectorUtil.getConnectorMenu(connectorMenuPath);
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 
@@ -195,7 +188,6 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		}
 
 		this.openType = "edit";
-		this.packageName = packageName;
 	}
 
 	@Override
@@ -417,7 +409,9 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 
 		createCateButton = new Button(categoryComposite, SWT.NONE);
 		createCateButton.setText("创建");
-//		createCateButton.setEnabled(false);
+		if(openType.equals("edit")) {
+			createCateButton.setEnabled(false);
+		}
 		createCateButton.addListener(SWT.Selection, new Listener() {
 
 			@Override
@@ -470,7 +464,9 @@ public class ConfigureNewConnectorWizardPage extends NewTypeWizardPage {
 		
 		categorytreeViewer.refresh();
 		
-		connectorDefinition.setCategoryId(null);
+		if(openType.equals("create")) {
+			connectorDefinition.setCategoryId(null);
+		}
 		
 		nodelist = EMFUtil.getAll(menu.eResource(), Node.class);
 		

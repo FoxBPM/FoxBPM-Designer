@@ -63,6 +63,7 @@ public class ConnectorWizardCreationWizard extends Wizard implements INewWizard{
 	private String projectName;
 	private String packagePath;
 	private String packageAbsolutePath;
+	private String connectorMenuPath;
 
 	/**
 	 * 添加时构造函数
@@ -76,9 +77,13 @@ public class ConnectorWizardCreationWizard extends Wizard implements INewWizard{
 	 * 
 	 * @param connector
 	 */
-	public ConnectorWizardCreationWizard(ConnectorDefinition newConnector) {
+	public ConnectorWizardCreationWizard(ConnectorDefinition newConnector, PackageFragment packageFragment) {
 		this.newConnector = newConnector;
 		this.fWorkspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		this.projectName = packageFragment.getResource().getProject().getName();
+		this.packagePath = packageFragment.getPath().toString().substring(1).substring(packageFragment.getPath().toString().substring(1).indexOf("/")+1).substring(0, packageFragment.getPath().toString().substring(1).substring(packageFragment.getPath().toString().substring(1).indexOf("/")+1).lastIndexOf("/"));
+		this.packageAbsolutePath = packageFragment.getResource().getLocation().toFile().getAbsolutePath().substring(0, packageFragment.getResource().getLocation().toFile().getAbsolutePath().lastIndexOf(File.separator));
+		this.connectorMenuPath = DefinitionConnectorUtil.getConnectorMenuPath(packageFragment.getResource().getProject().getName().equals("foxbpm-connector"));
 	}
 
 	@Override
@@ -115,7 +120,7 @@ public class ConnectorWizardCreationWizard extends Wizard implements INewWizard{
 		if (newConnector == null)
 			ccwd = new ConfigureNewConnectorWizardPage(true, "创建连接器", packageName.toString(), isDefault);
 		else
-			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector, packageName.toString(), isDefault);
+			ccwd = new ConfigureNewConnectorWizardPage(true, "编辑连接器", newConnector, connectorMenuPath);
 
 		addPage(ccwd);
 	}

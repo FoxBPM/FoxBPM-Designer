@@ -20,24 +20,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.foxbpm.bpmn.designer.ui.utils.DefinitionConnectorUtil;
-import org.foxbpm.model.config.connector.ConnectorDefinition;
 
 public class ChooseFlowConnectorFileToEditWizardPage extends WizardPage {
 	private CheckboxTreeViewer checkboxTreeViewer;
-	private ConnectorDefinition connector;
 	private Button wizardRadioButton;
 	private Button fileRadioButton;
 	private Text txtjava;
+	private String connectorPath;
 
 	/**
 	 * Create the wizard.
 	 */
-	public ChooseFlowConnectorFileToEditWizardPage(ConnectorDefinition connector) {
+	public ChooseFlowConnectorFileToEditWizardPage(String connectorPath) {
 		super("wizardPage");
 		setTitle("选择编辑方式");
 		setDescription("请选择您想要编辑连接器的方式");
-		this.connector = connector;
+		this.connectorPath = connectorPath;
 	}
 
 	/**
@@ -97,12 +95,12 @@ public class ChooseFlowConnectorFileToEditWizardPage extends WizardPage {
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		checkboxTreeViewer.setLabelProvider(new ViewerLabelProvider());
 		checkboxTreeViewer.setContentProvider(new TreeContentProvider());
-//		checkboxTreeViewer.setInput(getFilesInConnectorPath());
+		checkboxTreeViewer.setInput(getFilesInConnectorPath());
 	}
 
 	public List<String> getFilesInConnectorPath() {
 		List<String> filenames = new ArrayList<String>();
-		File d = new File(DefinitionConnectorUtil.getFlowConnectorPathById(connector.getId(), connector.getCategoryId()));// 建立当前目录中文件的File对象
+		File d = new File(connectorPath);// 建立当前目录中文件的File对象
 		File[] fl = d.listFiles();// 取得目录中所有文件的File对象数组
 		for (int i = 0; i < fl.length; i++) {
 			// 目录下的文件：
@@ -153,14 +151,6 @@ public class ChooseFlowConnectorFileToEditWizardPage extends WizardPage {
 		public boolean hasChildren(Object element) {
 			return false;
 		}
-	}
-
-	public ConnectorDefinition getConnector() {
-		return connector;
-	}
-
-	public void setConnector(ConnectorDefinition connector) {
-		this.connector = connector;
 	}
 
 	public CheckboxTreeViewer getCheckboxTreeViewer() {
