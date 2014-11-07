@@ -14,7 +14,7 @@ public class FoxBpmnPreferenceInitializer extends AbstractPreferenceInitializer 
 		store.setDefault(FoxBpmnPreferenceConstants.P_USERNAME, "user");
 		store.setDefault(FoxBpmnPreferenceConstants.P_PASSWORD, "password");
 		store.setDefault(FoxBpmnPreferenceConstants.P_ZIP_PATH, "");
-		store.setDefault(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "C:/Users/demonrain/Desktop/ttt");
+		store.setDefault(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "");
 	}
 
 }

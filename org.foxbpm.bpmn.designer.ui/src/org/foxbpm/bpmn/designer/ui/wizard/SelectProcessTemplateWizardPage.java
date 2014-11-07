@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Map;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -72,8 +73,10 @@ public class SelectProcessTemplateWizardPage extends WizardPage {
 		
 		chooseModelCombo = new Combo(container, SWT.READ_ONLY);
 		map = WizardUtil.getModelInfoForWizard(chooseModelCombo);
-		chooseModelCombo.setItems((String[]) map.get("comboStrs"));
-		chooseModelCombo.select(0);
+		if(map!=null || map.size()>0) {
+			chooseModelCombo.setItems((String[]) map.get("comboStrs"));
+			chooseModelCombo.select(0);
+		}
 		setFixDiagramType(chooseModelCombo.getText());
 		chooseModelCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		

@@ -2,8 +2,6 @@ package org.foxbpm.bpmn.designer.base.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -60,7 +58,13 @@ public class FoxBPMDesignerUtil {
 	 */
 	public static String getServicePath() {
 		String defaultPath = Platform.getInstallLocation().getURL().getPath() + "flowresource";
-		return Platform.getPreferencesService().getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/serviceFiles/";
+		String servicePath = Platform.getPreferencesService().getString(PLUGIN_ID, "zipPath", defaultPath, null) + "/serviceFiles/";
+		if(new File(servicePath).exists()) {
+			return servicePath;
+		}else {
+			MessageDialog.openInformation(null, "提示", "暂未配置解压路径，请在首选项中配置");
+			return servicePath;
+		}
 	}
 	
 	/**
@@ -123,7 +127,14 @@ public class FoxBPMDesignerUtil {
 	 * @return
 	 */
 	public static String getFlowTempletePath() {
-		return getServicePath() + FOXBPM_REPOSITORY_FLOW_TEMPLATE;
+		String templatePath = getServicePath() + FOXBPM_REPOSITORY_FLOW_TEMPLATE;
+		if(new File(templatePath).exists()) {
+			return templatePath;
+		}else {
+			MessageDialog.openInformation(null, "提示", "暂未配置解压路径，请在首选项中配置");
+			return "";
+		}
+		
 	}
 
 	/**
