@@ -408,12 +408,14 @@ public class FoxBPMExpDialog extends Dialog {
 		gd_displaytext.widthHint = 470;
 		displaytext.setLayoutData(gd_displaytext);
 		
-				Label label_3 = new Label(editorComposite, SWT.NONE);
-				label_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-				label_3.setText("脚本引擎");
-		
-				Combo combo = new Combo(editorComposite, SWT.READ_ONLY);
-				combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//				Label label_3 = new Label(editorComposite, SWT.NONE);
+//				label_3.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+//				label_3.setText("脚本引擎");
+//				label_3.setVisible(false);
+//		
+//				Combo combo = new Combo(editorComposite, SWT.READ_ONLY);
+//				combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//				combo.setVisible(false);
 
 		Composite toolbarComposite = new Composite(editorComposite, SWT.NONE);
 		toolbarComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 2, 1));
