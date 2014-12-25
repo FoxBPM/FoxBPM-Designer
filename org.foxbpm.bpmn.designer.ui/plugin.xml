@@ -6,21 +6,21 @@
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.actor.definition.ActorConnectorWizardCreationWizard"
-            icon="icons/fox_16.ico"
+            icon="icons/fox.ico"
             id="org.foxbpm.bpmn.designer.ui.wizard1"
             name="创建选择器">
       </wizard>
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.connector.definition.ConnectorWizardCreationWizard"
-            icon="icons/fox_16.ico"
+            icon="icons/fox.ico"
             id="org.foxbpm.bpmn.designer.ui.wizard.createconnector"
             name="创建连接器">
       </wizard>
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
-            icon="icons/fox_16.ico"
+            icon="icons/fox.ico"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
             name="%wizard.name">
       </wizard>
@@ -34,7 +34,7 @@
       <editor
             class="org.foxbpm.bpmn.designer.ui.editors.FoxBPMEditor"
             default="true"
-            icon="icons/fox_16.ico"
+            icon="icons/fox.ico"
             id="org.foxbpm.bpmn.designer.ui.editor"
             name="%editor.name">
       </editor>
@@ -216,7 +216,7 @@
              id="org.foxbpm.bpmn.designer.ui.toolbar.synres">
           <command
                 commandId="org.foxbpm.bpmn.designer.ui.command.downloadres"
-                icon="icons/fox_16.ico"
+                icon="icons/fox.ico"
                 style="push"
                 tooltip="同步设计器资源">
           </command>
@@ -394,7 +394,7 @@
     <page
           class="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
           id="org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferencePage"
-          name="流程设计器">
+          name="业务流程">
     </page>
  </extension>
 	<extension point="org.foxbpm.runtime">
