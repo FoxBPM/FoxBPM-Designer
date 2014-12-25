@@ -34,6 +34,7 @@
       <editor
             class="org.foxbpm.bpmn.designer.ui.editors.FoxBPMEditor"
             default="true"
+            extensions="bpmn"
             icon="icons/fox.ico"
             id="org.foxbpm.bpmn.designer.ui.editor"
             name="%editor.name">
