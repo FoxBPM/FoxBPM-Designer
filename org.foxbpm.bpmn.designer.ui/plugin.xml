@@ -200,14 +200,34 @@
     </menuContribution>-->
     <menuContribution
           allPopups="false"
-          locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+          locationURI="popup:org.eclipse.ui.popup.any?after=additions">
        <command
              commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
              style="push">
+          <visibleWhen checkEnabled="false">
+               <with variable="selection">
+				<count value="1"/>
+				<iterate ifEmpty="false">
+					 <and>
+	   					 <test property="org.eclipse.core.resources.name" value="*.bpmn"/>
+					 </and>
+			    </iterate>
+			 </with>
+          </visibleWhen>
        </command>
        <command
              commandId="org.foxbpm.bpmn.designer.ui.command.editconnector"
              style="push">
+          <visibleWhen checkEnabled="false">
+               <with variable="selection">
+				<count value="1"/>
+				<iterate ifEmpty="false">
+					 <and>
+	   					 <test property="org.eclipse.core.resources.name" value="*.bpmn"/>
+					 </and>
+			    </iterate>
+			 </with>
+          </visibleWhen>
        </command>
     </menuContribution>
     <menuContribution
