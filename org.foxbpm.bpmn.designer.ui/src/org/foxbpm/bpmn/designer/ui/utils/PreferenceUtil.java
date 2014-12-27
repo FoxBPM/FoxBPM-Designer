@@ -5,6 +5,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.foxbpm.bpmn.designer.ui.Activator;
 import org.foxbpm.bpmn.designer.ui.preferences.FoxBpmnPreferenceConstants;
 
+import com.wisedu.emap.studio.common.util.FixUtil;
 import com.wisedu.emap.studio.common.util.StudioUtil;
 
 /**
@@ -42,12 +43,24 @@ public class PreferenceUtil {
 				connectorMenuPath);
 	}
 	
+	/**
+	 * 设置解压路径
+	 * 
+	 * @param projectName
+	 */
+	private static void setUnzipPath() {
+	    String unzipPath = FixUtil.getEclipseRealRootPath() + "bpmn";
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		store.setValue(FoxBpmnPreferenceConstants.P_ZIP_PATH,unzipPath);
+	}	
+	
 	
 	/**
 	 * 设置流程首选项
 	 * @param project
 	 */
 	public static void setFlowPreference(IProject project){
+		setUnzipPath();
 		setServerAddress(project);
 		setConnectorMenuPath(project);
 	}
