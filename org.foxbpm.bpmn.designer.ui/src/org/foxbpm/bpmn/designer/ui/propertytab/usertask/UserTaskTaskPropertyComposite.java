@@ -84,40 +84,12 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 		priorityCombo.setData("非常高", "100");
 		priorityCombo.select(2);
 
-		Label taskTypeLabel = new Label(detailComposite, SWT.NONE);
-		taskTypeLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		taskTypeLabel.setText("任务类型");
-		taskTypeCombo = new Combo(detailComposite, SWT.READ_ONLY);
-		GridData gd_taskTypeCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
-		gd_taskTypeCombo.widthHint = 100;
-		taskTypeCombo.setLayoutData(gd_taskTypeCombo);
-		// taskTypeCombo.setItems(new String[]{"通用任务","通知任务","默认通用任务"});
-		// taskTypeCombo.setData("通用任务", "FIXFLOWTASK");
-		// taskTypeCombo.setData("通知任务", "FIXNOTICETASK");
-		// taskTypeCombo.setData("默认通用任务", "FIXREMIND");
-		taskTypeCombo.setItems(new String[] { "foxbpmtask" });
-		taskTypeCombo.select(0);
-
 		Label taskNameLabel = new Label(detailComposite, SWT.NONE);
 		taskNameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		taskNameLabel.setText("任务主题");
 		taskNameViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
 		Control control = taskNameViewer.getControl();
 		control.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label taskDescriptionLabel = new Label(detailComposite, SWT.NONE);
-		taskDescriptionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		taskDescriptionLabel.setText("任务描述");
-		taskDescriptionViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
-		Control control_1 = taskDescriptionViewer.getControl();
-		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label filishedDescriptionLabel = new Label(detailComposite, SWT.NONE);
-		filishedDescriptionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		filishedDescriptionLabel.setText("完成后的描述");
-		filishedDescriptionViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
-		Control control_2 = filishedDescriptionViewer.getControl();
-		control_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		Label durationLabel = new Label(detailComposite, SWT.NONE);
 		durationLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -137,6 +109,41 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 		Label miniutesLabel = new Label(durationTime, SWT.NONE);
 		miniutesLabel.setText("分");
 		predictMiniutesSpinner = new Spinner(durationTime, SWT.BORDER | SWT.READ_ONLY);
+		
+		Label taskTypeLabel = new Label(detailComposite, SWT.NONE);
+		taskTypeLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		taskTypeLabel.setText("任务类型");
+		taskTypeLabel.setVisible(false);
+		taskTypeCombo = new Combo(detailComposite, SWT.READ_ONLY);
+		GridData gd_taskTypeCombo = new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 1);
+		gd_taskTypeCombo.widthHint = 100;
+		taskTypeCombo.setLayoutData(gd_taskTypeCombo);
+		// taskTypeCombo.setItems(new String[]{"通用任务","通知任务","默认通用任务"});
+		// taskTypeCombo.setData("通用任务", "FIXFLOWTASK");
+		// taskTypeCombo.setData("通知任务", "FIXNOTICETASK");
+		// taskTypeCombo.setData("默认通用任务", "FIXREMIND");
+		taskTypeCombo.setItems(new String[] { "foxbpmtask" });
+		taskTypeCombo.select(0);
+		taskTypeCombo.setVisible(false);
+		
+		Label taskDescriptionLabel = new Label(detailComposite, SWT.NONE);
+		taskDescriptionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		taskDescriptionLabel.setText("任务描述");
+		taskDescriptionLabel.setVisible(false);
+		taskDescriptionViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		Control control_1 = taskDescriptionViewer.getControl();
+		control_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		taskDescriptionViewer.getControl().setVisible(false);
+		
+		Label filishedDescriptionLabel = new Label(detailComposite, SWT.NONE);
+		filishedDescriptionLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		filishedDescriptionLabel.setText("完成后的描述");
+		filishedDescriptionLabel.setVisible(false);
+		filishedDescriptionViewer = new FoxBPMExpViewer(detailComposite, SWT.BORDER);
+		Control control_2 = filishedDescriptionViewer.getControl();
+		control_2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		filishedDescriptionViewer.getControl().setVisible(false);
+		
 		return parent;
 	}
 
