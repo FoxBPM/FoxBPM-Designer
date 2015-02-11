@@ -12,5 +12,6 @@ Export-Package: org.foxbpm.model.bpmn.foxbpm,
  org.foxbpm.model.bpmn.foxbpm.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
- org.eclipse.emf.ecore.xmi;visibility:=reexport
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ com.wisedu.emap.studio.launcher;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
