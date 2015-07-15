@@ -32,14 +32,15 @@ public class ActorsPropertySection extends AbstractFoxBPMPropertySection {
 	 */
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject object = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-		Bpmn2DiagramType bpmn2DiagramType = BpmnModelUtil.getDiagramType(object);
-		if (bpmn2DiagramType == Bpmn2DiagramType.COLLABORATION) {
-			boolean enabled = object instanceof Participant;
-			return enabled;
-		} else {
-			boolean enabled = object instanceof BPMNDiagram;
-			return enabled;
-		}
+//		EObject object = BusinessObjectUtil.getBusinessObjectForSelection(selection);
+//		Bpmn2DiagramType bpmn2DiagramType = BpmnModelUtil.getDiagramType(object);
+//		if (bpmn2DiagramType == Bpmn2DiagramType.COLLABORATION) {
+//			boolean enabled = object instanceof Participant;
+//			return enabled;
+//		} else {
+//			boolean enabled = object instanceof BPMNDiagram;
+//			return enabled;
+//		}
+		return false;
 	}
 }

@@ -27,9 +27,10 @@ public class UserTaskcommandPropertySection extends AbstractFoxBPMPropertySectio
 
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject be = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-		boolean enable = be instanceof UserTask;
-		return enable;
+//		EObject be = BusinessObjectUtil.getBusinessObjectForSelection(selection);
+//		boolean enable = be instanceof UserTask;
+//		return enable;
+		return false;
 	}
 
 }

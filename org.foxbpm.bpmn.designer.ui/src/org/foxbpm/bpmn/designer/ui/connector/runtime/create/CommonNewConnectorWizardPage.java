@@ -32,7 +32,9 @@ import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage;
 import org.foxbpm.model.config.connector.ConnectorDefinition;
 import org.foxbpm.model.config.connector.Input;
+import org.foxbpm.model.config.connector.Items;
 import org.foxbpm.model.config.connector.Page;
+import org.foxbpm.model.config.connector.Select;
 import org.foxbpm.model.config.connector.Widget;
 
 public class CommonNewConnectorWizardPage extends WizardPage {
@@ -249,13 +251,20 @@ public class CommonNewConnectorWizardPage extends WizardPage {
 					}
 					controls.add(connectNameBtn);
 				} else if (type.equals(types[4])) {
+					Select select = (Select) widget;
 					// 创建
-					Button connectNameBtn = new Button(proGroup, SWT.BORDER | SWT.RADIO);
-					connectNameBtn.setLayoutData(new GridData(GridData.FILL_HORIZONTAL)); // 布局
+					Combo combo = new Combo(proGroup, SWT.READ_ONLY);
+					combo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL)); // 布局
 					if (isRequired) {
-						isRequiredControl.add(connectNameBtn);
+						isRequiredControl.add(combo);
 					}
-					controls.add(connectNameBtn);
+					List<String> item = new ArrayList<String>();
+					for (Items items : select.getItems()) {
+						item.add(items.getName());
+						combo.setData(items.getName(), items.getValue());
+					}
+					combo.setItems(item.toArray(new String[item.size()]));
+					controls.add(combo);
 				} else if (type.equals(types[5])) {
 					// 创建
 					final Combo connectNameCombo = new Combo(proGroup, SWT.BORDER);

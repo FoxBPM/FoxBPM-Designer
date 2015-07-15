@@ -39,16 +39,17 @@ public class ConnectorPropertySection extends AbstractFoxBPMPropertySection {
 
 	@Override
 	public boolean appliesTo(IWorkbenchPart part, ISelection selection) {
-		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
-
-		Bpmn2DiagramType bpmn2DiagramType = BpmnModelUtil.getDiagramType(eObject);
-		if (bpmn2DiagramType == Bpmn2DiagramType.COLLABORATION) {
-			boolean enabled = ((eObject instanceof Participant || eObject instanceof Task || eObject instanceof SubProcess || eObject instanceof CallActivity) && (!(eObject instanceof ManualTask)));
-			return enabled;
-		} else {
-			boolean enabled = ((eObject instanceof BPMNDiagram || eObject instanceof Task || eObject instanceof SubProcess || eObject instanceof CallActivity) && (!(eObject instanceof ManualTask)));
-			return enabled;
-		}
+//		EObject eObject = BusinessObjectUtil.getBusinessObjectForSelection(selection);
+//
+//		Bpmn2DiagramType bpmn2DiagramType = BpmnModelUtil.getDiagramType(eObject);
+//		if (bpmn2DiagramType == Bpmn2DiagramType.COLLABORATION) {
+//			boolean enabled = ((eObject instanceof Participant || eObject instanceof Task || eObject instanceof SubProcess || eObject instanceof CallActivity) && (!(eObject instanceof ManualTask)));
+//			return enabled;
+//		} else {
+//			boolean enabled = ((eObject instanceof BPMNDiagram || eObject instanceof Task || eObject instanceof SubProcess || eObject instanceof CallActivity) && (!(eObject instanceof ManualTask)));
+//			return enabled;
+//		}
+		return false;
 	}
 
 }

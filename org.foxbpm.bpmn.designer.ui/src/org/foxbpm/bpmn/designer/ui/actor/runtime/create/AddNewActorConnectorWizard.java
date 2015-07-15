@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -24,6 +25,7 @@ import org.foxbpm.model.bpmn.foxbpm.Expression;
 import org.foxbpm.model.bpmn.foxbpm.FoxBPMFactory;
 import org.foxbpm.model.bpmn.foxbpm.SkipComment;
 import org.foxbpm.model.config.connector.Input;
+import org.foxbpm.model.config.connector.Select;
 import org.foxbpm.model.config.connector.Widget;
 
 public class AddNewActorConnectorWizard extends DynamicPageWizard {
@@ -181,6 +183,10 @@ public class AddNewActorConnectorWizard extends DynamicPageWizard {
 						else if (control instanceof Button) {
 							Button button = (Button) control;
 							expression.setValue(button.getText().trim());
+						}
+						else if (control instanceof Combo) {
+							Combo combo = (Combo) control;
+							expression.setValue(combo.getData(combo.getText()).toString());
 						}
 
 						connectorParameterInput.setExpression(expression);

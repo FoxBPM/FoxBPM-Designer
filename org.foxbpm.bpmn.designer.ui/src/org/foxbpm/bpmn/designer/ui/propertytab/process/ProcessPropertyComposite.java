@@ -58,6 +58,7 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 		
 		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, process);
 		bindText(Bpmn2Package.Literals.CALLABLE_ELEMENT__NAME, nameText, process);
+		bindText(FoxBPMPackage.Literals.DOCUMENT_ROOT__CATEGORY, categoryText, process);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText, process);
 		
 		

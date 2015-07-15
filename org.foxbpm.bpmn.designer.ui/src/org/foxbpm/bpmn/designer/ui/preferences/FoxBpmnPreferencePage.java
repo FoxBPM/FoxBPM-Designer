@@ -28,8 +28,8 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		Composite parent=getFieldEditorParent();
 		
 		StringFieldEditor serverAddressEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "服务器地址:", parent);
-		DirectoryFieldEditor zipPathEditor=new DirectoryFieldEditor(FoxBpmnPreferenceConstants.P_ZIP_PATH, "解压路径：", parent);
-		FileFieldEditor connectorPathEditor=new FileFieldEditor(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "连接器Menu路径：", parent);
+		DirectoryFieldEditor zipPathEditor=new DirectoryFieldEditor(FoxBpmnPreferenceConstants.P_ZIP_PATH, "本地工作空间：", parent);
+//		FileFieldEditor connectorPathEditor=new FileFieldEditor(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "连接器Menu路径：", parent);
 		
 		StringFieldEditor usernameEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_USERNAME, "用户名：", parent);
 		StringFieldEditor passwordEditor=new StringFieldEditor(FoxBpmnPreferenceConstants.P_PASSWORD, "密码：", parent);
@@ -44,7 +44,7 @@ public class FoxBpmnPreferencePage extends FieldEditorPreferencePage implements 
 		addField(usernameEditor);
 		addField(passwordEditor);
 		addField(zipPathEditor);
-		addField(connectorPathEditor);
+//		addField(connectorPathEditor);
 	}
 
 	@Override

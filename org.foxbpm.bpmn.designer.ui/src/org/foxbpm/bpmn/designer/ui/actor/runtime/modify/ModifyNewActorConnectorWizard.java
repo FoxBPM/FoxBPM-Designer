@@ -9,6 +9,7 @@ import org.eclipse.emf.transaction.RecordingCommand;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
@@ -232,7 +233,10 @@ public class ModifyNewActorConnectorWizard extends Wizard {
 							Button button = (Button) control;
 							expression.setValue(button.getText().trim());
 						}
-
+						else if (control instanceof Combo) {
+							Combo combo = (Combo) control;
+							expression.setValue(combo.getData(combo.getText()).toString());
+						}
 						connectorParameterInput.setExpression(expression);
 
 						// 重新实例化
