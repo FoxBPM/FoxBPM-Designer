@@ -245,7 +245,7 @@ public class BpmnModelUtil {
 	
 	
 	
-	public static void updateBpmnModelFile(BPMN2Editor bpmn2Editor,final String processId,final String processName) {
+	public static void updateBpmnModelFile(BPMN2Editor bpmn2Editor,final String processId,final String processName, final String tenantId) {
 		final ModelHandler modelHandler=bpmn2Editor.getModelHandler();
 		final Resource resource=modelHandler.getResource();
 		
@@ -257,6 +257,7 @@ public class BpmnModelUtil {
 				Process process=getProcess(resource);
 				process.setId(processId);
 				process.setName(processName);
+				process.getAnyAttribute().add(FoxBPMPackage.Literals.DOCUMENT_ROOT__TENANT_ID, tenantId);
 			}
 		});
 	}

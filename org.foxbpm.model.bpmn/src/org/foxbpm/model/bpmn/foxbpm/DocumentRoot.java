@@ -73,6 +73,7 @@ import org.eclipse.emf.ecore.util.FeatureMap;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getConvergType <em>Converg Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialStarter <em>Potential Starter</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getPotentialOwner <em>Potential Owner</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTenantId <em>Tenant Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -1495,5 +1496,32 @@ public interface DocumentRoot extends EObject {
 	 * @generated
 	 */
 	void setPotentialOwner(PotentialOwner value);
+
+	/**
+	 * Returns the value of the '<em><b>Tenant Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Tenant Id</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Tenant Id</em>' attribute.
+	 * @see #setTenantId(String)
+	 * @see org.foxbpm.model.bpmn.foxbpm.FoxBPMPackage#getDocumentRoot_TenantId()
+	 * @model dataType="org.eclipse.emf.ecore.xml.type.String"
+	 *        extendedMetaData="namespace='##targetNamespace' kind='attribute'"
+	 * @generated
+	 */
+	String getTenantId();
+
+	/**
+	 * Sets the value of the '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTenantId <em>Tenant Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Tenant Id</em>' attribute.
+	 * @see #getTenantId()
+	 * @generated
+	 */
+	void setTenantId(String value);
 
 } // DocumentRoot

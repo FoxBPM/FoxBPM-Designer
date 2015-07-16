@@ -70,6 +70,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//DocumentRoot/convergType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//DocumentRoot/potentialStarter"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference foxbpm-bpmn-model.ecore#//DocumentRoot/potentialOwner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//DocumentRoot/tenantId"/>
     </genClasses>
     <genClasses ecoreClass="foxbpm-bpmn-model.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute foxbpm-bpmn-model.ecore#//Expression/value"/>

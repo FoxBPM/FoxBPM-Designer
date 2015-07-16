@@ -38,6 +38,8 @@ public class NewProcessWizardPage extends WizardPage {
 	private IResource diagramContainer;
 	private Text processVerText;
 	private String fileName;
+	private Label tenantIdlabel;
+	private Text tenantIdtext;
 
 	/**
 	 * Create the wizard.
@@ -118,11 +120,24 @@ public class NewProcessWizardPage extends WizardPage {
 		setControl(container);
 		
 		Label processVerLabel = new Label(container, SWT.NONE);
-		processVerLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		processVerLabel.setText("流程版本");
 		
 		processVerText = new Text(container, SWT.BORDER);
 		processVerText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		
+		tenantIdlabel = new Label(container, SWT.NONE);
+		tenantIdlabel.setText("应用编号");
+		
+		tenantIdtext = new Text(container, SWT.BORDER);
+		tenantIdtext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		
+		tenantIdtext.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				dialogChanged(true);
+			}
+		});
+		
 		processVerText.addModifyListener(new ModifyListener() {
 			
 			@Override
@@ -206,6 +221,10 @@ public class NewProcessWizardPage extends WizardPage {
 			return false;
 		}
 		
+		if (null == tenantIdtext.getText() || tenantIdtext.getText().equals("")) {
+			setErrorMessage("应用编号不能为空");
+			return false;
+		}
 		return true;
 	}
 	
@@ -300,4 +319,7 @@ public class NewProcessWizardPage extends WizardPage {
 		return processVerText.getText();
 	}
 
+	public String getTenantIdText() {
+		return tenantIdtext.getText();
+	}
 }

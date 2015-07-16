@@ -576,13 +576,22 @@ public interface FoxBPMPackage extends EPackage {
 	int DOCUMENT_ROOT__POTENTIAL_OWNER = 55;
 
 	/**
+	 * The feature id for the '<em><b>Tenant Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENT_ROOT__TENANT_ID = 56;
+
+	/**
 	 * The number of structural features of the '<em>Document Root</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOCUMENT_ROOT_FEATURE_COUNT = 56;
+	int DOCUMENT_ROOT_FEATURE_COUNT = 57;
 
 	/**
 	 * The number of operations of the '<em>Document Root</em>' class.
@@ -3695,6 +3704,17 @@ public interface FoxBPMPackage extends EPackage {
 	EReference getDocumentRoot_PotentialOwner();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTenantId <em>Tenant Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Tenant Id</em>'.
+	 * @see org.foxbpm.model.bpmn.foxbpm.DocumentRoot#getTenantId()
+	 * @see #getDocumentRoot()
+	 * @generated
+	 */
+	EAttribute getDocumentRoot_TenantId();
+
+	/**
 	 * Returns the meta object for class '{@link org.foxbpm.model.bpmn.foxbpm.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5956,6 +5976,14 @@ public interface FoxBPMPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DOCUMENT_ROOT__POTENTIAL_OWNER = eINSTANCE.getDocumentRoot_PotentialOwner();
+
+		/**
+		 * The meta object literal for the '<em><b>Tenant Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENT_ROOT__TENANT_ID = eINSTANCE.getDocumentRoot_TenantId();
 
 		/**
 		 * The meta object literal for the '{@link org.foxbpm.model.bpmn.foxbpm.impl.ExpressionImpl <em>Expression</em>}' class.

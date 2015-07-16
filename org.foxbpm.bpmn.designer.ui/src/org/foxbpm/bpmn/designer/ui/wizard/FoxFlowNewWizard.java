@@ -79,6 +79,7 @@ public class FoxFlowNewWizard extends Wizard implements INewWizard {
 		final String fileName = newProcessWizardPage.getProcessIdText();
 		final String processName = newProcessWizardPage.getProcessNameText();
 		final IResource container = newProcessWizardPage.getDiagramContainer();
+		final String tenantId = newProcessWizardPage.getTenantIdText();
 		
 		IRunnableWithProgress op = new IRunnableWithProgress() {
 			@Override
@@ -133,7 +134,7 @@ public class FoxFlowNewWizard extends Wizard implements INewWizard {
 		
 		BPMN2MultiPageEditor bpmn2MultiPageEditor = (BPMN2MultiPageEditor) PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 		BPMN2Editor bpmn2Editor = bpmn2MultiPageEditor.getDesignEditor();
-		BpmnModelUtil.updateBpmnModelFile(bpmn2Editor, fileName.substring(0, fileName.lastIndexOf(".")), processName);
+		BpmnModelUtil.updateBpmnModelFile(bpmn2Editor, fileName.substring(0, fileName.lastIndexOf(".")), processName, tenantId);
 		// try {
 		bpmn2MultiPageEditor.doSave(new NullProgressMonitor());
 		// bpmn2Editor.getDiagramBehavior().getModelHandler().getResource().save(null);

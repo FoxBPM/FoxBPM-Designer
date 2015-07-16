@@ -110,6 +110,7 @@ import org.foxbpm.model.bpmn.foxbpm.TaskSubject;
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getConvergType <em>Converg Type</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialStarter <em>Potential Starter</em>}</li>
  *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getPotentialOwner <em>Potential Owner</em>}</li>
+ *   <li>{@link org.foxbpm.model.bpmn.foxbpm.impl.DocumentRootImpl#getTenantId <em>Tenant Id</em>}</li>
  * </ul>
  * </p>
  *
@@ -915,6 +916,26 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * @ordered
 	 */
 	protected PotentialOwner potentialOwner;
+
+	/**
+	 * The default value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantId()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TENANT_ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getTenantId() <em>Tenant Id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTenantId()
+	 * @generated
+	 * @ordered
+	 */
+	protected String tenantId = TENANT_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2372,6 +2393,27 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTenantId(String newTenantId) {
+		String oldTenantId = tenantId;
+		tenantId = newTenantId;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, FoxBPMPackage.DOCUMENT_ROOT__TENANT_ID, oldTenantId, tenantId));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -2556,6 +2598,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return getPotentialStarter();
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				return getPotentialOwner();
+			case FoxBPMPackage.DOCUMENT_ROOT__TENANT_ID:
+				return getTenantId();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -2744,6 +2788,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				setPotentialOwner((PotentialOwner)newValue);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__TENANT_ID:
+				setTenantId((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -2924,6 +2971,9 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				setPotentialOwner((PotentialOwner)null);
 				return;
+			case FoxBPMPackage.DOCUMENT_ROOT__TENANT_ID:
+				setTenantId(TENANT_ID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -3048,6 +3098,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 				return potentialStarter != null && !potentialStarter.isEmpty();
 			case FoxBPMPackage.DOCUMENT_ROOT__POTENTIAL_OWNER:
 				return potentialOwner != null;
+			case FoxBPMPackage.DOCUMENT_ROOT__TENANT_ID:
+				return TENANT_ID_EDEFAULT == null ? tenantId != null : !TENANT_ID_EDEFAULT.equals(tenantId);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -3122,6 +3174,8 @@ public class DocumentRootImpl extends MinimalEObjectImpl.Container implements Do
 		result.append(claimType);
 		result.append(", convergType: ");
 		result.append(convergType);
+		result.append(", tenantId: ");
+		result.append(tenantId);
 		result.append(')');
 		return result.toString();
 	}

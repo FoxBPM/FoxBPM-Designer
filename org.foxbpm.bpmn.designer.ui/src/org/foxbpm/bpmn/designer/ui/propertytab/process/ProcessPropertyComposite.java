@@ -42,6 +42,7 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 	private Text nameText;
 	private Text uniText;
 	private Text categoryText;
+	private Text tenantIdText;
 	private FoxBPMExpViewer operformViewer;
 	private FoxBPMExpViewer tasksubjectViewer;
 	private FoxBPMExpViewer viewformViewer;
@@ -59,6 +60,7 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 		bindText(Bpmn2Package.Literals.BASE_ELEMENT__ID, idText, process);
 		bindText(Bpmn2Package.Literals.CALLABLE_ELEMENT__NAME, nameText, process);
 		bindText(FoxBPMPackage.Literals.DOCUMENT_ROOT__CATEGORY, categoryText, process);
+		bindText(FoxBPMPackage.Literals.DOCUMENT_ROOT__TENANT_ID, tenantIdText, process);
 		bindDocumentation(Bpmn2Package.Literals.BASE_ELEMENT__DOCUMENTATION, descText, process);
 		
 		
@@ -248,13 +250,13 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 		idText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		idText.setEditable(false);
 
-		Label uniLabel = new Label(detailComposite, SWT.NONE);
-		uniLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		uniLabel.setText("唯一编号");
+		Label tenantIdLabel = new Label(detailComposite, SWT.NONE);
+		tenantIdLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		tenantIdLabel.setText("应用编号");
 
-		uniText = new Text(detailComposite, SWT.BORDER);
-		uniText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
+		tenantIdText = new Text(detailComposite, SWT.BORDER);
+		tenantIdText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
 		Label nameLabel = new Label(detailComposite, SWT.NONE);
 		nameLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		nameLabel.setText("名称");
@@ -302,6 +304,15 @@ public class ProcessPropertyComposite extends AbstractFoxBPMComposite {
 		gd_descText.heightHint = 50;
 		descText.setLayoutData(gd_descText);
 
+		Label uniLabel = new Label(detailComposite, SWT.NONE);
+		uniLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		uniLabel.setText("唯一编号");
+		uniLabel.setVisible(false);
+
+		uniText = new Text(detailComposite, SWT.BORDER);
+		uniText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		uniText.setVisible(false);
+		
 		return parent;
 	}
 
