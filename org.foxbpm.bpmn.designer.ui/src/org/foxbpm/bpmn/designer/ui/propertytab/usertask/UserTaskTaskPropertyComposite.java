@@ -196,17 +196,17 @@ public class UserTaskTaskPropertyComposite extends AbstractFoxBPMComposite {
 			completeTaskDescriptionExp = completeTaskDescription.getExpression();
 		}
 
-//		// viewer上控件值
-//		taskNameViewer.getTextControl().setText(taskSubjectExp == null ? "" : taskSubjectExp.getName());
+		// viewer上控件值
+		taskNameViewer.getTextControl().setText(taskSubjectExp == null ? "" : taskSubjectExp.getName());
 //		taskDescriptionViewer.getTextControl().setText(taskDescriptionExp == null ? "" : taskDescriptionExp.getName());
 //		filishedDescriptionViewer.getTextControl().setText(completeTaskDescriptionExp == null ? "" : completeTaskDescriptionExp.getName());
 //
 //		// 传递表达式对象
-//		taskNameViewer.setExpression(taskSubjectExp);
+		taskNameViewer.setExpression(taskSubjectExp);
 //		taskDescriptionViewer.setExpression(taskDescriptionExp);
 //		filishedDescriptionViewer.setExpression(completeTaskDescriptionExp);
 //
-//		taskNameViewer.seteObject(userTask);
+		taskNameViewer.seteObject(userTask);
 //		taskDescriptionViewer.seteObject(userTask);
 //		filishedDescriptionViewer.seteObject(userTask);
 
