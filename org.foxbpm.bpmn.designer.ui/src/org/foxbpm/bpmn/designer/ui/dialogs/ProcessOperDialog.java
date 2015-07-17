@@ -572,7 +572,7 @@ public class ProcessOperDialog extends TitleAreaDialog {
 				dbid = processDbid==null?null:processDbid.toString();
 				publishButton.setEnabled(true);
 			}
-			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/process-definitions?key=" + process.getId());
+			ClientResource client = FoxBPMDesignerUtil.getClientByUrl("model/process-definitions?key=" + process.getId() + "&tenantId=" + process.eGet(FoxBPMPackage.Literals.DOCUMENT_ROOT__TENANT_ID));
 			if(client==null) {
 				noClientAllButtonsState();
 				return;
