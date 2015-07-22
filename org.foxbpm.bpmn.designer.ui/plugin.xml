@@ -209,7 +209,7 @@
              style="push">
        </command>
     </menuContribution>
-    <!--<menuContribution
+    <menuContribution
           allPopups="false"
           locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
        <toolbar
@@ -221,7 +221,7 @@
                 tooltip="同步设计器资源">
           </command>
        </toolbar>
-    </menuContribution>-->
+    </menuContribution>
     <menuContribution
           allPopups="false"
           locationURI="menu:org.eclipse.ui.main.menu?after=additions">
