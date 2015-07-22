@@ -1,5 +1,6 @@
 package org.foxbpm.bpmn.designer.ui.preferences;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.foxbpm.bpmn.designer.ui.Activator;
@@ -13,8 +14,11 @@ public class FoxBpmnPreferenceInitializer extends AbstractPreferenceInitializer 
 		store.setDefault(FoxBpmnPreferenceConstants.P_SERVER_ADDRESS, "http://127.0.0.1:8080/foxbpm-webapps-rest/service/");
 		store.setDefault(FoxBpmnPreferenceConstants.P_USERNAME, "user");
 		store.setDefault(FoxBpmnPreferenceConstants.P_PASSWORD, "password");
-		store.setDefault(FoxBpmnPreferenceConstants.P_ZIP_PATH, "");
+		store.setDefault(FoxBpmnPreferenceConstants.P_ZIP_PATH, getWorkspaceDir());
 		store.setDefault(FoxBpmnPreferenceConstants.P_CONNECTOR_PATH, "");
 	}
 
+	private String getWorkspaceDir() {
+		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
+	}
 }
