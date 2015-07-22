@@ -20,7 +20,7 @@
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
-            icon="icons/fox_16.ico"
+            icon="icons/bpmn2_editor_16.png"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
             name="%wizard.name">
       </wizard>
@@ -199,7 +199,7 @@
     </menuContribution>-->
     <menuContribution
           allPopups="false"
-          locationURI="popup:org.eclipse.ui.navigator.ProjectExplorer#PopupMenu?after=additions">
+          locationURI="popup:org.eclipse.ui.main#PopupMenu?after=additions">
        <command
              commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
              style="push">
@@ -209,7 +209,7 @@
              style="push">
        </command>
     </menuContribution>
-    <menuContribution
+    <!--<menuContribution
           allPopups="false"
           locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
        <toolbar
@@ -221,7 +221,7 @@
                 tooltip="同步设计器资源">
           </command>
        </toolbar>
-    </menuContribution>
+    </menuContribution>-->
     <menuContribution
           allPopups="false"
           locationURI="menu:org.eclipse.ui.main.menu?after=additions">
