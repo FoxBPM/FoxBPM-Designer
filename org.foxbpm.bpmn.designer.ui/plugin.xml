@@ -20,7 +20,7 @@
       <wizard
             category="org.foxbpm.bpmn.designer.ui.category"
             class="org.foxbpm.bpmn.designer.ui.wizard.FoxFlowNewWizard"
-            icon="icons/bpmn2_editor_16.png"
+            icon="icons/fox_16.ico"
             id="org.foxbpm.bpmn.designer.ui.newbpmwizard"
             name="%wizard.name">
       </wizard>
@@ -199,7 +199,7 @@
     </menuContribution>-->
     <menuContribution
           allPopups="false"
-          locationURI="popup:org.eclipse.ui.main#PopupMenu?after=additions">
+          locationURI="popup:org.eclipse.ui.popup.any?after=additions">
        <command
              commandId="org.foxbpm.bpmn.designer.ui.command.processoper"
              style="push">
