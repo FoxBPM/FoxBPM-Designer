@@ -404,17 +404,17 @@ public class RuntimeConnectorUtil {
 					}
 				});
 				// 同步数据
-				Display.getDefault().syncExec(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							// 组织数据
-							SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+//				Display.getDefault().syncExec(new Runnable() {
+//					@Override
+//					public void run() {
+//						try {
+//							// 组织数据
+//							SynDataUtils.getInstance().sysData(FoxBPMDesignerUtil.getServicePathPath());
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				});
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
